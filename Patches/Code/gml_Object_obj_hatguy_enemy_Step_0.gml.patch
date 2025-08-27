@@ -1,0 +1,115 @@
+--- a/Code/gml_Object_obj_hatguy_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_hatguy_enemy_Step_0.gml
+@@ -17,11 +17,15 @@
+         groove = 0;
+         global.typer = 50;
+         rr = choose(0, 1, 2, 3);
+-        if (dancing == 1 && dancedwithsusie == 0)
++        if (dancing == 1 && (dancedwithsusie == 0 && dancedwithnoelle == 0))
+         {
+             msgsetloc(0, "What, you wanna&see my moves?", "obj_hatguy_enemy_slash_Step_0_gml_29_0");
+         }
+-        else if (dancing == 1 && dancedwithsusie == 1)
++        else if (dancing == 1 && (dancedwithsusie == 1 && dancedwithnoelle == 1))
++        {
++            msgset(0, "Ladies, ladies!&One at a time!");
++        }
++        else if (dancing == 1 && (dancedwithsusie == 1 || dancedwithnoelle == 1))
+         {
+             msgsetloc(0, "Ah-ha, if it's&a madimoizel...", "obj_hatguy_enemy_slash_Step_0_gml_30_0");
+         }
+@@ -252,6 +256,7 @@
+         scr_act_charsprite("kris", spr_kris_dance, 0.16, 1);
+         scr_act_charsprite("ralsei", spr_ralsei_dance, 0.16, 1);
+         scr_act_charsprite("susie", spr_susie_dance, 0.16, 1);
++        scr_act_charsprite("noelle", spr_noelle_dance, 0.16, 1);
+         msgsetloc(0, "* Everyone danced with Cap'n! They're totally lost in the groove!/%", "obj_hatguy_enemy_slash_Step_0_gml_214_0");
+         scr_battletext_default();
+         actcon = 4;
+@@ -343,6 +348,47 @@
+             }
+         }
+     }
++    if (actingnoe == 1 && actconnoe == 1)
++    {
++        dancing = true;
++        danceCounter = 1;
++        dancedwithnoelle = 1;
++        scr_act_charsprite("noelle", spr_noelle_dance, 0.16, 1);
++        if (groove == 0)
++        {
++            if (global.lang == "ja")
++            {
++                msgset(0, "* Noelle danced with Cap'n!/");
++                msgnext("* Cap'n got lost in the groove!/%");
++            }
++            else
++            {
++                msgset(0, "* Noelle danced with Cap'n!/%");
++            }
++            groove = 1;
++        }
++        else
++        {
++            msgset(0, "* Noelle danced with Cap'n!/%");
++        }
++        if (global.lang == "ja")
++        {
++            scr_battletext_default();
++            actconnoe = 20;
++        }
++        else
++        {
++            scr_simultext("noelle");
++            if (simulordernoe == 0)
++            {
++                actconnoe = 20;
++            }
++            else
++            {
++                actconnoe = 0;
++            }
++        }
++    }
+     if (actcon == 1 && !instance_exists(obj_writer))
+     {
+         if (obj_sweet_enemy.dancing == true && obj_kk_enemy.dancing == true && obj_hatguy_enemy.dancing == true && obj_sweet_enemy.endcon == 0)
+@@ -351,9 +397,11 @@
+         }
+         else if (obj_sweet_enemy.endcon == 0)
+         {
++            actcon = 0;
++            acting = 0;
+             with (obj_marker)
+             {
+-                if (sprite_index == spr_kris_dance || sprite_index == spr_susie_dance || sprite_index == spr_ralsei_dance)
++                if (sprite_index == spr_kris_dance || sprite_index == spr_susie_dance || sprite_index == spr_ralsei_dance || sprite_index == spr_noelle_dance)
+                 {
+                     instance_destroy();
+                     with (obj_heroparent)
+@@ -371,7 +419,7 @@
+             scr_nextact();
+         }
+     }
+-    if (actcon == 20 || actconsus == 20 || actconral == 20)
++    if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
+     {
+         if (scr_terminate_writer())
+         {
+@@ -383,7 +431,7 @@
+             {
+                 with (obj_marker)
+                 {
+-                    if (sprite_index == spr_kris_dance || sprite_index == spr_susie_dance || sprite_index == spr_ralsei_dance)
++                    if (sprite_index == spr_kris_dance || sprite_index == spr_susie_dance || sprite_index == spr_ralsei_dance || sprite_index == spr_noelle_dance)
+                     {
+                         instance_destroy();
+                         with (obj_heroparent)
+@@ -398,6 +446,7 @@
+                         }
+                     }
+                 }
++                actconnoe = -1;
+                 actconsus = -1;
+                 actconral = -1;
+                 actcon = 1;

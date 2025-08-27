@@ -1,0 +1,92 @@
+--- a/Code/gml_Object_obj_kk_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_kk_enemy_Step_0.gml
+@@ -244,6 +244,7 @@
+         scr_act_charsprite("kris", spr_kris_dance, 0.16, 1);
+         scr_act_charsprite("ralsei", spr_ralsei_dance, 0.16, 1);
+         scr_act_charsprite("susie", spr_susie_dance, 0.16, 1);
++        scr_act_charsprite("noelle", spr_noelle_dance, 0.16, 1);
+         msgsetloc(0, "* Everyone danced with K_K! They're totally lost in the groove!/%", "obj_kk_enemy_slash_Step_0_gml_221_0");
+         scr_battletext_default();
+         actcon = 4;
+@@ -334,6 +335,46 @@
+             }
+         }
+     }
++    if (actingnoe == 1 && actconnoe == 1)
++    {
++        dancing = true;
++        danceCounter = 1;
++        scr_act_charsprite("noelle", spr_noelle_dance, 0.16, 1);
++        if (groove == 0)
++        {
++            if (global.lang == "ja")
++            {
++                msgset(0, "* Noelle danced with K_K!/");
++                msgnext("* K_K got lost in the groove anyway!/%");
++            }
++            else
++            {
++                msgset(0, "* Noelle danced with K_K!/%");
++            }
++            groove = 1;
++        }
++        else
++        {
++            msgset(0, "* Noelle danced with K_K!/%");
++        }
++        if (global.lang == "ja")
++        {
++            scr_battletext_default();
++            actconnoe = 20;
++        }
++        else
++        {
++            scr_simultext("noelle");
++            if (simulordernoe == 0)
++            {
++                actconnoe = 20;
++            }
++            else
++            {
++                actconnoe = 0;
++            }
++        }
++    }
+     if (actcon == 1 && !instance_exists(obj_writer))
+     {
+         if (obj_sweet_enemy.dancing == true && obj_kk_enemy.dancing == true && obj_hatguy_enemy.dancing == true && obj_sweet_enemy.endcon == 0)
+@@ -346,7 +387,7 @@
+             acting = 0;
+             with (obj_marker)
+             {
+-                if (sprite_index == spr_kris_dance || sprite_index == spr_susie_dance || sprite_index == spr_ralsei_dance)
++                if (sprite_index == spr_kris_dance || sprite_index == spr_susie_dance || sprite_index == spr_ralsei_dance || sprite_index == spr_noelle_dance)
+                 {
+                     instance_destroy();
+                     with (obj_heroparent)
+@@ -364,7 +405,7 @@
+             scr_nextact();
+         }
+     }
+-    if (actcon == 20 || actconsus == 20 || actconral == 20)
++    if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
+     {
+         if (scr_terminate_writer())
+         {
+@@ -376,7 +417,7 @@
+             {
+                 with (obj_marker)
+                 {
+-                    if (sprite_index == spr_kris_dance || sprite_index == spr_susie_dance || sprite_index == spr_ralsei_dance)
++                    if (sprite_index == spr_kris_dance || sprite_index == spr_susie_dance || sprite_index == spr_ralsei_dance || sprite_index == spr_noelle_dance)
+                     {
+                         instance_destroy();
+                         with (obj_heroparent)
+@@ -391,6 +432,7 @@
+                         }
+                     }
+                 }
++                actconnoe = -1;
+                 actconsus = -1;
+                 actconral = -1;
+                 actcon = 1;

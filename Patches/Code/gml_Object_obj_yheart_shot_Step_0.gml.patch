@@ -1,0 +1,27 @@
+--- a/Code/gml_Object_obj_yheart_shot_Step_0.gml
++++ b/Code/gml_Object_obj_yheart_shot_Step_0.gml
+@@ -11,6 +11,15 @@
+         image_yscale -= (0.1 * f);
+     }
+ }
++else if (spread_angle != 0)
++{
++    direction = spread_angle;
++    spread_angle /= 1.25;
++    if ((direction - spread_angle) <= 0.05)
++    {
++        spread_angle = 0;
++    }
++}
+ if (x >= (camerax() + 700))
+ {
+     instance_destroy();
+@@ -38,7 +47,7 @@
+     {
+         y--;
+     }
+-    direction = point_direction(x, y, obj_sneo_final_forme.x + 122, obj_sneo_final_forme.y + 146);
++    direction = point_direction(x, y, obj_sneo_final_forme.x + 122, obj_sneo_final_forme.y + 146) + spread_angle;
+     gravity_direction = point_direction(x, y, obj_sneo_final_forme.x + 122, obj_sneo_final_forme.y + 146);
+ }
+ if (trail == 1)

@@ -1,0 +1,18 @@
+--- a/Code/gml_GlobalScript_scr_spellinfo.gml
++++ b/Code/gml_GlobalScript_scr_spellinfo.gml
+@@ -146,6 +146,15 @@
+             cost = 250;
+             spellusable = 0;
+             break;
++        case 12:
++            spellname = stringset("SnowShock");
++            spellnameb = stringset("SnowShock");
++            spelldescb = stringset("Damage#w/ SNOW");
++            spelldesc = stringset(" ");
++            spelltarget = 0;
++            cost = 0;
++            spellusable = 0;
++            break;
+     }
+ }
+ 

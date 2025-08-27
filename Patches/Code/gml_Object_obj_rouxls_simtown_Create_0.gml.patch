@@ -1,0 +1,12 @@
+--- a/Code/gml_Object_obj_rouxls_simtown_Create_0.gml
++++ b/Code/gml_Object_obj_rouxls_simtown_Create_0.gml
+@@ -17,6 +17,9 @@
+ RouxlsHouseMax = 2;
+ RalseiDistract = 0;
+ RalseiDistractTwice = 0;
++SusieSabotage = 0;
++SusieSabotageTwice = 0;
++NoelleHouses = 0;
+ for (i = 0; i < 16; i += 1)
+ {
+     for (j = 0; j < 6; j += 1)

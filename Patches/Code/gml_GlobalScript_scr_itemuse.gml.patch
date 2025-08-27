@@ -1,0 +1,26 @@
+--- a/Code/gml_GlobalScript_scr_itemuse.gml
++++ b/Code/gml_GlobalScript_scr_itemuse.gml
+@@ -616,6 +616,23 @@
+             global.msg[0] = stringsetloc("* (Where'd this come from?)/%", "scr_itemuse_slash_scr_itemuse_gml_575_0");
+             scr_itemdialoguer();
+             break;
++        case 99:
++            usable = 1;
++            replaceable = 99;
++            snd_play(snd_cantselect);
++            if (scr_havechar(2))
++            {
++                scr_itemcomment(suspos, stringset("HELL no, why'd you have this?!"));
++            }
++            if (scr_havechar(3))
++            {
++                scr_itemcomment(ralpos, stringset("(Their hands are shaking...)"));
++            }
++            if (scr_havechar(4))
++            {
++                scr_itemcomment(noepos, stringset("(I-It's just glass... right?!)"));
++            }
++            break;
+         case 300:
+             break;
+         case 301:

@@ -1,0 +1,150 @@
+--- a/Code/gml_Object_obj_spamton_neo_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_spamton_neo_enemy_Step_0.gml
+@@ -1356,7 +1356,7 @@
+                     maxvinecount = maxv;
+                 }
+                 var multicut = 1;
+-                if (global.hp[2] <= 0 && global.hp[3] <= 0 && acting == 2)
++                if ((global.hp[2] <= 0 || !scr_havechar(2)) && (global.hp[3] <= 0 || !scr_havechar(3)) && (global.hp[4] <= 0 || !scr_havechar(4)) && acting == 2)
+                 {
+                     var mercyset = 4;
+                     if ((global.mercymod[myself] + mercyset) > 100)
+@@ -1513,7 +1513,7 @@
+                 maxvinecount = maxv;
+             }
+             var multicut = 1;
+-            if (global.hp[1] <= 0 && global.hp[3] <= 0)
++            if ((global.hp[1] <= 0 || !scr_havechar(1)) && (global.hp[3] <= 0 || !scr_havechar(3)) && (global.hp[4] <= 0 || !scr_havechar(4)))
+             {
+                 var mercyset = 4;
+                 if ((global.mercymod[myself] + mercyset) > 100)
+@@ -1603,7 +1603,7 @@
+                 maxvinecount = maxv;
+             }
+             var multicut = 1;
+-            if (global.hp[1] <= 0 && global.hp[2] <= 0)
++            if ((global.hp[1] <= 0 || !scr_havechar(1)) && (global.hp[2] <= 0 || !scr_havechar(2)) && (global.hp[4] <= 0 || !scr_havechar(4)))
+             {
+                 multicut = 2;
+                 var mercyset = 4;
+@@ -1741,7 +1741,97 @@
+                 snd_play(snd_boost);
+             }
+         }
++        if (actingnoe == 1 && actconnoe == 1)
++        {
++            var i = irandom(5);
++            var a = -1;
++            var maxv = 0;
++            repeat (6)
++            {
++                if (partvisible[i] == 1 && partweakened[i] > 0)
++                {
++                    a = i;
++                    break;
++                }
++                i++;
++                if (i > 5)
++                {
++                    i = 0;
++                }
++                if (partvisible[i] == 1)
++                {
++                    maxv++;
++                }
++            }
++            if (vinebgcount < 1)
++            {
++                maxvinecount = maxv;
++            }
++            var multicut = 1;
++            if ((global.hp[1] <= 0 || !scr_havechar(1)) && (global.hp[2] <= 0 || !scr_havechar(2)) && (global.hp[3] <= 0 || !scr_havechar(3)))
++            {
++                multicut = 2;
++                var mercyset = 4;
++                if ((global.mercymod[myself] + mercyset) > 100)
++                {
++                    mercyset = 100 - global.mercymod[myself];
++                }
++                scr_mercyadd(myself, mercyset);
++                if (mercyset == 0)
++                {
++                    with (obj_dmgwriter)
++                    {
++                        if (type == 5)
++                        {
++                            instance_destroy();
++                        }
++                    }
++                    msgset(0, "* Noelle tried to snap a wire... but it failed!/%");
++                }
++                else
++                {
++                    msgset(0, "* Noelle snapped desperately!/");
++                    msgnextloc("* Broke 2 wires!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_1277_0");
++                }
++            }
++            else
++            {
++                var mercyset = 2;
++                if ((global.mercymod[myself] + mercyset) > 100)
++                {
++                    mercyset = 100 - global.mercymod[myself];
++                }
++                scr_mercyadd(myself, mercyset);
++                if (mercyset == 0)
++                {
++                    with (obj_dmgwriter)
++                    {
++                        if (type == 5)
++                        {
++                            instance_destroy();
++                        }
++                    }
++                    msgset(0, "* Noelle tried to snap a wire... but it failed!/%");
++                }
++                else
++                {
++                    msgset(0, "* Noelle snapped a wire!/%");
++                }
++            }
++            scr_battletext_default();
++            actconnoe = 0;
++            actingnoe = 0;
++            actcon = 1;
++        }
++        if (actingnoe == 2 && actconnoe == 1)
++        {
++            actingnoe = 0;
++            actcon = 1;
++            multishotcount = 30;
++            msgset(0, "* Noelle used TriShot!#You now shoot 3 bullets at once!#Lasts 30 shots./%");
++            scr_battletext_default();
++        }
+-        if ((actcon == 1 && !instance_exists(obj_writer)) || actconsus == 20 || actconral == 20)
++        if ((actcon == 1 && !instance_exists(obj_writer)) || actconsus == 20 || actconral == 20 || actconnoe == 20)
+         {
+             usedact = 1;
+             if (global.mercymod[myself] > 99 && endcon == 0)
+@@ -2044,6 +2134,10 @@
+                         {
+                             global.hp[3] = 1;
+                         }
++                        if (global.hp[4] < 1)
++                        {
++                            global.hp[4] = 1;
++                        }
+                         if (i_ex(obj_ch2_sceneex2))
+                         {
+                             obj_ch2_sceneex2.forcend = 1;
+@@ -2283,6 +2377,10 @@
+                         if (global.hp[3] < 1)
+                         {
+                             global.hp[3] = 1;
++                        }
++                        if (global.hp[4] < 1)
++                        {
++                            global.hp[4] = 1;
+                         }
+                         if (i_ex(obj_ch2_sceneex2))
+                         {

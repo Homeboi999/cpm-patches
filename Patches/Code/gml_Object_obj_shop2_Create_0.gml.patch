@@ -1,0 +1,26 @@
+--- a/Code/gml_Object_obj_shop2_Create_0.gml
++++ b/Code/gml_Object_obj_shop2_Create_0.gml
+@@ -65,6 +65,7 @@
+     canequip[i][1] = 0;
+     canequip[i][2] = 0;
+     canequip[i][3] = 0;
++    canequip[i][4] = 0;
+     if (itemtype[i] == "item")
+     {
+         scr_iteminfo(item[i]);
+@@ -80,6 +81,7 @@
+         canequip[i][1] = armorchar1temp;
+         canequip[i][2] = armorchar2temp;
+         canequip[i][3] = armorchar3temp;
++        canequip[i][4] = armorchar4temp;
+     }
+     if (itemtype[i] == "weapon")
+     {
+@@ -90,6 +92,7 @@
+         canequip[i][1] = weaponchar1temp;
+         canequip[i][2] = weaponchar2temp;
+         canequip[i][3] = weaponchar3temp;
++        canequip[i][4] = weaponchar4temp;
+         buyvalue[i] = value;
+     }
+ }

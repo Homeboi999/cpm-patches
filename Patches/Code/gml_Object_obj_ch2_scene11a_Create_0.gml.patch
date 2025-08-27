@@ -1,0 +1,83 @@
+--- a/Code/gml_Object_obj_ch2_scene11a_Create_0.gml
++++ b/Code/gml_Object_obj_ch2_scene11a_Create_0.gml
+@@ -27,33 +27,64 @@
+ coaster_ramp.depth = 90000;
+ coaster_ramp.visible = 1;
+ coaster_kris = instance_create(800, 72, obj_coaster);
+-with (coaster_kris)
+-{
+-    scr_depth();
+-}
+ coaster_kris.visible = 0;
++coaster_kris.HeroType = global.char[0];
++if (scr_modconfig("coasterType") == 1)
++{
++    coaster_kris.CoasterType = 1;
++}
++else
++{
++    coaster_kris.CoasterType = coaster_kris.HeroType;
++}
++coaster_kris.laneID = 0;
++coaster_kris.lane_coaster_y = 0;
++with (coaster_kris)
++{
++    scr_depth();
++}
+ coaster_susie = instance_create(800, 118, obj_coaster);
+-coaster_susie.type = 1;
+-with (coaster_susie)
+-{
+-    scr_depth();
+-}
+ coaster_susie.visible = 0;
++coaster_susie.HeroType = global.char[1];
++if (scr_modconfig("coasterType") == 1)
++{
++    coaster_susie.CoasterType = 2;
++}
++else
++{
++    coaster_susie.CoasterType = coaster_susie.HeroType;
++}
++coaster_susie.laneID = 1;
++coaster_susie.lane_coaster_y = 14;
++with (coaster_susie)
++{
++    scr_depth();
++}
+ coaster_ralsei = instance_create(800, 181, obj_coaster);
+-coaster_ralsei.type = 2;
+-with (coaster_ralsei)
+-{
+-    scr_depth();
+-}
+ coaster_ralsei.visible = 0;
++coaster_ralsei.HeroType = global.char[2];
++if (scr_modconfig("coasterType") == 1)
++{
++    coaster_ralsei.CoasterType = 3;
++}
++else
++{
++    coaster_ralsei.CoasterType = coaster_ralsei.HeroType;
++}
++coaster_ralsei.laneID = 2;
++coaster_ralsei.lane_coaster_y = 9;
++with (coaster_ralsei)
++{
++    scr_depth();
++}
+ coaster_berdly = instance_create(1890, 126, obj_coaster);
+-coaster_berdly.type = 3;
++coaster_berdly.CoasterType = 5;
+ with (coaster_berdly)
+ {
+     scr_depth();
+ }
+ coaster_noelle = instance_create(1890, 105, obj_coaster);
+-coaster_noelle.type = 4;
++coaster_noelle.CoasterType = 6;
+ coaster_noelle.depth = 95000;
+ nise_berdly = scr_dark_marker(-100, 0, spr_cutscene_17_berdly_shocked);
+ with (nise_berdly)

@@ -1,0 +1,12 @@
+--- a/Code/gml_GlobalScript_scr_itemnamelist.gml
++++ b/Code/gml_GlobalScript_scr_itemnamelist.gml
+@@ -104,6 +104,9 @@
+         case 33:
+             global.itemname[i] = stringsetloc("DogDollar", "scr_itemnamelist_slash_scr_itemnamelist_gml_104_0");
+             break;
++        case 99:
++            global.itemname[i] = stringset("FragileHeart");
++            break;
+     }
+ }
+ 

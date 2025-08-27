@@ -1,0 +1,95 @@
+--- a/Code/gml_Object_obj_ch2_sceneex2_Step_0.gml
++++ b/Code/gml_Object_obj_ch2_sceneex2_Step_0.gml
+@@ -373,15 +373,15 @@
+         c_wait(11);
+         c_pan(1640, 0, 15);
+         c_sel(kr);
+-        c_sprite(spr_kris_fall_ball);
++        c_sprite(coaster_kris.char_sprite_sneo_ball);
+         c_imagespeed(0.5);
+         c_jump(1720, 48, 40, 40);
+         c_sel(su);
+-        c_sprite(spr_susie_dw_fall_ball);
++        c_sprite(coaster_susie.char_sprite_sneo_ball);
+         c_imagespeed(0.5);
+         c_jump(1720, 120, 40, 40);
+         c_sel(ra);
+-        c_sprite(spr_ralsei_jump_ball);
++        c_sprite(coaster_ralsei.char_sprite_sneo_ball);
+         c_imagespeed(0.5);
+         c_jump(1720, 244, 40, 40);
+         c_soundplay(snd_jump);
+@@ -420,12 +420,11 @@
+         c_var_instance(coaster_susie, "siner_add0", 0.08);
+         c_var_instance(coaster_ralsei, "siner_add0", 0.09);
+         c_var_instance(coaster_kris, "visible", 1);
+-        c_var_instance(coaster_kris, "character_sprite", spr_krisb_defeat);
++        c_var_instance(coaster_kris, "character_sprite", coaster_kris.char_sprite_sneo_intro);
+         c_var_instance(coaster_ralsei, "visible", 1);
+-        c_var_instance(coaster_ralsei, "character_sprite", spr_ralsei_surprised_down);
++        c_var_instance(coaster_ralsei, "character_sprite", coaster_ralsei.char_sprite_sneo_intro);
+-        c_var_instance(coaster_ralsei, "character_offset_x", -10);
+         c_var_instance(coaster_susie, "visible", 1);
+-        c_var_instance(coaster_susie, "character_sprite", spr_susie_shock_r);
++        c_var_instance(coaster_susie, "character_sprite", coaster_susie.char_sprite_sneo_intro);
+         c_var_instance(coaster_empty1, "visible", 0);
+         c_var_instance(coaster_empty2, "visible", 0);
+         c_var_instance(coaster_empty3, "visible", 0);
+@@ -489,12 +488,11 @@
+         c_var_instance(coaster_susie, "siner_add0", 0.08);
+         c_var_instance(coaster_ralsei, "siner_add0", 0.09);
+         c_var_instance(coaster_kris, "visible", 1);
+-        c_var_instance(coaster_kris, "character_sprite", spr_krisb_defeat);
++        c_var_instance(coaster_kris, "character_sprite", coaster_kris.char_sprite_sneo_intro);
+         c_var_instance(coaster_ralsei, "visible", 1);
+-        c_var_instance(coaster_ralsei, "character_sprite", spr_ralsei_surprised_down);
++        c_var_instance(coaster_ralsei, "character_sprite", coaster_ralsei.char_sprite_sneo_intro);
+-        c_var_instance(coaster_ralsei, "character_offset_x", -10);
+         c_var_instance(coaster_susie, "visible", 1);
+-        c_var_instance(coaster_susie, "character_sprite", spr_susie_shock_r);
++        c_var_instance(coaster_susie, "character_sprite", coaster_susie.char_sprite_sneo_intro);
+         c_actortokris();
+         c_actortocaterpillar();
+         c_wait(15);
+@@ -528,7 +526,6 @@
+         with (obj_encounterbasic)
+         {
+             counttimer = 14;
+-            c[2].y -= 28;
+             fightcon = 2;
+         }
+     }
+@@ -537,7 +534,6 @@
+         with (obj_encounterbasic)
+         {
+             counttimer = 9;
+-            c[2].y -= 28;
+         }
+         with (obj_doom)
+         {
+@@ -581,9 +577,9 @@
+         {
+             lerpstate = 2;
+         }
+-        coaster_kris.character_sprite = spr_krisr_dark;
+-        coaster_susie.character_sprite = spr_susie_walk_right_dw_unhappy;
+-        coaster_ralsei.character_sprite = spr_ralsei_walk_right_unhappy;
++        coaster_kris.character_sprite = coaster_kris.char_sprite_normal;
++        coaster_susie.character_sprite = coaster_susie.char_sprite_normal;
++        coaster_ralsei.character_sprite = coaster_ralsei.char_sprite_normal;
+         alarm[0] = 5;
+     }
+ }
+@@ -612,9 +608,9 @@
+ {
+     con = 49;
+     alarm[0] = 30;
+-    coaster_kris.character_sprite = spr_krisr_dark;
+-    coaster_susie.character_sprite = spr_susie_walk_right_dw_unhappy;
+-    coaster_ralsei.character_sprite = spr_ralsei_walk_right_unhappy;
++    coaster_kris.character_sprite = coaster_kris.char_sprite_normal;
++    coaster_susie.character_sprite = coaster_susie.char_sprite_normal;
++    coaster_ralsei.character_sprite = coaster_ralsei.char_sprite_normal;
+     coaster_kris.visible = 1;
+     coaster_susie.visible = 1;
+     coaster_ralsei.visible = 1;

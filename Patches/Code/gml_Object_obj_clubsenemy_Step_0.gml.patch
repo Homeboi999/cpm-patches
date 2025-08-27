@@ -1,0 +1,22 @@
+--- a/Code/gml_Object_obj_clubsenemy_Step_0.gml
++++ b/Code/gml_Object_obj_clubsenemy_Step_0.gml
+@@ -277,10 +277,18 @@
+         scr_simultext("ralsei");
+         actconral = 20;
+     }
++    if (actingnoe == 1 && actconnoe == 1)
++    {
++        scr_mercyadd(myself, 25);
++        msgset(0, "* Noelle stood there timidly!/%");
++        scr_simultext("noelle");
++        actconnoe = 20;
++    }
+-    if (actcon == 20 || actconsus == 20 || actconral == 20)
++    if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
+     {
+         if (scr_terminate_writer())
+         {
++            actconnoe = -1;
+             actconsus = -1;
+             actconral = -1;
+             actcon = 1;

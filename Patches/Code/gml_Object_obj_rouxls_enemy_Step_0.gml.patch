@@ -1,0 +1,140 @@
+--- a/Code/gml_Object_obj_rouxls_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_rouxls_enemy_Step_0.gml
+@@ -329,6 +329,77 @@
+         acting = 9;
+         HouseCount = 4;
+     }
++    if (actingsus == 1 && actconsus == 1)
++    {
++        if ((obj_rouxls_simtown.RalseiDistract != 1 && actingral == 1) || (obj_rouxls_simtown.RalseiDistractTwice != 1 && actingral == 1) || actingral != 1)
++        {
++            with (obj_rouxls_simtown)
++            {
++                if (SusieSabotageTwice != 1)
++                {
++                    SusieSabotage = 1;
++                    found = 0;
++                    while (found == 0)
++                    {
++                        RandomHouseX = floor(random(15));
++                        RandomHouseY = floor(random(6));
++                        if (RandomHouseY == 6)
++                        {
++                            RandomHouseY = 5;
++                        }
++                        if (TileHasHouse[RandomHouseX][RandomHouseY] == 2)
++                        {
++                            if (RandomHouseX == 11 && RandomHouseY == 5)
++                            {
++                                if (RouxlsAvailableTileTotal == 3 && TileHasHouse[10][5] == 0 && TileHasHouse[10][4] == 0 && TileHasHouse[11][4] == 0)
++                                {
++                                    SusieSabotage = 0;
++                                    found = 1;
++                                }
++                            }
++                            else
++                            {
++                                found = 1;
++                            }
++                        }
++                    }
++                    if (SusieSabotage == 1)
++                    {
++                        TileYouCanBuild[RandomHouseX][RandomHouseY] = 1;
++                        TileRouxlsCanBuild[RandomHouseX][RandomHouseY] = 1;
++                        TileHasHouse[RandomHouseX][RandomHouseY] = 0;
++                        scr_simtown_canbuild_check();
++                        repeat (10)
++                        {
++                            instance_create(camerax() + (RandomHouseX * 40) + irandom(40), cameray() + ((RandomHouseY + 1) * 40) + 40 + irandom(40), obj_house_placed_effect);
++                            instance_create(camerax() + (RandomHouseX * 40) + irandom(40), cameray() + ((RandomHouseY + 1) * 40) + 40 + irandom(40), obj_house_placed_effect);
++                            scr_fx_housesquare(camerax() + (RandomHouseX * 40) + 20, cameray() + ((RandomHouseY + 1) * 40) + 40 + 20, 16777215);
++                        }
++                        snd_play(snd_glassbreak);
++                    }
++                }
++            }
++            if (obj_rouxls_simtown.SusieSabotage == 1)
++            {
++                msgset(0, "* Susie sabotaged! One of Rouxls' houses was destroyed!/%");
++            }
++            else if (actingral == 1)
++            {
++                msgset(0, "%%");
++            }
++            else if (actingral == 0)
++            {
++                msgset(0, "* Susie sabotaged! But it failed./%");
++            }
++        }
++        else
++        {
++            msgset(0, "%%");
++        }
++        scr_battletext_default();
++        actcon = 1;
++        actconsus = 0;
++    }
+     if (actingral == 1 && actconral == 1)
+     {
+         with (obj_rouxls_simtown)
+@@ -340,7 +411,16 @@
+         }
+         if (obj_rouxls_simtown.RalseiDistract == 1)
+         {
++            if (actingsus == 1)
++            {
++                msgset(0, "* Ralsei distracted! Rouxls will place one less house next turn./");
++                msgnext("* Susie was also distracted! Her move got cancelled!/%");
++                obj_rouxls_simtown.SusieSabotage = 0;
++            }
++            else
++            {
+-            msgsetloc(0, "* Ralsei distracted! Rouxls will place one less house next turn./%", "obj_rouxls_enemy_slash_Step_0_gml_214_0");
++                msgsetloc(0, "* Ralsei distracted! Rouxls will place one less house next turn./%", "obj_rouxls_enemy_slash_Step_0_gml_214_0");
++            }
+         }
+         else
+         {
+@@ -350,20 +430,39 @@
+         actcon = 1;
+         actconral = 0;
+     }
++    if (actingnoe == 1 && actconnoe == 1)
++    {
++        if (!scr_havechar(1))
++        {
++            msgset(0, "%%");
++            acting = 9;
++            HouseCount = 2;
++        }
++        else
++        {
++            msgset(0, "Noelle planned ahead! You will place an additional house next turn./%");
++            obj_rouxls_simtown.NoelleHouses = 1;
++            actcon = 1;
++        }
++        scr_battletext_default();
++        actconnoe = 0;
++    }
+     if (acting == 9 && actcon == 0 && !instance_exists(obj_writer))
+     {
+         with (obj_rouxls_simtown)
+         {
+             MyTurn = 1;
+             TurnCon = 0;
+-            HouseCountMax = obj_rouxls_enemy.HouseCount;
++            HouseCountMax = obj_rouxls_enemy.HouseCount + NoelleHouses;
++            NoelleHouses = 0;
+         }
+         acting = 10;
+     }
+-    if (actcon == 20 || actconsus == 20 || actconral == 20)
++    if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
+     {
+         if (scr_terminate_writer())
+         {
++            actconnoe = -1;
+             actconsus = -1;
+             actconral = -1;
+             actcon = 1;

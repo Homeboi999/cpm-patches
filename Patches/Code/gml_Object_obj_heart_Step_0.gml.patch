@@ -1,0 +1,46 @@
+--- a/Code/gml_Object_obj_heart_Step_0.gml
++++ b/Code/gml_Object_obj_heart_Step_0.gml
+@@ -270,10 +270,42 @@
+     }
+     if (button1_p() || (z_hold >= 10 && z_hold <= 39 && button1_r()))
+     {
+-        if (instance_number(obj_yheart_shot) < 3 && chargeshot_delay == 0)
++        if (ceil(instance_number(obj_yheart_shot) / bulletspershot) < 3 && chargeshot_delay == 0)
+         {
+             instance_create(x + 10, y + 10, obj_yheart_shot);
+             snd_play(snd_heartshot_dr_b);
++            if (i_ex(obj_spamton_neo_enemy) && obj_spamton_neo_enemy.multishotcount > 0)
++            {
++                bulletspershot = 3;
++                var extra1 = instance_create(x + 10, y + 10, obj_yheart_shot);
++                var extra2 = instance_create(x + 10, y + 10, obj_yheart_shot);
++                if (obj_spamton_neo_enemy.multishotcount >= 10)
++                {
++                    extra1.spread_angle = 15;
++                    extra2.spread_angle = -15;
++                }
++                else
++                {
++                    extra1.spread_angle = 5 + obj_spamton_neo_enemy.multishotcount;
++                    extra2.spread_angle = -5 - obj_spamton_neo_enemy.multishotcount;
++                }
++                obj_spamton_neo_enemy.multishotcount--;
++                if (obj_spamton_neo_enemy.multishotcount == 0)
++                {
++                    instance_create(x, y, obj_supercharge_end);
++                    snd_play(snd_hurtsmall);
++                    bulletspershot = 1;
++                    var a = 150;
++                    repeat (3)
++                    {
++                        part = instance_create(other.x + 10, other.y + 10, obj_yheart_sneo_particle);
++                        part.direction = a + random(15);
++                        part.speed = 8;
++                        part.friction = 0.4;
++                        a += 30;
++                    }
++                }
++            }
+         }
+     }
+     if (z_hold == 20)

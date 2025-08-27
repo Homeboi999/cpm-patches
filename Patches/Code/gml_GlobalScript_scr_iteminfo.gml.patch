@@ -1,0 +1,16 @@
+--- a/Code/gml_GlobalScript_scr_iteminfo.gml
++++ b/Code/gml_GlobalScript_scr_iteminfo.gml
+@@ -245,6 +245,13 @@
+             value = floor(200 / global.chapter);
+             usable = 0;
+             break;
++        case 99:
++            itemnameb = stringset("FragileHeart");
++            itemdescb = stringset("Instant#death");
++            itemtarget = 2;
++            value = -1420;
++            usable = 1;
++            break;
+     }
+ }
+ 

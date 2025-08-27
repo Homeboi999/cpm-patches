@@ -1,0 +1,163 @@
+--- a/Code/gml_Object_obj_werewerewire_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_werewerewire_enemy_Step_0.gml
+@@ -360,64 +360,135 @@
+     if (acting == 2 && actcon == 0)
+     {
+         var mercy_amount = (simultotal == 1) ? 12 : 7;
+-        scr_mercyadd(myself, mercy_amount * mercy_act);
++        scr_mercyadd(myself, mercy_amount * (mercy_act + mercy_temp));
++        with (obj_werewerewire_enemy)
++        {
++            mercy_temp = 0;
++        }
+         var simultext = (simultotal == 1) ? stringsetloc("* You and Werewerewire locked eyes. The atmosphere is electric.../%", "obj_werewerewire_enemy_slash_Step_0_gml_383_0") : stringsetloc("* You watched coldly./%", "obj_werewerewire_enemy_slash_Step_0_gml_383_1");
+         msgset(0, simultext);
+         scr_simultext("kris");
+         actcon = (simulorderkri == 0) ? 20 : 1;
+     }
+-    if (acting == 3 && actcon == 0)
+-    {
+-        scr_mercyadd(myself, 16 * mercy_act);
+-        scr_speaker("no_name");
+-        msgsetloc(0, "* You and Susie told Werewerewire you'd beat them up!/", "obj_werewerewire_enemy_slash_Step_0_gml_393_0");
+-        msgnextloc("* The air crackles with fighting spirit!/%", "obj_werewerewire_enemy_slash_Step_0_gml_394_0");
+-        scr_battletext_default();
+-        actcon = 1;
+-    }
+-    if (acting == 4 && actcon == 0)
+-    {
+-        scr_mercyadd(myself, 5 * mercy_act);
+-        with (obj_werewerewire_enemy)
+-        {
+-            mercy_act = clamp(mercy_act + 1, 1, 10);
+-        }
+-        scr_speaker("no_name");
+-        msgsetloc(0, "* You and Ralsei whispered sweetly to Werewerewire!/", "obj_werewerewire_enemy_slash_Step_0_gml_408_0");
+-        msgnextloc("* It pretended not to care^1, but ACTs became more effective!/%", "obj_werewerewire_enemy_slash_Step_0_gml_409_0");
+-        scr_battletext_default();
+-        actcon = 1;
++    var num = 3;
++    if (scr_havechar(2))
++    {
++        if (acting == 3 && actcon == 0)
++        {
++            scr_mercyadd(myself, 16 * (mercy_act + mercy_temp));
++            with (obj_werewerewire_enemy)
++            {
++                mercy_temp = 0;
++            }
++            scr_speaker("no_name");
++            msgsetloc(0, "* You and Susie told Werewerewire you'd beat them up!/", "obj_werewerewire_enemy_slash_Step_0_gml_393_0");
++            msgnextloc("* The air crackles with fighting spirit!/%", "obj_werewerewire_enemy_slash_Step_0_gml_394_0");
++            scr_battletext_default();
++            actcon = 1;
++        }
++        num++;
++    }
++    if (scr_havechar(3))
++    {
++        if (acting == num && actcon == 0)
++        {
++            scr_mercyadd(myself, 5 * (mercy_act + mercy_temp));
++            with (obj_werewerewire_enemy)
++            {
++                if (mercy_temp >= 2)
++                {
++                    mercy_act = clamp(mercy_act + 2, 1, 10);
++                }
++                else
++                {
++                    mercy_act = clamp(mercy_act + 1, 1, 10);
++                }
++                mercy_temp = 0;
++            }
++            scr_speaker("no_name");
++            msgsetloc(0, "* You and Ralsei whispered sweetly to Werewerewire!/", "obj_werewerewire_enemy_slash_Step_0_gml_408_0");
++            msgnextloc("* It pretended not to care^1, but ACTs became more effective!/%", "obj_werewerewire_enemy_slash_Step_0_gml_409_0");
++            scr_battletext_default();
++            actcon = 1;
++        }
++        num++;
++    }
++    if (scr_havechar(4))
++    {
++        if (acting == num && actcon == 0)
++        {
++            scr_mercyadd(myself, 5 * (mercy_act + mercy_temp));
++            with (obj_werewerewire_enemy)
++            {
++                if (mercy_temp >= 2)
++                {
++                    mercy_temp = 3;
++                }
++                else
++                {
++                    mercy_temp = 2;
++                }
++            }
++            scr_speaker("no_name");
++            msgset(0, "* You and Noelle cautiously approached Werewerewire!/");
++            msgnext("* It cocked its head curiously! The next ACT is highly effective!/%");
++            scr_battletext_default();
++            actcon = 1;
++        }
++        num++;
+     }
+     if (actingsus == 1 && actconsus == 1)
+     {
+         var mercy_amount = (simultotal == 1) ? 12 : 7;
+-        scr_mercyadd(myself, mercy_amount * mercy_act);
++        scr_mercyadd(myself, mercy_amount * (mercy_act + mercy_temp));
+         var simultext = (choose(0, 1) == 0) ? stringsetloc("* Susie snorted \"tch!\"/%", "obj_werewerewire_enemy_slash_Step_0_gml_412_0") : stringsetloc("* Susie laughed \"heh!\"/%", "obj_werewerewire_enemy_slash_Step_0_gml_412_1");
+         msgset(0, simultext);
+         scr_simultext("susie");
++        with (obj_werewerewire_enemy)
++        {
++            mercy_temp = 0;
++        }
+         actconsus = (simulordersus == 0) ? 20 : 0;
+     }
+     if (actingral == 1 && actconral == 1)
+     {
+         var mercy_amount = (simultotal == 1) ? 12 : 7;
+-        scr_mercyadd(myself, mercy_amount * mercy_act);
++        scr_mercyadd(myself, mercy_amount * (mercy_act + mercy_temp));
+         var simultext = (choose(0, 1) == 0) ? stringsetloc("* Ralsei winks demurely!/%", "obj_werewerewire_enemy_slash_Step_0_gml_424_0") : stringsetloc("* Ralsei smiled sweetly!/%", "obj_werewerewire_enemy_slash_Step_0_gml_424_1");
+         msgset(0, simultext);
+         scr_simultext("ralsei");
++        with (obj_werewerewire_enemy)
++        {
++            mercy_temp = 0;
++        }
+         actconral = (simulorderral == 0) ? 20 : 0;
+     }
++    if (actingnoe == 1 && actconnoe == 1)
++    {
++        var mercy_amount = (simultotal == 1) ? 12 : 7;
++        scr_mercyadd(myself, mercy_amount * (mercy_act + mercy_temp));
++        var simultext = (choose(0, 1) == 0) ? stringset("* Noelle got startled!/%") : stringset("* Noelle showed hesitation!/%");
++        msgset(0, simultext);
++        scr_simultext("noelle");
++        with (obj_werewerewire_enemy)
++        {
++            mercy_temp = 0;
++        }
++        actconnoe = (simulordernoe == 0) ? 20 : 0;
++    }
+     if (actcon == 1 && !instance_exists(obj_writer))
+     {
+         scr_act_charsprite_end();
+         scr_nextact();
+     }
+-    if (actcon == 20 || actconsus == 20 || actconral == 20)
++    if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
+     {
+         if (scr_terminate_writer())
+         {
+             actconsus = -1;
+             actconral = -1;
+             actcon = 1;
++            actconnoe = -1;
+         }
+     }
+ }

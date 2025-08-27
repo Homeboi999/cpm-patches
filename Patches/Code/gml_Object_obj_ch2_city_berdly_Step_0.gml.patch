@@ -1,0 +1,61 @@
+--- a/Code/gml_Object_obj_ch2_city_berdly_Step_0.gml
++++ b/Code/gml_Object_obj_ch2_city_berdly_Step_0.gml
+@@ -10,7 +10,19 @@
+ }
+ if (con == 0.7)
+ {
+-    con = (scr_sideb_get_phase() == 0) ? 1 : 10;
++    if (scr_sideb_get_phase() == 0)
++    {
++        con = 1;
++    }
++    else if (scr_havechar(4))
++    {
++        con = 10;
++    }
++    else
++    {
++        scr_sideb_fail();
++        con = 1;
++    }
+     cutscene_master = scr_cutscene_make();
+     scr_maincharacters_actors();
+     be = actor_count + 1;
+@@ -366,14 +378,20 @@
+     var used_snowgrave = i_ex(obj_npc_sign);
+     if (!used_snowgrave)
+     {
++        if (i_ex(obj_herokris))
++        {
+-        obj_mainchara.x = obj_herokris.x;
++            obj_mainchara.x = obj_herokris.x;
+-        obj_mainchara.y = obj_herokris.y;
++            obj_mainchara.y = obj_herokris.y;
+-        kr_actor.x = obj_herokris.x;
++            kr_actor.x = obj_herokris.x;
+-        kr_actor.y = obj_herokris.y;
++            kr_actor.y = obj_herokris.y;
+-        kr_actor.sprite_index = obj_herokris.sprite_index;
++            kr_actor.sprite_index = obj_herokris.sprite_index;
++        }
++        if (i_ex(obj_heronoelle))
++        {
+-        no_actor.x = obj_heronoelle.x;
++            no_actor.x = obj_heronoelle.x;
+-        no_actor.y = obj_heronoelle.y;
++            no_actor.y = obj_heronoelle.y;
+-        no_actor.sprite_index = obj_heronoelle.sprite_index;
++            no_actor.sprite_index = obj_heronoelle.sprite_index;
++        }
+         be_actor.x = obj_berdlyb2_enemy.x + obj_berdlyb2_enemy.shakex;
+         be_actor.y = obj_berdlyb2_enemy.y;
+         be_actor.sprite_index = spr_berdly_hurt_kneel_battle;
+@@ -514,7 +532,7 @@
+         c_panobj(kr_actor, 30);
+         c_wait(31);
+         c_pannable(0);
+-        if (scr_sideb_get_phase() == 0 || global.flag[916] == 1)
++        if ((scr_sideb_get_phase() == 0 || global.flag[916] == 1) && scr_havechar(4))
+         {
+             if (global.hp[4] < global.maxhp[4])
+             {

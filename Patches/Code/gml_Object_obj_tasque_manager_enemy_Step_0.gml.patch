@@ -1,0 +1,98 @@
+--- a/Code/gml_Object_obj_tasque_manager_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_tasque_manager_enemy_Step_0.gml
+@@ -254,7 +254,7 @@
+         }
+         else
+         {
+-            if (global.hp[1] <= 0 && global.hp[2] <= 0)
++            if (!(scr_havechar(2) && global.hp[2] > 0) && !(scr_havechar(3) && global.hp[3] > 0) && !(scr_havechar(4) && global.hp[4] > 0))
+             {
+                 scr_mercyadd(myself, 15);
+             }
+@@ -279,6 +279,9 @@
+     if (acting == 3 && actcon == 0)
+     {
+         scr_act_charsprite("kris", spr_krisb_wan_tail, 0, 0);
++        scr_act_charsprite("susie", spr_susie_wan_sign, 0, 0);
++        scr_act_charsprite("ralsei", spr_ralseib_wan, 0, 0);
++        scr_act_charsprite("noelle", spr_noelle_wan, 0, 0);
+         if (violenceused == 1)
+         {
+             msgsetloc(0, "* (You talked to Tasque Manager, but no effect...)/%", "obj_tasque_manager_enemy_slash_Step_0_gml_277_0");
+@@ -303,7 +306,7 @@
+         }
+         else
+         {
+-            if (global.hp[0] <= 0 && global.hp[2] <= 0)
++            if (!(scr_havechar(1) && global.hp[1] > 0) && !(scr_havechar(3) && global.hp[3] > 0) && !(scr_havechar(4) && global.hp[4] > 0))
+             {
+                 scr_mercyadd(myself, 10);
+             }
+@@ -335,7 +338,7 @@
+         }
+         else
+         {
+-            if (global.hp[0] <= 0 && global.hp[1] <= 0)
++            if (!(scr_havechar(1) && global.hp[1] > 0) && !(scr_havechar(2) && global.hp[2] > 0) && !(scr_havechar(4) && global.hp[4] > 0))
+             {
+                 scr_mercyadd(myself, 10);
+             }
+@@ -357,23 +360,55 @@
+         scr_simultext("ralsei");
+         actconral = (simulorderral == 0) ? 20 : 0;
+     }
++    if (actingnoe == 1 && actconnoe == 1)
++    {
++        scr_act_charsprite("noelle", spr_noelle_wan, 0, 0);
++        var simultext;
++        if (violenceused == 1)
++        {
++            simultext = stringset("* N-Action failed!/%");
++        }
++        else
++        {
++            if (!(scr_havechar(1) && global.hp[1] > 0) && !(scr_havechar(2) && global.hp[2] > 0) && !(scr_havechar(3) && global.hp[3] > 0))
++            {
++                scr_mercyadd(myself, 10);
++            }
++            else
++            {
++                scr_mercyadd(myself, 6);
++            }
++            var a = choose(0, 1);
++            if (a == 0)
++            {
++                simultext = stringset("* Noelle stayed on task!/%");
++            }
++            if (a == 1)
++            {
++                simultext = stringset("* Noelle followed orders!/%");
++            }
++        }
++        msgset(0, simultext);
++        scr_simultext("noelle");
++        actconnoe = (simulordernoe == 0) ? 20 : 0;
++    }
+     if (actcon == 1 && !instance_exists(obj_writer))
+     {
+         scr_act_charsprite_end();
+         scr_nextact();
+     }
+-    if (actcon == 20 || actconsus == 20 || actconral == 20)
++    if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
+     {
+-        scr_act_charsprite_end();
+         if (scr_terminate_writer())
+         {
++            actconnoe = -1;
+             actconsus = -1;
+             actconral = -1;
+             actcon = 1;
+         }
+     }
+ }
+-else if (obj_herokris.image_alpha == 0 || (instance_exists(obj_herosusie) && obj_herosusie.image_alpha == 0) || (instance_exists(obj_heroralsei) && obj_heroralsei.image_alpha == 0))
++else if ((instance_exists(obj_herokris) && obj_herokris.image_alpha == 0) || (instance_exists(obj_herosusie) && obj_herosusie.image_alpha == 0) || (instance_exists(obj_heroralsei) && obj_heroralsei.image_alpha == 0) || (instance_exists(obj_heronoelle) && obj_heronoelle.image_alpha == 0))
+ {
+     scr_act_charsprite_end();
+ }

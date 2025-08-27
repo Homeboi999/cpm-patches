@@ -1,0 +1,10 @@
+--- a/Code/gml_Object_obj_queen_throw_controller_Create_0.gml
++++ b/Code/gml_Object_obj_queen_throw_controller_Create_0.gml
+@@ -12,6 +12,7 @@
+ image_yscale = 2;
+ y -= 200;
+ depth = obj_queen_enemy.depth + 1;
++debugY = 0;
+ for (i = 0; i < 6; i += 1)
+ {
+     x1[i] = x;

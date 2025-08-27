@@ -1,0 +1,16 @@
+--- a/Code/gml_Object_obj_dojograzeenemy_Step_0.gml
++++ b/Code/gml_Object_obj_dojograzeenemy_Step_0.gml
+@@ -91,6 +91,13 @@
+         actcon = 1;
+         actconral = 0;
+     }
++    if (actingnoe == 1 && actconnoe == 1)
++    {
++        msgset(0, "* Noelle acted!/%");
++        scr_battletext_default();
++        actcon = 1;
++        actconnoe = 0;
++    }
+     if (actcon == 1 && !instance_exists(obj_writer))
+     {
+         scr_nextact();

@@ -1,0 +1,12 @@
+--- a/Code/gml_GlobalScript_scr_itemdesc_single.gml
++++ b/Code/gml_GlobalScript_scr_itemdesc_single.gml
+@@ -110,6 +110,9 @@
+         case 33:
+             __itemdesc = stringsetloc("A dollar with a certain dog on it.#Its value decreases each Chapter.", "scr_itemdesc_single_slash_scr_itemdesc_single_gml_109_0");
+             break;
++        case 99:
++            __itemdesc = stringset("An ominously heart-shaped object made of glass.#It looks like it could shatter at any moment.");
++            break;
+     }
+     return __itemdesc;
+ }

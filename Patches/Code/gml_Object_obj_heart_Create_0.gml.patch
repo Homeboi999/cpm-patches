@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_heart_Create_0.gml
++++ b/Code/gml_Object_obj_heart_Create_0.gml
+@@ -17,7 +17,7 @@
+ z_hold_f = 0;
+ chargeshot_delay = 0;
+ superchargetimer = 0;
+-chargeshotcount = 0;
++bulletspershot = 1;
+ disableslow = 0;
+ if (button2_h())
+ {

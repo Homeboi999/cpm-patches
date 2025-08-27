@@ -1,0 +1,489 @@
+--- a/Code/gml_GlobalScript_scr_cutscene_commands.gml
++++ b/Code/gml_GlobalScript_scr_cutscene_commands.gml
+@@ -65,6 +65,231 @@
+             command_actor[i].y = command_arg2[i];
+         }
+     }
++    if (_c == "emote")
++    {
++        if (!instant)
++        {
++            command_actor[i].__arg0 = command_arg1[i];
++            command_actor[i].__arg1 = command_arg2[i];
++            command_actor[i].__arg2 = command_arg3[i];
++            if (command_arg3[i] == 0)
++            {
++                with (command_actor[i])
++                {
++                    scr_emote(__arg0, __arg1);
++                }
++            }
++            else
++            {
++                with (command_actor[i])
++                {
++                    scr_emote(__arg0, __arg1, __arg2);
++                }
++            }
++        }
++    }
++    if (_c == "autowalk")
++    {
++        command_actor[i].auto_facing = command_arg1[i];
++        command_actor[i].auto_walk = command_arg1[i];
++    }
++    if (_c == "autofacing")
++    {
++        command_actor[i].auto_facing = command_arg1[i];
++    }
++    if (_c == "autodepth")
++    {
++        command_actor[i].auto_depth = command_arg1[i];
++    }
++    if (_c == "depth")
++    {
++        command_actor[i].depth = command_arg1[i];
++    }
++    if (_c == "depthobject")
++    {
++        command_actor[i].depth = command_arg1[i].depth + command_arg2[i];
++    }
++    if (_c == "flip")
++    {
++        command_actor[i].__flipvalue = command_arg1[i];
++        with (command_actor[i])
++        {
++            scr_flip(__flipvalue);
++        }
++    }
++    if (_c == "facing")
++    {
++        if (command_arg1[i] == "l" || command_arg1[i] == "d" || command_arg1[i] == "r" || command_arg1[i] == "u")
++        {
++            scr_actor_facing(command_actor[i], command_arg1[i]);
++        }
++        else
++        {
++            command_actor[i]._setfacing = command_arg1[i];
++            with (command_actor[i])
++            {
++                scr_set_facing_sprites(_setfacing);
++            }
++        }
++    }
++    if (_c == "halt")
++    {
++        with (command_actor[i])
++        {
++            scr_halt();
++        }
++    }
++    if (_c == "spin")
++    {
++        if (i_ex(command_actor[i]))
++        {
++            command_actor[i].spinspeed = command_arg1[i];
++        }
++    }
++    if (_c == "stick")
++    {
++        if (command_arg1[i] == "on")
++        {
++            var _stickobj = command_arg2[i];
++            var _stickdepth = command_arg3[i];
++            with (command_actor[i])
++            {
++                scr_stickto(_stickobj, _stickdepth);
++            }
++        }
++        else
++        {
++            with (command_actor[i])
++            {
++                scr_stickto_stop();
++            }
++        }
++    }
++    if (_c == "sprite")
++    {
++        command_actor[i].sprite_index = command_arg1[i];
++    }
++    if (_c == "specialsprite")
++    {
++        command_actor[i].sprite_index = command_actor[i].specialsprite[command_arg1[i]];
++        command_actor[i].specialspriteno = command_arg1[i];
++    }
++    if (_c == "visible")
++    {
++        command_actor[i].visible = command_arg1[i];
++    }
++    if (_c == "imagespeed")
++    {
++        command_actor[i].image_speed = command_arg1[i];
++    }
++    if (_c == "imageindex")
++    {
++        command_actor[i].image_index = command_arg1[i];
++    }
++    if (_c == "animate")
++    {
++        if (i_ex(command_actor[i]) && !instant)
++        {
++            command_actor[i].__arg0 = command_arg1[i];
++            command_actor[i].__arg1 = command_arg2[i];
++            command_actor[i].__arg2 = command_arg3[i];
++            with (command_actor[i])
++            {
++                scr_animate(__arg0, __arg1, __arg2);
++            }
++        }
++    }
++    if (_c == "shakeobj")
++    {
++        if (!instant)
++        {
++            with (command_actor[i])
++            {
++                scr_shakeobj();
++            }
++        }
++    }
++    if (_c == "jump")
++    {
++        if (i_ex(command_actor[i]))
++        {
++            command_actor[i].__arg0 = command_arg1[i];
++            command_actor[i].__arg1 = command_arg2[i];
++            command_actor[i].__arg2 = command_arg3[i];
++            command_actor[i].__arg3 = command_arg4[i];
++            if (!instant)
++            {
++                with (command_actor[i])
++                {
++                    scr_jump_to_point(__arg0, __arg1, __arg2, __arg3);
++                }
++            }
++            else
++            {
++                command_actor[i].x = command_arg1[i];
++                command_actor[i].y = command_arg2[i];
++            }
++        }
++    }
++    if (_c == "jumpinplace")
++    {
++        if (i_ex(command_actor[i]))
++        {
++            command_actor[i].__arg0 = command_arg1[i];
++            command_actor[i].__arg1 = command_arg2[i];
++            if (!instant)
++            {
++                with (command_actor[i])
++                {
++                    scr_jump_in_place(__arg0, __arg1);
++                }
++            }
++        }
++    }
++    if (_c == "jumpsprite")
++    {
++        if (i_ex(command_actor[i]))
++        {
++            command_actor[i].__arg0 = command_arg1[i];
++            command_actor[i].__arg1 = command_arg2[i];
++            command_actor[i].__arg2 = command_arg3[i];
++            command_actor[i].__arg3 = command_arg4[i];
++            command_actor[i].__arg4 = command_arg5[i];
++            command_actor[i].__arg5 = command_arg6[i];
++            if (!instant)
++            {
++                with (command_actor[i])
++                {
++                    scr_jump_to_point_sprite(__arg0, __arg1, __arg2, __arg3, __arg4, __arg5);
++                }
++            }
++            else
++            {
++                command_actor[i].x = command_arg1[i];
++                command_actor[i].y = command_arg2[i];
++            }
++        }
++    }
++    if (_c == "addxy")
++    {
++        command_actor[i].x += command_arg1[i];
++        command_actor[i].y += command_arg2[i];
++    }
++    if (_c == "setxy")
++    {
++        command_actor[i].x = command_arg1[i];
++        command_actor[i].y = command_arg2[i];
++    }
++    if (_c == "arg_objectxy")
++    {
++        command_arg1[i + 1] = command_arg1[i].x + command_arg2[i];
++        command_arg2[i + 1] = command_arg1[i].y + command_arg3[i];
++    }
++    if (_c == "actortoobject")
++    {
++        instance_create(command_actor[i].x, command_actor[i].y, command_arg1[i]);
++        command_actor[i].visible = 0;
++    }
+     if (_c == "msgset")
+     {
+         msgset(command_arg1[i], command_arg2[i]);
+@@ -116,29 +341,6 @@
+             zurasu = 0;
+         }
+     }
+-    if (_c == "emote")
+-    {
+-        if (!instant)
+-        {
+-            command_actor[i].__arg0 = command_arg1[i];
+-            command_actor[i].__arg1 = command_arg2[i];
+-            command_actor[i].__arg2 = command_arg3[i];
+-            if (command_arg3[i] == 0)
+-            {
+-                with (command_actor[i])
+-                {
+-                    scr_emote(__arg0, __arg1);
+-                }
+-            }
+-            else
+-            {
+-                with (command_actor[i])
+-                {
+-                    scr_emote(__arg0, __arg1, __arg2);
+-                }
+-            }
+-        }
+-    }
+     if (_c == "speaker")
+     {
+         scr_speaker(command_arg1[i]);
+@@ -175,7 +377,7 @@
+             }
+         }
+         __chosenid = 0;
+-        if (command_arg1[i] == 0)
++        if (command_arg1[i] == 0 && i_ex(command_actor[i]))
+         {
+             __chosenid = command_actor[i];
+         }
+@@ -311,117 +513,6 @@
+     {
+         variable_global_set(command_arg1[i], command_arg2[i]);
+     }
+-    if (_c == "autowalk")
+-    {
+-        command_actor[i].auto_facing = command_arg1[i];
+-        command_actor[i].auto_walk = command_arg1[i];
+-    }
+-    if (_c == "autofacing")
+-    {
+-        command_actor[i].auto_facing = command_arg1[i];
+-    }
+-    if (_c == "autodepth")
+-    {
+-        command_actor[i].auto_depth = command_arg1[i];
+-    }
+-    if (_c == "depth")
+-    {
+-        command_actor[i].depth = command_arg1[i];
+-    }
+-    if (_c == "depthobject")
+-    {
+-        command_actor[i].depth = command_arg1[i].depth + command_arg2[i];
+-    }
+-    if (_c == "flip")
+-    {
+-        command_actor[i].__flipvalue = command_arg1[i];
+-        with (command_actor[i])
+-        {
+-            scr_flip(__flipvalue);
+-        }
+-    }
+-    if (_c == "facing")
+-    {
+-        if (command_arg1[i] == "l" || command_arg1[i] == "d" || command_arg1[i] == "r" || command_arg1[i] == "u")
+-        {
+-            scr_actor_facing(command_actor[i], command_arg1[i]);
+-        }
+-        else
+-        {
+-            command_actor[i]._setfacing = command_arg1[i];
+-            with (command_actor[i])
+-            {
+-                scr_set_facing_sprites(_setfacing);
+-            }
+-        }
+-    }
+-    if (_c == "halt")
+-    {
+-        with (command_actor[i])
+-        {
+-            scr_halt();
+-        }
+-    }
+-    if (_c == "spin")
+-    {
+-        if (i_ex(command_actor[i]))
+-        {
+-            command_actor[i].spinspeed = command_arg1[i];
+-        }
+-    }
+-    if (_c == "stick")
+-    {
+-        if (command_arg1[i] == "on")
+-        {
+-            var _stickobj = command_arg2[i];
+-            var _stickdepth = command_arg3[i];
+-            with (command_actor[i])
+-            {
+-                scr_stickto(_stickobj, _stickdepth);
+-            }
+-        }
+-        else
+-        {
+-            with (command_actor[i])
+-            {
+-                scr_stickto_stop();
+-            }
+-        }
+-    }
+-    if (_c == "sprite")
+-    {
+-        command_actor[i].sprite_index = command_arg1[i];
+-    }
+-    if (_c == "specialsprite")
+-    {
+-        command_actor[i].sprite_index = command_actor[i].specialsprite[command_arg1[i]];
+-        command_actor[i].specialspriteno = command_arg1[i];
+-    }
+-    if (_c == "visible")
+-    {
+-        command_actor[i].visible = command_arg1[i];
+-    }
+-    if (_c == "imagespeed")
+-    {
+-        command_actor[i].image_speed = command_arg1[i];
+-    }
+-    if (_c == "imageindex")
+-    {
+-        command_actor[i].image_index = command_arg1[i];
+-    }
+-    if (_c == "animate")
+-    {
+-        if (i_ex(command_actor[i]) && !instant)
+-        {
+-            command_actor[i].__arg0 = command_arg1[i];
+-            command_actor[i].__arg1 = command_arg2[i];
+-            command_actor[i].__arg2 = command_arg3[i];
+-            with (command_actor[i])
+-            {
+-                scr_animate(__arg0, __arg1, __arg2);
+-            }
+-        }
+-    }
+     if (_c == "soundplay")
+     {
+         if (!instant)
+@@ -592,97 +683,6 @@
+             myshake.shakey = command_arg2[i];
+             myshake.shakespeed = command_arg3[i];
+         }
+-    }
+-    if (_c == "shakeobj")
+-    {
+-        if (!instant)
+-        {
+-            with (command_actor[i])
+-            {
+-                scr_shakeobj();
+-            }
+-        }
+-    }
+-    if (_c == "jump")
+-    {
+-        if (i_ex(command_actor[i]))
+-        {
+-            command_actor[i].__arg0 = command_arg1[i];
+-            command_actor[i].__arg1 = command_arg2[i];
+-            command_actor[i].__arg2 = command_arg3[i];
+-            command_actor[i].__arg3 = command_arg4[i];
+-            if (!instant)
+-            {
+-                with (command_actor[i])
+-                {
+-                    scr_jump_to_point(__arg0, __arg1, __arg2, __arg3);
+-                }
+-            }
+-            else
+-            {
+-                command_actor[i].x = command_arg1[i];
+-                command_actor[i].y = command_arg2[i];
+-            }
+-        }
+-    }
+-    if (_c == "jumpinplace")
+-    {
+-        if (i_ex(command_actor[i]))
+-        {
+-            command_actor[i].__arg0 = command_arg1[i];
+-            command_actor[i].__arg1 = command_arg2[i];
+-            if (!instant)
+-            {
+-                with (command_actor[i])
+-                {
+-                    scr_jump_in_place(__arg0, __arg1);
+-                }
+-            }
+-        }
+-    }
+-    if (_c == "jumpsprite")
+-    {
+-        if (i_ex(command_actor[i]))
+-        {
+-            command_actor[i].__arg0 = command_arg1[i];
+-            command_actor[i].__arg1 = command_arg2[i];
+-            command_actor[i].__arg2 = command_arg3[i];
+-            command_actor[i].__arg3 = command_arg4[i];
+-            command_actor[i].__arg4 = command_arg5[i];
+-            command_actor[i].__arg5 = command_arg6[i];
+-            if (!instant)
+-            {
+-                with (command_actor[i])
+-                {
+-                    scr_jump_to_point_sprite(__arg0, __arg1, __arg2, __arg3, __arg4, __arg5);
+-                }
+-            }
+-            else
+-            {
+-                command_actor[i].x = command_arg1[i];
+-                command_actor[i].y = command_arg2[i];
+-            }
+-        }
+-    }
+-    if (_c == "addxy")
+-    {
+-        command_actor[i].x += command_arg1[i];
+-        command_actor[i].y += command_arg2[i];
+-    }
+-    if (_c == "setxy")
+-    {
+-        command_actor[i].x = command_arg1[i];
+-        command_actor[i].y = command_arg2[i];
+-    }
+-    if (_c == "arg_objectxy")
+-    {
+-        command_arg1[i + 1] = command_arg1[i].x + command_arg2[i];
+-        command_arg2[i + 1] = command_arg1[i].y + command_arg3[i];
+-    }
+-    if (_c == "actortoobject")
+-    {
+-        instance_create(command_actor[i].x, command_actor[i].y, command_arg1[i]);
+-        command_actor[i].visible = 0;
+     }
+     if (_c == "actortokris")
+     {

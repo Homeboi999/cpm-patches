@@ -1,0 +1,70 @@
+--- a/Code/gml_Object_obj_queencar_Step_0.gml
++++ b/Code/gml_Object_obj_queencar_Step_0.gml
+@@ -1,3 +1,9 @@
++var longOffset = 0;
++if (swanLong)
++{
++    longOffset = 40;
++    charspacing = 40;
++}
+ if (con == 1)
+ {
+     global.interact = 1;
+@@ -21,14 +27,21 @@
+         {
+             fun = 1;
+             global.facing = 1;
+-            scr_move_to_point_over_time(obj_queencar.x + obj_queencar.swanmaincharax, obj_queencar.y + obj_queencar.swanmaincharay, 15);
++            scr_move_to_point_over_time(obj_queencar.x + obj_queencar.swanmaincharax + longOffset, obj_queencar.y + obj_queencar.swanmaincharay + obj_queencar.charOffsets[global.char[0]], 15);
+         }
+-        with (obj_caterpillarchara)
++        with (global.cinstance[0])
+         {
+             follow = 0;
+             fun = 1;
+             sprite_index = rsprite;
+-            scr_move_to_point_over_time((obj_queencar.x + obj_queencar.swanmaincharax) - 50, (obj_queencar.y + obj_queencar.swanmaincharay) - 12, 15);
++            scr_move_to_point_over_time(((obj_queencar.x + obj_queencar.swanmaincharax) - obj_queencar.charspacing) + longOffset, obj_queencar.y + obj_queencar.swanmaincharay + obj_queencar.charOffsets[global.char[1]], 15);
++        }
++        with (global.cinstance[1])
++        {
++            follow = 0;
++            fun = 1;
++            sprite_index = rsprite;
++            scr_move_to_point_over_time((obj_queencar.x + obj_queencar.swanmaincharax) - obj_queencar.charspacing, obj_queencar.y + obj_queencar.swanmaincharay + obj_queencar.charOffsets[global.char[2]], 15);
+         }
+     }
+ }
+@@ -120,18 +133,24 @@
+     {
+         obj_mainchara.x = x + 85;
+         obj_mainchara.y = y;
++        scr_depth();
+     }
+     else
+     {
+-        obj_mainchara.x = x + swanmaincharax;
+-        obj_mainchara.y = y + swanmaincharay;
+-        if (instance_exists(obj_caterpillarchara))
+-        {
+-            obj_caterpillarchara.x = (x + swanmaincharax) - 50;
+-            obj_caterpillarchara.y = (y + swanmaincharay) - 12;
+-        }
++        obj_mainchara.x = x + swanmaincharax + longOffset;
++        obj_mainchara.y = y + swanmaincharay + obj_queencar.charOffsets[global.char[0]];
++        if (i_ex(global.cinstance[0]))
++        {
++            global.cinstance[0].x = ((x + swanmaincharax) - charspacing) + longOffset;
++            global.cinstance[0].y = y + swanmaincharay + obj_queencar.charOffsets[global.char[1]];
++        }
++        if (i_ex(global.cinstance[1]))
++        {
++            global.cinstance[1].x = (x + swanmaincharax) - charspacing;
++            global.cinstance[1].y = y + swanmaincharay + obj_queencar.charOffsets[global.char[2]];
++        }
++        scr_depth();
+     }
+-    scr_depth();
+ }
+ if (con == 2)
+ {

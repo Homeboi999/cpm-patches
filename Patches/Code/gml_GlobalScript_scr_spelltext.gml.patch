@@ -1,0 +1,22 @@
+--- a/Code/gml_GlobalScript_scr_spelltext.gml
++++ b/Code/gml_GlobalScript_scr_spelltext.gml
+@@ -53,6 +53,9 @@
+         case 11:
+             global.msg[0] = stringsetsubloc("* ~1 cast ULTIMATEHEAL!/%", global.charname[global.char[caster]], "scr_spelltext_slash_scr_spelltext_gml_67_0");
+             break;
++        case 12:
++            global.msg[0] = stringsetsub("* ~1 cast SNOWSHOCK!/%", global.charname[global.char[caster]]);
++            break;
+         case 100:
+             cancelattack = 0;
+             global.msg[0] = stringsetsubloc("* ~1 spared ~2!/%", global.charname[global.char[caster]], global.monstername[star], "scr_spelltext_slash_scr_spelltext_gml_58_0");
+@@ -271,6 +274,9 @@
+             break;
+         case 233:
+             msgsetsubloc(0, "* ~1 admired DOGDOLLAR!/%", global.charname[global.char[caster]], "scr_spelltext_slash_scr_spelltext_gml_298_0");
++            break;
++        case 299:
++            msgset(0, "* \\cRYOU DIED/%");
+             break;
+     }
+ }

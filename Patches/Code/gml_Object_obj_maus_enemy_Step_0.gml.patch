@@ -1,0 +1,111 @@
+--- a/Code/gml_Object_obj_maus_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_maus_enemy_Step_0.gml
+@@ -181,9 +181,10 @@
+         actcon = 9;
+         alarm[4] = 10;
+     }
+-    if (acting == 3 && actcon == 0)
++    var num = 3;
++    if (scr_havechar(2))
+     {
+-        if (!scr_havechar(4))
++        if (acting == 3 && actcon == 0)
+         {
+             scr_speaker("susie");
+             msgsetloc(0, "\\E5* There's only one solution for a mouse!!/", "obj_maus_enemy_slash_Step_0_gml_177_0");
+@@ -191,7 +192,11 @@
+             scr_battletext();
+             actcon = 30;
+         }
+-        else
++        num++;
++    }
++    if (scr_havechar(4))
++    {
++        if (acting == num && actcon == 0)
+         {
+             nact_count++;
+             if (global.flag[379] == 1)
+@@ -239,6 +244,7 @@
+             }
+             actcon = 1;
+         }
++        num++;
+     }
+     if (actcon == 30)
+     {
+@@ -255,17 +261,27 @@
+             {
+                 scr_move_to_point_over_time(currentX, currentY, 30);
+             }
++            if (scr_havechar(3))
++            {
+-            actcon = 31;
++                actcon = 31;
++            }
++            else
++            {
++                actcon = 33;
++            }
+             alarm[4] = 30;
+         }
+     }
+     if (actcon == 32)
+     {
++        if (scr_havechar(3))
++        {
+-        scr_speaker("ralsei");
++            scr_speaker("ralsei");
+-        msgsetloc(0, "\\EK* ...don't we just have to fight the cat now?/", "obj_maus_enemy_slash_Step_0_gml_251_0");
++            msgsetloc(0, "\\EK* ...don't we just have to fight the cat now?/", "obj_maus_enemy_slash_Step_0_gml_251_0");
+-        scr_anyface_next("susie", "K");
++            scr_anyface_next("susie", "K");
+-        msgnextloc("\\EK* Huh?/%", "obj_maus_enemy_slash_Step_0_gml_253_0");
++            msgnextloc("\\EK* Huh?/%", "obj_maus_enemy_slash_Step_0_gml_253_0");
+-        scr_battletext();
++            scr_battletext();
++        }
+         remove = true;
+         actcon = 33;
+         alarm[4] = 30;
+@@ -274,13 +290,16 @@
+     {
+         actcon = 1;
+     }
+-    if (acting == 4 && actcon == 0)
++    if (scr_havechar(3) || scr_havechar(4))
+     {
++        if (acting == num && actcon == 0)
++        {
+-        trappingX = true;
++            trappingX = true;
+-        msgsetsubloc(0, "* Press ~1 to trap all the enemies!", scr_get_input_name(6), "obj_maus_enemy_slash_Step_0_gml_269_0");
++            msgsetsubloc(0, "* Press ~1 to trap all the enemies!", scr_get_input_name(6), "obj_maus_enemy_slash_Step_0_gml_269_0");
+-        scr_battletext_default();
++            scr_battletext_default();
+-        actcon = 9;
++            actcon = 9;
+-        alarm[4] = 10;
++            alarm[4] = 10;
++        }
+     }
+     if (actcon == 10)
+     {
+@@ -338,7 +357,7 @@
+     }
+     if (actingral == 1 && actconral == 1)
+     {
+-        if (!trappedText)
++        if (!trappedText && scr_havechar(2))
+         {
+             with (obj_maus_enemy)
+             {
+@@ -437,7 +456,7 @@
+             {
+                 if ((global.actingtarget[__i] == myself && global.char[__i] > 0 && global.charspecial[__i] == 0) || (global.chartarget[__i] == myself && (global.charspecial[__i] == 100 || global.charspecial[__i] == 3)))
+                 {
+-                    if (global.char[__i] == 3)
++                    if (global.char[__i] > 2)
+                     {
+                         acttriggered = 1;
+                     }

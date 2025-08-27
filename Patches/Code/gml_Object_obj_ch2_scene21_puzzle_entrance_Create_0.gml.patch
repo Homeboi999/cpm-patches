@@ -1,0 +1,60 @@
+--- a/Code/gml_Object_obj_ch2_scene21_puzzle_entrance_Create_0.gml
++++ b/Code/gml_Object_obj_ch2_scene21_puzzle_entrance_Create_0.gml
+@@ -14,13 +14,29 @@
+     {
+         if (global.plot < 140)
+         {
+-            scr_losechar();
+-            safe_delete(obj_caterpillarchara);
+-            scr_getchar(3);
+             obj_mainchara.x = -100;
++            if (scr_modconfig("forceParty") == 0)
++            {
++                scr_losechar();
++                safe_delete(obj_caterpillarchara);
++                scr_getchar(3);
+-            var ra_x = (global.plot < 140) ? (obj_mainchara.x - 40) : obj_mainchara.x;
++                var ra_x = (global.plot < 140) ? (obj_mainchara.x - 40) : obj_mainchara.x;
+-            var ra_y = (global.plot < 140) ? obj_mainchara.y : (obj_mainchara.y - 40);
++                var ra_y = (global.plot < 140) ? obj_mainchara.y : (obj_mainchara.y - 40);
+-            scr_makecaterpillar(ra_x, ra_y, 3, 0);
++                scr_makecaterpillar(ra_x, ra_y, 3, 0);
++            }
++            else
++            {
++                if (i_ex(global.cinstance[0]))
++                {
++                    var offset = i_ex(global.cinstance[1]) ? 0 : 20;
++                    obj_mainchara.x += (20 - offset);
++                    global.cinstance[0].x = obj_mainchara.x - 20 - offset;
++                }
++                if (i_ex(global.cinstance[1]))
++                {
++                    global.cinstance[1].x = obj_mainchara.x - 40;
++                }
++            }
+             with (obj_caterpillarchara)
+             {
+                 scr_caterpillar_interpolate();
+@@ -30,6 +46,10 @@
+         swanboat = instance_create(swanboat_x, 240, obj_queencar);
+         with (swanboat)
+         {
++            if (swanLong)
++            {
++                x -= 40;
++            }
+             scr_depth();
+         }
+         swanboat.con = global.plot < 140;
+@@ -57,6 +77,10 @@
+         swanboat = instance_create(235, 240, obj_queencar);
+         with (swanboat)
+         {
++            if (swanLong)
++            {
++                x -= 20;
++            }
+             scr_depth();
+         }
+         swanboat.pause_y_move = true;

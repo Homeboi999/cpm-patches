@@ -1,0 +1,75 @@
+--- a/Code/gml_Object_obj_omawaroid_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_omawaroid_enemy_Step_0.gml
+@@ -154,9 +154,10 @@
+         msgsetloc(0, "* AMBYU-LANCE - If it doesn't find an accident, it'll make one!/%", "obj_omawaroid_enemy_slash_Step_0_gml_130_0");
+         scr_battletext_default();
+     }
+-    if (acting == 2 && actcon == 0)
++    var num = 2;
++    if (scr_havechar(2))
+     {
+-        if (!scr_havechar(4))
++        if (acting == 2 && actcon == 0)
+         {
+             actcon = 1;
+             scr_speaker("susie");
+@@ -166,7 +167,25 @@
+             chasecheck = 1;
+             scr_battletext();
+         }
+-        else
++        num++;
++    }
++    if (scr_havechar(3))
++    {
++        if (acting == num && actcon == 0)
++        {
++            actcon = 1;
++            scr_speaker("ralsei");
++            msgsetloc(0, "\\EH* We'll use your service^1, friends!/", "obj_omawaroid_enemy_slash_Step_0_gml_199_0");
++            scr_anyface_next("no_name", 0);
++            msgnextloc("* (Ralsei encouraged you to \\cYget hit\\cW by the ambulances!)/%", "obj_omawaroid_enemy_slash_Step_0_gml_201_0");
++            chasecheck = -1;
++            scr_battletext();
++        }
++        num++;
++    }
++    if (scr_havechar(4))
++    {
++        if (acting == num && actcon == 0)
+         {
+             nact_count++;
+             with (obj_omawaroid_enemy)
+@@ -195,16 +214,6 @@
+             alarm[4] = 15;
+         }
+     }
+-    else if (acting == 3 && actcon == 0)
+-    {
+-        actcon = 1;
+-        scr_speaker("ralsei");
+-        msgsetloc(0, "\\EH* We'll use your service^1, friends!/", "obj_omawaroid_enemy_slash_Step_0_gml_199_0");
+-        scr_anyface_next("no_name", 0);
+-        msgnextloc("* (Ralsei encouraged you to \\cYget hit\\cW by the ambulances!)/%", "obj_omawaroid_enemy_slash_Step_0_gml_201_0");
+-        chasecheck = -1;
+-        scr_battletext();
+-    }
+     if (actcon == 6 && !d_ex())
+     {
+         actcon = 1;
+@@ -227,11 +236,11 @@
+     }
+     if (actingnoe == 1 && actconnoe == 1)
+     {
++        var simultext = (simultotal == 1) ? stringsetloc("* Noelle takes on and off her nurse hat really fast!/%", "obj_omawaroid_enemy_slash_Step_0_gml_253_0") : stringset("* Noelle wore a nurse hat!/%");
++        msgset(0, simultext);
+         scr_mercyadd(myself, 50);
+-        msgsetloc(0, "* Noelle takes on and off her nurse hat really fast!/%", "obj_omawaroid_enemy_slash_Step_0_gml_253_0");
+-        scr_battletext_default();
+-        actcon = 1;
+-        actconnoe = 0;
++        scr_simultext("noelle");
++        actconnoe = (simulordernoe == 0) ? 20 : 0;
+     }
+     if (actcon == 1 && !instance_exists(obj_writer))
+     {

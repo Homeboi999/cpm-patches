@@ -1,0 +1,13 @@
+--- a/Code/gml_GlobalScript_scr_shopmenu.gml
++++ b/Code/gml_GlobalScript_scr_shopmenu.gml
+@@ -43,6 +43,10 @@
+                     {
+                         facetype = spr_headralsei;
+                     }
++                    if (global.char[i] == 4)
++                    {
++                        facetype = spr_headnoelle;
++                    }
+                     if (which != 0)
+                     {
+                         if (i == 0)

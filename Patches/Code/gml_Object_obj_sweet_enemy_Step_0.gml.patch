@@ -1,0 +1,243 @@
+--- a/Code/gml_Object_obj_sweet_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_sweet_enemy_Step_0.gml
+@@ -265,8 +265,18 @@
+ }
+ if (dancecon == 1.1 && !instance_exists(obj_writer))
+ {
++    if (scr_havechar(2) && scr_havechar(3))
++    {
+-    susi = scr_act_charsprite("susie", spr_susie_dance, 0.16, 1);
++        susi = scr_act_charsprite("susie", spr_susie_dance, 0.16, 1);
+-    susi.depth = obj_heroralsei.depth + 1;
++        susi.depth = obj_heroralsei.depth + 1;
++    }
++    else
++    {
++        learnActCutscene = false;
++        scr_act_charsprite("ralsei", spr_ralsei_dance, 0.16, 1);
++        scr_act_charsprite("susie", spr_susie_dance, 0.16, 1);
++        scr_act_charsprite("noelle", spr_noelle_dance, 0.16, 1);
++    }
+     with (obj_afterimage)
+     {
+         instance_destroy();
+@@ -291,24 +301,117 @@
+     global.actactor[obj_hatguy_enemy.myself][2] = 0;
+     scr_spellmenu_setup();
+     scr_speaker("none");
++    if (learnActCutscene)
++    {
+-    msgsetloc(0, "* Susie learned \\cSS-Action\\cW! She can ACT from her \\cYMAGIC\\cW menu!/", "obj_sweet_enemy_slash_Step_0_gml_266_0");
++        msgsetloc(0, "* Susie learned \\cSS-Action\\cW! She can ACT from her \\cYMAGIC\\cW menu!/", "obj_sweet_enemy_slash_Step_0_gml_266_0");
+-    scr_anyface_next("ralsei", "L");
++        scr_anyface_next("ralsei", "L");
+-    msgnextloc("\\EL* S-Susie^1, I-I don't think you should.../%", "obj_sweet_enemy_slash_Step_0_gml_268_0");
++        msgnextloc("\\EL* S-Susie^1, I-I don't think you should.../%", "obj_sweet_enemy_slash_Step_0_gml_268_0");
+-    scr_battletext();
++        scr_battletext();
+-    dancecon = 1.15;
++        dancecon = 1.15;
++    }
++    else
++    {
++        var charNames = "";
++        var pronoun1 = "";
++        var pronoun2 = "";
++        var actNames = "";
++        var prevChar = 0;
++        var s = "";
++        switch (global.char[1])
++        {
++            case 2:
++                charNames = "Susie";
++                actNames = "\\cSS-Action\\cW";
++                pronoun1 = "She";
++                pronoun2 = "her";
++                prevChar = 2;
++                break;
++            case 3:
++                charNames = "Ralsei";
++                actNames = "\\cVR-Action\\cW";
++                pronoun1 = "He";
++                pronoun2 = "his";
++                prevChar = 3;
++                break;
++            case 4:
++                charNames = "Noelle";
++                actNames = "\\cNN-Action\\cW";
++                pronoun1 = "She";
++                pronoun2 = "her";
++                prevChar = 4;
++                break;
++        }
++        switch (global.char[2])
++        {
++            case 2:
++                if (prevChar != 2)
++                {
++                    charNames = charNames + " and Susie";
++                    actNames = actNames + " and \\cSS-Action\\cW";
++                    pronoun1 = "They";
++                    pronoun2 = "their";
++                    prevChar = 2;
++                    s = "s";
++                }
++                break;
++            case 3:
++                if (prevChar != 3)
++                {
++                    charNames = charNames + " and Ralsei";
++                    actNames = actNames + " and \\cVR-Action\\cW";
++                    pronoun1 = "They";
++                    pronoun2 = "their";
++                    prevChar = 3;
++                    s = "s";
++                }
++                break;
++            case 4:
++                if (prevChar != 4)
++                {
++                    charNames = charNames + " and Noelle";
++                    actNames = actNames + " and \\cNN-Action\\cW";
++                    pronoun1 = "They";
++                    pronoun2 = "their";
++                    prevChar = 4;
++                    s = "s";
++                }
++                break;
++        }
++        if (prevChar != 0)
++        {
++            msgset(0, "* " + charNames + " learned " + actNames + "! " + pronoun1 + " can ACT from " + pronoun2 + " \\cYMAGIC\\cW menu" + s + "!/%");
++        }
++        else
++        {
++            msgset(0, "* Other party members can now ACT from their \\cYMAGIC\\cW menus!/%");
++        }
++        scr_battletext();
++        dancecon = 1.15;
++    }
+ }
+ if (dancecon == 1.15 && !instance_exists(obj_writer))
+ {
+-    with (susi)
++    if (learnActCutscene)
+     {
++        with (susi)
++        {
+-        move_towards_point(obj_heroralsei.x + 100, obj_heroralsei.y + 5, 10);
++            move_towards_point(obj_heroralsei.x + 100, obj_heroralsei.y + 5, 10);
++        }
++        if (susi.y >= (obj_heroralsei.y - 3))
++        {
++            susi.x = obj_heroralsei.x + 100;
++            susi.y = obj_heroralsei.y + 5;
++            susi.speed = 0;
++            dancecon = 1.2;
++        }
+     }
+-    if (susi.y >= (obj_heroralsei.y - 3))
++    else
+     {
+-        susi.x = obj_heroralsei.x + 100;
+-        susi.y = obj_heroralsei.y + 5;
+-        susi.speed = 0;
+-        dancecon = 1.2;
++        with (obj_musical_controller)
++        {
++            happyfeetscene = 1;
++        }
++        dancecon = 4;
+     }
+ }
+ if (dancecon == 1.2 || (dancescenetimer > 0 && dancescenetimer <= 146))
+@@ -548,6 +651,7 @@
+         scr_act_charsprite("kris", spr_kris_dance, 0.16, 1);
+         scr_act_charsprite("ralsei", spr_ralsei_dance, 0.16, 1);
+         scr_act_charsprite("susie", spr_susie_dance, 0.16, 1);
++        scr_act_charsprite("noelle", spr_noelle_dance, 0.16, 1);
+         msgsetloc(0, "* Everyone danced with Sweet! They're totally lost in the groove!/%", "obj_sweet_enemy_slash_Step_0_gml_470_0");
+         scr_battletext_default();
+         actcon = 4;
+@@ -638,6 +742,46 @@
+             }
+         }
+     }
++    if (actingnoe == 1 && actconnoe == 1)
++    {
++        dancing = true;
++        danceCounter = 1;
++        scr_act_charsprite("noelle", spr_noelle_dance, 0.16, 1);
++        if (groove == 0)
++        {
++            if (global.lang == "ja")
++            {
++                msgset(0, "* Noelle danced with Sweet!/");
++                msgnext("* Sweet got lost in the groove!/%");
++            }
++            else
++            {
++                msgset(0, "* Noelle danced with Sweet!/%");
++            }
++            groove = 1;
++        }
++        else
++        {
++            msgset(0, "* Noelle danced with Sweet!/%");
++        }
++        if (global.lang == "ja")
++        {
++            scr_battletext_default();
++            actconnoe = 20;
++        }
++        else
++        {
++            scr_simultext("noelle");
++            if (simulordernoe == 0)
++            {
++                actconnoe = 20;
++            }
++            else
++            {
++                actconnoe = 0;
++            }
++        }
++    }
+     if (actcon == 1 && !instance_exists(obj_writer))
+     {
+         if (obj_sweet_enemy.dancing == true && obj_kk_enemy.dancing == true && obj_hatguy_enemy.dancing == true && endcon == 0)
+@@ -648,7 +792,7 @@
+         {
+             with (obj_marker)
+             {
+-                if (sprite_index == spr_kris_dance || sprite_index == spr_susie_dance || sprite_index == spr_ralsei_dance)
++                if (sprite_index == spr_kris_dance || sprite_index == spr_susie_dance || sprite_index == spr_ralsei_dance || sprite_index == spr_noelle_dance)
+                 {
+                     instance_destroy();
+                     with (obj_heroparent)
+@@ -666,7 +810,7 @@
+             scr_nextact();
+         }
+     }
+-    if (actcon == 20 || actconsus == 20 || actconral == 20)
++    if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
+     {
+         if (scr_terminate_writer())
+         {
+@@ -678,7 +822,7 @@
+             {
+                 with (obj_marker)
+                 {
+-                    if (sprite_index == spr_kris_dance || sprite_index == spr_susie_dance || sprite_index == spr_ralsei_dance)
++                    if (sprite_index == spr_kris_dance || sprite_index == spr_susie_dance || sprite_index == spr_ralsei_dance || sprite_index == spr_noelle_dance)
+                     {
+                         instance_destroy();
+                         with (obj_heroparent)
+@@ -693,6 +837,7 @@
+                         }
+                     }
+                 }
++                actconnoe = -1;
+                 actconsus = -1;
+                 actconral = -1;
+                 actcon = 1;

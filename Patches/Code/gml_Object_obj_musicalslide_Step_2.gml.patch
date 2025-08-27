@@ -1,0 +1,116 @@
+--- a/Code/gml_Object_obj_musicalslide_Step_2.gml
++++ b/Code/gml_Object_obj_musicalslide_Step_2.gml
+@@ -38,57 +38,64 @@
+ }
+ table.x = sweet.x - 54;
+ table.y = sweet.y + 58;
++var slideSprites = [2491, 658, 836, 820, 3393];
+ if (state == 0)
+ {
+     if (instance_exists(obj_mainchara) && obj_mainchara.y > gameIntroY)
+     {
+         with (obj_mainchara)
+         {
+-            sprite_index = spr_krisd_slide;
++            sprite_index = slideSprites[1];
+             fun = 1;
+             autorun = 2;
+             cutscene = 1;
+             battlemode = 1;
+         }
+-        if (instance_exists(obj_caterpillarchara))
+-        {
+-            with (obj_caterpillarchara)
+-            {
+-                if (name == "susie")
+-                {
+-                    other.susX = x;
+-                    other.susY = y;
+-                    visible = false;
+-                }
+-                if (name == "ralsei")
+-                {
+-                    other.ralX = x;
+-                    other.ralY = y;
+-                    visible = false;
+-                }
+-            }
+-        }
+-        slideSus = instance_create(susX, susY, obj_marker);
+-        slideRal = instance_create(ralX, ralY, obj_marker);
+-        with (slideSus)
+-        {
+-            con = 0;
+-            sprite_index = spr_susie_slide;
+-            image_xscale = 2;
+-            image_yscale = 2;
+-            image_speed = 0.25;
+-            depth = 900000;
+-            timer = 0;
+-        }
+-        with (slideRal)
+-        {
+-            con = 0;
+-            sprite_index = spr_ralsei_slide;
+-            image_xscale = 2;
+-            image_yscale = 2;
+-            image_speed = 0.25;
+-            depth = 900000;
+-            timer = 0;
++        if (instance_exists(global.cinstance[0]))
++        {
++            with (global.cinstance[0])
++            {
++                other.susX = x;
++                other.susY = y;
++                visible = false;
++            }
++            slideSus = instance_create(susX, susY, obj_marker);
++        }
++        if (instance_exists(global.cinstance[1]))
++        {
++            with (global.cinstance[1])
++            {
++                other.ralX = x;
++                other.ralY = y;
++                visible = false;
++            }
++            slideRal = instance_create(ralX, ralY, obj_marker);
++        }
++        if (slideSus != 0)
++        {
++            with (slideSus)
++            {
++                con = 0;
++                sprite_index = slideSprites[global.char[1]];
++                image_xscale = 2;
++                image_yscale = 2;
++                image_speed = 0.25;
++                depth = 900000;
++                timer = 0;
++            }
++        }
++        if (slideRal != 0)
++        {
++            with (slideRal)
++            {
++                con = 0;
++                sprite_index = slideSprites[global.char[2]];
++                image_xscale = 2;
++                image_yscale = 2;
++                image_speed = 0.25;
++                depth = 900000;
++                timer = 0;
++            }
+         }
+         snd_play(snd_noise);
+         slideSound = snd_loop(snd_paper_surf);
+@@ -232,7 +239,7 @@
+ {
+     with (obj_mainchara)
+     {
+-        sprite_index = spr_krisd_slide;
++        sprite_index = slideSprites[1];
+         autorun = 2;
+     }
+     var _camY = cameray();

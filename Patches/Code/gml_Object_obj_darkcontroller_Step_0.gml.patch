@@ -1,0 +1,45 @@
+--- a/Code/gml_Object_obj_darkcontroller_Step_0.gml
++++ b/Code/gml_Object_obj_darkcontroller_Step_0.gml
+@@ -1,3 +1,32 @@
++if (global.interact == 5 && global.menuno == 4)
++{
++    if (global.submenu == 20)
++    {
++        if (button3_p() && threebuffer < 0)
++        {
++            if (scr_modconfig("menuMode") == 1 || scr_modconfig("menuMode") == 2)
++            {
++                selectnoise = 1;
++                threebuffer = 2;
++                partyMenu = instance_create(xx, yy, obj_partymenu);
++                partyMenu.partySelect = global.charselect;
++                partyMenu.charSelect = global.char[global.charselect];
++                global.submenu = 23;
++            }
++            else
++            {
++                snd_play(snd_cantselect);
++            }
++        }
++    }
++    if (global.submenu == 23)
++    {
++        if (!i_ex(obj_partymenu))
++        {
++            global.submenu = 20;
++        }
++    }
++}
+ xx = __view_get(e__VW.XView, 0);
+ yy = __view_get(e__VW.YView, 0);
+ if (global.interact == 5)
+@@ -900,8 +929,8 @@
+             {
+                 selectnoise = 1;
+                 deschaver = 1;
+-                global.submenu = 21;
+                 onebuffer = 2;
++                global.submenu = 21;
+             }
+             if (button2_p() && twobuffer < 0)
+             {

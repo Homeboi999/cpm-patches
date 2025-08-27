@@ -1,0 +1,9 @@
+--- a/Code/gml_GlobalScript_scr_gamestart.gml
++++ b/Code/gml_GlobalScript_scr_gamestart.gml
+@@ -1,5 +1,6 @@
+ function scr_gamestart()
+ {
++    global.modconfig = -1;
+     global.chapter = 2;
+     global.darkzone = 0;
+     global.filechoice = 0;

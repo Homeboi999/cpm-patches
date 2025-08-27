@@ -1,0 +1,10 @@
+--- a/Code/gml_Object_obj_sweet_enemy_Create_0.gml
++++ b/Code/gml_Object_obj_sweet_enemy_Create_0.gml
+@@ -15,6 +15,7 @@
+ danceCounter = 0;
+ actCounter = 0;
+ learnedAct = false;
++learnActCutscene = true;
+ letsdance = false;
+ letsdance2 = false;
+ letsdance3 = false;

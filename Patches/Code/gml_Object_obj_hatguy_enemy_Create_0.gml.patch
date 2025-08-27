@@ -1,0 +1,10 @@
+--- a/Code/gml_Object_obj_hatguy_enemy_Create_0.gml
++++ b/Code/gml_Object_obj_hatguy_enemy_Create_0.gml
+@@ -10,6 +10,7 @@
+ dancing = false;
+ danceCounter = 0;
+ dancedwithsusie = 0;
++dancedwithnoelle = 0;
+ heal = 0;
+ learnedAct = false;
+ helpusattack = 0;

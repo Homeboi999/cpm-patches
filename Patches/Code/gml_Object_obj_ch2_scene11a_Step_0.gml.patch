@@ -1,0 +1,32 @@
+--- a/Code/gml_Object_obj_ch2_scene11a_Step_0.gml
++++ b/Code/gml_Object_obj_ch2_scene11a_Step_0.gml
+@@ -511,14 +511,17 @@
+     }
+     with (coaster_kris)
+     {
++        character_sprite = char_sprite_normal;
+         visible = true;
+     }
+     with (coaster_susie)
+     {
++        character_sprite = char_sprite_normal;
+         visible = true;
+     }
+     with (coaster_ralsei)
+     {
++        character_sprite = char_sprite_normal;
+         visible = true;
+     }
+     smokecon = 1;
+@@ -619,8 +622,9 @@
+     c_wait(45);
+     c_mus("free_all");
+     c_soundplay(snd_cardrive);
++    c_var_instance(coaster_kris, "character_sprite", coaster_kris.char_sprite_berdly_ramp);
+-    c_var_instance(coaster_susie, "character_sprite", spr_susie_shock_r);
++    c_var_instance(coaster_susie, "character_sprite", coaster_susie.char_sprite_berdly_ramp);
+-    c_var_instance(coaster_ralsei, "character_sprite", spr_ralsei_hurt_overworld);
++    c_var_instance(coaster_ralsei, "character_sprite", coaster_ralsei.char_sprite_berdly_ramp);
+     c_var_instance(coaster_entry, "visible", 0);
+     c_var_instance(coaster_entry_hood, "visible", 0);
+     c_var_instance(id, "stoplooptrack", true);

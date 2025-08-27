@@ -1,0 +1,817 @@
+--- a/Code/gml_Object_obj_queen_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_queen_enemy_Step_0.gml
+@@ -1015,25 +1015,6 @@
+     {
+         shieldbreaking = 1;
+     }
+-    if (!instance_exists(obj_queenshield_enemy) || shieldbreaking == 1)
+-    {
+-        if (acting == 4)
+-        {
+-            acting = 5;
+-        }
+-        else if (acting == 5)
+-        {
+-            acting = 6;
+-        }
+-    }
+-    else if (acting == 3)
+-    {
+-        acting = 5;
+-    }
+-    else if (acting == 4)
+-    {
+-        acting = 6;
+-    }
+     if (acting == 1 && actcon == 0 && !instance_exists(obj_berdlyplug_enemy))
+     {
+         actcon = 1;
+@@ -1047,7 +1028,7 @@
+             msgsetloc(0, "* You shook Berdly's wire!/%", "obj_queen_enemy_slash_Step_0_gml_346_0");
+             scr_battletext_default();
+             var mercyset = 5;
+-            if (global.hp[2] <= 0 && global.hp[3] <= 0)
++            if (!(scr_havechar(2) && global.hp[2] > 0) && !(scr_havechar(3) && global.hp[3] > 0) && !(scr_havechar(4) && global.hp[4] > 0))
+             {
+                 mercyset = 8;
+             }
+@@ -1074,7 +1055,7 @@
+         else
+         {
+             shield_damage_buffer += 1;
+-            if (global.hp[2] <= 0 && global.hp[3] <= 0)
++            if (!(scr_havechar(2) && global.hp[2] > 0) && !(scr_havechar(3) && global.hp[3] > 0) && !(scr_havechar(4) && global.hp[4] > 0))
+             {
+                 shield_damage_buffer += 1.5;
+             }
+@@ -1083,88 +1064,79 @@
+                 scr_speaker("no_name");
+                 msgsetloc(0, "* You made a memorable and charming toast to Queen!/", "obj_queen_enemy_slash_Step_0_gml_764_0");
+                 scr_anyface_next("queen", "1");
+-                var small_text = stringsetloc("(Why did they make it so emotional?)", "obj_queen_enemy_slash_Step_0_gml_766_0");
+-                if (jp == 0)
+-                {
+-                    scr_smallface(0, "susie", 6, 338, 46, small_text);
+-                }
+-                if (jp == 1)
+-                {
+-                    scr_smallface(0, "susie", 6, 458, 46, small_text);
+-                }
+-                msgnextloc("\\EC* Wow Spoken Like A Real Trucie\\f0 /%", "obj_queen_enemy_slash_Step_0_gml_768_0");
+-                scr_battletext_default();
+-                waitnextactsusie = 1;
+-                waitnextactralsei = 1;
+-                if (actingsus == 1 && susieflattercount > 0 && actingral == 1 && ralseiflattercount > 0)
+-                {
+-                    changesimulorder = 1;
+-                }
+-                if (actingsus == 1 && susieflattercount == 0 && actingral == 1 && ralseiflattercount > 0)
+-                {
+-                    changesimulorder = 2;
+-                }
+-                if (actingsus == 0 && actingral == 1 && ralseiflattercount > 0)
+-                {
+-                    changesimulorder = 2;
+-                }
+-                if (actingral == 0 && actingsus == 1 && susieflattercount > 0)
+-                {
+-                    changesimulorder = 5;
+-                }
+-            }
+-            else
+-            {
+-                var aa = 0;
+-                if (actingsus == 1 && susieflattercount == 0 && actingral == 1 && ralseiflattercount == 0)
+-                {
+-                    aa = 1;
+-                }
+-                if (actingral != 1 && actingsus == 1 && susieflattercount == 0)
+-                {
+-                    aa = 1;
+-                }
+-                if (actingsus != 1 && actingral == 1 && ralseiflattercount == 0)
+-                {
+-                    aa = 1;
+-                }
+-                if (simultotal == 1 || aa == 1)
+-                {
+-                    msgsetloc(0, "* You made a memorable and charming toast to Queen!/%", "obj_queen_enemy_slash_Step_0_gml_788_0");
+-                    scr_battletext_default();
+-                    if (actingsus == 1 && susieflattercount == 0)
+-                    {
+-                        waitnextactsusie = 1;
+-                    }
+-                    if (actingral == 1 && ralseiflattercount == 0)
+-                    {
+-                        waitnextactralsei = 1;
+-                    }
+-                    if (actingsus == 1 && susieflattercount == 0 && actingral == 1 && ralseiflattercount > 0)
+-                    {
+-                        changesimulorder = 3;
++                if (scr_havechar(2))
++                {
++                    var small_text = stringsetloc("(Why did they make it so emotional?)", "obj_queen_enemy_slash_Step_0_gml_766_0");
++                    if (jp == 0)
++                    {
++                        scr_smallface(0, "susie", 6, 338, 46, small_text);
++                    }
++                    if (jp == 1)
++                    {
++                        scr_smallface(0, "susie", 6, 458, 46, small_text);
+                     }
+                 }
+                 else
+                 {
+-                    if (actingsus == 1 && susieflattercount == 0)
++                    scr_smallface(0, "none", 0, 338, 46, "");
++                }
++                msgnextloc("\\EC* Wow Spoken Like A Real Trucie\\f0 /%", "obj_queen_enemy_slash_Step_0_gml_768_0");
++                scr_battletext_default();
++                waitnextactsusie = 1;
++                waitnextactralsei = 1;
++                waitnextactnoelle = 1;
++                acting = 100;
++            }
++            else if (simultotal == 1)
++            {
++                waitnextactsusie = 1;
++                waitnextactralsei = 1;
++                waitnextactnoelle = 1;
++                msgsetloc(0, "* You made a memorable and charming toast to Queen!/%", "obj_queen_enemy_slash_Step_0_gml_788_0");
++                scr_battletext_default();
++                acting = 100;
++            }
++            else
++            {
++                if (actingsus == 1)
++                {
++                    if (susieflattercount == 0)
+                     {
+                         waitnextactsusie = 1;
+                     }
+-                    if (actingral == 1 && ralseiflattercount == 0)
++                    else
++                    {
++                        waitnextactsusie = 0;
++                    }
++                }
++                if (actingral == 1)
++                {
++                    if (ralseiflattercount == 0)
+                     {
+                         waitnextactralsei = 1;
+                     }
+-                    if (actingsus == 1 && susieflattercount == 0 && actingral == 1 && ralseiflattercount > 0)
+-                    {
+-                        changesimulorder = 3;
+-                    }
+-                    msgsetloc(0, "* You toasted Queen!/%", "obj_queen_enemy_slash_Step_0_gml_803_0");
+-                    scr_simultext("kris");
+-                }
++                    else
++                    {
++                        waitnextactralsei = 0;
++                    }
++                }
++                if (actingnoe == 1)
++                {
++                    if (noelleflattercount == 0)
++                    {
++                        waitnextactnoelle = 1;
++                    }
++                    else
++                    {
++                        waitnextactnoelle = 0;
++                    }
++                }
++                simulorder = global.currentactingchar;
++                msgsetloc(0, "* You toasted Queen!/%", "obj_queen_enemy_slash_Step_0_gml_803_0");
++                scr_simultext("kris");
++                acting = 99;
+             }
+             krisflattercount++;
+-            acting = 100;
+         }
+     }
+     if (acting == 2 && actcon == 0)
+@@ -1216,42 +1188,60 @@
+             acting = 100;
+         }
+     }
+-    if ((acting == 3 && actcon == 0) || (acting == 4 && actcon == 0))
+-    {
+-        if (acting == 3)
+-        {
+-            throwX = 0;
+-        }
+-        if (acting == 4)
+-        {
+-            throwX = 1;
+-        }
+-        actcon = 32;
+-        acting = 0;
+-        alarm[4] = 15;
+-        ___myrememberx = xstart;
+-        ___myremembery = ystart;
+-        siner = 0;
+-        if (!instance_exists(obj_queenshield_enemy))
+-        {
+-            obj_berdlyplug_enemy.con = 1;
+-            instance_create(__view_get(e__VW.XView, 0) + 380, __view_get(e__VW.YView, 0) + 50, obj_queen_throw_controller);
+-            scr_move_to_point_over_time(x - 40, cameray() + 195, 8);
+-        }
+-    }
+-    if (acting == 5 && actcon == 0)
+-    {
+-        global.msg[0] = stringsetloc("* Your SOUL shined its power on Susie!/%", "obj_queen_enemy_slash_Step_0_gml_410_0");
+-        actcon = 10;
+-        scr_battletext_default();
+-        acttimer = 0;
+-    }
+-    if (acting == 6 && actcon == 0)
+-    {
+-        global.msg[0] = stringsetloc("* Your SOUL shined its power on RALSEI!/%", "obj_queen_enemy_slash_Step_0_gml_419_0");
+-        scr_battletext_default();
+-        actcon = 20;
+-        acttimer = 0;
++    var num = 3;
++    if (scr_havechar(2))
++    {
++        if (!instance_exists(obj_queenshield_enemy) || shieldbreaking == 1)
++        {
++            if (acting == 3 && actcon == 0)
++            {
++                throwX = 0;
++                actcon = 33;
++                ___myrememberx = xstart;
++                ___myremembery = ystart;
++                siner = 0;
++                obj_berdlyplug_enemy.con = 1;
++                instance_create(__view_get(e__VW.XView, 0) + 380, __view_get(e__VW.YView, 0) + 50, obj_queen_throw_controller);
++                scr_move_to_point_over_time(x - 40, cameray() + 195, 8);
++            }
++            num++;
++        }
++        if (acting == num && actcon == 0)
++        {
++            global.msg[0] = stringsetloc("* Your SOUL shined its power on Susie!/%", "obj_queen_enemy_slash_Step_0_gml_410_0");
++            actcon = 10;
++            scr_battletext_default();
++            acttimer = 0;
++        }
++        num++;
++    }
++    if (scr_havechar(3) || scr_havechar(4))
++    {
++        if (acting == num && actcon == 0)
++        {
++            if (scr_havechar(3))
++            {
++                global.msg[0] = stringsetloc("* Your SOUL shined its power on RALSEI!/%", "obj_queen_enemy_slash_Step_0_gml_419_0");
++            }
++            else
++            {
++                global.msg[0] = stringset("* Your SOUL shined its power on Noelle!/%");
++            }
++            scr_battletext_default();
++            actcon = 20;
++            acttimer = 0;
++        }
++        num++;
++    }
++    if (scr_havechar(4))
++    {
++        if (acting == num && actcon == 0)
++        {
++            global.msg[0] = stringset("* Your SOUL shined its power on Noelle!/%");
++            actcon = 30;
++            scr_battletext_default();
++            acttimer = 0;
++        }
+     }
+     var _susie_simul = 0;
+     if (waitnextactsusie == 1 && i_ex(obj_writer))
+@@ -1265,7 +1255,7 @@
+             msgsetloc(0, "* Susie loosens one of Berdly's wires!/%", "obj_queen_enemy_slash_Step_0_gml_429_0");
+             scr_battletext_default();
+             var mercyset = 5;
+-            if (global.hp[1] <= 0 && global.hp[3] <= 0)
++            if (!(scr_havechar(1) && global.hp[1] > 0) && !(scr_havechar(3) && global.hp[3] > 0) && !(scr_havechar(4) && global.hp[4] > 0))
+             {
+                 mercyset = 8;
+             }
+@@ -1292,7 +1282,7 @@
+         else
+         {
+             shield_damage_buffer += 1;
+-            if (global.hp[1] <= 0 && global.hp[3] <= 0)
++            if (!(scr_havechar(1) && global.hp[1] > 0) && !(scr_havechar(3) && global.hp[3] > 0) && !(scr_havechar(4) && global.hp[4] > 0))
+             {
+                 shield_damage_buffer += 1.5;
+             }
+@@ -1306,43 +1296,44 @@
+                 msgnextloc("\\E1* It's A Good Thing I Have No Standards For This/%", "obj_queen_enemy_slash_Step_0_gml_932_0");
+                 scr_battletext_default();
+                 waitnextactralsei = 1;
+-                if (actingral == 1)
+-                {
+-                    changesimulorder = 2;
+-                }
++                waitnextactnoelle = 1;
++                acting = 100;
+             }
+-            else if (simultotal == 1 || changesimulorder == 5)
++            else if (simultotal == 1)
+             {
+                 waitnextactralsei = 1;
+-                if (changesimulorder == 5)
+-                {
+-                    simulordersus = 0;
+-                    changesimulorder = 0;
+-                }
++                waitnextactnoelle = 1;
+                 msgsetloc(0, "* Susie made an offensive toast to Queen!/%", "obj_queen_enemy_slash_Step_0_gml_946_0");
+                 scr_battletext_default();
++                acting = 100;
+             }
+             else
+             {
+-                if (changesimulorder == 1)
+-                {
+-                    simulordersus = 0;
+-                    simulorderral = 1;
+-                    changesimulorder = 0;
+-                }
+-                if (actingral == 1 && ralseiflattercount == 0)
+-                {
+-                    waitnextactralsei = 1;
+-                }
+-                if (actingral == 1 && ralseiflattercount > 0)
+-                {
+-                    waitnextactralsei = 0;
+-                }
+-                msgsetloc(0, "* Susie toasted Queen!/%", "obj_queen_enemy_slash_Step_0_gml_955_0");
+-                scr_simultext("susie");
++                if (actingral == 1)
++                {
++                    if (ralseiflattercount == 0)
++                    {
++                        waitnextactralsei = 1;
++                    }
++                    else
++                    {
++                        waitnextactralsei = 0;
++                    }
++                }
++                if (actingnoe == 1)
++                {
++                    if (noelleflattercount == 0)
++                    {
++                        waitnextactnoelle = 1;
++                    }
++                    else
++                    {
++                        waitnextactnoelle = 0;
++                    }
++                }
++                acting = 99;
+             }
+             susieflattercount++;
+-            acting = 100;
+         }
+         actconsus = 0;
+         actingsus = 0;
+@@ -1359,7 +1350,7 @@
+             msgsetloc(0, "* Ralsei loosens one of Berdly's wires!/%", "obj_queen_enemy_slash_Step_0_gml_457_0");
+             scr_battletext_default();
+             var mercyset = 5;
+-            if (global.hp[1] <= 0 && global.hp[2] <= 0)
++            if (!(scr_havechar(1) && global.hp[1] > 0) && !(scr_havechar(2) && global.hp[2] > 0) && !(scr_havechar(4) && global.hp[4] > 0))
+             {
+                 mercyset = 8;
+             }
+@@ -1386,7 +1377,7 @@
+         else
+         {
+             shield_damage_buffer += 1;
+-            if (global.hp[1] <= 0 && global.hp[2] <= 0)
++            if (!(scr_havechar(1) && global.hp[1] > 0) && !(scr_havechar(2) && global.hp[2] > 0) && !(scr_havechar(4) && global.hp[4] > 0))
+             {
+                 shield_damage_buffer += 1.5;
+             }
+@@ -1399,37 +1390,143 @@
+                 scr_anyface_next("queen", "1");
+                 msgnextloc("\\EL* Bro That's Weird But OK/%", "obj_queen_enemy_slash_Step_0_gml_1007_0");
+                 scr_battletext_default();
++                waitnextactsusie = 1;
++                waitnextactnoelle = 1;
++                acting = 100;
+             }
+-            else if (simultotal == 1 || changesimulorder == 2)
++            else if (simultotal == 1)
+             {
+-                if (changesimulorder == 2)
+-                {
+-                    simulorderral = 0;
+-                    changesimulorder = 0;
+-                }
++                waitnextactsusie = 1;
++                waitnextactnoelle = 1;
+                 msgsetloc(0, "* Ralsei made a slightly cringeworthy toast to Queen!/%", "obj_queen_enemy_slash_Step_0_gml_1015_0");
+                 scr_battletext_default();
++                acting = 100;
+             }
+             else
+             {
+-                if (changesimulorder == 3)
+-                {
+-                    simulorderral = 1;
+-                    changesimulorder = 0;
+-                }
+-                if (changesimulorder == 4)
+-                {
+-                    simulorderral = 0;
+-                    changesimulorder = 0;
+-                }
+-                msgsetloc(0, "* Ralsei toasted Queen!/%", "obj_queen_enemy_slash_Step_0_gml_472_0");
+-                scr_simultext("ralsei");
++                if (actingsus == 1)
++                {
++                    if (susieflattercount == 0)
++                    {
++                        waitnextactsusie = 1;
++                    }
++                    else
++                    {
++                        waitnextactsusie = 0;
++                    }
++                }
++                if (actingnoe == 1)
++                {
++                    if (noelleflattercount == 0)
++                    {
++                        waitnextactnoelle = 1;
++                    }
++                    else
++                    {
++                        waitnextactnoelle = 0;
++                    }
++                }
++                acting = 99;
+             }
+             ralseiflattercount++;
+-            acting = 100;
+         }
+         actconral = 0;
+         actingral = 0;
++    }
++    var _noelle_simul = 0;
++    if (waitnextactnoelle == 1 && i_ex(obj_writer))
++    {
++        _noelle_simul = 1;
++    }
++    if (actingnoe == 1 && actconnoe == 1 && _noelle_simul == 0)
++    {
++        if (!instance_exists(obj_queenshield_enemy))
++        {
++            msgset(0, "* Noelle loosens one of Berdly's wires!/%");
++            scr_battletext_default();
++            var mercyset = 5;
++            if (!(scr_havechar(1) && global.hp[1] > 0) && !(scr_havechar(2) && global.hp[2] > 0) && !(scr_havechar(3) && global.hp[3] > 0))
++            {
++                mercyset = 8;
++            }
++            if ((mercyset + bardlymercy) > 100)
++            {
++                mercyset = 100 - bardlymercy;
++            }
++            bardlymercy += mercyset;
++            __mercydmgwriter = instance_create(obj_berdlyplug_enemy.x + 20, (obj_berdlyplug_enemy.y + 20) - (global.hittarget[0] * 20), obj_dmgwriter);
++            __mercydmgwriter.damage = mercyset;
++            __mercydmgwriter.type = 5;
++            with (obj_berdlyplug_enemy)
++            {
++                event_user(0);
++            }
++            with (obj_dmgwriter)
++            {
++                x = obj_berdlyplug_enemy.x;
++                y = obj_berdlyplug_enemy.y + 20;
++            }
++            obj_dmgwriter.depth = obj_queen_enemy.depth - 1;
++            actcon = 1;
++        }
++        else
++        {
++            shield_damage_buffer += 1;
++            if (!(scr_havechar(1) && global.hp[1] > 0) && !(scr_havechar(2) && global.hp[2] > 0) && !(scr_havechar(3) && global.hp[3] > 0))
++            {
++                shield_damage_buffer += 1.5;
++            }
++            if (noelleflattercount == 0)
++            {
++                scr_speaker("no_name");
++                msgset(0, "* Noelle made a toast to Queen!/");
++                scr_anyface_next("noelle", "2");
++                msgnext("\\E2* (What am I even supposed to say??)/");
++                scr_anyface_next("queen", "1");
++                msgnext("\\EN* Something Something Placeholder Text Lmao/%");
++                scr_battletext_default();
++                waitnextactsusie = 1;
++                waitnextactralsei = 1;
++                acting = 100;
++            }
++            else if (simultotal == 1)
++            {
++                waitnextactsusie = 1;
++                waitnextactralsei = 1;
++                msgset(0, "* Noelle made an awkward toast to Queen!/%");
++                scr_battletext_default();
++                acting = 100;
++            }
++            else
++            {
++                if (actingsus == 1)
++                {
++                    if (susieflattercount == 0)
++                    {
++                        waitnextactsusie = 1;
++                    }
++                    else
++                    {
++                        waitnextactsusie = 0;
++                    }
++                }
++                if (actingral == 1)
++                {
++                    if (ralseiflattercount == 0)
++                    {
++                        waitnextactralsei = 1;
++                    }
++                    else
++                    {
++                        waitnextactralsei = 0;
++                    }
++                }
++                acting = 99;
++            }
++            noelleflattercount++;
++        }
++        actconnoe = 0;
++        actingnoe = 0;
+     }
+     if (actingral == 2 && actconral == 1)
+     {
+@@ -1440,6 +1537,50 @@
+         actingral = 0;
+         actcon = 1;
+     }
++    var simulcurrent = 0;
++    if (acting == 99)
++    {
++        for (i = 0; i < 3; i++)
++        {
++            switch (global.char[i])
++            {
++                case 1:
++                    if (krisflattercount > 0)
++                    {
++                        simulcurrent++;
++                    }
++                    break;
++                case 2:
++                    if (waitnextactsusie == 0)
++                    {
++                        simulordersus = simulcurrent;
++                        simulcurrent++;
++                        msgsetloc(0, "* Susie toasted Queen!/%", "obj_queen_enemy_slash_Step_0_gml_955_0");
++                        scr_simultext("susie");
++                    }
++                    break;
++                case 3:
++                    if (waitnextactralsei == 0)
++                    {
++                        simulorderral = simulcurrent;
++                        simulcurrent++;
++                        msgsetloc(0, "* Ralsei toasted Queen!/%", "obj_queen_enemy_slash_Step_0_gml_472_0");
++                        scr_simultext("ralsei");
++                    }
++                    break;
++                case 4:
++                    if (waitnextactnoelle == 0)
++                    {
++                        simulordernoe = simulcurrent;
++                        simulcurrent++;
++                        msgset(0, "* Noelle toasted Queen!/%");
++                        scr_simultext("noelle");
++                    }
++                    break;
++            }
++        }
++        acting = 100;
++    }
+     if (acting == 100 && !instance_exists(obj_writer))
+     {
+         acting = 0;
+@@ -1529,26 +1670,29 @@
+     }
+     if (actcon == 11)
+     {
++        var charSlot = scr_findchar(2);
+-        global.faceaction[1] = 2;
++        global.faceaction[charSlot] = 2;
+-        global.charaction[1] = 2;
+-        global.charaction[1] = 2;
++        global.charaction[charSlot] = 2;
+-        global.charspecial[1] = 5;
++        global.charspecial[charSlot] = 5;
+-        global.chartarget[1] = 0;
++        global.chartarget[charSlot] = 0;
+-        global.acting[1] = 0;
++        global.acting[charSlot] = 0;
+         snd_play(snd_boost);
++        if (i_ex(obj_herokris))
++        {
+-        heartanim = instance_create(obj_herokris.x + 30, obj_herokris.y + 50, obj_animation);
++            heartanim = instance_create(obj_herokris.x + 30, obj_herokris.y + 50, obj_animation);
+-        with (heartanim)
++            with (heartanim)
+-        {
++            {
+-            depth = -20;
++                depth = -20;
+-            image_index = 0;
++                image_index = 0;
+-            image_xscale = 2;
++                image_xscale = 2;
+-            image_yscale = 2;
++                image_yscale = 2;
+-            image_speed = 1;
++                image_speed = 1;
+-            sprite_index = spr_soulshining;
++                sprite_index = spr_soulshining;
+-        }
++            }
+-        with (obj_herokris)
++            with (obj_herokris)
+-        {
++            {
+-            scr_oflash();
++                scr_oflash();
++            }
+         }
+         with (obj_herosusie)
+         {
+@@ -1579,29 +1723,51 @@
+     }
+     if (actcon == 21)
+     {
++        var charSlot;
++        if (scr_havechar(3))
++        {
++            charSlot = scr_findchar(3);
++        }
++        else
++        {
++            charSlot = scr_findchar(4);
++        }
+-        global.faceaction[2] = 2;
++        global.faceaction[charSlot] = 2;
+-        global.charaction[2] = 2;
++        global.charaction[charSlot] = 2;
+-        global.charspecial[2] = 6;
++        global.charspecial[charSlot] = 6;
+-        global.chartarget[2] = 0;
++        global.chartarget[charSlot] = 0;
+-        global.acting[2] = 0;
++        global.acting[charSlot] = 0;
+         snd_play(snd_boost);
++        if (i_ex(obj_herokris))
++        {
+-        heartanim = instance_create(obj_herokris.x + 30, obj_herokris.y + 50, obj_animation);
++            heartanim = instance_create(obj_herokris.x + 30, obj_herokris.y + 50, obj_animation);
+-        with (heartanim)
++            with (heartanim)
+-        {
++            {
+-            depth = -20;
++                depth = -20;
+-            image_index = 0;
++                image_index = 0;
+-            image_xscale = 2;
++                image_xscale = 2;
+-            image_yscale = 2;
++                image_yscale = 2;
+-            image_speed = 1;
++                image_speed = 1;
+-            sprite_index = spr_soulshining;
++                sprite_index = spr_soulshining;
+-        }
++            }
+-        with (obj_heroralsei)
++            with (obj_herokris)
+-        {
++            {
+-            scr_oflash();
++                scr_oflash();
++            }
+         }
+-        with (obj_herokris)
++        if (scr_havechar(3))
+         {
+-            scr_oflash();
++            with (obj_heroralsei)
++            {
++                scr_oflash();
++            }
++        }
++        else
++        {
++            with (obj_heronoelle)
++            {
++                scr_oflash();
++            }
+         }
+         actcon = 22;
+     }
+@@ -1611,7 +1777,70 @@
+         if (acttimer >= 20)
+         {
+             actcon = 1;
++            if (scr_havechar(3))
++            {
+-            with (obj_heroralsei)
++                with (obj_heroralsei)
++                {
++                    state = 0;
++                }
++            }
++            else
++            {
++                with (obj_heronoelle)
++                {
++                    state = 0;
++                }
++            }
++        }
++    }
++    if (actcon == 30)
++    {
++        acttimer += 1;
++        if (acttimer >= 10 || !instance_exists(obj_writer))
++        {
++            acttimer = 0;
++            actcon = 31;
++        }
++    }
++    if (actcon == 31)
++    {
++        var charSlot = scr_findchar(4);
++        global.faceaction[charSlot] = 2;
++        global.charaction[charSlot] = 2;
++        global.charspecial[charSlot] = 12;
++        global.chartarget[charSlot] = 0;
++        global.acting[charSlot] = 0;
++        snd_play(snd_boost);
++        if (i_ex(obj_herokris))
++        {
++            heartanim = instance_create(obj_herokris.x + 30, obj_herokris.y + 50, obj_animation);
++            with (heartanim)
++            {
++                depth = -20;
++                image_index = 0;
++                image_xscale = 2;
++                image_yscale = 2;
++                image_speed = 1;
++                sprite_index = spr_soulshining;
++            }
++            with (obj_herokris)
++            {
++                scr_oflash();
++            }
++        }
++        with (obj_heronoelle)
++        {
++            scr_oflash();
++        }
++        actcon = 32;
++    }
++    if (actcon == 32)
++    {
++        acttimer += 1;
++        if (acttimer >= 20)
++        {
++            actcon = 1;
++            with (obj_heronoelle)
+             {
+                 state = 0;
+             }
+@@ -1621,7 +1850,7 @@
+     {
+         waitnextactsusie = 0;
+         waitnextactralsei = 0;
+-        changesimulorder = 0;
++        waitnextactnoelle = 0;
+         scr_nextact();
+     }
+ }

@@ -1,0 +1,10 @@
+--- a/Code/gml_Object_obj_spamton_neo_enemy_Create_0.gml
++++ b/Code/gml_Object_obj_spamton_neo_enemy_Create_0.gml
+@@ -34,6 +34,7 @@
+ bigshotused = 0;
+ bigshotcount = 0;
+ tinyralsei = 0;
++multishotcount = 0;
+ weakentimer = 0;
+ weakenshakeamount = 0;
+ maxvinecount = 6;

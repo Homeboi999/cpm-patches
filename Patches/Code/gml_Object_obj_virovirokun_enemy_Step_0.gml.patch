@@ -1,0 +1,48 @@
+--- a/Code/gml_Object_obj_virovirokun_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_virovirokun_enemy_Step_0.gml
+@@ -165,13 +165,15 @@
+         if (noelle_special == 0)
+         {
+             scr_act_charsprite("kris", choose(spr_krisb_virokun_nurse, spr_krisb_virokun_doctor), 0, 0);
+-            if (!scr_havechar(4))
++            if (scr_havechar(3))
+             {
+                 scr_act_charsprite("ralsei", spr_ralseib_virokun, 0, 0);
++            }
++            if (scr_havechar(2))
++            {
+                 scr_act_charsprite("susie", spr_susieb_virokun, 0, 0);
+-                msgsetloc(0, "* Everyone treated the enemy with tender loving care!! All the enemies felt great!!/%", "obj_virovirokun_enemy_slash_Step_0_gml_179_0");
+             }
+-            else
++            if (scr_havechar(4))
+             {
+                 if (scr_sideb_get_phase() < 2)
+                 {
+@@ -182,7 +184,25 @@
+                         noelle_splat = 1;
+                     }
+                 }
++            }
++            if (scr_havechar(0))
++            {
++                if (scr_havechar(2))
++                {
++                    msgset(0, "* You and Susie showed the enemy tender loving care!/%");
++                }
++                if (scr_havechar(3))
++                {
++                    msgset(0, "* You and Ralsei showed the enemy tender loving care!/%");
++                }
++                if (scr_havechar(4))
++                {
+-                msgsetloc(0, "* You and Noelle showed the enemy tender loving care!/%", "obj_virovirokun_enemy_slash_Step_0_gml_183_0");
++                    msgsetloc(0, "* You and Noelle showed the enemy tender loving care!/%", "obj_virovirokun_enemy_slash_Step_0_gml_183_0");
++                }
++            }
++            else
++            {
++                msgsetloc(0, "* Everyone treated the enemy with tender loving care!! All the enemies felt great!!/%", "obj_virovirokun_enemy_slash_Step_0_gml_179_0");
+             }
+             with (obj_monsterparent)
+             {

@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_yheart_shot_Other_12.gml
++++ b/Code/gml_Object_obj_yheart_shot_Other_12.gml
+@@ -1,7 +1,7 @@
+ if (sucked == 0)
+ {
+     sucked = 1;
+-    direction = point_direction(x, y, obj_sneo_final_forme.x + 122, obj_sneo_final_forme.y + 146);
++    direction = point_direction(x, y, obj_sneo_final_forme.x + 122, obj_sneo_final_forme.y + 146 + spread_angle);
+     gravity_direction = point_direction(x, y, obj_sneo_final_forme.x + 122, obj_sneo_final_forme.y + 146);
+     hspeed = 0;
+     speed = 3.5;

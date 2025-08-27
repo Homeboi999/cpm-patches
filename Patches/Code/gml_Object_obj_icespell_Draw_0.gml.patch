@@ -1,0 +1,136 @@
+--- a/Code/gml_Object_obj_icespell_Draw_0.gml
++++ b/Code/gml_Object_obj_icespell_Draw_0.gml
+@@ -1,7 +1,19 @@
+ timer++;
++spellpitch = 1;
+ if (timer == 1)
+ {
+-    snd_play(snd_icespell);
++    if (boosted)
++    {
++        spellpitch = 0.9;
++        damage += 55;
++    }
++    if (instance_exists(obj_queenshield_enemy))
++    {
++        depth = obj_queenshield_enemy.depth - 1;
++        x = obj_queenshield_enemy.x + 30;
++        y = obj_queenshield_enemy.y + 140;
++    }
++    snd_play_pitch(snd_icespell, spellpitch);
+ }
+ if (timer == 1)
+ {
+@@ -15,9 +27,37 @@
+ {
+     hex[2] = instance_create(x, y + 20, obj_icespell_hexagon);
+ }
+-if (timer == 10)
+-{
+-    for (i = 0; i < 3; i++)
++if (boosted)
++{
++    if (timer == 10)
++    {
++        snd_play(snd_icespell);
++    }
++    if (timer == 10)
++    {
++        hex[3] = instance_create(x, y - 60, obj_icespell_hexagon);
++    }
++    if (timer == 13)
++    {
++        hex[4] = instance_create(x + 50, y + 30, obj_icespell_hexagon);
++    }
++    if (timer == 16)
++    {
++        hex[5] = instance_create(x - 50, y + 30, obj_icespell_hexagon);
++    }
++}
++if ((timer == 10 && !boosted) || (timer == 19 && boosted))
++{
++    var count;
++    if (boosted)
++    {
++        count = 6;
++    }
++    else
++    {
++        count = 3;
++    }
++    for (i = 0; i < count; i++)
+     {
+         with (hex[i])
+         {
+@@ -34,7 +74,7 @@
+         }
+     }
+ }
+-if (timer == 11)
++if ((timer == 11 && !boosted) || (timer == 20 && boosted))
+ {
+     with (hex[0])
+     {
+@@ -48,12 +88,26 @@
+     {
+         instance_destroy();
+     }
++    if (boosted)
++    {
++        with (hex[3])
++        {
++            instance_destroy();
++        }
++        with (hex[4])
++        {
++            instance_destroy();
++        }
++        with (hex[5])
++        {
++            instance_destroy();
++        }
++    }
+ }
+-if (timer == 15)
++if ((timer == 15 && !boosted) || (timer == 24 && boosted))
+ {
+     if (global.fighting == 1)
+     {
+-        global.hittarget[star] = 0;
+         if (damage >= global.monsterhp[star])
+         {
+             if (i_ex(global.monsterinstance[star]))
+@@ -64,12 +118,27 @@
+                 }
+             }
+         }
++        if (instance_exists(obj_queenshield_enemy))
++        {
++            obj_queen_enemy.shieldhp -= damage;
++            with (obj_queenshield_enemy)
++            {
++                con = 1;
++            }
++            with (obj_queenshield_enemy)
++            {
++                event_user(0);
++            }
++        }
++        else
++        {
+-        scr_damage_enemy(star, damage);
++            scr_damage_enemy(star, damage);
+-        if (global.monster[star] == 1)
++            if (global.monster[star] == 1)
+-        {
++            {
+-            with (target)
++                with (target)
+-            {
++                {
+-                __of = scr_oflash();
++                    __of = scr_oflash();
++                }
+             }
+         }
+     }

@@ -1,0 +1,50 @@
+--- a/Code/gml_Object_obj_queencar_Create_0.gml
++++ b/Code/gml_Object_obj_queencar_Create_0.gml
+@@ -1,16 +1,45 @@
+ swan = 0;
++swanLong = false;
++var charCount = 1;
++charOffsets = [0, 0, -10, -12, -16];
++for (i = 1; i < 3; i++)
++{
++    if (global.char[i] > 1)
++    {
++        charCount++;
++    }
++}
++if (charCount == 3)
++{
++    swanLong = true;
++}
+ if (room >= room_dw_mansion_acid_tunnel)
+ {
+     swan = 1;
++    if (swanLong)
++    {
++        sprite_index = spr_swanboat_long;
++    }
++    else
++    {
+-    sprite_index = spr_swanboat;
++        sprite_index = spr_swanboat;
++    }
+     image_speed = 0.1;
+     if (global.plot == 140 && global.flag[343] == 0)
+     {
++        if (swanLong)
++        {
++            sprite_index = spr_swanboat_long_squish;
++        }
++        else
++        {
+-        sprite_index = spr_swanboat_squish;
++            sprite_index = spr_swanboat_squish;
++        }
+     }
+ }
+ swanmaincharax = 80;
+ swanmaincharay = 20;
++charspacing = 50;
+ con = 0;
+ contimer = 0;
+ active = 0;

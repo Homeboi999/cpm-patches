@@ -1,0 +1,31 @@
+--- a/Code/gml_Object_obj_berdlyb_enemy_Alarm_5.gml
++++ b/Code/gml_Object_obj_berdlyb_enemy_Alarm_5.gml
+@@ -7,22 +7,22 @@
+     with (coaster_kris)
+     {
+         con = 0;
+-        actor.sprite_index = spr_krisr_dark;
+-        character_sprite = spr_krisr_dark;
++        HeroType = global.char[0];
++        CoasterType = HeroType;
+         visible = false;
+     }
+     with (coaster_susie)
+     {
+         con = 0;
+-        actor.sprite_index = spr_susie_walk_right_dw;
+-        character_sprite = spr_susie_walk_right_dw;
++        HeroType = global.char[1];
++        CoasterType = HeroType;
+         visible = false;
+     }
+     with (coaster_ralsei)
+     {
+         con = 0;
+-        actor.sprite_index = spr_ralsei_walk_right;
+-        character_sprite = spr_ralsei_walk_right;
++        HeroType = global.char[2];
++        CoasterType = HeroType;
+         visible = false;
+     }
+ }

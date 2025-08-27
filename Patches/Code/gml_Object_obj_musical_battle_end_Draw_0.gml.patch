@@ -1,0 +1,196 @@
+--- a/Code/gml_Object_obj_musical_battle_end_Draw_0.gml
++++ b/Code/gml_Object_obj_musical_battle_end_Draw_0.gml
+@@ -6,14 +6,44 @@
+     auto = 1;
+     song1 = snd_init("cyber_battle_end.ogg");
+     song2 = mus_play(song1);
+-    marker[0] = scr_dark_marker(xx, yy - 200, spr_kris_dance);
+-    if (global.hp[1] < 1)
++    for (i = 0; i < 3; i++)
+     {
++        switch (global.char[i])
++        {
++            case 1:
++                marker[i] = scr_dark_marker(xx, yy - 200, spr_kris_dance);
++                if (global.hp[1] < 1)
++                {
+-        marker[0].sprite_index = spr_kris_fallen_dark;
++                    marker[i].sprite_index = spr_kris_fallen_dark;
+-        marker[0].y -= 2;
++                    marker[i].y -= 2;
++                }
++                break;
++            case 2:
++                marker[i] = scr_dark_marker(xx, yy - 200, spr_susie_dance);
++                if (global.hp[2] < 1)
++                {
++                    marker[i].sprite_index = spr_susieb_defeat;
++                    marker[i].y -= 2;
++                }
++                break;
++            case 3:
++                marker[i] = scr_dark_marker(xx, yy - 200, spr_ralsei_dance);
++                if (global.hp[3] < 1)
++                {
++                    marker[i].sprite_index = spr_ralsei_defeat;
++                    marker[i].y -= 2;
++                }
++                break;
++            case 4:
++                marker[i] = scr_dark_marker(xx, yy - 200, spr_noelle_dance);
++                if (global.hp[4] < 1)
++                {
++                    marker[i].sprite_index = spr_noelleb_defeat;
++                    marker[i].y += 2;
++                }
++                break;
++        }
+     }
+-    marker[1] = scr_dark_marker(xx, yy - 200, spr_susie_dance);
+-    marker[2] = scr_dark_marker(xx, yy - 200, spr_ralsei_dance);
+     marker[3] = instance_create(xx, yy - 200, obj_sweet_npc);
+     marker[3].dancing = 1;
+     marker[4] = instance_create(xx, yy - 200, obj_kk_npc);
+@@ -35,11 +65,44 @@
+             image_yscale = 4;
+         }
+     }
+-    markeroffsetx[0] = 6;
+-    markeroffsety[0] = 24;
+-    if (global.hp[1] < 0)
++    for (i = 0; i < 3; i++)
+     {
+-        markeroffsety[0] = 12;
++        switch (global.char[i])
++        {
++            case 1:
++                markeroffsetx[i] = 6;
++                markeroffsety[i] = 24;
++                if (global.hp[1] < 1)
++                {
++                    markeroffsety[i] -= 12;
++                }
++                break;
++            case 2:
++                markeroffsetx[i] = 0;
++                markeroffsety[i] = 0;
++                if (global.hp[2] < 1)
++                {
++                    markeroffsety[i] -= 22;
++                }
++                break;
++            case 3:
++                markeroffsetx[i] = 0;
++                markeroffsety[i] = 0;
++                if (global.hp[3] < 1)
++                {
++                    markeroffsety[i] -= 12;
++                }
++                break;
++            case 4:
++                markeroffsetx[i] = 0;
++                markeroffsety[i] = -6;
++                marker[i].image_speed *= 0.75;
++                if (global.hp[4] < 1)
++                {
++                    markeroffsety[i] -= 16;
++                }
++                break;
++        }
+     }
+     markeroffsety[4] = -36;
+     markeroffsetx[4] = -40;
+@@ -56,7 +119,7 @@
+     }
+     marker[con - 10].y = cy + markeroffsety[con - 10];
+     marker[con - 10].x = (cx - 140) + (sin(siner / 8) * 10) + markeroffsetx[con - 10];
+-    if (global.hp[1] < 0 && con == 10)
++    if (global.hp[global.char[con - 10]] < 1 && (con >= 10 && con <= 12))
+     {
+         marker[con - 10].x = (cx - 140) + 0 + markeroffsetx[con - 10];
+     }
+@@ -136,13 +199,38 @@
+ {
+     if (jumped[0] < 3)
+     {
+-        if (global.hp[1] > 0)
++        for (i = 0; i < 3; i++)
+         {
++            switch (global.char[i])
++            {
++                case 1:
++                    if (global.hp[1] > 0)
++                    {
+-            marker[0].sprite_index = spr_kris_pose;
++                        marker[i].sprite_index = spr_kris_pose;
+-            marker[0].y -= 18;
++                        marker[i].y -= 18;
++                    }
++                    break;
++                case 2:
++                    if (global.hp[2] > 0)
++                    {
++                        marker[i].sprite_index = spr_susie_pose;
++                    }
++                    break;
++                case 3:
++                    if (global.hp[3] > 0)
++                    {
++                        marker[i].sprite_index = spr_ralsei_pose;
++                    }
++                    break;
++                case 4:
++                    if (global.hp[4] > 0)
++                    {
++                        marker[i].sprite_index = spr_noelle_blush_dw;
++                        marker[i].image_speed = 0;
++                    }
++                    break;
++            }
+         }
+-        marker[1].sprite_index = spr_susie_pose;
+-        marker[2].sprite_index = spr_ralsei_pose;
+         for (i = 0; i < 20; i++)
+         {
+             note = instance_create(cx + random_range(-100, 100), (cy - 50) + random_range(-50, 50), obj_afterimage);
+@@ -189,12 +277,36 @@
+     marker[3].musicalnotetimer = 0;
+     marker[4].musicalnotetimer = 0;
+     marker[5].musicalnotetimer = 0;
+-    if (global.hp[1] > 0)
++    for (i = 0; i < 3; i++)
+     {
++        switch (global.char[i])
++        {
++            case 1:
++                if (global.hp[1] > 0)
++                {
+-        marker[0].sprite_index = spr_kris_pose;
++                    marker[i].sprite_index = spr_kris_pose;
++                }
++                break;
++            case 2:
++                if (global.hp[2] > 0)
++                {
++                    marker[i].sprite_index = spr_susie_pose;
++                }
++                break;
++            case 3:
++                if (global.hp[3] > 0)
++                {
++                    marker[i].sprite_index = spr_ralsei_pose;
++                }
++                break;
++            case 4:
++                if (global.hp[4] > 0)
++                {
++                    marker[i].sprite_index = spr_noelle_blush_dw;
++                }
++                break;
++        }
+     }
+-    marker[1].sprite_index = spr_susie_pose;
+-    marker[2].sprite_index = spr_ralsei_pose;
+ }
+ if (con == 19)
+ {

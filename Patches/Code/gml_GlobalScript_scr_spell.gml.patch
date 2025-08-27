@@ -1,0 +1,97 @@
+--- a/Code/gml_GlobalScript_scr_spell.gml
++++ b/Code/gml_GlobalScript_scr_spell.gml
+@@ -171,27 +171,30 @@
+             healnum = ceil(global.battlemag[arg1] * 5.5);
+             for (i = 0; i < 3; i += 1)
+             {
+-                scr_heal(i, healnum);
+-                global.charinstance[i].healnum = healnum;
+-                with (global.charinstance[i])
++                if (global.char[i] != 0)
+                 {
+-                    ha = instance_create(x, y, obj_healanim);
+-                    ha.target = id;
+-                    dmgwr = scr_dmgwriter_selfchar();
+-                    with (dmgwr)
+-                    {
+-                        delay = 8;
+-                        type = 3;
+-                    }
+-                    if (global.hp[global.char[myself]] >= global.maxhp[global.char[myself]])
+-                    {
++                    scr_heal(i, healnum);
++                    global.charinstance[i].healnum = healnum;
++                    with (global.charinstance[i])
++                    {
++                        ha = instance_create(x, y, obj_healanim);
++                        ha.target = id;
++                        dmgwr = scr_dmgwriter_selfchar();
+                         with (dmgwr)
+                         {
++                            delay = 8;
+-                            specialmessage = 3;
++                            type = 3;
+                         }
++                        if (global.hp[global.char[myself]] >= global.maxhp[global.char[myself]])
++                        {
++                            with (dmgwr)
++                            {
++                                specialmessage = 3;
++                            }
++                        }
++                        dmgwr.damage = healnum;
++                        tu += 1;
+                     }
+-                    dmgwr.damage = healnum;
+-                    tu += 1;
+                 }
+             }
+             global.spelldelay = 15;
+@@ -289,6 +292,27 @@
+                 }
+             }
+             break;
++        case 12:
++            cancelattack = 0;
++            global.spelldelay = 30;
++            if (global.monster[star] == 0)
++            {
++                scr_retarget_spell();
++            }
++            if (cancelattack == 0)
++            {
++                global.flag[925]++;
++                var minbattlemag = clamp(global.battlemag[arg1] - 10, 1, 999);
++                global.spelldelay = 40;
++                damage = ceil((minbattlemag * 45) + 100 + random(10));
++                attack = instance_create(global.monsterx[star], global.monstery[star], obj_icespell);
++                attack.boosted = 1;
++                attack.damage = damage;
++                attack.star = star;
++                attack.caster = caster;
++                attack.target = global.monsterinstance[star];
++            }
++            break;
+         case 100:
+             if (global.monster[star] == 0)
+             {
+@@ -326,6 +350,9 @@
+             }
+             global.spelldelay = 0;
+             break;
++        case 128:
++            scr_gameover();
++            break;
+         case 200:
+             break;
+         case 201:
+@@ -514,6 +541,9 @@
+             item_use = true;
+             break;
+         case 233:
++            break;
++        case 299:
++            scr_gameover();
+             break;
+     }
+     if (item_use == true)

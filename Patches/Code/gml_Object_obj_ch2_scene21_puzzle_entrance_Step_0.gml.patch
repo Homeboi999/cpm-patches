@@ -1,0 +1,32 @@
+--- a/Code/gml_Object_obj_ch2_scene21_puzzle_entrance_Step_0.gml
++++ b/Code/gml_Object_obj_ch2_scene21_puzzle_entrance_Step_0.gml
+@@ -1,15 +1,27 @@
++var longOffset = 0;
++if (swanboat.swanLong)
++{
++    longOffset = 35;
++}
+ if (global.plot < 140)
+ {
+     if (con == -1 && swanboat.x >= 40)
+     {
+         global.facing = 1;
+     }
+-    if (con == -1 && swanboat.x >= 136)
++    if (con == -1 && (swanboat.x + longOffset) >= 136)
+     {
+         con = 1;
+         global.interact = 1;
+         swanboat.pause_x_move = true;
++        if (swanboat.swanLong)
++        {
++            swanboat.sprite_index = spr_swanboat_long_squish;
++        }
++        else
++        {
+-        swanboat.sprite_index = spr_swanboat_squish;
++            swanboat.sprite_index = spr_swanboat_squish;
++        }
+         snd_play(snd_squeaky);
+         swanboat.con = 99;
+         swanboat.active = 0;

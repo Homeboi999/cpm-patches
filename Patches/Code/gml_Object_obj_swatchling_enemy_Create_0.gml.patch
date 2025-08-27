@@ -1,0 +1,10 @@
+--- a/Code/gml_Object_obj_swatchling_enemy_Create_0.gml
++++ b/Code/gml_Object_obj_swatchling_enemy_Create_0.gml
+@@ -21,6 +21,7 @@
+ setmessage = false;
+ coordinated = false;
+ becameAlone = 0;
++noelleWarm = 0;
+ base_colors[0] = red;
+ base_colors[1] = blue;
+ base_colors[2] = yellow;

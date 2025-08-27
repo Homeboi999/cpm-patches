@@ -1,0 +1,108 @@
+--- a/Code/gml_Object_obj_queen_enemy_Other_11.gml
++++ b/Code/gml_Object_obj_queen_enemy_Other_11.gml
+@@ -37,45 +37,69 @@
+ }
+ if (!instance_exists(obj_queenshield_enemy) || shieldbreaking == 1)
+ {
+-    global.canact[myself][2] = 1;
+-    global.actactor[myself][2] = 2;
+-    global.actname[myself][2] = stringsetloc("Throw", "scr_monstersetup_slash_scr_monstersetup_gml_1540_0");
+-    global.actdesc[myself][2] = " ";
++    global.actnamenoe[myself][0] = stringset("Loosen");
+-    global.actcost[myself][2] = 0;
++    global.actsimulnoe[myself][0] = 0;
+-    global.canact[myself][3] = 1;
+-    global.actactor[myself][3] = 2;
+-    global.actname[myself][3] = stringsetloc("RedBuster", "scr_monstersetup_slash_scr_monstersetup_gml_1552_0");
+-    global.actdesc[myself][3] = stringsetloc("Red#Damage", "scr_monstersetup_slash_scr_monstersetup_gml_1553_0");
+-    global.actcost[myself][3] = 150;
+-    global.canact[myself][4] = 1;
+-    global.actactor[myself][4] = 3;
+-    global.actname[myself][4] = stringsetloc("DualHeal", "scr_monstersetup_slash_scr_monstersetup_gml_1558_0");
+-    global.actdesc[myself][4] = stringsetloc("Heals#everyone", "scr_monstersetup_slash_scr_monstersetup_gml_1559_0");
+-    global.actcost[myself][4] = 125;
+-    global.canact[myself][5] = 0;
+ }
+ else
+ {
+-    global.canact[myself][2] = 1;
+-    global.actactor[myself][2] = 2;
+-    global.actname[myself][2] = stringsetloc("RedBuster", "scr_monstersetup_slash_scr_monstersetup_gml_1552_0");
+-    global.actdesc[myself][2] = stringsetloc("Red#Damage", "scr_monstersetup_slash_scr_monstersetup_gml_1553_0");
+-    global.actcost[myself][2] = 150;
+-    global.canact[myself][3] = 1;
+-    global.actactor[myself][3] = 3;
+-    global.actname[myself][3] = stringsetloc("DualHeal", "scr_monstersetup_slash_scr_monstersetup_gml_1558_0");
+-    global.actdesc[myself][3] = stringsetloc("Heals#everyone", "scr_monstersetup_slash_scr_monstersetup_gml_1559_0");
+-    global.actcost[myself][3] = 125;
+-    global.canact[myself][4] = 0;
+-    global.actactor[myself][4] = 0;
+-    global.actname[myself][4] = "";
+-    global.actdesc[myself][4] = "";
+-    global.actcost[myself][4] = 0;
+-    global.canact[myself][5] = 0;
+-    global.actactor[myself][5] = 0;
+-    global.actname[myself][5] = "";
+-    global.actdesc[myself][5] = "";
+-    global.actcost[myself][5] = 0;
++    global.actnamenoe[myself][0] = stringset("Toast");
++    global.actsimulnoe[myself][0] = 1;
++}
++global.canact[myself][2] = 0;
++global.actname[myself][2] = "";
++global.actactor[myself][2] = 0;
++global.canact[myself][3] = 0;
++global.actname[myself][3] = "";
++global.actactor[myself][3] = 0;
++global.canact[myself][4] = 0;
++global.actname[myself][4] = "";
++global.actactor[myself][4] = 0;
++global.canact[myself][5] = 0;
++global.actname[myself][5] = "";
++global.actactor[myself][5] = 0;
++var num = 2;
++if (scr_havechar(2))
++{
++    if (!instance_exists(obj_queenshield_enemy) || shieldbreaking == 1)
++    {
++        global.canact[myself][2] = 1;
++        global.actactor[myself][2] = 2;
++        global.actname[myself][2] = stringsetloc("Throw", "scr_monstersetup_slash_scr_monstersetup_gml_1540_0");
++        global.actdesc[myself][2] = " ";
++        global.actcost[myself][2] = 0;
++        num++;
++    }
++    global.canact[myself][num] = 1;
++    global.actactor[myself][num] = 2;
++    global.actname[myself][num] = stringsetloc("RedBuster", "scr_monstersetup_slash_scr_monstersetup_gml_1552_0");
++    global.actdesc[myself][num] = stringsetloc("Red#Damage", "scr_monstersetup_slash_scr_monstersetup_gml_1553_0");
++    global.actcost[myself][num] = 150;
++    num++;
++}
++if (scr_havechar(3) || scr_havechar(4))
++{
++    global.canact[myself][num] = 1;
++    if (!scr_havechar(3))
++    {
++        global.actactor[myself][num] = 5;
++    }
++    else
++    {
++        global.actactor[myself][num] = 3;
++    }
++    global.actname[myself][num] = stringsetloc("DualHeal", "scr_monstersetup_slash_scr_monstersetup_gml_1558_0");
++    global.actdesc[myself][num] = stringsetloc("Heals#everyone", "scr_monstersetup_slash_scr_monstersetup_gml_1559_0");
++    global.actcost[myself][num] = 125;
++    num++;
++}
++if (scr_havechar(4))
++{
++    global.canact[myself][num] = 1;
++    global.actactor[myself][num] = 5;
++    global.actname[myself][num] = stringset("SnowShock");
++    global.actdesc[myself][num] = stringset("Damage#w/ SNOW");
++    global.actcost[myself][num] = 75;
++    num++;
+ }
+ scr_spellmenu_setup();
+ 

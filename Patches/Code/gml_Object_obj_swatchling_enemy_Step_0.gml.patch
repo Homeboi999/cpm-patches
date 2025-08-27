@@ -1,0 +1,107 @@
+--- a/Code/gml_Object_obj_swatchling_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_swatchling_enemy_Step_0.gml
+@@ -170,6 +170,7 @@
+     if (talked == 1 && scr_isphase("enemytalk"))
+     {
+         rtimer = 0;
++        noelleWarm = 0;
+         scr_blconskip(15);
+         if (scr_isphase("bullets"))
+         {
+@@ -338,8 +339,8 @@
+     if (actcon == 5)
+     {
+         previouscolor = currentcolor;
+-        var warmify = acting == 2 || actconsus == 2;
+-        var extreme = (actconsus == 2 || actconral == 2) ? 1 : 2;
++        var warmify = acting == 2 || actconsus == 2 || (actconnoe && noelleWarm == 1);
++        var extreme = (actconsus == 2 || actconral == 2 || (actconnoe && noelleWarm != 1)) ? 1 : 2;
+         if (extreme == 2 && instance_number(obj_swatchling_enemy) != 1)
+         {
+             var a = 0;
+@@ -431,7 +432,7 @@
+             {
+                 colorText = stringsetloc("orange", "obj_swatchling_enemy_slash_Step_0_gml_434_0");
+             }
+-            var extreme = (actconsus == 2 || actconral == 2) ? stringsetloc("a little bit", "obj_swatchling_enemy_slash_Step_0_gml_404_0") : stringsetloc("a lot", "obj_swatchling_enemy_slash_Step_0_gml_404_1");
++            var extreme = (actconsus == 2 || actconral == 2 || (actconnoe && noelleWarm != 1)) ? stringsetloc("a little bit", "obj_swatchling_enemy_slash_Step_0_gml_404_0") : stringsetloc("a lot", "obj_swatchling_enemy_slash_Step_0_gml_404_1");
+             if (warmify)
+             {
+                 msgsetsubloc(0, "* Swatchling's color got ~1 warmer...! It's now ~2!/%", extreme, colorText, "obj_swatchling_enemy_slash_Step_0_gml_419_0");
+@@ -463,12 +464,14 @@
+         actcon = 1;
+         actconral = 0;
+         actconsus = 0;
++        actconnoe = 0;
+         scr_battletext_default();
+     }
+     if (actingsus == 1 && actconsus == 1)
+     {
+         var sentenceEnd = (currentcolor == red) ? "/" : "/%";
+         var random_text = choose(0, 1, 2);
++        noelleWarm = 1;
+         if (random_text == 0)
+         {
+             msgsetsubloc(0, "* Susie mentions explosions.~1", sentenceEnd, "obj_swatchling_enemy_slash_Step_0_gml_444_0");
+@@ -520,6 +523,61 @@
+         {
+             actcon = 5;
+             actconral = 2;
++        }
++        scr_battletext_default();
++    }
++    if (actingnoe == 1 && actconnoe == 1)
++    {
++        var sentenceEnd = (currentcolor == blue || (currentcolor == red && noelleWarm)) ? "/" : "/%";
++        var random_text = choose(0, 1, 2);
++        if (!noelleWarm && instance_number(obj_swatchling_enemy) != 1)
++        {
++            for (i = 0; i < instance_number(obj_swatchling_enemy); i += 1)
++            {
++                enemy[i] = instance_find(obj_swatchling_enemy, i);
++                if (enemy[i].noelleWarm || (enemy[i].actingsus == 1 && enemy[i].actconsus == 0))
++                {
++                    noelleWarm = true;
++                }
++            }
++        }
++        else if (actingsus == 1 && actconsus == 0 && !noelleWarm)
++        {
++            noelleWarm = true;
++        }
++        if (!noelleWarm)
++        {
++            if (random_text == 0)
++            {
++                msgsetsub(0, "* Noelle mentions eggnog.~1", sentenceEnd);
++            }
++            if (random_text == 1)
++            {
++                msgsetsub(0, "* Noelle mentions snow angels.~1", sentenceEnd);
++            }
++            if (random_text == 2)
++            {
++                msgsetsub(0, "* Noelle mentions candy canes.~1", sentenceEnd);
++            }
++        }
++        else
++        {
++            msgset(0, "* Noelle mumbles something about Susie./");
++            scr_anyface_next("susie", 1);
++            scr_smallface(0, "noelle", 22, "right", "bottommid", stringset("N-Nothing!!!"));
++            msgnextsub("* Did you... uh... say something?\\f0 ^1~1", sentenceEnd);
++            scr_anyface_next("none", 0);
++        }
++        if ((currentcolor == blue && !noelleWarm) || (currentcolor == red && noelleWarm))
++        {
++            msgnextloc("* But nothing happened!/%", "obj_swatchling_enemy_slash_Step_0_gml_460_0");
++            actcon = 1;
++            actconnoe = 0;
++        }
++        else
++        {
++            actcon = 5;
++            actconnoe = 2;
+         }
+         scr_battletext_default();
+     }

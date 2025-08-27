@@ -1,0 +1,309 @@
+--- a/Code/gml_Object_obj_berdlyb2_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_berdlyb2_enemy_Step_0.gml
+@@ -449,13 +449,20 @@
+             global.typer = 6;
+             global.fc = 0;
+             rr = choose(0, 1, 2, 3, 4, 5);
+-            if (rr == 0)
+-            {
+-                global.battlemsg[0] = stringsetloc("* Berdly thanks Noelle profusely.", "obj_berdlyb2_enemy_slash_Step_0_gml_124_0");
+-            }
+-            if (rr == 1)
+-            {
+-                global.battlemsg[0] = stringsetloc("* Berdly tries to entice Noelle to his side by gyrating his hips!", "obj_berdlyb2_enemy_slash_Step_0_gml_125_0");
++            if (scr_havechar(4))
++            {
++                if (rr == 0)
++                {
++                    global.battlemsg[0] = stringsetloc("* Berdly thanks Noelle profusely.", "obj_berdlyb2_enemy_slash_Step_0_gml_124_0");
++                }
++                else if (rr == 1)
++                {
++                    global.battlemsg[0] = stringsetloc("* Berdly tries to entice Noelle to his side by gyrating his hips!", "obj_berdlyb2_enemy_slash_Step_0_gml_125_0");
++                }
++                else
++                {
++                    rr = choose(2, 3, 4, 5);
++                }
+             }
+             if (rr == 2)
+             {
+@@ -517,11 +524,23 @@
+             }
+             else
+             {
+-                var rand = !spill ? choose(0, 1, 2, 3) : choose(0, 1, 2);
++                var rand = (!spill && scr_havechar(4)) ? choose(0, 1, 2, 3) : choose(0, 1, 2);
+                 if (rand == 0)
+                 {
++                    if (!ralmath && scr_havechar(3))
++                    {
++                        ralmath = true;
++                        scr_speaker("no_name");
++                        msgset(0, "* You did several math problems incorrectly!/");
++                        scr_anyface_next("ralsei", "M");
++                        msgnext("\\EM* Uh... Kris?/");
++                        msgnext("\\EQ* If you want some tutoring, I can give you a hand any time, alright?/%");
++                    }
++                    else
++                    {
+-                    scr_speaker("no_name");
++                        scr_speaker("no_name");
+-                    msgsetloc(0, "* You did several math problems incorrectly!/%", "obj_berdlyb2_enemy_slash_Step_0_gml_175_0");
++                        msgsetloc(0, "* You did several math problems incorrectly!/%", "obj_berdlyb2_enemy_slash_Step_0_gml_175_0");
++                    }
+                 }
+                 if (rand == 1)
+                 {
+@@ -570,47 +589,129 @@
+             actcon = 2;
+         }
+     }
+-    if (acting == 3 && actcon == 0)
++    var num = 3;
++    if (scr_havechar(2))
+     {
+-        nact_count++;
+-        if (!sideb_route)
++        if (acting == 3 && actcon == 0)
+         {
+-            mercy_add_amount = 16;
+-            scr_speaker("no_name");
+-            msgsetloc(0, "* You encouraged Noelle to use her mind!/%", "obj_berdlyb2_enemy_slash_Step_0_gml_245_0");
+-            if (nact_count <= 2)
++            sact_count++;
++            if (!sideb_route)
+             {
+-                global.battlemag[1] += 3;
+-                berdly_last_line = stringsetloc("* Her MAGIC increased^1! Berdly found her smarts appealing!/%", "obj_berdlyb2_enemy_slash_Step_0_gml_252_0");
++                mercy_add_amount = 16;
++                if (sact_count <= 2)
++                {
++                    global.battleat[scr_findchar(2)] += 3;
++                    global.monsterat[myself] += 3;
++                    scr_speaker("no_name");
++                    msgset(0, "* You encouraged Susie to be aggressive!/");
++                    msgnext("* Her ATTACK increased^1!/%");
++                    berdly_last_line = stringset("* Berdly got competitive! His ATTACK also increased!/%");
++                }
++                else
++                {
++                    scr_speaker("no_name");
++                    msgset(0, "* You encouraged Susie to be aggressive!/%");
++                    berdly_last_line = stringset("* Susie acted tough!/%");
++                }
++                scr_battletext_default();
++                actcon = 2;
+             }
+             else
+             {
+-                berdly_last_line = stringsetloc("* Noelle acted smart!/%", "obj_berdlyb2_enemy_slash_Step_0_gml_484_0");
+-            }
+-            scr_battletext_default();
+-            actcon = 2;
+-        }
+-        else
+-        {
+-            scr_speaker("no_name");
+-            msgsetloc(0, "* You told Noelle to concentrate!/", "obj_berdlyb2_enemy_slash_Step_0_gml_264_0");
+-            if (nact_count == 1)
+-            {
+-                scr_anyface_next("noelle", "W");
+-                msgnextloc("\\EW* Concentrate on what...?/", "obj_berdlyb2_enemy_slash_Step_0_gml_269_0");
+-            }
+-            if (nact_count <= 10)
+-            {
+-                global.battlemag[1] += 3;
++                scr_speaker("no_name");
++                msgset(0, "* You told Susie to mutilate the enemy!/");
++                if (sact_count == 1)
++                {
++                    scr_anyface_next("susie", 1);
++                    msgnext("\\E1* Kris, I dunno what your deal with Berdly is.../");
++                    msgnext("\\EC* ...but something about this is just... weird./");
++                }
+                 scr_anyface_next("no_name", 0);
+-                msgnextloc("* Her MAGIC increased!/%", "obj_berdlyb2_enemy_slash_Step_0_gml_278_0");
+-            }
+-            else
+-            {
+-                msgnextloc("* But nothing happened!/%", "obj_berdlyb2_enemy_slash_Step_0_gml_281_0");
+-            }
+-            scr_battletext();
+-            actcon = 1;
++                msgnext("* But she refused!/%");
++                actcon = 1;
++                scr_battletext();
++            }
++        }
++        num++;
++    }
++    if (scr_havechar(3))
++    {
++        if (acting == num && actcon == 0)
++        {
++            ract_count++;
++            if (!sideb_route)
++            {
++                mercy_add_amount = 5;
++                scr_speaker("no_name");
++                msgset(0, "* You encouraged Ralsei to fluff up his fur!/%");
++                if (ract_count <= 3)
++                {
++                    global.monsterdf[myself] -= 5;
++                    berdly_last_line = stringset("* Berdly let his guard down! His DEFENSE decreased!/%");
++                }
++                else
++                {
++                    berdly_last_line = stringset("* Ralsei acted kind!/%");
++                }
++                scr_battletext_default();
++                actcon = 2;
++            }
++            else
++            {
++                scr_speaker("no_name");
++                msgset(0, "* You told Ralsei to close his eyes!/");
++                scr_speaker("no_name");
++                msgnext(0, "* ...He didn't seem to hear!/%");
++                scr_battletext();
++                actcon = 1;
++            }
++        }
++        num++;
++    }
++    if (scr_havechar(4))
++    {
++        if (acting == num && actcon == 0)
++        {
++            nact_count++;
++            if (!sideb_route)
++            {
++                mercy_add_amount = 16;
++                scr_speaker("no_name");
++                msgsetloc(0, "* You encouraged Noelle to use her mind!/%", "obj_berdlyb2_enemy_slash_Step_0_gml_245_0");
++                if (nact_count <= 2)
++                {
++                    global.battlemag[scr_findchar(4)] += 3;
++                    berdly_last_line = stringsetloc("* Her MAGIC increased^1! Berdly found her smarts appealing!/%", "obj_berdlyb2_enemy_slash_Step_0_gml_252_0");
++                }
++                else
++                {
++                    berdly_last_line = stringsetloc("* Noelle acted smart!/%", "obj_berdlyb2_enemy_slash_Step_0_gml_484_0");
++                }
++                scr_battletext_default();
++                actcon = 2;
++            }
++            else
++            {
++                scr_speaker("no_name");
++                msgsetloc(0, "* You told Noelle to concentrate!/", "obj_berdlyb2_enemy_slash_Step_0_gml_264_0");
++                if (nact_count == 1)
++                {
++                    scr_anyface_next("noelle", "W");
++                    msgnextloc("\\EW* Concentrate on what...?/", "obj_berdlyb2_enemy_slash_Step_0_gml_269_0");
++                }
++                if (nact_count <= 10)
++                {
++                    global.battlemag[scr_findchar(4)] += 3;
++                    scr_anyface_next("no_name", 0);
++                    msgnextloc("* Her MAGIC increased!/%", "obj_berdlyb2_enemy_slash_Step_0_gml_278_0");
++                }
++                else
++                {
++                    msgnextloc("* But nothing happened!/%", "obj_berdlyb2_enemy_slash_Step_0_gml_281_0");
++                }
++                scr_battletext();
++                actcon = 1;
++            }
+         }
+     }
+     if (actingnoe == 1 && actconnoe == 1)
+@@ -640,7 +741,77 @@
+         }
+         actconnoe = 2;
+     }
+-    if ((actcon == 2 || actconnoe == 2) && !i_ex(obj_writer))
++    if (actingsus == 1 && actconsus == 1)
++    {
++        saction_count++;
++        mercy_add_amount = 10;
++        if (!sideb_route)
++        {
++            if (saction_count == 1)
++            {
++                scr_speaker("no_name");
++                msgset(0, "* Susie tried to talk to Berdly!/");
++                if (scr_havechar(4))
++                {
++                    scr_anyface_next("susie", 11);
++                    msgnext("\\EB* What makes you so sure Noelle doesn't wanna be with us anyway?/");
++                    scr_anyface_next("berdly", 20);
++                    msgnext("\\EK* Noelle? Wanting to be with YOU? HAH!/");
++                    scr_anyface_next("berdly", 2);
++                    msgnext("\\E1* Your ignorance never fails to surprise me./%");
++                }
++                else
++                {
++                    scr_anyface_next("susie", 27);
++                    msgnext("\\ER* You really don't know when to quit, do you?/");
++                    scr_anyface_next("berdly", 20);
++                    msgnext("\\EK* Oh Susie... Have you really not heard the age-olde proverb?/");
++                    scr_anyface_next("berdly", 2);
++                    msgnext("\\E2* \"If you quit, all unsaved progress will be lost!\"/");
++                }
++                scr_battletext();
++            }
++            berdly_last_line = stringset("* Susie accidentally inflated Berdly's ego!/%");
++        }
++        else
++        {
++            mercy_add_amount = 0;
++            scr_speaker("no_name");
++            msgsetloc(0, "* Susie tried to talk to Berdly!/");
++            berdly_last_line = stringsetloc("* But it failed./%");
++        }
++        actconsus = 2;
++    }
++    if (actingral == 1 && actconral == 1)
++    {
++        raction_count++;
++        mercy_add_amount = 10;
++        if (!sideb_route)
++        {
++            if (raction_count == 1)
++            {
++                scr_speaker("no_name");
++                msgset(0, "* Ralsei tried to talk to Berdly!/");
++                scr_anyface_next("ralsei", 14);
++                msgnext("\\EE* Berdly, please! Wouldn't talking it out be the smart thing to do?/");
++                scr_anyface_next("berdly", 1);
++                msgnext("\\E1* Hah! I've learned the only language simpletons like you understand.../");
++                scr_smallface(0, "ralsei", 33, "rightmid", "bottommid", stringset("* (Then why haven't you stopped#talking since we arrived?)"));
++                msgnext("\\E6* ...is the language of BRUTE FORCE!\\f0/%");
++                scr_battletext();
++            }
++            berdly_last_line = stringset("* Ralsei accidentally inflated Berdly's ego!/%");
++        }
++        else
++        {
++            mercy_add_amount = 0;
++            scr_speaker("no_name");
++            msgsetloc(0, "* Ralsei tried to talk to Berdly!/");
++            berdly_last_line = stringsetloc("* But it failed./%");
++        }
++        actconral = 2;
++    }
++    if ((actcon == 2 || actconnoe == 2 || actconsus == 2 || actconral == 2) && !i_ex(obj_writer))
+     {
+         if (global.mercymod[myself] < global.mercymax[myself])
+         {
+@@ -649,6 +820,8 @@
+         scr_speaker("no_name");
+         msgset(0, berdly_last_line);
+         scr_battletext();
++        actconsus = -1;
++        actconral = -1;
+         actconnoe = -1;
+         actcon = 1;
+     }

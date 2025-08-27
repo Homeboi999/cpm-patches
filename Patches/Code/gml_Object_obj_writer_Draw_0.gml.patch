@@ -1,0 +1,13 @@
+--- a/Code/gml_Object_obj_writer_Draw_0.gml
++++ b/Code/gml_Object_obj_writer_Draw_0.gml
+@@ -727,6 +727,10 @@
+             {
+                 xcolor = hexcolor(#80FF80);
+             }
++            if (nextchar2 == "N")
++            {
++                xcolor = hexcolor(#80FFFF);
++            }
+             if (nextchar2 == "0")
+             {
+                 xcolor = mycolor;

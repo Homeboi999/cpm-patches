@@ -1,0 +1,65 @@
+--- a/Code/gml_Object_obj_ch2_cyber01_Step_0.gml
++++ b/Code/gml_Object_obj_ch2_cyber01_Step_0.gml
+@@ -387,15 +387,30 @@
+ {
+     con = 34;
+     customcon = 0;
+-    kr_actor.x = obj_herokris.x;
+-    kr_actor.y = obj_herokris.y;
+-    kr_actor.sprite_index = spr_krisr_dark;
+-    su_actor.x = obj_herosusie.x;
+-    su_actor.y = obj_herosusie.y;
+-    su_actor.sprite_index = spr_susie_walk_right_dw;
+-    ra_actor.x = obj_heroralsei.x;
+-    ra_actor.y = obj_heroralsei.y;
+-    ra_actor.sprite_index = spr_ralsei_walk_right;
++    if (i_ex(obj_herokris))
++    {
++        kr_actor.x = obj_herokris.x;
++        kr_actor.y = obj_herokris.y;
++        kr_actor.sprite_index = spr_krisr_dark;
++    }
++    if (i_ex(obj_herosusie))
++    {
++        su_actor.x = obj_herosusie.x;
++        su_actor.y = obj_herosusie.y;
++        su_actor.sprite_index = spr_susie_walk_right_dw;
++    }
++    if (i_ex(obj_heroralsei))
++    {
++        ra_actor.x = obj_heroralsei.x;
++        ra_actor.y = obj_heroralsei.y;
++        ra_actor.sprite_index = spr_ralsei_walk_right;
++    }
++    if (i_ex(obj_heronoelle))
++    {
++        no_actor.x = obj_heronoelle.x;
++        no_actor.y = obj_heronoelle.y;
++        no_actor.sprite_index = spr_noelle_walk_right_dw;
++    }
+     sw_actor.x = obj_sweet_enemy.x;
+     sw_actor.y = obj_sweet_enemy.y;
+     sw_actor.sprite_index = obj_sweet_enemy.sprite_index;
+@@ -412,6 +427,22 @@
+     with (obj_actor)
+     {
+         visible = 1;
++        if (name == "kris" && !scr_havechar(1))
++        {
++            visible = 0;
++        }
++        if (name == "susie" && !scr_havechar(2))
++        {
++            visible = 0;
++        }
++        if (name == "ralsei" && !scr_havechar(3))
++        {
++            visible = 0;
++        }
++        if (name == "noelle" && !scr_havechar(4))
++        {
++            visible = 0;
++        }
+     }
+     with (obj_mainchara)
+     {

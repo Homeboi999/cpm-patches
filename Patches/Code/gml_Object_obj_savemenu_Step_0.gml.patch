@@ -1,0 +1,33 @@
+--- a/Code/gml_Object_obj_savemenu_Step_0.gml
++++ b/Code/gml_Object_obj_savemenu_Step_0.gml
+@@ -1,3 +1,30 @@
++if (menuno == 0)
++{
++    if (button3_p() && buffer < 0)
++    {
++        if (scr_modconfig("menuMode") == 0 || scr_modconfig("menuMode") == 2)
++        {
++            menuno = 3;
++            snd_play(snd_select);
++            buffer = 3;
++            global.charselect = 0;
++            partyMenu = instance_create(camerax(), cameray(), obj_partymenu);
++            partyMenu.partySelect = global.charselect;
++            partyMenu.charSelect = global.char[global.charselect];
++        }
++        else
++        {
++            snd_play(snd_cantselect);
++        }
++    }
++}
++if (menuno == 3)
++{
++    if (!instance_exists(obj_partymenu))
++    {
++        menuno = 0;
++    }
++}
+ buffer -= 1;
+ if (menuno == 0)
+ {

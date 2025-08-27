@@ -1,0 +1,22 @@
+--- a/Code/gml_Object_obj_ch2_city05_Step_0.gml
++++ b/Code/gml_Object_obj_ch2_city05_Step_0.gml
+@@ -354,11 +354,14 @@
+     con = (global.flag[309] == 1) ? 9 : 19;
+     alarm[0] = 5;
+     customcon = 0;
++    if (i_ex(obj_herokris))
++    {
+-    obj_mainchara.x = obj_herokris.x;
++        obj_mainchara.x = obj_herokris.x;
+-    obj_mainchara.y = obj_herokris.y;
++        obj_mainchara.y = obj_herokris.y;
+-    kr_actor.x = obj_herokris.x;
++        kr_actor.x = obj_herokris.x;
+-    kr_actor.y = obj_herokris.y;
++        kr_actor.y = obj_herokris.y;
+-    kr_actor.sprite_index = obj_herokris.sprite_index;
++        kr_actor.sprite_index = obj_herokris.sprite_index;
++    }
+     sp_actor.x = obj_spamton_enemy.x;
+     sp_actor.y = obj_spamton_enemy.y;
+     sp_actor.sprite_index = spr_cutscene_14_spamton;

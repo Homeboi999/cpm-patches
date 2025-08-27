@@ -1,0 +1,84 @@
+--- a/Code/gml_Object_obj_berdly_encounter_setup_Step_0.gml
++++ b/Code/gml_Object_obj_berdly_encounter_setup_Step_0.gml
+@@ -49,26 +49,73 @@
+             {
+                 stop_siner = 1;
+                 con = 1;
++                switch (global.char[0])
++                {
++                    case 1:
+-                character_sprite = spr_krisb_attack;
++                        character_sprite = spr_krisb_attack;
+-                actor.sprite_index = spr_krisb_attack;
++                        actor.sprite_index = spr_krisb_attack;
++                        break;
++                    case 2:
++                        character_sprite = spr_susieb_attack;
++                        actor.sprite_index = spr_susieb_attack;
++                        break;
++                    case 3:
++                        character_sprite = spr_ralsei_battleintro;
++                        actor.sprite_index = spr_ralsei_battleintro;
++                        break;
++                    case 4:
++                        character_sprite = spr_noelleb_battleintro;
++                        actor.sprite_index = spr_noelleb_battleintro;
++                        break;
++                }
+             }
+             with (coaster_susie)
+             {
+                 stop_siner = 1;
+                 con = 1;
+-                character_sprite = spr_susieb_attack;
+-                actor.sprite_index = spr_susieb_attack;
+-                if (global.charweapon[global.char[2]] == 0)
++                switch (global.char[1])
+                 {
++                    case 1:
++                        character_sprite = spr_krisb_attack;
++                        actor.sprite_index = spr_krisb_attack;
++                        break;
++                    case 2:
+-                    character_sprite = spr_susieb_attack_unarmed;
++                        character_sprite = spr_susieb_attack;
++                        actor.sprite_index = spr_susieb_attack;
++                        break;
++                    case 3:
++                        character_sprite = spr_ralsei_battleintro;
++                        actor.sprite_index = spr_ralsei_battleintro;
++                        break;
++                    case 4:
++                        character_sprite = spr_noelleb_battleintro;
++                        actor.sprite_index = spr_noelleb_battleintro;
++                        break;
+                 }
+             }
+             with (coaster_ralsei)
+             {
+                 stop_siner = 1;
+                 con = 1;
++                switch (global.char[2])
++                {
++                    case 1:
++                        character_sprite = spr_krisb_attack;
++                        actor.sprite_index = spr_krisb_attack;
++                        break;
++                    case 2:
++                        character_sprite = spr_susieb_attack;
++                        actor.sprite_index = spr_susieb_attack;
++                        break;
++                    case 3:
+-                character_sprite = spr_ralsei_battleintro;
++                        character_sprite = spr_ralsei_battleintro;
+-                actor.sprite_index = spr_ralsei_battleintro;
++                        actor.sprite_index = spr_ralsei_battleintro;
++                        break;
++                    case 4:
++                        character_sprite = spr_noelleb_battleintro;
++                        actor.sprite_index = spr_noelleb_battleintro;
++                        break;
++                }
+             }
+             with (coaster_berdly)
+             {

@@ -1,0 +1,41 @@
+--- a/Code/gml_Object_obj_ch2_scene21_loop_Create_0.gml
++++ b/Code/gml_Object_obj_ch2_scene21_loop_Create_0.gml
+@@ -15,13 +15,20 @@
+     }
+     instance_deactivate_object(obj_doorB);
+     obj_mainchara.x = -100;
++    with (obj_caterpillarchara)
++    {
++        x = -100;
++    }
++    if (scr_modconfig("forceParty") == false)
++    {
+-    scr_losechar();
++        scr_losechar();
+-    if (instance_exists(obj_caterpillarchara))
++        if (instance_exists(obj_caterpillarchara))
+-    {
++        {
+-        instance_destroy(obj_caterpillarchara);
++            instance_destroy(obj_caterpillarchara);
+-    }
++        }
+-    scr_getchar(3);
++        scr_getchar(3);
+-    scr_makecaterpillar(-100, obj_mainchara.y, 3, 0);
++        scr_makecaterpillar(-100, obj_mainchara.y, 3, 0);
++    }
+     global.facing = 1;
+     swanboat = instance_create(-200, 140, obj_queencar);
+     with (swanboat)
+@@ -34,6 +41,10 @@
+     actor_shadow = 0;
+     inside_tunnel = true;
+     swan_shadow = scr_dark_marker(-200, swanboat.y, spr_swanboat_shadow);
++    if (swanboat.swanLong)
++    {
++        swan_shadow.sprite_index = spr_swanboat_long_shadow;
++    }
+     swan_shadow.image_speed = swanboat.image_speed;
+     swan_shadow.image_alpha = 0.5;
+     adjust_actors = true;

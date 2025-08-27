@@ -1,0 +1,33 @@
+--- a/Code/gml_Object_obj_queen_enemy_Draw_0.gml
++++ b/Code/gml_Object_obj_queen_enemy_Draw_0.gml
+@@ -15,6 +15,10 @@
+ {
+     flash = 0;
+ }
++with (obj_heronoelle)
++{
++    flash = 0;
++}
+ if (global.bmenuno == 9 || global.bmenuno == 9)
+ {
+     if (global.bmenucoord[9][global.charturn] != 4 && global.bmenucoord[9][global.charturn] != 5 && shieldacthp <= 0)
+@@ -29,7 +33,7 @@
+     {
+         _flash = 0;
+     }
+-    if ((global.bmenucoord[9][global.charturn] == 4 && !instance_exists(obj_queenshield_enemy)) || (global.bmenucoord[9][global.charturn] == 3 && instance_exists(obj_queenshield_enemy)))
++    if ((global.bmenucoord[9][global.charturn] == (3 + scr_havechar(2)) && !instance_exists(obj_queenshield_enemy)) || (global.bmenucoord[9][global.charturn] == (2 + scr_havechar(2)) && instance_exists(obj_queenshield_enemy)))
+     {
+         with (obj_herokris)
+         {
+@@ -40,6 +44,10 @@
+             flash = 1;
+         }
+         with (obj_heroralsei)
++        {
++            flash = 1;
++        }
++        with (obj_heronoelle)
+         {
+             flash = 1;
+         }

@@ -1,0 +1,8 @@
+--- a/Code/gml_Object_obj_werewerewire_enemy_Create_0.gml
++++ b/Code/gml_Object_obj_werewerewire_enemy_Create_0.gml
+@@ -37,4 +37,5 @@
+ by1[3] = 46;
+ by1[4] = 72;
+ mercy_act = 1;
++mercy_temp = 1;
+ 

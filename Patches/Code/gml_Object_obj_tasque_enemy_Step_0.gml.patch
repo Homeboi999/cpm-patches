@@ -1,0 +1,184 @@
+--- a/Code/gml_Object_obj_tasque_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_tasque_enemy_Step_0.gml
+@@ -144,14 +144,22 @@
+         scr_simultext("kris");
+         actcon = (simulorderkri == 0) ? 20 : -1;
+     }
+-    if (acting == 3 && actcon == 0)
++    var num = 3;
++    if (scr_havechar(2))
+     {
+-        if (!scr_havechar(4))
++        if (acting == 3 && actcon == 0)
+         {
+             sact_count++;
+             if (sact_count == 1)
+             {
++                if (scr_havechar(3))
++                {
+-                scr_smallface(0, "ralsei", 20, "right", "middle", stringsetloc("It's just a cat...", "obj_tasque_enemy_slash_Step_0_gml_150_0"));
++                    scr_smallface(0, "ralsei", 20, "right", "middle", stringsetloc("It's just a cat...", "obj_tasque_enemy_slash_Step_0_gml_150_0"));
++                }
++                else
++                {
++                    scr_smallface(0, "none", 0, "right", "middle", stringset(" "));
++                }
+             }
+             var sentenceEnd = (sact_count == 1) ? "/" : "/%";
+             msgsetsubloc(0, "* Susie roared!! The enemies became TIRED.~1", sentenceEnd, "obj_tasque_enemy_slash_Step_0_gml_155_0");
+@@ -171,7 +179,57 @@
+             scr_battletext_default();
+             actcon = 1;
+         }
+-        else
++        num++;
++    }
++    if (scr_havechar(3))
++    {
++        if (acting == num && actcon == 0)
++        {
++            ract_count++;
++            if (ract_count == 1)
++            {
++                if (scr_havechar(2))
++                {
++                    scr_smallface(0, "susie", 12, "middle", "bottom", stringsetloc("Isn't that just how he normally talks?", "obj_tasque_enemy_slash_Step_0_gml_203_0"));
++                }
++                else
++                {
++                    scr_smallface(0, "none", 0, "middle", "bottom", stringset(" "));
++                }
++            }
++            var sentenceEnd = (ract_count == 1) ? "/" : "/%";
++            msgsetsubloc(0, "* Ralsei talked in a soft voice to the enemies!~1", sentenceEnd, "obj_tasque_enemy_slash_Step_0_gml_207_0");
++            if (ract_count == 1)
++            {
++                scr_anyface_next("ralsei", 2);
++                msgnextloc("\\E2* There^1, there^1, it's okay^1, little kitty...\\f0/%", "obj_tasque_enemy_slash_Step_0_gml_212_0");
++            }
++            with (obj_monsterparent)
++            {
++                if (global.mercymod[myself] < global.mercymax[myself])
++                {
++                    if (global.monstertype[myself] == 32)
++                    {
++                        scr_mercyadd(myself, 100);
++                    }
++                    else if (global.monstertype[myself] == 42)
++                    {
++                        scr_mercyadd(myself, 5);
++                    }
++                    else
++                    {
++                        scr_mercyadd(myself, 50);
++                    }
++                }
++            }
++            scr_battletext_default();
++            actcon = 1;
++        }
++        num++;
++    }
++    if (scr_havechar(4))
++    {
++        if (acting == num && actcon == 0)
+         {
+             nact_count++;
+             var sentenceEnd = (nact_count == 1) ? "/" : "/%";
+@@ -192,44 +250,17 @@
+             actcon = 1;
+         }
+     }
+-    if (acting == 4 && actcon == 0)
+-    {
+-        ract_count++;
+-        if (ract_count == 1)
+-        {
+-            scr_smallface(0, "susie", 12, "middle", "bottom", stringsetloc("Isn't that just how he normally talks?", "obj_tasque_enemy_slash_Step_0_gml_203_0"));
+-        }
+-        var sentenceEnd = (ract_count == 1) ? "/" : "/%";
+-        msgsetsubloc(0, "* Ralsei talked in a soft voice to the enemies!~1", sentenceEnd, "obj_tasque_enemy_slash_Step_0_gml_207_0");
+-        if (ract_count == 1)
+-        {
+-            scr_anyface_next("ralsei", 2);
+-            msgnextloc("\\E2* There^1, there^1, it's okay^1, little kitty...\\f0/%", "obj_tasque_enemy_slash_Step_0_gml_212_0");
+-        }
+-        with (obj_monsterparent)
+-        {
+-            if (global.mercymod[myself] < global.mercymax[myself])
+-            {
+-                if (global.monstertype[myself] == 32)
+-                {
+-                    scr_mercyadd(myself, 100);
+-                }
+-                else if (global.monstertype[myself] == 42)
+-                {
+-                    scr_mercyadd(myself, 5);
+-                }
+-                else
+-                {
+-                    scr_mercyadd(myself, 50);
+-                }
+-            }
+-        }
+-        scr_battletext_default();
+-        actcon = 1;
+-    }
+     if (actingsus == 1 && actconsus == 1)
+     {
+-        var simultext = (simultotal == 1) ? stringsetloc("* Susie yelled at Tasque to get off her lawn./%", "obj_tasque_enemy_slash_Step_0_gml_228_0") : stringsetloc("* Susie roared like a lion!/%", "obj_tasque_enemy_slash_Step_0_gml_228_1");
++        var simultext;
++        if (simultotal == 1)
++        {
++            simultext = stringsetloc("* Susie yelled at Tasque to get off her lawn./%", "obj_tasque_enemy_slash_Step_0_gml_228_0");
++        }
++        else
++        {
++            simultext = stringsetloc("* Susie roared like a lion!/%", "obj_tasque_enemy_slash_Step_0_gml_228_1");
++        }
+         msgset(0, simultext);
+         if (global.mercymod[myself] < global.mercymax[myself])
+         {
+@@ -240,7 +271,15 @@
+     }
+     if (actingral == 1 && actconral == 1)
+     {
+-        var simultext = (simultotal == 1) ? stringsetloc("* Ralsei cooed gently at Tasque!/%", "obj_tasque_enemy_slash_Step_0_gml_240_0") : stringsetloc("* Ralsei blinks at Tasque!/%", "obj_tasque_enemy_slash_Step_0_gml_240_1");
++        var simultext;
++        if (simultotal == 1)
++        {
++            simultext = stringsetloc("* Ralsei cooed gently at Tasque!/%", "obj_tasque_enemy_slash_Step_0_gml_240_0");
++        }
++        else
++        {
++            simultext = stringsetloc("* Ralsei blinks at Tasque!/%", "obj_tasque_enemy_slash_Step_0_gml_240_1");
++        }
+         msgset(0, simultext);
+         if (global.mercymod[myself] < global.mercymax[myself])
+         {
+@@ -251,8 +290,23 @@
+     }
+     if (actingnoe == 1 && actconnoe == 1)
+     {
+-        var nact_text = (choose(0, 1) == 0) ? stringsetloc("* Noelle got rubbed on by Tasque!/%", "obj_tasque_enemy_slash_Step_0_gml_252_0") : stringsetloc("* Tasque showed its belly to Noelle!/%", "obj_tasque_enemy_slash_Step_0_gml_252_1");
+-        msgset(0, nact_text);
++        var simultext;
++        if (simultotal == 1)
++        {
++            if (choose(0, 1) == 1)
++            {
++                simultext = stringsetloc("* Noelle got rubbed on by Tasque!/%", "obj_tasque_enemy_slash_Step_0_gml_252_0");
++            }
++            else
++            {
++                simultext = stringsetloc("* Tasque showed its belly to Noelle!/%", "obj_tasque_enemy_slash_Step_0_gml_252_1");
++            }
++        }
++        else
++        {
++            simultext = stringset("* Tasque purred at Noelle!");
++        }
++        msgset(0, simultext);
+         if (global.mercymod[myself] < global.mercymax[myself])
+         {
+             scr_mercyadd(myself, 50);

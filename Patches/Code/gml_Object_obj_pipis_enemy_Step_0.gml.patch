@@ -1,0 +1,30 @@
+--- a/Code/gml_Object_obj_pipis_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_pipis_enemy_Step_0.gml
+@@ -73,7 +73,7 @@
+         msgsetloc(0, "PIPIS - ''The Original'' An invasive species of freshwater clam. \\f0 /%", "obj_pipis_enemy_slash_Step_0_gml_100_0");
+         scr_battletext_default();
+     }
+-    if ((actingsus == 1 && actconsus == 1) || (actingral == 1 && actconral == 1))
++    if ((actingsus == 1 && actconsus == 1) || (actingral == 1 && actconral == 1) || (actingnoe == 1 && actconnoe == 1))
+     {
+         msgsetloc(0, "* Nothing happened!/%", "obj_pipis_enemy_slash_Step_0_gml_110_0");
+         scr_battletext_default();
+@@ -87,11 +87,17 @@
+             actcon = 1;
+             actconral = 0;
+         }
++        if (actingnoe == 1 && actconnoe == 1)
++        {
++            actcon = 1;
++            actconnoe = 0;
++        }
+     }
+-    if (actcon == 20 || actconsus == 20 || actconral == 20)
++    if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
+     {
+         if (scr_terminate_writer())
+         {
++            actconnoe = -1;
+             actconsus = -1;
+             actconral = -1;
+             actcon = 1;

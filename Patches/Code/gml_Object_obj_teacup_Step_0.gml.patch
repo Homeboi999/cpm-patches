@@ -1,0 +1,89 @@
+--- a/Code/gml_Object_obj_teacup_Step_0.gml
++++ b/Code/gml_Object_obj_teacup_Step_0.gml
+@@ -57,7 +57,7 @@
+ {
+     for (var i = 0; i < partySize; i += 1)
+     {
+-        var _sprites = [spr_teacup_kris, spr_teacup_kris, spr_teacup_susie, spr_teacup_ralsei];
++        var _sprites = [spr_teacup_empty, spr_teacup_kris, spr_teacup_susie, spr_teacup_ralsei, spr_teacup_noelle];
+         cup_char[i].sprite_index = _sprites[global.char[i]];
+         with (cup_char[i])
+         {
+@@ -171,22 +171,28 @@
+                     scr_tb_make_split(800, spin, 0, 3, 5);
+                 }
+             }
+-            if (collision_rectangle(bbox_left, bbox_top - 10, bbox_right, bbox_bottom, obj_teacup_bullet, false, true) != -4)
+-            {
+-                if (cup_char[1].sprite_index == spr_teacup_susie)
+-                {
+-                    cup_char[1].sprite_index = spr_teacup_susie_tea;
+-                }
+-                teatimer--;
+-                if (teatimer <= 0)
+-                {
+-                    snd_play(snd_swallow);
+-                    teatimer = 6;
+-                }
+-            }
+-            else if (cup_char[1].sprite_index == spr_teacup_susie_tea)
+-            {
+-                cup_char[1].sprite_index = spr_teacup_susie;
++            for (var j = 0; j < 3; j++)
++            {
++                if (collision_rectangle(bbox_left, bbox_top - 10, bbox_right, bbox_bottom, obj_teacup_bullet, false, true) != -4)
++                {
++                    if (cup_char[j].sprite_index == spr_teacup_susie)
++                    {
++                        cup_char[j].sprite_index = spr_teacup_susie_tea;
++                    }
++                    if (j == 0)
++                    {
++                        teatimer--;
++                    }
++                    if (teatimer <= 0)
++                    {
++                        snd_play(snd_swallow);
++                        teatimer = 6;
++                    }
++                }
++                else if (cup_char[j].sprite_index == spr_teacup_susie_tea)
++                {
++                    cup_char[j].sprite_index = spr_teacup_susie;
++                }
+             }
+             var _closest = abs(368 - spin) > abs(8 - spin);
+             spin = scr_approach(spin, _closest ? 8 : 368, spinSpeed);
+@@ -398,7 +404,7 @@
+         snd_play(snd_jump);
+         for (var i = 0; i < partySize; i++)
+         {
+-            var _sprites = [spr_kris_fall_ball, spr_kris_fall_ball, spr_susie_dw_fall_ball, spr_ralsei_teacup_enter];
++            var _sprites = [spr_empty, spr_kris_fall_ball, spr_susie_dw_fall_ball, spr_ralsei_teacup_enter, spr_noelle_jump_ball];
+             var _charaDest = reverse ? startPos[i] : endPos[i];
+             jumpMarker[i] = instance_create(cup_char[i].x, cup_char[i].y, obj_marker);
+             with (jumpMarker[i])
+@@ -432,7 +438,7 @@
+         var _longestAnim, _animSpeed;
+         for (var i = 0; i < partySize; i++)
+         {
+-            var _sprites = [spr_kris_dw_land_example_dark, spr_kris_dw_land_example_dark, spr_susie_dw_landed, spr_teacup_ralsei_land];
++            var _sprites = [spr_empty, spr_kris_dw_land_example_dark, spr_susie_dw_landed, spr_teacup_ralsei_land, spr_noelle_walk_down_dw];
+             _longestAnim = 0;
+             _animSpeed = 0.25;
+             with (jumpMarker[i])
+@@ -628,12 +634,12 @@
+     cupx = lengthdir_x(cupDistanceFromCenter, _charSpin);
+     cupy = lengthdir_y(cupDistanceFromCenter * 0.5, _charSpin);
+     var _cupDepth = depth - depthSeparation - cupy;
+-    var _spritesTea = [spr_teacup_tea, spr_teacup_kris_tea, spr_teacup_kris_tea, spr_teacup_ralsei_tea];
++    var _spritesTea = [spr_teacup_tea, spr_teacup_kris_tea, spr_teacup_susie_tea, spr_teacup_ralsei_tea, spr_teacup_noelle_tea];
+     if (teaFilled > 0.1 && global.char[i] != 2)
+     {
+         if (teaFilled >= 1)
+         {
+-            _spritesTea = [spr_teacup_tea2, spr_teacup_kris_tea2, spr_teacup_kris_tea, spr_teacup_ralsei_tea2];
++            _spritesTea = [spr_teacup_tea2, spr_teacup_kris_tea2, spr_teacup_susie, spr_teacup_ralsei_tea2, spr_teacup_noelle_tea2];
+         }
+         if ((state == 5 || state == 6) && i < partySize)
+         {

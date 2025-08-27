@@ -1,0 +1,10 @@
+--- a/Code/gml_Object_obj_yheart_shot_Create_0.gml
++++ b/Code/gml_Object_obj_yheart_shot_Create_0.gml
+@@ -6,6 +6,7 @@
+ sucked = 0;
+ trail = 0;
+ trail_timer = 0;
++spread_angle = 0;
+ if (instance_exists(obj_spamton_neo_enemy) && obj_spamton_neo_enemy.upgrade > 0)
+ {
+     big = 1;

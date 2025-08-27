@@ -1,0 +1,8 @@
+--- a/Code/gml_Object_obj_icespell_Create_0.gml
++++ b/Code/gml_Object_obj_icespell_Create_0.gml
+@@ -1,4 +1,5 @@
+ timer = 0;
+ star = 0;
+ damage = 0;
++boosted = 0;
+ 

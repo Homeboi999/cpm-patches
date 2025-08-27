@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_darkcontroller_Create_0.gml
++++ b/Code/gml_Object_obj_darkcontroller_Create_0.gml
+@@ -105,7 +105,7 @@
+             with (global.cinstance[i - 1])
+             {
+                 name = "noelle";
+-                slidesprite = spr_noelle_walk_down_dw;
++                slidesprite = spr_noelle_slide;
+                 usprite = spr_noelle_walk_up_dw;
+                 dsprite = spr_noelle_walk_down_dw;
+                 rsprite = spr_noelle_walk_right_dw;

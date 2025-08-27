@@ -1,0 +1,47 @@
+--- a/Code/gml_GlobalScript_scr_encountersetup.gml
++++ b/Code/gml_GlobalScript_scr_encountersetup.gml
+@@ -595,12 +595,38 @@
+         case 63:
+             if (i_ex(obj_ch2_scene21_loop))
+             {
+-                with (obj_ch2_scene21_loop)
+-                {
+-                    global.heromakex[0] = kr_actor.x;
+-                    global.heromakey[0] = kr_actor.y;
+-                    global.heromakex[1] = ra_actor.x;
+-                    global.heromakey[1] = ra_actor.y;
++                if (obj_ch2_scene21_loop.swanboat.swanLong)
++                {
++                    global.heromakex[0] = obj_mainchara.x;
++                    if (i_ex(global.cinstance[0]))
++                    {
++                        global.heromakex[1] = global.cinstance[0].x;
++                    }
++                    if (i_ex(global.cinstance[1]))
++                    {
++                        global.heromakex[2] = global.cinstance[1].x;
++                    }
++                }
++                else
++                {
++                    global.heromakex[0] = obj_mainchara.x + 8;
++                    if (i_ex(global.cinstance[0]))
++                    {
++                        global.heromakex[1] = global.cinstance[0].x + 15;
++                    }
++                    if (i_ex(global.cinstance[1]))
++                    {
++                        global.heromakex[2] = global.cinstance[1].x + 15;
++                    }
++                }
++                global.heromakey[0] = obj_mainchara.y;
++                if (i_ex(global.cinstance[0]))
++                {
++                    global.heromakey[1] = global.cinstance[0].y;
++                }
++                if (i_ex(global.cinstance[1]))
++                {
++                    global.heromakey[2] = global.cinstance[1].y;
+                 }
+             }
+             global.monsterinstancetype[0] = obj_rouxls_enemy;

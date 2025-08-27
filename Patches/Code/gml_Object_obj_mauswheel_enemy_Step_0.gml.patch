@@ -1,0 +1,39 @@
+--- a/Code/gml_Object_obj_mauswheel_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_mauswheel_enemy_Step_0.gml
+@@ -146,24 +146,25 @@
+     }
+     if (actingral == 1 && actconral == 1 && !i_ex(obj_writer))
+     {
+-        if (!trappedText)
++        if (!trappedText && scr_havechar(2))
+         {
++            with (obj_maus_enemy)
++            {
+-            trappedText = true;
++                trappedText = true;
+-            global.actsimulral[myself][0] = 1;
++                global.actsimulral[myself][0] = 1;
++            }
+-            msgsetloc(0, "* Ralsei started putting peanut butter on a spoon and put it in a trap!!/%", "obj_mauswheel_enemy_slash_Step_0_gml_202_0");
++            msgsetloc(0, "* Ralsei started putting peanut butter on a spoon and put it in a trap!!/%", "obj_maus_enemy_slash_Step_0_gml_343_0");
+-            scr_mercyadd(myself, 5);
++            scr_mercyadd(myself, 50);
+             actconral = 2;
+             scr_battletext_default();
+         }
+         else
+         {
+-            var simultext = (simultotal == 1) ? stringsetloc("* Ralsei sang a song about mice!!/%", "obj_mauswheel_enemy_slash_Step_0_gml_212_0") : stringsetloc("* Ralsei sang a mouse song!/%", "obj_mauswheel_enemy_slash_Step_0_gml_212_1");
++            var simultext = (simultotal == 1) ? stringsetloc("* Ralsei sang a song about mice!!/%", "obj_maus_enemy_slash_Step_0_gml_352_0") : stringsetloc("* Ralsei sang a mouse song!/%", "obj_maus_enemy_slash_Step_0_gml_352_1");
+             msgset(0, simultext);
+-            scr_mercyadd(myself, 5);
+-            scr_battletext_default();
+-            actingral = 0;
+-            actconral = 0;
+-            actcon = 1;
++            scr_mercyadd(myself, 50);
++            scr_simultext("ralsei");
++            actconral = (simulorderral == 0) ? 20 : 0;
+         }
+     }
+     if (actconral == 2 && !instance_exists(obj_writer))

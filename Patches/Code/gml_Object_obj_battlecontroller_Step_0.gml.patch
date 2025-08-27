@@ -1,0 +1,28 @@
+--- a/Code/gml_Object_obj_battlecontroller_Step_0.gml
++++ b/Code/gml_Object_obj_battlecontroller_Step_0.gml
+@@ -785,6 +785,25 @@
+                     canpress = 0;
+                 }
+             }
++            if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 6)
++            {
++                if (havechar[1] == 1 && global.hp[2] <= 0)
++                {
++                    canpress = 0;
++                }
++                if (havechar[2] == 1 && global.hp[3] <= 0)
++                {
++                    canpress = 0;
++                }
++                if (havechar[3] == 1 && global.hp[4] <= 0)
++                {
++                    canpress = 0;
++                }
++                if (havechar[1] != 1 && havechar[2] != 1 && havechar[3] != 1)
++                {
++                    canpress = 0;
++                }
++            }
+         }
+         if (canpress == 1)
+         {

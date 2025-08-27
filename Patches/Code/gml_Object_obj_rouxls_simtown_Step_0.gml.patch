@@ -1,0 +1,19 @@
+--- a/Code/gml_Object_obj_rouxls_simtown_Step_0.gml
++++ b/Code/gml_Object_obj_rouxls_simtown_Step_0.gml
+@@ -155,7 +155,16 @@
+         {
+             RalseiDistractTwice = 0;
+         }
++        if (SusieSabotage == 1)
++        {
++            SusieSabotageTwice = 1;
++        }
++        if (SusieSabotage == 0 && SusieSabotageTwice == 1)
++        {
++            SusieSabotageTwice = 0;
++        }
+         RalseiDistract = 0;
++        SusieSabotage = 0;
+         if (RouxlsTurn > 2)
+         {
+             RouxlsHouseMax = 3;

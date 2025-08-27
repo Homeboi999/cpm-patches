@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_teacup_Other_10.gml
++++ b/Code/gml_Object_obj_teacup_Other_10.gml
+@@ -52,7 +52,7 @@
+         var _character = (i == 0) ? obj_mainchara : global.cinstance[i - 1];
+         var _cup = cup_char[i];
+         var _jumpInDuration = jumpInDuration;
+-        var _rollSprites = [spr_kris_fall_ball, spr_kris_fall_ball, spr_susie_dw_fall_ball, spr_ralsei_teacup_enter];
++        var _rollSprites = [spr_kris_fall_ball, spr_kris_fall_ball, spr_susie_dw_fall_ball, spr_ralsei_teacup_enter, spr_noelle_jump_ball];
+         var _rideToRide = rideToRide;
+         _rideToRide = true;
+         with (_character)

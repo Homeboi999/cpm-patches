@@ -1,0 +1,165 @@
+--- a/Code/gml_Object_obj_battlecontroller_Draw_0.gml
++++ b/Code/gml_Object_obj_battlecontroller_Draw_0.gml
+@@ -527,16 +527,14 @@
+         drawsus = 0;
+         drawral = 0;
+         drawnoe = 0;
+-        susblend = 16777215;
++        faceblend = 16777215;
+-        ralblend = 16777215;
+-        noeblend = 16777215;
+         if (chartime == 2 || chartime == 4)
+         {
+             drawsus = 1;
+             if (havechar[1] == 0 || global.hp[2] <= 0)
+             {
+-                susblend = 8421504;
+                 cant = 1;
++                faceblend = 8421504;
+             }
+             charoffset = 30;
+         }
+@@ -545,8 +543,8 @@
+             drawral = 1;
+             if (havechar[2] == 0 || global.hp[3] <= 0)
+             {
+-                ralblend = 8421504;
+                 cant = 1;
++                faceblend = 8421504;
+             }
+             charoffset = 30;
+         }
+@@ -555,10 +553,46 @@
+             drawnoe = 1;
+             if (havechar[3] == 0 || global.hp[4] <= 0)
+             {
+-                noeblend = 8421504;
+                 cant = 1;
++                faceblend = 8421504;
+             }
+             charoffset = 30;
++        }
++        if (chartime == 6)
++        {
++            if (havechar[1] == 1)
++            {
++                drawsus = 1;
++                if (global.hp[2] <= 0)
++                {
++                    cant = 1;
++                    faceblend = 8421504;
++                }
++            }
++            if (havechar[2] == 1)
++            {
++                drawral = 1;
++                if (global.hp[3] <= 0)
++                {
++                    cant = 1;
++                    faceblend = 8421504;
++                }
++            }
++            if (havechar[3] == 1)
++            {
++                drawnoe = 1;
++                if (global.hp[4] <= 0)
++                {
++                    cant = 1;
++                    faceblend = 8421504;
++                }
++            }
++            if (!havechar[1] && !havechar[2] && !havechar[3])
++            {
++                cant = 1;
++                faceblend = 8421504;
++            }
++            charoffset = 0;
+         }
+         if (global.tension < acttpcost[i])
+         {
+@@ -575,42 +609,75 @@
+         }
+         if (chartime == 2)
+         {
+-            draw_sprite_ext(spr_headsusie, 0, xx + 30 + xoffset, yy + 375 + yoffset, 1, 1, 0, susblend, 1);
++            draw_sprite_ext(spr_headsusie, 0, xx + 30 + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
+         }
+         if (chartime == 3)
+         {
+-            draw_sprite_ext(spr_headralsei, 0, xx + 30 + xoffset, yy + 375 + yoffset, 1, 1, 0, susblend, 1);
++            draw_sprite_ext(spr_headralsei, 0, xx + 30 + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
+         }
+         if (chartime == 4)
+         {
+-            draw_sprite_ext(spr_headsusie, 0, xx + 30 + xoffset, yy + 375 + yoffset, 1, 1, 0, susblend, 1);
++            draw_sprite_ext(spr_headsusie, 0, xx + 30 + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
+-            draw_sprite_ext(spr_headralsei, 0, xx + 60 + xoffset, yy + 375 + yoffset, 1, 1, 0, susblend, 1);
++            draw_sprite_ext(spr_headralsei, 0, xx + 60 + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
+         }
+         if (chartime == 5)
+         {
+-            draw_sprite_ext(spr_headnoelle, 0, xx + 30 + xoffset, yy + 375 + yoffset, 1, 1, 0, noeblend, 1);
++            draw_sprite_ext(spr_headnoelle, 0, xx + 30 + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
++        }
++        if (chartime == 6)
++        {
++            for (slot = 0; slot < 3; slot++)
++            {
++                headsprite = spr_headkris;
++                switch (global.char[slot])
++                {
++                    case 1:
++                        headsprite = spr_headkris;
++                        break;
++                    case 2:
++                        headsprite = spr_headsusie;
++                        break;
++                    case 3:
++                        headsprite = spr_headralsei;
++                        break;
++                    case 4:
++                        headsprite = spr_headnoelle;
++                        break;
++                }
++                if (global.char[slot] > 1)
++                {
++                    charoffset += 30;
++                    draw_sprite_ext(headsprite, 0, xx + charoffset + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
++                }
++            }
++            if (charoffset == 0)
++            {
++                charoffset += 30;
++                draw_sprite_ext(spr_headkris, 8, xx + charoffset + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
++                cant = 1;
++            }
+         }
+         if (global.chapter == 2 && instance_exists(obj_spamton_neo_enemy) && obj_spamton_neo_enemy.savemeactcon > 0)
+         {
+             if (obj_spamton_neo_enemy.savemeactcon == 1)
+             {
+-                draw_sprite_ext(spr_headralsei, 0, xx + 30, yy + 380, 1, 1, 0, noeblend, 1);
++                draw_sprite_ext(spr_headralsei, 0, xx + 30, yy + 380, 1, 1, 0, c_white, 1);
+             }
+             if (obj_spamton_neo_enemy.savemeactcon == 2)
+             {
+-                draw_sprite_ext(spr_headralsei, 0, xx + 30, yy + 380, 1, 1, 0, noeblend, 1);
++                draw_sprite_ext(spr_headralsei, 0, xx + 30, yy + 380, 1, 1, 0, c_white, 1);
+             }
+             if (obj_spamton_neo_enemy.savemeactcon == 3)
+             {
+-                draw_sprite_ext(spr_headsusie, 0, xx + 30, yy + 380, 1, 1, 0, noeblend, 1);
++                draw_sprite_ext(spr_headsusie, 0, xx + 30, yy + 380, 1, 1, 0, c_white, 1);
+             }
+             if (obj_spamton_neo_enemy.savemeactcon == 4)
+             {
+-                draw_sprite_ext(spr_headsusie, 0, xx + 30, yy + 380, 1, 1, 0, noeblend, 1);
++                draw_sprite_ext(spr_headsusie, 0, xx + 30, yy + 380, 1, 1, 0, c_white, 1);
+             }
+             if (obj_spamton_neo_enemy.savemeactcon > 4)
+             {
+-                draw_sprite_ext(spr_headnoelle, 0, xx + 30, yy + 380, 1, 1, 0, noeblend, 1);
++                draw_sprite_ext(spr_headnoelle, 0, xx + 30, yy + 380, 1, 1, 0, c_white, 1);
+             }
+         }
+         var s1 = string_hash_to_newline(actname[i]);
