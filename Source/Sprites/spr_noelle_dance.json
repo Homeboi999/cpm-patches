@@ -1,0 +1,22 @@
+{
+  "Name": "spr_noelle_dance",
+  "ImageFile": "spr_noelle_dance_strip4.png",
+  "FrameCount": 4,
+  "Size": [
+    29,
+    48
+  ],
+  "Margins": [
+    0,
+    28,
+    47,
+    0
+  ],
+  "BoundingBoxMode": 0,
+  "Origin": [
+    0,
+    0
+  ],
+  "playbackSpeed": 15,
+  "playbackType": 0
+}

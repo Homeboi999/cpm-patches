@@ -1,0 +1,22 @@
+{
+  "Name": "spr_swanboat_long_shadow",
+  "ImageFile": "spr_swanboat_long_shadow_strip2.png",
+  "FrameCount": 2,
+  "Size": [
+    120,
+    68
+  ],
+  "Margins": [
+    2,
+    90,
+    63,
+    42
+  ],
+  "BoundingBoxMode": 2,
+  "Origin": [
+    0,
+    0
+  ],
+  "playbackSpeed": 1,
+  "playbackType": 1
+}

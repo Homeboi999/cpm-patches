@@ -1,0 +1,22 @@
+{
+  "Name": "spr_noelle_jump_ball",
+  "ImageFile": "spr_noelle_jump_ball_strip4.png",
+  "FrameCount": 4,
+  "Size": [
+    24,
+    24
+  ],
+  "Margins": [
+    1,
+    23,
+    22,
+    2
+  ],
+  "BoundingBoxMode": 0,
+  "Origin": [
+    0,
+    0
+  ],
+  "playbackSpeed": 15,
+  "playbackType": 0
+}

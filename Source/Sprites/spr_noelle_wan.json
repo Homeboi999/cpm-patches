@@ -1,0 +1,22 @@
+{
+  "Name": "spr_noelle_wan",
+  "ImageFile": "spr_noelle_wan.png",
+  "FrameCount": 1,
+  "Size": [
+    32,
+    40
+  ],
+  "Margins": [
+    0,
+    31,
+    39,
+    0
+  ],
+  "BoundingBoxMode": 0,
+  "Origin": [
+    4,
+    0
+  ],
+  "playbackSpeed": 15,
+  "playbackType": 0
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "spr_teacup_noelle_tea",
+  "ImageFile": "spr_teacup_noelle_tea_strip4.png",
+  "FrameCount": 4,
+  "Size": [
+    44,
+    50
+  ],
+  "Margins": [
+    0,
+    43,
+    49,
+    0
+  ],
+  "BoundingBoxMode": 0,
+  "Origin": [
+    13,
+    7
+  ],
+  "playbackSpeed": 15,
+  "playbackType": 0
+}

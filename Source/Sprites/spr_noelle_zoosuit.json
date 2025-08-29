@@ -1,0 +1,22 @@
+{
+  "Name": "spr_noelle_zoosuit",
+  "ImageFile": "spr_noelle_zoosuit.png",
+  "FrameCount": 1,
+  "Size": [
+    33,
+    46
+  ],
+  "Margins": [
+    0,
+    32,
+    45,
+    0
+  ],
+  "BoundingBoxMode": 0,
+  "Origin": [
+    0,
+    0
+  ],
+  "playbackSpeed": 15,
+  "playbackType": 0
+}
