@@ -1,0 +1,74 @@
+--- a/Code/gml_Object_obj_spell_mist_Draw_0.gml
++++ b/Code/gml_Object_obj_spell_mist_Draw_0.gml
+@@ -7,6 +7,18 @@
+             if (global.monsterstatus[myself] == 1)
+             {
+                 success = 1;
++                if (global.monstertype[myself] == 52)
++                {
++                    fail = true;
++                }
++                if (global.monstertype[myself] == 49)
++                {
++                    fake = true;
++                }
++                if (global.monstertype[myself] == 43)
++                {
++                    fake = true;
++                }
+             }
+         }
+     }
+@@ -14,10 +26,6 @@
+ if (initdelay == 0)
+ {
+     audio_play_sound(snd_ghostappear, 50, 0);
+-    if (success == 1)
+-    {
+-        audio_play_sound(snd_spell_pacify, 50, 0);
+-    }
+ }
+ initdelay--;
+ if (initdelay <= 0)
+@@ -32,10 +40,37 @@
+     {
+         if (success == 1)
+         {
+-            with (target)
+-            {
+-                global.flag[51 + myself] = 3;
+-                event_user(10);
++            if (fail)
++            {
++                success = 0;
++                with (target)
++                {
++                    pacifycon = 1;
++                }
++                exit;
++            }
++            else if (fake)
++            {
++                global.flag[51 + myself] = 3;
++                if (global.monstertype[myself] == 43)
++                {
++                    with (target)
++                    {
++                        endcon = 1;
++                    }
++                }
++                else
++                {
++                    with (target)
++                    {
++                        scr_fakespare();
++                        pacifycon = 1;
++                    }
++                }
++            }
++            else
++            {
++                global.flag[51 + myself] = 3;
+                 scr_monsterdefeat();
+             }
+         }

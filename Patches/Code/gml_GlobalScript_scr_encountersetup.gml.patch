@@ -1,6 +1,20 @@
 --- a/Code/gml_GlobalScript_scr_encountersetup.gml
 +++ b/Code/gml_GlobalScript_scr_encountersetup.gml
-@@ -595,12 +595,38 @@
+@@ -559,8 +559,11 @@
+             global.monstertype[0] = 49;
+             global.monstermakex[0] = xx + 490;
+             global.monstermakey[0] = yy + 180;
+-            global.heromakex[0] = xx + 90;
+-            global.heromakey[0] = yy + 170;
++            for (i = 0; i < 3; i++)
++            {
++                global.heromakex[i] += 10;
++                global.heromakey[i] += 30 - (15 * i);
++            }
+             global.battlemsg[0] = stringsetloc("* DON'T YOU WANNA BE A BIG SHOT?", "scr_encountersetup_slash_scr_encountersetup_gml_720_0");
+             break;
+         case 61:
+@@ -595,12 +598,38 @@
          case 63:
              if (i_ex(obj_ch2_scene21_loop))
              {

@@ -1,0 +1,8 @@
+--- a/Code/gml_Object_obj_spamton_enemy_Create_0.gml
++++ b/Code/gml_Object_obj_spamton_enemy_Create_0.gml
+@@ -26,4 +26,5 @@
+ global.flag[20] = 0;
+ shakeamt = 0;
+ expand_spam = 0;
++pacifycon = 0;
+ 

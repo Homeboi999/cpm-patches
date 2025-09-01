@@ -20,3 +20,154 @@
      sp_actor.x = obj_spamton_enemy.x;
      sp_actor.y = obj_spamton_enemy.y;
      sp_actor.sprite_index = spr_cutscene_14_spamton;
+@@ -368,10 +371,19 @@
+     {
+         visible = 1;
+     }
++    scr_hidecharactor();
+     snd_free(global.batmusic[0]);
+     snd_volume(global.currentsong[1], 0, 0);
+     snd_resume(global.currentsong[1]);
+     snd_volume(global.currentsong[1], 1, 20);
++    if (pacifycon)
++    {
++        dumpster.sprite_index = spr_cutscene_14_dumpster_closed;
++        dumpster.visible = true;
++        dumpster_nakami.visible = false;
++        du_actor.visible = false;
++        sp_actor.visible = false;
++    }
+     with (obj_monsterparent)
+     {
+         instance_destroy();
+@@ -401,45 +413,60 @@
+     con = 39;
+     alarm[0] = 30;
+     global.fighting = 0;
++    if (pacifycon)
++    {
++        c_waitcustom_end();
++        c_sel(kr);
++        c_var_lerp("x", kr_actor.x, 317, 10);
++        c_var_lerp("y", kr_actor.y, 183, 10);
++        c_visible(true);
++        c_pannable(1);
++        c_panobj(kr_actor, 30);
++        c_wait(30);
++        c_pannable(0);
++    }
++    else
++    {
+-    c_waitcustom_end();
++        c_waitcustom_end();
+-    c_sel(kr);
++        c_sel(kr);
+-    c_var_lerp("x", kr_actor.x, 317, 10);
++        c_var_lerp("x", kr_actor.x, 317, 10);
+-    c_var_lerp("y", kr_actor.y, 183, 10);
++        c_var_lerp("y", kr_actor.y, 183, 10);
+-    c_sel(sp);
++        c_sel(sp);
+-    c_var("siner_add0", 0.1);
++        c_var("siner_add0", 0.1);
+-    c_var_lerp("siner_amplitude0", 0, 10, 20);
++        c_var_lerp("siner_amplitude0", 0, 10, 20);
+-    c_wait(30);
++        c_wait(30);
+-    c_speaker("spamton");
++        c_speaker("spamton");
+-    c_msgsetloc(0, "* NOW ON TO THE NEXT STEP.../", "obj_ch2_city05_slash_Step_0_gml_551_0");
++        c_msgsetloc(0, "* NOW ON TO THE NEXT STEP.../", "obj_ch2_city05_slash_Step_0_gml_551_0");
+-    c_msgnextloc("* I'LL BE WAITING AT MY [[Home-made Storefront Site]]/", "obj_ch2_city05_slash_Step_0_gml_553_0");
++        c_msgnextloc("* I'LL BE WAITING AT MY [[Home-made Storefront Site]]/", "obj_ch2_city05_slash_Step_0_gml_553_0");
+-    c_msgnextloc("* IN THE [[Trash Area Closed For Repairs.]]/%", "obj_ch2_city05_slash_Step_0_gml_554_0");
++        c_msgnextloc("* IN THE [[Trash Area Closed For Repairs.]]/%", "obj_ch2_city05_slash_Step_0_gml_554_0");
+-    c_talk_wait();
++        c_talk_wait();
+-    c_sprite(spr_cutscene_14_spamton_dark);
++        c_sprite(spr_cutscene_14_spamton_dark);
+-    c_var("siner_add0", 0);
++        c_var("siner_add0", 0);
+-    c_speaker("spamton");
++        c_speaker("spamton");
+-    c_msgsetloc(0, "* COME..^1. ALONE./%", "obj_ch2_city05_slash_Step_0_gml_564_0");
++        c_msgsetloc(0, "* COME..^1. ALONE./%", "obj_ch2_city05_slash_Step_0_gml_564_0");
+-    c_talk_wait();
++        c_talk_wait();
+-    c_sprite(spr_cutscene_14_spamton_laugh_left);
++        c_sprite(spr_cutscene_14_spamton_laugh_left);
+-    c_halt();
++        c_halt();
+-    c_var("siner_add0", 0.1);
++        c_var("siner_add0", 0.1);
+-    c_speaker("spamton");
++        c_speaker("spamton");
+-    c_msgsetloc(0, "* AND DON'T..^1. FORGET!/%", "obj_ch2_city05_slash_Step_0_gml_574_0");
++        c_msgsetloc(0, "* AND DON'T..^1. FORGET!/%", "obj_ch2_city05_slash_Step_0_gml_574_0");
+-    c_talk_wait();
++        c_talk_wait();
+-    c_sprite(spr_cutscene_14_spamton);
++        c_sprite(spr_cutscene_14_spamton);
+-    c_halt();
++        c_halt();
+-    c_speaker("spamton");
++        c_speaker("spamton");
+-    c_msgsetloc(0, "* TO [[Like and Subscribe]] FOR MORE [[Hyperlink Blocked.]]/%", "obj_ch2_city05_slash_Step_0_gml_582_0");
++        c_msgsetloc(0, "* TO [[Like and Subscribe]] FOR MORE [[Hyperlink Blocked.]]/%", "obj_ch2_city05_slash_Step_0_gml_582_0");
+-    c_talk_wait();
++        c_talk_wait();
+-    c_sprite(spr_cutscene_14_spamton_laugh_glitch);
++        c_sprite(spr_cutscene_14_spamton_laugh_glitch);
+-    c_imagespeed(0.25);
++        c_imagespeed(0.25);
+-    c_walk("r", 5, 90);
++        c_walk("r", 5, 90);
+-    c_speaker("spamton");
++        c_speaker("spamton");
+-    c_msgsetloc(0, "* HAEAHAEAHAEAHAEAH!!/%", "obj_ch2_city05_slash_Step_0_gml_591_0");
++        c_msgsetloc(0, "* HAEAHAEAHAEAHAEAH!!/%", "obj_ch2_city05_slash_Step_0_gml_591_0");
+-    c_talk_wait();
++        c_talk_wait();
+-    c_pannable(1);
++        c_pannable(1);
+-    c_panobj(kr_actor, 30);
++        c_panobj(kr_actor, 30);
+-    c_wait(60);
++        c_wait(60);
+-    c_pannable(0);
++        c_pannable(0);
++    }
+ }
+ if (con == 20)
+ {
+@@ -515,6 +542,7 @@
+ {
+     con = 50;
+     c_actortokris();
++    c_actortocaterpillar();
+     c_terminatekillactors();
+ }
+ if (con == 50 && !i_ex(obj_cutscene_master))
+@@ -524,10 +552,21 @@
+     global.interact = 0;
+     global.facing = 0;
+     var dumpster_npc = instance_create(560, 106, obj_npc_sign);
++    if (pacifycon)
++    {
++        dumpster_npc.sprite_index = spr_cutscene_14_dumpster_closed;
++    }
++    else
++    {
+-    dumpster_npc.sprite_index = spr_cutscene_14_dumpster_open;
++        dumpster_npc.sprite_index = spr_cutscene_14_dumpster_open;
++    }
+     with (dumpster_npc)
+     {
+         scr_depth();
++    }
++    with (obj_actor)
++    {
++        instance_destroy();
+     }
+     instance_destroy(dumpster);
+     instance_destroy(dumpster_nakami);

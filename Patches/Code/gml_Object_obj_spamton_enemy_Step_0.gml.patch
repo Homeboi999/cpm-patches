@@ -1,0 +1,22 @@
+--- a/Code/gml_Object_obj_spamton_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_spamton_enemy_Step_0.gml
+@@ -1,5 +1,19 @@
+ if (global.monster[myself] == 1)
+ {
++    if (scr_isphase("enemytalk") && pacifycon == 1)
++    {
++        global.flag[309] = 1;
++        if (i_ex(obj_fakespare))
++        {
++            obj_fakespare.doreverse = false;
++        }
++        if (i_ex(obj_ch2_city05))
++        {
++            obj_ch2_city05.pacifycon = true;
++        }
++        scr_wincombat();
++        exit;
++    }
+     if (scr_isphase("enemytalk") && talked == 0)
+     {
+         scr_randomtarget();

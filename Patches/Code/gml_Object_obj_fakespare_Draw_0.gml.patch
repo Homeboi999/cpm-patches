@@ -1,0 +1,19 @@
+--- a/Code/gml_Object_obj_fakespare_Draw_0.gml
++++ b/Code/gml_Object_obj_fakespare_Draw_0.gml
+@@ -170,7 +170,15 @@
+             }
+         }
+         first_pass = false;
++        if (doreverse)
++        {
+-        reverse = true;
++            reverse = true;
++        }
++        else
++        {
++            instance_destroy();
++            exit;
++        }
+         t++;
+     }
+     if (reverse)

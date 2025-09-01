@@ -1,0 +1,18 @@
+--- a/Code/gml_Object_obj_npc_sign_Other_10.gml
++++ b/Code/gml_Object_obj_npc_sign_Other_10.gml
+@@ -765,7 +765,14 @@
+ if (room == room_dw_city_spamton_alley)
+ {
+     scr_speaker("no_name");
++    if (sprite_index == spr_cutscene_14_dumpster_closed)
++    {
++        msgset(0, "* (It's a dumpster. Sounds like there's someone sleeping inside.)/%");
++    }
++    else
++    {
+-    msgsetloc(0, "* (It's a dumpster. Looks like there's a pillow inside.)/%", "obj_npc_sign_slash_Other_10_gml_706_0");
++        msgsetloc(0, "* (It's a dumpster. Looks like there's a pillow inside.)/%", "obj_npc_sign_slash_Other_10_gml_706_0");
++    }
+ }
+ if (room == room_dw_city_mice)
+ {

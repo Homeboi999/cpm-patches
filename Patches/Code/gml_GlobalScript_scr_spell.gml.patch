@@ -1,6 +1,35 @@
 --- a/Code/gml_GlobalScript_scr_spell.gml
 +++ b/Code/gml_GlobalScript_scr_spell.gml
-@@ -171,27 +171,30 @@
+@@ -66,7 +66,7 @@
+                 {
+                     with (global.monsterinstance[star])
+                     {
+-                        if (global.monstertype[myself] != 19 && global.monstertype[myself] != 3 && global.monstertype[myself] != 52 && global.monstertype[myself] != 43)
++                        if (global.monstertype[myself] != 19 && global.monstertype[myself] != 3 && global.monstertype[myself] != 52 && global.monstertype[myself] != 43 && global.monstertype[myself] != 49)
+                         {
+                             var yoffy;
+                             if (global.monstertype[myself] == 33)
+@@ -104,6 +104,19 @@
+                                 }
+                                 exit;
+                             }
++                            if (global.monstertype[myself] == 49)
++                            {
++                                _pspell = instance_create(global.monsterx[myself], global.monstery[myself], obj_pacifyspell);
++                                _pspell.con = 20;
++                                _pspell.target = id;
++                                global.flag[51 + myself] = 3;
++                                scr_fakespare();
++                                with (obj_spamton_enemy)
++                                {
++                                    pacifycon = 1;
++                                }
++                                exit;
++                            }
+                             pacifycon = 1;
+                             global.spelldelay = 999;
+                         }
+@@ -171,27 +184,30 @@
              healnum = ceil(global.battlemag[arg1] * 5.5);
              for (i = 0; i < 3; i += 1)
              {
@@ -47,7 +76,7 @@
                  }
              }
              global.spelldelay = 15;
-@@ -289,6 +292,27 @@
+@@ -289,6 +305,27 @@
                  }
              }
              break;
@@ -75,7 +104,7 @@
          case 100:
              if (global.monster[star] == 0)
              {
-@@ -326,6 +350,9 @@
+@@ -326,6 +363,9 @@
              }
              global.spelldelay = 0;
              break;
@@ -85,7 +114,7 @@
          case 200:
              break;
          case 201:
-@@ -514,6 +541,9 @@
+@@ -514,6 +554,9 @@
              item_use = true;
              break;
          case 233:
