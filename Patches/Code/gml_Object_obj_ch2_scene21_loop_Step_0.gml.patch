@@ -133,7 +133,15 @@
          rouxls.sprite_index = spr_rouxls_stone_origin;
          rouxls.image_index = 0;
          rouxls.x += 34;
-@@ -939,10 +995,10 @@
+@@ -524,6 +580,7 @@
+         {
+             visible = 1;
+         }
++        scr_hidecharactor();
+         with (obj_thrashmachine)
+         {
+             if (visible == 1)
+@@ -939,10 +996,10 @@
          swanboat.pause_y_move = true;
          with (swanboat)
          {
@@ -146,7 +154,7 @@
      {
          con = 63;
          alarm[0] = 30;
-@@ -989,7 +1045,14 @@
+@@ -989,7 +1046,14 @@
              fun = 0;
          }
          var swanboat_npc = instance_create(swanboat.x, swanboat.y, obj_npc_room_animated);

@@ -1,0 +1,42 @@
+--- a/Code/gml_Object_obj_cyber_shadowMaker_fireworks_Draw_0.gml
++++ b/Code/gml_Object_obj_cyber_shadowMaker_fireworks_Draw_0.gml
+@@ -48,33 +48,14 @@
+     draw_sprite_ext(obj_mainchara.sprite_index, obj_mainchara.image_index, obj_mainchara.x, (obj_mainchara.y + (obj_mainchara.sprite_height * obj_mainchara.image_yscale)) - 4, 2, -2, 0, frontShadowColor, frontshadOpacity);
+     if (i_ex(obj_caterpillarchara))
+     {
+-        var sus_x, sus_sprite, sus_index, sus_y, sus_height, ral_x, ral_sprite, ral_index, ral_y, ral_height;
+         with (obj_caterpillarchara)
+         {
+-            if (name == "susie")
+-            {
+-                sus_x = x;
++            char_x = x;
+-                sus_y = y;
++            char_y = y;
+-                sus_sprite = sprite_index;
++            char_sprite = sprite_index;
+-                sus_index = image_index;
++            char_index = image_index;
+-                sus_height = sprite_height;
++            char_height = sprite_height;
+-            }
+-            if (name == "ralsei")
+-            {
+-                ral_x = x;
+-                ral_y = y;
+-                ral_sprite = sprite_index;
+-                ral_index = image_index;
+-                ral_height = sprite_height;
+-            }
+-        }
+-        if (sus_x != 0)
+-        {
+-            draw_sprite_ext(sus_sprite, sus_index, sus_x, (sus_y + (sus_height * 2)) - 4, 2, -2, 0, frontShadowColor, frontshadOpacity);
+-        }
+-        if (ral_x != 0)
+-        {
+-            draw_sprite_ext(ral_sprite, ral_index, ral_x, (ral_y + (ral_height * 2)) - 4, 2, -2, 0, frontShadowColor, frontshadOpacity);
++            draw_sprite_ext(char_sprite, char_index, char_x, (char_y + (char_height * 2)) - 4, 2, -2, 0, other.frontShadowColor, other.frontshadOpacity);
+         }
+     }
+     if (i_ex(obj_interactablesolid))

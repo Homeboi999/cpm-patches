@@ -4,7 +4,7 @@
  }
  table.x = sweet.x - 54;
  table.y = sweet.y + 58;
-+var slideSprites = [2491, 658, 836, 820, 3393];
++var slideSprites = [2491, 658, 836, 820, 3391];
  if (state == 0)
  {
      if (instance_exists(obj_mainchara) && obj_mainchara.y > gameIntroY)

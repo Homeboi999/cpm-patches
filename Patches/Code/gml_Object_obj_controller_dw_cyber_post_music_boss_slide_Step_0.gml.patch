@@ -1,0 +1,126 @@
+--- a/Code/gml_Object_obj_controller_dw_cyber_post_music_boss_slide_Step_0.gml
++++ b/Code/gml_Object_obj_controller_dw_cyber_post_music_boss_slide_Step_0.gml
+@@ -108,69 +108,60 @@
+ }
+ if (con >= 3)
+ {
+-    if (instance_exists(obj_caterpillarchara))
+-    {
+-        with (obj_caterpillarchara)
+-        {
+-            if (name == "susie")
+-            {
+-                other.realsus = id;
+-            }
+-            if (name == "ralsei")
+-            {
+-                other.realral = id;
+-            }
+-        }
+-    }
+-    if (realsus.x < 2440 && watch == 0)
+-    {
+-        with (realsus)
+-        {
+-            fun = 1;
+-            sprite_index = spr_susie_walk_up_dw;
+-            image_index = 0;
+-            image_speed = 0;
+-            hspeed = -4;
+-            follow = 0;
+-        }
+-        watch = 1;
+-    }
+-    if (watch == 1)
+-    {
+-    }
+-    if (realral.x < 2480 && ralwatch == 0)
+-    {
+-        with (realral)
+-        {
+-            fun = 1;
+-            sprite_index = spr_ralsei_walk_up;
+-            image_index = 0;
+-            image_speed = 0;
+-            hspeed = -4;
+-            follow = 0;
+-        }
+-        ralwatch = 1;
+-    }
+-    if (realsus.x < 540 && watch == 1)
+-    {
+-        watch = 2;
+-        with (realsus)
+-        {
+-            fun = 0;
+-            hspeed = 0;
+-            follow = 1;
+-            scr_caterpillar_interpolate();
+-        }
+-    }
+-    if (realral.x < 540 && ralwatch == 1)
+-    {
+-        ralwatch = 2;
+-        with (realral)
+-        {
+-            fun = 0;
+-            hspeed = 0;
+-            follow = 1;
+-            scr_caterpillar_interpolate();
++    if (instance_exists(global.cinstance[0]))
++    {
++        realsus = global.cinstance[0].id;
++        if (realsus.x < 2440 && watch == 0)
++        {
++            with (realsus)
++            {
++                fun = 1;
++                sprite_index = usprite;
++                image_index = 0;
++                image_speed = 0;
++                hspeed = -4;
++                follow = 0;
++            }
++            watch = 1;
++        }
++        if (realsus.x < 540 && watch == 1)
++        {
++            watch = 2;
++            with (realsus)
++            {
++                fun = 0;
++                hspeed = 0;
++                follow = 1;
++                scr_caterpillar_interpolate();
++            }
++        }
++    }
++    if (instance_exists(global.cinstance[1]))
++    {
++        realral = global.cinstance[1].id;
++        if (realral.x < 2480 && ralwatch == 0)
++        {
++            with (realral)
++            {
++                fun = 1;
++                sprite_index = usprite;
++                image_index = 0;
++                image_speed = 0;
++                hspeed = -4;
++                follow = 0;
++            }
++            ralwatch = 1;
++        }
++        if (realral.x < 540 && ralwatch == 1)
++        {
++            ralwatch = 2;
++            with (realral)
++            {
++                fun = 0;
++                hspeed = 0;
++                follow = 1;
++                scr_caterpillar_interpolate();
++            }
+         }
+     }
+ }

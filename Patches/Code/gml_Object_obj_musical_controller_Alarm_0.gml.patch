@@ -1,0 +1,28 @@
+--- a/Code/gml_Object_obj_musical_controller_Alarm_0.gml
++++ b/Code/gml_Object_obj_musical_controller_Alarm_0.gml
+@@ -24,13 +24,23 @@
+     obj_sweet_enemy.postattackscene = 1;
+     if (global.hp[2] < 1)
+     {
+-        star = 1;
++        star = scr_findchar(2);
+         scr_healitemspell(abs(global.hp[2]) + 1);
+     }
+     if (global.hp[3] < 1)
+     {
+-        star = 2;
++        star = scr_findchar(3);
+         scr_healitemspell(abs(global.hp[3]) + 1);
++    }
++    if (global.hp[4] < 1)
++    {
++        star = scr_findchar(4);
++        scr_healitemspell(abs(global.hp[4]) + 1);
++    }
++    if (scr_havechar(0))
++    {
++        star = 0;
++        scr_healitemspell(abs(global.hp[1]) + 1);
+     }
+     exit;
+ }

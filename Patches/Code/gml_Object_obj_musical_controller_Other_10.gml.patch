@@ -1,0 +1,13 @@
+--- a/Code/gml_Object_obj_musical_controller_Other_10.gml
++++ b/Code/gml_Object_obj_musical_controller_Other_10.gml
+@@ -16,6 +16,10 @@
+     {
+         b = 0;
+     }
++    if (global.hp[4] < 1)
++    {
++        b = 0;
++    }
+ }
+ if (b == 0)
+ {

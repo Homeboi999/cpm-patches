@@ -1,6 +1,27 @@
 --- a/Code/gml_Object_obj_ch2_cyber01_Step_0.gml
 +++ b/Code/gml_Object_obj_ch2_cyber01_Step_0.gml
-@@ -387,15 +387,30 @@
+@@ -350,10 +350,16 @@
+     obj_mainchara.cutscene = 1;
+     obj_mainchara.x = kr_actor.x;
+     obj_mainchara.y = kr_actor.y;
++    if (i_ex(global.cinstance[0]))
++    {
+-    global.cinstance[0].x = su_actor.x;
++        global.cinstance[0].x = su_actor.x;
+-    global.cinstance[0].y = su_actor.y;
++        global.cinstance[0].y = su_actor.y;
++    }
++    if (i_ex(global.cinstance[1]))
++    {
+-    global.cinstance[1].x = ra_actor.x;
++        global.cinstance[1].x = ra_actor.x;
+-    global.cinstance[1].y = ra_actor.y;
++        global.cinstance[1].y = ra_actor.y;
++    }
+     global.flag[9] = 2;
+     global.batmusic[0] = -1;
+     snd_init("spamton_neo_mix_ex_wip.ogg");
+@@ -387,15 +393,30 @@
  {
      con = 34;
      customcon = 0;
@@ -40,26 +61,19 @@
      sw_actor.x = obj_sweet_enemy.x;
      sw_actor.y = obj_sweet_enemy.y;
      sw_actor.sprite_index = obj_sweet_enemy.sprite_index;
-@@ -412,6 +427,22 @@
-     with (obj_actor)
+@@ -413,6 +434,7 @@
      {
          visible = 1;
-+        if (name == "kris" && !scr_havechar(1))
-+        {
-+            visible = 0;
-+        }
-+        if (name == "susie" && !scr_havechar(2))
-+        {
-+            visible = 0;
-+        }
-+        if (name == "ralsei" && !scr_havechar(3))
-+        {
-+            visible = 0;
-+        }
-+        if (name == "noelle" && !scr_havechar(4))
-+        {
-+            visible = 0;
-+        }
      }
++    scr_hidecharactor();
      with (obj_mainchara)
      {
+         visible = 0;
+@@ -458,6 +480,7 @@
+     {
+         visible = 1;
+     }
++    scr_hidecharactor();
+     with (obj_mainchara)
+     {
+         visible = 0;

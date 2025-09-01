@@ -21,8 +21,37 @@
      with (obj_afterimage)
      {
          instance_destroy();
-@@ -291,24 +301,117 @@
-     global.actactor[obj_hatguy_enemy.myself][2] = 0;
+@@ -277,38 +287,134 @@
+     }
+     global.flag[34] = 0;
+     learnedhowtoact = 1;
++    if (!scr_havechar(0))
++    {
+-    global.canact[myself][2] = 0;
++        global.canact[myself][2] = 0;
+-    global.actname[myself][2] = "";
++        global.actname[myself][2] = "";
+-    global.actcost[myself][2] = 0;
++        global.actcost[myself][2] = 0;
+-    global.actactor[myself][2] = 0;
++        global.actactor[myself][2] = 0;
+-    global.canact[obj_kk_enemy.myself][2] = 0;
++        global.canact[obj_kk_enemy.myself][2] = 0;
+-    global.actname[obj_kk_enemy.myself][2] = "";
++        global.actname[obj_kk_enemy.myself][2] = "";
+-    global.actcost[obj_kk_enemy.myself][2] = 0;
++        global.actcost[obj_kk_enemy.myself][2] = 0;
+-    global.actactor[obj_kk_enemy.myself][2] = 0;
++        global.actactor[obj_kk_enemy.myself][2] = 0;
+-    global.canact[obj_hatguy_enemy.myself][2] = 0;
++        global.canact[obj_hatguy_enemy.myself][2] = 0;
+-    global.actname[obj_hatguy_enemy.myself][2] = "";
++        global.actname[obj_hatguy_enemy.myself][2] = "";
+-    global.actcost[obj_hatguy_enemy.myself][2] = 0;
++        global.actcost[obj_hatguy_enemy.myself][2] = 0;
+-    global.actactor[obj_hatguy_enemy.myself][2] = 0;
++        global.actactor[obj_hatguy_enemy.myself][2] = 0;
++    }
      scr_spellmenu_setup();
      scr_speaker("none");
 +    if (learnActCutscene)
@@ -151,7 +180,7 @@
      }
  }
  if (dancecon == 1.2 || (dancescenetimer > 0 && dancescenetimer <= 146))
-@@ -548,6 +651,7 @@
+@@ -548,6 +654,7 @@
          scr_act_charsprite("kris", spr_kris_dance, 0.16, 1);
          scr_act_charsprite("ralsei", spr_ralsei_dance, 0.16, 1);
          scr_act_charsprite("susie", spr_susie_dance, 0.16, 1);
@@ -159,7 +188,7 @@
          msgsetloc(0, "* Everyone danced with Sweet! They're totally lost in the groove!/%", "obj_sweet_enemy_slash_Step_0_gml_470_0");
          scr_battletext_default();
          actcon = 4;
-@@ -638,6 +742,46 @@
+@@ -638,6 +745,46 @@
              }
          }
      }
@@ -206,7 +235,7 @@
      if (actcon == 1 && !instance_exists(obj_writer))
      {
          if (obj_sweet_enemy.dancing == true && obj_kk_enemy.dancing == true && obj_hatguy_enemy.dancing == true && endcon == 0)
-@@ -648,7 +792,7 @@
+@@ -648,7 +795,7 @@
          {
              with (obj_marker)
              {
@@ -215,7 +244,7 @@
                  {
                      instance_destroy();
                      with (obj_heroparent)
-@@ -666,7 +810,7 @@
+@@ -666,7 +813,7 @@
              scr_nextact();
          }
      }
@@ -224,7 +253,7 @@
      {
          if (scr_terminate_writer())
          {
-@@ -678,7 +822,7 @@
+@@ -678,7 +825,7 @@
              {
                  with (obj_marker)
                  {
@@ -233,7 +262,7 @@
                      {
                          instance_destroy();
                          with (obj_heroparent)
-@@ -693,6 +837,7 @@
+@@ -693,6 +840,7 @@
                          }
                      }
                  }

@@ -1,0 +1,54 @@
+--- a/Code/gml_Object_obj_ch2_scene25_Step_0.gml
++++ b/Code/gml_Object_obj_ch2_scene25_Step_0.gml
+@@ -422,20 +422,37 @@
+     global.facing = 0;
+     if (!berdly_full_spare)
+     {
+-        kr_actor.visible = 1;
+-        su_actor.visible = 1;
+-        ra_actor.visible = 1;
+-        kr_actor.sprite_index = spr_krisr_dark;
+-        kr_actor.x = obj_herokris.x;
+-        kr_actor.y = obj_herokris.y;
+-        su_actor.sprite_index = spr_susier_dark_eyes;
+-        su_actor.image_index = 0;
+-        su_actor.x = obj_herosusie.x + 6;
+-        su_actor.y = obj_herosusie.y + 4;
+-        ra_actor.depth = su_actor.depth - 1;
+-        ra_actor.sprite_index = spr_ralsei_walk_right_unhappy;
+-        ra_actor.x = obj_heroralsei.x;
+-        ra_actor.y = obj_heroralsei.y;
++        if (i_ex(obj_herokris))
++        {
++            kr_actor.visible = 1;
++            kr_actor.sprite_index = spr_krisr_dark;
++            kr_actor.x = obj_herokris.x;
++            kr_actor.y = obj_herokris.y;
++        }
++        if (i_ex(obj_herosusie))
++        {
++            su_actor.visible = 1;
++            su_actor.sprite_index = spr_susier_dark_eyes;
++            su_actor.image_index = 0;
++            su_actor.x = obj_herosusie.x + 6;
++            su_actor.y = obj_herosusie.y + 4;
++        }
++        if (i_ex(obj_heroralsei))
++        {
++            ra_actor.visible = 1;
++            ra_actor.depth = su_actor.depth - 1;
++            ra_actor.sprite_index = spr_ralsei_walk_right_unhappy;
++            ra_actor.x = obj_heroralsei.x;
++            ra_actor.y = obj_heroralsei.y;
++        }
++        if (i_ex(obj_heronoelle))
++        {
++            no_actor.visible = 1;
++            no_actor.depth = su_actor.depth - 1;
++            no_actor.sprite_index = spr_noelle_walk_right_dw;
++            no_actor.x = obj_heronoelle.x;
++            no_actor.y = obj_heronoelle.y;
++        }
+     }
+     else
+     {

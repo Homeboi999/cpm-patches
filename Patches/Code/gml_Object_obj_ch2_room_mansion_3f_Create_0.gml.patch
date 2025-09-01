@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_ch2_room_mansion_3f_Create_0.gml
++++ b/Code/gml_Object_obj_ch2_room_mansion_3f_Create_0.gml
+@@ -60,7 +60,7 @@
+         }
+     }
+     hide_entrance = false;
+-    if (!scr_havechar(2))
++    if (!scr_havechar(2) && obj_mainchara.y < 360)
+     {
+         layer_set_visible("Tiles_ExitBlock", 1);
+         var exit_collider = instance_create(240, 360, obj_soliddark);

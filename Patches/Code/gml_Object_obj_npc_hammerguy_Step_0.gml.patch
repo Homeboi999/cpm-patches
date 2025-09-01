@@ -1,0 +1,28 @@
+--- a/Code/gml_Object_obj_npc_hammerguy_Step_0.gml
++++ b/Code/gml_Object_obj_npc_hammerguy_Step_0.gml
+@@ -115,6 +115,17 @@
+                     depth = 400000;
+                 }
+             }
++            if (chartype == 4)
++            {
++                var xpos = x + 90;
++                var ypos = y + 35;
++                var noe_sprite = 720;
++                char = scr_dark_marker(xpos, ypos, noe_sprite);
++                with (char)
++                {
++                    depth = 400000;
++                }
++            }
+         }
+         con = 14;
+         alarm[4] = 36;
+@@ -133,6 +144,7 @@
+         global.hp[1] = global.maxhp[1];
+         global.hp[2] = global.maxhp[2];
+         global.hp[3] = global.maxhp[3];
++        global.hp[4] = global.maxhp[4];
+         global.typer = 6;
+         global.fc = 0;
+         snd_play(snd_power);

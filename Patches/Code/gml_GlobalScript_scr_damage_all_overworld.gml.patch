@@ -1,0 +1,28 @@
+--- a/Code/gml_GlobalScript_scr_damage_all_overworld.gml
++++ b/Code/gml_GlobalScript_scr_damage_all_overworld.gml
+@@ -21,10 +21,13 @@
+             damage = remdamage;
+             target = ti;
+             tdamage = damage;
+-            with (global.charinstance[target])
++            if (i_ex(global.charinstance[target]))
+             {
++                with (global.charinstance[target])
++                {
+-                hurt = 1;
++                    hurt = 1;
+-                hurttimer = 0;
++                    hurttimer = 0;
++                }
+             }
+             hpdiff = tdamage;
+             if (hpdiff >= global.hp[global.char[target]])
+@@ -41,7 +44,7 @@
+             {
+                 doomtype = -1;
+                 global.hp[global.char[target]] -= hpdiff;
+-                if (global.charinstance[target].visible == true)
++                if (i_ex(global.charinstance[target]) && global.charinstance[target].visible == true)
+                 {
+                     dmgwriter = instance_create(global.charinstance[target].x, (global.charinstance[target].y + global.charinstance[target].myheight) - 24, obj_dmgwriter);
+                     dmgwriter.damage = hpdiff;

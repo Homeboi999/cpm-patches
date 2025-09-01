@@ -1,0 +1,16 @@
+--- a/Code/gml_Object_obj_ch2_scene10_Step_0.gml
++++ b/Code/gml_Object_obj_ch2_scene10_Step_0.gml
+@@ -24,11 +24,11 @@
+     scr_actor_setup(kr, kr_actor, "kris");
+     kr_actor.sprite_index = spr_krisr_dark;
+     su = 1;
+-    su_actor = instance_create(obj_mainchara.x - 160, global.cinstance[0].y - 16, obj_actor);
++    su_actor = instance_create(obj_mainchara.x - 160, obj_mainchara.y - 16, obj_actor);
+     scr_actor_setup(su, su_actor, "susie");
+     su_actor.sprite_index = spr_susie_walk_right_dw;
+     ra = 2;
+-    ra_actor = instance_create(obj_mainchara.x - 200, global.cinstance[1].y - 16, obj_actor);
++    ra_actor = instance_create(obj_mainchara.x - 200, obj_mainchara.y - 16, obj_actor);
+     scr_actor_setup(ra, ra_actor, "ralsei");
+     ra_actor.sprite_index = spr_ralsei_walk_right;
+     qu = 3;

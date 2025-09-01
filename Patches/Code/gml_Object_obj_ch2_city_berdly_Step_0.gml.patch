@@ -21,12 +21,16 @@
      cutscene_master = scr_cutscene_make();
      scr_maincharacters_actors();
      be = actor_count + 1;
-@@ -366,14 +378,20 @@
+@@ -366,14 +378,24 @@
      var used_snowgrave = i_ex(obj_npc_sign);
      if (!used_snowgrave)
      {
 +        if (i_ex(obj_herokris))
 +        {
++            if (obj_herokris.y < 120)
++            {
++                obj_herokris.y = 120;
++            }
 -        obj_mainchara.x = obj_herokris.x;
 +            obj_mainchara.x = obj_herokris.x;
 -        obj_mainchara.y = obj_herokris.y;
@@ -50,7 +54,15 @@
          be_actor.x = obj_berdlyb2_enemy.x + obj_berdlyb2_enemy.shakex;
          be_actor.y = obj_berdlyb2_enemy.y;
          be_actor.sprite_index = spr_berdly_hurt_kneel_battle;
-@@ -514,7 +532,7 @@
+@@ -422,6 +444,7 @@
+     {
+         visible = 1;
+     }
++    scr_hidecharactor();
+     if (i_ex(obj_monsterparent))
+     {
+         with (obj_monsterparent)
+@@ -514,7 +537,7 @@
          c_panobj(kr_actor, 30);
          c_wait(31);
          c_pannable(0);
