@@ -37,4 +37,3 @@ if (configMenu == 0)
     }
     draw_sprite_ext(spr_heart, 0, menu_x + 15, menu_y + 60 + (configSelect * 30), 1, 1, 0, c_white, 1);
 }
-

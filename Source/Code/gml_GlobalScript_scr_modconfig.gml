@@ -40,4 +40,3 @@ function scr_modconfig(arg0)
             break;
     }
 }
-

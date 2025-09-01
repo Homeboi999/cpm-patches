@@ -47,4 +47,3 @@ if (configMenu == 0)
 onebuffer -= 1;
 twobuffer -= 1;
 threebuffer -= 1;
-

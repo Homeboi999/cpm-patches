@@ -26,4 +26,3 @@ dupeWarn = 0;
 dupeChar = 0;
 gapWarnText = "Gaps in the party are likely to crash.";
 gapWarn = 0;
-

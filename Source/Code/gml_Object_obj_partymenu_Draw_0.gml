@@ -228,4 +228,3 @@ if (partyMenu == 0 || partyMenu == 1)
         draw_sprite_ext(spr_heart, 0, (menu_x + (charSelect * 71)) - 51, menu_y + 156, 1, 1, 0, c_white, 1);
     }
 }
-

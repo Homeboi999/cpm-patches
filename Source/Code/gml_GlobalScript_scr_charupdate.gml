@@ -37,4 +37,3 @@ function scr_charupdate()
         }
     }
 }
-

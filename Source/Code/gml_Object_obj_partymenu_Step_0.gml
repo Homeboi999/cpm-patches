@@ -127,4 +127,3 @@ if (partyMenu == 2)
 onebuffer -= 1;
 twobuffer -= 1;
 threebuffer -= 1;
-
