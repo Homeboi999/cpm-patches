@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_darkcontroller_Create_0.gml
 +++ b/Code/gml_Object_obj_darkcontroller_Create_0.gml
-@@ -105,7 +105,7 @@
+@@ -132,7 +132,7 @@
              with (global.cinstance[i - 1])
              {
                  name = "noelle";
