@@ -1,0 +1,65 @@
+--- a/Code/gml_Object_obj_knight_enemy_Create_0.gml
++++ b/Code/gml_Object_obj_knight_enemy_Create_0.gml
+@@ -23,6 +23,7 @@
+ holdbreathcount = 0;
+ sactcount = 0;
+ ractcount = 0;
++nactcount = 0;
+ chargeupcon = 0;
+ chargeuptimer = 0;
+ turn = 0;
+@@ -63,6 +64,7 @@
+ krisdownmessage = false;
+ susiedownmessage = false;
+ ralseidownmessage = false;
++noelledownmessage = false;
+ setdownmessage = false;
+ damagecounter = 0;
+ phase4turn = 0;
+@@ -92,9 +94,45 @@
+     spellsprite = spr_susieb_spell_unhappy;
+     defeatsprite = spr_susie_dw_fell;
+ }
++vanillaParty = global.char[0] == 1 && global.char[1] == 2 && global.char[2] == 3;
++krisTarget = global.hp[1] > 0 && scr_havechar(1);
++susieTarget = global.hp[2] > 0 && scr_havechar(2);
++ralseiTarget = global.hp[3] > 0 && scr_havechar(3);
++noelleTarget = global.hp[4] > 0 && scr_havechar(4);
++krisValid = krisTarget && !susieTarget && !ralseiTarget && !noelleTarget;
++allDown = false;
++susieOnly = !krisTarget && susieTarget && !ralseiTarget && !noelleTarget;
++susieSolo = susieOnly;
++susieName[0] = "Thing 1";
++susieName[1] = "Thing 2";
++susieNameCount = 0;
++for (i = 0; i < 3; i++)
++{
++    if (global.char[i] != 2 && global.char[i] != 0)
++    {
++        switch (global.char[i])
++        {
++            case 1:
++                susieName[susieNameCount] = "Kris";
++                susieNameCount++;
++                break;
++            case 3:
++                susieName[susieNameCount] = "Ralsei";
++                susieNameCount++;
++                break;
++            case 4:
++                susieName[susieNameCount] = "Noelle";
++                susieNameCount++;
++                break;
++        }
++    }
++}
+ with (obj_battleback)
+ {
++    if (room != room_dw_castle_dojo)
++    {
+-    instance_destroy();
++        instance_destroy();
++    }
+ }
+ instance_create(x, y, obj_bgfountaintest);
+ global.tempflag[96] = 0;

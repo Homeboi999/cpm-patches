@@ -1,0 +1,159 @@
+--- a/Code/gml_Object_obj_knight_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_knight_enemy_Step_0.gml
+@@ -1,12 +1,3 @@
+-if (!i_ex(obj_herosusie) || !i_ex(obj_heroralsei))
+-{
+-    if (debugvar == false && scr_debug())
+-    {
+-        scr_debug_print("You need Susie and Ralsei for this battle");
+-        debugvar = true;
+-    }
+-    exit;
+-}
+ if (global.monsterhp[myself] <= (global.monstermaxhp[myself] * 0.8))
+ {
+     global.tempflag[96] = 1;
+@@ -706,31 +697,65 @@
+             var krisdown = "";
+             var susiedown = "";
+             var ralseidown = "";
++            var noelledown = "";
+             var downcount = 0;
+-            if (krisdownmessage == false && global.hp[1] < 1)
+-            {
+-                krisdown = stringsetloc("* Kris kneeled in silence.&", "obj_knight_enemy_slash_Step_0_gml_343_0");
+-                downcount++;
+-                krisdownmessage = true;
+-                global.battlemsg[0] = krisdown;
+-            }
+-            if (susiedownmessage == false && global.hp[2] < 1)
+-            {
+-                susiedown = stringsetloc("* Susie was hurt and beaten.&", "obj_knight_enemy_slash_Step_0_gml_344_0");
+-                downcount++;
+-                susiedownmessage = true;
+-                global.battlemsg[0] = susiedown;
+-            }
+-            if (ralseidownmessage == false && global.hp[3] < 1)
+-            {
+-                ralseidown = stringsetloc("* Ralsei became a pile of fluff.&", "obj_knight_enemy_slash_Step_0_gml_345_0");
+-                downcount++;
+-                ralseidownmessage = true;
+-                global.battlemsg[0] = ralseidown;
+-            }
+-            if (downcount == 2)
+-            {
+-                global.battlemsg[0] = krisdown + susiedown + ralseidown;
++            for (i = 0; i < 3; i++)
++            {
++                switch (global.char[i])
++                {
++                    case 1:
++                        if (krisdownmessage == false && (global.hp[1] < 1 && scr_havechar(1)))
++                        {
++                            krisdown = stringsetloc("* Kris kneeled in silence.&", "obj_knight_enemy_slash_Step_0_gml_343_0");
++                            downcount++;
++                            krisdownmessage = true;
++                            if (downcount == 1)
++                            {
++                                global.battlemsg[0] = "";
++                            }
++                            global.battlemsg[0] += krisdown;
++                        }
++                        break;
++                    case 2:
++                        if (susiedownmessage == false && global.hp[2] < 1 && scr_havechar(2))
++                        {
++                            susiedown = stringsetloc("* Susie was hurt and beaten.&", "obj_knight_enemy_slash_Step_0_gml_344_0");
++                            downcount++;
++                            susiedownmessage = true;
++                            if (downcount == 1)
++                            {
++                                global.battlemsg[0] = "";
++                            }
++                            global.battlemsg[0] += susiedown;
++                        }
++                        break;
++                    case 3:
++                        if (ralseidownmessage == false && global.hp[3] < 1 && scr_havechar(3))
++                        {
++                            ralseidown = stringsetloc("* Ralsei became a pile of fluff.&", "obj_knight_enemy_slash_Step_0_gml_345_0");
++                            downcount++;
++                            ralseidownmessage = true;
++                            if (downcount == 1)
++                            {
++                                global.battlemsg[0] = "";
++                            }
++                            global.battlemsg[0] += ralseidown;
++                        }
++                        break;
++                    case 4:
++                        if (noelledownmessage == false && global.hp[4] < 1 && scr_havechar(4))
++                        {
++                            noelledown = stringset("* Noelle froze in terror.&");
++                            downcount++;
++                            noelledownmessage = true;
++                            if (downcount == 1)
++                            {
++                                global.battlemsg[0] = "";
++                            }
++                            global.battlemsg[0] += noelledown;
++                        }
++                        break;
++                }
+             }
+         }
+     }
+@@ -868,10 +893,52 @@
+         actcon = 1;
+         actconral = 0;
+     }
++    if (actingnoe == 1 && actconnoe == 1)
++    {
++        nactcount++;
++        if (nactcount == 1)
++        {
++            scr_speaker("noone");
++            msgsetloc(0, "* Noelle tried talking.../");
++            scr_anyface_next("noelle", "C");
++            msgnextloc("\\EC * I... I don't... know what you want, b-but.../");
++            msgnextloc("\\ED * We... We can t-talk about this, r-right?/");
++            msgnextloc("\\Ee * .../");
++            msgnextloc("\\EZ * (... We don't even stand a chance, do we?)/");
++            scr_anyface_next("none", 0);
++            msgnextloc("* (... but nothing happened.)/%");
++            scr_speaker("noone");
++        }
++        else if (nactcount == 2)
++        {
++            scr_speaker("noone");
++            msgsetloc(0, "* Noelle tried talking.../");
++            scr_anyface_next("noelle", "e");
++            msgnextloc("\\Ee * .../");
++            msgnextloc("\\EW * (G-Get it t-together, Noelle!)/");
++            msgnextloc("\\Ec * (If we don't do something soon, then...)/");
++            scr_anyface_next("none", 0);
++            msgnextloc("* (... but nothing happened.)/%");
++        }
++        else
++        {
++            scr_speaker("noone");
++            msgsetloc(0, "* Noelle tried talking.../");
++            scr_anyface_next("noelle", "2");
++            msgnextloc("\\E2 * Hey Kris? I appreciate the optimism, but.../");
++            msgnextloc("\\E3 * ... I don't think this is, um.. working./");
++            scr_anyface_next("none", 0);
++            msgnextloc("* (... but nothing happened.)/%");
++        }
++        scr_battletext_default();
++        actcon = 1;
++        actconnoe = 0;
++    }
+-    if (actcon == 20 || actconsus == 20 || actconral == 20)
++    if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
+     {
+         if (scr_terminate_writer())
+         {
++            actconnoe = -1;
+             actconsus = -1;
+             actconral = -1;
+             actcon = 1;

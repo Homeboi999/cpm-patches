@@ -1,0 +1,38 @@
+--- a/Code/gml_Object_obj_fusionmenu_Step_0.gml
++++ b/Code/gml_Object_obj_fusionmenu_Step_0.gml
+@@ -157,11 +157,30 @@
+                 dojoEncounter[4] = 90;
+             }
+         }
+-        dojoEncounterAmbush[0] = 0;
+-        dojoEncounterAmbush[1] = 1;
+-        dojoEncounterAmbush[2] = 0;
+-        dojoEncounterAmbush[3] = 1;
+-        dojoEncounterAmbush[4] = 0;
++        if (global.chapter == 3)
++        {
++            dojoName[0] = stringset("Knight Time!");
++            dojoPrizeName[0] = stringset("SWOON");
++            dojoPrizeType[0] = "money";
++            dojoPrizeValue[0] = 0;
++            dojoTopComment[0] = stringset("Challenge the Roaring Knight in a somewhat#controlled environment. Practice makes perfect!");
++            dojoEncounter[0] = 115;
++            dojoEncounterAmbush[0] = 0;
++            dojoName[1] = stringset("TV Time: Season 2");
++            dojoPrizeName[1] = stringset("Genuine Ralsei Plush");
++            dojoPrizeType[1] = "money";
++            dojoPrizeValue[1] = 32;
++            dojoTopComment[1] = stringset("The FUN-O-METER doesn't lie, folks! The#crowd is chanting for a rematch!, and#Tenna is ready to deliver!");
++            dojoEncounter[1] = 121;
++            dojoEncounterAmbush[1] = 0;
++            dojoName[2] = stringset("House Rouxls");
++            dojoPrizeName[2] = stringset("RouxlsRoux");
++            dojoPrizeType[2] = "money";
++            dojoPrizeValue[2] = 0;
++            dojoTopComment[2] = stringset("Hange on a second, guyse.");
++            dojoEncounter[2] = 25;
++            dojoEncounterAmbush[2] = 0;
++        }
+         stringClaimed = stringsetloc("Claimed", "obj_fusionmenu_slash_Step_0_gml_208_0");
+         if (global.flag[814] != 0)
+         {

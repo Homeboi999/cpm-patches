@@ -1,0 +1,22 @@
+--- a/Code/gml_GlobalScript_scr_battle.gml
++++ b/Code/gml_GlobalScript_scr_battle.gml
+@@ -12,6 +12,10 @@
+             {
+                 batmusic = "rudebuster_boss.ogg";
+             }
++            if (global.encounterno == 115 && room == room_dw_castle_dojo)
++            {
++                batmusic = "knight.ogg";
++            }
+             if (room == room_dw_b3bs_watercooler || room == room_dw_teevie_watercooler || room == room_dw_b3bs_zapper_b || room == room_dw_ranking_c)
+             {
+                 batmusic = "battle_vapor.ogg";
+@@ -48,7 +52,7 @@
+                     scr_move_to_point_over_time(camerax() + 526, cameray() + 260, 20);
+                     sprite_index = spr_tenna_point_up;
+                 }
+-                else if (global.monstertype[other.__ien] == 104)
++                else if (global.monstertype[other.__ien] == 104 && i_ex(obj_ch3_PTB02_roaringknight))
+                 {
+                     with (obj_ch3_PTB02_roaringknight)
+                     {
