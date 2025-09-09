@@ -13,7 +13,16 @@
  if (global.monsterhp[myself] <= (global.monstermaxhp[myself] * 0.8))
  {
      global.tempflag[96] = 1;
-@@ -706,31 +697,65 @@
+@@ -110,7 +101,7 @@
+         global.typer = 81;
+         var createballoon = false;
+         susietalks = 1;
+-        if (global.hp[2] > 0)
++        if (susieTarget)
+         {
+             balloonturn++;
+             if (balloonturn == 6)
+@@ -706,35 +697,79 @@
              var krisdown = "";
              var susiedown = "";
              var ralseidown = "";
@@ -103,7 +112,31 @@
              }
          }
      }
-@@ -868,10 +893,52 @@
+-    if (global.hp[1] < 1 && global.hp[2] < 1 && global.hp[3] < 1 && global.turntimer > 0)
++    krisTarget = global.hp[1] > 0 && scr_havechar(1);
++    susieTarget = global.hp[2] > 0 && scr_havechar(2);
++    ralseiTarget = global.hp[3] > 0 && scr_havechar(3);
++    noelleTarget = global.hp[4] > 0 && scr_havechar(4);
++    krisValid = krisTarget && !susieTarget && !ralseiTarget && !noelleTarget;
++    susieOnly = !krisTarget && susieTarget && !ralseiTarget && !noelleTarget;
++    if (!krisTarget && !susieTarget && !ralseiTarget && !noelleTarget)
++    {
++        allDown = true;
++    }
++    if (allDown && global.turntimer > 0)
+     {
+         global.turntimer = 0;
+         with (obj_lerpvar)
+@@ -750,7 +785,7 @@
+             instance_destroy();
+         }
+     }
+-    if (global.mnfight == 2 && global.turntimer < 1 && global.hp[1] < 1 && global.hp[2] < 1 && global.hp[3] < 1 && endcon == 0)
++    if (global.mnfight == 2 && global.turntimer < 1 && allDown && endcon == 0)
+     {
+         endcon = 1;
+         with (obj_particle_generic)
+@@ -868,10 +903,52 @@
          actcon = 1;
          actconral = 0;
      }

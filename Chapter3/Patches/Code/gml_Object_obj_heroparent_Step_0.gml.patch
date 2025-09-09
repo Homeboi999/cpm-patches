@@ -1,0 +1,16 @@
+--- a/Code/gml_Object_obj_heroparent_Step_0.gml
++++ b/Code/gml_Object_obj_heroparent_Step_0.gml
+@@ -365,11 +365,11 @@
+                 damage = ceil(damage * obj_knight_enemy.damagereduction);
+                 if (object_index == obj_herokris)
+                 {
+-                    if (global.hp[2] < 0 && global.hp[3] < 0)
++                    if (obj_knight_enemy.krisValid)
+                     {
+                         damage *= 2;
+                     }
+-                    else if (global.hp[2] < 0 || global.hp[3] < 0)
++                    if ((global.hp[2] < 0 && scr_havechar(2)) || (global.hp[3] < 0 && scr_havechar(3)) || (global.hp[4] < 0 && scr_havechar(4)))
+                     {
+                         damage *= 1;
+                     }

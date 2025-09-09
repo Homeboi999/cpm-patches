@@ -1,0 +1,102 @@
+--- a/Code/gml_Object_o_coaster_controller_Create_0.gml
++++ b/Code/gml_Object_o_coaster_controller_Create_0.gml
+@@ -22,55 +22,59 @@
+ {
+     HeroCoaster[i] = instance_create((camerax() + 100) - (i * 20), cameray() + 149 + (60 * i), o_coaster_hero);
+     HeroCoaster[i].HeroID = i;
++    HeroCoaster[i].HeroType = global.char[i];
++    if (scr_modconfig("coasterType") == 1)
++    {
++        HeroCoaster[i].CoasterType = HeroCoaster[i].HeroID + 1;
++    }
++    else
++    {
++        HeroCoaster[i].CoasterType = global.char[i];
++    }
+-    HeroCoaster[i].image_index = i;
++    HeroCoaster[i].image_index = 0;
+     HeroCoaster[i].depth = HeroCoaster[i].y * -100;
+     HeroCoaster[i].siner = 0;
+     HeroCoaster[i].mykey = mykey[i];
++    BerdlyCoaster.yspot[i] = HeroCoaster[i].y;
++    if (instance_exists(global.charinstance[i]))
++    {
++        global.charinstance[i].x = camerax() - 200;
++        HeroCoaster[i].sprite_index = global.charinstance[i].idlesprite;
++    }
+     with (HeroCoaster[i])
+     {
+-        back = instance_create(x, y, o_coaster_hero_back);
++        back = instance_create(x, y + 1, o_coaster_hero_back);
+-        back.image_index = HeroID;
+         back.parentid = id;
+-    }
+-    yspot[i] = HeroCoaster[i].y;
+-    BerdlyCoaster.yspot[i] = HeroCoaster[i].y;
+-    obj_herokris.x = camerax() - 200;
+-    if (instance_exists(obj_herosusie))
+-    {
+-        obj_herosusie.x = camerax() - 200;
+-    }
+-    if (instance_exists(obj_heroralsei))
+-    {
+-        obj_heroralsei.x = camerax() - 200;
+-    }
+-    if (HeroCoaster[i].HeroID == 0)
+-    {
+-        HeroCoaster[i].sprite_index = spr_krisb_idle;
+-    }
+-    if (HeroCoaster[i].HeroID == 1)
+-    {
+-        HeroCoaster[i].sprite_index = spr_susieb_idle;
+-    }
+-    if (HeroCoaster[i].HeroID == 2)
+-    {
+-        HeroCoaster[i].sprite_index = spr_ralsei_idle;
++        back.visible = visible;
++        switch (HeroType)
++        {
++            case 1:
++                sprite_index = spr_krisb_attack;
++                break;
++            case 2:
++                sprite_index = spr_susieb_attack;
++                break;
++            case 3:
++                sprite_index = spr_ralsei_battleintro;
++                break;
++            case 4:
++                sprite_index = spr_noelleb_battleintro;
++                break;
++        }
+     }
+     if (instance_exists(obj_ch2_scene11a))
+     {
+-        if (i == 0)
+-        {
+-            HeroCoaster[i].x = obj_ch2_scene11a.coaster_kris.x - 22;
+-            HeroCoaster[i].sprite_index = spr_krisb_attack;
+-        }
+-        if (i == 1)
+-        {
+-            HeroCoaster[i].x = obj_ch2_scene11a.coaster_susie.x - 22;
+-            HeroCoaster[i].sprite_index = spr_susie_attack;
+-        }
+-        if (i == 2)
+-        {
+-            HeroCoaster[i].x = obj_ch2_scene11a.coaster_ralsei.x - 22;
+-            HeroCoaster[i].sprite_index = spr_ralsei_battleintro;
++        switch (i)
++        {
++            case 0:
++                HeroCoaster[i].x = obj_ch2_scene11a.coaster_kris.x - 22;
++                break;
++            case 1:
++                HeroCoaster[i].x = obj_ch2_scene11a.coaster_susie.x - 22;
++                break;
++            case 2:
++                HeroCoaster[i].x = obj_ch2_scene11a.coaster_ralsei.x - 22;
++                break;
+         }
+     }
+ }

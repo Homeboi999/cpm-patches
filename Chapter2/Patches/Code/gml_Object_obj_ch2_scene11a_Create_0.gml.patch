@@ -19,7 +19,7 @@
 +    coaster_kris.CoasterType = coaster_kris.HeroType;
 +}
 +coaster_kris.laneID = 0;
-+coaster_kris.lane_coaster_y = 0;
++coaster_kris.lane_coaster_y = -2;
 +with (coaster_kris)
 +{
 +    scr_depth();
@@ -41,7 +41,7 @@
 +    coaster_susie.CoasterType = coaster_susie.HeroType;
 +}
 +coaster_susie.laneID = 1;
-+coaster_susie.lane_coaster_y = 14;
++coaster_susie.lane_coaster_y = 12;
 +with (coaster_susie)
 +{
 +    scr_depth();

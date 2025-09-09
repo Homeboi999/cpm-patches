@@ -1,0 +1,12 @@
+--- a/Code/gml_GlobalScript_scr_monstersetup.gml
++++ b/Code/gml_GlobalScript_scr_monstersetup.gml
+@@ -1863,6 +1863,9 @@
+         global.canactral[myself][0] = 1;
+         global.actnameral[myself][0] = stringsetloc("R-Action", "scr_monstersetup_slash_scr_monstersetup_gml_2187_0");
+         global.actsimulral[myself][0] = 0;
++        global.canactnoe[myself][0] = 1;
++        global.actnamenoe[myself][0] = stringset("N-Action");
++        global.actsimulnoe[myself][0] = 0;
+     }
+     if (global.monstertype[myself] == 105)
+     {

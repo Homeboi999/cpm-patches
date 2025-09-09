@@ -1,0 +1,17 @@
+--- a/Code/gml_GlobalScript_scr_moveheart.gml
++++ b/Code/gml_GlobalScript_scr_moveheart.gml
+@@ -1,6 +1,13 @@
+ function scr_moveheart()
+ {
+     global.inv = 0;
++    if (i_ex(obj_herokris))
++    {
+-    return instance_create(obj_herokris.x + 10, obj_herokris.y + 40, obj_moveheart);
++        return instance_create(obj_herokris.x + 10, obj_herokris.y + 40, obj_moveheart);
++    }
++    else
++    {
++        return instance_create(0, 0, obj_moveheart);
++    }
+ }
+ 
