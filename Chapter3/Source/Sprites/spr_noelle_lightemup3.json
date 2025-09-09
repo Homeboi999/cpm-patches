@@ -1,13 +1,13 @@
 {
-  "Name": "spr_noelle_zoosuit",
-  "ImageFile": "spr_noelle_zoosuit.png",
+  "Name": "spr_noelle_lightemup3",
+  "ImageFile": "spr_noelle_lightemup3.png",
   "FrameCount": 1,
   "Size": [
     32,
     46
   ],
   "Margins": [
-    3,
+    1,
     29,
     45,
     0

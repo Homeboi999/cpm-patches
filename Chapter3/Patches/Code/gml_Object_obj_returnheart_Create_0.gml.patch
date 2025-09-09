@@ -1,0 +1,21 @@
+--- a/Code/gml_Object_obj_returnheart_Create_0.gml
++++ b/Code/gml_Object_obj_returnheart_Create_0.gml
+@@ -2,8 +2,16 @@
+ shift = 1;
+ image_alpha = 1;
+ flytime = 8;
++if (i_ex(obj_herokris))
++{
+-distx = obj_herokris.x + 10;
++    distx = obj_herokris.x + 10;
+-disty = obj_herokris.y + 40;
++    disty = obj_herokris.y + 40;
++}
++else
++{
++    distx = x;
++    disty = y;
++}
+ dist = point_distance(x, y, distx, disty);
+ move_towards_point(distx, disty, dist / flytime);
+ alarm[0] = flytime;

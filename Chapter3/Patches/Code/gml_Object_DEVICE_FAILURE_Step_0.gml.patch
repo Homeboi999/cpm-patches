@@ -1,0 +1,19 @@
+--- a/Code/gml_Object_DEVICE_FAILURE_Step_0.gml
++++ b/Code/gml_Object_DEVICE_FAILURE_Step_0.gml
+@@ -419,7 +419,7 @@
+         {
+             scr_getchar(3);
+         }
+-        for (var i = 0; i < 4; i++)
++        for (var i = 0; i < 5; i++)
+         {
+             global.hp[i] = global.maxhp[i];
+         }
+@@ -455,6 +455,7 @@
+         global.hp[1] = 1;
+         global.hp[2] = 1;
+         global.hp[3] = 1;
++        global.hp[4] = 1;
+     }
+     if (knight_mode_con == 60)
+     {
