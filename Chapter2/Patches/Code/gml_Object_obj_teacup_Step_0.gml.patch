@@ -68,7 +68,7 @@
          for (var i = 0; i < partySize; i++)
          {
 -            var _sprites = [spr_kris_dw_land_example_dark, spr_kris_dw_land_example_dark, spr_susie_dw_landed, spr_teacup_ralsei_land];
-+            var _sprites = [spr_empty, spr_kris_dw_land_example_dark, spr_susie_dw_landed, spr_teacup_ralsei_land, spr_noelle_walk_down_dw];
++            var _sprites = [spr_empty, spr_kris_dw_land_example_dark, spr_susie_dw_landed, spr_teacup_ralsei_land, spr_noelle_dw_landed];
              _longestAnim = 0;
              _animSpeed = 0.25;
              with (jumpMarker[i])

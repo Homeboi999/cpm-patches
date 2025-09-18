@@ -22,6 +22,24 @@
          {
              balloonturn++;
              if (balloonturn == 6)
+@@ -141,7 +132,7 @@
+                 balloonend = 0;
+                 createballoon = true;
+             }
+-            if (balloonturn == 9 && global.hp[1] < 1 && global.hp[3] < 1)
++            if (balloonturn == 9 && susieOnly)
+             {
+                 msgsetloc(0, "Even... even if&you knock them down.../%", "obj_knight_enemy_slash_Step_0_gml_150_0");
+                 ballooncon = 5;
+@@ -155,7 +146,7 @@
+                 balloonend = 0;
+                 createballoon = true;
+             }
+-            if (balloonturn == 10 && global.hp[1] < 1 && global.hp[3] < 1)
++            if (balloonturn == 10 && susieOnly)
+             {
+                 msgsetloc(0, "As long as I'm here to&lift them back up.../%", "obj_knight_enemy_slash_Step_0_gml_152_0");
+                 ballooncon = 6;
 @@ -706,35 +697,79 @@
              var krisdown = "";
              var susiedown = "";
@@ -136,6 +154,23 @@
      {
          endcon = 1;
          with (obj_particle_generic)
+@@ -833,11 +868,11 @@
+         global.actsimulsus[myself][0] = 0;
+         global.actactorsus[myself][0] = 0;
+         global.actcostsus[myself][0] = 0;
+-        global.battlespell[1][0] = 0;
+-        global.battlespell[1][0] = -1;
+-        global.battleactcount[1] = 0;
+-        global.battlespellname[1][0] = "";
+-        global.battlespelldesc[1][0] = "";
++        global.battlespell[scr_findchar(2)][0] = 0;
++        global.battlespell[scr_findchar(2)][0] = -1;
++        global.battleactcount[scr_findchar(2)] = 0;
++        global.battlespellname[scr_findchar(2)][0] = "";
++        global.battlespelldesc[scr_findchar(2)][0] = "";
+         scr_spellmenu_setup();
+     }
+     if (actingral == 1 && actconral == 1)
 @@ -868,10 +903,52 @@
          actcon = 1;
          actconral = 0;

@@ -1,0 +1,22 @@
+{
+  "Name": "spr_noelle_dw_landed",
+  "ImageFile": "spr_noelle_dw_landed_strip3.png",
+  "FrameCount": 3,
+  "Size": [
+    23,
+    47
+  ],
+  "Margins": [
+    0,
+    22,
+    46,
+    1
+  ],
+  "BoundingBoxMode": 0,
+  "Origin": [
+    0,
+    0
+  ],
+  "playbackSpeed": 1,
+  "playbackType": 1
+}

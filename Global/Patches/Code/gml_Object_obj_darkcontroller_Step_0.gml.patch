@@ -33,7 +33,7 @@
  xx = __view_get(e__VW.XView, 0);
  yy = __view_get(e__VW.YView, 0);
  if (global.interact == 5)
-@@ -904,8 +933,8 @@
+@@ -907,8 +936,8 @@
              {
                  selectnoise = 1;
                  deschaver = 1;
