@@ -1,0 +1,36 @@
+{
+  "Name": "o_coaster_hero_cpm",
+  "CollisionShape": 1,
+  "Events": [
+    {
+      "Code": "gml_Object_o_coaster_hero_cpm_Create_0",
+      "Type": 0,
+      "Subtype": 0
+    },
+    {
+      "Code": "gml_Object_o_coaster_hero_cpm_Destroy_0",
+      "Type": 1,
+      "Subtype": 0
+    },
+    {
+      "Code": "gml_Object_o_coaster_hero_cpm_Step_2",
+      "Type": 3,
+      "Subtype": 2
+    },
+    {
+      "Code": "gml_Object_o_coaster_hero_cpm_Step_0",
+      "Type": 3,
+      "Subtype": 0
+    },
+    {
+      "Code": "gml_Object_o_coaster_hero_cpm_Collision_500",
+      "Type": 4,
+      "Subtype": 500
+    },
+    {
+      "Code": "gml_Object_o_coaster_hero_cpm_Draw_0",
+      "Type": 8,
+      "Subtype": 0
+    }
+  ]
+}

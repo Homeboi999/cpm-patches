@@ -1,0 +1,36 @@
+--- a/Code/gml_Object_o_coaster_controller_Step_0.gml
++++ b/Code/gml_Object_o_coaster_controller_Step_0.gml
+@@ -1,15 +1,3 @@
+-if (endcoaster == 0)
+-{
+-    if (obj_berdlyb_enemy.kriscoaster == 0 && krisgooffscreen == 1)
+-    {
+-    }
+-    if (obj_berdlyb_enemy.suscoaster == 0 && susiegooffscreen == 1)
+-    {
+-    }
+-    if (obj_berdlyb_enemy.ralcoaster == 0 && ralseigooffscreen == 1)
+-    {
+-    }
+-}
+ if (endcoaster == 1)
+ {
+     if (HeroCoaster[0].x < HeroCoaster[0].xstart && HeroCoaster[0].gooffscreen == 1)
+@@ -70,7 +58,7 @@
+         HeroCoaster[0].gooffscreen = 0;
+         HeroCoaster[1].gooffscreen = 0;
+         HeroCoaster[2].gooffscreen = 0;
+-        with (o_coaster_hero)
++        with (obj_partymenu)
+         {
+             forceact = 0;
+         }
+@@ -88,7 +76,7 @@
+                 rideactgo = 0;
+                 bumpactstarted = 0;
+                 bumpactfast = 0;
+-                with (o_coaster_hero)
++                with (obj_partymenu)
+                 {
+                     draw_button_press = 0;
+                 }

@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_berdlyb_enemy_Destroy_0.gml
++++ b/Code/gml_Object_obj_berdlyb_enemy_Destroy_0.gml
+@@ -2,7 +2,7 @@
+ {
+     instance_destroy();
+ }
+-with (o_coaster_hero)
++with (obj_partymenu)
+ {
+     instance_destroy();
+ }

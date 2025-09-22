@@ -1,0 +1,21 @@
+{
+  "Name": "obj_partymenu",
+  "CollisionShape": 0,
+  "Events": [
+    {
+      "Code": "gml_Object_obj_partymenu_Create_0",
+      "Type": 0,
+      "Subtype": 0
+    },
+    {
+      "Code": "gml_Object_obj_partymenu_Step_0",
+      "Type": 3,
+      "Subtype": 0
+    },
+    {
+      "Code": "gml_Object_obj_partymenu_Draw_0",
+      "Type": 8,
+      "Subtype": 0
+    }
+  ]
+}

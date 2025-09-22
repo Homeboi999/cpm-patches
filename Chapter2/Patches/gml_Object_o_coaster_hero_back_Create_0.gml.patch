@@ -1,0 +1,8 @@
+--- a/Code/gml_Object_o_coaster_hero_back_Create_0.gml
++++ b/Code/gml_Object_o_coaster_hero_back_Create_0.gml
+@@ -1,4 +1,4 @@
+-depth = o_coaster_hero.depth + 20;
++depth = obj_partymenu.depth + 20;
+ image_speed = 0;
+ image_xscale = 2;
+ image_yscale = 2;
