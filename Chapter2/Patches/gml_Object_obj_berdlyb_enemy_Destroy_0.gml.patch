@@ -5,7 +5,7 @@
      instance_destroy();
  }
 -with (o_coaster_hero)
-+with (obj_partymenu)
++with (o_coaster_hero_cpm)
  {
      instance_destroy();
  }

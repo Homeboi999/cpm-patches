@@ -5,7 +5,7 @@
  for (i = 0; i < 3; i += 1)
  {
 -    HeroCoaster[i] = instance_create((camerax() + 100) - (i * 20), cameray() + 149 + (60 * i), o_coaster_hero);
-+    HeroCoaster[i] = instance_create((camerax() + 100) - (i * 20), cameray() + 149 + (60 * i), obj_partymenu);
++    HeroCoaster[i] = instance_create((camerax() + 100) - (i * 20), cameray() + 149 + (60 * i), o_coaster_hero_cpm);
      HeroCoaster[i].HeroID = i;
 +    HeroCoaster[i].HeroType = global.char[i];
 +    switch (scr_modconfig("coasterMode"))

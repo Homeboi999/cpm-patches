@@ -405,7 +405,7 @@
              o_coaster_controller.playerinputtimer = 0;
              o_coaster_controller.actcon = 1;
 -            with (o_coaster_hero)
-+            with (obj_partymenu)
++            with (o_coaster_hero_cpm)
              {
                  if (HeroID == 0 && obj_berdlyb_enemy.kriscoaster == 1)
                  {
@@ -449,7 +449,7 @@
      if (endtime == 1)
      {
 -        with (o_coaster_hero)
-+        with (obj_partymenu)
++        with (o_coaster_hero_cpm)
          {
              endscene = 1;
          }

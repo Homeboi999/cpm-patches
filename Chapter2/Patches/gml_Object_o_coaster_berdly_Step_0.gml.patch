@@ -14,7 +14,7 @@
              forceypos = 2;
              obj_berdlyb_enemy.ralseigo = 0;
 -            with (o_coaster_hero)
-+            with (obj_partymenu)
++            with (o_coaster_hero_cpm)
              {
                  if (HeroID == 2)
                  {
@@ -23,7 +23,7 @@
              forceypos = 1;
              obj_berdlyb_enemy.susiego = 0;
 -            with (o_coaster_hero)
-+            with (obj_partymenu)
++            with (o_coaster_hero_cpm)
              {
                  if (HeroID == 1)
                  {
@@ -32,7 +32,7 @@
              forceypos = 0;
              obj_berdlyb_enemy.krisgo = 0;
 -            with (o_coaster_hero)
-+            with (obj_partymenu)
++            with (o_coaster_hero_cpm)
              {
                  if (HeroID == 0)
                  {

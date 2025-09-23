@@ -21,7 +21,7 @@
          HeroCoaster[1].gooffscreen = 0;
          HeroCoaster[2].gooffscreen = 0;
 -        with (o_coaster_hero)
-+        with (obj_partymenu)
++        with (o_coaster_hero_cpm)
          {
              forceact = 0;
          }
@@ -30,7 +30,7 @@
                  bumpactstarted = 0;
                  bumpactfast = 0;
 -                with (o_coaster_hero)
-+                with (obj_partymenu)
++                with (o_coaster_hero_cpm)
                  {
                      draw_button_press = 0;
                  }
