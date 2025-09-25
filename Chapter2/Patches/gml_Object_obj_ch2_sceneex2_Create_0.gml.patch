@@ -1,11 +1,10 @@
 --- a/Code/gml_Object_obj_ch2_sceneex2_Create_0.gml
 +++ b/Code/gml_Object_obj_ch2_sceneex2_Create_0.gml
-@@ -59,18 +59,68 @@
-         scr_depth();
+@@ -43,34 +43,84 @@
+     {
+         instance_destroy(obj_caterpillarchara);
      }
-     coaster_kris = instance_create(0, cameray() - 500, obj_coaster);
--    coaster_kris.depth = 90000;
--    coaster_kris.visible = 0;
++    coaster_kris = instance_create(0, cameray() - 500, obj_coaster);
 +    with (coaster_kris)
 +    {
 +        HeroType = global.char[0];
@@ -23,14 +22,10 @@
 +                break;
 +        }
 +        laneID = 0;
-+        lane_coaster_y = -2;
++        lane_coaster_y = -4;
 +        depth = 90000;
 +    }
-     coaster_susie = instance_create(0, cameray() - 500, obj_coaster);
--    coaster_susie.type = 1;
--    coaster_susie.depth = 80000;
--    coaster_susie.character_sprite = spr_susie_shock;
--    coaster_susie.visible = 0;
++    coaster_susie = instance_create(0, cameray() - 500, obj_coaster);
 +    with (coaster_susie)
 +    {
 +        HeroType = global.char[1];
@@ -48,14 +43,10 @@
 +                break;
 +        }
 +        laneID = 1;
-+        lane_coaster_y = 13;
++        lane_coaster_y = 11;
 +        depth = 80000;
 +    }
-     coaster_ralsei = instance_create(0, cameray() - 500, obj_coaster);
--    coaster_ralsei.type = 2;
--    coaster_ralsei.depth = 70000;
--    coaster_ralsei.character_sprite = spr_ralsei_hurt_fixed;
--    coaster_ralsei.visible = 0;
++    coaster_ralsei = instance_create(0, cameray() - 500, obj_coaster);
 +    with (coaster_ralsei)
 +    {
 +        HeroType = global.char[2];
@@ -73,8 +64,41 @@
 +                break;
 +        }
 +        laneID = 2;
-+        lane_coaster_y = 2;
++        lane_coaster_y = 1;
 +        depth = 70000;
++    }
+     coaster_marker_kris = scr_dark_marker(0, cameray() - 500, spr_sneo_car_empty);
+     with (coaster_marker_kris)
+     {
+         scr_depth();
+     }
+-    coaster_marker_ra = scr_dark_marker(0, cameray() - 500, spr_sneo_car_empty);
+-    with (coaster_marker_ra)
+-    {
+-        scr_depth();
+-    }
+     coaster_marker_su = scr_dark_marker(0, cameray() - 500, spr_sneo_car_empty);
+     with (coaster_marker_su)
+     {
+         scr_depth();
+     }
+-    coaster_kris = instance_create(0, cameray() - 500, obj_coaster);
+-    coaster_kris.depth = 90000;
+-    coaster_kris.visible = 0;
+-    coaster_susie = instance_create(0, cameray() - 500, obj_coaster);
+-    coaster_susie.type = 1;
+-    coaster_susie.depth = 80000;
+-    coaster_susie.character_sprite = spr_susie_shock;
+-    coaster_susie.visible = 0;
+-    coaster_ralsei = instance_create(0, cameray() - 500, obj_coaster);
+-    coaster_ralsei.type = 2;
+-    coaster_ralsei.depth = 70000;
+-    coaster_ralsei.character_sprite = spr_ralsei_hurt_fixed;
+-    coaster_ralsei.visible = 0;
++    coaster_marker_ra = scr_dark_marker(0, cameray() - 500, spr_sneo_car_empty);
++    with (coaster_marker_ra)
++    {
++        scr_depth();
 +    }
      loop_tiles = false;
      bg_loop = layer_get_id("BG_Loop");

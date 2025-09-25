@@ -78,7 +78,7 @@
 +            default_sprite_front = spr_sneo_car_front;
 +            default_sprite_back = spr_sneo_car_back;
 +            coaster_offset_x += -25;
-+            coaster_offset_y += 42;
++            coaster_offset_y += 44;
 +            switch (HeroType)
 +            {
 +                case 1:
@@ -186,7 +186,7 @@
 +            char_sprite_hurt = 1543;
 +            char_sprite_berdly_ramp = 720;
 +            char_sprite_sneo_intro = 720;
-+            char_sprite_sneo_ball = 3386;
++            char_sprite_sneo_ball = 3390;
 +            character_offset_x += -4;
 +            character_offset_y += -12;
 +            break;

@@ -400,7 +400,7 @@
          {
              if (mrboneswildride == 1)
              {
-@@ -418,29 +654,23 @@
+@@ -418,29 +654,32 @@
              o_coaster_controller.timer = 0;
              o_coaster_controller.playerinputtimer = 0;
              o_coaster_controller.actcon = 1;
@@ -410,7 +410,10 @@
                  if (HeroID == 0 && obj_berdlyb_enemy.kriscoaster == 1)
                  {
 -                    sprite_index = spr_krisb_idle;
-+                    sprite_index = global.charinstance[0].idlesprite;
++                    if (i_ex(global.charinstance[0]))
++                    {
++                        sprite_index = global.charinstance[0].idlesprite;
++                    }
                      image_index = 0;
                      image_speed = 0.25;
                  }
@@ -420,7 +423,10 @@
                  if (HeroID == 1 && obj_berdlyb_enemy.suscoaster == 1)
                  {
 -                    sprite_index = spr_susieb_idle;
-+                    sprite_index = global.charinstance[1].idlesprite;
++                    if (i_ex(global.charinstance[1]))
++                    {
++                        sprite_index = global.charinstance[1].idlesprite;
++                    }
                      image_index = 0;
                      image_speed = 0.25;
                  }
@@ -430,11 +436,14 @@
                  if (HeroID == 2 && obj_berdlyb_enemy.ralcoaster == 1)
                  {
 -                    sprite_index = spr_ralsei_idle;
-+                    sprite_index = global.charinstance[2].idlesprite;
++                    if (i_ex(global.charinstance[2]))
++                    {
++                        sprite_index = global.charinstance[2].idlesprite;
++                    }
                      image_index = 0;
                      image_speed = 0.25;
                  }
-@@ -474,6 +704,9 @@
+@@ -474,6 +713,9 @@
              kriscoaster = 0;
              suscoaster = 0;
              ralcoaster = 0;
@@ -444,7 +453,7 @@
          }
          else
          {
-@@ -490,7 +723,7 @@
+@@ -490,7 +732,7 @@
      endtime++;
      if (endtime == 1)
      {

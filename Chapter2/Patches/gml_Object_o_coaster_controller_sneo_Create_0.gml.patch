@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_o_coaster_controller_sneo_Create_0.gml
 +++ b/Code/gml_Object_o_coaster_controller_sneo_Create_0.gml
-@@ -13,17 +13,50 @@
+@@ -13,17 +13,45 @@
  mykey[2] = 67;
  for (i = 0; i < 3; i += 1)
  {
@@ -10,6 +10,8 @@
 -    HeroCoaster[i].image_index = i;
      HeroCoaster[i].depth = HeroCoaster[i].y * -100;
      HeroCoaster[i].siner = 0;
++    HeroCoaster[i].forceact = 0;
++    HeroCoaster[i].introanim = 0;
      HeroCoaster[i].mykey = mykey[i];
 +    switch (scr_modconfig("coasterMode"))
 +    {
@@ -26,30 +28,24 @@
 +    }
      with (HeroCoaster[i])
      {
-         back = instance_create(x, y, o_coaster_hero_back_sneo);
+-        back = instance_create(x, y, o_coaster_hero_back_sneo);
++        back = instance_create(x, y, o_coaster_hero_back);
          back.parentid = id;
 -        back.depth = depth + 2;
-+        if (global.char[HeroID] == 0)
-+        {
-+            back.visible = 0;
-+        }
 +    }
 +    switch (HeroCoaster[i].HeroID)
 +    {
 +        case 0:
 +            HeroCoaster[i].lane_coaster_x = -15;
-+            HeroCoaster[i].lane_coaster_y = 34;
-+            HeroCoaster[i].lane_character_x = -5;
-+            HeroCoaster[i].lane_character_y = -10;
++            HeroCoaster[i].lane_coaster_y = 75;
 +            break;
 +        case 1:
 +            HeroCoaster[i].lane_coaster_x = -5;
-+            HeroCoaster[i].lane_coaster_y = 33;
-+            HeroCoaster[i].lane_character_x = 5;
++            HeroCoaster[i].lane_coaster_y = 90;
 +            break;
 +        case 2:
 +            HeroCoaster[i].lane_coaster_x = -10;
-+            HeroCoaster[i].lane_coaster_y = 35;
++            HeroCoaster[i].lane_coaster_y = 80;
 +            break;
      }
      yspot[i] = HeroCoaster[i].y;
