@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_coaster_Step_0.gml
 +++ b/Code/gml_Object_obj_coaster_Step_0.gml
-@@ -1,73 +1,154 @@
+@@ -1,73 +1,166 @@
 -if (type == 0 && !init)
 -{
 -    init = true;
@@ -82,19 +82,19 @@
 +            switch (HeroType)
 +            {
 +                case 1:
-+                    character_offset_y += 2;
++                    character_offset_y += 4;
 +                    break;
 +                case 2:
 +                    character_offset_x -= 2;
-+                    character_offset_y += 1;
++                    character_offset_y += 2;
 +                    break;
 +                case 3:
 +                    character_offset_x -= 5;
-+                    character_offset_y += 8;
++                    character_offset_y += 10;
 +                    break;
 +                case 4:
 +                    character_offset_x -= 5;
-+                    character_offset_y += 2;
++                    character_offset_y += 4;
 +                    break;
 +            }
 +            break;
@@ -154,6 +154,18 @@
 +            character_offset_y += -1;
 +            character_sprite = char_sprite_normal;
 +            break;
++        case 8:
++            default_sprite_front = spr_berdly_coaster_front;
++            default_sprite_back = spr_berdly_coaster_back;
++            hurt_sprite_front = spr_berdly_coaster_hurt_front;
++            hurt_sprite_back = spr_berdly_coaster_hurt_back;
++            coaster_offset_x += -24;
++            coaster_offset_y += 26;
++            character_offset_x = -10;
++            character_offset_y = -13;
++            coaster_scale_x = -1;
++            coaster_offset_x += (2 * sprite_get_width(default_sprite_front));
++            break;
 +    }
 +    switch (HeroType)
 +    {
@@ -191,7 +203,7 @@
 +            character_offset_y += -12;
 +            break;
 +        default:
-+            if (CoasterType < 5)
++            if (CoasterType != 5 && CoasterType != 6)
 +            {
 +                char_sprite_normal = 654;
 +                showHero = 0;
@@ -221,7 +233,7 @@
  if (con == 0)
  {
      actor.image_speed = animate ? 0.25 : 0;
-@@ -75,15 +156,19 @@
+@@ -75,15 +168,19 @@
  else
  {
      image_speed = 0;
@@ -244,7 +256,7 @@
      {
          actor.image_index += 0.5;
      }
-@@ -91,15 +176,7 @@
+@@ -91,15 +188,7 @@
  if (stop_siner == 1)
  {
      sinerx = 0;

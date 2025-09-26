@@ -1,6 +1,29 @@
 --- a/Code/gml_Object_obj_ch2_sceneex2_Step_0.gml
 +++ b/Code/gml_Object_obj_ch2_sceneex2_Step_0.gml
-@@ -373,15 +373,15 @@
+@@ -82,13 +82,16 @@
+     {
+         cutscene = 1;
+     }
+-    scr_getchar(2);
+-    scr_getchar(3);
+-    scr_makecaterpillar(obj_mainchara.x + 60, cameray() - 300, 2, 0);
+-    scr_makecaterpillar(obj_mainchara.x + 100, cameray() - 300, 3, 1);
+-    with (obj_caterpillarchara)
++    if (scr_modconfig("forceParty") != 1)
+     {
++        scr_getchar(2);
++        scr_getchar(3);
++        scr_makecaterpillar(obj_mainchara.x + 60, cameray() - 300, 2, 0);
++        scr_makecaterpillar(obj_mainchara.x + 100, cameray() - 300, 3, 1);
++        with (obj_caterpillarchara)
++        {
+-        visible = 0;
++            visible = 0;
++        }
+     }
+     coaster_empty1 = scr_dark_marker(-100, -100, spr_sneo_car_empty);
+     with (coaster_empty1)
+@@ -373,15 +376,15 @@
          c_wait(11);
          c_pan(1640, 0, 15);
          c_sel(kr);
@@ -19,7 +42,7 @@
          c_imagespeed(0.5);
          c_jump(1720, 244, 40, 40);
          c_soundplay(snd_jump);
-@@ -420,12 +420,11 @@
+@@ -420,12 +423,11 @@
          c_var_instance(coaster_susie, "siner_add0", 0.08);
          c_var_instance(coaster_ralsei, "siner_add0", 0.09);
          c_var_instance(coaster_kris, "visible", 1);
@@ -35,7 +58,7 @@
          c_var_instance(coaster_empty1, "visible", 0);
          c_var_instance(coaster_empty2, "visible", 0);
          c_var_instance(coaster_empty3, "visible", 0);
-@@ -489,12 +488,11 @@
+@@ -489,12 +491,11 @@
          c_var_instance(coaster_susie, "siner_add0", 0.08);
          c_var_instance(coaster_ralsei, "siner_add0", 0.09);
          c_var_instance(coaster_kris, "visible", 1);
@@ -51,7 +74,7 @@
          c_actortokris();
          c_actortocaterpillar();
          c_wait(15);
-@@ -528,7 +526,6 @@
+@@ -528,7 +529,6 @@
          with (obj_encounterbasic)
          {
              counttimer = 14;
@@ -59,7 +82,7 @@
              fightcon = 2;
          }
      }
-@@ -537,7 +534,6 @@
+@@ -537,7 +537,6 @@
          with (obj_encounterbasic)
          {
              counttimer = 9;
@@ -67,7 +90,7 @@
          }
          with (obj_doom)
          {
-@@ -581,9 +577,9 @@
+@@ -581,9 +580,9 @@
          {
              lerpstate = 2;
          }
@@ -80,7 +103,7 @@
          alarm[0] = 5;
      }
  }
-@@ -612,9 +608,9 @@
+@@ -612,9 +611,9 @@
  {
      con = 49;
      alarm[0] = 30;

@@ -1,6 +1,14 @@
 --- a/Code/gml_Object_o_coaster_controller_Create_0.gml
 +++ b/Code/gml_Object_o_coaster_controller_Create_0.gml
-@@ -20,57 +20,64 @@
+@@ -13,64 +13,71 @@
+ mykey[0] = 90;
+ mykey[1] = 88;
+ mykey[2] = 67;
+-BerdlyCoaster = instance_create(camerax() + 470, cameray() + 203, o_coaster_berdly);
++BerdlyCoaster = instance_create(camerax() + 470, cameray() + 202, o_coaster_berdly);
+ if (instance_exists(obj_ch2_scene11a))
+ {
+     o_coaster_berdly.x = obj_ch2_scene11a.coaster_berdly.x + 16;
  }
  for (i = 0; i < 3; i += 1)
  {
@@ -24,7 +32,7 @@
      HeroCoaster[i].depth = HeroCoaster[i].y * -100;
      HeroCoaster[i].siner = 0;
      HeroCoaster[i].mykey = mykey[i];
-+    BerdlyCoaster.yspot[i] = HeroCoaster[i].y;
++    BerdlyCoaster.yspot[i] = HeroCoaster[i].y - 7;
 +    if (instance_exists(global.charinstance[i]))
 +    {
 +        global.charinstance[i].x = camerax() - 200;

@@ -1,6 +1,11 @@
 --- a/Code/gml_Object_obj_ch2_sceneex2_Create_0.gml
 +++ b/Code/gml_Object_obj_ch2_sceneex2_Create_0.gml
-@@ -43,34 +43,84 @@
+@@ -39,38 +39,88 @@
+     start_xpos = shortened ? (x + 100) : x;
+     con = 1;
+     scr_losechar();
+-    if (instance_exists(obj_caterpillarchara))
++    if (instance_exists(obj_caterpillarchara) && scr_modconfig("forceParty") != 1)
      {
          instance_destroy(obj_caterpillarchara);
      }

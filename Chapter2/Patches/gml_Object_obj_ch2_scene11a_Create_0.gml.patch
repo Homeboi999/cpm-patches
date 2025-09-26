@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_ch2_scene11a_Create_0.gml
 +++ b/Code/gml_Object_obj_ch2_scene11a_Create_0.gml
-@@ -27,33 +27,64 @@
+@@ -27,33 +27,73 @@
  coaster_ramp.depth = 90000;
  coaster_ramp.visible = 1;
  coaster_kris = instance_create(800, 72, obj_coaster);
@@ -10,13 +10,16 @@
 -}
  coaster_kris.visible = 0;
 +coaster_kris.HeroType = global.char[0];
-+if (scr_modconfig("coasterType") == 1)
++switch (scr_modconfig("coasterMode"))
 +{
-+    coaster_kris.CoasterType = 1;
-+}
-+else
-+{
-+    coaster_kris.CoasterType = coaster_kris.HeroType;
++    case 0:
++    case 1:
++        coaster_kris.CoasterType = global.char[0];
++        break;
++    case 2:
++        var variants = [7, 1, 2, 3, 4, 8];
++        coaster_kris.CoasterType = variants[scr_modconfig("coasterType")];
++        break;
 +}
 +coaster_kris.laneID = 0;
 +coaster_kris.lane_coaster_y = -2;
@@ -32,13 +35,16 @@
 -}
  coaster_susie.visible = 0;
 +coaster_susie.HeroType = global.char[1];
-+if (scr_modconfig("coasterType") == 1)
++switch (scr_modconfig("coasterMode"))
 +{
-+    coaster_susie.CoasterType = 2;
-+}
-+else
-+{
-+    coaster_susie.CoasterType = coaster_susie.HeroType;
++    case 0:
++    case 1:
++        coaster_susie.CoasterType = global.char[1];
++        break;
++    case 2:
++        var variants = [7, 1, 2, 3, 4, 8];
++        coaster_susie.CoasterType = variants[scr_modconfig("coasterType")];
++        break;
 +}
 +coaster_susie.laneID = 1;
 +coaster_susie.lane_coaster_y = 12;
@@ -54,13 +60,16 @@
 -}
  coaster_ralsei.visible = 0;
 +coaster_ralsei.HeroType = global.char[2];
-+if (scr_modconfig("coasterType") == 1)
++switch (scr_modconfig("coasterMode"))
 +{
-+    coaster_ralsei.CoasterType = 3;
-+}
-+else
-+{
-+    coaster_ralsei.CoasterType = coaster_ralsei.HeroType;
++    case 0:
++    case 1:
++        coaster_ralsei.CoasterType = global.char[2];
++        break;
++    case 2:
++        var variants = [7, 1, 2, 3, 4, 8];
++        coaster_ralsei.CoasterType = variants[scr_modconfig("coasterType")];
++        break;
 +}
 +coaster_ralsei.laneID = 2;
 +coaster_ralsei.lane_coaster_y = 9;
