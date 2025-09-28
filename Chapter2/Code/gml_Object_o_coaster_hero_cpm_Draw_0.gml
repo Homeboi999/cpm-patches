@@ -38,6 +38,7 @@ if (hurt == 0)
 
 if (hurt == 1)
 {
+    // hurt sprite is part of default sprite
     draw_sprite_ext(hurt_sprite_front, 0, x + coaster_offset_x, (y - sprite_get_height(hurt_sprite_front)) + coaster_offset_y + 8, image_xscale * coaster_scale_x, image_yscale, 0, c_white, image_alpha);
 }
 
@@ -47,12 +48,15 @@ if (hspeed < 0 || disabled == 1)
     {
         draw_sprite_ext(sprite_index, image_index, x + 20 + anim_offset_x + character_offset_x, (y - (sprite_get_height(sprite_index) * factor_y)) + anim_offset_y + character_offset_y + 8, image_xscalex, image_yscale, 0, c_black, 0.4);
     }
+
     if (hurt == 0)
     {
         draw_sprite_ext(default_sprite_front, 0, x + coaster_offset_x, (y - sprite_get_height(default_sprite_front)) + coaster_offset_y + 8, image_xscale * coaster_scale_x, image_yscale, 0, c_black, 0.4);
     }
+
     if (hurt == 1)
     {
+        // hurt sprite is part of default sprite
         draw_sprite_ext(hurt_sprite_front, 0, x + coaster_offset_x, (y - sprite_get_height(hurt_sprite_front)) + coaster_offset_y + 8, image_xscale * coaster_scale_x, image_yscale, 0, c_black, 0.4);
     }
 }

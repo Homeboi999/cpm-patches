@@ -14,33 +14,29 @@ heroInstance = 0; // battle object
 
 // sprites
 default_sprite_front = spr_sneo_car_front;
-default_sprite_back = spr_sneo_car_back;
-hurt_sprite_front = spr_sneo_car_front;
+default_sprite_back = -1;
+hurt_sprite_front = -1;
+hurt_sprite_back = -1;
 normalsprite = spr_krisr_dark;
 
 // offsets
 coaster_offset_x = 0;
 coaster_offset_y = 0;
-coaster_scale_x = 1;
 back_offset_x = 0;
 back_offset_y = 0;
+coaster_scale_x = 1; // used to flip sprites
 
 character_offset_x = 0;
 character_offset_y = 0;
 anim_offset_x = 0;
 anim_offset_y = 0;
-factor_y = 2; // only susie uses this lmao
+factor_y = 2; // how much the sprite height influences position
+disable_offsets = false; // un-hardcode the sneo checks
 
 lane_coaster_x = 0; // rename these to
 lane_coaster_y = 0; // "lane_offset" later
-battle_hero_x = 0;
-battle_hero_y = 0;
 
-debug_markers = true; // debug squares
-
-// delete these
-lane_character_x = 0;
-lane_character_y = 0;
+debug_markers = false; // debug squares
 
 // -------------------
 //    VANILLA LOGIC
@@ -54,7 +50,6 @@ image_speed = 0.25;
 image_xscale = 2;
 image_yscale = 2;
 mask_index = spr_coaster_hero;
-visible = false;
 siner = 0;
 smoketimer = 0;
 con = 0;

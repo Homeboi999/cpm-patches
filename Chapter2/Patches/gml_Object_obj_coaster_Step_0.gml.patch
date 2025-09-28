@@ -74,30 +74,6 @@
 +        case 0:
 +            showCoaster = 0;
 +            break;
-+        case 7:
-+            default_sprite_front = spr_sneo_car_front;
-+            default_sprite_back = spr_sneo_car_back;
-+            coaster_offset_x += -25;
-+            coaster_offset_y += 44;
-+            switch (HeroType)
-+            {
-+                case 1:
-+                    character_offset_y += 4;
-+                    break;
-+                case 2:
-+                    character_offset_x -= 2;
-+                    character_offset_y += 2;
-+                    break;
-+                case 3:
-+                    character_offset_x -= 5;
-+                    character_offset_y += 10;
-+                    break;
-+                case 4:
-+                    character_offset_x -= 5;
-+                    character_offset_y += 4;
-+                    break;
-+            }
-+            break;
 +        case 1:
 +            default_sprite_front = spr_kris_coaster_front;
 +            default_sprite_back = spr_kris_coaster_back;
@@ -154,6 +130,30 @@
 +            character_offset_y += -1;
 +            character_sprite = char_sprite_normal;
 +            break;
++        case 7:
++            default_sprite_front = spr_sneo_car_front;
++            default_sprite_back = spr_sneo_car_back;
++            coaster_offset_x += -25;
++            coaster_offset_y += 44;
++            switch (HeroType)
++            {
++                case 1:
++                    character_offset_y += 4;
++                    break;
++                case 2:
++                    character_offset_x -= 2;
++                    character_offset_y += 2;
++                    break;
++                case 3:
++                    character_offset_x -= 5;
++                    character_offset_y += 10;
++                    break;
++                case 4:
++                    character_offset_x -= 5;
++                    character_offset_y += 4;
++                    break;
++            }
++            break;
 +        case 8:
 +            default_sprite_front = spr_berdly_coaster_front;
 +            default_sprite_back = spr_berdly_coaster_back;
@@ -161,8 +161,8 @@
 +            hurt_sprite_back = spr_berdly_coaster_hurt_back;
 +            coaster_offset_x += -24;
 +            coaster_offset_y += 26;
-+            character_offset_x = -10;
-+            character_offset_y = -13;
++            character_offset_x = -8;
++            character_offset_y = -1;
 +            coaster_scale_x = -1;
 +            coaster_offset_x += (2 * sprite_get_width(default_sprite_front));
 +            break;

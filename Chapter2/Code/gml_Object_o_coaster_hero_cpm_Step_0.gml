@@ -10,28 +10,12 @@ if (!init)
     // set coaster offsets
     switch (CoasterType)
     {
-        // spamton neo
-        case 7:
-            default_sprite_front = spr_sneo_car_front;
-            default_sprite_back = spr_sneo_car_back;
-            back_offset_x = 1;
-            back_offset_y = -35;
-            coaster_offset_x = 0;
-            coaster_offset_y = -19;
-
-            // dont adjust per-sprite like other coasters
-            // (now character_offset_y is the only offset)
-            factor_y = 0;
-            character_offset_x = -5;
-            character_offset_y = -90;
-
-            break;
-        
         // kris
         case 1:
             default_sprite_front = spr_kris_coaster_front;
             hurt_sprite_front = spr_kris_coaster_hurt_front;
             default_sprite_back = spr_kris_coaster_back;
+            
             back_offset_x = 0;
             back_offset_y = -37;
             coaster_offset_x = 0;
@@ -43,6 +27,7 @@ if (!init)
             default_sprite_front = spr_susie_coaster_front;
             hurt_sprite_front = spr_susie_coaster_hurt_front;
             default_sprite_back = spr_susie_coaster_back;
+
             back_offset_x = 0;
             back_offset_y = -35;
             coaster_offset_x = 0;
@@ -55,6 +40,7 @@ if (!init)
             default_sprite_front = spr_ralsei_coaster_front;
             hurt_sprite_front = spr_ralsei_coaster_hurt_front;
             default_sprite_back = spr_ralsei_coaster_back;
+
             back_offset_x = -10;
             back_offset_y = -43;
             coaster_offset_x = -10;
@@ -66,20 +52,58 @@ if (!init)
             default_sprite_front = spr_noelle_coaster_front;
             hurt_sprite_front = spr_noelle_coaster_front;
             default_sprite_back = -1;
+
             character_offset_x = 4;
             character_offset_y = -10;
             coaster_offset_x = -17;
             coaster_offset_y = 35;
+
+            // flip the sprite
             coaster_offset_x += (2 * sprite_get_width(default_sprite_front));
             coaster_offset_y -= (2 * sprite_get_height(default_sprite_front));
             coaster_scale_x = -1;
             break;
-    }
 
-    // starting as visible crashes on empty slots
-    if (CoasterType != 0)
-    {
-        visible = true;
+        // spamton neo
+        case 7:
+            default_sprite_front = spr_sneo_car_front;
+            default_sprite_back = spr_sneo_car_back;
+
+            back_offset_x = 1;
+            back_offset_y = -35;
+            coaster_offset_x = 0;
+            coaster_offset_y = -19;
+            character_offset_x = -5;
+            character_offset_y = -90; // compensating for factor_y
+
+            // dont adjust per-sprite like other coasters
+            // (now character_offset_y is the only offset)
+            factor_y = 0;
+            disable_offsets = true;
+
+            break;
+
+        // berdly
+        case 8:
+            default_sprite_front = spr_berdly_coaster_front;
+            hurt_sprite_front = spr_berdly_coaster_hurt_front;
+            default_sprite_back = spr_berdly_coaster_back;
+            hurt_sprite_back = spr_berdly_coaster_hurt_back;
+            
+            back_offset_x = -8;
+            back_offset_y = -53;
+            coaster_offset_x = 12;
+            coaster_offset_y = -30;
+
+            // flip the sprites
+            coaster_offset_x += (2 * sprite_get_width(default_sprite_front));
+            back_offset_x += (2 * sprite_get_width(default_sprite_back));
+            coaster_scale_x = -1;
+            break;
+
+        default:
+            visible = false;
+            break;
     }
 
     // char-specific offsets
@@ -265,7 +289,7 @@ if (instance_exists(heroInstance))
 }
 
 // anim offsets (skipped for sneo variant)
-if (CoasterType != 7)
+if (!disable_offsets)
 {
     switch (HeroType)
     {

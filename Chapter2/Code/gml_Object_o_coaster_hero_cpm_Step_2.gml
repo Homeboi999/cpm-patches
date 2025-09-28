@@ -2,11 +2,37 @@
 back.x = x + back_offset_x;
 back.y = y + back_offset_y;
 
-// make sure the IS a back
+// change sprite based on heroInstance
+var hurt = 0;
+
+if (instance_exists(heroInstance))
+{
+    if (sprite_index == heroInstance.hurtsprite)
+    {
+        hurt = 1;
+    }
+    if (heroInstance.hurt > 0)
+    {
+        hurt = 1;
+    }
+}
+// update o_coaster_hero_back
 if (default_sprite_back != -1 && visible)
 {
-    back.sprite_index = default_sprite_back;
+    // set hurt sprite
+    if (hurt)
+    {
+        back.sprite_index = hurt_sprite_back;
+        back.image_index = 0;
+    }
+    else
+    {
+        back.sprite_index = default_sprite_back;
+        back.image_index = 0;
+    }
+
     back.visible = 1;
+    back.image_xscale = 2 * coaster_scale_x;
 }
 else
 {
