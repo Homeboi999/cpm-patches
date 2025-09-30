@@ -1,0 +1,123 @@
+--- a/Code/gml_GlobalScript_scr_text.gml
++++ b/Code/gml_GlobalScript_scr_text.gml
+@@ -4366,31 +4366,107 @@
+             }
+             break;
+         case 1079:
+-            global.choicemsg[0] = stringsetloc(" #Kris", "scr_text_slash_scr_text_gml_4585_0");
+-            global.choicemsg[1] = scr_havechar(4) ? stringsetloc(" #Noelle", "scr_text_slash_scr_text_gml_4586_0") : stringsetloc(" #Susie", "scr_text_slash_scr_text_gml_4586_1");
+-            global.choicemsg[2] = scr_havechar(4) ? stringsetloc(" ", "scr_text_slash_scr_text_gml_4587_0_b") : stringsetloc("Ralsei", "scr_text_slash_scr_text_gml_4587_1");
+-            global.choicemsg[3] = stringsetloc(" ", "scr_text_slash_scr_text_gml_4588_0");
+-            scr_speaker("no_name");
+-            msgsetloc(0, "* OK!^1! Choose your OWN flavor!!/", "scr_text_slash_scr_text_gml_4590_0");
+-            var choiceAmount = scr_havechar(4) ? "\\C2 " : "\\C3 ";
+-            msgnext(choiceAmount);
++            var choiceCount = 0;
++            var krisAdded = false;
++            var susieAdded = false;
++            var ralseiAdded = false;
++            var noelleAdded = false;
++            for (i = 0; i < 3; i++)
++            {
++                switch (global.char[i])
++                {
++                    case 1:
++                        if (!krisAdded)
++                        {
++                            global.choicemsg[choiceCount] = stringsetloc(" #Kris", "scr_text_slash_scr_text_gml_4585_0");
++                            choiceCount++;
++                            susieAdded = true;
++                        }
++                        break;
++                    case 2:
++                        if (!susieAdded)
++                        {
++                            global.choicemsg[choiceCount] = stringsetloc(" #Susie", "scr_text_slash_scr_text_gml_4586_1");
++                            choiceCount++;
++                            susieAdded = true;
++                        }
++                        break;
++                    case 3:
++                        if (!ralseiAdded)
++                        {
++                            global.choicemsg[choiceCount] = stringsetloc(" #Ralsei", "scr_text_slash_scr_text_gml_4587_1");
++                            choiceCount++;
++                            ralseiAdded = true;
++                        }
++                        break;
++                    case 4:
++                        if (!noelleAdded)
++                        {
++                            global.choicemsg[choiceCount] = stringsetloc(" #Noelle", "scr_text_slash_scr_text_gml_4586_0");
++                            choiceCount++;
++                            noelleAdded = true;
++                        }
++                        break;
++                }
++            }
++            if (choiceCount > 1)
++            {
++                scr_speaker("no_name");
++                msgsetloc(0, "* OK!^1! Choose your OWN flavor!!/", "scr_text_slash_scr_text_gml_4590_0");
++                var choiceAmount = "\\C" + string(choiceCount) + " ";
++                msgnext(choiceAmount);
++            }
++            else if (choiceCount == 1)
++            {
++                var itemgetstring = stringsetloc("%%", "scr_text_slash_scr_text_gml_4596_0");
++                if (global.choicemsg[0] == stringsetloc(" #Kris", "scr_text_slash_scr_text_gml_4585_0"))
++                {
++                    itemgetstring = scr_itemget_anytype_text(18, "item");
++                }
++                if (global.choicemsg[0] == stringsetloc(" #Noelle", "scr_text_slash_scr_text_gml_4586_0"))
++                {
++                    itemgetstring = scr_itemget_anytype_text(19, "item");
++                }
++                if (global.choicemsg[0] == stringsetloc(" #Ralsei", "scr_text_slash_scr_text_gml_4587_1"))
++                {
++                    itemgetstring = scr_itemget_anytype_text(20, "item");
++                }
++                if (global.choicemsg[0] == stringsetloc(" #Susie", "scr_text_slash_scr_text_gml_4586_1"))
++                {
++                    itemgetstring = scr_itemget_anytype_text(21, "item");
++                }
++                snd_play(snd_equip);
++                scr_speaker("no_name");
++                msgsetloc(0, "* Okay^1, here you go!/", "scr_text_slash_scr_text_gml_4617_0");
++                msgnext(itemgetstring);
++                break;
++            }
++            else
++            {
++                scr_speaker("no_name");
++                msgset(0, "* You lack the flavor to choose a flavor!!/%");
++            }
+             break;
+         case 1080:
+             var itemgetstring = stringsetloc("%%", "scr_text_slash_scr_text_gml_4596_0");
+-            if (global.choice == 0)
++            if (global.choicemsg[global.choice] == stringsetloc(" #Kris", "scr_text_slash_scr_text_gml_4585_0"))
+             {
+                 itemgetstring = scr_itemget_anytype_text(18, "item");
+             }
+-            if (global.choice == 1)
++            if (global.choicemsg[global.choice] == stringsetloc(" #Noelle", "scr_text_slash_scr_text_gml_4586_0"))
+             {
+-                var teaitemid = scr_havechar(4) ? 19 : 21;
+-                itemgetstring = scr_itemget_anytype_text(teaitemid, "item");
++                itemgetstring = scr_itemget_anytype_text(19, "item");
+             }
+-            if (global.choice == 2)
++            if (global.choicemsg[global.choice] == stringsetloc(" #Ralsei", "scr_text_slash_scr_text_gml_4587_1"))
+             {
+                 itemgetstring = scr_itemget_anytype_text(20, "item");
+             }
++            if (global.choicemsg[global.choice] == stringsetloc(" #Susie", "scr_text_slash_scr_text_gml_4586_1"))
++            {
++                itemgetstring = scr_itemget_anytype_text(21, "item");
++            }
+             snd_play(snd_equip);
++            scr_speaker("no_name");
+             msgsetloc(0, "* Okay^1, here you go!/", "scr_text_slash_scr_text_gml_4617_0");
+             msgnext(itemgetstring);
+             break;
