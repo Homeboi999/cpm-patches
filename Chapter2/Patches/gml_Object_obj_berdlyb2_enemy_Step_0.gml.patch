@@ -219,7 +219,7 @@
          }
      }
      if (actingnoe == 1 && actconnoe == 1)
-@@ -640,7 +741,77 @@
+@@ -640,7 +741,75 @@
          }
          actconnoe = 2;
      }
@@ -240,7 +240,6 @@
 +                    msgnext("\\EB* What makes you so sure Noelle doesn't wanna be with us anyway?/");
 +                    scr_anyface_next("berdly", 20);
 +                    msgnext("\\EK* Noelle? Wanting to be with YOU? HAH!/");
-+                    scr_anyface_next("berdly", 2);
 +                    msgnext("\\E1* Your ignorance never fails to surprise me./%");
 +                }
 +                else
@@ -249,8 +248,7 @@
 +                    msgnext("\\ER* You really don't know when to quit, do you?/");
 +                    scr_anyface_next("berdly", 20);
 +                    msgnext("\\EK* Oh Susie... Have you really not heard the age-olde proverb?/");
-+                    scr_anyface_next("berdly", 2);
-+                    msgnext("\\E2* \"If you quit, all unsaved progress will be lost!\"/");
++                    msgnext("\\E2* \"If you quit, all unsaved progress will be lost!\"/%");
 +                }
 +                scr_battletext();
 +            }
@@ -298,7 +296,7 @@
      {
          if (global.mercymod[myself] < global.mercymax[myself])
          {
-@@ -649,6 +820,8 @@
+@@ -649,6 +818,8 @@
          scr_speaker("no_name");
          msgset(0, berdly_last_line);
          scr_battletext();

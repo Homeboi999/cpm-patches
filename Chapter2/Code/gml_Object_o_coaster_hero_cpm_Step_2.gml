@@ -20,7 +20,7 @@ if (instance_exists(heroInstance))
 if (default_sprite_back != -1 && visible)
 {
     // set hurt sprite
-    if (hurt)
+    if (hurt && hurt_sprite_back != -1)
     {
         back.sprite_index = hurt_sprite_back;
         back.image_index = 0;

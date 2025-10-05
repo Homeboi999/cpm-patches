@@ -30,14 +30,10 @@
  }
  initdelay--;
  if (initdelay <= 0)
-@@ -32,10 +40,37 @@
+@@ -32,11 +40,40 @@
      {
          if (success == 1)
          {
--            with (target)
--            {
--                global.flag[51 + myself] = 3;
--                event_user(10);
 +            if (fail)
 +            {
 +                success = 0;
@@ -49,26 +45,34 @@
 +            }
 +            else if (fake)
 +            {
-+                global.flag[51 + myself] = 3;
-+                if (global.monstertype[myself] == 43)
++                with (target)
 +                {
-+                    with (target)
++                    global.flag[51 + myself] = 3;
++                    if (global.monstertype[myself] == 43)
 +                    {
 +                        endcon = 1;
 +                    }
-+                }
-+                else
-+                {
-+                    with (target)
++                    else
 +                    {
 +                        scr_fakespare();
++                        spareanim.doreverse = false;
 +                        pacifycon = 1;
 +                    }
 +                }
 +            }
 +            else
 +            {
-+                global.flag[51 + myself] = 3;
-                 scr_monsterdefeat();
+-            with (target)
++                with (target)
+-            {
++                {
+-                global.flag[51 + myself] = 3;
++                    global.flag[51 + myself] = 3;
+-                event_user(10);
++                    event_user(10);
+-                scr_monsterdefeat();
++                    scr_monsterdefeat();
++                }
              }
          }
+     }

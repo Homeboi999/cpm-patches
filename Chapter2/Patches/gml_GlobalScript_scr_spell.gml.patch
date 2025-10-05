@@ -9,7 +9,7 @@
                          {
                              var yoffy;
                              if (global.monstertype[myself] == 33)
-@@ -104,6 +104,19 @@
+@@ -104,6 +104,20 @@
                                  }
                                  exit;
                              }
@@ -20,6 +20,7 @@
 +                                _pspell.target = id;
 +                                global.flag[51 + myself] = 3;
 +                                scr_fakespare();
++                                spareanim.doreverse = false;
 +                                with (obj_spamton_enemy)
 +                                {
 +                                    pacifycon = 1;
@@ -29,7 +30,7 @@
                              pacifycon = 1;
                              global.spelldelay = 999;
                          }
-@@ -171,27 +184,30 @@
+@@ -171,27 +185,30 @@
              healnum = ceil(global.battlemag[arg1] * 5.5);
              for (i = 0; i < 3; i += 1)
              {
@@ -76,7 +77,7 @@
                  }
              }
              global.spelldelay = 15;
-@@ -289,6 +305,27 @@
+@@ -289,6 +306,27 @@
                  }
              }
              break;
@@ -104,7 +105,7 @@
          case 100:
              if (global.monster[star] == 0)
              {
-@@ -326,6 +363,9 @@
+@@ -326,6 +364,9 @@
              }
              global.spelldelay = 0;
              break;
@@ -114,7 +115,7 @@
          case 200:
              break;
          case 201:
-@@ -514,6 +554,9 @@
+@@ -514,6 +555,9 @@
              item_use = true;
              break;
          case 233:
