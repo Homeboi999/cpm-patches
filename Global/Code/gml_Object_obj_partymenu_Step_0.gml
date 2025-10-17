@@ -77,14 +77,14 @@ if (partyMenu == 1)
         charSelect -= 1;
         if (charSelect < 1)
         {
-            charSelect = array_length(charList) - 1;
+            charSelect = charMax;
         }
     }
     if (right_p())
     {
         snd_play(snd_menumove);
         charSelect += 1;
-        if (charSelect > (array_length(charList) - 1))
+        if (charSelect > (charMax))
         {
             charSelect = 1;
         }

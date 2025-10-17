@@ -9,6 +9,7 @@ if (global.chapter == 2)
         config_list = [0, 1, 2];
     }
 }
+
 if (configMenu == 0)
 {
     if (up_p())

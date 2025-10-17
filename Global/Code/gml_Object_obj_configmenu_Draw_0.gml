@@ -22,7 +22,7 @@ if (configMenu == 0)
     draw_rectangle(menu_x, menu_y, menu_x + menu_width, menu_y + menu_height, false);
     scr_darkbox(menu_x - 10, menu_y - 10, menu_x + menu_width + 10, menu_y + menu_height + 10);
     draw_set_color(c_white);
-    draw_text(menu_x + 87, menu_y + 12, stringset("Mod Options"));
+    draw_text(menu_x + 87, menu_y + 12, "Mod Options");
     for (i = 0; i < array_length(config_list); i++)
     {
         if (config_max[config_list[i]] == 0)
