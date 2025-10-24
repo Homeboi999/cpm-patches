@@ -44,14 +44,17 @@ if (partyMenu == 0)
             partyMenu = 2;
         }
     }
-    if (button2_p() && twobuffer < 0)
+    else if (button2_p() && twobuffer < 0)
     {
+        // closing the menu is an else/if bc doing so
+        // on the same frame as opening the config menu
+        // will crash the game when closing it.
         snd_play(snd_smallswing);
         twobuffer = 2;
         global.charselect = global.submenucoord[20];
         instance_destroy();
     }
-    if (button3_p() && threebuffer < 0)
+    else if (button3_p() && threebuffer < 0)
     {
         threebuffer = 2;
         if (partySelect < 3)

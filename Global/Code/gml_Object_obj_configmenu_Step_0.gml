@@ -51,7 +51,13 @@ if (configMenu == 0)
     {
         snd_play(snd_smallswing);
         twobuffer = 2;
-        obj_partymenu.partyMenu = 0;
+
+        // failsafe in case the config menu gets opened
+        // without a partymenu
+        if (instance_exists(obj_partymenu))
+        {
+            obj_partymenu.partyMenu = 0;
+        }
         global.othername[2] = string(global.modconfig);
         instance_destroy();
     }
