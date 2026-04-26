@@ -1,0 +1,341 @@
+--- a/Code/gml_GlobalScript_scr_charbox.gml
++++ b/Code/gml_GlobalScript_scr_charbox.gml
+@@ -1,8 +1,9 @@
+ function scr_charbox()
+ {
+-    for (c = 0; c < 4; c += 1)
++    for (pos = 0; pos < 3; pos++)
+     {
+-        if (havechar[c] == 1)
++        c = global.char[pos] - 1;
++        if (c != -1)
+         {
+             if (c == 0)
+             {
+@@ -22,107 +23,107 @@
+             }
+             gc = global.charturn;
+             xchunk = 0;
+-            if (charpos[c] == 0 && chartotal == 3)
++            if (pos == 0 && chartotal == 3)
+             {
+                 xchunk = 0;
+             }
+-            if (charpos[c] == 1 && chartotal == 3)
++            if (pos == 1 && chartotal == 3)
+             {
+                 xchunk = 213;
+             }
+-            if (charpos[c] == 2 && chartotal == 3)
++            if (pos == 2 && chartotal == 3)
+             {
+                 xchunk = 426;
+             }
+-            if (charpos[c] == 0 && chartotal == 2)
++            if (pos == 0 && chartotal == 2)
+             {
+                 xchunk = 108;
+             }
+-            if (charpos[c] == 1 && chartotal == 2)
++            if (pos == 1 && chartotal == 2)
+             {
+                 xchunk = 322;
+             }
+-            if (charpos[c] == 0 && chartotal == 1)
++            if (pos == 0 && chartotal == 1)
+             {
+                 xchunk = 213;
+             }
+-            if (gc == charpos[c])
++            if (gc == pos)
+             {
+                 if (rouxlsgridenabled == false)
+                 {
+-                    if (mmy[c] > -32)
++                    if (mmy[pos] > -32)
+                     {
+-                        mmy[c] -= 2;
++                        mmy[pos] -= 2;
+                     }
+-                    if (mmy[c] > -24)
++                    if (mmy[pos] > -24)
+                     {
+-                        mmy[c] -= 4;
++                        mmy[pos] -= 4;
+                     }
+-                    if (mmy[c] > -16)
++                    if (mmy[pos] > -16)
+                     {
+-                        mmy[c] -= 6;
++                        mmy[pos] -= 6;
+                     }
+-                    if (mmy[c] > -8)
++                    if (mmy[pos] > -8)
+                     {
+-                        mmy[c] -= 8;
++                        mmy[pos] -= 8;
+                     }
+-                    if (mmy[c] < -32)
++                    if (mmy[pos] < -32)
+                     {
+-                        mmy[c] = -64;
++                        mmy[pos] = -64;
+                     }
+                 }
+                 else
+                 {
+-                    if (mmy[c] > -170)
++                    if (mmy[pos] > -170)
+                     {
+-                        mmy[c] -= 2;
++                        mmy[pos] -= 2;
+                     }
+-                    if (mmy[c] > -160)
++                    if (mmy[pos] > -160)
+                     {
+-                        mmy[c] -= 4;
++                        mmy[pos] -= 4;
+                     }
+-                    if (mmy[c] > -150)
++                    if (mmy[pos] > -150)
+                     {
+-                        mmy[c] -= 6;
++                        mmy[pos] -= 6;
+                     }
+-                    if (mmy[c] > -140)
++                    if (mmy[pos] > -140)
+                     {
+-                        mmy[c] -= 12;
++                        mmy[pos] -= 12;
+                     }
+-                    if (mmy[c] > -32)
++                    if (mmy[pos] > -32)
+                     {
+-                        mmy[c] -= 32;
++                        mmy[pos] -= 32;
+                     }
+                 }
+             }
+             else if (rouxlsgridenabled == false)
+             {
+-                if (mmy[c] < -14)
++                if (mmy[pos] < -14)
+                 {
+-                    mmy[c] += 15;
++                    mmy[pos] += 15;
+                 }
+                 else
+                 {
+-                    mmy[c] = 0;
++                    mmy[pos] = 0;
+                 }
+             }
+             else
+             {
+-                if (mmy[c] < -14)
++                if (mmy[pos] < -14)
+                 {
+-                    mmy[c] += 32;
++                    mmy[pos] += 32;
+                 }
+-                if (mmy[c] > -14)
++                if (mmy[pos] > -14)
+                 {
+-                    mmy[c] = 0;
++                    mmy[pos] = 0;
+                 }
+             }
+-            if (rouxlsgridenabled && mmy[c] != 0)
++            if (rouxlsgridenabled && mmy[pos] != 0)
+             {
+                 draw_set_color(c_black);
+-                draw_rectangle(xx + xchunk + 2, (480 - bp - 1) + yy + mmy[c], xx + xchunk + 210, (480 - bp) + yy + 0 + 33, false);
++                draw_rectangle(xx + xchunk + 2, (480 - bp - 1) + yy + mmy[pos], xx + xchunk + 210, (480 - bp) + yy + 0 + 33, false);
+             }
+-            if (gc == charpos[c])
++            if (gc == pos)
+             {
+                 if (global.myfight == 0)
+                 {
+@@ -132,27 +133,27 @@
+                     }
+                     else
+                     {
+-                        draw_rectangle(xx + xchunk, (480 - bp - 3) + yy + mmy[c], xx + xchunk + 212, 480 - bp, false);
++                        draw_rectangle(xx + xchunk, (480 - bp - 3) + yy + mmy[pos], xx + xchunk + 212, 480 - bp, false);
+                         draw_set_color(c_black);
+-                        draw_rectangle(xx + xchunk + 2, (480 - bp - 1) + yy + mmy[c], xx + xchunk + 210, 480 - bp, false);
++                        draw_rectangle(xx + xchunk + 2, (480 - bp - 1) + yy + mmy[pos], xx + xchunk + 210, 480 - bp, false);
+                         slmxx = xx + xchunk;
+                         slmyy = (480 - bp) + yy;
+                         s_siner += 2;
+                         draw_set_color(charcolor);
+-                        draw_rectangle(slmxx, (480 - bp) + 40 + yy + mmy[c], slmxx + 212, (480 - bp) + 43 + yy + mmy[c], false);
++                        draw_rectangle(slmxx, (480 - bp) + 40 + yy + mmy[pos], slmxx + 212, (480 - bp) + 43 + yy + mmy[pos], false);
+                         for (i = 0; i < 12; i += 1)
+                         {
+                             myxx = s_siner + (i * (10 * pi));
+                             draw_set_alpha(sin(myxx / 60));
+-                            draw_line_width(slmxx, (slmyy - 3) + (mmy[c] * 0.75), slmxx, slmyy + 33, 2);
++                            draw_line_width(slmxx, (slmyy - 3) + (mmy[pos] * 0.75), slmxx, slmyy + 33, 2);
+-                            draw_line_width(slmxx + 210 + 1, (slmyy - 3) + (mmy[c] * 0.75), slmxx + 210 + 1, slmyy + 33, 2);
++                            draw_line_width(slmxx + 210 + 1, (slmyy - 3) + (mmy[pos] * 0.75), slmxx + 210 + 1, slmyy + 33, 2);
+-                            if (mmy[c] < -140)
++                            if (mmy[pos] < -140)
+                             {
+                                 if (cos(myxx / 60) < 0)
+                                 {
+-                                    draw_set_alpha(lerp(0, sin(myxx / 60), (abs(mmy[c]) - 140) / 30));
++                                    draw_set_alpha(lerp(0, sin(myxx / 60), (abs(mmy[pos]) - 140) / 30));
+-                                    draw_line_width((slmxx - (sin(myxx / 60) * 30)) + 30, slmyy + (mmy[c] * 0.75), (slmxx - (sin(myxx / 60) * 30)) + 30, slmyy + 33, 2);
++                                    draw_line_width((slmxx - (sin(myxx / 60) * 30)) + 30, slmyy + (mmy[pos] * 0.75), (slmxx - (sin(myxx / 60) * 30)) + 30, slmyy + 33, 2);
+-                                    draw_line_width((slmxx + 210 + (sin(myxx / 60) * 30)) - 30, slmyy + (mmy[c] * 0.75), (slmxx + 210 + (sin(myxx / 60) * 30)) - 30, slmyy + 33, 2);
++                                    draw_line_width((slmxx + 210 + (sin(myxx / 60) * 30)) - 30, slmyy + (mmy[pos] * 0.75), (slmxx + 210 + (sin(myxx / 60) * 30)) - 30, slmyy + 33, 2);
+                                 }
+                             }
+                         }
+@@ -174,7 +175,7 @@
+                     rep++;
+                 }
+             }
+-            if (gc == charpos[c])
++            if (gc == pos)
+             {
+                 btc[global.bmenucoord[0][global.charturn] + (rouxlsbuttoncount_y * 5)] = 1;
+             }
+@@ -498,12 +499,12 @@
+                             y_extra = 0;
+                             rep = 5;
+                         }
+-                        if (gc == charpos[c])
++                        if (gc == pos)
+                         {
+                             repeat (rep)
+                             {
+-                                var __y2 = lerp(140, 0, abs(mmy[c] / 170));
++                                var __y2 = lerp(140, 0, abs(mmy[pos] / 170));
+-                                var __y = (y_extra * 32) + (mmy[c] * 0.75) + __y2;
++                                var __y = (y_extra * 32) + (mmy[pos] * 0.75) + __y2;
+                                 if (rep == 1)
+                                 {
+                                     __y += 32;
+@@ -644,17 +645,17 @@
+                     draw_sprite(scr_84_get_sprite("spr_btitem"), btc[2], xx + xchunk + 85 + icon_offset, (485 - bp) + yy);
+                     draw_sprite(scr_84_get_sprite("spr_btspare"), btc[3], xx + xchunk + 120 + icon_offset, (485 - bp) + yy);
+                     draw_sprite(scr_84_get_sprite("spr_btdefend"), btc[4], xx + xchunk + 155 + icon_offset, (485 - bp) + yy);
+-                    if (spare_glow == 1 && gc == charpos[c])
++                    if (spare_glow == 1 && gc == pos)
+                     {
+                         draw_sprite_ext(scr_84_get_sprite("spr_btspare"), 2, xx + xchunk + 120 + icon_offset, (485 - bp) + yy, 1, 1, 0, c_white, 0.4 + (sin(global.time / 6) * 0.4));
+                     }
+-                    if (pacify_glow == 1 && gc == charpos[c])
++                    if (pacify_glow == 1 && gc == pos)
+                     {
+                         draw_sprite_ext(scr_84_get_sprite("spr_bttech"), 2, xx + xchunk + 50 + icon_offset, (485 - bp) + yy, 1, 1, 0, c_white, 0.4 + (sin(global.time / 6) * 0.4));
+                     }
+                 }
+             }
+-            if (gc == charpos[c])
++            if (gc == pos)
+             {
+                 draw_set_color(charcolor);
+             }
+@@ -662,32 +663,32 @@
+             {
+                 draw_set_color(bcolor);
+             }
+-            if (global.charselect == charpos[c] || global.charselect == 3)
++            if (global.charselect == pos || global.charselect == 3)
+             {
+                 draw_set_color(charcolor);
+             }
+             if (rouxlsgridenabled == false)
+             {
+-                draw_rectangle(xx + xchunk, (480 - bp - 3) + yy + mmy[c], xx + xchunk + 212, ((480 - bp) + yy) - 2, false);
++                draw_rectangle(xx + xchunk, (480 - bp - 3) + yy + mmy[pos], xx + xchunk + 212, ((480 - bp) + yy) - 2, false);
+                 draw_set_color(c_black);
+-                draw_rectangle(xx + xchunk + 2, (480 - bp - 1) + yy + mmy[c], xx + xchunk + 210, (480 - bp) + yy + mmy[c] + 33, false);
++                draw_rectangle(xx + xchunk + 2, (480 - bp - 1) + yy + mmy[pos], xx + xchunk + 210, (480 - bp) + yy + mmy[pos] + 33, false);
+             }
+             else
+             {
+-                draw_rectangle(xx + xchunk, (480 - bp - 3) + yy + mmy[c], xx + xchunk + 212, (480 - bp - 2) + yy + mmy[c], false);
++                draw_rectangle(xx + xchunk, (480 - bp - 3) + yy + mmy[pos], xx + xchunk + 212, (480 - bp - 2) + yy + mmy[pos], false);
+                 if (mmy[c] < -32)
+                 {
+-                    draw_rectangle(xx + xchunk, (480 - bp - 3) + yy + mmy[c], xx + xchunk + 1, bpoff + b_offset + 39 + mmy[c], false);
++                    draw_rectangle(xx + xchunk, (480 - bp - 3) + yy + mmy[pos], xx + xchunk + 1, bpoff + b_offset + 39 + mmy[pos], false);
+-                    draw_rectangle(xx + xchunk + 211, (480 - bp - 3) + yy + mmy[c], xx + xchunk + 212, bpoff + b_offset + 39 + mmy[c], false);
++                    draw_rectangle(xx + xchunk + 211, (480 - bp - 3) + yy + mmy[pos], xx + xchunk + 212, bpoff + b_offset + 39 + mmy[pos], false);
+                 }
+                 draw_set_color(c_black);
+-                if (gc != charpos[c] && mmy[c] != 0)
++                if (gc != pos && mmy[pos] != 0)
+                 {
+-                    draw_rectangle(xx + xchunk + 2, (480 - bp - 1) + yy + mmy[c], xx + xchunk + 210, (480 - bp) + yy + 0 + 33, false);
++                    draw_rectangle(xx + xchunk + 2, (480 - bp - 1) + yy + mmy[pos], xx + xchunk + 210, (480 - bp) + yy + 0 + 33, false);
+                 }
+                 else
+                 {
+-                    draw_rectangle(xx + xchunk + 2, (480 - bp - 1) + yy + mmy[c], xx + xchunk + 210, (480 - bp) + yy + mmy[c] + 33, false);
++                    draw_rectangle(xx + xchunk + 2, (480 - bp - 1) + yy + mmy[pos], xx + xchunk + 210, (480 - bp) + yy + mmy[pos] + 33, false);
+                 }
+             }
+             b_offset = 480;
+@@ -701,25 +702,25 @@
+             }
+             if (c == 0)
+             {
+-                draw_sprite(spr_headkris, global.faceaction[charpos[c]], xx + 13 + xchunk, bpoff + b_offset + mmy[c]);
++                draw_sprite(spr_headkris, global.faceaction[pos], xx + 13 + xchunk, bpoff + b_offset + mmy[pos]);
+-                draw_sprite(scr_84_get_sprite("spr_bnamekris"), 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[c]);
++                draw_sprite(scr_84_get_sprite("spr_bnamekris"), 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[pos]);
+             }
+             if (c == 1)
+             {
+-                draw_sprite(spr_headsusie, global.faceaction[charpos[c]], xx + 13 + xchunk, bpoff + b_offset + mmy[c]);
++                draw_sprite(spr_headsusie, global.faceaction[pos], xx + 13 + xchunk, bpoff + b_offset + mmy[pos]);
+-                draw_sprite(scr_84_get_sprite("spr_bnamesusie"), 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[c]);
++                draw_sprite(scr_84_get_sprite("spr_bnamesusie"), 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[pos]);
+             }
+             if (c == 2)
+             {
+-                draw_sprite(spr_headralsei, global.faceaction[charpos[c]], xx + 13 + xchunk, bpoff + b_offset + mmy[c]);
++                draw_sprite(spr_headralsei, global.faceaction[pos], xx + 13 + xchunk, bpoff + b_offset + mmy[pos]);
+-                draw_sprite(scr_84_get_sprite("spr_bnameralsei"), 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[c]);
++                draw_sprite(scr_84_get_sprite("spr_bnameralsei"), 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[pos]);
+             }
+             if (c == 3)
+             {
+-                draw_sprite(spr_headnoelle, global.faceaction[charpos[c]], xx + 13 + xchunk, bpoff + b_offset + mmy[c]);
++                draw_sprite(spr_headnoelle, global.faceaction[pos], xx + 13 + xchunk, bpoff + b_offset + mmy[pos]);
+-                draw_sprite(scr_84_get_sprite("spr_bnamenoelle"), 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[c]);
++                draw_sprite(scr_84_get_sprite("spr_bnamenoelle"), 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[pos]);
+             }
+-            draw_sprite(spr_hpname, 0, xx + 109 + xchunk, bpoff + b_offset + 11 + mmy[c]);
++            draw_sprite(spr_hpname, 0, xx + 109 + xchunk, bpoff + b_offset + 11 + mmy[pos]);
+             draw_set_color(c_white);
+             draw_set_font(global.hpfont);
+             if ((global.hp[c + 1] / global.maxhp[c + 1]) <= 0.25)
+@@ -731,16 +732,16 @@
+                 draw_set_color(c_red);
+             }
+             draw_set_halign(fa_right);
+-            draw_text(xx + 160 + xchunk, ((bpoff + b_offset) - 2) + mmy[c], string_hash_to_newline(global.hp[c + 1]));
++            draw_text(xx + 160 + xchunk, ((bpoff + b_offset) - 2) + mmy[pos], string_hash_to_newline(global.hp[c + 1]));
+-            draw_sprite(spr_hpslash, 0, xx + 159 + xchunk, ((bpoff + b_offset) - 4) + mmy[c]);
++            draw_sprite(spr_hpslash, 0, xx + 159 + xchunk, ((bpoff + b_offset) - 4) + mmy[pos]);
+-            draw_text(xx + 205 + xchunk, ((bpoff + b_offset) - 2) + mmy[c], string_hash_to_newline(global.maxhp[c + 1]));
++            draw_text(xx + 205 + xchunk, ((bpoff + b_offset) - 2) + mmy[pos], string_hash_to_newline(global.maxhp[c + 1]));
+             draw_set_halign(fa_left);
+             draw_set_color(c_maroon);
+-            draw_rectangle(xx + 128 + xchunk, bpoff + b_offset + 11 + mmy[c], xx + 203 + xchunk, bpoff + b_offset + 19 + mmy[c], false);
++            draw_rectangle(xx + 128 + xchunk, bpoff + b_offset + 11 + mmy[pos], xx + 203 + xchunk, bpoff + b_offset + 19 + mmy[pos], false);
+             if (global.hp[c + 1] > 0 && global.maxhp[c + 1] > 0)
+             {
+                 draw_set_color(charcolor);
+-                draw_rectangle(xx + 128 + xchunk, bpoff + b_offset + 11 + mmy[c], xx + xchunk + 128 + ceil((global.hp[c + 1] / global.maxhp[c + 1]) * 75), bpoff + b_offset + 19 + mmy[c], false);
++                draw_rectangle(xx + 128 + xchunk, bpoff + b_offset + 11 + mmy[pos], xx + xchunk + 128 + ceil((global.hp[c + 1] / global.maxhp[c + 1]) * 75), bpoff + b_offset + 19 + mmy[pos], false);
+             }
+         }
+     }
