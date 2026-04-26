@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_dummyenemy_Step_0.gml
 +++ b/Code/gml_Object_obj_dummyenemy_Step_0.gml
-@@ -3,11 +3,20 @@
+@@ -3,11 +3,19 @@
      scr_ambush();
      ambushed = 1;
  }
@@ -9,10 +9,9 @@
 +global.charmove[2] = 0;
 +susie_dmg = 0;
 +var msg_num = 0;
-+if (scr_havechar(2) && susie_auto && plot == 1 && turns <= 3)
++if (susie_auto)
 +{
 +    global.charmove[scr_findchar(2)] = 1;
-+    susie_dmg = round(((global.battleat[scr_findchar(2)] * 160) / 20) - (global.monsterdf[global.chartarget[scr_findchar(2)]] * 3));
 +}
  if (plot != 3)
  {
@@ -24,7 +23,7 @@
      {
          spare_used = 1;
      }
-@@ -18,17 +27,16 @@
+@@ -18,17 +26,16 @@
  }
  else
  {
@@ -46,7 +45,7 @@
      {
          with (obj_attackpress)
          {
-@@ -45,8 +53,8 @@
+@@ -45,8 +52,8 @@
              global.myfight = -1;
              instance_destroy();
          }
@@ -57,7 +56,7 @@
      }
  }
  if (global.monster[myself] == 1)
-@@ -69,12 +77,12 @@
+@@ -69,12 +76,12 @@
              {
                  abletotarget = 0;
              }
@@ -72,7 +71,7 @@
                  }
              }
              else
-@@ -106,17 +114,17 @@
+@@ -106,17 +113,17 @@
          if (plot >= 1)
          {
              dial = 0;
@@ -94,7 +93,7 @@
                  {
                      dial = 3;
                      global.flag[205] = 6;
-@@ -128,7 +136,7 @@
+@@ -128,7 +135,7 @@
                      global.flag[205] = 4;
                  }
              }
@@ -103,7 +102,7 @@
              {
                  global.fe = 0;
                  global.msg[0] = scr_84_get_lang_string("obj_dummyenemy_slash_Step_0_gml_115_0");
-@@ -182,7 +190,7 @@
+@@ -182,7 +189,7 @@
                  defendtime += 1;
                  commanded = 1;
              }
@@ -112,7 +111,7 @@
              {
                  global.fe = 0;
                  global.msg[0] = scr_84_get_lang_string("obj_dummyenemy_slash_Step_0_gml_167_0");
-@@ -254,34 +262,88 @@
+@@ -254,34 +261,88 @@
                  ral_wrongcommand_count += 1;
                  commanded = 0;
              }
@@ -219,7 +218,7 @@
                  {
                      global.fe = 0;
                      if (spare_command == 0)
-@@ -319,7 +381,14 @@
+@@ -319,7 +380,14 @@
                  if (plot == 5)
                  {
                      global.msg[0] = scr_84_get_lang_string("obj_dummyenemy_slash_Step_0_gml_307_0");
@@ -235,7 +234,7 @@
                      won = 1;
                  }
                  spare_used = 0;
-@@ -331,7 +400,8 @@
+@@ -331,7 +399,8 @@
                  if (plot == 1)
                  {
                      global.fe = 3;
@@ -245,7 +244,7 @@
                      {
                          global.msg[0] = scr_84_get_lang_string("obj_dummyenemy_slash_Step_0_gml_327_0");
                          global.msg[1] = scr_84_get_lang_string("obj_dummyenemy_slash_Step_0_gml_328_0");
-@@ -340,17 +410,35 @@
+@@ -340,17 +409,35 @@
                      {
                          global.msg[0] = scr_84_get_lang_string("obj_dummyenemy_slash_Step_0_gml_332_0");
                          global.msg[1] = scr_84_get_lang_string("obj_dummyenemy_slash_Step_0_gml_333_0") + scr_get_input_name(4) + scr_84_get_lang_string("obj_dummyenemy_slash_Step_0_gml_333_1");
@@ -285,7 +284,7 @@
                      plot = 2;
                      if (defendtime >= 1)
                      {
-@@ -399,8 +487,16 @@
+@@ -399,8 +486,16 @@
                  global.msg[1] = scr_84_get_lang_string("obj_dummyenemy_slash_Step_0_gml_399_0") + scr_get_input_name(4) + scr_84_get_lang_string("obj_dummyenemy_slash_Step_0_gml_399_1");
                  if (misstime >= 1)
                  {
@@ -303,7 +302,7 @@
                      if (misstime == 2)
                      {
                          global.msg[0] = scr_84_get_lang_string("obj_dummyenemy_slash_Step_0_gml_404_0") + scr_get_input_name(4) + scr_84_get_lang_string("obj_dummyenemy_slash_Step_0_gml_404_1");
-@@ -428,18 +524,27 @@
+@@ -428,18 +523,27 @@
                      }
                      if (misstime == 8)
                      {
@@ -339,7 +338,7 @@
                              plot = 3;
                          }
                      }
-@@ -450,14 +555,29 @@
+@@ -450,14 +554,29 @@
              {
                  global.fe = 9;
                  global.msg[0] = scr_84_get_lang_string("obj_dummyenemy_slash_Step_0_gml_441_0");
@@ -377,7 +376,7 @@
                  }
                  won = 1;
                  global.myfight = 999;
-@@ -616,15 +736,28 @@
+@@ -616,15 +735,28 @@
      global.fe = 0;
      global.writerimg[0] = scr_84_get_sprite("spr_btfight");
      global.msg[0] = scr_84_get_lang_string("obj_dummyenemy_slash_Step_0_gml_598_0");
@@ -394,7 +393,7 @@
 +        scr_susface(2, 0);
 +        global.msg[3] = "* You dorks just wanna run away from everything?/";
 +        global.msg[4] = "\\E1* I thought you were teaching us how to \\cYFIGHT\\cW./";
-+        scr_ralface(5, "B");
++        scr_ralface(5, 0);
 +        global.msg[6] = "* I'm getting there, Susie./";
 +        msg_num = 4;
 +    }
@@ -410,7 +409,7 @@
      global.battlemsg[0] = scr_84_get_lang_string("obj_dummyenemy_slash_Step_0_gml_610_0");
      scr_battletext();
      con = 6;
-@@ -685,11 +818,11 @@
+@@ -685,11 +817,11 @@
      }
      if (actcon == 10)
      {
@@ -424,7 +423,7 @@
          with (k)
          {
              scr_move_to_point_over_time(global.monsterx[0] - 42, global.monstery[0] - 30, 15);
-@@ -732,23 +865,40 @@
+@@ -732,23 +864,40 @@
          }
          if (plot == 1)
          {
@@ -478,7 +477,7 @@
                  plot = 3;
              }
          }
-@@ -786,7 +936,7 @@
+@@ -786,7 +935,7 @@
          }
          with (k)
          {
@@ -487,7 +486,7 @@
          }
          actcon = 19;
          alarm[4] = 25;
-@@ -799,7 +949,7 @@
+@@ -799,7 +948,7 @@
          }
          global.mercymod[0] = 100;
          global.mercymod[1] = 100;
@@ -496,7 +495,7 @@
          actcon = 1;
      }
      if (acting == 3 && actcon == 0)
-@@ -825,11 +975,11 @@
+@@ -825,11 +974,11 @@
      {
          makekris = 1;
          maker = 0;
@@ -510,7 +509,7 @@
          with (k)
          {
              scr_move_to_point_over_time(obj_heroralsei.x - 24, obj_heroralsei.y + 10, 15);
-@@ -919,7 +1069,7 @@
+@@ -919,7 +1068,7 @@
          }
          with (k)
          {
@@ -519,7 +518,7 @@
          }
          actcon = 39;
          alarm[4] = 25;
-@@ -940,7 +1090,7 @@
+@@ -940,7 +1089,7 @@
          {
              instance_destroy();
          }

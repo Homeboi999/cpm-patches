@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_dummyenemy_Create_0.gml
 +++ b/Code/gml_Object_obj_dummyenemy_Create_0.gml
-@@ -57,6 +57,13 @@
+@@ -57,6 +57,17 @@
  sparedsprite = sprite_index;
  hurtsprite = sprite_index;
  idlesprite = sprite_index;
@@ -12,6 +12,10 @@
 +    mainchar = 3;
 +}
 +kris_inithp = global.hp[mainchar];
-+susie_auto = global.charauto[2];
++susie_auto = scr_havechar(2) && global.charauto[2];
 +susie_dmg = 0;
++if (susie_auto)
++{
++    susie_dmg = round(((global.battleat[scr_findchar(2)] * 160) / 20) - (global.monsterdf[global.chartarget[scr_findchar(2)]] * 3));
++}
  

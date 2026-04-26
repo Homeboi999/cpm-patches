@@ -1,0 +1,11 @@
+--- a/Code/gml_GlobalScript_scr_mnendturn.gml
++++ b/Code/gml_GlobalScript_scr_mnendturn.gml
+@@ -86,7 +86,7 @@
+         }
+         if (skip == 1)
+         {
+-            if (global.char[0] == 2 && global.charauto[2] == 1)
++            if (global.char[0] == 2 && global.charauto[2] == 1 && instance_exists(obj_lancerboss2))
+             {
+                 global.acting[0] = 1;
+                 global.myfight = 3;
