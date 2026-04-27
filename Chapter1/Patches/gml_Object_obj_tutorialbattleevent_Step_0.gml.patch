@@ -28,3 +28,49 @@
      }
      if (con == 20 && d_ex() == 0)
      {
+@@ -60,17 +63,35 @@
+         global.fc = 2;
+         global.fe = 0;
+         global.typer = 31;
++        var msg_num = 0;
++        if (scr_havechar(3))
++        {
++            global.msg[0] = "\\E8* That was good! Practice makes perfect!/";
++            global.msg[1] = "\\E1* I should probably get going, though.../";
++            if (global.flag[205] >= 4)
++            {
++                global.msg[0] = "\\E8* (Thank goodness that was just a rehearsal.)/";
++                global.msg[1] = "\\E2* ...I think I’m a little rusty, maybe I should.../";
++                global.msg[2] = "\\E3* No! I don’t have time!!/";
++                msg_num = 1;
++            }
++            global.msg[msg_num + 2] = "\\EB* I need to find Kris and Susie, so I.../";
++            global.msg[msg_num + 3] = "\\E3* Oh, I almost forgot! I wrote a Manual for them to read!/";
++        }
++        else
++        {
+-        global.msg[0] = scr_84_get_lang_string("obj_tutorialbattleevent_slash_Step_0_gml_87_0");
++            global.msg[0] = scr_84_get_lang_string("obj_tutorialbattleevent_slash_Step_0_gml_87_0");
+-        global.msg[1] = scr_84_get_lang_string("obj_tutorialbattleevent_slash_Step_0_gml_88_0");
++            global.msg[1] = scr_84_get_lang_string("obj_tutorialbattleevent_slash_Step_0_gml_88_0");
+-        global.msg[2] = scr_84_get_lang_string("obj_tutorialbattleevent_slash_Step_0_gml_89_0");
++            global.msg[2] = scr_84_get_lang_string("obj_tutorialbattleevent_slash_Step_0_gml_89_0");
+-        global.msg[3] = scr_84_get_lang_string("obj_tutorialbattleevent_slash_Step_0_gml_90_0") + scr_get_input_name(6) + scr_84_get_lang_string("obj_tutorialbattleevent_slash_Step_0_gml_90_1");
++            global.msg[3] = scr_84_get_lang_string("obj_tutorialbattleevent_slash_Step_0_gml_90_0") + scr_get_input_name(6) + scr_84_get_lang_string("obj_tutorialbattleevent_slash_Step_0_gml_90_1");
+-        scr_noface(4);
+-        global.msg[5] = scr_84_get_lang_string("obj_tutorialbattleevent_slash_Step_0_gml_92_0");
+-        if (global.flag[205] >= 4)
++            if (global.flag[205] >= 4)
+-        {
++            {
+-            global.msg[0] = scr_84_get_lang_string("obj_tutorialbattleevent_slash_Step_0_gml_95_0");
++                global.msg[0] = scr_84_get_lang_string("obj_tutorialbattleevent_slash_Step_0_gml_95_0");
+-            global.msg[1] = scr_84_get_lang_string("obj_tutorialbattleevent_slash_Step_0_gml_96_0");
++                global.msg[1] = scr_84_get_lang_string("obj_tutorialbattleevent_slash_Step_0_gml_96_0");
++            }
+         }
++        scr_noface(msg_num + 4);
++        global.msg[msg_num + 5] = scr_84_get_lang_string("obj_tutorialbattleevent_slash_Step_0_gml_92_0");
+         instance_create(0, 0, obj_dialoguer);
+         scr_itemget(4);
+         con = 28;

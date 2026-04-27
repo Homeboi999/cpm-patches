@@ -1,0 +1,42 @@
+--- a/Code/gml_Object_obj_battlecontroller_Step_0.gml
++++ b/Code/gml_Object_obj_battlecontroller_Step_0.gml
+@@ -59,6 +59,10 @@
+     }
+     with (obj_tensionbar)
+     {
++        if (instance_exists(obj_dummyenemy) && obj_dummyenemy.should_die)
++        {
++            continue;
++        }
+         alarm[5] = 15;
+         hspeed = -10;
+         friction = -0.4;
+@@ -73,6 +77,28 @@
+         with (lastbattlewriter)
+         {
+             instance_destroy();
++        }
++    }
++    if (instance_exists(obj_dummyenemy))
++    {
++        if (obj_dummyenemy.should_die)
++        {
++            with (obj_dummyenemy)
++            {
++                susie_kill = 1;
++            }
++            with (lastbattlewriter)
++            {
++                instance_destroy();
++            }
++            for (i = 0; i < 3; i += 1)
++            {
++                with (global.charinstance[i])
++                {
++                    state = 0;
++                }
++            }
++            victoried = 2;
+         }
+     }
+ }
