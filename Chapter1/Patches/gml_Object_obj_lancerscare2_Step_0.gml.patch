@@ -1,0 +1,40 @@
+--- a/Code/gml_Object_obj_lancerscare2_Step_0.gml
++++ b/Code/gml_Object_obj_lancerscare2_Step_0.gml
+@@ -13,9 +13,35 @@
+     mm = 0.5;
+     image_blend = merge_color(c_white, c_black, mm);
+     global.interact = 1;
+-    sus = scr_dark_marker(obj_mainchara.x - 100, global.cinstance[1].y, spr_susier_dark);
+-    ral = scr_dark_marker(obj_mainchara.x - 50, global.cinstance[0].y, spr_ralseir);
++    if (instance_exists(global.cinstance[1]))
++    {
++        sus = scr_dark_marker(obj_mainchara.x - 100, global.cinstance[1].y, spr_susier_dark);
++    }
++    else
++    {
++        sus = scr_dark_marker(obj_mainchara.x - 100, obj_mainchara.y, spr_susier_dark);
++    }
++    if (instance_exists(global.cinstance[0]))
++    {
++        ral = scr_dark_marker(obj_mainchara.x - 50, global.cinstance[0].y, spr_ralseir);
++    }
++    else
++    {
++        ral = scr_dark_marker(obj_mainchara.x - 50, obj_mainchara.y, spr_ralseir);
++    }
+     k = scr_dark_marker(obj_mainchara.x, obj_mainchara.y, spr_krisr_dark);
++    if (!scr_havechar(1))
++    {
++        k.visible = false;
++    }
++    if (!scr_havechar(3))
++    {
++        ral.visible = false;
++    }
++    if (!scr_havechar(2))
++    {
++        sus.visible = false;
++    }
+     r = ral;
+     s = sus;
+     with (obj_caterpillarchara)

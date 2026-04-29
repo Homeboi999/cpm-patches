@@ -1,0 +1,19 @@
+--- a/Code/gml_GlobalScript_scr_spell.gml
++++ b/Code/gml_GlobalScript_scr_spell.gml
+@@ -66,7 +66,7 @@
+                 {
+                     with (global.monsterinstance[star])
+                     {
+-                        if (global.monstertype[myself] != 19 && global.monstertype[myself] != 3)
++                        if (global.monstertype[myself] != 19 && global.monstertype[myself] != 3 && global.monstertype[myself] != 21 && global.monstertype[myself] != 10)
+                         {
+                             global.flag[51 + myself] = 3;
+                             event_user(10);
+@@ -75,7 +75,6 @@
+                         else
+                         {
+                             pacifycon = 1;
+-                            global.spelldelay = 999;
+                         }
+                     }
+                 }

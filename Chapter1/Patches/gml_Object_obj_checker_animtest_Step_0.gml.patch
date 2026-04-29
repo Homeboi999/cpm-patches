@@ -1,0 +1,110 @@
+--- a/Code/gml_Object_obj_checker_animtest_Step_0.gml
++++ b/Code/gml_Object_obj_checker_animtest_Step_0.gml
+@@ -6,9 +6,35 @@
+         image_speed = 0.2;
+         sprite_index = spr_smallchecker_front;
+         global.interact = 1;
+-        s = scr_dark_marker(-100, global.cinstance[1].y, spr_susier_dark);
+-        r = scr_dark_marker(-50, global.cinstance[0].y, spr_ralseir);
++        if (instance_exists(global.cinstance[1]))
++        {
++            s = scr_dark_marker(-100, global.cinstance[1].y, spr_susier_dark);
++        }
++        else
++        {
++            s = scr_dark_marker(-100, obj_mainchara.y, spr_susier_dark);
++        }
++        if (instance_exists(global.cinstance[0]))
++        {
++            r = scr_dark_marker(-50, global.cinstance[0].y, spr_ralseir);
++        }
++        else
++        {
++            r = scr_dark_marker(-50, obj_mainchara.y, spr_ralseir);
++        }
+         k = scr_dark_marker(0, obj_mainchara.y, spr_krisr_dark);
++        if (!scr_havechar(1))
++        {
++            k.visible = 0;
++        }
++        if (!scr_havechar(2))
++        {
++            s.visible = 0;
++        }
++        if (!scr_havechar(3))
++        {
++            r.visible = 0;
++        }
+         with (obj_caterpillarchara)
+         {
+             visible = 0;
+@@ -159,7 +185,10 @@
+             scr_halt();
+         }
+         obj_mainchara.x = k.x;
++        if (scr_havechar(1))
++        {
+-        obj_mainchara.visible = 1;
++            obj_mainchara.visible = 1;
++        }
+         obj_mainchara.cutscene = 1;
+         with (l)
+         {
+@@ -622,9 +651,35 @@
+         {
+             visible = 0;
+         }
+-        r = scr_dark_marker(global.cinstance[0].x, global.cinstance[0].y, spr_ralseil);
+-        s = scr_dark_marker(global.cinstance[1].x, global.cinstance[1].y, spr_susier_dark);
++        if (instance_exists(global.cinstance[1]))
++        {
++            s = scr_dark_marker(global.cinstance[1].x, global.cinstance[1].y, spr_susier_dark);
++        }
++        else
++        {
++            s = scr_dark_marker(obj_mainchara.x, obj_mainchara.y, spr_susier_dark);
++        }
++        if (instance_exists(global.cinstance[0]))
++        {
++            r = scr_dark_marker(global.cinstance[0].x, global.cinstance[0].y, spr_ralseir);
++        }
++        else
++        {
++            r = scr_dark_marker(obj_mainchara.x, obj_mainchara.y, spr_ralseir);
++        }
+         k = scr_dark_marker(obj_mainchara.x, obj_mainchara.y, spr_krisl_dark);
++        if (!scr_havechar(1))
++        {
++            k.visible = 0;
++        }
++        if (!scr_havechar(2))
++        {
++            s.visible = 0;
++        }
++        if (!scr_havechar(3))
++        {
++            r.visible = 0;
++        }
+         global.typer = 31;
+         global.fc = 2;
+         global.fe = 1;
+@@ -860,7 +915,18 @@
+     }
+     if (con == 72)
+     {
++        if (scr_havechar(3) && scr_havechar(1))
++        {
+-        con = 22;
++            con = 22;
++        }
++        else if (scr_havechar(1) || scr_havechar(3))
++        {
++            con = 28;
++        }
++        else
++        {
++            con = 30;
++        }
+     }
+     if (con == 22 && !d_ex())
+     {

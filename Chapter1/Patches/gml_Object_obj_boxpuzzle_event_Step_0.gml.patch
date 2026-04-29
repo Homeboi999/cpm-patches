@@ -1,0 +1,197 @@
+--- a/Code/gml_Object_obj_boxpuzzle_event_Step_0.gml
++++ b/Code/gml_Object_obj_boxpuzzle_event_Step_0.gml
+@@ -1,24 +1,64 @@
+ if (con == 1)
+ {
+-    global.interact = 1;
+-    sus = scr_dark_marker(obj_mainchara.x - 100, global.cinstance[1].y, spr_susier_dark);
+-    ral = scr_dark_marker(obj_mainchara.x - 50, global.cinstance[0].y, spr_ralseir);
+-    k = scr_dark_marker(obj_mainchara.x, obj_mainchara.y, spr_krisr_dark);
+-    with (obj_caterpillarchara)
+-    {
+-        instance_destroy();
+-    }
+-    with (obj_mainchara)
+-    {
+-        visible = 0;
+-    }
+-    with (obj_marker)
+-    {
+-        hspeed = 4;
+-        image_speed = 0.2;
+-    }
+-    con = 2;
+-    alarm[4] = 40;
++    if (!scr_havechar(2) && !scr_havechar(3))
++    {
++        global.flag[212] = 1;
++        with (obj_pushableblock)
++        {
++            event = 0;
++        }
++        con = 20;
++        boxcon = 1;
++        leavecon = -1;
++    }
++    else
++    {
++        global.interact = 1;
++        if (instance_exists(global.cinstance[1]))
++        {
++            sus = scr_dark_marker(obj_mainchara.x - 100, global.cinstance[1].y, spr_susier_dark);
++        }
++        else
++        {
++            sus = scr_dark_marker(obj_mainchara.x - 100, obj_mainchara.y, spr_susier_dark);
++        }
++        if (instance_exists(global.cinstance[0]))
++        {
++            ral = scr_dark_marker(obj_mainchara.x - 50, global.cinstance[0].y, spr_ralseir);
++        }
++        else
++        {
++            ral = scr_dark_marker(obj_mainchara.x - 50, obj_mainchara.y, spr_ralseir);
++        }
++        k = scr_dark_marker(obj_mainchara.x, obj_mainchara.y, spr_krisr_dark);
++        if (!scr_havechar(1))
++        {
++            k.visible = 0;
++        }
++        if (!scr_havechar(2))
++        {
++            sus.visible = 0;
++        }
++        if (!scr_havechar(3))
++        {
++            ral.visible = 0;
++        }
++        with (obj_caterpillarchara)
++        {
++            instance_destroy();
++        }
++        with (obj_mainchara)
++        {
++            visible = 0;
++        }
++        with (obj_marker)
++        {
++            hspeed = 4;
++            image_speed = 0.2;
++        }
++        con = 2;
++        alarm[4] = 40;
++    }
+ }
+ if (con == 2)
+ {
+@@ -221,30 +261,33 @@
+             }
+         }
+     }
++    if (scr_havechar(2) && scr_havechar(3))
++    {
+-    if (boxcount == 0 && global.interact == 0 && boxon == 2)
++        if (boxcount == 0 && global.interact == 0 && boxon == 2)
+-    {
++        {
+-        global.fc = 2;
++            global.fc = 2;
+-        global.fe = 1;
++            global.fe = 1;
+-        global.typer = 31;
++            global.typer = 31;
+-        global.interact = 1;
++            global.interact = 1;
+-        boxon = 3;
++            boxon = 3;
+-        global.msg[0] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_207_0");
++            global.msg[0] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_207_0");
+-        scr_susface(1, 2);
++            scr_susface(1, 2);
+-        global.msg[2] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_209_0");
++            global.msg[2] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_209_0");
+-        instance_create(0, 0, obj_dialoguer);
++            instance_create(0, 0, obj_dialoguer);
+-    }
++        }
+-    if (boxcount == 1 && global.interact == 0 && boxon == 0)
++        if (boxcount == 1 && global.interact == 0 && boxon == 0)
+-    {
++        {
+-        global.fc = 2;
++            global.fc = 2;
+-        global.fe = 6;
++            global.fe = 6;
+-        global.typer = 31;
++            global.typer = 31;
+-        global.interact = 1;
++            global.interact = 1;
+-        boxon = 1;
++            boxon = 1;
+-        global.msg[0] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_220_0");
++            global.msg[0] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_220_0");
+-        scr_susface(1, 2);
++            scr_susface(1, 2);
+-        global.msg[2] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_222_0");
++            global.msg[2] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_222_0");
+-        global.msg[3] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_223_0");
++            global.msg[3] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_223_0");
+-        instance_create(0, 0, obj_dialoguer);
++            instance_create(0, 0, obj_dialoguer);
++        }
+     }
+     if (boxcount >= 2 && global.interact == 0)
+     {
+@@ -256,26 +299,36 @@
+         global.interact = 1;
+         instance_create(0, 0, obj_shake);
+         snd_play(snd_impact);
++        if (scr_havechar(2) && scr_havechar(3))
++        {
+-        con = 25;
++            con = 25;
++        }
++        else
++        {
++            con = 33;
++        }
+         alarm[4] = 30;
+     }
+     else if (tilecount == 2 && boxcount == 1 && global.interact == 0 && boxcon == 1)
+     {
++        if (scr_havechar(2) && scr_havechar(3))
++        {
+-        global.interact = 1;
++            global.interact = 1;
+-        boxcon = 2;
++            boxcon = 2;
+-        global.fc = 2;
++            global.fc = 2;
+-        global.fe = 6;
++            global.fe = 6;
+-        global.typer = 31;
++            global.typer = 31;
+-        global.msg[0] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_248_0");
++            global.msg[0] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_248_0");
+-        global.msg[1] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_249_0");
++            global.msg[1] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_249_0");
+-        scr_susface(2, 1);
++            scr_susface(2, 1);
+-        global.msg[3] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_251_0");
++            global.msg[3] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_251_0");
+-        global.msg[4] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_252_0");
++            global.msg[4] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_252_0");
+-        scr_ralface(5, 1);
++            scr_ralface(5, 1);
+-        global.msg[6] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_254_0");
++            global.msg[6] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_254_0");
+-        scr_susface(7, 2);
++            scr_susface(7, 2);
+-        global.msg[8] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_256_0");
++            global.msg[8] = scr_84_get_lang_string("obj_boxpuzzle_event_slash_Step_0_gml_256_0");
+-        instance_create(0, 0, obj_dialoguer);
++            instance_create(0, 0, obj_dialoguer);
++        }
+     }
+ }
+ if (boxcon == 2)

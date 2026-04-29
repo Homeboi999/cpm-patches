@@ -1,0 +1,311 @@
+--- a/Code/gml_Object_obj_checkers_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_checkers_enemy_Step_0.gml
+@@ -1,3 +1,4 @@
++var last_msg = 0;
+ if (global.monstertype[myself] == 21)
+ {
+     secondtime = 1;
+@@ -23,7 +24,14 @@
+         milkmax = 1000;
+         if (milk_counter > 0)
+         {
++            if (milk_counter > 1 && !scr_havechar(1) && scr_havechar(3))
++            {
++                milkmax = 200;
++            }
++            else
++            {
+-            milkmax = 600;
++                milkmax = 600;
++            }
+         }
+         if (global.monsterhp[myself] > milkmax)
+         {
+@@ -56,7 +64,14 @@
+             milkmax = 1000;
+             if (milk_counter > 0)
+             {
++                if (milk_counter > 1 && !scr_havechar(1) && scr_havechar(3))
++                {
++                    milkmax = 200;
++                }
++                else
++                {
+-                milkmax = 600;
++                    milkmax = 600;
++                }
+             }
+             if (global.monsterhp[myself] <= milkmax)
+             {
+@@ -109,10 +124,18 @@
+             {
+                 global.battlemsg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_79_0");
+             }
+-            if (global.monsterhp[myself] <= (global.monstermaxhp[myself] / 3))
++            else if (global.monsterhp[myself] <= 600 && milkmax == 200)
+             {
+                 global.battlemsg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_80_0");
+             }
++            if (global.monsterhp[myself] <= 400)
++            {
++                global.monsterstatus[myself] = 1;
++            }
++            else
++            {
++                global.monsterstatus[myself] = 0;
++            }
+             if (crown > 0)
+             {
+                 global.battlemsg[0] = scr_84_get_subst_string(scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_82_0"), string(crown));
+@@ -142,11 +165,42 @@
+             }
+         }
+     }
++    if (susie_end == 1 && global.turntimer > 0)
++    {
++        global.turntimer = 0;
++    }
++    if (global.mnfight == 2 && global.turntimer < 1 && susie_end == 1)
++    {
++        susie_end = 2;
++        obj_battlecontroller.noreturn = 1;
++        obj_battlecontroller.intro = 2;
++        with (obj_tensionbar)
++        {
++            alarm[5] = 15;
++            hspeed = -10;
++            friction = -0.4;
++        }
++        for (i = 0; i < 4; i += 1)
++        {
++            if (global.hp[i] < 1)
++            {
++                global.hp[i] = round(global.maxhp[i] / 8);
++            }
++        }
++        scr_endcombat();
++        mus_volume(global.batmusic[1], 0, 90);
++        event_user(3);
++        global.fighting = 0;
++    }
+ }
+ if (scon == 1)
+ {
+     if (milk_counter > 0)
+     {
++        if (milk_counter == 2 && susie_solo)
++        {
++            susie_endcon = 1;
++        }
+         scon = 1.5;
+     }
+     else
+@@ -230,6 +284,10 @@
+         {
+             milkheal = 300;
+         }
++        else if (milkmax == 200)
++        {
++            milkheal = 1100;
++        }
+         global.monsterhp[myself] += milkheal;
+         healamt = instance_create(global.monsterx[myself], global.monstery[myself], obj_dmgwriter);
+         with (healamt)
+@@ -257,7 +315,7 @@
+     milktimer += 1;
+     if (milktimer >= 30)
+     {
+-        if (milk_counter > 0)
++        if (milk_counter > 0 && (susie_endcon == 0 && susie_solo))
+         {
+             with (obj_writer)
+             {
+@@ -267,6 +325,18 @@
+             milktimer = 0;
+             global.turntimer = 0;
+         }
++        else if (susie_endcon > 0 && susie_solo)
++        {
++            with (obj_writer)
++            {
++                instance_destroy();
++            }
++            scon = 6;
++            scr_susface(0, 0);
++            global.msg[1] = "* Huff.. Puff.../";
++            global.msg[2] = "* How much damn milk does this thing have?!/%";
++            scr_battletext_default();
++        }
+         else
+         {
+             with (obj_writer)
+@@ -275,10 +345,17 @@
+             }
+             scon = 6;
+             global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_226_0");
++            if (scr_havechar(2) && global.charauto[2] && scr_havechar(3))
++            {
+-            scr_ralface(1, 3);
++                scr_ralface(1, 3);
+-            global.msg[2] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_228_0");
++                global.msg[2] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_228_0");
+-            scr_susface(3, 3);
++                scr_susface(3, 3);
+-            global.msg[4] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_230_0");
++                global.msg[4] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_230_0");
++            }
++            else
++            {
++                global.msg[0] = global.msg[0] + "%";
++            }
+             scr_battletext_default();
+         }
+         milk_counter += 1;
+@@ -298,6 +375,15 @@
+         global.turntimer = 999;
+     }
+ }
++if (pacifycon == 1 && !instance_exists(obj_writer))
++{
++    pacifycon = 2;
++    global.spelldelay = 999;
++    global.charturn = 3;
++    global.myfight = 3;
++    acting = 2;
++    actcon = 50;
++}
+ if (global.myfight == 3)
+ {
+     xx = __view_get(e__VW.XView, 0);
+@@ -374,16 +460,33 @@
+         global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_327_0");
+         if (ralsei_lecture == 0 && secondtime == 0)
+         {
++            last_msg = 0;
+             global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_330_0");
++            if (scr_havechar(3))
++            {
+-            scr_ralface(1, 0);
++                scr_ralface(1, 0);
+-            global.msg[2] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_332_0");
++                global.msg[2] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_332_0");
+-            global.msg[3] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_333_0");
++                global.msg[3] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_333_0");
++                if (scr_havechar(2))
++                {
+-            global.msg[4] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_334_0");
++                    global.msg[4] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_334_0");
+-            scr_susface(5, 0);
++                    scr_susface(5, 0);
+-            global.msg[6] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_336_0");
++                    global.msg[6] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_336_0");
+-            global.msg[7] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_337_0");
++                    global.msg[7] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_337_0");
+-            scr_ralface(8, 1);
++                    scr_ralface(8, 1);
+-            global.msg[9] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_339_0");
++                    global.msg[9] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_339_0");
++                }
++                else
++                {
++                    last_msg = 3;
++                    global.msg[last_msg] = global.msg[last_msg] + "%";
++                }
++            }
++            else
++            {
++                last_msg = 0;
++                global.msg[last_msg] = global.msg[last_msg] + "%";
++            }
+             ralsei_lecture = 1;
+         }
+         if (thrown == 0 && secondtime == 1)
+@@ -395,18 +498,38 @@
+                 global.typer = 45;
+                 global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_349_0");
+                 global.msg[1] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_350_0");
++                if (scr_havechar(2))
++                {
+-                scr_susface(2, 1);
++                    scr_susface(2, 1);
+-                global.msg[3] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_352_0");
++                    global.msg[3] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_352_0");
++                }
++                else
++                {
++                    last_msg = 1;
++                    global.msg[last_msg] = global.msg[last_msg] + "%";
++                }
+             }
+             if (bowcounter == 1)
+             {
++                if (!scr_havechar(2))
++                {
++                    bowcounter = 2;
++                }
+                 global.fc = 2;
+                 global.fe = 3;
+                 global.typer = 45;
+                 global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_359_0");
+                 global.msg[1] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_360_0");
++                if (scr_havechar(2))
++                {
+-                scr_susface(2, 2);
++                    scr_susface(2, 2);
+-                global.msg[3] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_362_0");
++                    global.msg[3] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_362_0");
++                }
++                else
++                {
++                    last_msg = 1;
++                    global.msg[last_msg] = global.msg[last_msg] + "%";
++                }
+             }
+             if (bowcounter == 2)
+             {
+@@ -415,8 +538,16 @@
+                 global.typer = 45;
+                 global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_369_0");
+                 global.msg[1] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_370_0");
++                if (scr_havechar(2))
++                {
+-                scr_susface(2, 7);
++                    scr_susface(2, 7);
+-                global.msg[3] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_372_0");
++                    global.msg[3] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_372_0");
++                }
++                else
++                {
++                    last_msg = 1;
++                    global.msg[last_msg] = global.msg[last_msg] + "%";
++                }
+             }
+         }
+         bowcounter += 1;
+@@ -494,12 +625,20 @@
+             scr_ralface(1, 0);
+             global.msg[2] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_447_0");
+             global.msg[3] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_448_0");
++            if (scr_havechar(2))
++            {
+-            global.msg[4] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_449_0");
++                global.msg[4] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_449_0");
+-            scr_susface(5, 0);
++                scr_susface(5, 0);
+-            global.msg[6] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_451_0");
++                global.msg[6] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_451_0");
+-            global.msg[7] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_452_0");
++                global.msg[7] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_452_0");
+-            scr_ralface(8, 1);
++                scr_ralface(8, 1);
+-            global.msg[9] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_454_0");
++                global.msg[9] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_454_0");
++            }
++            else
++            {
++                last_msg = 3;
++                global.msg[last_msg] = global.msg[last_msg] + "%";
++            }
+             ralsei_lecture = 1;
+         }
+         scr_battletext_default();

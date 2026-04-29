@@ -1,0 +1,22 @@
+--- a/Code/gml_GlobalScript_scr_unmarkify_caterpillar.gml
++++ b/Code/gml_GlobalScript_scr_unmarkify_caterpillar.gml
+@@ -80,5 +80,19 @@
+             }
+         }
+     }
++    if (instance_exists(s))
++    {
++        with (s)
++        {
++            instance_destroy();
++        }
++    }
++    if (instance_exists(r))
++    {
++        with (r)
++        {
++            instance_destroy();
++        }
++    }
+ }
+ 

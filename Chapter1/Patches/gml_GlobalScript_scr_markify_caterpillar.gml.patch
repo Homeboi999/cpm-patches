@@ -1,0 +1,18 @@
+--- a/Code/gml_GlobalScript_scr_markify_caterpillar.gml
++++ b/Code/gml_GlobalScript_scr_markify_caterpillar.gml
+@@ -24,5 +24,15 @@
+             }
+         }
+     }
++    if (!instance_exists(s))
++    {
++        s = scr_dark_marker(obj_mainchara.x, obj_mainchara.y, obj_mainchara.sprite_index);
++        s.visible = 0;
++    }
++    if (!instance_exists(r))
++    {
++        r = scr_dark_marker(obj_mainchara.x, obj_mainchara.y, obj_mainchara.sprite_index);
++        r.visible = 0;
++    }
+ }
+ 

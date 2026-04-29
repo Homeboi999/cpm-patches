@@ -1,0 +1,65 @@
+--- a/Code/gml_Object_obj_scarelancerevent_Step_0.gml
++++ b/Code/gml_Object_obj_scarelancerevent_Step_0.gml
+@@ -8,13 +8,39 @@
+         {
+             visible = 0;
+         }
+-        s = scr_dark_marker(global.cinstance[1].x, global.cinstance[1].y, spr_susier_dark);
+-        r = scr_dark_marker(global.cinstance[0].x, global.cinstance[0].y, spr_ralseir);
+-        k = scr_dark_marker(obj_mainchara.x, obj_mainchara.y, spr_krisr_dark);
+         with (obj_mainchara)
+         {
+             visible = 0;
+         }
++        if (instance_exists(global.cinstance[1]))
++        {
++            s = scr_dark_marker(global.cinstance[1].x, global.cinstance[1].y, spr_susier_dark);
++        }
++        else
++        {
++            s = scr_dark_marker(obj_mainchara.x, obj_mainchara.y, spr_susier_dark);
++        }
++        if (instance_exists(global.cinstance[0]))
++        {
++            r = scr_dark_marker(global.cinstance[0].x, global.cinstance[0].y, spr_ralseir);
++        }
++        else
++        {
++            r = scr_dark_marker(obj_mainchara.x, obj_mainchara.y, spr_ralseir);
++        }
++        k = scr_dark_marker(obj_mainchara.x, obj_mainchara.y, spr_krisr_dark);
++        if (!scr_havechar(1))
++        {
++            k.visible = 0;
++        }
++        if (!scr_havechar(2))
++        {
++            s.visible = 0;
++        }
++        if (!scr_havechar(3))
++        {
++            r.visible = 0;
++        }
+         with (s)
+         {
+             scr_depth();
+@@ -358,11 +384,17 @@
+     }
+     with (s)
+     {
++        if (instance_exists(global.cinstance[1]))
++        {
+-        scr_move_to_point_over_time(global.cinstance[1].x, global.cinstance[1].y, 20);
++            scr_move_to_point_over_time(global.cinstance[1].x, global.cinstance[1].y, 20);
++        }
+     }
+     with (r)
+     {
++        if (instance_exists(global.cinstance[0]))
++        {
+-        scr_move_to_point_over_time(global.cinstance[0].x, global.cinstance[0].y, 20);
++            scr_move_to_point_over_time(global.cinstance[0].x, global.cinstance[0].y, 20);
++        }
+     }
+     alarm[4] = 30;
+ }
