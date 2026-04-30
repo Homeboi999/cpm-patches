@@ -1,0 +1,18 @@
+--- a/Code/gml_Object_obj_lancerbattle2_event_Step_0.gml
++++ b/Code/gml_Object_obj_lancerbattle2_event_Step_0.gml
+@@ -722,7 +722,14 @@
+ }
+ if (con == 53)
+ {
++    if (instance_exists(obj_herosusie))
++    {
+-    s = scr_dark_marker(obj_herosusie.x, obj_herosusie.y, spr_susieb_attack_serious);
++        s = scr_dark_marker(obj_herosusie.x, obj_herosusie.y, spr_susieb_attack_serious);
++    }
++    else
++    {
++        s = scr_dark_marker(global.heromakex[0], global.heromakey[0], spr_susieb_attack_serious);
++    }
+     with (s)
+     {
+         scr_depth();

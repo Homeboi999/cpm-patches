@@ -1,0 +1,54 @@
+--- a/Code/gml_Object_obj_susieandlancer_event_Step_0.gml
++++ b/Code/gml_Object_obj_susieandlancer_event_Step_0.gml
+@@ -14,8 +14,23 @@
+         {
+             visible = 0;
+         }
++        if (instance_exists(global.cinstance[0]))
++        {
++            r = scr_dark_marker(global.cinstance[0].x, global.cinstance[0].y, spr_ralseir);
++        }
++        else
++        {
+-        r = scr_dark_marker(obj_caterpillarchara.x, obj_caterpillarchara.y, spr_ralseir);
++            r = scr_dark_marker(obj_mainchara.x, obj_mainchara.y, spr_ralseir);
++        }
+         k = scr_dark_marker(obj_mainchara.x, obj_mainchara.y, spr_krisr_dark);
++        if (!scr_havechar(3))
++        {
++            r.visible = false;
++        }
++        if (!scr_havechar(1))
++        {
++            k.visible = false;
++        }
+         if (global.flag[250] == 0)
+         {
+             with (obj_marker)
+@@ -424,8 +439,11 @@
+     global.flag[250] += 1;
+     obj_mainchara.x = k.x;
+     obj_mainchara.y = k.y;
++    if (instance_exists(global.cinstance[0]))
++    {
+-    global.cinstance[0].x = r.x;
++        global.cinstance[0].x = r.x;
+-    global.cinstance[0].y = r.y;
++        global.cinstance[0].y = r.y;
++    }
+     global.facing = 1;
+     with (global.cinstance[0])
+     {
+@@ -839,10 +857,10 @@
+     {
+         visible = 0;
+     }
+-    global.cinstance[0].x = r.x;
+-    global.cinstance[0].y = r.y;
+     with (global.cinstance[0])
+     {
++        x = r.x;
++        y = r.y;
+         visible = 1;
+         scr_caterpillar_interpolate();
+     }

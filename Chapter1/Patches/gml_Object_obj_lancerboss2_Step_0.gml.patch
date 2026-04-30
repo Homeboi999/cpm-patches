@@ -1,0 +1,14 @@
+--- a/Code/gml_Object_obj_lancerboss2_Step_0.gml
++++ b/Code/gml_Object_obj_lancerboss2_Step_0.gml
+@@ -179,7 +179,10 @@
+             actcon = 2;
+         }
+         global.monsterdf[myself] -= 5;
++        if (instance_exists(obj_herosusie))
++        {
+-        scr_enemyblcon(obj_herosusie.x + 100, obj_herosusie.y, 7);
++            scr_enemyblcon(obj_herosusie.x + 100, obj_herosusie.y, 7);
++        }
+         with (obj_writer)
+         {
+             skippable = 0;

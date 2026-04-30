@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_savemenu_Draw_0.gml
 +++ b/Code/gml_Object_obj_savemenu_Draw_0.gml
-@@ -9,7 +9,7 @@
+@@ -37,7 +37,7 @@
  {
      scr_84_set_draw_font("mainbig");
  }
@@ -9,13 +9,13 @@
  {
      if (d == 1)
      {
-@@ -51,7 +51,10 @@
-     draw_set_halign(fa_left);
+@@ -88,7 +88,10 @@
+     }
      if (xcoord < 2)
      {
 +        if (menuno == 0)
 +        {
--        draw_sprite(heartsprite, 0, xx + (71 * d) + (xcoord * 90 * d), yy + (114 * d) + (ycoord * 42));
+-        draw_sprite(heartsprite, 0, xx + (71 * d) + (xcoord * 90 * d), yy + (114 * d) + (ycoord * 42) + myoff);
 +            draw_sprite(heartsprite, 0, xx + (71 * d) + (xcoord * 90 * d), yy + (114 * d) + (ycoord * 42));
 +        }
      }

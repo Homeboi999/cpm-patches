@@ -1,0 +1,27 @@
+--- a/Code/gml_Object_obj_thrashmaker_event_Step_0.gml
++++ b/Code/gml_Object_obj_thrashmaker_event_Step_0.gml
+@@ -3,8 +3,23 @@
+     snd_free_all();
+     y = 200;
+     global.interact = 1;
++    if (instance_exists(global.cinstance[0]))
++    {
+-    ral = scr_dark_marker(-50, global.cinstance[0].y, spr_ralseir);
++        ral = scr_dark_marker(-50, global.cinstance[0].y, spr_ralseir);
++    }
++    else
++    {
++        ral = scr_dark_marker(-50, obj_mainchara.y, spr_ralseir);
++    }
+     k = scr_dark_marker(0, obj_mainchara.y, spr_krisr_dark);
++    if (!scr_havechar(1))
++    {
++        k.visible = false;
++    }
++    if (!scr_havechar(3))
++    {
++        ral.visible = false;
++    }
+     c[0] = k;
+     c[1] = ral;
+     with (obj_caterpillarchara)

@@ -1,0 +1,26 @@
+--- a/Code/gml_Object_obj_prisonevent_Step_0.gml
++++ b/Code/gml_Object_obj_prisonevent_Step_0.gml
+@@ -481,7 +481,10 @@
+ if (con == 230)
+ {
+     scr_losechar();
++    if (!scr_modconfig("forceParty"))
++    {
+-    global.char[0] = 2;
++        global.char[0] = 2;
++    }
+     global.entrance = 0;
+     global.interact = 3;
+     global.plot = 152;
+@@ -638,7 +641,10 @@
+ {
+     global.plot = 156;
+     scr_losechar();
++    if (!scr_modconfig("forceParty"))
++    {
+-    global.char[0] = 1;
++        global.char[0] = 1;
++    }
+     scr_getchar(2);
+     scr_getchar(3);
+     global.charauto[0] = 0;
