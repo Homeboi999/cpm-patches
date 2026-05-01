@@ -1,0 +1,12 @@
+--- a/Code/gml_Object_obj_lancerboss2_Create_0.gml
++++ b/Code/gml_Object_obj_lancerboss2_Create_0.gml
+@@ -39,4 +39,9 @@
+ hmake = 0;
+ firstskip = 1;
+ shakesine = 0;
++hitcount = 0;
++prevhp = 0;
++sparecon = 0;
++sparecount = 0;
++killcon = 0;
+ 

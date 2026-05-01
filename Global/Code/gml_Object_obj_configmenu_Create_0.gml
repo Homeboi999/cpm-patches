@@ -42,15 +42,25 @@ config_state[4][3] = ["Ralsei", ""];
 config_state[4][4] = ["Noelle", ""];
 config_state[4][5] = ["Berdly", ""];
 
+// Chapter 1
+config_info[5] = ["Auto-Susie", "Choose whether Susie auto-attacks the enemy."];
+config_state[5][0] = ["DEFAULT", "Susie's behavior is unchanged."];
+config_state[5][1] = ["ON", "Susie will always attack on her own."];
+config_state[5][2] = ["OFF", "Susie is always controllable."];
+
 config_max[0] = array_length(config_state[0]) - 1;
 config_max[1] = array_length(config_state[1]) - 1;
 config_max[2] = array_length(config_state[2]) - 1;
 config_max[3] = array_length(config_state[3]) - 1;
 config_max[4] = array_length(config_state[4]) - 1;
+config_max[5] = array_length(config_state[5]) - 1;
 config_list[0] = 0;
 config_list[1] = 1;
 switch (global.chapter)
 {
+    case 1:
+        config_list = [0, 1, 5];
+        break;
     case 2:
         if (global.modconfig[2] == 2)
         {

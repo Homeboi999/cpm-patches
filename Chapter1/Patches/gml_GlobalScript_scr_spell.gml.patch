@@ -17,3 +17,12 @@
                          }
                      }
                  }
+@@ -171,7 +170,7 @@
+             {
+                 if (global.mercymod[star] >= 100)
+                 {
+-                    if (global.monstertype[star] != 3)
++                    if (global.monstertype[star] != 3 && !(global.monstertype[star] == 12 && scr_havechar(2)))
+                     {
+                         with (global.monsterinstance[star])
+                         {

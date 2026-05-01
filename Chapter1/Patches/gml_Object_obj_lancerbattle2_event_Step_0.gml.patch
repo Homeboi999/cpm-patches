@@ -1,6 +1,69 @@
 --- a/Code/gml_Object_obj_lancerbattle2_event_Step_0.gml
 +++ b/Code/gml_Object_obj_lancerbattle2_event_Step_0.gml
-@@ -722,7 +722,14 @@
+@@ -20,6 +20,10 @@
+     __view_set(e__VW.XView, 0, 200);
+     global.interact = 1;
+     image_speed = 0;
++    with (obj_caterpillarchara)
++    {
++        visible = 0;
++    }
+     with (obj_mainchara)
+     {
+         visible = 0;
+@@ -28,6 +32,8 @@
+     {
+         cutscene = 1;
+     }
++    var __cam = view_get_camera(0);
++    pathy = camera_get_view_y(__cam) + 140;
+     global.encounterno = 20;
+     scr_encountersetup(global.encounterno);
+     s = scr_dark_marker(500, __view_get(e__VW.YView, 0) - 20, spr_susied_dark_unhappy);
+@@ -42,12 +48,12 @@
+ if (con == 2)
+ {
+     global.interact = 1;
+-    if (s.y >= (global.heromakey[0] - 4))
++    if (s.y >= (pathy - 4))
+     {
+         with (s)
+         {
+             scr_halt();
+-            y = global.heromakey[0];
++            y = other.pathy;
+         }
+         con = 3;
+         alarm[4] = 30;
+@@ -701,7 +707,7 @@
+         instance_destroy();
+     }
+     global.encounterno = 20;
+-    global.specialbattle = 0;
++    global.specialbattle = 1;
+     global.flag[9] = 0;
+     global.interact = 1;
+     con = 51;
+@@ -715,22 +721,49 @@
+     {
+         visible = 0;
+     }
++    with (obj_caterpillarchara)
++    {
++        visible = 0;
++    }
+     with (obj_mainchara)
+     {
+         visible = 0;
++    }
++}
++if (con == 51)
++{
++    if (instance_exists(obj_battlecontroller) && obj_battlecontroller.victoried == 1 && !instance_exists(obj_writer))
++    {
++        con = 53;
++        spared = true;
+     }
  }
  if (con == 53)
  {
@@ -11,8 +74,52 @@
 +    }
 +    else
 +    {
-+        s = scr_dark_marker(global.heromakex[0], global.heromakey[0], spr_susieb_attack_serious);
++        s = scr_dark_marker(global.heromakex[0], pathy, spr_susieb_attack_serious);
 +    }
      with (s)
      {
          scr_depth();
+         image_index = 5;
+     }
+     visible = 1;
++    if (spared)
++    {
++        sprite_index = spr_lancer_battle;
++    }
++    else
++    {
+-    sprite_index = spr_lancer_battle_hurt;
++        sprite_index = spr_lancer_battle_hurt;
++    }
+     global.fighting = 0;
++    snd_free_all();
+     with (obj_battlecontroller)
+     {
+         instance_destroy();
+@@ -743,6 +776,10 @@
+     {
+         instance_destroy();
+     }
++    with (obj_heroralsei)
++    {
++        instance_destroy();
++    }
+     with (obj_tensionbar)
+     {
+         instance_destroy();
+@@ -759,9 +796,12 @@
+     {
+         instance_destroy();
+     }
++    if (!spared)
++    {
+-    dm = instance_create(x + 30, y + 40, obj_dmgwriter);
++        dm = instance_create(x + 30, y + 40, obj_dmgwriter);
+-    dm.type = 1;
++        dm.type = 1;
+-    dm.damage = 0;
++        dm.damage = 0;
++    }
+     con = 54;
+     alarm[4] = 120;
+ }

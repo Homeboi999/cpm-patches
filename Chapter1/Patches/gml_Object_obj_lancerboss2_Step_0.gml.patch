@@ -1,14 +1,386 @@
 --- a/Code/gml_Object_obj_lancerboss2_Step_0.gml
 +++ b/Code/gml_Object_obj_lancerboss2_Step_0.gml
-@@ -179,7 +179,10 @@
-             actcon = 2;
-         }
-         global.monsterdf[myself] -= 5;
-+        if (instance_exists(obj_herosusie))
-+        {
--        scr_enemyblcon(obj_herosusie.x + 100, obj_herosusie.y, 7);
-+            scr_enemyblcon(obj_herosusie.x + 100, obj_herosusie.y, 7);
-+        }
-         with (obj_writer)
+@@ -1,7 +1,9 @@
+ if (firstskip == 1)
+ {
+-    global.acting[0] = 1;
+-    acting = 1;
++    acting = 99;
++    actcon = 10;
++    firstskip = 0;
++    prevhp = global.monsterhp[myself];
+     with (obj_writer)
+     {
+         instance_destroy();
+@@ -20,15 +22,16 @@
+     }
+     global.charturn = 3;
+     global.myfight = 3;
++    global.mercymod[myself] = 100;
+ }
+ if (global.monster[myself] == 1)
+ {
+     global.flag[51 + myself] = 4;
+-    global.acting[0] = 1;
+-    acting = 1;
+     if (global.mnfight == 1 && talked == 0)
+     {
++        global.acting[0] = 1;
+         actcon = 0;
++        sparecon = 0;
+         scr_randomtarget();
+         if (!instance_exists(obj_darkener))
          {
-             skippable = 0;
+@@ -60,39 +63,47 @@
+         if (rtimer == 12)
+         {
+             global.turntimer = 140;
++            if (hitcount < 3)
++            {
++                var attack = choose(0, 1, 2);
++                if (turns < 3)
++                {
++                    attack = turns;
++                }
+-            if (turns == 0 || turns == 2)
++                if (attack == 0 || attack == 2)
+-            {
++                {
+-                dc = instance_create(x, y, obj_dbulletcontroller);
++                    dc = instance_create(x, y, obj_dbulletcontroller);
+-                dc.type = 20;
++                    dc.type = 20;
+-                dc.target = mytarget;
++                    dc.target = mytarget;
+-                dc.damage = global.monsterat[myself] * 5;
++                    dc.damage = global.monsterat[myself] * 5;
+-                if (global.hp[global.char[0]] <= 70)
++                    if (global.hp[global.char[0]] <= 70)
+-                {
++                    {
+-                    dc.damage = global.monsterat[myself] * 3;
++                        dc.damage = global.monsterat[myself] * 3;
+-                }
++                    }
+-                global.turntimer = 180;
++                    global.turntimer = 180;
+-            }
++                }
+-            if (turns == 1)
++                if (attack == 1)
+-            {
++                {
+-                dc = instance_create(x, y, obj_dbulletcontroller);
++                    dc = instance_create(x, y, obj_dbulletcontroller);
+-                dc.type = 21;
++                    dc.type = 21;
+-                dc.target = mytarget;
++                    dc.target = mytarget;
+-                dc.damage = global.monsterat[myself] * 5;
++                    dc.damage = global.monsterat[myself] * 5;
+-                if (global.hp[global.char[0]] <= 70)
++                    if (global.hp[global.char[0]] <= 70)
+-                {
++                    {
+-                    dc.damage = global.monsterat[myself] * 3;
++                        dc.damage = global.monsterat[myself] * 3;
+-                }
++                    }
+-                global.turntimer = 180;
++                    global.turntimer = 180;
++                }
+             }
+-            if (turns >= 3)
++            else
+             {
+                 dc = instance_create(x, y, obj_dbulletcontroller);
+-                dc.difficulty = turns * 2;
++                dc.difficulty = hitcount * 2;
+-                if (turns == 6)
++                if (hitcount == 6)
+                 {
+                     dc.difficulty = 30;
+                 }
+-                if (turns == 7)
++                if (hitcount == 7)
+                 {
+                     dc.difficulty = 90;
+                 }
+@@ -104,7 +115,10 @@
+             attacked = 1;
+             global.typer = 6;
+             global.fc = 0;
++            if (turns > 0)
++            {
+-            global.battlemsg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_88_0");
++                global.battlemsg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_88_0");
++            }
+         }
+         else
+         {
+@@ -125,97 +139,174 @@
+     yy = __view_get(e__VW.YView, 0);
+     if (acting == 1 && actcon == 0)
+     {
+-        firstskip = 0;
+-        global.typer = 53;
+-        rr = choose(0, 1, 2, 3);
+-        actcon = 1;
+-        if (turns == 0)
+-        {
+-            global.msg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_120_0");
+-        }
+-        if (turns == 1)
+-        {
+-            global.msg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_121_0");
+-        }
+-        if (turns == 2)
+-        {
+-            global.msg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_122_0");
+-            global.msg[1] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_122_1");
+-        }
+-        if (turns == 3)
+-        {
+-            global.msg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_123_0");
+-        }
+-        if (turns == 4)
+-        {
+-            global.msg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_124_0");
+-        }
+-        if (turns == 5)
+-        {
+-            global.msg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_127_0");
+-            with (obj_herosusie)
+-            {
+-                idlesprite = spr_susieb_idle_serious;
+-                attacksprite = spr_susieb_attack_serious;
+-            }
+-        }
+-        if (turns == 6)
+-        {
+-            global.msg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_135_0");
+-            global.msg[1] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_136_0");
+-            global.msg[2] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_137_0");
+-            with (obj_herosusie)
+-            {
+-                idlesprite = spr_susieb_idle;
+-                attacksprite = spr_susieb_attack;
+-            }
+-        }
+-        if (turns == 7)
+-        {
+-            global.typer = 54;
+-            global.msg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_145_0");
+-            global.msg[1] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_145_1");
+-            global.msg[2] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_145_2");
+-            actcon = 2;
+-        }
+-        global.monsterdf[myself] -= 5;
+-        scr_enemyblcon(obj_herosusie.x + 100, obj_herosusie.y, 7);
+-        with (obj_writer)
+-        {
+-            skippable = 0;
+-        }
+-    }
+-    if (actcon == 1 && !instance_exists(obj_writer))
+-    {
+-        actcon = 0;
+-        scr_attackphase();
+-    }
+-    if (actcon == 2 && !instance_exists(obj_writer))
+-    {
+-        snd_free_all();
+-        snd_play(snd_laz_c);
+-        black = scr_dark_marker(__view_get(e__VW.XView, 0) - 20, __view_get(e__VW.YView, 0) - 20, spr_pixel_white);
+-        with (black)
+-        {
+-            image_blend = c_black;
+-            depth = -10000;
+-            image_xscale = 900;
+-            image_yscale = 900;
+-        }
+-        actcon = 3;
+-        acttimer = 0;
+-        if (instance_exists(obj_lancerbattle2_event))
+-        {
+-            obj_lancerbattle2_event.black = black;
+-            with (obj_lancerbattle2_event)
+-            {
+-                con = 52;
+-                alarm[4] = 80;
+-            }
+-        }
+-    }
+-    if (actcon == 3)
+-    {
++        actcon = 1;
++        var teamname = "us";
++        switch (global.flag[214])
++        {
++            case 1:
++                teamname = "the $!$? Squad";
++                break;
++            case 2:
++                teamname = "the Lancer Fan Club";
++                break;
++            case 3:
++                teamname = "the Fun Gang";
++                break;
++        }
++        global.msg[0] = "* LANCER - AT 7 DF 1&* Turned on " + teamname + " almost instantly./";
++        global.msg[1] = "* Trying his best to resolve this peacefully, but reluctantly standing his ground./%";
++        scr_battletext_default();
++        actcon = 1;
++    }
++    if (acting == 2 && actcon == 0)
++    {
++        actcon = 1;
++        global.monsterhp[myself] = 1;
++    }
++    if (acting != 99 && actcon < 10 && !instance_exists(obj_writer))
++    {
++        if (prevhp > global.monsterhp[myself])
++        {
++            hitcount++;
++        }
++        prevhp = global.monsterhp[myself];
++        acting = 99;
++        actcon = 10;
++    }
++    if (acting == 99)
++    {
++        if (actcon == 10)
++        {
++            global.typer = 53;
++            rr = choose(0, 1, 2, 3);
++            actcon = 11;
++            if (hitcount == 0)
++            {
++                global.msg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_120_0");
++            }
++            if (hitcount == 1)
++            {
++                global.msg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_121_0");
++            }
++            if (hitcount == 2)
++            {
++                global.msg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_122_0");
++                global.msg[1] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_122_1");
++            }
++            if (hitcount == 3)
++            {
++                global.msg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_123_0");
++            }
++            if (hitcount == 4)
++            {
++                global.msg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_124_0");
++            }
++            if (hitcount == 5)
++            {
++                global.msg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_127_0");
++                with (obj_herosusie)
++                {
++                    idlesprite = spr_susieb_idle_serious;
++                    attacksprite = spr_susieb_attack_serious;
++                }
++            }
++            if (hitcount == 6)
++            {
++                global.msg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_135_0");
++                global.msg[1] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_136_0");
++                global.msg[2] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_137_0");
++                with (obj_herosusie)
++                {
++                    idlesprite = spr_susieb_idle;
++                    attacksprite = spr_susieb_attack;
++                }
++            }
++            if (hitcount == 7)
++            {
++                global.typer = 54;
++                global.msg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_145_0");
++                global.msg[1] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_145_1");
++                global.msg[2] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_145_2");
++                actcon = 12;
++            }
++            global.monsterdf[myself] -= 5;
++            if (instance_exists(obj_herosusie))
++            {
++                scr_enemyblcon(obj_herosusie.x + 100, obj_herosusie.y, 7);
++            }
++            with (obj_writer)
++            {
++                skippable = 0;
++            }
++        }
++        if (actcon == 11 && !instance_exists(obj_writer))
++        {
++            actcon = 0;
++            scr_attackphase();
++        }
++        if (actcon == 12 && !instance_exists(obj_writer))
++        {
++            killcon = 1;
++            actcon = 13;
++            acttimer = 0;
++        }
++        if (actcon == 13)
++        {
++        }
++    }
++}
++if (sparecon > 0 && scr_havechar(2))
++{
++    global.spelldelay = 999;
++    with (obj_spellphase)
++    {
++        if (spelltimer > 30)
++        {
++            spelltimer = 30;
++        }
++    }
++}
++if (sparecon == 1 && !instance_exists(obj_writer))
++{
++    sparecon = 2;
++    sparecount++;
++    if (scr_havechar(2))
++    {
++        global.msg[0] = "* spared! " + string(sparecount) + "/%";
++        scr_battletext_default();
++    }
++}
++if (sparecon == 2 && !instance_exists(obj_writer))
++{
++    sparecon = 0;
++    global.spelldelay = 0;
++}
++if (killcon == 0 && global.monsterhp[0] <= 0)
++{
++    killcon = 1;
++}
++if (killcon == 1)
++{
++    snd_free_all();
++    snd_play(snd_laz_c);
++    black = scr_dark_marker(__view_get(e__VW.XView, 0) - 20, __view_get(e__VW.YView, 0) - 20, spr_pixel_white);
++    with (black)
++    {
++        image_blend = c_black;
++        depth = -10000;
++        image_xscale = 900;
++        image_yscale = 900;
++    }
++    killcon = 2;
++    acttimer = 0;
++    if (instance_exists(obj_lancerbattle2_event))
++    {
++        obj_lancerbattle2_event.black = black;
++        with (obj_lancerbattle2_event)
++        {
++            con = 52;
++            alarm[4] = 80;
++        }
+     }
+ }
+ 

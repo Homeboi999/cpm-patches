@@ -1,0 +1,12 @@
+--- a/Code/gml_Object_obj_defeatanim_Create_0.gml
++++ b/Code/gml_Object_obj_defeatanim_Create_0.gml
+@@ -4,5 +4,8 @@
+ starcount = 0;
+ redup = 0;
+ bsize = 6;
++if (!instance_exists(obj_lancerbattle2_event))
++{
+-snd_play(snd_defeatrun);
++    snd_play(snd_defeatrun);
++}
+ 

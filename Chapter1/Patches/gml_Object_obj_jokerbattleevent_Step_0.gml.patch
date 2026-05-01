@@ -1,0 +1,181 @@
+--- a/Code/gml_Object_obj_jokerbattleevent_Step_0.gml
++++ b/Code/gml_Object_obj_jokerbattleevent_Step_0.gml
+@@ -20,6 +20,21 @@
+             hspeed = 2;
+             image_speed = 0.2;
+         }
++        switch (global.char[i])
++        {
++            case 1:
++                c[i].sprite_index = spr_krisr_dark;
++                break;
++            case 2:
++                c[i].sprite_index = spr_susier_dark;
++                break;
++            case 3:
++                c[i].sprite_index = spr_ralseir;
++                break;
++            default:
++                c[i].visible = false;
++                break;
++        }
+         if (quick == 1)
+         {
+             with (c[i])
+@@ -33,15 +48,7 @@
+     }
+     k = c[0];
+     s = c[1];
+-    with (s)
+-    {
+-        sprite_index = spr_susier_dark;
+-    }
+     r = c[2];
+-    with (r)
+-    {
+-        sprite_index = spr_ralseir;
+-    }
+     con = 2;
+     alarm[4] = 83;
+     if (quick == 1)
+@@ -141,16 +148,17 @@
+ }
+ if (con == 12)
+ {
+-    with (s)
+-    {
+-        sprite_index = spr_susie_shock_r;
+-    }
+-    with (r)
+-    {
+-        sprite_index = spr_ralsei_shock_overworld;
+-    }
+     for (i = 0; i < 3; i += 1)
+     {
++        switch (global.char[i])
++        {
++            case 2:
++                c[i].sprite_index = spr_susie_shock_r;
++                break;
++            case 3:
++                c[i].sprite_index = spr_ralsei_shock_overworld;
++                break;
++        }
+         with (c[i])
+         {
+             hspeed = -10;
+@@ -169,13 +177,17 @@
+ if (con == 14)
+ {
+     image_speed = 0;
+-    with (s)
+-    {
+-        sprite_index = spr_susier_dark_unhappy;
+-    }
+-    with (r)
+-    {
+-        sprite_index = spr_ralseir;
++    for (i = 0; i < 3; i += 1)
++    {
++        switch (global.char[i])
++        {
++            case 2:
++                c[i].sprite_index = spr_susier_dark_unhappy;
++                break;
++            case 3:
++                c[i].sprite_index = spr_ralseir;
++                break;
++        }
+     }
+     global.typer = 30;
+     global.fe = 0;
+@@ -190,20 +202,20 @@
+ }
+ if (con == 15.1 && !d_ex())
+ {
+-    with (s)
+-    {
+-        sprite_index = spr_susieb_attack;
+-    }
+-    with (r)
+-    {
+-        sprite_index = spr_ralseib_attack;
+-    }
+-    with (k)
+-    {
+-        sprite_index = spr_krisb_attack;
+-    }
+     for (i = 0; i < 3; i += 1)
+     {
++        switch (global.char[i])
++        {
++            case 1:
++                c[i].sprite_index = spr_krisb_attack;
++                break;
++            case 2:
++                c[i].sprite_index = spr_susieb_attack;
++                break;
++            case 3:
++                c[i].sprite_index = spr_ralseib_attack;
++                break;
++        }
+         c[i].image_index = 0;
+         c[i].image_speed = 0.25;
+     }
+@@ -213,17 +225,24 @@
+ }
+ if (con == 16)
+ {
+-    if (s.image_index >= 5)
+-    {
+-        s.image_speed = 0;
+-    }
+-    if (k.image_index >= 6)
+-    {
+-        k.image_speed = 0;
+-    }
+-    if (r.image_index >= 5)
+-    {
+-        r.image_speed = 0;
++    for (i = 0; i < 3; i += 1)
++    {
++        switch (global.char[i])
++        {
++            case 1:
++                if (c[i].image_index >= 6)
++                {
++                    c[i].image_speed = 0;
++                }
++                break;
++            case 2:
++            case 3:
++                if (c[i].image_index >= 6)
++                {
++                    c[i].image_speed = 0;
++                }
++                break;
++        }
+     }
+ }
+ if (con == 17)
+@@ -260,10 +279,16 @@
+ {
+     obj_mainchara.x = k.x;
+     obj_mainchara.y = k.y;
+-    global.cinstance[0].x = s.x;
+-    global.cinstance[0].y = s.y;
+-    global.cinstance[1].x = r.x;
+-    global.cinstance[1].y = r.y;
++    if (instance_exists(global.cinstance[0]))
++    {
++        global.cinstance[0].x = s.x;
++        global.cinstance[0].y = s.y;
++    }
++    if (instance_exists(global.cinstance[1]))
++    {
++        global.cinstance[1].x = r.x;
++        global.cinstance[1].y = r.y;
++    }
+     with (global.cinstance[0])
+     {
+         scr_caterpillar_interpolate();

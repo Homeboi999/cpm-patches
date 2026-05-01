@@ -1,0 +1,11 @@
+--- a/Code/gml_GlobalScript_scr_spelltext.gml
++++ b/Code/gml_GlobalScript_scr_spelltext.gml
+@@ -52,7 +52,7 @@
+             else
+             {
+                 global.msg[0] = scr_84_get_subst_string(scr_84_get_lang_string("scr_spelltext_slash_scr_spelltext_gml_66_0"), global.charname[global.char[caster]], global.monstername[star]);
+-                if (global.monsterstatus[star] == 1)
++                if (global.monsterstatus[star] == 1 && scr_havechar(3))
+                 {
+                     global.msg[0] = scr_84_get_subst_string(scr_84_get_lang_string("scr_spelltext_slash_scr_spelltext_gml_69_0"), global.charname[global.char[caster]], global.monstername[star]);
+                     global.msg[1] = scr_84_get_lang_string("scr_spelltext_slash_scr_spelltext_gml_70_0");

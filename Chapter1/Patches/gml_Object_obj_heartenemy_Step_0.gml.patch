@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_heartenemy_Step_0.gml
++++ b/Code/gml_Object_obj_heartenemy_Step_0.gml
+@@ -199,7 +199,7 @@
+     if (acting == 4 && actcon == 0)
+     {
+         actcon = 1;
+-        if (global.plot < 150)
++        if (scr_susiemode())
+         {
+             global.msg[0] = scr_84_get_lang_string("obj_heartenemy_slash_Step_0_gml_168_0");
+             if (scr_monsterpop() > 1)

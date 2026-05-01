@@ -1,0 +1,10 @@
+--- a/Code/gml_Object_obj_lancerbattle2_event_Create_0.gml
++++ b/Code/gml_Object_obj_lancerbattle2_event_Create_0.gml
+@@ -21,4 +21,7 @@
+     mcon = 999;
+     instance_destroy();
+ }
++black = scr_dark_marker(0, 0, spr_pixel_white);
++black.visible = 0;
++spared = false;
+ 
