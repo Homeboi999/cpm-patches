@@ -1,6 +1,24 @@
 --- a/Code/gml_GlobalScript_scr_spell.gml
 +++ b/Code/gml_GlobalScript_scr_spell.gml
-@@ -66,7 +66,7 @@
+@@ -43,7 +43,16 @@
+                     delay = 8;
+                     type = 3;
+                 }
++                var full = false;
++                if (instance_exists(obj_joker))
++                {
++                    full = global.hp[obj_joker.hpchar[myself]] >= global.maxhp[obj_joker.hpchar[myself]];
++                }
++                else
++                {
+-                if (global.hp[global.char[myself]] >= global.maxhp[global.char[myself]])
++                    full = global.hp[global.char[myself]] >= global.maxhp[global.char[myself]];
++                }
++                if (full)
+                 {
+                     with (dmgwr)
+                     {
+@@ -66,7 +75,7 @@
                  {
                      with (global.monsterinstance[star])
                      {
@@ -9,7 +27,7 @@
                          {
                              global.flag[51 + myself] = 3;
                              event_user(10);
-@@ -75,7 +75,6 @@
+@@ -75,7 +84,6 @@
                          else
                          {
                              pacifycon = 1;
@@ -17,7 +35,7 @@
                          }
                      }
                  }
-@@ -171,7 +170,7 @@
+@@ -171,7 +179,7 @@
              {
                  if (global.mercymod[star] >= 100)
                  {

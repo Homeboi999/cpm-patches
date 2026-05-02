@@ -1,0 +1,20 @@
+--- a/Code/gml_GlobalScript_scr_healitemspell.gml
++++ b/Code/gml_GlobalScript_scr_healitemspell.gml
+@@ -12,7 +12,16 @@
+             type = 3;
+             damage = arg0;
+         }
++        var full = false;
++        if (instance_exists(obj_joker))
++        {
++            full = global.hp[obj_joker.hpchar[myself]] >= global.maxhp[obj_joker.hpchar[myself]];
++        }
++        else
++        {
+-        if (global.hp[global.char[myself]] >= global.maxhp[global.char[myself]])
++            full = global.hp[global.char[myself]] >= global.maxhp[global.char[myself]];
++        }
++        if (full)
+         {
+             with (dmgwr)
+             {

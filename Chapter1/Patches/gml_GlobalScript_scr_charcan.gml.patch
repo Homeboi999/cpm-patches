@@ -1,0 +1,18 @@
+--- a/Code/gml_GlobalScript_scr_charcan.gml
++++ b/Code/gml_GlobalScript_scr_charcan.gml
+@@ -1,7 +1,14 @@
+ function scr_charcan(arg0)
+ {
+     charcan = 1;
++    if (instance_exists(obj_joker))
++    {
++        if (global.hp[obj_joker.hpchar[arg0]] <= 0)
++        {
++            charcan = 0;
++        }
++    }
+-    if (global.hp[global.char[arg0]] <= 0)
++    else if (global.hp[global.char[arg0]] <= 0)
+     {
+         charcan = 0;
+     }

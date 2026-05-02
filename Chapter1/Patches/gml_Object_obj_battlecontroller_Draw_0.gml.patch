@@ -1,0 +1,18 @@
+--- a/Code/gml_Object_obj_battlecontroller_Draw_0.gml
++++ b/Code/gml_Object_obj_battlecontroller_Draw_0.gml
+@@ -415,7 +415,14 @@
+                 draw_set_color(c_maroon);
+                 draw_rectangle(xx + 400, yy + 380 + (i * 30), xx + 500, yy + 380 + (i * 30) + 15, false);
+                 draw_set_color(c_lime);
++                if (instance_exists(obj_joker))
++                {
++                    draw_rectangle(xx + 400, yy + 380 + (i * 30), xx + 400 + ((global.hp[obj_joker.hpchar[i]] / global.maxhp[obj_joker.hpchar[i]]) * 100), yy + 380 + (i * 30) + 15, false);
++                }
++                else
++                {
+-                draw_rectangle(xx + 400, yy + 380 + (i * 30), xx + 400 + ((global.hp[global.char[i]] / global.maxhp[global.char[i]]) * 100), yy + 380 + (i * 30) + 15, false);
++                    draw_rectangle(xx + 400, yy + 380 + (i * 30), xx + 400 + ((global.hp[global.char[i]] / global.maxhp[global.char[i]]) * 100), yy + 380 + (i * 30) + 15, false);
++                }
+             }
+         }
+     }

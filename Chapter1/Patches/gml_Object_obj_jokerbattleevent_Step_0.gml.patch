@@ -149,7 +149,7 @@
 +                break;
 +            case 2:
 +            case 3:
-+                if (c[i].image_index >= 6)
++                if (c[i].image_index >= 5)
 +                {
 +                    c[i].image_speed = 0;
 +                }

@@ -1,6 +1,22 @@
 --- a/Code/gml_GlobalScript_scr_mnendturn.gml
 +++ b/Code/gml_GlobalScript_scr_mnendturn.gml
-@@ -86,7 +86,7 @@
+@@ -31,7 +31,14 @@
+             {
+                 tu = 0;
+             }
++            if (instance_exists(obj_joker))
++            {
++                hptarget = obj_joker.hpchar[i];
++            }
++            else
++            {
+-            hptarget = global.char[i];
++                hptarget = global.char[i];
++            }
+             if (global.char[i] != 0 && global.hp[hptarget] <= 0)
+             {
+                 healamt = ceil(global.maxhp[hptarget] / 8);
+@@ -86,7 +93,7 @@
          }
          if (skip == 1)
          {

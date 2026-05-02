@@ -1,0 +1,17 @@
+--- a/Code/gml_Object_obj_joker_Create_0.gml
++++ b/Code/gml_Object_obj_joker_Create_0.gml
+@@ -55,4 +55,14 @@
+ jturn = 0;
+ jattack = 0;
+ global.tempflag[4] = 1;
++charcolor[0] = 8421504;
++charcolor[1] = 16776960;
++charcolor[2] = 16711935;
++charcolor[3] = 65280;
++for (i = 0; i < 3; i++)
++{
++    hpcolor[i] = charcolor[global.char[i]];
++    shufflepos[i] = i;
++    hpchar[i] = global.char[i];
++}
+ 

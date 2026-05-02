@@ -1,0 +1,30 @@
+--- a/Code/gml_Object_obj_collidebullet_Other_15.gml
++++ b/Code/gml_Object_obj_collidebullet_Other_15.gml
+@@ -2,11 +2,25 @@
+ {
+     if (target != 3)
+     {
++        if (instance_exists(obj_joker))
++        {
++            scr_jokerdamage();
++        }
++        else
++        {
+-        scr_damage();
++            scr_damage();
++        }
+     }
+     if (target == 3)
+     {
++        if (instance_exists(obj_joker))
++        {
++            scr_jokerdamage_all();
++        }
++        else
++        {
+-        scr_damage_all();
++            scr_damage_all();
++        }
+     }
+     instance_destroy();
+ }

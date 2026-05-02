@@ -1,6 +1,6 @@
 --- a/Code/gml_GlobalScript_scr_charbox.gml
 +++ b/Code/gml_GlobalScript_scr_charbox.gml
-@@ -1,8 +1,9 @@
+@@ -1,88 +1,85 @@
  function scr_charbox()
  {
 -    for (c = 0; c < 3; c += 1)
@@ -10,9 +10,21 @@
 +        c = global.char[pos] - 1;
 +        if (c != -1)
          {
-             if (c == 0)
+-            if (c == 0)
++            if (instance_exists(obj_joker))
              {
-@@ -18,71 +19,71 @@
+-                charcolor = hpcolor[0];
++                charcolor = obj_joker.hpcolor[pos];
+             }
+-            if (c == 1)
++            else
+             {
+-                charcolor = hpcolor[1];
++                charcolor = hpcolor[c];
+-            }
+-            if (c == 2)
+-            {
+-                charcolor = hpcolor[2];
              }
              gc = global.charturn;
              xchunk = 0;
@@ -105,7 +117,7 @@
              {
                  btc[global.bmenucoord[0][global.charturn]] = 1;
              }
-@@ -123,16 +124,16 @@
+@@ -123,16 +120,16 @@
                  draw_sprite(scr_84_get_sprite("spr_btitem"), btc[2], xx + xchunk + 85, (485 - bp) + yy);
                  draw_sprite(scr_84_get_sprite("spr_btspare"), btc[3], xx + xchunk + 120, (485 - bp) + yy);
                  draw_sprite(scr_84_get_sprite("spr_btdefend"), btc[4], xx + xchunk + 155, (485 - bp) + yy);
@@ -125,7 +137,7 @@
              {
                  draw_set_color(charcolor);
              }
-@@ -140,13 +141,13 @@
+@@ -140,13 +137,13 @@
              {
                  draw_set_color(bcolor);
              }
@@ -142,7 +154,7 @@
              b_offset = 480;
              if (global.fighting == 0)
              {
-@@ -158,20 +159,20 @@
+@@ -158,22 +155,26 @@
              }
              if (c == 0)
              {
@@ -169,7 +181,13 @@
 +            draw_sprite(spr_hpname, 0, xx + 109 + xchunk, bpoff + b_offset + 11 + mmy[pos]);
              draw_set_color(c_white);
              draw_set_font(global.hpfont);
++            if (instance_exists(obj_joker))
++            {
++                c = obj_joker.hpchar[pos] - 1;
++            }
              if ((global.hp[c + 1] / global.maxhp[c + 1]) <= 0.25)
+             {
+                 draw_set_color(c_yellow);
 @@ -183,16 +184,16 @@
                  draw_set_color(c_red);
              }
