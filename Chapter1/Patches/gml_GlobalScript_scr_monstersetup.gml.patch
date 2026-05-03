@@ -98,3 +98,47 @@
          {
              global.canact[myself][2] = 1;
              global.actname[myself][2] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_440_0");
+@@ -549,9 +552,18 @@
+         global.actname[myself][0] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_631_0");
+         global.canact[myself][1] = 1;
+         global.actname[myself][1] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_633_0");
++        if (scr_havechar(2) && !scr_susiemode())
++        {
+-        global.canact[myself][2] = 1;
++            global.canact[myself][2] = 1;
+-        global.actname[myself][2] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_635_0");
++            global.actname[myself][2] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_635_0");
+-        global.actactor[myself][2] = 2;
++            global.actactor[myself][2] = 2;
++        }
++        if (scr_havechar(2) && scr_susiemode())
++        {
++            global.canact[myself][2] = 1;
++            global.actname[myself][2] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_440_0");
++            global.actactor[myself][2] = 3;
++        }
+     }
+     if (global.monstertype[myself] == 23)
+     {
+@@ -569,9 +581,18 @@
+         global.actname[myself][0] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_655_0");
+         global.canact[myself][1] = 1;
+         global.actname[myself][1] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_657_0");
++        if (scr_havechar(2) && !scr_susiemode())
++        {
+-        global.canact[myself][2] = 1;
++            global.canact[myself][2] = 1;
+-        global.actname[myself][2] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_659_0");
++            global.actname[myself][2] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_659_0");
+-        global.actactor[myself][2] = 2;
++            global.actactor[myself][2] = 2;
++        }
++        if (scr_havechar(2) && scr_susiemode())
++        {
++            global.canact[myself][2] = 1;
++            global.actname[myself][2] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_440_0");
++            global.actactor[myself][2] = 3;
++        }
+     }
+     if (global.monstertype[myself] == 25)
+     {

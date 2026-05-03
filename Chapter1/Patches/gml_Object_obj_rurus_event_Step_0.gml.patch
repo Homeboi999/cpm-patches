@@ -1,0 +1,46 @@
+--- a/Code/gml_Object_obj_rurus_event_Step_0.gml
++++ b/Code/gml_Object_obj_rurus_event_Step_0.gml
+@@ -2,13 +2,14 @@
+ {
+     if (con == 0 && global.interact == 0)
+     {
+-        cinstancecheck = 0;
+-        if (instance_exists(global.cinstance[0]) && instance_exists(global.cinstance[1]))
+-        {
+-            if (global.cinstance[0].x >= 125 && global.cinstance[1].x >= 125)
+-            {
+-                cinstancecheck = 1;
+-            }
++        cinstancecheck = 1;
++        if (instance_exists(global.cinstance[0]) && global.cinstance[0].x < 125)
++        {
++            cinstancecheck = 0;
++        }
++        if (instance_exists(global.cinstance[1]) && global.cinstance[1].x < 125)
++        {
++            cinstancecheck = 0;
+         }
+         if (obj_mainchara.x >= 125 && cinstancecheck == 1)
+         {
+@@ -240,13 +241,14 @@
+ {
+     if (con == 0 && global.interact == 0)
+     {
+-        cinstancecheck = 0;
+-        if (instance_exists(global.cinstance[0]) && instance_exists(global.cinstance[1]))
+-        {
+-            if (global.cinstance[0].x >= 125 && global.cinstance[1].x >= 125)
+-            {
+-                cinstancecheck = 1;
+-            }
++        cinstancecheck = 1;
++        if (instance_exists(global.cinstance[0]) && global.cinstance[0].x < 125)
++        {
++            cinstancecheck = 0;
++        }
++        if (instance_exists(global.cinstance[1]) && global.cinstance[1].x < 125)
++        {
++            cinstancecheck = 0;
+         }
+         if (obj_mainchara.x >= 125 && cinstancecheck == 1)
+         {
