@@ -1,0 +1,60 @@
+--- a/Code/gml_Object_obj_smallcheckers_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_smallcheckers_enemy_Step_0.gml
+@@ -15,8 +15,21 @@
+     if (global.mnfight == 1 && talked == 0)
+     {
+         scr_randomtarget();
++        if (!instance_exists(obj_darkener))
++        {
++            instance_create(0, 0, obj_darkener);
++        }
+         talked = 1;
+         talktimer = 0;
++        if (!instance_exists(obj_moveheart) && !instance_exists(obj_heart))
++        {
++            scr_moveheart();
++        }
++        if (!instance_exists(obj_growtangle))
++        {
++            instance_create(__view_get(e__VW.XView, 0) + 320, __view_get(e__VW.YView, 0) + 170, obj_growtangle);
++        }
++        attacked = 0;
+     }
+     if (talked == 1 && global.mnfight == 1)
+     {
+@@ -40,15 +53,21 @@
+         rtimer += 1;
+         if (rtimer == 12)
+         {
+-            rr = scr_monsterpop();
+-            global.turntimer = 1;
+-            if (rr == 999)
++            global.turntimer = 999;
++            if (!instance_exists(obj_smallcheckers_leap))
+             {
+-                dc = instance_create(x, y, obj_spinheart);
++                dc = instance_create(x, y, obj_smallcheckers_leap);
+-                dc.type = 0;
++                dc.leapmode = attacktype;
+                 dc.target = mytarget;
+                 dc.damage = global.monsterat[myself] * 5;
++                attacktype += 1;
++                if (attacktype > 1)
++                {
++                    attacktype = 0;
++                }
+             }
++            siner = 0;
++            visible = 0;
+             turns += 1;
+             attacked = 1;
+             global.typer = 6;
+@@ -61,7 +80,7 @@
+         }
+         else
+         {
+-            global.turntimer = 1;
++            global.turntimer = 120;
+         }
+     }
+     if (global.mnfight == 2)

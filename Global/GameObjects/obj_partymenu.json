@@ -1,6 +1,9 @@
 {
   "Name": "obj_partymenu",
+  "Sprite": null,
+  "Parent": null,
   "CollisionShape": 0,
+  "IsAwake": false,
   "Events": [
     {
       "Code": "gml_Object_obj_partymenu_Create_0",

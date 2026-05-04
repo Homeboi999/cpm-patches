@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_rurus_checker_event_Step_0.gml
++++ b/Code/gml_Object_obj_rurus_checker_event_Step_0.gml
+@@ -243,7 +243,7 @@
+ }
+ if (con == 36)
+ {
+-    if (!instance_exists(obj_battlecontroller))
++    if (!instance_exists(obj_battlecontroller) || (instance_exists(obj_checkers_enemy) && obj_checkers_enemy.susie_end > 0))
+     {
+         rurus.x = __view_get(e__VW.XView, 0) + 660;
+         with (rurus)

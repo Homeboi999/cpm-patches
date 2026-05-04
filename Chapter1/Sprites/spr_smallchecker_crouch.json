@@ -1,0 +1,23 @@
+{
+  "Name": "spr_smallchecker_crouch",
+  "index": 1095,
+  "ImageFile": "spr_smallchecker_crouch.png",
+  "FrameCount": 1,
+  "Size": [
+    25,
+    33
+  ],
+  "Margins": [
+    0,
+    24,
+    32,
+    2
+  ],
+  "BoundingBoxMode": 0,
+  "Origin": [
+    0,
+    2
+  ],
+  "playbackSpeed": 1,
+  "playbackType": 1
+}

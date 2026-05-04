@@ -1,0 +1,29 @@
+{
+  "Name": "obj_smallcheckers_leap",
+  "Sprite": "spr_smallchecker_idle",
+  "Parent": "obj_collidebullet",
+  "CollisionShape": 0,
+  "IsAwake": true,
+  "Events": [
+    {
+      "Code": "gml_Object_obj_smallcheckers_leap_Create_0",
+      "Type": 0,
+      "Subtype": 0
+    },
+    {
+      "Code": "gml_Object_obj_smallcheckers_leap_Destroy_0",
+      "Type": 1,
+      "Subtype": 0
+    },
+    {
+      "Code": "gml_Object_obj_smallcheckers_leap_Step_0",
+      "Type": 3,
+      "Subtype": 0
+    },
+    {
+      "Code": "gml_Object_obj_smallcheckers_leap_Other_15",
+      "Type": 7,
+      "Subtype": 15
+    }
+  ]
+}

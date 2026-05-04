@@ -1,0 +1,23 @@
+{
+  "Name": "spr_smallchecker_leg",
+  "index": 1093,
+  "ImageFile": "spr_smallchecker_leg_strip5.png",
+  "FrameCount": 5,
+  "Size": [
+    50,
+    36
+  ],
+  "Margins": [
+    9,
+    44,
+    35,
+    3
+  ],
+  "BoundingBoxMode": 0,
+  "Origin": [
+    20,
+    3
+  ],
+  "playbackSpeed": 1,
+  "playbackType": 1
+}

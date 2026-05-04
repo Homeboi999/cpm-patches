@@ -4,9 +4,9 @@
          {
              gameover = 0;
          }
-+        if (!scr_havechar(1) && !scr_havechar(3) && instance_exists(obj_checkers_enemy) && gameover == 1)
++        if (instance_exists(obj_checkers_enemy) && gameover == 1)
 +        {
-+            if (obj_checkers_enemy.secondtime == 0 && obj_checkers_enemy.susie_endcon > 0)
++            if (obj_checkers_enemy.susie_solo)
 +            {
 +                gameover = 0;
 +                with (obj_checkers_enemy)

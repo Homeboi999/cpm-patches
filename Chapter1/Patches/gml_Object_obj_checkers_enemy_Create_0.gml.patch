@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_checkers_enemy_Create_0.gml
 +++ b/Code/gml_Object_obj_checkers_enemy_Create_0.gml
-@@ -42,4 +42,8 @@
+@@ -42,4 +42,9 @@
  bowcounter = 0;
  ralsei_lecture = 0;
  milk_counter = 0;
@@ -8,4 +8,5 @@
 +susie_solo = scr_havechar(2) && !scr_havechar(1) && !scr_havechar(3);
 +susie_endcon = 2;
 +susie_end = 0;
++susie_idea = scr_havechar(2) && !scr_susiemode();
  

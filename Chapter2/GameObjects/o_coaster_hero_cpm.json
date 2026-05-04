@@ -1,6 +1,9 @@
 {
   "Name": "o_coaster_hero_cpm",
+  "Sprite": null,
+  "Parent": null,
   "CollisionShape": 1,
+  "IsAwake": false,
   "Events": [
     {
       "Code": "gml_Object_o_coaster_hero_cpm_Create_0",

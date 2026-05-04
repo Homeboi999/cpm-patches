@@ -1,23 +1,27 @@
 function scr_susiemode()
 {
     var modsetting = scr_modconfig("autoSusie");
+    var auto = true;
+    
     switch (modsetting)
     {
         case 0:
             if (global.plot < 150)
-            {
-                return true;
-            }
+                auto = true;
             else
-            {
-                return false;
-            }
+                auto = false;
+            
             break;
+        
         case 1:
-            return true;
+            auto = true;
             break;
+        
         case 2:
-            return false;
+            auto = false;
             break;
     }
+    
+    global.charauto[2] = auto;
+    return auto;
 }

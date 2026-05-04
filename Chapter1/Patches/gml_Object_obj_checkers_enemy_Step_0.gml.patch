@@ -5,9 +5,27 @@
  if (global.monstertype[myself] == 21)
  {
      secondtime = 1;
-@@ -23,7 +24,14 @@
+@@ -5,14 +6,6 @@
+ if (global.monster[myself] == 1)
+ {
+     global.flag[51 + myself] = 4;
+-    if (secondtime == 1)
+-    {
+-        milk_counter = 99;
+-    }
+-    if (secondtime == 1)
+-    {
+-        ralsei_lecture = 99;
+-    }
+     if (global.mnfight == 1 && talked == 0)
+     {
+         scr_randomtarget();
+@@ -21,9 +14,16 @@
+             instance_create(0, 0, obj_darkener);
+         }
          milkmax = 1000;
-         if (milk_counter > 0)
+-        if (milk_counter > 0)
++        if (milk_counter > 0 || secondtime == 1)
          {
 +            if (milk_counter > 1 && !scr_havechar(1) && scr_havechar(3))
 +            {
@@ -21,9 +39,12 @@
          }
          if (global.monsterhp[myself] > milkmax)
          {
-@@ -56,7 +64,14 @@
+@@ -54,9 +54,16 @@
+         {
+             talked = 0;
              milkmax = 1000;
-             if (milk_counter > 0)
+-            if (milk_counter > 0)
++            if (milk_counter > 0 || secondtime == 1)
              {
 +                if (milk_counter > 1 && !scr_havechar(1) && scr_havechar(3))
 +                {
@@ -37,7 +58,7 @@
              }
              if (global.monsterhp[myself] <= milkmax)
              {
-@@ -109,10 +124,18 @@
+@@ -109,10 +116,18 @@
              {
                  global.battlemsg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_79_0");
              }
@@ -57,7 +78,7 @@
              if (crown > 0)
              {
                  global.battlemsg[0] = scr_84_get_subst_string(scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_82_0"), string(crown));
-@@ -142,11 +165,42 @@
+@@ -142,11 +157,42 @@
              }
          }
      }
@@ -91,7 +112,8 @@
  }
  if (scon == 1)
  {
-     if (milk_counter > 0)
+-    if (milk_counter > 0)
++    if (milk_counter > 0 || secondtime == 1)
      {
 +        if (milk_counter == 2 && susie_solo)
 +        {
@@ -100,27 +122,31 @@
          scon = 1.5;
      }
      else
-@@ -230,6 +284,10 @@
-         {
-             milkheal = 300;
+@@ -225,12 +271,9 @@
+             global.monsterat[myself] += 0.5;
          }
-+        else if (milkmax == 200)
-+        {
-+            milkheal = 1100;
-+        }
+         snd_play(snd_power);
+-        milkheal = 700;
+-        if (milk_counter == 0)
+-        {
+-            milkheal = 300;
+-        }
++        milkheal = 1300 - milkmax;
          global.monsterhp[myself] += milkheal;
++        global.monsterstatus[myself] = 0;
          healamt = instance_create(global.monsterx[myself], global.monstery[myself], obj_dmgwriter);
          with (healamt)
-@@ -257,7 +315,7 @@
+         {
+@@ -257,7 +300,7 @@
      milktimer += 1;
      if (milktimer >= 30)
      {
 -        if (milk_counter > 0)
-+        if (milk_counter > 0 && (susie_endcon == 0 && susie_solo))
++        if ((milk_counter > 0 || secondtime == 1) && (susie_endcon == 0 && susie_solo))
          {
              with (obj_writer)
              {
-@@ -267,6 +325,18 @@
+@@ -267,6 +310,18 @@
              milktimer = 0;
              global.turntimer = 0;
          }
@@ -139,7 +165,7 @@
          else
          {
              with (obj_writer)
-@@ -275,10 +345,17 @@
+@@ -275,10 +330,17 @@
              }
              scon = 6;
              global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_226_0");
@@ -161,7 +187,7 @@
              scr_battletext_default();
          }
          milk_counter += 1;
-@@ -298,6 +375,15 @@
+@@ -298,6 +360,15 @@
          global.turntimer = 999;
      }
  }
@@ -177,9 +203,12 @@
  if (global.myfight == 3)
  {
      xx = __view_get(e__VW.XView, 0);
-@@ -374,16 +460,33 @@
+@@ -372,21 +443,38 @@
+         global.fc = 0;
+         global.typer = 4;
          global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_327_0");
-         if (ralsei_lecture == 0 && secondtime == 0)
+-        if (ralsei_lecture == 0 && secondtime == 0)
++        if (ralsei_lecture == 0 && susie_idea == 0)
          {
 +            last_msg = 0;
              global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_330_0");
@@ -219,8 +248,12 @@
 +            }
              ralsei_lecture = 1;
          }
-         if (thrown == 0 && secondtime == 1)
-@@ -395,18 +498,38 @@
+-        if (thrown == 0 && secondtime == 1)
++        if (thrown == 0 && susie_idea == 1)
+         {
+             if (bowcounter == 0)
+             {
+@@ -395,18 +483,38 @@
                  global.typer = 45;
                  global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_349_0");
                  global.msg[1] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_350_0");
@@ -263,7 +296,7 @@
              }
              if (bowcounter == 2)
              {
-@@ -415,8 +538,16 @@
+@@ -415,8 +523,16 @@
                  global.typer = 45;
                  global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_369_0");
                  global.msg[1] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_370_0");
@@ -282,7 +315,23 @@
              }
          }
          bowcounter += 1;
-@@ -494,12 +625,20 @@
+@@ -440,7 +556,7 @@
+         }
+         actcon = 1;
+     }
+-    if (secondtime == 0)
++    if (susie_idea == 0)
+     {
+         if (acting == 3 && actcon == 0)
+         {
+@@ -488,18 +604,26 @@
+             image_speed = 0.5;
+         }
+         global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_442_0");
+-        if (ralsei_lecture == 0 && secondtime == 0)
++        if (ralsei_lecture == 0)
+         {
+             global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_445_0");
              scr_ralface(1, 0);
              global.msg[2] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_447_0");
              global.msg[3] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_448_0");
@@ -309,3 +358,12 @@
              ralsei_lecture = 1;
          }
          scr_battletext_default();
+@@ -530,7 +654,7 @@
+         }
+         actcon = 1;
+     }
+-    if (secondtime == 1)
++    if (susie_idea == 1)
+     {
+         if (acting == 3 && actcon == 0)
+         {

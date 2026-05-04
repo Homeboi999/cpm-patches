@@ -1,0 +1,23 @@
+{
+  "Name": "spr_smallchecker_leap",
+  "index": 1094,
+  "ImageFile": "spr_smallchecker_leap.png",
+  "FrameCount": 1,
+  "Size": [
+    25,
+    40
+  ],
+  "Margins": [
+    0,
+    24,
+    39,
+    0
+  ],
+  "BoundingBoxMode": 0,
+  "Origin": [
+    0,
+    9
+  ],
+  "playbackSpeed": 1,
+  "playbackType": 1
+}

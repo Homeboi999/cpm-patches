@@ -1,6 +1,9 @@
 {
   "Name": "obj_configmenu",
+  "Sprite": null,
+  "Parent": null,
   "CollisionShape": 0,
+  "IsAwake": false,
   "Events": [
     {
       "Code": "gml_Object_obj_configmenu_Create_0",
