@@ -1,8 +1,15 @@
 --- a/Code/gml_Object_obj_smallcheckers_enemy_Create_0.gml
 +++ b/Code/gml_Object_obj_smallcheckers_enemy_Create_0.gml
-@@ -32,4 +32,5 @@
+@@ -32,4 +32,12 @@
  checkhp1 = global.hp[1];
  checkhp2 = global.hp[2];
  firstturn = 0;
 +attacktype = 0;
++actcount = 0;
++image_speed = 0;
++image_xscale = 2;
++image_yscale = 2;
++idlesprite = spr_smallchecker_idle;
++hurtsprite = spr_smallchecker_hurt;
++sparedsprite = spr_smallchecker_spared;
  

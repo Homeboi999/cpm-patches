@@ -1,0 +1,23 @@
+{
+  "Name": "spr_smallchecker_spared",
+  "index": 1096,
+  "ImageFile": "spr_smallchecker_spared_strip8.png",
+  "FrameCount": 8,
+  "Size": [
+    50,
+    36
+  ],
+  "Margins": [
+    17,
+    45,
+    34,
+    1
+  ],
+  "BoundingBoxMode": 0,
+  "Origin": [
+    20,
+    3
+  ],
+  "playbackSpeed": 1,
+  "playbackType": 1
+}
