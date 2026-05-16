@@ -1,18 +1,16 @@
 --- a/Code/gml_Object_obj_lancerboss2_Step_0.gml
 +++ b/Code/gml_Object_obj_lancerboss2_Step_0.gml
-@@ -1,7 +1,9 @@
+@@ -1,7 +1,7 @@
  if (firstskip == 1)
  {
 -    global.acting[0] = 1;
 -    acting = 1;
-+    acting = 99;
-+    actcon = 10;
 +    firstskip = 0;
 +    prevhp = global.monsterhp[myself];
      with (obj_writer)
      {
          instance_destroy();
-@@ -20,15 +22,16 @@
+@@ -20,15 +20,16 @@
      }
      global.charturn = 3;
      global.myfight = 3;
@@ -31,7 +29,7 @@
          scr_randomtarget();
          if (!instance_exists(obj_darkener))
          {
-@@ -60,39 +63,47 @@
+@@ -60,39 +61,47 @@
          if (rtimer == 12)
          {
              global.turntimer = 140;
@@ -106,11 +104,11 @@
                  {
                      dc.difficulty = 90;
                  }
-@@ -104,7 +115,10 @@
+@@ -104,7 +113,10 @@
              attacked = 1;
              global.typer = 6;
              global.fc = 0;
-+            if (turns > 0)
++            if (turns > 1)
 +            {
 -            global.battlemsg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_88_0");
 +                global.battlemsg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_88_0");
@@ -118,7 +116,7 @@
          }
          else
          {
-@@ -125,97 +139,174 @@
+@@ -125,97 +137,241 @@
      yy = __view_get(e__VW.YView, 0);
      if (acting == 1 && actcon == 0)
      {
@@ -239,21 +237,102 @@
 +    }
 +    if (acting != 99 && actcon < 10 && !instance_exists(obj_writer))
 +    {
++        acting = 99;
++        actcon = 10;
++    }
++    if (acting == 99 && actcon == 10)
++    {
 +        if (prevhp > global.monsterhp[myself])
 +        {
 +            hitcount++;
 +        }
 +        prevhp = global.monsterhp[myself];
-+        acting = 99;
-+        actcon = 10;
++        actcon = 11;
++        var magicking = false;
++        if (global.charaction[0] == 4 || global.charaction[0] == 2)
++        {
++            magicking = true;
++        }
++        if (global.charaction[1] == 4 || global.charaction[1] == 2)
++        {
++            magicking = true;
++        }
++        if (global.charaction[2] == 4 || global.charaction[2] == 2)
++        {
++            magicking = true;
++        }
++        if (magicking || !(scr_havechar(2) && scr_susiemode()))
++        {
++            scr_attackphase();
++        }
++        else
++        {
++            bubbleactive = true;
++            bubble = 2;
++        }
 +    }
-+    if (acting == 99)
++}
++if (global.myfight == 4)
++{
++    if (sparecon < 2 && sparecon != 0)
 +    {
-+        if (actcon == 10)
++        global.spelldelay = 999;
++        with (obj_spellphase)
++        {
++            if (spelltimer > 30)
++            {
++                spelltimer = 30;
++            }
++        }
++    }
++    if (sparecon == 1 && !instance_exists(obj_writer))
++    {
++        sparecount++;
++        if (instance_exists(obj_spellphase) && (obj_spellphase.char >= 3 || obj_spellphase.spelltotal == 1))
++        {
++            bubbleactive = true;
++            if (scr_havechar(2) && scr_susiemode())
++            {
++                bubble = 2;
++            }
++            else
++            {
++                bubble = 1;
++            }
++        }
++        else
++        {
++            sparecon = 2;
++        }
++    }
++    if (sparecon == 2 && !instance_exists(obj_writer))
++    {
++        sparecon = 0;
++        global.spelldelay = 0;
++    }
++}
++if (bubbleactive)
++{
++    if (bubble == 1)
++    {
++        if (bubblecon == 0)
++        {
++            bubblecon = 1;
++            global.msg[0] = "* spared! " + string(sparecount) + "/%";
++            scr_battletext_default();
++        }
++        if (bubblecon == 1 && !instance_exists(obj_writer))
++        {
++            bubble = 0;
++        }
++    }
++    if (bubble == 2)
++    {
++        if (bubblecon == 0)
 +        {
 +            global.typer = 53;
 +            rr = choose(0, 1, 2, 3);
-+            actcon = 11;
++            bubblecon = 1;
 +            if (hitcount == 0)
 +            {
 +                global.msg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_120_0");
@@ -301,7 +380,7 @@
 +                global.msg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_145_0");
 +                global.msg[1] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_145_1");
 +                global.msg[2] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_145_2");
-+                actcon = 12;
++                bubblecon = 2;
 +            }
 +            global.monsterdf[myself] -= 5;
 +            if (instance_exists(obj_herosusie))
@@ -313,47 +392,33 @@
 +                skippable = 0;
 +            }
 +        }
-+        if (actcon == 11 && !instance_exists(obj_writer))
++        if (bubblecon == 1 && !instance_exists(obj_writer))
++        {
++            bubble = 0;
++        }
++        if (bubblecon == 2 && !instance_exists(obj_writer))
++        {
++            killcon = 1;
++            bubblecon = 3;
++        }
++        if (bubblecon == 3)
++        {
++        }
++    }
++    if (bubble == 0)
++    {
++        bubblecon = 0;
++        bubbleactive = false;
++        if (global.myfight == 3)
 +        {
 +            actcon = 0;
 +            scr_attackphase();
 +        }
-+        if (actcon == 12 && !instance_exists(obj_writer))
++        else if (global.myfight == 4)
 +        {
-+            killcon = 1;
-+            actcon = 13;
-+            acttimer = 0;
-+        }
-+        if (actcon == 13)
-+        {
++            sparecon = 2;
 +        }
 +    }
-+}
-+if (sparecon > 0 && scr_havechar(2))
-+{
-+    global.spelldelay = 999;
-+    with (obj_spellphase)
-+    {
-+        if (spelltimer > 30)
-+        {
-+            spelltimer = 30;
-+        }
-+    }
-+}
-+if (sparecon == 1 && !instance_exists(obj_writer))
-+{
-+    sparecon = 2;
-+    sparecount++;
-+    if (scr_havechar(2))
-+    {
-+        global.msg[0] = "* spared! " + string(sparecount) + "/%";
-+        scr_battletext_default();
-+    }
-+}
-+if (sparecon == 2 && !instance_exists(obj_writer))
-+{
-+    sparecon = 0;
-+    global.spelldelay = 0;
 +}
 +if (killcon == 0 && global.monsterhp[0] <= 0)
 +{

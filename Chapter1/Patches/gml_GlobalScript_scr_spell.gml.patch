@@ -40,7 +40,7 @@
                  if (global.mercymod[star] >= 100)
                  {
 -                    if (global.monstertype[star] != 3)
-+                    if (global.monstertype[star] != 3 && !(global.monstertype[star] == 12 && scr_havechar(2)))
++                    if (global.monstertype[star] != 3 && global.monstertype[star] != 12)
                      {
                          with (global.monsterinstance[star])
                          {

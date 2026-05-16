@@ -116,17 +116,24 @@
          {
              global.canact[myself][3] = 1;
              global.actname[myself][3] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_337_0");
-@@ -316,6 +345,9 @@
+@@ -312,10 +341,15 @@
+         global.monsterexp[myself] = 0;
+         global.monstergold[myself] = 0;
+         global.sparepoint[myself] = 0;
+-        global.mercymod[myself] = 0;
++        global.mercymod[myself] = 100;
          global.mercymax[myself] = 100;
          global.canact[myself][0] = 1;
          global.actname[myself][0] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_358_0");
 +        global.canact[myself][1] = 1;
-+        global.actname[myself][1] = "death tester";
-+        global.actactor[myself][1] = 2;
++        global.actname[myself][1] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_688_0");
++        global.canact[myself][2] = 1;
++        global.actname[myself][2] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_117_0");
++        global.actactor[myself][2] = 2;
      }
      if (global.monstertype[myself] == 13)
      {
-@@ -336,7 +368,7 @@
+@@ -336,7 +370,7 @@
          global.canact[myself][2] = 1;
          global.actname[myself][2] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_381_0");
          global.actactor[myself][2] = 3;
@@ -135,7 +142,7 @@
          {
              global.canact[myself][3] = 1;
              global.actname[myself][3] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_386_0");
-@@ -359,7 +391,7 @@
+@@ -359,7 +393,7 @@
          global.actname[myself][0] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_406_0");
          global.canact[myself][1] = 1;
          global.actname[myself][1] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_408_0");
@@ -144,7 +151,7 @@
          {
              global.canact[myself][2] = 1;
              global.actname[myself][2] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_412_0");
-@@ -382,7 +414,7 @@
+@@ -382,7 +416,7 @@
          global.actname[myself][0] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_432_0");
          global.canact[myself][1] = 1;
          global.actname[myself][1] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_434_0");
@@ -153,7 +160,7 @@
          {
              global.canact[myself][2] = 1;
              global.actname[myself][2] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_440_0");
-@@ -529,9 +561,27 @@
+@@ -529,9 +563,27 @@
          }
          global.canact[myself][1] = 1;
          global.actname[myself][1] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_609_0");
@@ -184,7 +191,7 @@
      }
      if (global.monstertype[myself] == 22)
      {
-@@ -549,9 +599,18 @@
+@@ -549,9 +601,18 @@
          global.actname[myself][0] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_631_0");
          global.canact[myself][1] = 1;
          global.actname[myself][1] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_633_0");
@@ -206,7 +213,7 @@
      }
      if (global.monstertype[myself] == 23)
      {
-@@ -569,9 +628,18 @@
+@@ -569,9 +630,18 @@
          global.actname[myself][0] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_655_0");
          global.canact[myself][1] = 1;
          global.actname[myself][1] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_657_0");
