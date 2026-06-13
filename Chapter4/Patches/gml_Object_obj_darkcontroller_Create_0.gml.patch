@@ -1,0 +1,89 @@
+--- a/Code/gml_Object_obj_darkcontroller_Create_0.gml
++++ b/Code/gml_Object_obj_darkcontroller_Create_0.gml
+@@ -44,6 +44,7 @@
+ }
+ global.cinstance[0] = 4343434343;
+ global.cinstance[1] = 343434343434;
++var align_TODO_PUT_SOMEWHERE_ELSE = [[-3, -8], [6, 16], [2, 12], [4, 20]];
+ for (var i = 0; i < 3; i += 1)
+ {
+     global.faceaction[i] = 0;
+@@ -51,69 +52,15 @@
+     {
+         chartotal += 1;
+     }
+-    if (global.char[i] == 1)
+-    {
+-        havechar[0] = 1;
+-        charpos[0] = i;
+-    }
+-    if (global.char[i] == 2)
+-    {
+-        havechar[1] = 1;
+-        charpos[1] = i;
+-        if (i > 0)
+-        {
+-            global.cinstance[i - 1] = instance_create(obj_mainchara.x - 6, obj_mainchara.y - 16, obj_caterpillarchara);
+-            global.cinstance[i - 1].target = i * 12;
+-        }
+-    }
+-    if (global.char[i] == 3)
+-    {
+-        havechar[2] = 1;
+-        charpos[2] = i;
+-        if (i > 0)
+-        {
+-            global.cinstance[i - 1] = instance_create(obj_mainchara.x - 2, obj_mainchara.y - 12, obj_caterpillarchara);
+-            global.cinstance[i - 1].target = i * 12;
+-            with (global.cinstance[i - 1])
+-            {
+-                name = "ralsei";
+-                slidesprite = spr_ralsei_slide;
+-                if (global.chapter >= 2)
+-                {
+-                    usprite = spr_ralsei_walk_up;
+-                    dsprite = spr_ralsei_walk_down;
+-                    rsprite = spr_ralsei_walk_right;
+-                    lsprite = spr_ralsei_walk_left;
+-                }
+-                else
+-                {
+-                    usprite = spr_ralseiu;
+-                    dsprite = spr_ralseid;
+-                    rsprite = spr_ralseir;
+-                    lsprite = spr_ralseil;
+-                }
+-            }
+-        }
+-    }
+-    if (global.char[i] == 4)
+-    {
+-        havechar[3] = 1;
+-        charpos[3] = i;
+-        if (i > 0)
+-        {
+-            global.cinstance[i - 1] = instance_create(obj_mainchara.x - 4, obj_mainchara.y - 20, obj_caterpillarchara);
+-            global.cinstance[i - 1].target = i * 12;
+-            with (global.cinstance[i - 1])
+-            {
+-                name = "noelle";
+-                slidesprite = spr_noelle_walk_down_dw;
+-                usprite = spr_noelle_walk_up_dw;
+-                dsprite = spr_noelle_walk_down_dw;
+-                rsprite = spr_noelle_walk_right_dw;
+-                lsprite = spr_noelle_walk_left_dw;
+-            }
+-        }
+-    }
++    var charid = global.char[i];
++    if (i == 0 || charid == 0 || charid > 4)
++    {
++        continue;
++    }
++    havechar[charid - 1] = 1;
++    charpos[charid - 1] = i;
++    var charalign = align_TODO_PUT_SOMEWHERE_ELSE[charid - 1];
++    scr_makecaterpillar(obj_mainchara.x - charalign[0], obj_mainchara.y - charalign[1], charid, i - 1);
+ }
+ global.charinstance[0] = obj_mainchara;
+ global.charinstance[1] = global.cinstance[0];
