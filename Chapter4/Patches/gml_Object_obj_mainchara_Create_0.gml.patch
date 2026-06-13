@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_mainchara_Create_0.gml
 +++ b/Code/gml_Object_obj_mainchara_Create_0.gml
-@@ -62,28 +62,10 @@
+@@ -62,28 +62,12 @@
  walkbuffer = 0;
  walktimer = 0;
  image_speed = 0;
@@ -19,6 +19,8 @@
 -init_clothes = false;
 +var charname = scr_char_id_to_name(global.char[0]);
 +scr_set_chara_sprites(charname ?? "kris");
++halign = 0;
++valign = 0;
  if (global.chapter == 4)
  {
 -    if (global.darkzone == 0 && global.plot >= 11 && global.plot < 35)
