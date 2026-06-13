@@ -1,0 +1,32 @@
+--- a/Code/gml_Object_obj_mainchara_Create_0.gml
++++ b/Code/gml_Object_obj_mainchara_Create_0.gml
+@@ -62,28 +62,9 @@
+ walkbuffer = 0;
+ walktimer = 0;
+ image_speed = 0;
+-dsprite = spr_krisd;
+-rsprite = spr_krisr;
+-usprite = spr_krisu;
+-lsprite = spr_krisl;
+-climbsprite = 3708;
+-if (global.darkzone == 1)
+-{
+-    dsprite = spr_krisd_dark;
+-    rsprite = spr_krisr_dark;
+-    lsprite = spr_krisl_dark;
+-    usprite = spr_krisu_dark;
+-}
+-init_clothes = false;
++scr_set_chara_sprites("kris");
+ if (global.chapter == 4)
+ {
+-    if (global.darkzone == 0 && global.plot >= 11 && global.plot < 35)
+-    {
+-        init_clothes = true;
+-        dsprite = spr_kris_walk_down_church;
+-        rsprite = spr_kris_walk_right_church;
+-        lsprite = spr_kris_walk_left_church;
+-    }
+     tower_shake_xoffset = 0;
+ }
+ swordfacing = 1;
