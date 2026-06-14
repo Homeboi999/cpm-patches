@@ -1,30 +1,6 @@
 --- a/Code/gml_Object_obj_darkcontroller_Create_0.gml
 +++ b/Code/gml_Object_obj_darkcontroller_Create_0.gml
-@@ -44,6 +44,23 @@
- }
- global.cinstance[0] = 4343434343;
- global.cinstance[1] = 343434343434;
-+var align_TODO_PUT_SOMEWHERE_ELSE = [
-+{
-+    halign: 0,
-+    valign: 0
-+}, 
-+{
-+    halign: 6,
-+    valign: 16
-+}, 
-+{
-+    halign: 2,
-+    valign: 12
-+}, 
-+{
-+    halign: 4,
-+    valign: 20
-+}];
- for (var i = 0; i < 3; i += 1)
- {
-     global.faceaction[i] = 0;
-@@ -51,69 +68,15 @@
+@@ -51,69 +51,20 @@
      {
          chartotal += 1;
      }
@@ -98,7 +74,12 @@
 +    }
 +    havechar[charid - 1] = 1;
 +    charpos[charid - 1] = i;
-+    var charalign = align_TODO_PUT_SOMEWHERE_ELSE[charid - 1];
++    var charname = scr_char_id_to_name(charid);
++    var charalign = scr_get_chara_alignment(charname);
++    if (charname == "noelle")
++    {
++        charalign.valign += 2;
++    }
 +    scr_makecaterpillar(obj_mainchara.x - charalign.halign, obj_mainchara.y - charalign.valign, charid, i - 1);
  }
  global.charinstance[0] = obj_mainchara;
