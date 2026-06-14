@@ -1,11 +1,23 @@
 --- a/Code/gml_Object_obj_mainchara_Create_0.gml
 +++ b/Code/gml_Object_obj_mainchara_Create_0.gml
-@@ -86,6 +86,8 @@
+@@ -86,6 +86,20 @@
      }
      tower_shake_xoffset = 0;
  }
-+halign = 0;
-+valign = 0;
++name = scr_char_id_to_name(global.char[0]) ?? "kris";
++visual_info = 
++{
++    halign: 0,
++    valign: 0
++};
++with (visual_info)
++{
++    scr_set_chara_sprites(other.name);
++}
++visual_info.sprite_index = visual_info.dsprite;
++var alignment = scr_get_chara_alignment(name, visual_info);
++visual_info.halign = alignment.halign;
++visual_info.valign = alignment.valign;
  swordfacing = 1;
  swordsprite = rsprite;
  fun = 0;
