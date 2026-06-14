@@ -28,14 +28,11 @@
      }
  }
  if (stepping == 1 && fun == 0)
-@@ -864,6 +869,10 @@
-             rsprite = spr_krisr;
+@@ -865,6 +870,7 @@
              lsprite = spr_krisl;
              usprite = spr_krisu;
-+        }
-+        with (visual_info)
-+        {
-+            scr_set_chara_sprites(other.name);
          }
++        scr_set_chara_sprites(name, visual_info);
      }
  }
+ if (scr_debug())

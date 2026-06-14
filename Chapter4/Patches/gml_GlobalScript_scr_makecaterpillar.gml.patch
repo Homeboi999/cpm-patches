@@ -76,7 +76,7 @@
 +    with (global.cinstance[arg3])
 +    {
 +        self.name = name;
-+        scr_set_chara_sprites(name);
++        scr_set_chara_sprites(name, self);
      }
      return global.cinstance[arg3];
  }

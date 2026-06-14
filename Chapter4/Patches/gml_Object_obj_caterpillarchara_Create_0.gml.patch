@@ -64,7 +64,7 @@
 -        }
 -    }
 -}
-+scr_set_chara_sprites(name);
++scr_set_chara_sprites(name, self);
  usprite_blush = spr_ralseiu;
  dsprite_blush = spr_ralseid;
  rsprite_blush = spr_ralseir_blush;
