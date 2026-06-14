@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_mainchara_Create_0.gml
 +++ b/Code/gml_Object_obj_mainchara_Create_0.gml
-@@ -62,28 +62,12 @@
+@@ -62,28 +62,13 @@
  walkbuffer = 0;
  walktimer = 0;
  image_speed = 0;
@@ -17,10 +17,11 @@
 -    usprite = spr_krisu_dark;
 -}
 -init_clothes = false;
-+var charname = scr_char_id_to_name(global.char[0]);
-+scr_set_chara_sprites(charname ?? "kris");
-+halign = 0;
-+valign = 0;
++name = scr_char_id_to_name(global.char[0]) ?? "kris";
++scr_set_chara_sprites(name);
++var alignment = scr_get_chara_alignment(name, self);
++halign = alignment.halign;
++valign = alignment.valign;
  if (global.chapter == 4)
  {
 -    if (global.darkzone == 0 && global.plot >= 11 && global.plot < 35)
