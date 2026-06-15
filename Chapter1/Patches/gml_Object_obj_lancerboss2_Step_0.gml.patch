@@ -160,7 +160,7 @@
          }
          else
          {
-@@ -125,97 +148,430 @@
+@@ -125,97 +148,434 @@
      yy = __view_get(e__VW.YView, 0);
      if (acting == 1 && actcon == 0)
      {
@@ -258,17 +258,17 @@
 +                    break;
 +            }
 +            global.msg[0] = "* LANCER - AT 7 DF 1&* Turned on " + teamname + " almost instantly./";
-+            global.msg[1] = "* Trying his best to resolve this peacefully, but reluctantly standing his ground./%";
++            global.msg[1] = "* Trying his best to resolve this peacefully^1, but reluctantly standing his ground./%";
 +        }
 +        else if (hitcount < 7)
 +        {
 +            global.msg[0] = "* LANCER - AT 7 DF 0&* Can't take many more hits./";
-+            global.msg[1] = "* Still hoping for peace, but losing hope. He looks defeated... is he giving up?/%";
++            global.msg[1] = "* Still hoping for peace^1, but losing hope^1. He looks defeated..^1. is he giving up?/%";
 +        }
 +        else
 +        {
 +            global.msg[0] = "* LANCER - AT 7 DF 0&* Accepting his fate./";
-+            global.msg[1] = "* He stopped fighting back a while ago, now seemingly delaying the inevitable./%";
++            global.msg[1] = "* He stopped fighting back a while ago^1, now seemingly delaying the inevitable./%";
 +        }
 +        scr_battletext_default();
 +        actcon = 1;
@@ -288,13 +288,13 @@
 +                }
 +                else
 +                {
-+                    global.msg[1] = "* ... He cautiously glances at Susie.&* She looks conflicted./";
++                    global.msg[1] = "* ... He cautiously glances at Susie.^1&* She looks conflicted./";
 +                    global.msg[2] = "* You realise Lancer isn't the only one needing reassurance./%";
 +                }
 +            }
 +            else
 +            {
-+                global.msg[1] = "* ... He looks up for a second, but.../%";
++                global.msg[1] = "* ... He looks up for a second^1, but.../%";
 +            }
 +        }
 +        if (talkcon == 1)
@@ -309,13 +309,13 @@
 +                    scr_lanface(3, "A");
 +                    global.msg[4] = "* Susie, please-/";
 +                    scr_susface(5, 3);
-+                    global.msg[6] = "* Doesn't. Matter./%";
++                    global.msg[6] = "* Doesn't^2. Matter./%";
 +                }
 +                else
 +                {
-+                    global.msg[0] = "* You asked Lancer why he's fighting.&* He looks away./";
++                    global.msg[0] = "* You asked Lancer why he's fighting.^1&* He looks away./";
 +                    scr_lanface(1, "A");
-+                    global.msg[2] = "* I... if I let you go, then you'll.../";
++                    global.msg[2] = "* I..^1. if I let you go^1, then you'll.../";
 +                    global.msg[3] = "* ... I didn't have a choice./";
 +                    scr_susface(4, "D");
 +                    global.msg[5] = "* .../%";
@@ -323,7 +323,7 @@
 +            }
 +            else
 +            {
-+                global.msg[0] = "* You asked Lancer why he's fighting.&* He looks away./";
++                global.msg[0] = "* You asked Lancer why he's fighting.^1&* He looks away./";
 +                global.msg[1] = "* You might need to try something else./%";
 +            }
 +        }
@@ -333,11 +333,11 @@
 +            {
 +                if (scr_susiemode())
 +                {
-+                    global.msg[0] = "* It doesn't feel like talking is an option.&* ... mostly because of Susie./%";
++                    global.msg[0] = "* It doesn't feel like talking is an option.^1&* ... mostly because of Susie./%";
 +                }
 +                else
 +                {
-+                    global.msg[0] = "* You couldn't think of anything to say.&* ... maybe Susie could help?/%";
++                    global.msg[0] = "* You couldn't think of anything to say.^1&* ... maybe Susie could help?/%";
 +                }
 +            }
 +            else
@@ -352,7 +352,7 @@
 +    if (acting == 2 && actcon == 2 && !instance_exists(obj_writer))
 +    {
 +        laughsound = snd_play(snd_suslaugh);
-+        global.msg[0] = "* ... Susie laughs menacingly.&* Lancer takes a step back./%";
++        global.msg[0] = "* ... Susie laughs menacingly.^1&* Lancer takes a step back./%";
 +        with (obj_herosusie)
 +        {
 +            visible = 0;
@@ -418,7 +418,7 @@
 +            else
 +            {
 +                global.msg[0] = "* You asked Susie let Lancer explain./";
-+                scr_susface(1, "D");
++                scr_susface(1, "C");
 +                global.msg[2] = "* ... Why are you doing this?/";
 +                scr_lanface(3, 7);
 +                global.msg[4] = "* idk bro/%";
@@ -539,6 +539,10 @@
 +            if (sparecount >= 0)
 +            {
 +                global.msg[0] = "* spared! " + string(sparecount) + "/%";
++            }
++            if (sparecount == 6)
++            {
++                global.mercymod[myself] = 100;
 +            }
 +            global.monsterdf[myself] -= 5;
 +            scr_enemyblcon(x - 160, y, 3);

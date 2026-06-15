@@ -16,3 +16,45 @@
              break;
          case 8:
              global.monsterinstancetype[0] = obj_clubsenemy;
+@@ -223,7 +230,40 @@
+         case 20:
+             global.monsterinstancetype[0] = obj_lancerboss2;
+             global.monstertype[0] = 12;
+-            global.heromakex[0] = xx + 120;
++            var herocount = 0;
++            for (i = 0; i < 3; i++)
++            {
++                global.heromakex[i] = (xx + 130) - ((herocount - 1) * 40);
++                global.heromakey[i] = yy + 140 + ((herocount - 1) * 10);
++                if (global.char[i] != 0)
++                {
++                    herocount++;
++                }
++                if (global.char[i] == 1)
++                {
++                    global.heromakey[i] += 10;
++                }
++                else if (global.char[i] == 2)
++                {
++                    global.heromakex[i] -= 10;
++                }
++            }
++            if (herocount == 2)
++            {
++                for (i = 0; i < 3; i++)
++                {
++                    global.heromakex[i] -= 20;
++                    global.heromakey[i] += 5;
++                }
++            }
++            if (herocount == 1)
++            {
++                for (i = 0; i < 3; i++)
++                {
++                    global.heromakex[i] -= 40;
++                    global.heromakey[i] += 10;
++                }
++            }
+             global.monstermakex[0] = xx + 480;
+             global.monstermakey[0] = yy + 160;
+             global.monstertype[1] = 0;
