@@ -44,7 +44,7 @@
      global.flag[9] = 0;
      global.interact = 1;
      con = 51;
-@@ -715,22 +721,49 @@
+@@ -715,26 +721,49 @@
      {
          visible = 0;
      }
@@ -92,34 +92,74 @@
 +        sprite_index = spr_lancer_battle_hurt;
 +    }
      global.fighting = 0;
+-    with (obj_battlecontroller)
+-    {
+-        instance_destroy();
+-    }
 +    snd_free_all();
-     with (obj_battlecontroller)
+     with (obj_herosusie)
      {
          instance_destroy();
-@@ -743,6 +776,10 @@
+@@ -743,7 +772,7 @@
      {
          instance_destroy();
      }
+-    with (obj_tensionbar)
 +    with (obj_heroralsei)
-+    {
-+        instance_destroy();
-+    }
-     with (obj_tensionbar)
      {
          instance_destroy();
-@@ -759,9 +796,12 @@
+     }
+@@ -759,22 +788,40 @@
      {
          instance_destroy();
      }
 +    if (!spared)
 +    {
++        with (obj_battlecontroller)
++        {
++            instance_destroy();
++        }
++        with (obj_tensionbar)
++        {
++            instance_destroy();
++        }
 -    dm = instance_create(x + 30, y + 40, obj_dmgwriter);
 +        dm = instance_create(x + 30, y + 40, obj_dmgwriter);
 -    dm.type = 1;
 +        dm.type = 1;
 -    dm.damage = 0;
 +        dm.damage = 0;
+-    con = 54;
++        con = 54;
+-    alarm[4] = 120;
++        alarm[4] = 120;
 +    }
-     con = 54;
-     alarm[4] = 120;
++    else
++    {
++        con = 56;
++    }
  }
+ if (con == 55)
+ {
++    if (!spared)
++    {
+-    sprite_index = spr_lancer_battle;
++        sprite_index = spr_lancer_battle;
+-    image_index = 0;
++        image_index = 0;
+-    global.typer = 32;
++        global.typer = 32;
+-    global.fc = 5;
++        global.fc = 5;
+-    global.fe = 12;
++        global.fe = 12;
+-    global.msg[0] = scr_84_get_lang_string("obj_lancerbattle2_event_slash_Step_0_gml_762_0");
++        global.msg[0] = scr_84_get_lang_string("obj_lancerbattle2_event_slash_Step_0_gml_762_0");
+-    global.msg[1] = scr_84_get_lang_string("obj_lancerbattle2_event_slash_Step_0_gml_763_0");
++        global.msg[1] = scr_84_get_lang_string("obj_lancerbattle2_event_slash_Step_0_gml_763_0");
+-    instance_create(0, 0, obj_dialoguer);
++        instance_create(0, 0, obj_dialoguer);
++    }
+     con = 56;
+ }
+ if (con == 56 && !d_ex())

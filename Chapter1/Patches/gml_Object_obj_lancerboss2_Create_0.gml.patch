@@ -1,11 +1,12 @@
 --- a/Code/gml_Object_obj_lancerboss2_Create_0.gml
 +++ b/Code/gml_Object_obj_lancerboss2_Create_0.gml
-@@ -37,6 +37,21 @@
+@@ -37,6 +37,26 @@
  sparedsprite = spr_lancer_battle;
  hurtlevel = 0;
  hmake = 0;
 -firstskip = 1;
  shakesine = 0;
++init = false;
 +if (scr_havechar(2) && scr_susiemode())
 +{
 +    firstskip = 1;
@@ -15,6 +16,7 @@
 +    firstskip = 0;
 +}
 +hitcount = 0;
++rudebuster = false;
 +prevhp = 0;
 +sparecon = 0;
 +sparecount = 0;
@@ -22,4 +24,7 @@
 +bubble = 0;
 +bubblecon = 0;
 +bubbleactive = false;
++talkcon = 0;
++convincecon = 0;
++laughtimer = 0;
  

@@ -1,0 +1,148 @@
+--- a/Code/gml_Object_obj_king_boss_Step_0.gml
++++ b/Code/gml_Object_obj_king_boss_Step_0.gml
+@@ -272,72 +272,82 @@
+         scr_battletext_default();
+         actcon = 1;
+     }
+-    if (acting == 3 && actcon == 0)
++    var num = 3;
++    if (scr_havechar(2))
+     {
++        if (acting == num && actcon == 0)
++        {
+-        if (global.tempflag[6] == 0)
++            if (global.tempflag[6] == 0)
+-        {
++            {
+-            global.msg[0] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_214_0");
++                global.msg[0] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_214_0");
+-            scr_susface(1, 1);
++                scr_susface(1, 1);
+-            global.msg[2] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_216_0");
++                global.msg[2] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_216_0");
+-            global.msg[3] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_217_0");
++                global.msg[3] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_217_0");
+-            global.msg[4] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_218_0");
++                global.msg[4] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_218_0");
+-            scr_kingface(5, 0);
++                scr_kingface(5, 0);
+-            global.msg[6] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_220_0");
++                global.msg[6] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_220_0");
+-            global.msg[7] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_221_0");
++                global.msg[7] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_221_0");
+-            scr_susface(8, "C");
++                scr_susface(8, "C");
+-            global.msg[9] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_223_0");
++                global.msg[9] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_223_0");
+-            global.msg[10] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_224_0");
++                global.msg[10] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_224_0");
+-            scr_noface(11);
++                scr_noface(11);
+-            global.msg[12] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_226_0");
++                global.msg[12] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_226_0");
+-            global.tempflag[6] = 1;
++                global.tempflag[6] = 1;
+-            global.canact[myself][2] = 1;
++                global.canact[myself][2] = 1;
+-            global.actactor[myself][2] = 2;
++                global.actactor[myself][2] = 2;
+-            global.actname[myself][2] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_232_0");
++                global.actname[myself][2] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_232_0");
+-            global.actdesc[myself][2] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_233_0");
++                global.actdesc[myself][2] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_233_0");
+-            global.actcost[myself][2] = 150;
++                global.actcost[myself][2] = 150;
+-            actcon = 1;
++                actcon = 1;
+-        }
++            }
+-        else
++            else
+-        {
++            {
+-            global.msg[0] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_241_0");
++                global.msg[0] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_241_0");
+-            actcon = 10;
++                actcon = 10;
+-        }
++            }
+-        scr_battletext_default();
++            scr_battletext_default();
+-        acttimer = 0;
++            acttimer = 0;
++        }
++        num++;
+     }
+-    if (acting == 4 && actcon == 0)
++    if (scr_havechar(3))
+     {
++        if (acting == num && actcon == 0)
++        {
+-        if (global.tempflag[7] == 0)
++            if (global.tempflag[7] == 0)
+-        {
++            {
+-            global.msg[0] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_254_0");
++                global.msg[0] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_254_0");
+-            scr_ralface(1, "B");
++                scr_ralface(1, "B");
+-            global.msg[2] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_256_0");
++                global.msg[2] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_256_0");
+-            global.msg[3] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_257_0");
++                global.msg[3] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_257_0");
+-            global.msg[4] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_258_0");
++                global.msg[4] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_258_0");
+-            scr_kingface(5, 6);
++                scr_kingface(5, 6);
+-            global.msg[6] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_260_0");
++                global.msg[6] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_260_0");
+-            global.msg[7] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_261_0");
++                global.msg[7] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_261_0");
+-            global.msg[8] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_262_0");
++                global.msg[8] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_262_0");
+-            scr_ralface(9, 8);
++                scr_ralface(9, 8);
+-            global.msg[10] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_264_0");
++                global.msg[10] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_264_0");
+-            scr_noface(11);
++                scr_noface(11);
+-            global.msg[12] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_266_0");
++                global.msg[12] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_266_0");
+-            scr_battletext_default();
++                scr_battletext_default();
+-            global.tempflag[7] = 1;
++                global.tempflag[7] = 1;
++                var slot = 2 + scr_havechar(2);
+-            global.canact[myself][3] = 1;
++                global.canact[myself][slot] = 1;
+-            global.actactor[myself][3] = 3;
++                global.actactor[myself][slot] = 3;
+-            global.actname[myself][3] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_273_0");
++                global.actname[myself][slot] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_273_0");
+-            global.actdesc[myself][3] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_274_0");
++                global.actdesc[myself][slot] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_274_0");
+-            global.actcost[myself][3] = 125;
++                global.actcost[myself][slot] = 125;
+-            actcon = 1;
++                actcon = 1;
+-        }
++            }
+-        else
++            else
+-        {
++            {
+-            global.msg[0] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_282_0");
++                global.msg[0] = scr_84_get_lang_string("obj_king_boss_slash_Step_0_gml_282_0");
+-            scr_battletext_default();
++                scr_battletext_default();
+-            actcon = 20;
++                actcon = 20;
+-        }
++            }
+-        acttimer = 0;
++            acttimer = 0;
++        }
++        num++;
+     }
+     if (actcon == 10)
+     {

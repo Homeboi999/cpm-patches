@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_getsusieevent_Step_0.gml
++++ b/Code/gml_Object_obj_getsusieevent_Step_0.gml
+@@ -168,7 +168,7 @@
+     global.interact = 0;
+     con = 14;
+ }
+-if (rcon == 1 && obj_mainchara.x >= 80 && global.interact == 0)
++if (rcon == 1 && obj_mainchara.x >= 80 && global.interact == 0 && scr_havechar(1) && scr_havechar(2) && scr_havechar(3))
+ {
+     global.interact = 1;
+     global.typer = 31;

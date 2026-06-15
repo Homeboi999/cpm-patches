@@ -105,7 +105,90 @@
              break;
          case 140:
              global.choicemsg[0] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_318_0");
-@@ -1236,7 +1304,7 @@
+@@ -1150,6 +1218,10 @@
+                 global.msg[4] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1218_0");
+                 scr_noface(5);
+                 global.msg[6] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1220_0");
++                if (!scr_havechar(3))
++                {
++                    global.msg[2] = global.msg[2] + "%";
++                }
+             }
+             if (global.choice == 1)
+             {
+@@ -1159,6 +1231,10 @@
+                 global.msg[3] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1227_0");
+                 scr_noface(4);
+                 global.msg[5] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1229_0");
++                if (!scr_havechar(3))
++                {
++                    global.msg[1] = global.msg[1] + "%";
++                }
+             }
+             if (global.choice == 2)
+             {
+@@ -1171,8 +1247,15 @@
+                 global.msg[6] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1239_0");
+                 if (!scr_havechar(2))
+                 {
++                    if (scr_havechar(3))
++                    {
+-                    scr_ralface(3, 1);
++                        scr_ralface(3, 1);
+-                    global.msg[4] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1244_0");
++                        global.msg[4] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1244_0");
++                    }
++                    else
++                    {
++                        global.msg[2] = global.msg[2] + "%";
++                    }
+                 }
+             }
+             break;
+@@ -1193,6 +1276,11 @@
+                 global.msg[2] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1265_0");
+                 scr_noface(3);
+                 global.msg[4] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1267_0");
++                if (!scr_havechar(3))
++                {
++                    global.msg[0] = "* Ralsei's gone^1, someway^1, somehow./";
++                    global.msg[1] = "* How will you deal with babies now?/%";
++                }
+             }
+             if (global.choice == 1)
+             {
+@@ -1202,6 +1290,11 @@
+                 global.msg[3] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1275_0");
+                 scr_noface(4);
+                 global.msg[5] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1277_0");
++                if (!scr_havechar(3))
++                {
++                    global.msg[0] = "* Ralsei's gone^1, so no more HEALS./";
++                    global.msg[1] = "* Unless you eat a delicious MEALS./%";
++                }
+             }
+             if (global.choice == 2)
+             {
+@@ -1210,6 +1303,18 @@
+                 scr_ralface(2, "A");
+                 global.msg[3] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1284_0");
+                 global.msg[4] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1285_0");
++                if (!scr_havechar(3))
++                {
++                    global.msg[0] = "* Ralsei's gone^1, so no facts./";
++                    if (scr_havechar(2) && scr_havechar(1))
++                    {
++                        global.msg[1] = "* Will you two pick up the slackts?/%";
++                    }
++                    else
++                    {
++                        global.msg[1] = "* Think you can pick up the slackts?/%";
++                    }
++                }
+             }
+             break;
+         case 240:
+@@ -1236,7 +1341,7 @@
                      global.msg[0] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1312_0");
                      global.msg[1] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1313_0");
                  }
@@ -114,21 +197,150 @@
                  {
                      global.msg[0] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1317_0");
                      global.msg[1] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1318_0");
-@@ -1256,7 +1324,7 @@
+@@ -1254,9 +1359,16 @@
+                 if (!scr_havechar(2))
+                 {
                      global.msg[0] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1335_0");
-                     global.msg[1] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1336_0");
++                    if (scr_havechar(3) && scr_havechar(1))
++                    {
+-                    global.msg[1] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1336_0");
++                        global.msg[1] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1336_0");
++                    }
++                    else
++                    {
++                        global.msg[1] = "* Think you can pick up the slack?/%";
++                    }
                  }
 -                if (global.plot >= 150)
 +                else if (!scr_susiemode())
                  {
                      input_name = scr_get_input_name(4);
                      global.msg[0] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1341_0");
-@@ -1275,7 +1343,7 @@
+@@ -1273,9 +1385,16 @@
+                 if (!scr_havechar(2))
+                 {
                      global.msg[0] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1355_0");
-                     global.msg[1] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1356_0");
++                    if (scr_havechar(3) && scr_havechar(1))
++                    {
+-                    global.msg[1] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1356_0");
++                        global.msg[1] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1356_0");
++                    }
++                    else
++                    {
++                        global.msg[1] = "* Think you can pick up the slackts?/%";
++                    }
                  }
 -                if (global.plot >= 150)
 +                else if (scr_susiemode())
                  {
                      global.msg[0] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1360_0");
                      global.msg[1] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1361_0");
+@@ -1294,14 +1413,25 @@
+             global.msg[0] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1382_0");
+             if (global.choice == 0)
+             {
++                var num = 0;
++                if (!scr_havechar(1))
++                {
++                    global.msg[0] = "* Kris's gone^1, but you're in luck./";
++                    global.msg[1] = "* Everyone can use this^1, even a duck!/";
++                    num = 2;
++                }
+-                global.msg[0] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1385_0");
++                global.msg[num + 0] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1385_0");
+-                global.msg[1] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1386_0");
++                global.msg[num + 1] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1386_0");
+-                global.msg[2] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1387_0");
++                global.msg[num + 2] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1387_0");
+-                global.msg[3] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1388_0");
++                global.msg[num + 3] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1388_0");
+-                scr_ralface(4, 0);
++                scr_ralface(num + 4, 0);
+-                global.msg[5] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1390_0");
++                global.msg[num + 5] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1390_0");
+-                scr_noface(6);
++                scr_noface(num + 6);
+-                global.msg[7] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1392_0");
++                global.msg[num + 7] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1392_0");
++                if (!scr_havechar(3))
++                {
++                    global.msg[num + 3] = global.msg[num + 3] + "%";
++                }
+             }
+             if (global.choice == 1)
+             {
+@@ -1314,6 +1444,26 @@
+                 global.msg[6] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1403_0");
+                 scr_noface(7);
+                 global.msg[8] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1405_0");
++                if (!scr_havechar(1))
++                {
++                    if (scr_havechar(3))
++                    {
++                        global.msg[0] = "* Without Kris to ACT^1, you might start to think -/";
++                        global.msg[3] = "* Enemies will still get TIRED when their HP drops too low.../";
++                        global.msg[4] = "* So if I'm careful^1, I can still cast PACIFY to end the battle peacefully!/";
++                        scr_noface(5);
++                        global.msg[6] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1405_0");
++                    }
++                    else
++                    {
++                        global.msg[0] = "* Kris's gone^1, so you can't use ACTs./";
++                        global.msg[1] = "* SPAREing enemies^1, will be quite the task./";
++                    }
++                }
++                if (!scr_havechar(3))
++                {
++                    global.msg[1] = global.msg[1] + "%";
++                }
+             }
+             if (global.choice == 2)
+             {
+@@ -1366,10 +1516,20 @@
+             }
+             break;
+         case 255:
++            if (scr_havechar(3))
++            {
+-            global.choicemsg[0] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1451_0");
++                global.choicemsg[0] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1451_0");
+-            global.choicemsg[1] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1452_0");
++                global.choicemsg[1] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1452_0");
+-            global.choicemsg[2] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1453_0");
++                global.choicemsg[2] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1453_0");
+-            global.choicemsg[3] = " ";
++                global.choicemsg[3] = " ";
++            }
++            else
++            {
++                global.choicemsg[0] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1452_0");
++                global.choicemsg[1] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1453_0");
++                global.choicemsg[2] = " ";
++                global.choicemsg[3] = " ";
++            }
+             global.msg[0] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1455_0");
+             scr_susface(1, 6);
+             global.msg[2] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1457_0");
+@@ -1390,10 +1550,21 @@
+             global.msg[17] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1472_0");
+             scr_ralface(18, 8);
+             global.msg[19] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1474_0");
++            if (scr_havechar(3))
++            {
+-            global.msg[20] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1475_0");
++                global.msg[20] = scr_84_get_lang_string("scr_text_slash_scr_text_gml_1475_0");
++            }
++            else
++            {
++                global.msg[20] = "\\C2";
++            }
+             break;
+         case 256:
+             global.flag[232] = 1;
++            if (!scr_havechar(3))
++            {
++                global.choice++;
++            }
+             if (global.choice == 0)
+             {
+                 scr_ralface(0, 6);

@@ -1,0 +1,23 @@
+--- a/Code/gml_Object_obj_kingcutscene_Step_0.gml
++++ b/Code/gml_Object_obj_kingcutscene_Step_0.gml
+@@ -857,10 +857,16 @@
+         global.tempflag[8] = 1;
+         obj_mainchara.x = k.x;
+         obj_mainchara.y = k.y;
+-        global.cinstance[0].x = s.x;
+-        global.cinstance[0].y = s.y;
+-        global.cinstance[1].x = r.x;
+-        global.cinstance[1].y = r.y;
++        if (instance_exists(global.cinstance[0]))
++        {
++            global.cinstance[0].x = s.x;
++            global.cinstance[0].y = s.y;
++        }
++        if (instance_exists(global.cinstance[1]))
++        {
++            global.cinstance[1].x = r.x;
++            global.cinstance[1].y = r.y;
++        }
+         with (global.cinstance[0])
+         {
+             scr_caterpillar_interpolate();

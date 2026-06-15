@@ -35,12 +35,31 @@
                          }
                      }
                  }
-@@ -171,7 +179,7 @@
-             {
-                 if (global.mercymod[star] >= 100)
+@@ -103,6 +111,13 @@
                  {
--                    if (global.monstertype[star] != 3)
-+                    if (global.monstertype[star] != 3 && global.monstertype[star] != 12)
-                     {
-                         with (global.monsterinstance[star])
-                         {
+                     damage = 0;
+                 }
++                with (global.monsterinstance[star])
++                {
++                    if (global.monstertype[myself] == 12)
++                    {
++                        rudebuster = true;
++                    }
++                }
+                 attack = instance_create(obj_herosusie.x, obj_herosusie.y, obj_rudebuster_anim);
+                 attack.damage = damage;
+                 attack.star = star;
+@@ -190,6 +205,13 @@
+                 }
+                 else
+                 {
++                    if (global.monstertype[star] == 12)
++                    {
++                        with (global.monsterinstance[star])
++                        {
++                            sparecon = 1;
++                        }
++                    }
+                     scr_mercyadd(star, global.sparepoint[star]);
+                     _pspell = instance_create(0, 0, obj_pacifyspell);
+                     _pspell.target = global.monsterinstance[star];

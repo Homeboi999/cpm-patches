@@ -1,6 +1,14 @@
 --- a/Code/gml_GlobalScript_scr_spelltext.gml
 +++ b/Code/gml_GlobalScript_scr_spelltext.gml
-@@ -52,7 +52,7 @@
+@@ -45,14 +45,14 @@
+             cancelattack = 0;
+             global.msg[0] = scr_84_get_subst_string(scr_84_get_lang_string("scr_spelltext_slash_scr_spelltext_gml_58_0"), global.charname[global.char[caster]], global.monstername[star]);
+             scr_retarget_spell();
+-            if (global.mercymod[star] >= 100)
++            if (global.mercymod[star] >= 100 || global.monstertype[star] == 12)
+             {
+                 global.msg[0] = scr_84_get_subst_string(scr_84_get_lang_string("scr_spelltext_slash_scr_spelltext_gml_62_0"), global.charname[global.char[caster]], global.monstername[star]);
+             }
              else
              {
                  global.msg[0] = scr_84_get_subst_string(scr_84_get_lang_string("scr_spelltext_slash_scr_spelltext_gml_66_0"), global.charname[global.char[caster]], global.monstername[star]);

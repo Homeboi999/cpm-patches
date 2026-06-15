@@ -1,20 +1,60 @@
 --- a/Code/gml_Object_obj_lancerboss2_Step_0.gml
 +++ b/Code/gml_Object_obj_lancerboss2_Step_0.gml
-@@ -1,7 +1,7 @@
- if (firstskip == 1)
+@@ -1,34 +1,45 @@
+-if (firstskip == 1)
++if (!init)
  {
 -    global.acting[0] = 1;
 -    acting = 1;
-+    firstskip = 0;
-+    prevhp = global.monsterhp[myself];
-     with (obj_writer)
-     {
-         instance_destroy();
-@@ -20,15 +20,16 @@
-     }
-     global.charturn = 3;
-     global.myfight = 3;
-+    global.mercymod[myself] = 100;
+-    with (obj_writer)
+-    {
+-        instance_destroy();
+-    }
+-    with (obj_face)
+-    {
+-        instance_destroy();
+-    }
+-    with (obj_smallface)
+-    {
+-        instance_destroy();
+-    }
+-    if (global.charaction[0] == 1)
+-    {
+-        global.attacking = 1;
+-    }
+-    global.charturn = 3;
+-    global.myfight = 3;
++    init = true;
++    if (firstskip == 1)
++    {
++        prevhp = global.monsterhp[myself];
++        with (obj_writer)
++        {
++            instance_destroy();
++        }
++        with (obj_face)
++        {
++            instance_destroy();
++        }
++        with (obj_smallface)
++        {
++            instance_destroy();
++        }
++        if (global.charaction[0] == 1)
++        {
++            global.attacking = 1;
++        }
++        global.charturn = 3;
++        global.myfight = 3;
++    }
++    else
++    {
++        with (obj_herosusie)
++        {
++            idlesprite = spr_susieb_idle_serious;
++            attacksprite = spr_susieb_attack_serious;
++        }
++    }
  }
  if (global.monster[myself] == 1)
  {
@@ -29,7 +69,11 @@
          scr_randomtarget();
          if (!instance_exists(obj_darkener))
          {
-@@ -60,39 +61,47 @@
+@@ -57,42 +68,51 @@
+     if (global.mnfight == 2 && attacked == 0)
+     {
+         rtimer += 1;
++        rudebuster = false;
          if (rtimer == 12)
          {
              global.turntimer = 140;
@@ -104,7 +148,7 @@
                  {
                      dc.difficulty = 90;
                  }
-@@ -104,7 +113,10 @@
+@@ -104,7 +124,10 @@
              attacked = 1;
              global.typer = 6;
              global.fc = 0;
@@ -116,7 +160,7 @@
          }
          else
          {
-@@ -125,97 +137,241 @@
+@@ -125,97 +148,430 @@
      yy = __view_get(e__VW.YView, 0);
      if (acting == 1 && actcon == 0)
      {
@@ -197,57 +241,217 @@
 -            image_xscale = 900;
 -            image_yscale = 900;
 -        }
--        actcon = 3;
--        acttimer = 0;
--        if (instance_exists(obj_lancerbattle2_event))
--        {
--            obj_lancerbattle2_event.black = black;
--            with (obj_lancerbattle2_event)
--            {
--                con = 52;
--                alarm[4] = 80;
--            }
--        }
--    }
--    if (actcon == 3)
--    {
 +        actcon = 1;
-+        var teamname = "us";
-+        switch (global.flag[214])
++        if (hitcount <= 3)
 +        {
-+            case 1:
-+                teamname = "the $!$? Squad";
-+                break;
-+            case 2:
-+                teamname = "the Lancer Fan Club";
-+                break;
-+            case 3:
-+                teamname = "the Fun Gang";
-+                break;
++            var teamname = "us";
++            switch (global.flag[214])
++            {
++                case 1:
++                    teamname = "the $!$? Squad";
++                    break;
++                case 2:
++                    teamname = "the Lancer Fan Club";
++                    break;
++                case 3:
++                    teamname = "the Fun Gang";
++                    break;
++            }
++            global.msg[0] = "* LANCER - AT 7 DF 1&* Turned on " + teamname + " almost instantly./";
++            global.msg[1] = "* Trying his best to resolve this peacefully, but reluctantly standing his ground./%";
 +        }
-+        global.msg[0] = "* LANCER - AT 7 DF 1&* Turned on " + teamname + " almost instantly./";
-+        global.msg[1] = "* Trying his best to resolve this peacefully, but reluctantly standing his ground./%";
++        else if (hitcount < 7)
++        {
++            global.msg[0] = "* LANCER - AT 7 DF 0&* Can't take many more hits./";
++            global.msg[1] = "* Still hoping for peace, but losing hope. He looks defeated... is he giving up?/%";
++        }
++        else
++        {
++            global.msg[0] = "* LANCER - AT 7 DF 0&* Accepting his fate./";
++            global.msg[1] = "* He stopped fighting back a while ago, now seemingly delaying the inevitable./%";
++        }
 +        scr_battletext_default();
 +        actcon = 1;
 +    }
 +    if (acting == 2 && actcon == 0)
 +    {
 +        actcon = 1;
-+        global.monsterhp[myself] = 1;
++        if (talkcon == 0)
++        {
++            global.msg[0] = "* You tried to tell Lancer you don't want to hurt him./";
++            if (scr_havechar(2))
++            {
++                if (scr_susiemode())
++                {
++                    global.msg[0] = "* You tried to tell Lancer you don't want to hurt him./%";
++                    actcon = 2;
++                }
++                else
++                {
++                    global.msg[1] = "* ... He cautiously glances at Susie.&* She looks conflicted./";
++                    global.msg[2] = "* You realise Lancer isn't the only one needing reassurance./%";
++                }
++            }
++            else
++            {
++                global.msg[1] = "* ... He looks up for a second, but.../%";
++            }
++        }
++        if (talkcon == 1)
++        {
++            if (scr_havechar(2))
++            {
++                if (scr_susiemode())
++                {
++                    global.msg[0] = "* You asked Lancer why he's fighting./";
++                    scr_susface(1, 1);
++                    global.msg[2] = "* ... Doesn't matter./";
++                    scr_lanface(3, "A");
++                    global.msg[4] = "* Susie, please-/";
++                    scr_susface(5, 3);
++                    global.msg[6] = "* Doesn't. Matter./%";
++                }
++                else
++                {
++                    global.msg[0] = "* You asked Lancer why he's fighting.&* He looks away./";
++                    scr_lanface(1, "A");
++                    global.msg[2] = "* I... if I let you go, then you'll.../";
++                    global.msg[3] = "* ... I didn't have a choice./";
++                    scr_susface(4, "D");
++                    global.msg[5] = "* .../%";
++                }
++            }
++            else
++            {
++                global.msg[0] = "* You asked Lancer why he's fighting.&* He looks away./";
++                global.msg[1] = "* You might need to try something else./%";
++            }
++        }
++        if (talkcon >= 2)
++        {
++            if (scr_havechar(2))
++            {
++                if (scr_susiemode())
++                {
++                    global.msg[0] = "* It doesn't feel like talking is an option.&* ... mostly because of Susie./%";
++                }
++                else
++                {
++                    global.msg[0] = "* You couldn't think of anything to say.&* ... maybe Susie could help?/%";
++                }
++            }
++            else
++            {
++                global.msg[0] = "* You couldn't think of anything to say./";
++                global.msg[1] = "* ... is there another way to resolve things peacefully?/%";
++            }
++        }
++        talkcon++;
++        scr_battletext_default();
 +    }
-+    if (acting != 99 && actcon < 10 && !instance_exists(obj_writer))
++    if (acting == 2 && actcon == 2 && !instance_exists(obj_writer))
++    {
++        laughsound = snd_play(snd_suslaugh);
++        global.msg[0] = "* ... Susie laughs menacingly.&* Lancer takes a step back./%";
++        with (obj_herosusie)
++        {
++            visible = 0;
++        }
++        suslaugh = scr_dark_marker(obj_herosusie.x, obj_herosusie.y, spr_susier_dark_laugh);
++        with (suslaugh)
++        {
++            image_speed = 0.2;
++        }
++        laughtimer = 0;
++        scr_battletext_default();
+         actcon = 3;
++    }
++    if (acting == 2 && actcon == 3)
++    {
++        laughtimer += 1;
++        if (laughtimer >= 30)
++        {
++            actcon = 4;
++        }
++    }
++    if (acting == 2 && actcon == 4 && !instance_exists(obj_writer))
++    {
++        snd_stop(laughsound);
++        with (suslaugh)
++        {
++            instance_destroy();
++        }
++        with (obj_herosusie)
++        {
++            visible = 1;
++        }
++        actcon = 1;
++    }
++    if (acting == 3 && actcon == 0)
++    {
++        actcon = 1;
++        if (convincecon == 0)
++        {
++            if (scr_susiemode())
++            {
++                global.msg[0] = "* You tried to convince Susie to stop fighting./";
++                global.msg[1] = "* ... The grip on her axe tightens.&* Your words fall on deaf ears./%";
++            }
++            else
++            {
++                global.msg[0] = "* You asked Susie to reason with Lancer./";
++                scr_susface(1, "C");
++                global.msg[2] = "* .../";
++                scr_noface(3);
++                global.msg[4] = "* She couldn't think of anything to say, but.../%";
++            }
++        }
++        if (convincecon == 1)
++        {
++            if (scr_susiemode())
++            {
++                global.msg[0] = "* You tried to convince Susie to let Lancer explain./";
++                scr_susface(1, 0);
++                global.msg[2] = "* ... Why? He CHOSE to betray us!/";
++                global.msg[3] = "\\E4* I'm just making sure it NEVER happens again./";
++            }
++            else
++            {
++                global.msg[0] = "* You asked Susie let Lancer explain./";
++                scr_susface(1, "D");
++                global.msg[2] = "* ... Why are you doing this?/";
++                scr_lanface(3, 7);
++                global.msg[4] = "* idk bro/%";
++            }
++        }
++        if (convincecon >= 2)
++        {
++            if (scr_susiemode())
++            {
++                global.msg[0] = "* You kept trying to talk to Susie.&* ... She still isn't listening./%";
++            }
++            else
++            {
++                global.msg[0] = "* don't know specifics.&* ... it worked./%";
++                global.mercymod[myself] = 100;
++            }
++        }
++        convincecon++;
++        scr_battletext_default();
++    }
++    if (acting != 99 && actcon < 2 && !instance_exists(obj_writer))
 +    {
 +        acting = 99;
 +        actcon = 10;
 +    }
 +    if (acting == 99 && actcon == 10)
 +    {
++        actcon = 11;
 +        if (prevhp > global.monsterhp[myself])
 +        {
 +            hitcount++;
++            prevhp = global.monsterhp[myself];
 +        }
-+        prevhp = global.monsterhp[myself];
-+        actcon = 11;
 +        var magicking = false;
 +        if (global.charaction[0] == 4 || global.charaction[0] == 2)
 +        {
@@ -274,40 +478,52 @@
 +}
 +if (global.myfight == 4)
 +{
-+    if (sparecon < 2 && sparecon != 0)
++    if (sparecon == 2)
 +    {
+-        acttimer = 0;
 +        global.spelldelay = 999;
+-        if (instance_exists(obj_lancerbattle2_event))
 +        with (obj_spellphase)
-+        {
+         {
+-            obj_lancerbattle2_event.black = black;
+-            with (obj_lancerbattle2_event)
 +            if (spelltimer > 30)
-+            {
+             {
+-                con = 52;
 +                spelltimer = 30;
-+            }
-+        }
-+    }
-+    if (sparecon == 1 && !instance_exists(obj_writer))
-+    {
-+        sparecount++;
-+        if (instance_exists(obj_spellphase) && (obj_spellphase.char >= 3 || obj_spellphase.spelltotal == 1))
+-                alarm[4] = 80;
+             }
+         }
+     }
+-    if (actcon == 3)
++    if (sparecon == 1)
+     {
++        if ((global.attacking || rudebuster) && !(scr_havechar(2) && scr_susiemode()))
 +        {
-+            bubbleactive = true;
-+            if (scr_havechar(2) && scr_susiemode())
-+            {
-+                bubble = 2;
-+            }
-+            else
-+            {
-+                bubble = 1;
-+            }
++            sparecon = 0;
 +        }
-+        else
++        else if (instance_exists(obj_spellphase) && (obj_spellphase.char >= 3 || obj_spellphase.spelltotal == 1))
 +        {
 +            sparecon = 2;
 +        }
 +    }
 +    if (sparecon == 2 && !instance_exists(obj_writer))
 +    {
++        if (scr_havechar(2) && scr_susiemode())
++        {
++            bubbleactive = true;
++            bubble = 2;
++        }
++        else
++        {
++            bubbleactive = true;
++            bubble = 1;
++        }
++    }
++    if (sparecon == 3 && !instance_exists(obj_writer))
++    {
 +        sparecon = 0;
++        sparecount++;
 +        global.spelldelay = 0;
 +    }
 +}
@@ -317,9 +533,19 @@
 +    {
 +        if (bubblecon == 0)
 +        {
++            global.typer = 56;
++            rr = choose(0, 1, 2, 3);
 +            bubblecon = 1;
-+            global.msg[0] = "* spared! " + string(sparecount) + "/%";
-+            scr_battletext_default();
++            if (sparecount >= 0)
++            {
++                global.msg[0] = "* spared! " + string(sparecount) + "/%";
++            }
++            global.monsterdf[myself] -= 5;
++            scr_enemyblcon(x - 160, y, 3);
++            with (obj_writer)
++            {
++                skippable = 0;
++            }
 +        }
 +        if (bubblecon == 1 && !instance_exists(obj_writer))
 +        {
@@ -416,7 +642,7 @@
 +        }
 +        else if (global.myfight == 4)
 +        {
-+            sparecon = 2;
++            sparecon = 3;
 +        }
 +    }
 +}

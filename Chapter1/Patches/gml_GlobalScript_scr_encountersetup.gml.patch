@@ -1,0 +1,18 @@
+--- a/Code/gml_GlobalScript_scr_encountersetup.gml
++++ b/Code/gml_GlobalScript_scr_encountersetup.gml
+@@ -104,7 +104,14 @@
+             global.monstermakey[0] = yy + 150;
+             global.monstertype[1] = 0;
+             global.monstertype[2] = 0;
++            if (scr_havechar(1) && scr_havechar(2) && scr_havechar(3))
++            {
+-            global.battlemsg[0] = scr_84_get_lang_string("scr_encountersetup_slash_scr_encountersetup_gml_128_0");
++                global.battlemsg[0] = scr_84_get_lang_string("scr_encountersetup_slash_scr_encountersetup_gml_128_0");
++            }
++            else
++            {
++                global.battlemsg[0] = "* C. Round attacked violently!";
++            }
+             break;
+         case 8:
+             global.monsterinstancetype[0] = obj_clubsenemy;
