@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_lancerboss2_Create_0.gml
 +++ b/Code/gml_Object_obj_lancerboss2_Create_0.gml
-@@ -37,6 +37,26 @@
+@@ -37,6 +37,27 @@
  sparedsprite = spr_lancer_battle;
  hurtlevel = 0;
  hmake = 0;
@@ -21,6 +21,7 @@
 +sparecon = 0;
 +sparecount = 0;
 +killcon = 0;
++peacecon = 0;
 +bubble = 0;
 +bubblecon = 0;
 +bubbleactive = false;

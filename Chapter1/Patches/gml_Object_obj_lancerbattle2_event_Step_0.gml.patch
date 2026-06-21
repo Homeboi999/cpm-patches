@@ -53,7 +53,7 @@
      global.flag[9] = 0;
      global.interact = 1;
      con = 51;
-@@ -715,26 +721,49 @@
+@@ -715,35 +721,50 @@
      {
          visible = 0;
      }
@@ -105,20 +105,21 @@
 -    {
 -        instance_destroy();
 -    }
-+    snd_free_all();
-     with (obj_herosusie)
-     {
-         instance_destroy();
-@@ -743,7 +772,7 @@
-     {
-         instance_destroy();
-     }
+-    with (obj_herosusie)
+-    {
+-        instance_destroy();
+-    }
+-    with (obj_herokris)
+-    {
+-        instance_destroy();
+-    }
 -    with (obj_tensionbar)
-+    with (obj_heroralsei)
++    snd_free_all();
++    with (obj_heroparent)
      {
          instance_destroy();
      }
-@@ -759,11 +788,26 @@
+@@ -759,11 +780,26 @@
      {
          instance_destroy();
      }

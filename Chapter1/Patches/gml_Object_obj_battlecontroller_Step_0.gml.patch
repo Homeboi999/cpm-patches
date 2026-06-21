@@ -11,7 +11,7 @@
          alarm[5] = 15;
          hspeed = -10;
          friction = -0.4;
-@@ -73,6 +77,43 @@
+@@ -73,6 +77,47 @@
          with (lastbattlewriter)
          {
              instance_destroy();
@@ -30,6 +30,10 @@
 +            {
 +                instance_destroy();
 +            }
++        }
++        else
++        {
++            victortimer = 0;
 +        }
 +    }
 +    if (instance_exists(obj_dummyenemy))

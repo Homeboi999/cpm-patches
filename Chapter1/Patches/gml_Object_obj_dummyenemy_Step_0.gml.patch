@@ -471,7 +471,7 @@
 +        global.msg[2] = "* You dorks just wanna run away from everything?/";
 +        global.msg[3] = "\\E0* I thought you were teaching us how to \\cYFIGHT\\cW./";
 +        scr_ralface(4, 3);
-+        global.msg[5] = "* I'm getting there, Susie!/";
++        global.msg[5] = "* I'm getting there^1, Susie!/";
 +        msg_num = 3;
 +    }
 +    else

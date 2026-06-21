@@ -152,7 +152,7 @@
              attacked = 1;
              global.typer = 6;
              global.fc = 0;
-+            if (turns > 1)
++            if (turns > 0)
 +            {
 -            global.battlemsg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_88_0");
 +                global.battlemsg[0] = scr_84_get_lang_string("obj_lancerboss2_slash_Step_0_gml_88_0");
@@ -160,7 +160,7 @@
          }
          else
          {
-@@ -125,97 +148,434 @@
+@@ -125,98 +148,446 @@
      yy = __view_get(e__VW.YView, 0);
      if (acting == 1 && actcon == 0)
      {
@@ -307,17 +307,17 @@
 +                    scr_susface(1, 1);
 +                    global.msg[2] = "* ... Doesn't matter./";
 +                    scr_lanface(3, "A");
-+                    global.msg[4] = "* Susie, please-/";
++                    global.msg[4] = "* Susie^1, please-/";
 +                    scr_susface(5, 3);
 +                    global.msg[6] = "* Doesn't^2. Matter./%";
 +                }
 +                else
 +                {
 +                    global.msg[0] = "* You asked Lancer why he's fighting.^1&* He looks away./";
-+                    scr_lanface(1, "A");
++                    scr_lanface(1, "B");
 +                    global.msg[2] = "* I..^1. if I let you go^1, then you'll.../";
-+                    global.msg[3] = "* ... I didn't have a choice./";
-+                    scr_susface(4, "D");
++                    global.msg[3] = "\\EA* ... I didn't have a choice./";
++                    scr_susface(4, "C");
 +                    global.msg[5] = "* .../%";
 +                }
 +            }
@@ -395,33 +395,33 @@
 +            if (scr_susiemode())
 +            {
 +                global.msg[0] = "* You tried to convince Susie to stop fighting./";
-+                global.msg[1] = "* ... The grip on her axe tightens.&* Your words fall on deaf ears./%";
++                scr_susface(1, 0);
++                global.msg[2] = "* ... Why^1? He CHOSE to betray us!/";
++                global.msg[3] = "\\E4* I'm just making sure it NEVER happens again./%";
 +            }
 +            else
 +            {
-+                global.msg[0] = "* You asked Susie to reason with Lancer./";
++                global.msg[0] = "* You tried to get Susie to lower her guard./";
 +                scr_susface(1, "C");
 +                global.msg[2] = "* .../";
 +                scr_noface(3);
-+                global.msg[4] = "* She couldn't think of anything to say, but.../%";
++                global.msg[4] = "* She pauses for a moment.^1&* The grip on her axe loosens slightly./%";
 +            }
 +        }
 +        if (convincecon == 1)
 +        {
 +            if (scr_susiemode())
 +            {
-+                global.msg[0] = "* You tried to convince Susie to let Lancer explain./";
-+                scr_susface(1, 0);
-+                global.msg[2] = "* ... Why? He CHOSE to betray us!/";
-+                global.msg[3] = "\\E4* I'm just making sure it NEVER happens again./";
++                global.msg[0] = "* You tried to convince Susie to reason with Lancer./";
++                global.msg[1] = "* ... The grip on her axe tightens.^1&* Your words fall on deaf ears./%";
 +            }
 +            else
 +            {
-+                global.msg[0] = "* You asked Susie let Lancer explain./";
++                global.msg[0] = "* You told Susie that Lancer doesn't want to fight./";
 +                scr_susface(1, "C");
-+                global.msg[2] = "* ... Why are you doing this?/";
-+                scr_lanface(3, 7);
-+                global.msg[4] = "* idk bro/%";
++                global.msg[2] = "* ... But...^2 he's.../";
++                scr_lanface(3, "B");
++                global.msg[4] = "* S-Susie...? Your hands are shaking.../%";
 +            }
 +        }
 +        if (convincecon >= 2)
@@ -432,8 +432,9 @@
 +            }
 +            else
 +            {
-+                global.msg[0] = "* don't know specifics.&* ... it worked./%";
-+                global.mercymod[myself] = 100;
++                global.msg[0] = "* You convinced Susie to reason with Lancer./%";
++                actcon = 2;
++                peacecon = 1;
 +            }
 +        }
 +        convincecon++;
@@ -498,6 +499,7 @@
 -    if (actcon == 3)
 +    if (sparecon == 1)
      {
+-    }
 +        if ((global.attacking || rudebuster) && !(scr_havechar(2) && scr_susiemode()))
 +        {
 +            sparecon = 0;
@@ -542,7 +544,7 @@
 +            }
 +            if (sparecount == 6)
 +            {
-+                global.mercymod[myself] = 100;
++                peacecon = 1;
 +            }
 +            global.monsterdf[myself] -= 5;
 +            scr_enemyblcon(x - 160, y, 3);
@@ -650,7 +652,7 @@
 +        }
 +    }
 +}
-+if (killcon == 0 && global.monsterhp[0] <= 0)
++if (killcon == 0 && global.monsterhp[myself] <= 0)
 +{
 +    killcon = 1;
 +}
@@ -676,6 +678,17 @@
 +            con = 52;
 +            alarm[4] = 80;
 +        }
-     }
++    }
++}
++if (peacecon == 1 && !instance_exists(obj_writer))
++{
++    with (obj_battlecontroller)
++    {
++        skipvictory = 1;
++    }
++    scr_monsterdefeat();
++    scr_mnendturn();
++    peacecon = 2;
  }
  
+ enum e__VW
