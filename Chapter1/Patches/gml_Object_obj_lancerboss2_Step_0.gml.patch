@@ -61,7 +61,8 @@
      global.flag[51 + myself] = 4;
 -    global.acting[0] = 1;
 -    acting = 1;
-     if (global.mnfight == 1 && talked == 0)
+-    if (global.mnfight == 1 && talked == 0)
++    if (global.mnfight == 1 && talked == 0 && !bubbleactive)
      {
 +        global.acting[0] = 1;
          actcon = 0;
@@ -160,7 +161,7 @@
          }
          else
          {
-@@ -125,98 +148,446 @@
+@@ -125,98 +148,639 @@
      yy = __view_get(e__VW.YView, 0);
      if (acting == 1 && actcon == 0)
      {
@@ -448,9 +449,11 @@
 +    if (acting == 99 && actcon == 10)
 +    {
 +        actcon = 11;
++        washit = false;
 +        if (prevhp > global.monsterhp[myself])
 +        {
 +            hitcount++;
++            washit = true;
 +            prevhp = global.monsterhp[myself];
 +        }
 +        var magicking = false;
@@ -479,7 +482,7 @@
 +}
 +if (global.myfight == 4)
 +{
-+    if (sparecon == 2)
++    if (sparecon == 1 || sparecon == 2)
 +    {
 -        acttimer = 0;
 +        global.spelldelay = 999;
@@ -537,25 +540,216 @@
 +        {
 +            global.typer = 56;
 +            rr = choose(0, 1, 2, 3);
-+            bubblecon = 1;
-+            if (sparecount >= 0)
++            bubblecon = 3;
++            var skiplancer = false;
++            if (sparecount == 0)
 +            {
-+                global.msg[0] = "* spared! " + string(sparecount) + "/%";
++                global.msg[0] = ".../%";
++            }
++            if (sparecount == 1)
++            {
++                if (scr_havechar(2))
++                {
++                    global.msg[0] = "...?/%";
++                }
++                else
++                {
++                    global.msg[0] = "...&.../%";
++                }
++            }
++            if (sparecount == 2)
++            {
++                if (scr_havechar(2))
++                {
++                    global.msg[0] = "...S-Susie?/%";
++                }
++                else
++                {
++                    global.msg[0] = "...?/%";
++                }
++            }
++            if (sparecount == 3)
++            {
++                if (scr_havechar(2))
++                {
++                    global.msg[0] = "W-what are&you doing?/%";
++                    bubblecon = 1;
++                }
++                else
++                {
++                    global.msg[0] = "I-I'm sorry,&I.../";
++                    global.msg[1] = "...I don't&know what&else to do./%";
++                }
++            }
++            if (sparecount == 4)
++            {
++                if (scr_havechar(2))
++                {
++                    bubblecon = 1;
++                    skiplancer = true;
++                }
++                else
++                {
++                    global.msg[0] = "...I-I just&don't want&anyone to&get hurt./";
++                    global.msg[1] = "If I let&you guys &go, then.../%";
++                    if (scr_havechar(3))
++                    {
++                        bubblecon = 1;
++                    }
++                }
++            }
++            if (sparecount == 5)
++            {
++                if (scr_havechar(2))
++                {
++                    global.msg[0] = "I-If you&keep going,&then.../";
++                    global.msg[1] = "You'll&have to.../%";
++                    bubblecon = 1;
++                }
++                else if (scr_havechar(3))
++                {
++                    bubblecon = 1;
++                    skiplancer = true;
++                }
++                else
++                {
++                    global.msg[0] = "You guys&would have&to fight my&dad, and.../";
++                    global.msg[1] = "...You'd kill&each other./%";
++                }
 +            }
 +            if (sparecount == 6)
 +            {
-+                peacecon = 1;
++                if (scr_havechar(3))
++                {
++                    bubblecon = 1;
++                    skiplancer = true;
++                }
++                else
++                {
++                    global.msg[0] = ".../%";
++                    bubblecon = 4;
++                }
 +            }
 +            global.monsterdf[myself] -= 5;
++            if (!skiplancer)
++            {
++                scr_enemyblcon(x - 160, y, 3);
++                with (obj_writer)
++                {
++                    skippable = 0;
++                }
++            }
++        }
++        if (bubblecon == 1 && !instance_exists(obj_writer))
++        {
++            global.typer = 53;
++            bubblecon = 3;
++            if (sparecount == 3)
++            {
++                global.msg[0] = ".../%";
++            }
++            if (sparecount == 4)
++            {
++                if (scr_havechar(2))
++                {
++                    global.msg[0] = "Just...&let us go./";
++                    global.msg[1] = "... Please./%";
++                    bubblecon = 2;
++                }
++                else
++                {
++                    global.typer = 57;
++                    global.msg[0] = "It's okay,&Lancer.../";
++                    global.msg[1] = "We don't&want to hurt&anyone./%";
++                    bubblecon = 2;
++                }
++            }
++            if (sparecount == 5)
++            {
++                if (scr_havechar(2))
++                {
++                    global.msg[0] = ".../%";
++                    bubblecon = 4;
++                }
++                else
++                {
++                    global.typer = 57;
++                    global.msg[0] = "Don't worry,&Susie will be&alright./";
++                    global.msg[1] = "She's strong!&She can take&care of&herself./%";
++                    bubblecon = 2;
++                }
++            }
++            if (sparecount == 6)
++            {
++                global.typer = 57;
++                global.msg[0] = "Lancer, you&and Susie are&friends,&right?/";
++                if (scr_susiemode())
++                {
++                    global.msg[1] = "I know she's&been a bit...&violent,&but.../";
++                }
++                else
++                {
++                    global.msg[1] = "I know she&doesn't like&taking orders,&but.../";
++                }
++                global.msg[2] = "If there's&anyone she'll&listen to,&it's you./%";
++                bubblecon = 2;
++            }
++            if (instance_exists(obj_herosusie))
++            {
++                scr_enemyblcon(obj_herosusie.x + 100, obj_herosusie.y, 7);
++            }
++            else if (instance_exists(obj_heroralsei))
++            {
++                scr_enemyblcon(obj_heroralsei.x + 100, obj_heroralsei.y, 7);
++            }
++            with (obj_writer)
++            {
++                skippable = 0;
++            }
++        }
++        if (bubblecon == 2 && !instance_exists(obj_writer))
++        {
++            global.typer = 56;
++            bubblecon = 3;
++            if (sparecount == 4)
++            {
++                if (scr_havechar(2))
++                {
++                    global.msg[0] = "I...&I can't./";
++                    global.msg[1] = "I-I have&to do this./%";
++                }
++                else
++                {
++                    global.msg[0] = "B-but, Susie&would.../%";
++                }
++            }
++            if (sparecount == 5)
++            {
++                global.msg[0] = "I-I know,&but.../";
++                global.msg[1] = "She'd have&to fight my&dad, and.../%";
++            }
++            if (sparecount == 6)
++            {
++                global.msg[0] = ".../%";
++                bubblecon = 4;
++            }
 +            scr_enemyblcon(x - 160, y, 3);
 +            with (obj_writer)
 +            {
 +                skippable = 0;
 +            }
 +        }
-+        if (bubblecon == 1 && !instance_exists(obj_writer))
++        if (bubblecon == 3 && !instance_exists(obj_writer))
 +        {
 +            bubble = 0;
++        }
++        if (bubblecon == 4)
++        {
++            bubblecon = 5;
++            peacecon = 1;
++        }
++        if (bubblecon == 5)
++        {
 +        }
 +    }
 +    if (bubble == 2)

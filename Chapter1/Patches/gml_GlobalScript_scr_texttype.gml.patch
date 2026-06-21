@@ -1,11 +1,14 @@
 --- a/Code/gml_GlobalScript_scr_texttype.gml
 +++ b/Code/gml_GlobalScript_scr_texttype.gml
-@@ -161,6 +161,9 @@
+@@ -161,6 +161,12 @@
          case 55:
              scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 1, snd_txtrud, 8, 18, 0);
              break;
 +        case 56:
 +            scr_textsetup(scr_84_get_font("dotumche"), c_black, x, y, 33, 0, 1, snd_txtlan, 9, 20, 0);
++            break;
++        case 57:
++            scr_textsetup(scr_84_get_font("dotumche"), c_black, x, y, 33, 0, 1, snd_txtral, 9, 20, 0);
 +            break;
          case 60:
              scr_textsetup(scr_84_get_font("main"), c_white, x, y, 33, 0, 8, snd_nosound, 8, 18, 0);
