@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_darkcontroller_Draw_0.gml
 +++ b/Code/gml_Object_obj_darkcontroller_Draw_0.gml
-@@ -294,6 +294,12 @@
+@@ -294,6 +294,13 @@
      coord = global.submenucoord[20];
      charcoord = global.char[coord];
      menusiner += 1;
@@ -8,7 +8,8 @@
 +    {
 +        draw_set_color(c_gray);
 +        scr_84_set_draw_font("main");
-+        draw_text(xx + 230, yy + 105, string_hash_to_newline("Party Menu#Press " + scr_get_input_name(6)));
++        draw_text(xx + 227, yy + 105, string_hash_to_newline("Edit Party:"));
++        draw_text(xx + 227, yy + 118, string_hash_to_newline("Press " + scr_get_input_name(6)));
 +    }
      draw_set_color(c_white);
      scr_84_set_draw_font("mainbig");

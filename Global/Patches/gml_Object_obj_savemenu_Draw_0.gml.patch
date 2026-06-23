@@ -17,7 +17,7 @@
 +    {
 +        draw_set_color(c_gray);
 +        scr_84_set_draw_font("main");
-+        draw_text((60 * d) + xx, (75 * d) + yy, string_hash_to_newline("Party Menu: Press " + scr_get_input_name(6)));
++        draw_text((60 * d) + xx, (75 * d) + yy, string_hash_to_newline("Edit Party: Press " + scr_get_input_name(6)));
 +        scr_84_set_draw_font("mainbig");
 +        draw_set_color(c_white);
 +        if (xcoord == 2)
