@@ -1,0 +1,28 @@
+--- a/Code/gml_GlobalScript_scr_revive.gml
++++ b/Code/gml_GlobalScript_scr_revive.gml
+@@ -1,7 +1,22 @@
+ function scr_revive(arg0)
+ {
++    var chartarget;
++    if (instance_exists(obj_joker))
++    {
++        chartarget = obj_joker.hpchar[arg0];
++    }
++    else
++    {
++        chartarget = global.char[arg0];
++    }
++    for (i = 0; i < 3; i++)
++    {
++        if (global.char[i] == chartarget)
++        {
+-    global.charmove[arg0] = 1;
++            global.charmove[i] = 1;
+-    global.charcantarget[arg0] = 1;
++            global.charcantarget[i] = 1;
+-    global.chardead[arg0] = 0;
++            global.chardead[i] = 0;
++        }
++    }
+ }
+ 

@@ -1,0 +1,32 @@
+--- a/Code/gml_GlobalScript_scr_dead.gml
++++ b/Code/gml_GlobalScript_scr_dead.gml
+@@ -1,9 +1,24 @@
+ function scr_dead(arg0)
+ {
++    var chartarget;
++    if (instance_exists(obj_joker))
++    {
++        chartarget = obj_joker.hpchar[arg0];
++    }
++    else
++    {
++        chartarget = global.char[arg0];
++    }
++    for (i = 0; i < 3; i++)
++    {
++        if (global.char[i] == chartarget)
++        {
+-    global.charmove[arg0] = 0;
++            global.charmove[arg0] = 0;
+-    global.charcantarget[arg0] = 0;
++            global.charcantarget[arg0] = 0;
+-    global.chardead[arg0] = 1;
++            global.chardead[arg0] = 1;
+-    global.charaction[arg0] = 0;
++            global.charaction[arg0] = 0;
+-    global.charspecial[arg0] = 0;
++            global.charspecial[arg0] = 0;
++        }
++    }
+ }
+ 
