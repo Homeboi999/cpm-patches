@@ -1,11 +1,23 @@
 --- a/Code/gml_Object_obj_savemenu_Draw_0.gml
 +++ b/Code/gml_Object_obj_savemenu_Draw_0.gml
-@@ -44,13 +44,16 @@
+@@ -44,13 +44,28 @@
      draw_set_halign(fa_center);
      draw_text((160 * d) + xx, (100 * d) + yy, string_hash_to_newline(roomname));
      draw_set_halign(fa_left);
 +    if (!instance_exists(obj_partymenu))
 +    {
++        if (scr_modconfig("menuMode") == 1 || scr_modconfig("menuMode") == 2)
++        {
++            draw_set_color(c_gray);
++            scr_84_set_draw_font("main");
++            draw_text((70 * d) + xx, (95 * d) + yy, string_hash_to_newline("Party Menu: Press " + scr_get_input_name(6)));
++            scr_84_set_draw_font("mainbig");
++            draw_set_color(c_white);
++            if (coord == 2)
++            {
++                draw_set_color(c_yellow);
++            }
++        }
 -    if (coord == 0)
 +        if (coord == 0)
 -    {
@@ -24,12 +36,24 @@
      }
      if (coord < 2)
      {
-@@ -112,13 +115,16 @@
+@@ -112,13 +127,28 @@
      }
      draw_text((210 * d) + xx, (60 * d) + yy, scr_timedisp(time_current));
      draw_text((70 * d) + xx, (80 * d) + yy, string_hash_to_newline(roomname));
 +    if (!instance_exists(obj_partymenu))
 +    {
++        if (scr_modconfig("menuMode") == 1 || scr_modconfig("menuMode") == 2)
++        {
++            draw_set_color(c_gray);
++            scr_84_set_draw_font("main");
++            draw_text((70 * d) + xx, (95 * d) + yy, string_hash_to_newline("Party Menu: Press " + scr_get_input_name(6)));
++            scr_84_set_draw_font("mainbig");
++            draw_set_color(c_white);
++            if (coord == 2)
++            {
++                draw_set_color(c_yellow);
++            }
++        }
 -    if (coord == 0)
 +        if (coord == 0)
 -    {

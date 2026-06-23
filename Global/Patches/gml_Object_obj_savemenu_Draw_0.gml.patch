@@ -1,0 +1,37 @@
+--- a/Code/gml_Object_obj_savemenu_Draw_0.gml
++++ b/Code/gml_Object_obj_savemenu_Draw_0.gml
+@@ -9,7 +9,7 @@
+ {
+     scr_84_set_draw_font("mainbig");
+ }
+-if (menuno == 0)
++if (menuno == 0 || menuno == 3)
+ {
+     if (d == 1)
+     {
+@@ -49,9 +49,24 @@
+     draw_set_halign(fa_center);
+     draw_text_width((160 * d) + xx, (85 * d) + yy, string_hash_to_newline(scr_roomname(room)), 360);
+     draw_set_halign(fa_left);
++    if (menuno == 0 && (scr_modconfig("menuMode") == 1 || scr_modconfig("menuMode") == 2))
++    {
++        draw_set_color(c_gray);
++        scr_84_set_draw_font("main");
++        draw_text((60 * d) + xx, (75 * d) + yy, string_hash_to_newline("Party Menu: Press " + scr_get_input_name(6)));
++        scr_84_set_draw_font("mainbig");
++        draw_set_color(c_white);
++        if (xcoord == 2)
++        {
++            draw_set_color(c_yellow);
++        }
++    }
+     if (xcoord < 2)
+     {
++        if (menuno == 0)
++        {
+-        draw_sprite(heartsprite, 0, xx + (71 * d) + (xcoord * 90 * d), yy + (114 * d) + (ycoord * 42));
++            draw_sprite(heartsprite, 0, xx + (71 * d) + (xcoord * 90 * d), yy + (114 * d) + (ycoord * 42));
++        }
+     }
+     if (xcoord < 2)
+     {
