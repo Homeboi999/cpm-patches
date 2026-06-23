@@ -366,6 +366,20 @@
 +        laughtimer = 0;
 +        scr_battletext_default();
          actcon = 3;
+-        acttimer = 0;
+-        if (instance_exists(obj_lancerbattle2_event))
+-        {
+-            obj_lancerbattle2_event.black = black;
+-            with (obj_lancerbattle2_event)
+-            {
+-                con = 52;
+-                alarm[4] = 80;
+-            }
+-        }
+-    }
+-    if (actcon == 3)
+-    {
+-    }
 +    }
 +    if (acting == 2 && actcon == 3)
 +    {
@@ -482,27 +496,8 @@
 +}
 +if (global.myfight == 4)
 +{
-+    if (sparecon == 1 || sparecon == 2)
-+    {
--        acttimer = 0;
-+        global.spelldelay = 999;
--        if (instance_exists(obj_lancerbattle2_event))
-+        with (obj_spellphase)
-         {
--            obj_lancerbattle2_event.black = black;
--            with (obj_lancerbattle2_event)
-+            if (spelltimer > 30)
-             {
--                con = 52;
-+                spelltimer = 30;
--                alarm[4] = 80;
-             }
-         }
-     }
--    if (actcon == 3)
 +    if (sparecon == 1)
-     {
--    }
++    {
 +        if ((global.attacking || rudebuster) && !(scr_havechar(2) && scr_susiemode()))
 +        {
 +            sparecon = 0;
@@ -510,6 +505,17 @@
 +        else if (instance_exists(obj_spellphase) && (obj_spellphase.char >= 3 || obj_spellphase.spelltotal == 1))
 +        {
 +            sparecon = 2;
++        }
++    }
++    if (sparecon == 2)
++    {
++        global.spelldelay = 999;
++        with (obj_spellphase)
++        {
++            if (spelltimer > 30)
++            {
++                spelltimer = 30;
++            }
 +        }
 +    }
 +    if (sparecon == 2 && !instance_exists(obj_writer))
@@ -840,7 +846,7 @@
 +            actcon = 0;
 +            scr_attackphase();
 +        }
-+        else if (global.myfight == 4)
++        else
 +        {
 +            sparecon = 3;
 +        }
