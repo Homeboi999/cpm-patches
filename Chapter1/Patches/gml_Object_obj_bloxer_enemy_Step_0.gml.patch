@@ -1,0 +1,68 @@
+--- a/Code/gml_Object_obj_bloxer_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_bloxer_enemy_Step_0.gml
+@@ -195,26 +195,45 @@
+     }
+     if (acting == 3 && actcon == 0)
+     {
++        if (scr_susiemode())
++        {
++            actcon = 1;
++            global.msg[0] = "* You and Ralsei warned Bloxer about Susie^1.&* The enemy went on guard.../%";
++            if (scr_monsterpop() > 1)
++            {
++                global.msg[0] = scr_84_get_lang_string("obj_diamondenemy_slash_Step_0_gml_190_0");
++            }
++            for (i = 0; i < 3; i += 1)
++            {
++                global.monstercomment[i] = scr_84_get_lang_string("obj_diamondenemy_slash_Step_0_gml_193_0");
++                global.automiss[i] = 1;
++            }
++            scr_battletext_default();
++        }
++        else
++        {
+-        actcon = 1;
++            actcon = 1;
+-        global.msg[0] = scr_84_get_lang_string("obj_bloxer_enemy_slash_Step_0_gml_162_0");
++            global.msg[0] = scr_84_get_lang_string("obj_bloxer_enemy_slash_Step_0_gml_162_0");
+-        rr = choose(0, 1, 2);
++            rr = choose(0, 1, 2);
+-        scr_susface(1, 2);
++            scr_susface(1, 2);
+-        global.msg[2] = scr_84_get_lang_string("obj_bloxer_enemy_slash_Step_0_gml_165_0");
++            global.msg[2] = scr_84_get_lang_string("obj_bloxer_enemy_slash_Step_0_gml_165_0");
+-        if (rr == 1)
++            if (rr == 1)
+-        {
++            {
+-            global.msg[2] = scr_84_get_lang_string("obj_bloxer_enemy_slash_Step_0_gml_166_0");
++                global.msg[2] = scr_84_get_lang_string("obj_bloxer_enemy_slash_Step_0_gml_166_0");
+-        }
++            }
+-        if (rr == 2)
++            if (rr == 2)
+-        {
++            {
+-            global.msg[2] = scr_84_get_lang_string("obj_bloxer_enemy_slash_Step_0_gml_167_0");
++                global.msg[2] = scr_84_get_lang_string("obj_bloxer_enemy_slash_Step_0_gml_167_0");
+-        }
++            }
++            scr_noface(3);
+-        global.msg[3] = scr_84_get_lang_string("obj_bloxer_enemy_slash_Step_0_gml_168_0");
++            global.msg[4] = scr_84_get_lang_string("obj_bloxer_enemy_slash_Step_0_gml_168_0");
+-        for (i = 0; i < 3; i += 1)
++            for (i = 0; i < 3; i += 1)
+-        {
++            {
+-            global.monstercomment[i] = scr_84_get_lang_string("obj_bloxer_enemy_slash_Step_0_gml_171_0");
++                global.monstercomment[i] = scr_84_get_lang_string("obj_bloxer_enemy_slash_Step_0_gml_171_0");
+-            global.monsterstatus[i] = 1;
++                global.monsterstatus[i] = 1;
+-        }
++            }
+-        scr_battletext_default();
++            scr_battletext_default();
++        }
+     }
+     if (actcon == 1 && !instance_exists(obj_writer))
+     {

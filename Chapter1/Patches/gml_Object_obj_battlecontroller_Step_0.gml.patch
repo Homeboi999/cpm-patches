@@ -11,12 +11,10 @@
          alarm[5] = 15;
          hspeed = -10;
          friction = -0.4;
-@@ -73,6 +77,43 @@
-         with (lastbattlewriter)
-         {
+@@ -75,6 +79,43 @@
              instance_destroy();
-+        }
-+    }
+         }
+     }
 +    if (instance_exists(obj_lancerbattle2_event))
 +    {
 +        if (obj_lancerbattle2_event.con == 52)
@@ -52,6 +50,43 @@
 +                }
 +            }
 +            victoried = 2;
-         }
-     }
++        }
++    }
  }
+ if (victoried == 1)
+ {
+@@ -569,6 +610,21 @@
+                 canpress = 0;
+             }
+         }
++        if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 5)
++        {
++            if (havechar[1] == 1 && global.hp[2] <= 0)
++            {
++                canpress = 0;
++            }
++            if (havechar[2] == 1 && global.hp[3] <= 0)
++            {
++                canpress = 0;
++            }
++            if (havechar[1] != 1 && havechar[2] != 1)
++            {
++                canpress = 0;
++            }
++        }
+         if (canpress == 1)
+         {
+             if (button1_p() && global.canact[thisenemy][global.bmenucoord[9][global.charturn]] == 1 && global.tension >= global.tensionselect && onebuffer < 0)
+@@ -595,6 +651,12 @@
+                 {
+                     global.acting[2] = 1;
+                     global.acting[1] = 1;
++                }
++                if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 5)
++                {
++                    global.acting[0] = 1;
++                    global.acting[1] = 1;
++                    global.acting[2] = 1;
+                 }
+                 for (i = 0; i < 3; i += 1)
+                 {

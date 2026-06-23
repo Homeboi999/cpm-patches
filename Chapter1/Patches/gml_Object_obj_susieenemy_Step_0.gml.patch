@@ -1,0 +1,119 @@
+--- a/Code/gml_Object_obj_susieenemy_Step_0.gml
++++ b/Code/gml_Object_obj_susieenemy_Step_0.gml
+@@ -200,42 +200,88 @@
+         anythingcounter += 1;
+         actcon = 1;
+     }
+-    if (acting == 3 && actcon == 0)
++    var actnum = 3;
++    if (scr_havechar(3))
+     {
+-        with (obj_monsterparent)
++        if (acting == 3 && actcon == 0)
+         {
++            with (obj_monsterparent)
++            {
+-            susie_act = 3;
++                susie_act = 3;
++            }
++            snd_pause(global.batmusic[1]);
++            if (lullabied == 0)
++            {
++                singy = snd_play(snd_ralseising1);
++                with (object_index)
++                {
++                    lullabied = 1;
++                }
++            }
++            else
++            {
++                singy = snd_play(snd_ralseising2);
++                with (object_index)
++                {
++                    lullabied = 0;
++                }
++            }
++            global.msg[0] = scr_84_get_lang_string("obj_susieenemy_slash_Step_0_gml_197_0");
++            with (obj_heroralsei)
++            {
++                visible = 0;
++            }
++            ralsing = scr_dark_marker(obj_heroralsei.x, obj_heroralsei.y, spr_ralseib_sing);
++            with (ralsing)
++            {
++                image_speed = 0.2;
++            }
++            lullatimer = 0;
++            scr_battletext_default();
++            actcon = 10;
+         }
+-        snd_pause(global.batmusic[1]);
+-        if (lullabied == 0)
++        actnum++;
++    }
++    if (acting == actnum && actcon == 0)
++    {
++        if (susie_anythingcounter == 0)
+         {
+-            singy = snd_play(snd_ralseising1);
+-            with (object_index)
+-            {
+-                lullabied = 1;
+-            }
++            global.msg[0] = "* You told Susie to talk to Susie./";
++            scr_susface(1, 0);
++            global.msg[2] = "* Uhh... Hey./";
++            global.msg[3] = "\\E2* Hey./";
++            global.msg[4] = "* Nice ax./";
++            global.msg[5] = "* Thanks./";
++            scr_lanface(6, 2);
++            global.msg[7] = "* Hey, other Susie!/";
++            scr_susface(8, 2);
++            global.msg[9] = "* Hey, Lancer!/";
++            global.msg[10] = "\\E7* ...Wait a sec!&* Lancer's on my team!/";
++            scr_lanface(11, 9);
++            global.msg[12] = "* Yeah! I'm on Susie's team!/";
++            global.msg[13] = "\\E7* ...Wait, which Susie am I friends with?/";
++            scr_susface(14, 5);
++            global.msg[15] = "* Uh.../";
++            global.msg[16] = "\\E6* ... Both of us?/";
++            global.msg[17] = "\\E2* ... Nah, he's already on my team./";
++            global.msg[18] = "\\E7* Says who?!/";
++            global.msg[19] = "* Says me!/";
++            global.msg[20] = "\\E8* .../";
++            scr_lanface(21, 4);
++            global.msg[22] = "* I'm confused./";
++            scr_susface(23, 0);
++            global.msg[24] = "* Me too./";
++            scr_noface(25);
++            global.msg[26] = "* ...Everyone was confused!&* Unfortunately, that isn't helpful./%";
+         }
+         else
+         {
+-            singy = snd_play(snd_ralseising2);
+-            with (object_index)
+-            {
+-                lullabied = 0;
+-            }
+-        }
+-        global.msg[0] = scr_84_get_lang_string("obj_susieenemy_slash_Step_0_gml_197_0");
+-        with (obj_heroralsei)
+-        {
+-            visible = 0;
+-        }
+-        ralsing = scr_dark_marker(obj_heroralsei.x, obj_heroralsei.y, spr_ralseib_sing);
+-        with (ralsing)
+-        {
+-            image_speed = 0.2;
+-        }
+-        lullatimer = 0;
++            global.msg[0] = "* You decided it would be too confusing if Susie talked to Susie./";
++            global.msg[1] = "* Seems like this command is a waste of time./%";
++        }
+         scr_battletext_default();
++        susie_anythingcounter += 1;
+-        actcon = 10;
++        actcon = 1;
+     }
+     if (actcon == 10)
+     {

@@ -1,6 +1,18 @@
 --- a/Code/gml_Object_obj_joker_Step_0.gml
 +++ b/Code/gml_Object_obj_joker_Step_0.gml
-@@ -485,61 +485,83 @@
+@@ -481,65 +481,94 @@
+         {
+             global.msg[0] = scr_84_get_lang_string("obj_joker_slash_Step_0_gml_314_0");
+             star = choose(0, 1, 2);
++            if (!(global.char[0] == 0 && global.char[1] == 0 && global.char[2] == 0))
++            {
++                while (global.char[star] == 0)
++                {
++                    star = choose(0, 1, 2);
++                }
+-            scr_healitemspell(floor(random(31) + 25));
++                scr_healitemspell(floor(random(31) + 25));
++            }
          }
          if (chaosdance == 6)
          {
@@ -138,3 +150,24 @@
          }
          if (chaosdance == 7)
          {
+@@ -573,7 +602,19 @@
+         hypnofx = instance_create(global.monsterx[myself], global.monstery[myself], obj_hypnofx);
+         snd_play(snd_hypnosis);
+         actcon = 1;
++        aaa = 2;
++        if (scr_havechar(2) && scr_havechar(3))
++        {
+-        aaa = choose(0, 1, 2);
++            aaa = choose(0, 1, 2);
++        }
++        else if (scr_havechar(2))
++        {
++            aaa = choose(1, 2);
++        }
++        else if (scr_havechar(3))
++        {
++            aaa = choose(0, 2);
++        }
+         if (aaa == 0)
+         {
+             txtpart1 = scr_84_get_lang_string("obj_joker_slash_Step_0_gml_400_0");

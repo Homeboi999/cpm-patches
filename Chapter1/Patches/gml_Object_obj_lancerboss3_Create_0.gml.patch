@@ -1,0 +1,8 @@
+--- a/Code/gml_Object_obj_lancerboss3_Create_0.gml
++++ b/Code/gml_Object_obj_lancerboss3_Create_0.gml
+@@ -33,4 +33,5 @@
+ idlesprite = sprite_index;
+ susie_revive_count = 0;
+ ears_blocked = 0;
++susie_anythingcounter = 0;
+ 

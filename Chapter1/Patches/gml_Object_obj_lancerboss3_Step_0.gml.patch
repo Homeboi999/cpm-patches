@@ -1,0 +1,226 @@
+--- a/Code/gml_Object_obj_lancerboss3_Step_0.gml
++++ b/Code/gml_Object_obj_lancerboss3_Step_0.gml
+@@ -281,86 +281,145 @@
+         }
+         scr_battletext_default();
+     }
++    var actnum = 3;
++    if (scr_havechar(3))
++    {
+-    if (acting == 3 && actcon == 0)
++        if (acting == 3 && actcon == 0)
++        {
++            actcon = 1;
++            global.msg[0] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_222_0");
++            scr_ralface(1, 8);
++            global.msg[2] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_224_0");
++            scr_noface(3);
++            global.msg[4] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_226_0");
++            if (anythingcounter == 1)
++            {
++                global.msg[0] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_230_0");
++                scr_ralface(1, 1);
++                global.msg[2] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_232_0");
++                global.msg[3] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_233_0");
++                scr_noface(4);
++                global.msg[5] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_235_0");
++            }
++            if (anythingcounter == 2)
++            {
++                global.msg[0] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_240_0");
++                scr_ralface(1, 1);
++                global.msg[2] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_242_0");
++                global.msg[3] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_243_0");
++                scr_noface(4);
++                global.msg[5] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_245_0");
++            }
++            if (anythingcounter >= 3)
++            {
++                global.msg[0] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_250_0");
++                scr_ralface(1, 6);
++                global.msg[2] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_252_0");
++                global.msg[3] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_253_0");
++                if (ears_blocked >= 2)
++                {
++                    global.msg[0] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_256_0");
++                    scr_ralface(1, 0);
++                    global.msg[2] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_258_0");
++                    scr_noface(3);
++                    global.msg[4] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_260_0");
++                }
++                attack_qual = 0;
++                if (scr_monsterpop() == 1)
++                {
++                    attack_qual = 1;
++                }
++                with (obj_susieenemy)
++                {
++                    if (sleeping == 1)
++                    {
++                        obj_lancerboss3.attack_qual = 1;
++                    }
++                }
++                if (attack_qual == 0)
++                {
++                    actcon = 20;
++                    with (obj_monsterparent)
++                    {
++                        ears_blocked += 1;
++                    }
++                }
++                else
++                {
++                    anythingcounter = 10;
++                }
++                if (ears_blocked >= 3)
++                {
++                    anythingcounter = 10;
++                    actcon = 1;
++                    attack_qual = 1;
++                }
++            }
++            if (anythingcounter < 4)
++            {
++                anythingcounter += 1;
++            }
++            if (instance_exists(obj_susieenemy))
++            {
++                obj_susieenemy.anythingxcounter = anythingcounter;
++                obj_susieenemy.lancer_act = 3;
++            }
++            scr_battletext_default();
++        }
++        actnum++;
++    }
++    if (acting == actnum && actcon == 0)
+     {
+         actcon = 1;
+-        global.msg[0] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_222_0");
+-        scr_ralface(1, 8);
+-        global.msg[2] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_224_0");
+-        scr_noface(3);
+-        global.msg[4] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_226_0");
+-        if (anythingcounter == 1)
+-        {
+-            global.msg[0] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_230_0");
+-            scr_ralface(1, 1);
+-            global.msg[2] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_232_0");
+-            global.msg[3] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_233_0");
+-            scr_noface(4);
+-            global.msg[5] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_235_0");
+-        }
+-        if (anythingcounter == 2)
+-        {
+-            global.msg[0] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_240_0");
+-            scr_ralface(1, 1);
+-            global.msg[2] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_242_0");
+-            global.msg[3] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_243_0");
+-            scr_noface(4);
+-            global.msg[5] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_245_0");
+-        }
+-        if (anythingcounter >= 3)
+-        {
+-            global.msg[0] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_250_0");
+-            scr_ralface(1, 6);
+-            global.msg[2] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_252_0");
+-            global.msg[3] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_253_0");
+-            if (ears_blocked >= 2)
+-            {
+-                global.msg[0] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_256_0");
+-                scr_ralface(1, 0);
+-                global.msg[2] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_258_0");
+-                scr_noface(3);
+-                global.msg[4] = scr_84_get_lang_string("obj_lancerboss3_slash_Step_0_gml_260_0");
+-            }
+-            attack_qual = 0;
+-            if (scr_monsterpop() == 1)
+-            {
+-                attack_qual = 1;
+-            }
+-            with (obj_susieenemy)
+-            {
+-                if (sleeping == 1)
+-                {
+-                    obj_lancerboss3.attack_qual = 1;
+-                }
+-            }
+-            if (attack_qual == 0)
+-            {
+-                actcon = 20;
+-                with (obj_monsterparent)
+-                {
+-                    ears_blocked += 1;
+-                }
+-            }
+-            else
+-            {
+-                anythingcounter = 10;
+-            }
+-            if (ears_blocked >= 3)
+-            {
+-                anythingcounter = 10;
+-                actcon = 1;
+-                attack_qual = 1;
+-            }
+-        }
+-        if (anythingcounter < 4)
+-        {
+-            anythingcounter += 1;
+-        }
+-        if (instance_exists(obj_susieenemy))
+-        {
+-            obj_susieenemy.anythingxcounter = anythingcounter;
+-            obj_susieenemy.lancer_act = 3;
+-        }
++        global.msg[0] = "* You told Susie to compliment the enemies./";
++        var endmsg = 1;
++        var msg;
++        if (scr_havechar(3))
++        {
++            msg = choose(0, 1, 2, 3);
++        }
++        else
++        {
++            msg = choose(0, 1, 2);
++        }
++        if (susie_anythingcounter == 0)
++        {
++            msg = 1;
++        }
++        if (msg == 0)
++        {
++            scr_susface(1, 2);
++            global.msg[2] = "* Nice bike./";
++            scr_lanface(3, 0);
++            global.msg[4] = "* Thanks!/";
++            endmsg = 5;
++        }
++        if (msg == 1)
++        {
++            scr_susface(1, 0);
++            global.msg[2] = "* Nice ax./";
++            global.msg[3] = "\\E2* Cool, right?/";
++            endmsg = 4;
++        }
++        if (msg == 2)
++        {
++            scr_susface(1, 0);
++            global.msg[2] = "* Nice sword./";
++            endmsg = 3;
++        }
++        if (msg == 3)
++        {
++            scr_susface(1, 0);
++            global.msg[2] = "* Nice hat, I guess./";
++            scr_ralface(3, 7);
++            global.msg[4] = "* Aww, thank you Susie!./";
++            scr_susface(5, 7);
++            global.msg[6] = "* Shut up, it's not THAT good!/";
++            endmsg = 7;
++        }
++        scr_noface(endmsg);
++        global.msg[endmsg + 1] = "* You realise you can't tell which Susie was talking./%";
++        susie_anythingcounter++;
+         scr_battletext_default();
+     }
+     if (actcon == 1 && !instance_exists(obj_writer))

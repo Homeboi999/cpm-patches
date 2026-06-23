@@ -1,6 +1,113 @@
 --- a/Code/gml_Object_obj_battlecontroller_Draw_0.gml
 +++ b/Code/gml_Object_obj_battlecontroller_Draw_0.gml
-@@ -415,7 +415,14 @@
+@@ -307,14 +307,13 @@
+         }
+         drawsus = 0;
+         drawral = 0;
+-        susblend = 16777215;
++        faceblend = 16777215;
+-        ralblend = 16777215;
+         if (chartime == 2 || chartime == 4)
+         {
+             drawsus = 1;
+             if (havechar[1] == 0 || global.hp[2] <= 0)
+             {
+-                susblend = 8421504;
++                faceblend = 8421504;
+                 cant = 1;
+             }
+             charoffset = 36;
+@@ -324,10 +323,37 @@
+             drawral = 1;
+             if (havechar[2] == 0 || global.hp[3] <= 0)
+             {
+-                ralblend = 8421504;
++                faceblend = 8421504;
+                 cant = 1;
+             }
+             charoffset = 36;
++        }
++        if (chartime == 5)
++        {
++            if (havechar[1] == 1)
++            {
++                drawsus = 1;
++                if (global.hp[2] <= 0)
++                {
++                    cant = 1;
++                    faceblend = 8421504;
++                }
++            }
++            if (havechar[2] == 1)
++            {
++                drawral = 1;
++                if (global.hp[3] <= 0)
++                {
++                    cant = 1;
++                    faceblend = 8421504;
++                }
++            }
++            if (!havechar[1] && !havechar[2])
++            {
++                cant = 1;
++                faceblend = 8421504;
++            }
++            charoffset = 0;
+         }
+         if (global.tension < global.actcost[global.bmenucoord[11][global.charturn]][i])
+         {
+@@ -344,16 +370,46 @@
+         }
+         if (chartime == 2)
+         {
+-            draw_sprite_ext(spr_headsusie, 0, xx + 30 + xoffset, yy + 375 + yoffset, 1, 1, 0, susblend, 1);
++            draw_sprite_ext(spr_headsusie, 0, xx + 30 + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
+         }
+         if (chartime == 3)
+         {
+-            draw_sprite_ext(spr_headralsei, 0, xx + 30 + xoffset, yy + 375 + yoffset, 1, 1, 0, susblend, 1);
++            draw_sprite_ext(spr_headralsei, 0, xx + 30 + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
+         }
+         if (chartime == 4)
+         {
+-            draw_sprite_ext(spr_headsusie, 0, xx + 30 + xoffset, yy + 375 + yoffset, 1, 1, 0, susblend, 1);
++            draw_sprite_ext(spr_headsusie, 0, xx + 30 + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
+-            draw_sprite_ext(spr_headralsei, 0, xx + 60 + xoffset, yy + 375 + yoffset, 1, 1, 0, susblend, 1);
++            draw_sprite_ext(spr_headralsei, 0, xx + 60 + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
++        }
++        if (chartime == 5)
++        {
++            for (slot = 0; slot < 3; slot++)
++            {
++                var headsprite = spr_headkris;
++                switch (global.char[slot])
++                {
++                    case 1:
++                        headsprite = spr_headkris;
++                        break;
++                    case 2:
++                        headsprite = spr_headsusie;
++                        break;
++                    case 3:
++                        headsprite = spr_headralsei;
++                        break;
++                }
++                if (global.char[slot] > 1)
++                {
++                    charoffset += 30;
++                    draw_sprite_ext(headsprite, 0, xx + charoffset + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
++                }
++            }
++            if (charoffset == 0)
++            {
++                charoffset += 30;
++                draw_sprite_ext(spr_headkris, 8, xx + charoffset + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
++                cant = 1;
++            }
+         }
+         if (global.lang == "ja")
+         {
+@@ -415,7 +471,14 @@
                  draw_set_color(c_maroon);
                  draw_rectangle(xx + 400, yy + 380 + (i * 30), xx + 500, yy + 380 + (i * 30) + 15, false);
                  draw_set_color(c_lime);
