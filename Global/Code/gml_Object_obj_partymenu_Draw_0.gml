@@ -9,9 +9,9 @@ if (partyMenu == 0 || partyMenu == 1)
 {
     // Useful variables for menu measurements
     var menu_x = x + 160;
-    var menu_y = y + 145;
+    var menu_y = y + 143;
     var menu_width = 320;
-    var menu_height = 200;
+    var menu_height = 204;
 
     // Main Box + Title
     draw_set_color(c_black);
@@ -123,7 +123,7 @@ if (partyMenu == 0 || partyMenu == 1)
     // Draw Clear Character hint
     draw_set_color(c_gray);
     scr_84_set_draw_font("main");
-    draw_text(menu_x + iconStart - 10, menu_y + 180, "Press " + scr_get_input_name(6) + " to remove the current character")
+    draw_text(menu_x + 31, menu_y + 180, "Press " + scr_get_input_name(6) + " to remove the current character")
     draw_set_color(c_white);
     scr_84_set_draw_font("mainbig");
 
