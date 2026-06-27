@@ -1,0 +1,257 @@
+--- a/Code/gml_GlobalScript_scr_charbox.gml
++++ b/Code/gml_GlobalScript_scr_charbox.gml
+@@ -15,9 +15,10 @@
+     }
+     var flx = camerax() + 436;
+     var fly = (bpoff + 421) - (global.fighting * 94);
+-    for (c = 0; c < 4; c += 1)
++    for (pos = 0; pos < 3; pos += 1)
+     {
+-        if (havechar[c] == 1)
++        c = global.char[pos] - 1;
++        if (c != -1)
+         {
+             if (c == 0)
+             {
+@@ -37,71 +38,71 @@
+             }
+             gc = global.charturn;
+             xchunk = 0;
+-            if (charpos[c] == 0 && chartotal == 3)
++            if (pos == 0 && chartotal == 3)
+             {
+                 xchunk = 0;
+             }
+-            if (charpos[c] == 1 && chartotal == 3)
++            if (pos == 1 && chartotal == 3)
+             {
+                 xchunk = 213;
+             }
+-            if (charpos[c] == 2 && chartotal == 3)
++            if (pos == 2 && chartotal == 3)
+             {
+                 xchunk = 426;
+             }
+-            if (charpos[c] == 0 && chartotal == 2)
++            if (pos == 0 && chartotal == 2)
+             {
+                 xchunk = 108;
+             }
+-            if (charpos[c] == 1 && chartotal == 2)
++            if (pos == 1 && chartotal == 2)
+             {
+                 xchunk = 322;
+             }
+-            if (charpos[c] == 0 && chartotal == 1)
++            if (pos == 0 && chartotal == 1)
+             {
+                 xchunk = 213;
+             }
+-            if (gc == charpos[c])
++            if (gc == pos)
+             {
+                 if (global.myfight == 0)
+                 {
+                     scr_selectionmatrix(xx + xchunk, (480 - bp) + yy);
+                 }
+-                if (mmy[c] > -32)
++                if (mmy[pos] > -32)
+                 {
+-                    mmy[c] -= 2;
++                    mmy[pos] -= 2;
+                 }
+-                if (mmy[c] > -24)
++                if (mmy[pos] > -24)
+                 {
+-                    mmy[c] -= 4;
++                    mmy[pos] -= 4;
+                 }
+-                if (mmy[c] > -16)
++                if (mmy[pos] > -16)
+                 {
+-                    mmy[c] -= 6;
++                    mmy[pos] -= 6;
+                 }
+-                if (mmy[c] > -8)
++                if (mmy[pos] > -8)
+                 {
+-                    mmy[c] -= 8;
++                    mmy[pos] -= 8;
+                 }
+-                if (mmy[c] < -32)
++                if (mmy[pos] < -32)
+                 {
+-                    mmy[c] = -64;
++                    mmy[pos] = -64;
+                 }
+             }
+-            else if (mmy[c] < -14)
++            else if (mmy[pos] < -14)
+             {
+-                mmy[c] += 15;
++                mmy[pos] += 15;
+             }
+             else
+             {
+-                mmy[c] = 0;
++                mmy[pos] = 0;
+             }
+             btc[0] = 0;
+             btc[1] = 0;
+             btc[2] = 0;
+             btc[3] = 0;
+             btc[4] = 0;
+-            if (gc == charpos[c])
++            if (gc == pos)
+             {
+                 btc[global.bmenucoord[0][global.charturn]] = 1;
+             }
+@@ -116,7 +117,7 @@
+                     }
+                 }
+                 pacify_glow = 0;
+-                if (c == 2 || c == 3 || c == 1)
++                if (c > 0)
+                 {
+                     for (sglowi = 0; sglowi < 3; sglowi += 1)
+                     {
+@@ -140,7 +141,7 @@
+                     }
+                 }
+                 var icon_offset = 5;
+-                if (disablesusieralseiattack == 1 && (global.charturn == 1 || global.charturn == 2))
++                if (disablesusieralseiattack == 1 && global.charturn == pos && (global.char[global.charturn] == 2 || global.char[global.charturn] == 3))
+                 {
+                     draw_sprite(scr_84_get_sprite("spr_btfight"), 2, xx + xchunk + 15 + icon_offset, (485 - bp) + yy);
+                 }
+@@ -163,16 +164,16 @@
+                 draw_sprite(scr_84_get_sprite("spr_btitem"), btc[2], xx + xchunk + 85 + icon_offset, (485 - bp) + yy);
+                 draw_sprite(scr_84_get_sprite("spr_btspare"), btc[3], xx + xchunk + 120 + icon_offset, (485 - bp) + yy);
+                 draw_sprite(scr_84_get_sprite("spr_btdefend"), btc[4], xx + xchunk + 155 + icon_offset, (485 - bp) + yy);
+-                if (spare_glow == 1 && gc == charpos[c])
++                if (spare_glow == 1 && gc == pos)
+                 {
+                     draw_sprite_ext(scr_84_get_sprite("spr_btspare"), 2, xx + xchunk + 120 + icon_offset, (485 - bp) + yy, 1, 1, 0, c_white, 0.4 + (sin(global.time / 6) * 0.4));
+                 }
+-                if (pacify_glow == 1 && gc == charpos[c])
++                if (pacify_glow == 1 && gc == pos)
+                 {
+                     draw_sprite_ext(scr_84_get_sprite("spr_bttech"), 2, xx + xchunk + 50 + icon_offset, (485 - bp) + yy, 1, 1, 0, c_white, 0.4 + (sin(global.time / 6) * 0.4));
+                 }
+             }
+-            if (gc == charpos[c])
++            if (gc == pos)
+             {
+                 draw_set_color(charcolor);
+             }
+@@ -180,13 +181,13 @@
+             {
+                 draw_set_color(bcolor);
+             }
+-            if (global.charselect == charpos[c] || global.charselect == 3)
++            if (global.charselect == pos || global.charselect == 3)
+             {
+                 draw_set_color(charcolor);
+             }
+-            d_rectangle(xx + xchunk, (480 - bp - 3) + yy + mmy[c], xx + xchunk + 212, ((480 - bp) + yy) - 2, false);
++            d_rectangle(xx + xchunk, (480 - bp - 3) + yy + mmy[pos], xx + xchunk + 212, ((480 - bp) + yy) - 2, false);
+             draw_set_color(c_black);
+-            d_rectangle(xx + xchunk + 2, (480 - bp - 1) + yy + mmy[c], xx + xchunk + 210, (480 - bp) + yy + mmy[c] + 33, false);
++            d_rectangle(xx + xchunk + 2, (480 - bp - 1) + yy + mmy[pos], xx + xchunk + 210, (480 - bp) + yy + mmy[pos] + 33, false);
+             b_offset = 480;
+             if (global.fighting == 0)
+             {
+@@ -205,19 +206,19 @@
+                     {
+                         bname = 5501;
+                     }
+-                    draw_sprite(spr_headflowery, global.faceaction[charpos[c]], xx + 13 + xchunk, (bpoff + b_offset + mmy[c]) - 11);
++                    draw_sprite(spr_headflowery, global.faceaction[pos], xx + 13 + xchunk, (bpoff + b_offset + mmy[pos]) - 11);
+-                    draw_sprite(bname, 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[c]);
++                    draw_sprite(bname, 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[pos]);
+                 }
+                 else
+                 {
+-                    draw_sprite(spr_headkris, global.faceaction[charpos[c]], xx + 13 + xchunk, bpoff + b_offset + mmy[c]);
++                    draw_sprite(spr_headkris, global.faceaction[pos], xx + 13 + xchunk, bpoff + b_offset + mmy[pos]);
+-                    draw_sprite(scr_84_get_sprite("spr_bnamekris"), 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[c]);
++                    draw_sprite(scr_84_get_sprite("spr_bnamekris"), 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[pos]);
+                 }
+             }
+             if (c == 1)
+             {
+-                draw_sprite(spr_headsusie, global.faceaction[charpos[c]], xx + 13 + xchunk, bpoff + b_offset + mmy[c]);
++                draw_sprite(spr_headsusie, global.faceaction[pos], xx + 13 + xchunk, bpoff + b_offset + mmy[pos]);
+-                draw_sprite(scr_84_get_sprite("spr_bnamesusie"), 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[c]);
++                draw_sprite(scr_84_get_sprite("spr_bnamesusie"), 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[pos]);
+             }
+             if (c == 2)
+             {
+@@ -229,25 +230,25 @@
+                         bname = 5501;
+                     }
+                     draw_sprite(bname, 0, flx + 41, fly + 12);
+-                    if (global.faceaction[charpos[c]] == 0 || global.faceaction[charpos[c]] == 5 || global.faceaction[charpos[c]] == 9)
++                    if (global.faceaction[pos] == 0 || global.faceaction[pos] == 5 || global.faceaction[pos] == 9)
+                     {
+-                        draw_sprite(spr_headflowery, 0, xx + 240 + 198, (bpoff + b_offset + mmy[c]) - 11);
++                        draw_sprite(spr_headflowery, 0, xx + 240 + 198, (bpoff + b_offset + mmy[pos]) - 11);
+                     }
+                     else
+                     {
+-                        draw_sprite(spr_headralsei, global.faceaction[charpos[c]], xx + 13 + xchunk, bpoff + b_offset + mmy[c]);
++                        draw_sprite(spr_headralsei, global.faceaction[pos], xx + 13 + xchunk, bpoff + b_offset + mmy[pos]);
+                     }
+                 }
+                 else
+                 {
+-                    draw_sprite(spr_headralsei, global.faceaction[charpos[c]], xx + 13 + xchunk, bpoff + b_offset + mmy[c]);
++                    draw_sprite(spr_headralsei, global.faceaction[pos], xx + 13 + xchunk, bpoff + b_offset + mmy[pos]);
+-                    draw_sprite(scr_84_get_sprite("spr_bnameralsei"), 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[c]);
++                    draw_sprite(scr_84_get_sprite("spr_bnameralsei"), 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[pos]);
+                 }
+             }
+             if (c == 3)
+             {
+-                draw_sprite(spr_headnoelle, global.faceaction[charpos[c]], xx + 13 + xchunk, bpoff + b_offset + mmy[c]);
++                draw_sprite(spr_headnoelle, global.faceaction[pos], xx + 13 + xchunk, bpoff + b_offset + mmy[pos]);
+-                draw_sprite(scr_84_get_sprite("spr_bnamenoelle"), 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[c]);
++                draw_sprite(scr_84_get_sprite("spr_bnamenoelle"), 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[pos]);
+             }
+             var hp = global.hp[c + 1];
+             var maxhp = global.maxhp[c + 1];
+@@ -261,7 +262,7 @@
+                 maxhp = 90;
+                 hp = min(hp, maxhp);
+             }
+-            draw_sprite(spr_hpname, 0, xx + 109 + xchunk, bpoff + b_offset + 11 + mmy[c]);
++            draw_sprite(spr_hpname, 0, xx + 109 + xchunk, bpoff + b_offset + 11 + mmy[pos]);
+             draw_set_color(c_white);
+             draw_set_font(global.hpfont);
+             if ((hp / maxhp) <= 0.25)
+@@ -273,12 +274,12 @@
+                 draw_set_color(c_red);
+             }
+             draw_set_halign(fa_right);
+-            draw_text(xx + 160 + xchunk, ((bpoff + b_offset) - 2) + mmy[c], string(hp));
++            draw_text(xx + 160 + xchunk, ((bpoff + b_offset) - 2) + mmy[pos], string(hp));
+-            draw_sprite(spr_hpslash, 0, xx + 159 + xchunk, ((bpoff + b_offset) - 4) + mmy[c]);
++            draw_sprite(spr_hpslash, 0, xx + 159 + xchunk, ((bpoff + b_offset) - 4) + mmy[pos]);
+-            draw_text(xx + 205 + xchunk, ((bpoff + b_offset) - 2) + mmy[c], string(maxhp));
++            draw_text(xx + 205 + xchunk, ((bpoff + b_offset) - 2) + mmy[pos], string(maxhp));
+             draw_set_halign(fa_left);
+             draw_set_color(c_maroon);
+-            d_rectangle(xx + 128 + xchunk, bpoff + b_offset + 11 + mmy[c], xx + 203 + xchunk, bpoff + b_offset + 19 + mmy[c], false);
++            d_rectangle(xx + 128 + xchunk, bpoff + b_offset + 11 + mmy[pos], xx + 203 + xchunk, bpoff + b_offset + 19 + mmy[pos], false);
+             if (hp > 0 && maxhp > 0)
+             {
+                 if (haveflowery && (soloflowery || c == 2))
+@@ -286,7 +287,7 @@
+                     charcolor = 189950;
+                 }
+                 draw_set_color(charcolor);
+-                d_rectangle(xx + 128 + xchunk, bpoff + b_offset + 11 + mmy[c], xx + xchunk + 128 + ceil((hp / maxhp) * 75), bpoff + b_offset + 19 + mmy[c], false);
++                d_rectangle(xx + 128 + xchunk, bpoff + b_offset + 11 + mmy[pos], xx + xchunk + 128 + ceil((hp / maxhp) * 75), bpoff + b_offset + 19 + mmy[pos], false);
+             }
+         }
+     }

@@ -41,15 +41,26 @@ if (partyMenu == 0 || partyMenu == 1)
         }
         else
         {
-            // Chapter 1 uses a unique sprite for the characters
-            if (global.chapter > 1)
+            
+            var headssprite = spr_equipchar;
+            
+            // Chapter 1 uses a unique sprite for the characters,
+            // And Chapter 5 re-uses it for Hat Ralsei
+            if (global.chapter == 5)
             {
-                draw_sprite_ext(spr_equipchar_ch2, global.char[i], menu_x + 32 + (i * 50), menu_y + 67, 2, 2, 0, c_white, chosen);
+                if (global.flag[1311] == 0)
+                    headssprite = spr_equipchar_ch2;
+            }
+            else if (global.chapter > 1)
+            {
+                headssprite = spr_equipchar_ch2;
             }
             else
             {
-                draw_sprite_ext(spr_equipchar, global.char[i], menu_x + 32 + (i * 50), menu_y + 67, 2, 2, 0, c_white, chosen);
+                headssprite = spr_equipchar;
             }
+
+            draw_sprite_ext(headssprite, global.char[i], menu_x + 32 + (i * 50), menu_y + 67, 2, 2, 0, c_white, chosen);
         }
     }
 
