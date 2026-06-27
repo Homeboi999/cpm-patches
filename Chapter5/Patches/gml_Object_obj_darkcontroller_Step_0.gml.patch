@@ -1,0 +1,33 @@
+--- a/Code/gml_Object_obj_darkcontroller_Step_0.gml
++++ b/Code/gml_Object_obj_darkcontroller_Step_0.gml
+@@ -1,3 +1,30 @@
++if (global.interact == 5 && global.menuno == 4)
++{
++    if (global.submenu == 20)
++    {
++        if (button3_p() && threebuffer < 0)
++        {
++            if (scr_modconfig("menuMode") == 0 || scr_modconfig("menuMode") == 2)
++            {
++                selectnoise = 1;
++                threebuffer = 2;
++                partyMenu = instance_create(xx, yy, obj_partymenu);
++                global.submenu = 23;
++            }
++            else
++            {
++                snd_play(snd_cantselect);
++            }
++        }
++    }
++    if (global.submenu == 23)
++    {
++        if (!instance_exists(obj_partymenu))
++        {
++            global.submenu = 20;
++        }
++    }
++}
+ xx = camerax();
+ yy = cameray();
+ var haveflowery = false;
