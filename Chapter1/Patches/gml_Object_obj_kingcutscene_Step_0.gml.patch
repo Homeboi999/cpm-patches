@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_kingcutscene_Step_0.gml
 +++ b/Code/gml_Object_obj_kingcutscene_Step_0.gml
-@@ -857,10 +857,16 @@
+@@ -857,17 +857,23 @@
          global.tempflag[8] = 1;
          obj_mainchara.x = k.x;
          obj_mainchara.y = k.y;
@@ -8,16 +8,43 @@
 -        global.cinstance[0].y = s.y;
 -        global.cinstance[1].x = r.x;
 -        global.cinstance[1].y = r.y;
+-        with (global.cinstance[0])
 +        if (instance_exists(global.cinstance[0]))
-+        {
+         {
 +            global.cinstance[0].x = s.x;
 +            global.cinstance[0].y = s.y;
-+        }
++            with (global.cinstance[0])
++            {
+-            scr_caterpillar_interpolate();
++                scr_caterpillar_interpolate();
++            }
+         }
+-        with (global.cinstance[1])
 +        if (instance_exists(global.cinstance[1]))
-+        {
+         {
 +            global.cinstance[1].x = r.x;
 +            global.cinstance[1].y = r.y;
-+        }
-         with (global.cinstance[0])
++            with (global.cinstance[1])
++            {
+-            scr_caterpillar_interpolate();
++                scr_caterpillar_interpolate();
++            }
+         }
+         scr_caterpillar_facing(1);
+         with (obj_mainchara)
+@@ -3314,7 +3320,14 @@
          {
-             scr_caterpillar_interpolate();
+             visible = 0;
+         }
++        if (instance_exists(obj_caterpillarchara))
++        {
+-        s = scr_dark_marker(obj_caterpillarchara.x, obj_caterpillarchara.y, spr_susiel_dark_eyes);
++            s = scr_dark_marker(obj_caterpillarchara.x, obj_caterpillarchara.y, spr_susiel_dark_eyes);
++        }
++        else
++        {
++            s = scr_dark_marker(obj_mainchara.x - 60, obj_mainchara.y, spr_susiel_dark_eyes);
++        }
+         with (s)
+         {
+             scr_depth();

@@ -1,6 +1,39 @@
 --- a/Code/gml_Object_obj_getsusieevent_Step_0.gml
 +++ b/Code/gml_Object_obj_getsusieevent_Step_0.gml
-@@ -168,7 +168,7 @@
+@@ -90,13 +90,30 @@
+             alarm[4] = 30;
+         }
+     }
++    else if (x <= (obj_mainchara.x - 60))
++    {
++        sprite_index = spr_susier_dark;
++        hspeed = 0;
++        image_speed = 0;
++        image_index = 0;
++        global.facing = 3;
++        con = 3.4;
++        alarm[4] = 30;
++    }
+ }
+ if (con == 4.4)
+ {
+     global.fe = 0;
+     global.msg[0] = scr_84_get_lang_string("obj_getsusieevent_slash_Step_0_gml_105_0");
++    if (scr_havechar(3))
++    {
+-    scr_ralface(1, 8);
++        scr_ralface(1, 8);
+-    global.msg[2] = scr_84_get_lang_string("obj_getsusieevent_slash_Step_0_gml_107_0");
++        global.msg[2] = scr_84_get_lang_string("obj_getsusieevent_slash_Step_0_gml_107_0");
++    }
++    else
++    {
++        global.msg[0] = global.msg[0] + "%";
++    }
+     instance_create(0, 0, obj_dialoguer);
+     con = 5;
+ }
+@@ -168,7 +185,7 @@
      global.interact = 0;
      con = 14;
  }
