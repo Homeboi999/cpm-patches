@@ -1,0 +1,30 @@
+--- a/Code/gml_Object_obj_controller_dw_city_mice_Step_0.gml
++++ b/Code/gml_Object_obj_controller_dw_city_mice_Step_0.gml
+@@ -19,8 +19,11 @@
+                     global.interact = 1;
+                     if (instance_exists(obj_npc_facing))
+                     {
++                        if (instance_exists(obj_caterpillarchara))
++                        {
+-                        obj_caterpillarchara.x = obj_npc_facing.x;
++                            obj_caterpillarchara.x = obj_npc_facing.x;
+-                        obj_caterpillarchara.y = obj_npc_facing.y;
++                            obj_caterpillarchara.y = obj_npc_facing.y;
++                        }
+                         with (obj_npc_facing)
+                         {
+                             instance_destroy();
+@@ -28,8 +31,11 @@
+                     }
+                     else if (instance_exists(obj_noelle_scared))
+                     {
++                        if (instance_exists(obj_caterpillarchara))
++                        {
+-                        obj_caterpillarchara.x = obj_noelle_scared.x;
++                            obj_caterpillarchara.x = obj_noelle_scared.x;
+-                        obj_caterpillarchara.y = obj_noelle_scared.y;
++                            obj_caterpillarchara.y = obj_noelle_scared.y;
++                        }
+                         with (obj_noelle_scared)
+                         {
+                             instance_destroy();

@@ -1,0 +1,18 @@
+--- a/Code/gml_Object_obj_weirdroute_manipulator_Create_0.gml
++++ b/Code/gml_Object_obj_weirdroute_manipulator_Create_0.gml
+@@ -1,14 +1,4 @@
+-havenoelle = 0;
+-if (instance_exists(obj_caterpillarchara))
+-{
+-    with (obj_caterpillarchara)
+-    {
+-        if (name == "noelle")
+-        {
+-            other.havenoelle = true;
+-        }
+-    }
+-}
++havenoelle = scr_havechar(4);
+ phase = scr_sideb_get_phase();
+ trashcon = 0;
+ if (global.flag[915] > 0 && global.flag[916] == 0)

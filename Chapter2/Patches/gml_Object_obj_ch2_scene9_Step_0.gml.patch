@@ -1,0 +1,25 @@
+--- a/Code/gml_Object_obj_ch2_scene9_Step_0.gml
++++ b/Code/gml_Object_obj_ch2_scene9_Step_0.gml
+@@ -582,13 +582,19 @@
+     obj_mainchara.cutscene = 1;
+     obj_mainchara.x = 707;
+     obj_mainchara.y = 194;
+-    obj_caterpillarchara.x = 814;
+-    obj_caterpillarchara.y = 176;
++    if (instance_exists(global.cinstance[0]))
++    {
++        global.cinstance[0].x = 814;
++        global.cinstance[0].y = 176;
++    }
+     camerax_set(620);
+     scr_losechar();
+     scr_getchar(2);
+     scr_getchar(3);
++    if (!instance_exists(global.cinstance[1]))
++    {
+-    global.cinstance[1] = scr_makecaterpillar(540, 180, 3, 1);
++        global.cinstance[1] = scr_makecaterpillar(540, 180, 3, 1);
++    }
+ }
+ if (con == 9.5)
+ {

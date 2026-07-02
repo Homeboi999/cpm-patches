@@ -1,0 +1,22 @@
+--- a/Code/gml_Object_obj_ch2_city07_Step_0.gml
++++ b/Code/gml_Object_obj_ch2_city07_Step_0.gml
+@@ -3,8 +3,17 @@
+     con = 1;
+     global.interact = 1;
+     global.facing = 1;
++    var noelle_x, noelle_y;
++    if (instance_exists(obj_caterpillarchara))
++    {
+-    var noelle_x = obj_caterpillarchara.x;
++        noelle_x = obj_caterpillarchara.x;
+-    var noelle_y = obj_caterpillarchara.y;
++        noelle_y = obj_caterpillarchara.y;
++    }
++    else
++    {
++        noelle_x = obj_mainchara.x - 60;
++        noelle_y = obj_mainchara.y;
++    }
+     scr_losechar();
+     instance_destroy(obj_caterpillarchara);
+     scr_getchar(2);

@@ -1,0 +1,28 @@
+--- a/Code/gml_Object_obj_mouseSpawnSwitch_Step_0.gml
++++ b/Code/gml_Object_obj_mouseSpawnSwitch_Step_0.gml
+@@ -114,9 +114,9 @@
+             fun = 1;
+             sprite_index = spr_noelle_shocked_dw;
+         }
+-        tIntroCon = 6;
+-        mousetimer = 0;
+     }
++    tIntroCon = 6;
++    mousetimer = 0;
+ }
+ if (tIntroCon == 6)
+ {
+@@ -402,8 +402,11 @@
+ if (introCon == 131 && !d_ex())
+ {
+     global.interact = 1;
++    if (instance_exists(obj_caterpillarchara))
++    {
+-    obj_caterpillarchara.x = obj_npc_facing.x;
++        obj_caterpillarchara.x = obj_npc_facing.x;
+-    obj_caterpillarchara.y = obj_npc_facing.y;
++        obj_caterpillarchara.y = obj_npc_facing.y;
++    }
+     with (obj_npc_facing)
+     {
+         instance_destroy();

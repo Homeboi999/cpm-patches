@@ -1,0 +1,18 @@
+--- a/Code/gml_Object_obj_ch2_tutorialViroMaker_Create_0.gml
++++ b/Code/gml_Object_obj_ch2_tutorialViroMaker_Create_0.gml
+@@ -1,14 +1,4 @@
+-havenoelle = 0;
+-if (instance_exists(obj_caterpillarchara))
+-{
+-    with (obj_caterpillarchara)
+-    {
+-        if (name == "noelle")
+-        {
+-            other.havenoelle = true;
+-        }
+-    }
+-}
++havenoelle = scr_havechar(4);
+ makeviro = 1;
+ if ((room == room_dw_city_big_1 && global.flag[438] == 2) || (room == room_dw_city_roadblock && global.flag[438] == 1) || (global.flag[531] != 0 && global.flag[531] != 6) || havenoelle == 0)
+ {

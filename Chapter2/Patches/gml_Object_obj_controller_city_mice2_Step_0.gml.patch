@@ -1,0 +1,90 @@
+--- a/Code/gml_Object_obj_controller_city_mice2_Step_0.gml
++++ b/Code/gml_Object_obj_controller_city_mice2_Step_0.gml
+@@ -8,8 +8,8 @@
+             {
+                 global.flag[7] = 1;
+                 global.interact = 1;
+-                noeX = 0;
+-                noeY = 0;
++                noeX = obj_mainchara.x - 60;
++                noeY = obj_mainchara.y;
+                 krX = obj_mainchara.x;
+                 krY = obj_mainchara.y;
+                 with (obj_caterpillarchara)
+@@ -87,6 +87,10 @@
+                 global.interact = 1;
+                 cutscene_master = scr_cutscene_make();
+                 scr_maincharacters_actors();
++                if (!instance_exists(obj_caterpillarchara))
++                {
++                    scr_makecaterpillar(obj_mainchara.x - 60, obj_mainchara.y, 4, 0);
++                }
+                 icon = 1;
+             }
+             if (icon == 1)
+@@ -518,11 +522,11 @@
+         global.interact = 1;
+         if (scarecount > 0)
+         {
+-            obj_caterpillarchara.x = obj_npc_facing.x;
+-            obj_caterpillarchara.y = obj_npc_facing.y;
+-            obj_caterpillarchara.visible = true;
+             with (obj_caterpillarchara)
+             {
++                x = obj_npc_facing.x;
++                y = obj_npc_facing.y;
++                visible = true;
+                 scr_caterpillar_facing(1);
+             }
+             with (obj_npc_facing)
+@@ -530,7 +534,7 @@
+                 instance_destroy();
+             }
+         }
+-        if (obj_caterpillarchara.x >= 518)
++        if (instance_exists(obj_caterpillarchara) && obj_caterpillarchara.x >= 518)
+         {
+             walkpoint = obj_caterpillarchara.x;
+         }
+@@ -577,7 +581,10 @@
+     }
+     if (con == 5)
+     {
+-        obj_caterpillarchara.visible = false;
++        with (obj_caterpillarchara)
++        {
++            visible = false;
++        }
+         scaredNoelle = instance_create(678, 218, obj_npc_room);
+         scaredNoelle.sprite_index = spr_noelle_walk_up_headtilt_dw;
+         scaredNoelle.image_xscale = 2;
+@@ -679,7 +686,14 @@
+     }
+     if (con == 8.1)
+     {
++        if (instance_exists(obj_caterpillarchara))
++        {
+-        if (endNoelle.x == obj_caterpillarchara.x)
++            if (endNoelle.x == obj_caterpillarchara.x)
++            {
++                endNoelle.image_speed = 0;
++            }
++        }
++        else if (endNoelle.x == (obj_mainchara.x - 60))
+         {
+             endNoelle.image_speed = 0;
+         }
+@@ -720,8 +734,11 @@
+     }
+     if (con == 11 && !d_ex())
+     {
++        if (instance_exists(obj_caterpillarchara))
++        {
+-        obj_caterpillarchara.x = endNoelle.x;
++            obj_caterpillarchara.x = endNoelle.x;
+-        obj_caterpillarchara.y = endNoelle.y;
++            obj_caterpillarchara.y = endNoelle.y;
++        }
+         with (endNoelle)
+         {
+             instance_destroy();
