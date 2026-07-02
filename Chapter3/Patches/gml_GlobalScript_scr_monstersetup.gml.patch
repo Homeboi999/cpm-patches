@@ -1,6 +1,119 @@
 --- a/Code/gml_GlobalScript_scr_monstersetup.gml
 +++ b/Code/gml_GlobalScript_scr_monstersetup.gml
-@@ -1863,6 +1863,9 @@
+@@ -1786,34 +1786,73 @@
+         var _minigame_string = stringsetloc("Minigame", "scr_monstersetup_slash_scr_monstersetup_gml_2239_0");
+         var _playgame_string = stringsetloc("Play#game", "scr_monstersetup_slash_scr_monstersetup_gml_2240_0");
+         var _earnscore_string = stringsetloc("Earn#score", "scr_monstersetup_slash_scr_monstersetup_gml_2241_0");
++        var charcount = 0;
++        var char_r = 0;
++        var char_l = 0;
++        for (i = 0; i < 3; i++)
++        {
++            if (global.char[i] != 0)
++            {
++                charcount++;
++            }
++            if (global.char[i] > 1)
++            {
++                if (char_l == 0)
++                {
++                    char_l = global.char[i];
++                }
++                char_r = global.char[i];
++            }
++        }
++        if (char_l == 4)
++        {
++            char_l = 5;
++        }
++        if (char_r == 4)
++        {
++            char_r = 5;
++        }
++        var solonum = 1;
++        if (charcount > 1)
++        {
++            global.canact[myself][1] = 1;
++            global.actname[myself][1] = _minigame_string;
++            global.actdesc[myself][1] = _playgame_string;
++            global.actsimul[myself][1] = 0;
++            global.actactor[myself][1] = 6;
++            global.actcost[myself][1] = 65;
++            solonum = 2;
+-        global.canact[myself][1] = 1;
++        }
+-        global.actname[myself][1] = _minigame_string;
++        if (charcount == 3)
+-        global.actdesc[myself][1] = _playgame_string;
++        {
+-        global.actsimul[myself][1] = 0;
++            global.actcost[myself][1] = 20;
+-        global.actactor[myself][1] = 4;
++            if (char_l != char_r)
+-        global.actcost[myself][1] = 20;
++            {
+-        global.canact[myself][2] = 1;
++                global.canact[myself][2] = 1;
+-        global.actname[myself][2] = _minigame_string;
++                global.actname[myself][2] = _minigame_string;
+-        global.actdesc[myself][2] = _playgame_string;
++                global.actdesc[myself][2] = _playgame_string;
+-        global.actsimul[myself][2] = 0;
++                global.actsimul[myself][2] = 0;
+-        global.actactor[myself][2] = 2;
++                global.actactor[myself][2] = char_l;
+-        global.actcost[myself][2] = 65;
++                global.actcost[myself][2] = 65;
+-        global.canact[myself][3] = 1;
++                global.canact[myself][3] = 1;
+-        global.actname[myself][3] = _minigame_string;
++                global.actname[myself][3] = _minigame_string;
+-        global.actdesc[myself][3] = _playgame_string;
++                global.actdesc[myself][3] = _playgame_string;
+-        global.actsimul[myself][3] = 0;
++                global.actsimul[myself][3] = 0;
+-        global.actactor[myself][3] = 3;
++                global.actactor[myself][3] = char_r;
+-        global.actcost[myself][3] = 65;
++                global.actcost[myself][3] = 65;
++                solonum = 4;
++            }
++        }
+-        global.canact[myself][4] = 1;
++        global.canact[myself][solonum] = 1;
+-        global.actname[myself][4] = _minigame_string;
++        global.actname[myself][solonum] = _minigame_string;
+-        global.actdesc[myself][4] = _playgame_string;
++        global.actdesc[myself][solonum] = _playgame_string;
+-        global.actsimul[myself][4] = 0;
++        global.actsimul[myself][solonum] = 0;
+-        global.actactor[myself][4] = 0;
++        global.actactor[myself][solonum] = 0;
+-        global.actcost[myself][4] = 110;
++        global.actcost[myself][solonum] = 110;
+-        global.canact[myself][5] = 1;
++        global.canact[myself][solonum + 1] = 1;
+-        global.actname[myself][5] = stringsetloc("ILoveTV", "scr_monstersetup_slash_scr_monstersetup_gml_2148_0");
++        global.actname[myself][solonum + 1] = stringsetloc("ILoveTV", "scr_monstersetup_slash_scr_monstersetup_gml_2148_0");
+-        global.actdesc[myself][5] = _earnscore_string;
++        global.actdesc[myself][solonum + 1] = _earnscore_string;
+-        global.actsimul[myself][5] = 1;
++        global.actsimul[myself][solonum + 1] = 1;
+         var havejeviltail = false;
+         if (global.chararmor1[1] == 7 || global.chararmor2[1] == 7 || global.chararmor1[2] == 7 || global.chararmor2[2] == 7 || global.chararmor1[3] == 7 || global.chararmor2[3] == 7)
+         {
+@@ -1839,6 +1878,10 @@
+         global.actnameral[myself][1] = stringsetloc("PopularBoy", "scr_monstersetup_slash_scr_monstersetup_gml_2158_0");
+         global.actdescral[myself][1] = stringsetloc("Ralsei#HPChange#=score", "scr_monstersetup_slash_scr_monstersetup_gml_2321_0");
+         global.actsimulral[myself][1] = 0;
++        global.canactnoe[myself][0] = 1;
++        global.actnamenoe[myself][0] = stringset("N-Action");
++        global.actdescnoe[myself][0] = _earnscore_string;
++        global.actsimulnoe[myself][0] = 1;
+     }
+     if (global.monstertype[myself] == 104)
+     {
+@@ -1863,6 +1906,9 @@
          global.canactral[myself][0] = 1;
          global.actnameral[myself][0] = stringsetloc("R-Action", "scr_monstersetup_slash_scr_monstersetup_gml_2187_0");
          global.actsimulral[myself][0] = 0;

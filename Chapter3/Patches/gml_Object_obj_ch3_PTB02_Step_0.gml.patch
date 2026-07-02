@@ -1,0 +1,73 @@
+--- a/Code/gml_Object_obj_ch3_PTB02_Step_0.gml
++++ b/Code/gml_Object_obj_ch3_PTB02_Step_0.gml
+@@ -515,10 +515,20 @@
+             destroy = 1;
+         }
+     }
++    if (instance_exists(obj_herokris))
++    {
+-    obj_mainchara.x = obj_herokris.x;
++        obj_mainchara.x = obj_herokris.x;
+-    obj_mainchara.y = obj_herokris.y;
++        obj_mainchara.y = obj_herokris.y;
+-    kr_actor.x = obj_herokris.x;
++        kr_actor.x = obj_herokris.x;
+-    kr_actor.y = obj_herokris.y;
++        kr_actor.y = obj_herokris.y;
++    }
++    else
++    {
++        obj_mainchara.x = global.heromakex[0];
++        obj_mainchara.y = global.heromakey[0];
++        kr_actor.x = global.heromakex[0];
++        kr_actor.y = global.heromakey[0];
++    }
+     if (teamdefeated == true)
+     {
+         kr_actor.sprite_index = spr_krisb_defeat;
+@@ -527,8 +537,16 @@
+     {
+         kr_actor.sprite_index = spr_krisr_dark;
+     }
++    if (instance_exists(obj_herosusie))
++    {
+-    su_actor.x = obj_herosusie.x;
++        su_actor.x = obj_herosusie.x;
+-    su_actor.y = obj_herosusie.y;
++        su_actor.y = obj_herosusie.y;
++    }
++    else
++    {
++        su_actor.x = global.heromakex[1];
++        su_actor.y = global.heromakey[1];
++    }
+     if (teamdefeated == true)
+     {
+         su_actor.sprite_index = spr_susie_dw_fell;
+@@ -537,8 +555,16 @@
+     {
+         su_actor.sprite_index = spr_susie_walk_right_dw_unhappy;
+     }
++    if (instance_exists(obj_heroralsei))
++    {
+-    ra_actor.x = obj_heroralsei.x;
++        ra_actor.x = obj_heroralsei.x;
+-    ra_actor.y = obj_heroralsei.y;
++        ra_actor.y = obj_heroralsei.y;
++    }
++    else
++    {
++        ra_actor.x = global.heromakex[2];
++        ra_actor.y = global.heromakey[2];
++    }
+     if (teamdefeated == true)
+     {
+         ra_actor.sprite_index = spr_ralsei_defeat;
+@@ -559,6 +585,7 @@
+     {
+         visible = 1;
+     }
++    scr_hidecharactor();
+     roaring_knight.visible = 1;
+     roaring_knight.state = 0;
+     roaring_knight.sword_active = false;

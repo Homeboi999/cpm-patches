@@ -1,0 +1,16 @@
+--- a/Code/gml_GlobalScript_scr_actselect.gml
++++ b/Code/gml_GlobalScript_scr_actselect.gml
+@@ -33,10 +33,11 @@
+         {
+             global.acting[charpos[2]] = 1;
+         }
+-        if (global.actactor[arg0][arg1] == 4)
++        if (global.actactor[arg0][arg1] == 4 || global.actactor[arg0][arg1] == 6)
+         {
+-            global.acting[2] = 1;
++            global.acting[0] = 1;
+             global.acting[1] = 1;
++            global.acting[2] = 1;
+         }
+         if (global.actactor[arg0][arg1] == 5)
+         {

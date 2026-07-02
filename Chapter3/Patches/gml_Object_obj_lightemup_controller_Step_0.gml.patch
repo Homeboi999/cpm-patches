@@ -1,0 +1,111 @@
+--- a/Code/gml_Object_obj_lightemup_controller_Step_0.gml
++++ b/Code/gml_Object_obj_lightemup_controller_Step_0.gml
+@@ -38,11 +38,20 @@
+ invincibility--;
+ if (scr_debug() && keyboard_check_pressed(ord("O")))
+ {
+-    obj_herokris.x += 8;
+-    obj_herokris.y += 12;
+-    obj_herosusie.x += 8;
+-    obj_herosusie.y += 6;
+-    obj_heroralsei.x += 4;
++    if (instance_exists(global.charinstance[0]))
++    {
++        global.charinstance[0].x += 8;
++        global.charinstance[0].y += 12;
++    }
++    if (instance_exists(global.charinstance[1]))
++    {
++        global.charinstance[1].x += 8;
++        global.charinstance[1].y += 6;
++    }
++    if (instance_exists(global.charinstance[2]))
++    {
++        global.charinstance[2].x += 4;
++    }
+     instance_destroy();
+     instance_create(x, y, obj_lightemup_controller);
+ }
+@@ -66,36 +75,21 @@
+         {
+             var _channelnumber = obj_lightemup_controller.channelnumber % 5;
+             scr_act_charsprite_end();
+-            obj_herosusie.depth = obj_herokris.depth + 1000;
+-            if (_channelnumber == 1)
+-            {
+-                scr_act_charsprite("ralsei", spr_ralsei_zoosuit, 0, 0);
+-                scr_act_charsprite("kris", spr_kris_zoosuit, 0, 0);
+-                scr_act_charsprite("susie", spr_susie_zoosuit, 0, 0);
+-            }
+-            if (_channelnumber == 2)
+-            {
+-                scr_act_charsprite("ralsei", spr_ralsei_lightemup2, 0, 0);
+-                scr_act_charsprite("kris", spr_kris_lightemup2, 0, 0);
+-                scr_act_charsprite("susie", spr_susie_lightemup2, 0, 0);
+-            }
+-            if (_channelnumber == 3)
+-            {
+-                scr_act_charsprite("ralsei", spr_ralsei_lightemup4, 0, 0);
+-                scr_act_charsprite("kris", spr_kris_lightemup4, 0, 0);
+-                scr_act_charsprite("susie", spr_susie_lightemup4, 0, 0);
+-            }
+-            if (_channelnumber == 4)
+-            {
+-                scr_act_charsprite("ralsei", spr_ralsei_lightemup1, 0, 0);
+-                scr_act_charsprite("kris", spr_kris_lightemup1, 0, 0);
+-                scr_act_charsprite("susie", spr_susie_lightemup1, 0, 0);
+-            }
+-            if (_channelnumber == 0)
+-            {
+-                scr_act_charsprite("ralsei", spr_ralsei_lightemup3, 0, 0);
+-                scr_act_charsprite("kris", spr_kris_lightemup3, 0, 0);
+-                scr_act_charsprite("susie", spr_susie_lightemup3, 0, 0);
++            if (instance_exists(global.charinstance[0]) && instance_exists(global.charinstance[1]))
++            {
++                global.charinstance[1].depth = global.charinstance[0].depth + 1000;
++            }
++            if (global.char[2] > 0)
++            {
++                scr_act_charsprite(other.charnames[global.char[2]], other.charsprites[_channelnumber][global.char[2]], 0, 0);
++            }
++            if (global.char[0] > 0)
++            {
++                scr_act_charsprite(other.charnames[global.char[0]], other.charsprites[_channelnumber][global.char[0]], 0, 0);
++            }
++            if (global.char[1] > 0)
++            {
++                scr_act_charsprite(other.charnames[global.char[1]], other.charsprites[_channelnumber][global.char[1]], 0, 0);
+             }
+             with (obj_oflash)
+             {
+@@ -167,12 +161,24 @@
+     else if ((button3_h() == 1 || button1_h() == 1) && cursor_shoottimer > 0 && shooting_enabled == true)
+     {
+         cursor_shoottimer = -3;
+-        inst = instance_create(obj_herokris.x + 27 + 34, obj_herokris.y + 33 + 12, obj_shadowman_sharpshoot_heart);
+-        inst.depth = obj_heroralsei.depth - 10;
+-        inst = instance_create(obj_herosusie.x + 27 + 49, obj_herosusie.y + 42, obj_shadowman_sharpshoot_heart);
+-        inst.depth = obj_heroralsei.depth - 10;
+-        inst = instance_create(obj_heroralsei.x + 47 + 32, (obj_heroralsei.y + 50) - 3, obj_shadowman_sharpshoot_heart);
+-        inst.depth = obj_heroralsei.depth - 10;
++        spriteoffx[0] = 0;
++        spriteoffx[1] = 61;
++        spriteoffx[2] = 76;
++        spriteoffx[3] = 79;
++        spriteoffx[4] = 65;
++        spriteoffy[0] = 0;
++        spriteoffy[1] = 45;
++        spriteoffy[2] = 42;
++        spriteoffy[3] = 47;
++        spriteoffy[4] = 50;
++        for (var i = 0; i < 3; i++)
++        {
++            if (i_ex(global.charinstance[i]))
++            {
++                inst = instance_create(global.charinstance[i].x + spriteoffx[global.char[i]], global.charinstance[i].y + spriteoffy[global.char[i]], obj_shadowman_sharpshoot_heart);
++                inst.depth = global.charinstance[i].depth - 10;
++            }
++        }
+         snd_play_x(snd_noise, 0.2, 1.1 + random(0.2));
+     }
+     if (endattack)

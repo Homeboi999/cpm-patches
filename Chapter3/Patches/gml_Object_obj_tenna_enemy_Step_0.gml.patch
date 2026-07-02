@@ -1,0 +1,233 @@
+--- a/Code/gml_Object_obj_tenna_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_tenna_enemy_Step_0.gml
+@@ -1,12 +1,3 @@
+-if (!i_ex(obj_herosusie) || !i_ex(obj_heroralsei))
+-{
+-    if (debugvar == false && scr_debug())
+-    {
+-        scr_debug_print("You need Susie and Ralsei for this battle");
+-        debugvar = true;
+-    }
+-    exit;
+-}
+ if (audience_goes_away == true)
+ {
+     with (obj_tenna_enemy_bg)
+@@ -706,33 +697,36 @@
+         {
+             resetralsei = false;
+             snd_play(snd_wing);
++            if (instance_exists(obj_heroralsei))
++            {
+-            obj_heroralsei.x = obj_heroralsei.xstart;
++                obj_heroralsei.x = obj_heroralsei.xstart;
+-            obj_heroralsei.y = obj_heroralsei.ystart;
++                obj_heroralsei.y = obj_heroralsei.ystart;
+-            with (obj_heroralsei)
++                with (obj_heroralsei)
+-            {
++                {
+-                normalsprite = spr_ralsei_walk_right;
++                    normalsprite = spr_ralsei_walk_right;
+-                idlesprite = spr_ralsei_idle;
++                    idlesprite = spr_ralsei_idle;
+-                defendsprite = spr_ralsei_defend;
++                    defendsprite = spr_ralsei_defend;
+-                hurtsprite = spr_ralsei_hurt_fixed;
++                    hurtsprite = spr_ralsei_hurt_fixed;
+-                attackreadysprite = spr_ralsei_attackready;
++                    attackreadysprite = spr_ralsei_attackready;
+-                attacksprite = spr_ralsei_attack;
++                    attacksprite = spr_ralsei_attack;
+-                itemsprite = spr_ralsei_item;
++                    itemsprite = spr_ralsei_item;
+-                itemreadysprite = spr_ralsei_itemready;
++                    itemreadysprite = spr_ralsei_itemready;
+-                spellreadysprite = spr_ralsei_spellready;
++                    spellreadysprite = spr_ralsei_spellready;
+-                spellsprite = spr_ralsei_spell;
++                    spellsprite = spr_ralsei_spell;
+-                defeatsprite = spr_ralsei_defeat;
++                    defeatsprite = spr_ralsei_defeat;
+-                victorysprite = spr_ralsei_victory;
++                    victorysprite = spr_ralsei_victory;
+-                actreadysprite = spr_ralsei_actready;
++                    actreadysprite = spr_ralsei_actready;
+-                actsprite = spr_ralsei_act;
++                    actsprite = spr_ralsei_act;
+-            }
++                }
+-            repeat (26)
++                repeat (26)
+-            {
++                {
+-                puff = instance_create(((obj_heroralsei.x + 50) - 60) + irandom(80), (obj_heroralsei.y - 90) + 90 + irandom(100), obj_animation);
++                    puff = instance_create(((obj_heroralsei.x + 50) - 60) + irandom(80), (obj_heroralsei.y - 90) + 90 + irandom(100), obj_animation);
+-                puff.depth = obj_heroralsei.depth - 1;
++                    puff.depth = obj_heroralsei.depth - 1;
+-                puff.sprite_index = spr_susiezilla_houseexplosion;
++                    puff.sprite_index = spr_susiezilla_houseexplosion;
+-                puff.image_speed = 0.5;
++                    puff.image_speed = 0.5;
+-                puff.image_xscale = 1;
++                    puff.image_xscale = 1;
+-                puff.image_yscale = 1;
++                    puff.image_yscale = 1;
++                }
+             }
+         }
+         if (lancercheat == true)
+@@ -795,7 +789,7 @@
+         }
+     }
+     var havejeviltail = false;
+-    if (global.chararmor1[1] == 7 || global.chararmor2[1] == 7 || global.chararmor1[2] == 7 || global.chararmor2[2] == 7 || global.chararmor1[3] == 7 || global.chararmor2[3] == 7)
++    if (scr_armorcheck_equipped_party(7) > 0)
+     {
+         havejeviltail = true;
+     }
+@@ -806,7 +800,7 @@
+         {
+             msgsetloc(0, "* TENNA - Despite his size, sadly, he's quite fragile./%", "obj_tenna_enemy_slash_Step_0_gml_446_0");
+         }
+-        else if (global.chararmor1[1] == 21 || global.chararmor2[1] == 21 || global.chararmor1[2] == 21 || global.chararmor2[2] == 21 || global.chararmor1[3] == 21 || global.chararmor2[3] == 21)
++        else if (scr_armorcheck_equipped_party(21))
+         {
+             msgsetloc(0, "* TENNA - THE [Tragic businesmen] THAT [Died] AT THE [Now] OF THE [Story]/%", "obj_tenna_enemy_slash_Step_0_gml_449_0");
+         }
+@@ -816,30 +810,32 @@
+         }
+         scr_battletext_default();
+     }
+-    if ((acting == 2 && actcon == 0) || (acting == 3 && actcon == 0) || (acting == 4 && actcon == 0) || (acting == 5 && actcon == 0))
++    if ((acting == act_multiminigame && actcon == 0) || (acting > act_multiminigame && acting < act_solominigame && actcon == 0 && act_multiminigame != -1) || (acting == act_solominigame && actcon == 0))
+     {
+-        if (acting == 2)
+-        {
+-            strng = stringsetloc("Everyone gets", "obj_tenna_enemy_slash_Step_0_gml_387_0_b");
+-        }
+-        if (acting == 3)
+-        {
+-            strng = stringsetloc("You and Susie get", "obj_tenna_enemy_slash_Step_0_gml_385_0");
+-        }
+-        if (acting == 4)
+-        {
+-            strng = stringsetloc("You and Ralsei get", "obj_tenna_enemy_slash_Step_0_gml_386_0");
+-        }
+-        if (acting == 5)
+-        {
+-            if (global.lang != "ja")
+-            {
+-                strng = stringsetloc("You get", "obj_tenna_enemy_slash_Step_0_gml_384_0");
+-            }
+-            else
+-            {
+-                strng = "";
+-            }
++        switch (global.actactor[myself][acting - 1])
++        {
++            case 6:
++                strng = stringsetloc("Everyone gets", "obj_tenna_enemy_slash_Step_0_gml_387_0_b");
++                break;
++            case 2:
++                strng = stringsetloc("You and Susie get", "obj_tenna_enemy_slash_Step_0_gml_385_0");
++                break;
++            case 3:
++                strng = stringsetloc("You and Ralsei get", "obj_tenna_enemy_slash_Step_0_gml_386_0");
++                break;
++            case 5:
++                strng = stringset("You and Noelle get");
++                break;
++            default:
++                if (global.lang != "ja")
++                {
++                    strng = stringsetloc("You get", "obj_tenna_enemy_slash_Step_0_gml_384_0");
++                }
++                else
++                {
++                    strng = "";
++                }
++                break;
+         }
+         acting = 5.1;
+     }
+@@ -856,7 +852,7 @@
+             minigametimecon = 1;
+         }
+     }
+-    if (acting == 6 && actcon == 0)
++    if (acting == (act_solominigame + 1) && actcon == 0)
+     {
+         var _ilovetvstring = stringsetloc("* You said \"I Love TV\"!", "obj_tenna_enemy_slash_Step_0_gml_502_0");
+         if (simultotal == 1)
+@@ -1080,12 +1076,55 @@
+         actconral = 0;
+         global.actsimulral[myself][1] = 1;
+     }
++    if (actingnoe == 1 && actconnoe == 1)
++    {
++        if (acting != 6.1)
++        {
++            with (obj_tenna_enemy_bg)
++            {
++                addscore += 10;
++                if (global.hp[1] < 1)
++                {
++                    addscore += 10;
++                }
++            }
++        }
++        else
++        {
++            extrapoints += 10;
++            if (global.hp[1] < 1)
++            {
++                extrapoints += 10;
++            }
++        }
++        var _n_act_string = stringset("* Noelle said \"I Love TV!\"");
++        if (simultotal == 1)
++        {
++            msgset(0, _n_act_string + "/%");
++            scr_battletext_default();
++            actconnoe = 20;
++        }
++        else
++        {
++            msgset(0, _n_act_string);
++            scr_simultext("noelle");
++            if (simulordernoe == 0)
++            {
++                actconnoe = 20;
++            }
++            else
++            {
++                actconnoe = 0;
++            }
++        }
++    }
+-    if (actcon == 20 || actconsus == 20 || actconral == 20)
++    if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
+     {
+         if (scr_terminate_writer() && obj_tenna_enemy_bg.addscore == 0)
+         {
+             actconsus = -1;
+             actconral = -1;
++            actconnoe = -1;
+             actcon = 1;
+             with (obj_face)
+             {
+@@ -1332,6 +1371,13 @@
+             if (global.hp[3] > 0)
+             {
+                 with (obj_heroralsei)
++                {
++                    instance_create(x + 30, y + 50, obj_tenna_x_hurt);
++                }
++            }
++            if (global.hp[4] > 0)
++            {
++                with (obj_heronoelle)
+                 {
+                     instance_create(x + 30, y + 50, obj_tenna_x_hurt);
+                 }

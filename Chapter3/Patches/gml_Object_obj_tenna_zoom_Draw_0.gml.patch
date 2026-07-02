@@ -1,0 +1,29 @@
+--- a/Code/gml_Object_obj_tenna_zoom_Draw_0.gml
++++ b/Code/gml_Object_obj_tenna_zoom_Draw_0.gml
+@@ -33,17 +33,15 @@
+     }
+     if (i_ex(obj_tenna_enemy))
+     {
+-        with (markkris)
+-        {
+-            draw_self();
+-        }
+-        with (marksusie)
+-        {
+-            draw_self();
+-        }
+-        with (markralsei)
+-        {
+-            draw_self();
++        for (var i = 0; i < 3; i++)
++        {
++            if (global.char[i] > 0)
++            {
++                with (markhero[i])
++                {
++                    draw_self();
++                }
++            }
+         }
+     }
+     draw_sprite_ext(spr_tenna_grasp_static, index, x, y, 2, 2, 0, c_white, image_alpha);

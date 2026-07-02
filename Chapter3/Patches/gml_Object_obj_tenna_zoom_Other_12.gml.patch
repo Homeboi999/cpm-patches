@@ -1,0 +1,27 @@
+--- a/Code/gml_Object_obj_tenna_zoom_Other_12.gml
++++ b/Code/gml_Object_obj_tenna_zoom_Other_12.gml
+@@ -159,20 +159,10 @@
+     with (obj_tenna_enemy)
+     {
+         scr_act_charsprite_end();
+-        with (obj_herokris)
+-        {
+-            obj_herokris.x = obj_herokris.xstart;
+-            obj_herokris.y = obj_herokris.ystart;
+-        }
+-        with (obj_herosusie)
+-        {
+-            obj_herosusie.x = obj_herosusie.xstart;
+-            obj_herosusie.y = obj_herosusie.ystart;
+-        }
+-        with (obj_heroralsei)
+-        {
+-            obj_heroralsei.x = obj_heroralsei.xstart;
+-            obj_heroralsei.y = obj_heroralsei.ystart;
++        with (obj_heroparent)
++        {
++            x = xstart;
++            y = ystart;
+         }
+     }
+     if (minigamedifficulty == 1)

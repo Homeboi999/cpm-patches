@@ -1,0 +1,410 @@
+--- a/Code/gml_Object_obj_tenna_zoom_Step_0.gml
++++ b/Code/gml_Object_obj_tenna_zoom_Step_0.gml
+@@ -44,61 +44,40 @@
+         }
+         if (i_ex(obj_tenna_enemy))
+         {
+-            obj_herokris.visible = false;
+-            obj_herosusie.visible = false;
+-            obj_heroralsei.visible = false;
+-            obj_tenna_enemy.ralseiplushmarker.visible = false;
+             if (obj_tenna_enemy.popularboy)
+             {
+                 obj_tenna_enemy.ralseiplushmarker.visible = false;
+             }
+-            markkris = instance_create_depth(obj_herokris.x, obj_herokris.y, -9999997, obj_marker);
+-            markkris.sprite_index = obj_herokris.thissprite;
+-            markkris.image_index = obj_herokris.index;
+-            markkris.image_xscale = 2;
+-            markkris.image_yscale = 2;
+-            markkris.image_speed = 0.16666666666666666;
+-            if (obj_herokris.thissprite == obj_herokris.defendsprite)
+-            {
+-                markkris.image_speed = 0;
+-            }
+-            marksusie = instance_create_depth(obj_herosusie.x, obj_herosusie.y, -9999998, obj_marker);
+-            marksusie.sprite_index = obj_herosusie.thissprite;
+-            marksusie.image_index = obj_herosusie.index;
+-            marksusie.image_xscale = 2;
+-            marksusie.image_yscale = 2;
+-            marksusie.image_speed = 0.16666666666666666;
+-            if (obj_herosusie.thissprite == obj_herosusie.defendsprite)
+-            {
+-                marksusie.image_speed = 0;
+-            }
+-            if ((obj_tenna_enemy.popularboy && global.hp[3] > 0) || madeplush == true)
+-            {
+-                markralsei = instance_create_depth(obj_heroralsei.x, obj_heroralsei.y, -9999999, obj_marker);
+-                markralsei.sprite_index = obj_tenna_enemy.ralseiplushmarker.sprite_index;
+-                markralsei.image_index = 0;
+-                markralsei.image_speed = 0;
+-                madeplush = true;
+-            }
+-            else
+-            {
+-                markralsei = instance_create_depth(obj_heroralsei.x, obj_heroralsei.y, -9999999, obj_marker);
+-                markralsei.sprite_index = obj_heroralsei.thissprite;
+-                markralsei.image_index = obj_heroralsei.index;
+-                markralsei.image_xscale = 2;
+-                markralsei.image_yscale = 2;
+-                markralsei.image_speed = 0.16666666666666666;
+-                if (obj_heroralsei.thissprite == obj_heroralsei.defendsprite)
++            for (var i = 0; i < 3; i++)
++            {
++                if (i_ex(global.charinstance[i]))
+                 {
+-                    markralsei.image_speed = 0;
++                    global.charinstance[i].visible = false;
++                    if ((global.char[i] == 3 && (obj_tenna_enemy.popularboy && global.hp[3] > 0)) || madeplush == true)
++                    {
++                        markhero[i] = instance_create_depth(global.charinstance[i].x, global.charinstance[i].y, -9999999, obj_marker);
++                        markhero[i].sprite_index = obj_tenna_enemy.ralseiplushmarker.sprite_index;
++                        markhero[i].image_index = 0;
++                        markhero[i].image_speed = 0;
++                        madeplush = true;
++                    }
++                    else
++                    {
++                        markhero[i] = instance_create_depth(global.charinstance[i].x, global.charinstance[i].y, -9999999, obj_marker);
++                        markhero[i].sprite_index = global.charinstance[i].thissprite;
++                        markhero[i].image_index = global.charinstance[i].index;
++                        markhero[i].image_xscale = 2;
++                        markhero[i].image_yscale = 2;
++                        markhero[i].image_speed = 0.16666666666666666;
++                        if (global.charinstance[i].thissprite == global.charinstance[i].defendsprite)
++                        {
++                            markhero[i].image_speed = 0;
++                        }
++                    }
++                    heroxoff[i] = sprite_get_xoffset(global.charinstance[i].thissprite);
++                    heroyoff[i] = sprite_get_yoffset(global.charinstance[i].thissprite);
+                 }
+             }
+-            krisxoff = sprite_get_xoffset(obj_herokris.thissprite);
+-            krisyoff = sprite_get_yoffset(obj_herokris.thissprite);
+-            susiexoff = sprite_get_xoffset(obj_herosusie.thissprite);
+-            susieyoff = sprite_get_yoffset(obj_herosusie.thissprite);
+-            ralseixoff = sprite_get_xoffset(obj_heroralsei.thissprite);
+-            ralseiyoff = sprite_get_yoffset(obj_heroralsei.thissprite);
+         }
+     }
+     if (timer == 2)
+@@ -172,49 +151,18 @@
+             scr_lerpvar("anchor_x2", anchor_x2, 0, 17, 3, "in");
+             scr_lerpvar("anchor_y2", anchor_y2, 0, 17, 3, "in");
+             var _time = 10;
+-            with (markkris)
+-            {
+-                scr_lerpvar("x", x, -200, _time, 3, "in");
+-            }
+-            with (marksusie)
+-            {
+-                scr_lerpvar("x", x, -300, _time, 3, "in");
+-            }
+-            with (marksusie)
+-            {
+-                scr_lerpvar("y", y, cameray() + (cameraheight() / 2), _time, 3, "in");
+-            }
+-            with (markralsei)
+-            {
+-                scr_lerpvar("x", x, -400, _time, 3, "in");
+-            }
+-            with (markralsei)
+-            {
+-                scr_lerpvar("y", y, cameray() + cameraheight(), _time, 3, "in");
+-            }
+-            with (markkris)
+-            {
+-                scr_lerpvar("image_xscale", image_xscale, 500, other.time - 10, 3, "in");
+-            }
+-            with (markkris)
+-            {
+-                scr_lerpvar("image_yscale", image_yscale, 500, other.time - 10, 3, "in");
+-            }
+-            with (marksusie)
+-            {
+-                scr_lerpvar("image_xscale", image_xscale, 500, other.time - 10, 3, "in");
+-            }
+-            with (marksusie)
+-            {
+-                scr_lerpvar("image_yscale", image_yscale, 500, other.time - 10, 3, "in");
+-            }
+-            with (markralsei)
+-            {
+-                scr_lerpvar("image_xscale", image_xscale, 500, other.time - 10, 3, "in");
+-            }
+-            with (markralsei)
+-            {
+-                scr_lerpvar("image_yscale", image_yscale, 500, other.time - 10, 3, "in");
++            for (var i = 0; i < 3; i++)
++            {
++                if (global.char[i] > 0)
++                {
++                    with (markhero[i])
++                    {
++                        scr_lerpvar("x", x, -200 - (100 * i), _time, 3, "in");
++                        scr_lerpvar("y", y, cameray() + ((cameraheight() * i) / 2), _time, 3, "in");
++                        scr_lerpvar("image_xscale", image_xscale, 500, other.time - 10, 3, "in");
++                        scr_lerpvar("image_yscale", image_yscale, 500, other.time - 10, 3, "in");
++                    }
++                }
+             }
+         }
+         else
+@@ -227,49 +175,18 @@
+             var _time = 5;
+             if (i_ex(obj_tenna_enemy))
+             {
+-                with (markkris)
+-                {
+-                    scr_lerpvar("x", x, -200, _time, 3, "in");
+-                }
+-                with (marksusie)
+-                {
+-                    scr_lerpvar("x", x, -300, _time, 3, "in");
+-                }
+-                with (marksusie)
+-                {
+-                    scr_lerpvar("y", y, cameray() + (cameraheight() / 2), _time, 3, "in");
+-                }
+-                with (markralsei)
+-                {
+-                    scr_lerpvar("x", x, -400, _time, 3, "in");
+-                }
+-                with (markralsei)
+-                {
+-                    scr_lerpvar("y", y, cameray() + cameraheight(), _time, 3, "in");
+-                }
+-                with (markkris)
+-                {
+-                    scr_lerpvar("image_xscale", image_xscale, 500, other.time - 10, 3, "in");
+-                }
+-                with (markkris)
+-                {
+-                    scr_lerpvar("image_yscale", image_yscale, 500, other.time - 10, 3, "in");
+-                }
+-                with (marksusie)
+-                {
+-                    scr_lerpvar("image_xscale", image_xscale, 500, other.time - 10, 3, "in");
+-                }
+-                with (marksusie)
+-                {
+-                    scr_lerpvar("image_yscale", image_yscale, 500, other.time - 10, 3, "in");
+-                }
+-                with (markralsei)
+-                {
+-                    scr_lerpvar("image_xscale", image_xscale, 500, other.time - 10, 3, "in");
+-                }
+-                with (markralsei)
+-                {
+-                    scr_lerpvar("image_yscale", image_yscale, 500, other.time - 10, 3, "in");
++                for (var i = 0; i < 3; i++)
++                {
++                    if (global.char[i] > 0)
++                    {
++                        with (markhero[i])
++                        {
++                            scr_lerpvar("x", x, -200 - (100 * i), _time, 3, "in");
++                            scr_lerpvar("y", y, cameray() + ((cameraheight() * i) / 2), _time, 3, "in");
++                            scr_lerpvar("image_xscale", image_xscale, 500, other.time - 10, 3, "in");
++                            scr_lerpvar("image_yscale", image_yscale, 500, other.time - 10, 3, "in");
++                        }
++                    }
+                 }
+             }
+         }
+@@ -279,17 +196,15 @@
+     {
+         if (i_ex(obj_tenna_enemy))
+         {
+-            with (markkris)
+-            {
+-                image_alpha = 0;
+-            }
+-            with (marksusie)
+-            {
+-                image_alpha = 0;
+-            }
+-            with (markralsei)
+-            {
+-                image_alpha = 0;
++            for (var i = 0; i < 3; i++)
++            {
++                if (global.char[i] > 0)
++                {
++                    with (markhero[i])
++                    {
++                        image_alpha = 0;
++                    }
++                }
+             }
+         }
+     }
+@@ -626,62 +541,25 @@
+         scr_lerpvar("yoffset", yoffset, 0, time, 3, "in");
+         if (i_ex(obj_tenna_enemy))
+         {
+-            with (markkris)
+-            {
+-                scr_lerpvar("x", x, xstart, _time, 3, "in");
+-            }
+-            with (marksusie)
+-            {
+-                scr_lerpvar("x", x, xstart, _time, 3, "in");
+-            }
+-            with (marksusie)
+-            {
+-                scr_lerpvar("y", y, ystart, _time, 3, "in");
+-            }
+-            with (markralsei)
+-            {
+-                scr_lerpvar("x", x, xstart, _time, 3, "in");
+-            }
+-            with (markralsei)
+-            {
+-                scr_lerpvar("y", y, ystart, _time, 3, "in");
+-            }
+-            with (markkris)
+-            {
+-                scr_lerpvar("image_xscale", image_xscale, 2, other.time, 3, "in");
+-            }
+-            with (markkris)
+-            {
+-                scr_lerpvar("image_yscale", image_yscale, 2, other.time, 3, "in");
+-            }
+-            with (marksusie)
+-            {
+-                scr_lerpvar("image_xscale", image_xscale, 2, other.time, 3, "in");
+-            }
+-            with (marksusie)
+-            {
+-                scr_lerpvar("image_yscale", image_yscale, 2, other.time, 3, "in");
+-            }
+-            if (obj_tenna_enemy.popularboy)
+-            {
+-                with (markralsei)
+-                {
+-                    scr_lerpvar("image_xscale", image_xscale, 1, other.time, 3, "in");
+-                }
+-                with (markralsei)
+-                {
+-                    scr_lerpvar("image_yscale", image_yscale, 1, other.time, 3, "in");
+-                }
+-            }
+-            else
+-            {
+-                with (markralsei)
+-                {
+-                    scr_lerpvar("image_xscale", image_xscale, 2, other.time, 3, "in");
+-                }
+-                with (markralsei)
+-                {
+-                    scr_lerpvar("image_yscale", image_yscale, 2, other.time, 3, "in");
++            for (var i = 0; i < 3; i++)
++            {
++                if (global.char[i] > 0)
++                {
++                    with (markhero[i])
++                    {
++                        scr_lerpvar("x", x, xstart, _time, 3, "in");
++                        scr_lerpvar("y", y, ystart, _time, 3, "in");
++                        if (obj_tenna_enemy.popularboy && markhero[i].sprite_index == obj_tenna_enemy.ralseiplushmarker.sprite_index)
++                        {
++                            scr_lerpvar("image_xscale", image_xscale, 1, other.time, 3, "in");
++                            scr_lerpvar("image_yscale", image_yscale, 1, other.time, 3, "in");
++                        }
++                        else
++                        {
++                            scr_lerpvar("image_xscale", image_xscale, 2, other.time, 3, "in");
++                            scr_lerpvar("image_yscale", image_yscale, 2, other.time, 3, "in");
++                        }
++                    }
+                 }
+             }
+         }
+@@ -699,17 +577,15 @@
+     {
+         if (i_ex(obj_tenna_enemy))
+         {
+-            with (markkris)
+-            {
+-                image_alpha = 1;
+-            }
+-            with (marksusie)
+-            {
+-                image_alpha = 1;
+-            }
+-            with (markralsei)
+-            {
+-                image_alpha = 1;
++            for (var i = 0; i < 3; i++)
++            {
++                if (global.char[i] > 0)
++                {
++                    with (markhero[i])
++                    {
++                        image_alpha = 1;
++                    }
++                }
+             }
+         }
+         with (obj_elnina_bouncingbullet)
+@@ -755,42 +631,31 @@
+                 obj_tenna_minigame_ui.myscore = 0;
+                 timer = 0;
+             }
+-            sprite_set_offset(markkris.sprite_index, krisxoff, krisyoff);
+-            sprite_set_offset(marksusie.sprite_index, susiexoff, susieyoff);
+-            sprite_set_offset(markralsei.sprite_index, ralseixoff, ralseiyoff);
+-            obj_herokris.visible = true;
+-            obj_herosusie.visible = true;
+-            obj_heroralsei.visible = true;
++            for (var i = 0; i < 3; i++)
++            {
++                if (global.char[i] > 0)
++                {
++                    with (markhero[i])
++                    {
++                        sprite_set_offset(other.markhero[i].sprite_index, other.heroxoff[i], other.heroyoff[i]);
++                        instance_destroy();
++                    }
++                    if (instance_exists(global.charinstance[i]))
++                    {
++                        global.charinstance[i].visible = true;
++                    }
++                }
++            }
+             obj_tenna_enemy.ralseiplushmarker.visible = true;
+             if (obj_tenna_enemy.popularboy)
+             {
+                 obj_tenna_enemy.ralseiplushmarker.visible = true;
+             }
+-            with (markkris)
+-            {
+-                instance_destroy();
+-            }
+-            with (marksusie)
+-            {
+-                instance_destroy();
+-            }
+-            with (markralsei)
+-            {
+-                instance_destroy();
+-            }
+             event_user(2);
+         }
+         for (var i = 0; i < 3; i += 1)
+         {
+-            if (global.char[i] == 1)
++            if (global.char[i] > 0)
+-            {
+-                global.charinstance[i].depth = 200 - (i * 20);
+-            }
+-            if (global.char[i] == 2)
+-            {
+-                global.charinstance[i].depth = 200 - (i * 20);
+-            }
+-            if (global.char[i] == 3)
+             {
+                 global.charinstance[i].depth = 200 - (i * 20);
+             }

@@ -1,0 +1,35 @@
+--- a/Code/gml_Object_obj_tenna_zoom_Create_0.gml
++++ b/Code/gml_Object_obj_tenna_zoom_Create_0.gml
+@@ -19,12 +19,8 @@
+ anchor_x = x - 0;
+ anchor_y = y - 0;
+ yoffset = 0;
+-krisxoff = 0;
+-krisyoff = 0;
+-susiexoff = 0;
+-susieyoff = 0;
+-ralseixoff = 0;
+-ralseiyoff = 0;
++heroxoff = [0, 0, 0];
++heroyoff = [0, 0, 0];
+ minigametype = "music";
+ minigamedifficulty = 0;
+ minigametype2 = "cooking";
+@@ -40,9 +36,14 @@
+ redx_2_scale = 9;
+ redx_3_alpha = 0;
+ redx_3_scale = 9;
+-savekrisdepth = obj_herokris.depth;
+-savesusiedepth = obj_herosusie.depth;
+-saveralseidepth = obj_heroralsei.depth;
++saveherodepth = [0, 0, 0];
++for (var i = 0; i < 3; i++)
++{
++    if (instance_exists(global.charinstance[i]))
++    {
++        saveherodepth[i] = global.charinstance[i].depth;
++    }
++}
+ minigameinsanityintro = false;
+ if (i_ex(obj_tenna_enemy))
+ {
