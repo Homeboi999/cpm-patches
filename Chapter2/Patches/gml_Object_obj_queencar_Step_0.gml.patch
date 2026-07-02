@@ -15,7 +15,7 @@
              fun = 1;
              global.facing = 1;
 -            scr_move_to_point_over_time(obj_queencar.x + obj_queencar.swanmaincharax, obj_queencar.y + obj_queencar.swanmaincharay, 15);
-+            scr_move_to_point_over_time(obj_queencar.x + obj_queencar.swanmaincharax + longOffset, obj_queencar.y + obj_queencar.swanmaincharay + obj_queencar.charOffsets[global.char[0]], 15);
++            scr_move_to_point_over_time(obj_queencar.x + obj_queencar.swanmaincharax + longOffset, obj_queencar.y + obj_queencar.swanmaincharay + obj_queencar.charOffsets[1], 15);
          }
 -        with (obj_caterpillarchara)
 +        with (global.cinstance[0])
@@ -51,7 +51,7 @@
 -            obj_caterpillarchara.y = (y + swanmaincharay) - 12;
 -        }
 +        obj_mainchara.x = x + swanmaincharax + longOffset;
-+        obj_mainchara.y = y + swanmaincharay + obj_queencar.charOffsets[global.char[0]];
++        obj_mainchara.y = y + swanmaincharay + obj_queencar.charOffsets[1];
 +        if (i_ex(global.cinstance[0]))
 +        {
 +            global.cinstance[0].x = ((x + swanmaincharax) - charspacing) + longOffset;

@@ -1,6 +1,6 @@
 --- a/Code/gml_GlobalScript_scr_dead.gml
 +++ b/Code/gml_GlobalScript_scr_dead.gml
-@@ -1,9 +1,24 @@
+@@ -1,9 +1,33 @@
  function scr_dead(arg0)
  {
 +    var chartarget;
@@ -14,18 +14,27 @@
 +    }
 +    for (i = 0; i < 3; i++)
 +    {
-+        if (global.char[i] == chartarget)
++        var charcheck;
++        if (instance_exists(obj_joker))
++        {
++            charcheck = obj_joker.hpchar[i];
++        }
++        else
++        {
++            charcheck = global.char[i];
++        }
++        if (charcheck == chartarget)
 +        {
 -    global.charmove[arg0] = 0;
-+            global.charmove[arg0] = 0;
++            global.charmove[i] = 0;
 -    global.charcantarget[arg0] = 0;
-+            global.charcantarget[arg0] = 0;
++            global.charcantarget[i] = 0;
 -    global.chardead[arg0] = 1;
-+            global.chardead[arg0] = 1;
++            global.chardead[i] = 1;
 -    global.charaction[arg0] = 0;
-+            global.charaction[arg0] = 0;
++            global.charaction[i] = 0;
 -    global.charspecial[arg0] = 0;
-+            global.charspecial[arg0] = 0;
++            global.charspecial[i] = 0;
 +        }
 +    }
  }

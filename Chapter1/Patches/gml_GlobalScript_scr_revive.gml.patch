@@ -1,6 +1,6 @@
 --- a/Code/gml_GlobalScript_scr_revive.gml
 +++ b/Code/gml_GlobalScript_scr_revive.gml
-@@ -1,7 +1,22 @@
+@@ -1,7 +1,31 @@
  function scr_revive(arg0)
  {
 +    var chartarget;
@@ -14,7 +14,16 @@
 +    }
 +    for (i = 0; i < 3; i++)
 +    {
-+        if (global.char[i] == chartarget)
++        var charcheck;
++        if (instance_exists(obj_joker))
++        {
++            charcheck = obj_joker.hpchar[i];
++        }
++        else
++        {
++            charcheck = global.char[i];
++        }
++        if (charcheck == chartarget)
 +        {
 -    global.charmove[arg0] = 1;
 +            global.charmove[i] = 1;

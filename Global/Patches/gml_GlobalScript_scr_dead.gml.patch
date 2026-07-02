@@ -9,15 +9,15 @@
 +        if (global.char[i] == chartarget)
 +        {
 -    global.charmove[arg0] = 0;
-+            global.charmove[arg0] = 0;
++            global.charmove[i] = 0;
 -    global.charcantarget[arg0] = 0;
-+            global.charcantarget[arg0] = 0;
++            global.charcantarget[i] = 0;
 -    global.chardead[arg0] = 1;
-+            global.chardead[arg0] = 1;
++            global.chardead[i] = 1;
 -    global.charaction[arg0] = 0;
-+            global.charaction[arg0] = 0;
++            global.charaction[i] = 0;
 -    global.charspecial[arg0] = 0;
-+            global.charspecial[arg0] = 0;
++            global.charspecial[i] = 0;
 +        }
 +    }
  }

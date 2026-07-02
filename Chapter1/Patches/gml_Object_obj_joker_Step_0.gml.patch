@@ -82,10 +82,6 @@
 +            if (chartotal > 1)
 +            {
 +                hpshift = 0 + choose(-1, 1);
-+                for (i = 0; i < 3; i += 1)
-+                {
-+                    remhpcolor[i] = hpcolor[i];
-+                }
 +                for (i = 0; i < 3; i++)
 +                {
 +                    if (global.char[i] != 0)
@@ -116,8 +112,8 @@
 +                            }
 +                        }
 +                        shufflepos[i] = otherslot;
-+                        hpcolor[i] = remhpcolor[otherslot];
 +                        hpchar[i] = global.char[otherslot];
++                        hpcolor[i] = charcolor[hpchar[i]];
 +                    }
 +                }
 +                for (i = 1; i <= 3; i += 1)
@@ -146,6 +142,10 @@
 +                scr_revive(1);
 +                scr_revive(2);
 +                snd_play(snd_weirdeffect);
++            }
++            else
++            {
++                snd_play(snd_cantselect);
 +            }
          }
          if (chaosdance == 7)
