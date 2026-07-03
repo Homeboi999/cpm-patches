@@ -1,0 +1,18 @@
+--- a/Code/gml_Object_obj_tenna_zoom_Other_11.gml
++++ b/Code/gml_Object_obj_tenna_zoom_Other_11.gml
+@@ -282,7 +282,14 @@
+             {
+                 instance_create_depth(__view_get(e__VW.XView, 0) + 320, __view_get(e__VW.YView, 0) + 200, depth + 10, obj_growtangle);
+                 global.inv = 0;
++                if (instance_exists(obj_herokris))
++                {
+-                instance_create_depth(obj_herokris.x + 10, obj_herokris.y + 40, depth + 10, obj_moveheart);
++                    instance_create_depth(obj_herokris.x + 10, obj_herokris.y + 40, depth + 10, obj_moveheart);
++                }
++                else
++                {
++                    instance_create_depth(0, 0, depth + 10, obj_moveheart);
++                }
+                 blocker = instance_create_depth(x, y, depth + 10, obj_elnina_umbrella);
+                 blocker.sprite_index = spr_ch3_elnina_umbrella;
+                 inst = instance_create_depth(camerax() + 80, cameray() - 320, depth + 10, obj_umbrella_tv);
