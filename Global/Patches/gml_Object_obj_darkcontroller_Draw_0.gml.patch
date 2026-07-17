@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_darkcontroller_Draw_0.gml
 +++ b/Code/gml_Object_obj_darkcontroller_Draw_0.gml
-@@ -294,6 +294,13 @@
+@@ -285,6 +285,13 @@
      coord = global.submenucoord[20];
      charcoord = global.char[coord];
      menusiner += 1;
