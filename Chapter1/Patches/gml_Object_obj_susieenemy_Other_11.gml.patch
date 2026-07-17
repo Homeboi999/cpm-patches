@@ -1,0 +1,24 @@
+--- a/Code/gml_Object_obj_susieenemy_Other_11.gml
++++ b/Code/gml_Object_obj_susieenemy_Other_11.gml
+@@ -9,6 +9,21 @@
+         global.monstercomment[myself] = scr_84_get_lang_string("obj_susieenemy_slash_Other_11_gml_9_0");
+         global.monsterstatus[myself] = 0;
+         sleepcounter = 99;
++        if (scr_monsterpop() > 1 && scr_havechar(2))
++        {
++            for (dx = 0; dx < 3; dx += 1)
++            {
++                if (global.char[dx] == 2)
++                {
++                    if (global.charcond[dx] == 5)
++                    {
++                        global.charcond[dx] = 0;
++                        global.faceaction[dx] = 0;
++                        global.charmove[dx] = 1;
++                    }
++                }
++            }
++        }
+         awoke = 1;
+     }
+     if (sleeping == 0)

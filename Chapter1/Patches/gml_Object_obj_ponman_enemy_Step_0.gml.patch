@@ -1,0 +1,10 @@
+--- a/Code/gml_Object_obj_ponman_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_ponman_enemy_Step_0.gml
+@@ -247,6 +247,7 @@
+                     if (global.charcond[dx] != 5)
+                     {
+                         global.charcond[dx] = 5;
++                        global.charaction[dx] = 0;
+                         global.faceaction[dx] = 9;
+                         global.charmove[dx] = 0;
+                         global.msg[0] = scr_84_get_lang_string("obj_ponman_enemy_slash_Step_0_gml_198_0");

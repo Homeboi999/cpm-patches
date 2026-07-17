@@ -1,0 +1,19 @@
+--- a/Code/gml_Object_obj_overworld_spademaker_Create_0.gml
++++ b/Code/gml_Object_obj_overworld_spademaker_Create_0.gml
+@@ -5,6 +5,16 @@
+     battlemode = 1;
+ }
+ global.charinstance[0] = obj_mainchara;
++global.charinstance[1] = -4;
++global.charinstance[2] = -4;
++if (instance_exists(global.cinstance[0]))
++{
++    global.charinstance[1] = global.cinstance[0];
++}
++if (instance_exists(global.cinstance[1]))
++{
++    global.charinstance[2] = global.cinstance[1];
++}
+ alarm[0] = 5;
+ side = 0;
+ homing = 0;

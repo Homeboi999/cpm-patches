@@ -1,0 +1,18 @@
+--- a/Code/gml_GlobalScript_scr_damage_all_overworld.gml
++++ b/Code/gml_GlobalScript_scr_damage_all_overworld.gml
+@@ -32,10 +32,14 @@
+                 hpdiff = global.hp[global.char[target]] - 1;
+             }
+             d_cancel = 0;
+-            if (hpdiff <= 1)
++            if (hpdiff <= 1 && global.hp[global.char[target]] == 1)
+             {
+                 d_cancel = 1;
+                 hpdiff = 0;
++            }
++            if (!instance_exists(global.charinstance[target]))
++            {
++                d_cancel = 1;
+             }
+             if (d_cancel == 0)
+             {

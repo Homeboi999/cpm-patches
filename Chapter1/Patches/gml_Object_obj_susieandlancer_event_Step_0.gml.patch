@@ -47,8 +47,8 @@
 -    global.cinstance[0].y = r.y;
      with (global.cinstance[0])
      {
-+        x = r.x;
-+        y = r.y;
++        x = other.r.x;
++        y = other.r.y;
          visible = 1;
          scr_caterpillar_interpolate();
      }

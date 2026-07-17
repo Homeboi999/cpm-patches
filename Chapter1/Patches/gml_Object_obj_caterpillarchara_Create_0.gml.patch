@@ -1,0 +1,13 @@
+--- a/Code/gml_Object_obj_caterpillarchara_Create_0.gml
++++ b/Code/gml_Object_obj_caterpillarchara_Create_0.gml
+@@ -30,10 +30,6 @@
+ rsprite_blush = spr_ralseir_blush;
+ lsprite_blush = spr_ralseil_blush;
+ parent = obj_mainchara;
+-pd = parent.dsprite;
+-pr = parent.rsprite;
+-pl = parent.lsprite;
+-pu = parent.usprite;
+ for (i = 0; i < 25; i += 1)
+ {
+     remx[i] = obj_mainchara.x;

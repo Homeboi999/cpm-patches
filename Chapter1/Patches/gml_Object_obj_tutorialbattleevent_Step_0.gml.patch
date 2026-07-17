@@ -33,7 +33,7 @@
          global.fe = 0;
          global.typer = 31;
 +        var msg_num = 0;
-+        if (scr_havechar(3))
++        if (!scr_havechar(1) && scr_havechar(3))
 +        {
 +            global.msg[0] = "\\E8* That was good! Practice makes perfect!/";
 +            global.msg[1] = "\\E1* I should probably get going, though.../";

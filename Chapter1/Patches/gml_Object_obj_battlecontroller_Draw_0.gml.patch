@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_battlecontroller_Draw_0.gml
 +++ b/Code/gml_Object_obj_battlecontroller_Draw_0.gml
-@@ -307,14 +307,13 @@
+@@ -307,14 +307,24 @@
          }
          drawsus = 0;
          drawral = 0;
@@ -10,14 +10,26 @@
          if (chartime == 2 || chartime == 4)
          {
              drawsus = 1;
-             if (havechar[1] == 0 || global.hp[2] <= 0)
++            var sussleep = false;
++            for (dx = 0; dx < 3; dx += 1)
++            {
++                if (global.char[dx] == 2)
++                {
++                    if (global.charcond[dx] == 5)
++                    {
++                        sussleep = true;
++                    }
++                }
++            }
+-            if (havechar[1] == 0 || global.hp[2] <= 0)
++            if (havechar[1] == 0 || global.hp[2] <= 0 || sussleep)
              {
 -                susblend = 8421504;
 +                faceblend = 8421504;
                  cant = 1;
              }
              charoffset = 36;
-@@ -324,10 +323,37 @@
+@@ -324,10 +334,48 @@
              drawral = 1;
              if (havechar[2] == 0 || global.hp[3] <= 0)
              {
@@ -32,7 +44,18 @@
 +            if (havechar[1] == 1)
 +            {
 +                drawsus = 1;
-+                if (global.hp[2] <= 0)
++                var sussleep = false;
++                for (dx = 0; dx < 3; dx += 1)
++                {
++                    if (global.char[dx] == 2)
++                    {
++                        if (global.charcond[dx] == 5)
++                        {
++                            sussleep = true;
++                        }
++                    }
++                }
++                if (global.hp[2] <= 0 || sussleep)
 +                {
 +                    cant = 1;
 +                    faceblend = 8421504;
@@ -56,7 +79,7 @@
          }
          if (global.tension < global.actcost[global.bmenucoord[11][global.charturn]][i])
          {
-@@ -344,16 +370,46 @@
+@@ -344,16 +392,46 @@
          }
          if (chartime == 2)
          {
@@ -107,7 +130,7 @@
          }
          if (global.lang == "ja")
          {
-@@ -415,7 +471,14 @@
+@@ -415,7 +493,14 @@
                  draw_set_color(c_maroon);
                  draw_rectangle(xx + 400, yy + 380 + (i * 30), xx + 500, yy + 380 + (i * 30) + 15, false);
                  draw_set_color(c_lime);

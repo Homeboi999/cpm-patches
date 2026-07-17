@@ -117,3 +117,38 @@
      }
      if (actcon == 10)
      {
+@@ -261,6 +307,34 @@
+         if (sleeping == 1)
+         {
+             global.msg[0] = scr_84_get_lang_string("obj_susieenemy_slash_Step_0_gml_224_0");
++        }
++        if (scr_monsterpop() > 1 && scr_havechar(2))
++        {
++            for (dx = 0; dx < 3; dx += 1)
++            {
++                if (global.char[dx] == 2)
++                {
++                    if (global.charcond[dx] != 5)
++                    {
++                        global.charcond[dx] = 5;
++                        global.charaction[dx] = 0;
++                        global.faceaction[dx] = 9;
++                        global.charmove[dx] = 0;
++                        if (sleeping == 1)
++                        {
++                            global.msg[0] = scr_84_get_lang_string("obj_susieenemy_slash_Step_0_gml_223_0");
++                        }
++                        else
++                        {
++                            global.msg[0] = "* Both SUSIES fell asleep!/%";
++                        }
++                    }
++                    else if (sleeping == 1)
++                    {
++                        global.msg[0] = "* But both SUSIES were already asleep...!/%";
++                    }
++                }
++            }
+         }
+         idlesprite = spr_susie_enemy_defeat;
+         sleepcounter = 0;

@@ -17,7 +17,6 @@ if (leapmode == 0)
             }
         }
     }
-    
     if (jumpcon == 3)
     {
         if (vspeed >= 0)
@@ -35,16 +34,15 @@ if (leapmode == 0)
             }
         }
     }
-    
     if (jumpcon == 0)
     {
         sprite_index = spr_smallchecker_crouch;
         jumptimer += 1;
         jumpmax = 20;
-        
         if (amt >= 1)
+        {
             jumpmax = 10;
-        
+        }
         if (jumptimer >= jumpmax)
         {
             snd_play(snd_jump);
@@ -55,13 +53,12 @@ if (leapmode == 0)
             sprite_index = spr_smallchecker_leap;
             targetx = (obj_heart.x + 8) - (sprite_width / 2);
             vspeed = -15;
-            
             if (amt == 1)
+            {
                 vspeed = -17;
-            
+            }
             gravity = 1;
             hspeed = (targetx - x) / 28;
-            
             if (amt >= 4)
             {
                 active = 0;
@@ -73,23 +70,20 @@ if (leapmode == 0)
             }
         }
     }
-    
     if (jumpcon == 4)
     {
         jumptimer += 1;
-        
         if (jumptimer >= 10)
         {
             global.turntimer = -1;
-            
             with (obj_smallcheckers_enemy)
+            {
                 visible = 1;
-            
+            }
             instance_destroy();
         }
     }
 }
-
 if (leapmode == 1)
 {
     with (obj_regularbullet)
@@ -97,7 +91,6 @@ if (leapmode == 1)
         image_xscale += 0.01;
         image_yscale += 0.01;
     }
-    
     if (jumpcon == 0)
     {
         sprite_index = spr_smallchecker_leg;
@@ -105,7 +98,6 @@ if (leapmode == 1)
         image_speed = 0.5;
         jumpcon = 1;
     }
-    
     if (jumpcon == 1)
     {
         if (image_index == 3)
@@ -119,7 +111,6 @@ if (leapmode == 1)
             bul.target = target;
             bul.damage = damage;
         }
-        
         if (image_index >= 4)
         {
             image_index = 4;
@@ -127,23 +118,19 @@ if (leapmode == 1)
             jumpcon = 2;
         }
     }
-    
     if (jumpcon == 2)
     {
         jumptimer += 1;
-        
         if (jumptimer >= 15)
         {
             sprite_index = spr_smallchecker_idle;
             image_index = 0;
         }
-        
         if (jumptimer >= 25)
         {
             jumptimer = 0;
             jumpcon = 0;
             amt += 1;
-            
             if (amt >= 4)
             {
                 jumpcon = 3;
@@ -151,11 +138,9 @@ if (leapmode == 1)
             }
         }
     }
-    
     if (jumpcon == 3)
     {
         jumptimer += 1;
-        
         if (jumptimer >= 20)
         {
             with (obj_regularbullet)
@@ -164,22 +149,20 @@ if (leapmode == 1)
                 active = 0;
             }
         }
-        
         if (jumptimer >= 30)
         {
             global.turntimer = -1;
             instance_destroy();
-            
             with (obj_smallcheckers_enemy)
+            {
                 visible = 1;
+            }
         }
     }
 }
-
 if (grazed == 1)
 {
     grazetimer += 1;
-    
     if (grazetimer >= 10)
     {
         grazetimer = 0;

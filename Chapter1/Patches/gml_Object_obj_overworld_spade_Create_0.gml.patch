@@ -1,0 +1,23 @@
+--- a/Code/gml_Object_obj_overworld_spade_Create_0.gml
++++ b/Code/gml_Object_obj_overworld_spade_Create_0.gml
+@@ -1,6 +1,18 @@
+ active = 0;
+ image_alpha = 0;
+ timer = 0;
+-damage = 18;
+-target = 0;
++var partycount = 0;
++for (i = 0; i < 3; i++)
++{
++    if (global.char[i] != 0)
++    {
++        partycount++;
++    }
++}
++if (partycount == 0)
++{
++    partycount++;
++}
++damage = 18 / partycount;
++target = 3;
+ 

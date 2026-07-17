@@ -198,7 +198,7 @@
 +            char_sprite_hurt = 1543;
 +            char_sprite_berdly_ramp = 720;
 +            char_sprite_sneo_intro = 720;
-+            char_sprite_sneo_ball = 3390;
++            char_sprite_sneo_ball = 3389;
 +            character_offset_x += -4;
 +            character_offset_y += -12;
 +            break;

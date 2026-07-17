@@ -1,0 +1,12 @@
+--- a/Code/gml_Object_obj_lancerslideevent_Step_0.gml
++++ b/Code/gml_Object_obj_lancerslideevent_Step_0.gml
+@@ -1,5 +1,9 @@
+ if (con == 1)
+ {
++    with (obj_caterpillarchara)
++    {
++        visible = 0;
++    }
+     with (obj_mainchara)
+     {
+         visible = 0;

@@ -1,6 +1,18 @@
 --- a/Code/gml_Object_obj_controller_dw_city_big_2_Step_0.gml
 +++ b/Code/gml_Object_obj_controller_dw_city_big_2_Step_0.gml
-@@ -141,15 +141,23 @@
+@@ -31,6 +31,11 @@
+     else if (!i_ex(forcefield))
+     {
+         forcefield = scr_forcefield(680, 1040, 2, 8, 1, 1);
++        if (obj_mainchara.x > (forcefield.x - 40))
++        {
++            obj_mainchara.x = forcefield.x - 40;
++            snd_play(snd_cantselect);
++        }
+     }
+ }
+ toggledtimer++;
+@@ -141,15 +146,23 @@
      }
      if (con == 6)
      {
@@ -27,7 +39,7 @@
          con++;
      }
      if (con == 7)
-@@ -617,12 +625,20 @@
+@@ -617,12 +630,20 @@
      {
          if (!i_ex(d))
          {
@@ -51,7 +63,7 @@
              con++;
          }
      }
-@@ -784,15 +800,12 @@
+@@ -784,15 +805,12 @@
          timer++;
          if (noellePuzzle.x == newtargx && noellePuzzle.y == newtargy)
          {
