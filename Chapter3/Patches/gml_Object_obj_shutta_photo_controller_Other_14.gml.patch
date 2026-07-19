@@ -1,0 +1,23 @@
+--- a/Code/gml_Object_obj_shutta_photo_controller_Other_14.gml
++++ b/Code/gml_Object_obj_shutta_photo_controller_Other_14.gml
+@@ -144,6 +144,20 @@
+             }
+             global.flag[515] = 1;
+         }
++        else if (got_noelle && closest_hero == "noelle")
++        {
++            enemy.photosuccesscount++;
++            endmessage = message_nicephoto;
++            if (enemy.amiabossfight == true)
++            {
++                obj_shutta_photo_controller.endmessage = message_noelle;
++                if (global.flag[516] > 0)
++                {
++                    obj_shutta_photo_controller.endmessage = message_noelle2;
++                }
++            }
++            global.flag[516] = 1;
++        }
+         else if (place_meeting(x, y, obj_shutta_pipehand) && collision_circle(x, y, reticle_size + 60, obj_shutta_pipehand, false, true) && obj_shutta_pipehand.goodshot)
+         {
+             enemy.photosuccessballoon = 1;

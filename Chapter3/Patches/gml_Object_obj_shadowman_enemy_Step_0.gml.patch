@@ -1,0 +1,187 @@
+--- a/Code/gml_Object_obj_shadowman_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_shadowman_enemy_Step_0.gml
+@@ -3,8 +3,8 @@
+     init = 1;
+     if (i_ex(obj_tenna_board4_enemy))
+     {
+-        global.actactor[0][0] = 4;
++        global.actactor[0][0] = 7;
+-        global.actactor[0][1] = 4;
++        global.actactor[0][1] = 7;
+         scr_spellmenu_setup();
+     }
+ }
+@@ -23,6 +23,11 @@
+     scr_battle_sprite_reset("ralsei");
+     ralseidancing = false;
+ }
++if (global.monster[myself] == 0 && noelledancing)
++{
++    scr_battle_sprite_reset("noelle");
++    noelledancing = false;
++}
+ if (global.monster[myself] == 1)
+ {
+     var rouxlswait = false;
+@@ -206,7 +211,7 @@
+             target = 0;
+         }
+     }
+-    if ((global.mnfight == 2 && (savekrishp > global.hp[1] || savesusiehp > global.hp[2] || saveralseihp > global.hp[3]) && gainmercyovertime == 0) || (global.mnfight == 2 && global.turntimer <= 1 && gainmercyovertime == 0))
++    if ((global.mnfight == 2 && (savekrishp > global.hp[1] || savesusiehp > global.hp[2] || saveralseihp > global.hp[3] || savenoellehp > global.hp[4]) && gainmercyovertime == 0) || (global.mnfight == 2 && global.turntimer <= 1 && gainmercyovertime == 0))
+     {
+         gainmercyovertime = 1;
+         gainmercytimer = 0;
+@@ -237,6 +242,8 @@
+         susiedancing = false;
+         scr_battle_sprite_reset("ralsei");
+         ralseidancing = false;
++        scr_battle_sprite_reset("noelle");
++        noelledancing = false;
+     }
+     if (global.mnfight > 0 && !i_ex(obj_rouxls_ch3_enemy))
+     {
+@@ -262,8 +269,16 @@
+                 scr_battle_sprite_reset("ralsei");
+             }
+         }
++        with (obj_heronoelle)
++        {
++            if (sprite_index == spr_noelleb_actready)
++            {
++                noelledancing = false;
++                scr_battle_sprite_reset("noelle");
++            }
++        }
+     }
+-    if (gainmercyovertime == 0 && savekrishp <= global.hp[1] && savesusiehp <= global.hp[2] && saveralseihp <= global.hp[3])
++    if (gainmercyovertime == 0 && (scr_havechar(1) && savekrishp <= global.hp[1]) && (scr_havechar(2) && savesusiehp <= global.hp[2]) && (scr_havechar(3) && saveralseihp <= global.hp[3]) && (scr_havechar(4) && savenoellehp <= global.hp[4]))
+     {
+         if (global.mnfight == 2 && global.turntimer > 1 && i_ex(obj_dmgwriter_boogie))
+         {
+@@ -332,6 +347,7 @@
+         savekrishp = global.hp[1];
+         savesusiehp = global.hp[2];
+         saveralseihp = global.hp[3];
++        savenoellehp = global.hp[4];
+         krisdancing = true;
+     }
+     if (acting == 3 && actcon == 0)
+@@ -354,14 +370,30 @@
+             msgsetloc(0, "* Everyone gets ready to knock the enemies' socks off!/%", "obj_shadowman_enemy_slash_Step_0_gml_304_0");
+         }
+         scr_battletext_default();
+-        obj_herokris.x -= 8;
+-        obj_herokris.y -= 12;
+-        obj_herosusie.x -= 8;
+-        obj_herosusie.y -= 6;
+-        obj_heroralsei.x -= 4;
+-        scr_act_charsprite("ralsei", spr_ralsei_zoosuit, 0, 0);
+-        scr_act_charsprite("susie", spr_susie_zoosuit, 0, 0);
+-        scr_act_charsprite("kris", spr_kris_zoosuit, 0, 0);
++        with (obj_herokris)
++        {
++            x -= 8;
++            y -= 12;
++        }
++        with (obj_herosusie)
++        {
++            x -= 8;
++            y -= 6;
++        }
++        with (obj_heroralsei)
++        {
++            x -= 4;
++        }
++        for (var i = 2; i >= 0; i--)
++        {
++            if (global.char[i] == 0)
++            {
++                continue;
++            }
++            var charnames = ["", "kris", "susie", "ralsei", "noelle"];
++            var charsprites = [147, 147, 4259, 3910, 4993];
++            scr_act_charsprite(charnames[global.char[i]], charsprites[global.char[i]], 0, 0);
++        }
+         snd_play(snd_boost);
+         with (obj_tenna_board4_gacha)
+         {
+@@ -470,9 +502,12 @@
+         sharpshoottimer++;
+         if (sharpshoottimer >= 14)
+         {
++            if (instance_exists(obj_herokris))
++            {
+-            obj_herokris.state = 8;
++                obj_herokris.state = 8;
+-            obj_herokris.image_speed = 0;
++                obj_herokris.image_speed = 0;
+-            obj_herokris.image_index = 7;
++                obj_herokris.image_index = 7;
++            }
+         }
+         with (obj_monsterparent)
+         {
+@@ -553,11 +588,20 @@
+                 state = 0;
+                 global.faceaction[myself] = 0;
+             }
+-            obj_herokris.x += 8;
+-            obj_herokris.y += 12;
+-            obj_herosusie.x += 8;
+-            obj_herosusie.y += 6;
+-            obj_heroralsei.x += 4;
++            with (obj_herokris)
++            {
++                x += 8;
++                y += 12;
++            }
++            with (obj_herosusie)
++            {
++                x += 8;
++                y += 6;
++            }
++            with (obj_heroralsei)
++            {
++                x += 4;
++            }
+             with (obj_tenna_board4_gacha)
+             {
+                 sharpshoot = false;
+@@ -794,12 +838,35 @@
+         }
+         scr_simultext("ralsei");
+     }
++    if (actingnoe == 1 && actconnoe == 1)
++    {
++        noelledancing = true;
++        scr_mercyadd(myself, 30);
++        if (simulordernoe == 0)
++        {
++            actconnoe = 20;
++        }
++        else
++        {
++            actconnoe = 0;
++        }
++        scr_battle_sprite_set("noelle", spr_noelleb_actready, 0.25, true);
++        scr_battle_sprite_actflash("noelle");
++        idlesprite = spr_shadowman_sax_b;
++        msgset(0, "* Noelle danced!/%");
++        if (global.monsterstatus[myself] != 1)
++        {
++            scr_monster_make_tired(myself);
++        }
++        scr_simultext("noelle");
++    }
+-    if (actcon == 20 || actconsus == 20 || actconral == 20)
++    if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
+     {
+         if (scr_terminate_writer())
+         {
+             actconsus = -1;
+             actconral = -1;
++            actconnoe = -1;
+             actcon = 1;
+         }
+     }

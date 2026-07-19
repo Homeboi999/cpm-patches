@@ -1,0 +1,22 @@
+--- a/Code/gml_Object_obj_shutta_enemy_Create_0.gml
++++ b/Code/gml_Object_obj_shutta_enemy_Create_0.gml
+@@ -55,4 +55,19 @@
+ toiletfailcount = 0;
+ ralseifailcount = 0;
+ krsfailcount = 0;
++fancyphoto = false;
++noellefailcount = 0;
++luigifailcount = 0;
++partyphotos = [0, 0, 0];
++curpartyphoto = 0;
++var index = 0;
++for (var i = 0; i < 3; i++)
++{
++    if (global.char[i] <= 1)
++    {
++        continue;
++    }
++    partyphotos[index] = global.char[i];
++    index++;
++}
+ 

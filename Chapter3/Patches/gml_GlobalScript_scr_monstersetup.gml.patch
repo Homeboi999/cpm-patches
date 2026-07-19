@@ -1,6 +1,117 @@
 --- a/Code/gml_GlobalScript_scr_monstersetup.gml
 +++ b/Code/gml_GlobalScript_scr_monstersetup.gml
-@@ -1786,34 +1786,73 @@
+@@ -1488,7 +1488,7 @@
+         global.canact[myself][2] = 1;
+         global.actname[myself][2] = stringsetloc("Sharpshoot", "scr_monstersetup_slash_scr_monstersetup_gml_1885_0");
+         global.actdesc[myself][2] = " ";
+-        global.actactor[myself][2] = 4;
++        global.actactor[myself][2] = 6;
+         global.actdesc[myself][2] = stringsetloc("Light#'em up", "scr_monstersetup_slash_scr_monstersetup_gml_1888_0");
+         global.canactsus[myself][0] = 1;
+         global.actnamesus[myself][0] = stringsetloc("S-Action", "scr_monstersetup_slash_scr_monstersetup_gml_1891_0");
+@@ -1496,6 +1496,9 @@
+         global.canactral[myself][0] = 1;
+         global.actnameral[myself][0] = stringsetloc("R-Action", "scr_monstersetup_slash_scr_monstersetup_gml_1895_0");
+         global.actsimulral[myself][0] = 1;
++        global.canactnoe[myself][0] = 1;
++        global.actnamenoe[myself][0] = stringset("N-Action");
++        global.actsimulnoe[myself][0] = 1;
+     }
+     if (global.monstertype[myself] == 55)
+     {
+@@ -1521,24 +1524,46 @@
+         global.canact[myself][0] = 1;
+         global.actname[myself][0] = stringsetloc("Check", "scr_monstersetup_slash_scr_monstersetup_gml_1913_0");
+         global.actdesc[myself][0] = stringsetloc("Useless#analysis", "scr_monstersetup_slash_scr_monstersetup_gml_1877_0");
++        var actnum = 1;
++        if (scr_havechar(3))
++        {
+-        global.canact[myself][1] = 1;
++            global.canact[myself][actnum] = 1;
+-        global.actname[myself][1] = stringsetloc("EasyPhoto", "scr_monstersetup_slash_scr_monstersetup_gml_1916_0");
++            global.actname[myself][actnum] = stringsetloc("EasyPhoto", "scr_monstersetup_slash_scr_monstersetup_gml_1916_0");
+-        global.actactor[myself][1] = 3;
++            global.actactor[myself][actnum] = 3;
+-        global.actdesc[myself][1] = stringsetloc("Timely#photo", "scr_monstersetup_slash_scr_monstersetup_gml_1918_0");
++            global.actdesc[myself][actnum] = stringsetloc("Timely#photo", "scr_monstersetup_slash_scr_monstersetup_gml_1918_0");
++            actnum++;
++        }
+-        global.canact[myself][2] = 1;
++        global.canact[myself][actnum] = 1;
+-        global.actname[myself][2] = stringsetloc("ToughPhoto", "scr_monstersetup_slash_scr_monstersetup_gml_1921_0");
++        global.actname[myself][actnum] = stringsetloc("ToughPhoto", "scr_monstersetup_slash_scr_monstersetup_gml_1921_0");
+-        global.actdesc[myself][2] = stringsetloc("Fast#photo", "scr_monstersetup_slash_scr_monstersetup_gml_1922_0");
++        global.actdesc[myself][actnum] = stringsetloc("Fast#photo", "scr_monstersetup_slash_scr_monstersetup_gml_1922_0");
++        actnum++;
++        if (scr_havechar(2))
++        {
+-        global.canact[myself][3] = 1;
++            global.canact[myself][actnum] = 1;
+-        global.actname[myself][3] = stringsetloc("PowerPhoto", "scr_monstersetup_slash_scr_monstersetup_gml_1930_0");
++            global.actname[myself][actnum] = stringsetloc("PowerPhoto", "scr_monstersetup_slash_scr_monstersetup_gml_1930_0");
+-        global.actdesc[myself][3] = stringsetloc("Extra#Mercy", "scr_monstersetup_slash_scr_monstersetup_gml_1931_0");
++            global.actdesc[myself][actnum] = stringsetloc("Extra#Mercy", "scr_monstersetup_slash_scr_monstersetup_gml_1931_0");
+-        global.actcost[myself][3] = 62.5;
++            global.actcost[myself][actnum] = 62.5;
+-        global.actactor[myself][3] = 2;
++            global.actactor[myself][actnum] = 2;
++            actnum++;
++        }
++        if (scr_havechar(4))
++        {
++            global.canact[myself][actnum] = 1;
++            global.actname[myself][actnum] = stringset("ClassyPhoto");
++            global.actdesc[myself][actnum] = stringset("Nice#Photo");
++            global.actcost[myself][actnum] = 30;
++            global.actactor[myself][actnum] = 5;
++            actnum++;
++        }
+         global.canactsus[myself][0] = 1;
+         global.actnamesus[myself][0] = stringsetloc("S-Action", "scr_monstersetup_slash_scr_monstersetup_gml_1925_0");
+         global.actsimulsus[myself][0] = 1;
+         global.canactral[myself][0] = 1;
+         global.actnameral[myself][0] = stringsetloc("R-Action", "scr_monstersetup_slash_scr_monstersetup_gml_1929_0");
+         global.actsimulral[myself][0] = 1;
++        global.canactnoe[myself][0] = 1;
++        global.actnamenoe[myself][0] = stringset("N-Action");
++        global.actsimulnoe[myself][0] = 1;
+     }
+     if (global.monstertype[myself] == 56)
+     {
+@@ -1560,7 +1585,7 @@
+         global.actdesc[myself][1] = stringsetloc("Bullets#give big#TP...", "scr_monstersetup_slash_scr_monstersetup_gml_1956_0");
+         if (global.encounterno == 135)
+         {
+-            global.actsimul[myself][1] = 4;
++            global.actsimul[myself][1] = 7;
+         }
+         global.canact[myself][2] = 1;
+         global.actname[myself][2] = stringsetloc("Mute", "scr_monstersetup_slash_scr_monstersetup_gml_1960_0");
+@@ -1568,11 +1593,11 @@
+         global.actdesc[myself][2] = stringsetloc("Tire#enemies", "scr_monstersetup_slash_scr_monstersetup_gml_1962_0");
+         if (global.encounterno == 135)
+         {
+-            global.actsimul[myself][1] = 4;
++            global.actsimul[myself][1] = 7;
+         }
+         global.canact[myself][3] = 1;
+         global.actname[myself][3] = stringsetloc("OffButton", "scr_monstersetup_slash_scr_monstersetup_gml_1966_0");
+-        global.actactor[myself][3] = 4;
++        global.actactor[myself][3] = 6;
+         global.actcost[myself][3] = 250;
+         global.actdesc[myself][3] = stringsetloc("Turn#it off", "scr_monstersetup_slash_scr_monstersetup_gml_1969_0");
+         global.canactsus[myself][0] = 1;
+@@ -1581,6 +1606,9 @@
+         global.canactral[myself][0] = 1;
+         global.actnameral[myself][0] = stringsetloc("R-Action", "scr_monstersetup_slash_scr_monstersetup_gml_1976_0");
+         global.actsimulral[myself][0] = 0;
++        global.canactnoe[myself][0] = 1;
++        global.actnamenoe[myself][0] = stringset("N-Action");
++        global.actsimulnoe[myself][0] = 1;
+     }
+     if (global.monstertype[myself] == 57)
+     {
+@@ -1786,34 +1814,73 @@
          var _minigame_string = stringsetloc("Minigame", "scr_monstersetup_slash_scr_monstersetup_gml_2239_0");
          var _playgame_string = stringsetloc("Play#game", "scr_monstersetup_slash_scr_monstersetup_gml_2240_0");
          var _earnscore_string = stringsetloc("Earn#score", "scr_monstersetup_slash_scr_monstersetup_gml_2241_0");
@@ -102,7 +213,7 @@
          var havejeviltail = false;
          if (global.chararmor1[1] == 7 || global.chararmor2[1] == 7 || global.chararmor1[2] == 7 || global.chararmor2[2] == 7 || global.chararmor1[3] == 7 || global.chararmor2[3] == 7)
          {
-@@ -1839,6 +1878,10 @@
+@@ -1839,6 +1906,10 @@
          global.actnameral[myself][1] = stringsetloc("PopularBoy", "scr_monstersetup_slash_scr_monstersetup_gml_2158_0");
          global.actdescral[myself][1] = stringsetloc("Ralsei#HPChange#=score", "scr_monstersetup_slash_scr_monstersetup_gml_2321_0");
          global.actsimulral[myself][1] = 0;
@@ -113,7 +224,7 @@
      }
      if (global.monstertype[myself] == 104)
      {
-@@ -1863,6 +1906,9 @@
+@@ -1863,6 +1934,9 @@
          global.canactral[myself][0] = 1;
          global.actnameral[myself][0] = stringsetloc("R-Action", "scr_monstersetup_slash_scr_monstersetup_gml_2187_0");
          global.actsimulral[myself][0] = 0;
@@ -122,4 +233,19 @@
 +        global.actsimulnoe[myself][0] = 0;
      }
      if (global.monstertype[myself] == 105)
+     {
+@@ -1878,12 +1952,12 @@
+         global.mercymax[myself] = 100;
+         global.canact[myself][0] = 1;
+         global.actname[myself][0] = stringsetloc("ILOVETV", "scr_monstersetup_slash_scr_monstersetup_gml_2205_0");
+-        global.actactor[myself][0] = 4;
++        global.actactor[myself][0] = 7;
+         global.canact[myself][1] = 1;
+         global.actname[myself][1] = stringsetloc("Resist", "scr_monstersetup_slash_scr_monstersetup_gml_2209_0");
+         global.actdesc[myself][1] = stringsetloc("", "scr_monstersetup_slash_scr_monstersetup_gml_2210_0");
+         global.actsimul[myself][1] = 0;
+-        global.actactor[myself][1] = 4;
++        global.actactor[myself][1] = 7;
+     }
+     if (global.monstertype[myself] == 106)
      {
