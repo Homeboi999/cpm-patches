@@ -1,0 +1,18 @@
+--- a/Code/gml_GlobalScript_scr_spellconsumeb.gml
++++ b/Code/gml_GlobalScript_scr_spellconsumeb.gml
+@@ -3,14 +3,7 @@
+     global.tension -= cost;
+     global.faceaction[global.charturn] = 2;
+     global.charaction[global.charturn] = 2;
+-    if (global.flag[34] == 1)
+-    {
+-        global.charspecial[global.charturn] = global.spell[global.char[global.charturn]][global.bmenucoord[2][global.charturn]];
+-    }
+-    if (global.flag[34] == 0)
+-    {
+-        global.charspecial[global.charturn] = global.battlespell[global.charturn][global.bmenucoord[2][global.charturn]];
++    global.charspecial[global.charturn] = global.battlespell[global.charturn][global.bmenucoord[2][global.charturn]];
+-    }
+     global.tensionselect = 0;
+     if (spellanim == 1)
+     {

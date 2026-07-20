@@ -1,6 +1,81 @@
 --- a/Code/gml_Object_obj_battlecontroller_Draw_0.gml
 +++ b/Code/gml_Object_obj_battlecontroller_Draw_0.gml
-@@ -527,16 +527,14 @@
+@@ -259,73 +259,7 @@
+         }
+     }
+ }
+-if (global.bmenuno == 2 && global.myfight == 0 && global.flag[34] == 1)
+-{
+-    thischar = global.char[global.charturn];
+-    spellcoord = global.bmenucoord[2][global.charturn];
+-    page = 0;
+-    if (spellcoord > 5)
+-    {
+-        page = 1;
+-        spellcoord -= 6;
+-    }
+-    icx = 10;
+-    icy = 385;
+-    if (spellcoord == 1 || spellcoord == 3 || spellcoord == 5)
+-    {
+-        icx = 230;
+-    }
+-    if (spellcoord > 1 && spellcoord < 4)
+-    {
+-        icy = 415;
+-    }
+-    if (spellcoord > 3)
+-    {
+-        icy = 445;
+-    }
+-    draw_sprite(spr_heart, 0, xx + icx, yy + icy);
+-    scr_84_set_draw_font("mainbig");
+-    for (i = 0; i < 3; i += 1)
+-    {
+-        var currentspell = global.spell[thischar][(page * 6) + (i * 2)];
+-        draw_set_color(c_white);
+-        if (global.tension < global.spellcost[thischar][(page * 6) + (i * 2)])
+-        {
+-            draw_set_color(c_gray);
+-        }
+-        else if (currentspell == 3 || currentspell == 8)
+-        {
+-            pacify_glow = 0;
+-            for (sglowi = 0; sglowi < 3; sglowi += 1)
+-            {
+-                if (global.monster[sglowi] == 1 && global.monsterstatus[sglowi] == 1)
+-                {
+-                    if (global.encounterno != 31)
+-                    {
+-                        pacify_glow = 1;
+-                    }
+-                }
+-            }
+-            if (pacify_glow == 1)
+-            {
+-                draw_set_color(merge_color(c_aqua, c_blue, 0.3));
+-            }
+-        }
+-        draw_text(xx + 30, yy + 375 + (i * 30), string_hash_to_newline(global.spellnameb[thischar][(page * 6) + (i * 2)]));
+-        draw_set_color(c_white);
+-        if (global.tension < global.spellcost[thischar][(page * 6) + (i * 2) + 1])
+-        {
+-            draw_set_color(c_gray);
+-        }
+-        draw_text(xx + 260, yy + 375 + (i * 30), string_hash_to_newline(global.spellnameb[thischar][(page * 6) + (i * 2) + 1]));
+-    }
+-    draw_set_color(c_gray);
+-    draw_text(xx + spell_offset, yy + 375, string_hash_to_newline(global.spelldescb[thischar][(page * 6) + spellcoord]));
+-    thiscost = round((global.spellcost[thischar][(page * 6) + spellcoord] / global.maxtension) * 100);
+-    draw_set_color(c_orange);
+-    draw_text(xx + spell_offset, yy + 440, string_hash_to_newline(string(thiscost) + "% TP"));
+-}
+-if (global.bmenuno == 2 && global.myfight == 0 && global.flag[34] == 0)
++if (global.bmenuno == 2 && global.myfight == 0)
+ {
+     thischar = global.charturn;
+     spellcoord = global.bmenucoord[2][global.charturn];
+@@ -527,16 +461,14 @@
          drawsus = 0;
          drawral = 0;
          drawnoe = 0;
@@ -19,7 +94,7 @@
              }
              charoffset = 30;
          }
-@@ -545,8 +543,8 @@
+@@ -545,8 +477,8 @@
              drawral = 1;
              if (havechar[2] == 0 || global.hp[3] <= 0)
              {
@@ -29,7 +104,7 @@
              }
              charoffset = 30;
          }
-@@ -555,10 +553,46 @@
+@@ -555,10 +487,46 @@
              drawnoe = 1;
              if (havechar[3] == 0 || global.hp[4] <= 0)
              {
@@ -77,7 +152,7 @@
          }
          if (global.tension < acttpcost[i])
          {
-@@ -575,42 +609,75 @@
+@@ -575,42 +543,75 @@
          }
          if (chartime == 2)
          {
@@ -163,3 +238,12 @@
              }
          }
          var s1 = string_hash_to_newline(actname[i]);
+@@ -813,6 +814,8 @@
+         }
+     }
+ }
++draw_set_color(c_yellow);
++draw_text(xx, yy, "bmenuno = " + string(global.bmenuno));
+ 
+ enum e__VW
+ {
