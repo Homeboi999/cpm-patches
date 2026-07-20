@@ -1,0 +1,28 @@
+--- a/Code/gml_GlobalScript_scr_endturn.gml
++++ b/Code/gml_GlobalScript_scr_endturn.gml
+@@ -49,12 +49,12 @@
+         }
+     }
+     __noactors = 1;
+-    if (global.acting[0] == 1)
+-    {
+-        __noactors = 0;
+-    }
+     for (__noactorsi = 0; __noactorsi < 3; __noactorsi++)
+     {
++        if (global.acting[__noactorsi] == 1)
++        {
++            __noactors = 0;
++        }
+         if (global.actingsingle[__noactorsi] == 1)
+         {
+             __noactors = 0;
+@@ -69,7 +69,7 @@
+         global.charturn = 3;
+         global.myfight = 3;
+         global.currentactingchar = 0;
+-        if (global.acting[0] == 0)
++        if (global.actingsingle[0] == 0)
+         {
+             scr_nextact();
+         }

@@ -540,7 +540,7 @@
 +                global.canact[myself][num] = 1;
 +                global.actactor[myself][num] = 5;
 +                global.actname[myself][num] = stringset("SnowShock");
-+                global.actdesc[myself][num] = stringset("Working#title");
++                global.actdesc[myself][num] = stringset("Icy#Damage");
 +                global.actcost[myself][num] = 75;
 +            }
              global.canactsus[myself][0] = 1;

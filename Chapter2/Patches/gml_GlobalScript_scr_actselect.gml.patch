@@ -1,23 +1,97 @@
 --- a/Code/gml_GlobalScript_scr_actselect.gml
 +++ b/Code/gml_GlobalScript_scr_actselect.gml
-@@ -24,7 +24,7 @@
-         global.actingsimul[0] = actsimul[arg1];
-         global.acting[0] = 1;
-         global.actingsingle[0] = 1;
--        global.actingtarget[global.charturn] = arg0;
-+        global.actingtarget[0] = arg0;
+@@ -1,6 +1,6 @@
+ function scr_actselect(arg0, arg1)
+ {
+-    if (i_ex(global.monsterinstance[arg0]))
++    if ((global.charturn == 0 || (global.actingsimul[0] == 1 && actsimul[arg1] == 1)) && i_ex(global.monsterinstance[arg0]))
+     {
+         if (global.char[global.charturn] == 1)
+         {
+@@ -9,38 +9,73 @@
+         if (global.char[global.charturn] == 2)
+         {
+             global.monsterinstance[arg0].actingsus = arg1 + 1;
++            global.monsterinstance[arg0].actconsus = 1;
+         }
+         if (global.char[global.charturn] == 3)
+         {
+             global.monsterinstance[arg0].actingral = arg1 + 1;
++            global.monsterinstance[arg0].actconral = 1;
+         }
+         if (global.char[global.charturn] == 4)
+         {
+             global.monsterinstance[arg0].actingnoe = arg1 + 1;
++            global.monsterinstance[arg0].actconnoe = 1;
+         }
+     }
+     if (global.char[global.charturn] == 1)
+     {
+-        global.actingsimul[0] = actsimul[arg1];
+-        global.acting[0] = 1;
+-        global.actingsingle[0] = 1;
++        global.acting[global.charturn] = 1;
++        global.actingsimul[global.charturn] = actsimul[arg1];
++        global.actingsingle[global.charturn] = 1;
+         global.actingtarget[global.charturn] = arg0;
          if (global.actactor[arg0][arg1] == 2)
          {
              global.acting[charpos[1]] = 1;
-@@ -41,6 +41,11 @@
++            global.actingsimul[charpos[1]] = 0;
++            global.actingsingle[charpos[1]] = 0;
++            if (charpos[1] == 0)
++            {
++                global.monsterinstance[arg0].acting = arg1 + 1;
++                global.monsterinstance[arg0].actingsus = 0;
++                global.monsterinstance[arg0].actconsus = 0;
++            }
+         }
+         if (global.actactor[arg0][arg1] == 3)
+         {
+             global.acting[charpos[2]] = 1;
++            global.actingsimul[charpos[2]] = 0;
++            global.actingsingle[charpos[2]] = 0;
++            if (charpos[2] == 0)
++            {
++                global.monsterinstance[arg0].acting = arg1 + 1;
++                global.monsterinstance[arg0].actingral = 0;
++                global.monsterinstance[arg0].actconral = 0;
++            }
+         }
+-        if (global.actactor[arg0][arg1] == 4)
++        if (global.actactor[arg0][arg1] == 4 || global.actactor[arg0][arg1] == 6)
+         {
+-            global.acting[2] = 1;
++            global.acting[0] = 1;
++            global.actingsimul[0] = actsimul[arg1];
++            global.actingsingle[0] = 1;
++            global.monsterinstance[arg0].acting = arg1 + 1;
+             global.acting[1] = 1;
++            global.actingsimul[1] = 0;
++            global.actingsingle[1] = 0;
++            global.acting[2] = 1;
++            global.actingsimul[2] = 0;
++            global.actingsingle[2] = 0;
+         }
          if (global.actactor[arg0][arg1] == 5)
          {
              global.acting[charpos[3]] = 1;
-+        }
-+        if (global.actactor[arg0][arg1] == 6)
-+        {
-+            global.acting[2] = 1;
-+            global.acting[1] = 1;
++            global.actingsimul[charpos[3]] = 0;
++            global.actingsingle[charpos[3]] = 0;
++            if (charpos[3] == 0)
++            {
++                global.monsterinstance[arg0].acting = arg1 + 1;
++                global.monsterinstance[arg0].actingnoe = 0;
++                global.monsterinstance[arg0].actconnoe = 0;
++            }
          }
          for (i = 0; i < 3; i += 1)
          {
+@@ -53,6 +88,7 @@
+     }
+     else
+     {
++        global.acting[global.charturn] = 1;
+         global.actingtarget[global.charturn] = arg0;
+         global.actingsingle[global.charturn] = 1;
+         global.actingsimul[global.charturn] = actsimul[arg1];

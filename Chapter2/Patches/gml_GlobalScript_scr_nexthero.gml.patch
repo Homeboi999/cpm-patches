@@ -1,0 +1,11 @@
+--- a/Code/gml_GlobalScript_scr_nexthero.gml
++++ b/Code/gml_GlobalScript_scr_nexthero.gml
+@@ -21,7 +21,7 @@
+     if (global.charturn == 1 && moveswapped == 0)
+     {
+         moveswapped = 1;
+-        if (scr_charcan(2) && global.acting[1] == 0)
++        if (scr_charcan(2))
+         {
+             global.charturn = 2;
+         }

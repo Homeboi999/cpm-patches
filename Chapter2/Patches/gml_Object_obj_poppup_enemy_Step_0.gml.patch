@@ -1,0 +1,12 @@
+--- a/Code/gml_Object_obj_poppup_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_poppup_enemy_Step_0.gml
+@@ -582,7 +582,8 @@
+         scr_anyface_next("noelle", "8");
+         msgnextloc("\\E8* Wh-what!? What did I do wrong??/%", "obj_poppup_enemy_slash_Step_0_gml_536_0");
+         scr_battletext();
+-        actconnoe = (simulordernoe == 0) ? 20 : 0;
++        actconnoe = 0;
++        actcon = 1;
+     }
+     if (actcon == 1 && !instance_exists(obj_writer))
+     {
