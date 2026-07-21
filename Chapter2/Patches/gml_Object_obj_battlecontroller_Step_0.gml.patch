@@ -168,7 +168,7 @@
 +                        global.bmenuno = 13;
 +                        break;
 +                    case -2:
-+                        scr_nexthero();
++                        scr_actwait();
 +                        break;
 +                    default:
 +                        scr_spellinfo(global.battlespell[thischar][global.bmenucoord[2][global.charturn]]);

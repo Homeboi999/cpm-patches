@@ -1,0 +1,10 @@
+--- a/Code/gml_GlobalScript_scr_mnendturn.gml
++++ b/Code/gml_GlobalScript_scr_mnendturn.gml
+@@ -89,6 +89,7 @@
+             global.actingsingle[i] = 0;
+             global.actingsimul[i] = 0;
+             global.actingtarget[i] = 0;
++            global.actwaiting[i] = 0;
+             global.temptension[i] = global.tension;
+             global.charspecial[i] = 0;
+             global.targeted[i] = 0;
