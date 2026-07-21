@@ -1,0 +1,11 @@
+--- a/Code/gml_GlobalScript_scr_prevhero.gml
++++ b/Code/gml_GlobalScript_scr_prevhero.gml
+@@ -13,7 +13,7 @@
+     if (global.charturn == 2)
+     {
+         moveswapped = 1;
+-        if (global.charmove[1] == 1 && global.acting[1] == 0)
++        if (global.charmove[1] == 1 && (global.acting[1] == 0 && (global.acting[0] == 0 || global.actingsingle[0] == 1)))
+         {
+             global.charturn = 1;
+         }
