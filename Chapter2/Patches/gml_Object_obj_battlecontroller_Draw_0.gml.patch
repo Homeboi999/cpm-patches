@@ -75,84 +75,77 @@
  {
      thischar = global.charturn;
      spellcoord = global.bmenucoord[2][global.charturn];
-@@ -527,16 +461,14 @@
+@@ -527,38 +461,37 @@
          drawsus = 0;
          drawral = 0;
          drawnoe = 0;
 -        susblend = 16777215;
-+        faceblend = 16777215;
 -        ralblend = 16777215;
 -        noeblend = 16777215;
-         if (chartime == 2 || chartime == 4)
-         {
-             drawsus = 1;
-             if (havechar[1] == 0 || global.hp[2] <= 0)
-             {
+-        if (chartime == 2 || chartime == 4)
+-        {
+-            drawsus = 1;
+-            if (havechar[1] == 0 || global.hp[2] <= 0)
+-            {
 -                susblend = 8421504;
-                 cant = 1;
-+                faceblend = 8421504;
-             }
-             charoffset = 30;
-         }
-@@ -545,8 +477,8 @@
-             drawral = 1;
-             if (havechar[2] == 0 || global.hp[3] <= 0)
-             {
+-                cant = 1;
+-            }
+-            charoffset = 30;
+-        }
+-        if (chartime == 3 || chartime == 4)
+-        {
+-            drawral = 1;
+-            if (havechar[2] == 0 || global.hp[3] <= 0)
+-            {
 -                ralblend = 8421504;
-                 cant = 1;
-+                faceblend = 8421504;
-             }
-             charoffset = 30;
-         }
-@@ -555,10 +487,46 @@
-             drawnoe = 1;
-             if (havechar[3] == 0 || global.hp[4] <= 0)
-             {
+-                cant = 1;
+-            }
+-            charoffset = 30;
+-        }
+-        if (chartime == 5)
+-        {
+-            drawnoe = 1;
+-            if (havechar[3] == 0 || global.hp[4] <= 0)
+-            {
 -                noeblend = 8421504;
-                 cant = 1;
-+                faceblend = 8421504;
-             }
-             charoffset = 30;
-+        }
-+        if (chartime == 6)
+-                cant = 1;
+-            }
+-            charoffset = 30;
++        faceblend = 16777215;
++        switch (chartime)
 +        {
-+            if (havechar[1] == 1)
-+            {
++            case 2:
 +                drawsus = 1;
-+                if (global.hp[2] <= 0)
-+                {
-+                    cant = 1;
-+                    faceblend = 8421504;
-+                }
-+            }
-+            if (havechar[2] == 1)
-+            {
++                charoffset = 30;
++                break;
++            case 3:
 +                drawral = 1;
-+                if (global.hp[3] <= 0)
-+                {
-+                    cant = 1;
-+                    faceblend = 8421504;
-+                }
-+            }
-+            if (havechar[3] == 1)
-+            {
++                charoffset = 30;
++                break;
++            case 4:
++                drawsus = 1;
++                drawral = 1;
++                charoffset = 30;
++                break;
++            case 5:
 +                drawnoe = 1;
-+                if (global.hp[4] <= 0)
-+                {
-+                    cant = 1;
-+                    faceblend = 8421504;
-+                }
-+            }
-+            if (!havechar[1] && !havechar[2] && !havechar[3])
-+            {
-+                cant = 1;
-+                faceblend = 8421504;
-+            }
-+            charoffset = 0;
++                charoffset = 30;
++                break;
++            case 6:
++                drawsus = havechar[1] == 1;
++                drawral = havechar[2] == 1;
++                drawnoe = havechar[3] == 1;
++                charoffset = 1;
++                break;
++        }
++        if (!scr_actactor_available(chartime))
++        {
++            cant = 1;
++            faceblend = 8421504;
          }
          if (global.tension < acttpcost[i])
          {
-@@ -575,42 +543,75 @@
+@@ -575,42 +508,75 @@
          }
          if (chartime == 2)
          {
@@ -238,3 +231,13 @@
              }
          }
          var s1 = string_hash_to_newline(actname[i]);
+@@ -813,6 +779,9 @@
+         }
+     }
+ }
++scr_84_set_draw_font("mainbig");
++draw_set_color(c_yellow);
++draw_text(xx, yy, "charaction 0: " + string(global.charaction[0]) + ", 1: " + string(global.charaction[1]) + ", 2: " + string(global.charaction[2]));
+ 
+ enum e__VW
+ {

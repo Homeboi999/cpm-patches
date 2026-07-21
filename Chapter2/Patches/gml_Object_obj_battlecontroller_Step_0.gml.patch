@@ -192,29 +192,33 @@
                  }
              }
          }
-@@ -781,6 +659,25 @@
-             if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 5)
-             {
-                 if (havechar[3] == 0 || global.hp[4] <= 0)
-+                {
-+                    canpress = 0;
-+                }
-+            }
-+            if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 6)
-+            {
-+                if (havechar[1] == 1 && global.hp[2] <= 0)
-+                {
-+                    canpress = 0;
-+                }
-+                if (havechar[2] == 1 && global.hp[3] <= 0)
-+                {
-+                    canpress = 0;
-+                }
-+                if (havechar[3] == 1 && global.hp[4] <= 0)
-+                {
-+                    canpress = 0;
-+                }
-+                if (havechar[1] != 1 && havechar[2] != 1 && havechar[3] != 1)
-                 {
-                     canpress = 0;
-                 }
+@@ -764,27 +642,8 @@
+         canpress = 1;
+         if (global.char[global.charturn] == 1)
+         {
+-            if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 2 || global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 4)
+-            {
+-                if (havechar[1] == 0 || global.hp[2] <= 0)
+-                {
+-                    canpress = 0;
+-                }
+-            }
+-            if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 3 || global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 4)
+-            {
+-                if (havechar[2] == 0 || global.hp[3] <= 0)
+-                {
+-                    canpress = 0;
+-                }
+-            }
+-            if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 5)
+-            {
+-                if (havechar[3] == 0 || global.hp[4] <= 0)
+-                {
+-                    canpress = 0;
+-                }
+-            }
++            var actactor = global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]];
++            canpress = scr_actactor_available(actactor);
+         }
+         if (canpress == 1)
+         {
