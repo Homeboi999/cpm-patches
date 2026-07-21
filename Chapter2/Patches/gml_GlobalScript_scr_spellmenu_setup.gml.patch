@@ -161,7 +161,7 @@
                  }
              }
 +        }
-+        if (scr_should_have_wait_act(__i))
++        if (scr_actwait_available(__i))
 +        {
 +            var offset = global.battleactcount[__i];
 +            if (global.battleactcount[__i] < (offset + 1))
