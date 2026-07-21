@@ -135,7 +135,64 @@
      {
          with (battlewriter)
          {
-@@ -781,6 +655,25 @@
+@@ -457,29 +331,33 @@
+                 onebuffer = 2;
+                 global.bmenuno = 0;
+                 selnoise = 1;
+-                if (global.battlespell[thischar][global.bmenucoord[2][global.charturn]] != -1)
+-                {
+-                    scr_spellinfo(global.battlespell[thischar][global.bmenucoord[2][global.charturn]]);
+-                    if (spelltarget == 0)
+-                    {
+-                        scr_spellconsumeb();
+-                    }
+-                    if (spelltarget == 1)
+-                    {
+-                        global.bmenuno = 8;
+-                    }
+-                    if (spelltarget == 2)
+-                    {
+-                        global.bmenuno = 3;
+-                    }
+-                    if (spelltarget == 3)
+-                    {
+-                        global.bmenuno = 99;
+-                    }
+-                }
+-                else
+-                {
+-                    global.bmenuno = 13;
++                switch (global.battlespell[thischar][global.bmenucoord[2][global.charturn]])
++                {
++                    case -1:
++                        global.bmenuno = 13;
++                        break;
++                    case -2:
++                        scr_nexthero();
++                        break;
++                    default:
++                        scr_spellinfo(global.battlespell[thischar][global.bmenucoord[2][global.charturn]]);
++                        if (spelltarget == 0)
++                        {
++                            scr_spellconsumeb();
++                        }
++                        if (spelltarget == 1)
++                        {
++                            global.bmenuno = 8;
++                        }
++                        if (spelltarget == 2)
++                        {
++                            global.bmenuno = 3;
++                        }
++                        if (spelltarget == 3)
++                        {
++                            global.bmenuno = 99;
++                        }
++                        break;
+                 }
+             }
+         }
+@@ -781,6 +659,25 @@
              if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 5)
              {
                  if (havechar[3] == 0 || global.hp[4] <= 0)

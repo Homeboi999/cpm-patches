@@ -1,16 +1,14 @@
 --- a/Code/gml_GlobalScript_scr_spellmenu_setup.gml
 +++ b/Code/gml_GlobalScript_scr_spellmenu_setup.gml
-@@ -9,85 +9,88 @@
-             __actnamecheck = 1;
-         }
+@@ -11,85 +11,102 @@
      }
--    for (__i = 0; __i < 3; __i++)
-+    if (global.flag[34] == 0)
+     for (__i = 0; __i < 3; __i++)
      {
++        if (global.flag[34] == 0)
++        {
 -        for (__fj = 0; __fj < 6; __fj++)
-+        for (__i = 0; __i < 3; __i++)
-         {
 +            for (__fj = 0; __fj < 6; __fj++)
+-        {
 +            {
 -            global.battlespell[__i][__fj] = 0;
 +                global.battlespell[__i][__fj] = 0;
@@ -162,4 +160,20 @@
 +                    }
                  }
              }
++        }
++        if (scr_should_have_wait_act(__i))
++        {
++            var offset = global.battleactcount[__i];
++            if (global.battleactcount[__i] < (offset + 1))
++            {
++                global.battleactcount[__i] = offset + 1;
++            }
++            global.battlespell[__i][offset] = -2;
++            global.battlespellcost[__i][offset] = 0;
++            global.battlespellname[__i][offset] = "Wait";
++            global.battlespelldesc[__i][offset] = "Act with#Kris";
++            global.battlespelltarget[__i][offset] = 0;
++            global.battlespellspecial[__i][offset] = 1;
          }
+     }
+     scr_spellinfo_all();

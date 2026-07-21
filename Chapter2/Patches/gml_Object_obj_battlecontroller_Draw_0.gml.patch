@@ -238,12 +238,3 @@
              }
          }
          var s1 = string_hash_to_newline(actname[i]);
-@@ -813,6 +814,8 @@
-         }
-     }
- }
-+draw_set_color(c_yellow);
-+draw_text(xx, yy, "bmenuno = " + string(global.bmenuno));
- 
- enum e__VW
- {
