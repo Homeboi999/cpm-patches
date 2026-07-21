@@ -231,13 +231,3 @@
              }
          }
          var s1 = string_hash_to_newline(actname[i]);
-@@ -813,6 +779,9 @@
-         }
-     }
- }
-+scr_84_set_draw_font("mainbig");
-+draw_set_color(c_yellow);
-+draw_text(xx, yy, "charaction 0: " + string(global.charaction[0]) + ", 1: " + string(global.charaction[1]) + ", 2: " + string(global.charaction[2]));
- 
- enum e__VW
- {
