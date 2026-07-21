@@ -10,3 +10,11 @@
      }
      if (actcon == 1 && !instance_exists(obj_writer))
      {
+@@ -591,6 +592,7 @@
+     }
+     if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
+     {
++        scr_nextact_simul();
+         if (scr_terminate_writer())
+         {
+             actconsus = -1;

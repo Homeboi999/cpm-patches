@@ -1,13 +1,8 @@
-// if no character, dont try.
-// no sprite gets loaded
 if (HeroType == 0)
 {
     userealsprite = 1;
 }
-
-// change sprite based on heroInstance
 var hurt = 0;
-
 if (instance_exists(heroInstance))
 {
     if (sprite_index == heroInstance.hurtsprite)
@@ -19,38 +14,30 @@ if (instance_exists(heroInstance))
         hurt = 1;
     }
 }
-
 if (image_index < 0)
 {
     image_index = 0;
 }
-
-// make sure the sprite is real
 if (userealsprite == 0 && sprite_index != -1)
 {
     draw_sprite_ext(sprite_index, image_index, x + 20 + anim_offset_x + character_offset_x, (y - (sprite_get_height(sprite_index) * factor_y)) + anim_offset_y + character_offset_y + 8, image_xscale, image_yscale, 0, c_white, image_alpha);
 }
-
 if (hurt == 1 && hurt_sprite_front != -1)
 {
-    // hurt sprite is part of default sprite
     draw_sprite_ext(hurt_sprite_front, 0, x + coaster_offset_x, (y - sprite_get_height(hurt_sprite_front)) + coaster_offset_y + 8, image_xscale * coaster_scale_x, image_yscale, 0, c_white, image_alpha);
 }
 else
 {
     draw_sprite_ext(default_sprite_front, 0, x + coaster_offset_x, (y - sprite_get_height(default_sprite_front)) + coaster_offset_y + 8, image_xscale * coaster_scale_x, image_yscale, 0, c_white, image_alpha);
 }
-
 if (hspeed < 0 || disabled == 1)
 {
     if (userealsprite == 0 && sprite_index != -1)
     {
         draw_sprite_ext(sprite_index, image_index, x + 20 + anim_offset_x + character_offset_x, (y - (sprite_get_height(sprite_index) * factor_y)) + anim_offset_y + character_offset_y + 8, image_xscalex, image_yscale, 0, c_black, 0.4);
     }
-
     if (hurt == 1 && hurt_sprite_front != -1)
     {
-        // hurt sprite is part of default sprite
         draw_sprite_ext(hurt_sprite_front, 0, x + coaster_offset_x, (y - sprite_get_height(hurt_sprite_front)) + coaster_offset_y + 8, image_xscale * coaster_scale_x, image_yscale, 0, c_black, 0.4);
     }
     else
@@ -58,44 +45,33 @@ if (hspeed < 0 || disabled == 1)
         draw_sprite_ext(default_sprite_front, 0, x + coaster_offset_x, (y - sprite_get_height(default_sprite_front)) + coaster_offset_y + 8, image_xscale * coaster_scale_x, image_yscale, 0, c_black, 0.4);
     }
 }
-
 if (debug_markers)
 {
-    // get per-character color
-    var charColor = c_white;
+    var charColor = 16777215;
     switch (HeroType)
     {
         case 1:
-            charColor = c_aqua;
+            charColor = 16776960;
             break;
-        
         case 2:
-            charColor = c_fuchsia;
+            charColor = 16711935;
             break;
-        
         case 3:
-            charColor = c_lime;
+            charColor = 65280;
             break;
-        
         case 4:
-            charColor = c_yellow;
+            charColor = 65535;
             break;
     }
-
-    // testing anim offsets
     draw_sprite_ext(spr_pixel_white, 0, (x + 20 + character_offset_x) - 5, ((y - (sprite_get_height(sprite_index) * factor_y)) + character_offset_y + 8) - 5, 2.5, 2.5, 0, c_black, 1);
     draw_sprite_ext(spr_pixel_white, 0, (x + 20 + anim_offset_x + character_offset_x) - 3, ((y - (sprite_get_height(sprite_index) * factor_y)) + anim_offset_y + character_offset_y + 8) - 3, 1.5, 1.5, 0, c_black, 1);
     draw_sprite_ext(spr_pixel_white, 0, (x + 20 + character_offset_x) - 4, ((y - (sprite_get_height(sprite_index) * factor_y)) + character_offset_y + 8) - 4, 2, 2, 0, charColor, 0.5);
     draw_sprite_ext(spr_pixel_white, 0, (x + 20 + anim_offset_x + character_offset_x) - 2, ((y - (sprite_get_height(sprite_index) * factor_y)) + anim_offset_y + character_offset_y + 8) - 2, 1, 1, 0, charColor, 1);
-    
-    // origin point + whether or not heroInstance exists
-    var coasterColor = c_red;
-
+    var coasterColor = 255;
     if (i_ex(heroInstance))
     {
-        coasterColor = c_green;
+        coasterColor = 32768;
     }
-
     draw_sprite_ext(spr_pixel_white, 0, x - 3, y - 3, 1.5, 1.5, 0, c_black, 1);
     draw_sprite_ext(spr_pixel_white, 0, x - 2, y - 2, 1, 1, 0, coasterColor, 1);
 }

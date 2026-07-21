@@ -1,0 +1,23 @@
+--- a/Code/gml_GlobalScript_scr_mnendturn.gml
++++ b/Code/gml_GlobalScript_scr_mnendturn.gml
+@@ -105,6 +105,20 @@
+             actingsus = 0;
+             actingral = 0;
+             actingnoe = 0;
++            actcon = 0;
++            actconsus = 0;
++            actconral = 0;
++            actconnoe = 0;
++            simulorder[0] = -1;
++            simulorder[1] = -1;
++            simulorder[2] = -1;
++            simuldone[0] = 0;
++            simuldone[1] = 0;
++            simuldone[2] = 0;
++            simulcountkri = 0;
++            simulcountsus = 0;
++            simulcountral = 0;
++            simulcountnoe = 0;
+         }
+         if (skip == 1)
+         {

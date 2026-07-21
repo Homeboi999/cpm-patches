@@ -27,7 +27,7 @@
              {
                  multicut = 2;
                  var mercyset = 4;
-@@ -1741,7 +1741,97 @@
+@@ -1741,8 +1741,99 @@
                  snd_play(snd_boost);
              }
          }
@@ -124,9 +124,11 @@
 -        if ((actcon == 1 && !instance_exists(obj_writer)) || actconsus == 20 || actconral == 20)
 +        if ((actcon == 1 && !instance_exists(obj_writer)) || actconsus == 20 || actconral == 20 || actconnoe == 20)
          {
++            scr_nextact_simul();
              usedact = 1;
              if (global.mercymod[myself] > 99 && endcon == 0)
-@@ -2044,6 +2134,10 @@
+             {
+@@ -2044,6 +2135,10 @@
                          {
                              global.hp[3] = 1;
                          }
@@ -137,7 +139,7 @@
                          if (i_ex(obj_ch2_sceneex2))
                          {
                              obj_ch2_sceneex2.forcend = 1;
-@@ -2283,6 +2377,10 @@
+@@ -2283,6 +2378,10 @@
                          if (global.hp[3] < 1)
                          {
                              global.hp[3] = 1;

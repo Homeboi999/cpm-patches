@@ -1,0 +1,44 @@
+--- a/Code/gml_Object_obj_dojo_spareenemy_Step_0.gml
++++ b/Code/gml_Object_obj_dojo_spareenemy_Step_0.gml
+@@ -217,14 +217,21 @@
+         msgsetloc(0, "* Susie acted!/%", "obj_dojograzeenemy_slash_Step_0_gml_97_0");
+         scr_battletext_default();
+         actcon = 1;
+-        actconsus = 0;
++        actconsus = 20;
+     }
+     if (acting == 1 && actconral == 1)
+     {
+         msgsetloc(0, "* Ralsei acted!/%", "obj_dojograzeenemy_slash_Step_0_gml_106_0");
+         scr_battletext_default();
+         actcon = 1;
+-        actconral = 0;
++        actconral = 20;
++    }
++    if (acting == 1 && actconnoe == 1)
++    {
++        msgset(0, "* Noelle acted!/%");
++        scr_battletext_default();
++        actcon = 1;
++        actconnoe = 20;
+     }
+     if (actcon == 2 && !instance_exists(obj_writer))
+     {
+@@ -243,6 +250,17 @@
+         _cut.image_yscale = 0.25;
+         _cut.depth = depth - 1;
+         _cut.image_speed = 1/3;
++    }
++    if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
++    {
++        scr_nextact_simul();
++        if (scr_terminate_writer())
++        {
++            actconsus = -1;
++            actconral = -1;
++            actconnoe = -1;
++            actcon = 1;
++        }
+     }
+     if (actcon == 1 && !instance_exists(obj_writer))
+     {

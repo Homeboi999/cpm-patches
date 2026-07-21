@@ -1,14 +1,15 @@
 --- a/Code/gml_GlobalScript_scr_nextact.gml
 +++ b/Code/gml_GlobalScript_scr_nextact.gml
-@@ -14,6 +14,7 @@
-         actconnoe = 0;
-     }
-     var singleactcomplete = 0;
-+    var ongoingsimulact = 0;
-     while (global.currentactingchar < 3)
+@@ -5,7 +5,7 @@
+     global.acting[2] = 0;
+     global.actingsingle[global.currentactingchar] = 0;
+     __minstance = global.monsterinstance[global.actingtarget[global.currentactingchar]];
+-    with (__minstance)
++    with (obj_monsterparent)
      {
-         global.currentactingchar++;
-@@ -22,40 +23,72 @@
+         acting = 0;
+         actcon = 0;
+@@ -22,10 +22,24 @@
              if (global.actingsingle[global.currentactingchar] == 1)
              {
                  __minstance = global.monsterinstance[global.actingtarget[global.currentactingchar]];
@@ -23,10 +24,6 @@
 +                    {
 +                        singleactcomplete = 1;
 +                    }
-+                    else
-+                    {
-+                        ongoingsimulact = 1;
-+                    }
 +                    break;
 +                }
                  if (global.char[global.currentactingchar] == 2)
@@ -37,16 +34,7 @@
                          actconsus = 1;
                      }
                      if (global.actingsimul[global.currentactingchar] == 0)
-                     {
-                         singleactcomplete = 1;
-                     }
-+                    else
-+                    {
-+                        ongoingsimulact = 1;
-+                    }
-                     break;
-                 }
-                 if (global.char[global.currentactingchar] == 3)
+@@ -38,6 +52,7 @@
                  {
                      with (__minstance)
                      {
@@ -54,16 +42,7 @@
                          actconral = 1;
                      }
                      if (global.actingsimul[global.currentactingchar] == 0)
-                     {
-                         singleactcomplete = 1;
-                     }
-+                    else
-+                    {
-+                        ongoingsimulact = 1;
-+                    }
-                     break;
-                 }
-                 if (global.char[global.currentactingchar] == 4)
+@@ -50,6 +65,7 @@
                  {
                      with (__minstance)
                      {
@@ -71,17 +50,7 @@
                          actconnoe = 1;
                      }
                      if (global.actingsimul[global.currentactingchar] == 0)
-                     {
-                         singleactcomplete = 1;
-                     }
-+                    else
-+                    {
-+                        ongoingsimulact = 1;
-+                    }
-                     break;
-                 }
-             }
-@@ -70,7 +103,6 @@
+@@ -70,7 +86,6 @@
              actingral = 0;
              actingnoe = 0;
          }

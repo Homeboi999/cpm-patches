@@ -87,16 +87,18 @@
                  {
                      instance_destroy();
                      with (obj_heroparent)
-@@ -371,7 +419,7 @@
+@@ -371,8 +419,9 @@
              scr_nextact();
          }
      }
 -    if (actcon == 20 || actconsus == 20 || actconral == 20)
 +    if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
      {
++        scr_nextact_simul();
          if (scr_terminate_writer())
          {
-@@ -383,7 +431,7 @@
+             if (obj_sweet_enemy.dancing == true && obj_kk_enemy.dancing == true && obj_hatguy_enemy.dancing == true && obj_sweet_enemy.endcon == 0)
+@@ -383,7 +432,7 @@
              {
                  with (obj_marker)
                  {
@@ -105,7 +107,7 @@
                      {
                          instance_destroy();
                          with (obj_heroparent)
-@@ -398,6 +446,7 @@
+@@ -398,6 +447,7 @@
                          }
                      }
                  }

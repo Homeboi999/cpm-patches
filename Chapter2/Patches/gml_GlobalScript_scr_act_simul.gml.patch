@@ -1,0 +1,91 @@
+--- a/Code/gml_GlobalScript_scr_act_simul.gml
++++ b/Code/gml_GlobalScript_scr_act_simul.gml
+@@ -8,38 +8,74 @@
+         {
+             if (global.char[__ii] == 1 && global.actsimul[global.actingtarget[__ii]][global.actingchoice[__ii]] == 1)
+             {
+-                obj_monsterparent.simulorderkri = __simulcount;
+-                with (global.monsterinstance[global.actingtarget[__ii]])
++                obj_monsterparent.simulorder[__ii] = __simulcount;
++                obj_monsterparent.simulorderkri = 0;
++                var acttarget = global.monsterinstance[global.actingtarget[__ii]];
++                if (acttarget.simulcountkri == 0)
+                 {
++                    var actchoice = global.actingchoice[__ii];
++                    with (acttarget)
++                    {
++                        acting = actchoice + 1;
+-                    actcon = 0;
++                        actcon = 0;
++                    }
+                 }
++                acttarget.simulcountkri++;
+                 __foundsimul = 1;
+             }
+             if (global.char[__ii] == 2 && global.actsimulsus[global.actingtarget[__ii]][global.actingchoice[__ii]] == 1)
+             {
+-                obj_monsterparent.simulordersus = __simulcount;
+-                with (global.monsterinstance[global.actingtarget[__ii]])
++                obj_monsterparent.simulorder[__ii] = __simulcount;
++                obj_monsterparent.simulordersus = 0;
++                var acttarget = global.monsterinstance[global.actingtarget[__ii]];
++                if (acttarget.simulcountsus == 0)
+                 {
++                    var actchoice = global.actingchoice[__ii];
++                    with (acttarget)
++                    {
++                        actingsus = actchoice + 1;
+-                    actconsus = 1;
++                        actconsus = 1;
++                    }
+                 }
++                acttarget.simulcountsus++;
+                 __foundsimul = 1;
+             }
+             if (global.char[__ii] == 3 && global.actsimulral[global.actingtarget[__ii]][global.actingchoice[__ii]] == 1)
+             {
+-                obj_monsterparent.simulorderral = __simulcount;
+-                with (global.monsterinstance[global.actingtarget[__ii]])
++                obj_monsterparent.simulorder[__ii] = __simulcount;
++                obj_monsterparent.simulorderral = 0;
++                var acttarget = global.monsterinstance[global.actingtarget[__ii]];
++                if (acttarget.simulcountral == 0)
+                 {
++                    var actchoice = global.actingchoice[__ii];
++                    with (acttarget)
++                    {
++                        actingral = actchoice + 1;
+-                    actconral = 1;
++                        actconral = 1;
++                    }
+                 }
++                acttarget.simulcountral++;
+                 __foundsimul = 1;
+             }
+             if (global.char[__ii] == 4 && global.actsimulnoe[global.actingtarget[__ii]][global.actingchoice[__ii]] == 1)
+             {
+-                obj_monsterparent.simulordernoe = __simulcount;
+-                with (global.monsterinstance[global.actingtarget[__ii]])
+-                {
+-                    actconnoe = 1;
+-                }
++                obj_monsterparent.simulorder[__ii] = __simulcount;
++                obj_monsterparent.simulordernoe = 0;
++                var acttarget = global.monsterinstance[global.actingtarget[__ii]];
++                if (acttarget.simulcountnoe == 0)
++                {
++                    var actchoice = global.actingchoice[__ii];
++                    with (acttarget)
++                    {
++                        actingnoe = actchoice + 1;
++                        actconnoe = 1;
++                    }
++                }
++                else
++                {
++                    acttarget.simulchardupe[__ii] = 1;
++                }
++                acttarget.simulcountnoe++;
+                 __foundsimul = 1;
+             }
+             if (__foundsimul)

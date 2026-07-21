@@ -1,30 +1,20 @@
 --- a/Code/gml_Object_obj_berdlyb_enemy_Step_0.gml
 +++ b/Code/gml_Object_obj_berdlyb_enemy_Step_0.gml
-@@ -263,47 +263,89 @@
+@@ -261,49 +261,134 @@
+         msgsetloc(0, "* BERDLY - Go! Use your roller coaster cars to play \"bump of chicken\"!/%", "obj_berdlyb_enemy_slash_Step_0_gml_123_0");
+         scr_battletext_default();
      }
-     if (acting == 2 && actcon == 0)
+-    if (acting == 2 && actcon == 0)
++    if ((acting == 2 && actcon == 0) || (actingsus == 1 && actconsus == 1) || (actingral == 1 && actconral == 1) || (actingnoe == 1 && actconnoe == 1))
      {
 -        if (actingsus == 1 && actingral == 1)
-+        switch (global.currentactingchar)
++        for (var i = global.currentactingchar; i < 3; i++)
 +        {
-+            case 0:
-+                kriscoaster = 1;
-+                bump0 = 1;
-+                break;
-+            case 1:
-+                suscoaster = 1;
-+                bump1 = 1;
-+                break;
-+            case 2:
-+                ralcoaster = 1;
-+                bump2 = 1;
-+                break;
-+        }
-+        i = global.currentactingchar + 1;
-+        while (i < 3)
-+        {
-+            if ((acting == 2 && global.char[i] == 1) || (actingsus == 1 && global.char[i] == 2) || (actingral == 1 && global.char[i] == 3) || (actingnoe == 1 && global.char[i] == 4))
++            if (global.actingsingle[i] == 1 && (global.char[i] > 1 || (global.char[i] == 1 && (global.actingchoice[i] + 1) == 2)))
 +            {
++                global.actingsingle[i] = 0;
++                bumpchars[bumpcount] = global.char[i];
++                bumpcount++;
 +                switch (i)
 +                {
 +                    case 0:
@@ -41,9 +31,8 @@
 +                        break;
 +                }
 +            }
-+            i++;
 +        }
-+        if (bump0 && bump1 && bump2)
++        if (bumpcount == 3)
          {
              dialoguecon = 1;
          }
@@ -56,37 +45,96 @@
 -        {
 -            msgsetloc(0, "* You and Ralsei will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_131_0");
 -            scr_battletext_default();
-+        else if ((bump0 + bump1 + bump2) == 2)
-+        {
-+            if (actingsus == 1 && actingral != 1 && actingnoe != 1 && rideactgo == 0)
-+            {
-+                msgsetloc(0, "* You and Susie will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_130_0");
-+                scr_battletext_default();
-+            }
-+            else if (actingsus != 1 && actingral == 1 && actingnoe != 1 && rideactgo == 0)
-+            {
-+                msgsetloc(0, "* You and Ralsei will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_131_0");
-+                scr_battletext_default();
-+            }
-+            else if (actingsus != 1 && actingral != 1 && actingnoe == 1 && rideactgo == 0)
-+            {
-+                msgset(0, "* You and Noelle will attempt to bump into Berdly's car!/%");
-+                scr_battletext_default();
-+            }
-+            else if (actingsus != 1 && actingral != 1 && actingnoe != 1 && rideactgo == 0)
-+            {
-+                msgsetloc(0, "* You will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_132_0");
-+                scr_battletext_default();
-+            }
-         }
+-        }
          else
          {
-             msgsetloc(0, "* You will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_132_0");
++            if (bumpchars[0] == 1 || bumpchars[1] == 1)
++            {
++                var char = bumpchars[0];
++                if (char == 1)
++                {
++                    char = bumpchars[1];
++                }
++                switch (char)
++                {
++                    case 1:
++                        msgset(0, "* You and Kris will attempt to bump into Berdly's car!/%");
++                        break;
++                    case 2:
++                        msgsetloc(0, "* You and Susie will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_130_0");
++                        break;
++                    case 3:
++                        msgsetloc(0, "* You and Ralsei will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_131_0");
++                        break;
++                    case 4:
++                        msgset(0, "* You and Noelle will attempt to bump into Berdly's car!/%");
++                        break;
++                    default:
+-            msgsetloc(0, "* You will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_132_0");
++                        msgsetloc(0, "* You will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_132_0");
++                        break;
++                }
++            }
++            else
++            {
++                var names = ["", ""];
++                for (var slot = 0; slot < 2; slot++)
++                {
++                    switch (bumpchars[slot])
++                    {
++                        case 1:
++                            names[slot] = "Kris";
++                            break;
++                        case 2:
++                            names[slot] = "Susie";
++                            break;
++                        case 3:
++                            names[slot] = "Ralsei";
++                            break;
++                        case 4:
++                            names[slot] = "Noelle";
++                            break;
++                    }
++                }
++                if (bumpchars[0] == 2 && bumpchars[1] == 3)
++                {
++                    msgsetloc(0, "* Susie and Ralsei will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_187_0");
++                }
++                else if (bumpchars[1] == 0)
++                {
++                    switch (bumpchars[0])
++                    {
++                        case 1:
++                            msgsetloc(0, "* You will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_132_0");
++                            break;
++                        case 2:
++                            msgsetloc(0, "* Susie will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_186_0");
++                            break;
++                        case 3:
++                            msgsetloc(0, "* Ralsei will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_221_0");
++                            break;
++                        case 4:
++                            msgset(0, "* Noelle will attempt to bump into Berdly's car!/%");
++                            break;
++                    }
++                }
++                else
++                {
++                    var bumptext = "* " + names[0] + " and " + names[1] + " will attempt to bump into Berdly's car!/%";
++                    msgset(0, bumptext);
++                }
++            }
              scr_battletext_default();
          }
 -        kriscoaster = 1;
          acting = 0;
-         actcon = 1;
+-        actcon = 1;
++        actingsus = 0;
++        actingral = 0;
++        actingnoe = 0;
++        actconsus = 0;
++        actconral = 0;
++        actconnoe = 0;
          rideactgo = 1;
 -        if (actingsus == 2)
 -        {
@@ -96,6 +144,7 @@
 -        {
 -            ralcoaster = 1;
 -        }
++        actcon = 1;
      }
      if (acting == 3 && actcon == 0)
      {
@@ -110,97 +159,35 @@
      }
      if (acting == 4 && actcon == 0)
      {
-@@ -318,6 +360,21 @@
+@@ -316,91 +401,12 @@
+         suscoaster = 1;
+         ralcoaster = 1;
      }
-     if (actingsus == 1 && actconsus == 1)
-     {
-+        switch (global.currentactingchar)
-+        {
-+            case 0:
-+                kriscoaster = 1;
-+                bump0 = 1;
-+                break;
-+            case 1:
-+                suscoaster = 1;
-+                bump1 = 1;
-+                break;
-+            case 2:
-+                ralcoaster = 1;
-+                bump2 = 1;
-+                break;
-+        }
-         if (bumpactstarted == 1)
-         {
-             acting = 0;
-@@ -327,33 +384,84 @@
-         }
-         else
-         {
+-    if (actingsus == 1 && actconsus == 1)
+-    {
+-        if (bumpactstarted == 1)
+-        {
+-            acting = 0;
+-            actcon = 1;
+-            actingsus = 0;
+-            actconsus = 0;
+-        }
+-        else
+-        {
 -            if (actingral != 1 && rideactgo == 0)
-+            i = global.currentactingchar + 1;
-+            while (i < 3)
-+            {
-+                if ((acting == 2 && global.char[i] == 1) || (actingsus == 1 && global.char[i] == 2) || (actingral == 1 && global.char[i] == 3) || (actingnoe == 1 && global.char[i] == 4))
-+                {
-+                    switch (i)
-+                    {
-+                        case 0:
-+                            kriscoaster = 1;
-+                            bump0 = 1;
-+                            break;
-+                        case 1:
-+                            suscoaster = 1;
-+                            bump1 = 1;
-+                            break;
-+                        case 2:
-+                            ralcoaster = 1;
-+                            bump2 = 1;
-+                            break;
-+                    }
-+                }
-+                i++;
-+            }
-+            if (bump0 && bump1 && bump2)
-+            {
-+                dialoguecon = 1;
-+            }
-+            else if ((bump0 + bump1 + bump2) == 2)
-+            {
-+                if (acting == 2 && actingral != 1 && actingnoe != 1 && rideactgo)
-+                {
-+                    msgsetloc(0, "* You and Susie will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_130_0");
-+                    scr_battletext_default();
-+                }
-+                else if (acting == 0 && actingral == 1 && actingnoe != 1 && rideactgo == 0)
-+                {
-+                    msgsetloc(0, "* Susie and Ralsei will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_187_0");
-+                    scr_battletext_default();
-+                }
-+                else if (acting == 0 && actingral != 1 && actingnoe == 1 && rideactgo == 0)
-+                {
-+                    msgset(0, "* Susie and Noelle will attempt to bump into Berdly's car!/%");
-+                    scr_battletext_default();
-+                }
-+                else if (acting == 0 && actingral != 1 && actingnoe != 1 && rideactgo == 0)
-+                {
-+                    msgsetloc(0, "* Susie will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_186_0");
-+                    scr_battletext_default();
-+                }
-+            }
-+            else
-             {
-                 msgsetloc(0, "* Susie will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_186_0");
-                 scr_battletext_default();
-             }
+-            {
+-                msgsetloc(0, "* Susie will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_186_0");
+-                scr_battletext_default();
+-            }
 -            if (actingral == 1 && rideactgo == 0)
 -            {
 -                msgsetloc(0, "* Susie and Ralsei will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_187_0");
 -                scr_battletext_default();
 -            }
-             acting = 0;
-             actcon = 1;
-             rideactgo = 1;
-             actconsus = 0;
+-            acting = 0;
+-            actcon = 1;
+-            rideactgo = 1;
+-            actconsus = 0;
 -            suscoaster = 1;
 -            if (acting == 2)
 -            {
@@ -210,197 +197,70 @@
 -            {
 -                ralcoaster = 1;
 -            }
-         }
-     }
-     if (actingral == 1 && actconral == 1)
-     {
-+        switch (global.currentactingchar)
-+        {
-+            case 0:
-+                kriscoaster = 1;
-+                bump0 = 1;
-+                break;
-+            case 1:
-+                suscoaster = 1;
-+                bump1 = 1;
-+                break;
-+            case 2:
-+                ralcoaster = 1;
-+                bump2 = 1;
-+                break;
-+        }
-         if (bumpactstarted == 1)
-         {
-             acting = 0;
-@@ -363,7 +471,57 @@
-         }
-         else
-         {
+-        }
+-    }
+-    if (actingral == 1 && actconral == 1)
+-    {
+-        if (bumpactstarted == 1)
+-        {
+-            acting = 0;
+-            actcon = 1;
+-            actconral = 0;
+-            actingral = 0;
+-        }
+-        else
+-        {
 -            if (actingsus != 1 && rideactgo == 0)
-+            i = global.currentactingchar + 1;
-+            while (i < 3)
-+            {
-+                if ((acting == 2 && global.char[i] == 1) || (actingsus == 1 && global.char[i] == 2) || (actingral == 1 && global.char[i] == 3) || (actingnoe == 1 && global.char[i] == 4))
-+                {
-+                    switch (i)
-+                    {
-+                        case 0:
-+                            kriscoaster = 1;
-+                            bump0 = 1;
-+                            break;
-+                        case 1:
-+                            suscoaster = 1;
-+                            bump1 = 1;
-+                            break;
-+                        case 2:
-+                            ralcoaster = 1;
-+                            bump2 = 1;
-+                            break;
-+                    }
-+                }
-+                i++;
-+            }
-+            if (bump0 && bump1 && bump2)
-+            {
-+                dialoguecon = 1;
-+            }
-+            else if ((bump0 + bump1 + bump2) == 2)
-+            {
-+                if (acting == 2 && actingsus != 1 && actingnoe != 1 && rideactgo == 0)
-+                {
-+                    msgsetloc(0, "* You and Ralsei will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_131_0");
-+                    scr_battletext_default();
-+                }
-+                else if (acting == 0 && actingsus == 1 && actingnoe != 1 && rideactgo == 0)
-+                {
-+                    msgsetloc(0, "* Susie and Ralsei will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_187_0");
-+                    scr_battletext_default();
-+                }
-+                else if (acting == 0 && actingsus != 1 && actingnoe == 1 && rideactgo == 0)
-+                {
-+                    msgset(0, "* Ralsei and Noelle will attempt to bump into Berdly's car!/%");
-+                    scr_battletext_default();
-+                }
-+                else if (acting == 0 && actingsus != 1 && actingnoe != 1 && rideactgo == 0)
-+                {
-+                    msgsetloc(0, "* Ralsei will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_221_0");
-+                    scr_battletext_default();
-+                }
-+            }
-+            else
-             {
-                 msgsetloc(0, "* Ralsei will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_221_0");
-                 scr_battletext_default();
-@@ -372,15 +530,93 @@
-             actcon = 1;
-             rideactgo = 1;
-             actconral = 0;
+-            {
+-                msgsetloc(0, "* Ralsei will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_221_0");
+-                scr_battletext_default();
+-            }
+-            acting = 0;
+-            actcon = 1;
+-            rideactgo = 1;
+-            actconral = 0;
 -            ralcoaster = 1;
 -            if (acting == 2)
 -            {
-+        }
-+    }
-+    if (actingnoe == 1 && actconnoe == 1)
-+    {
-+        switch (global.currentactingchar)
-+        {
-+            case 0:
-                 kriscoaster = 1;
+-                kriscoaster = 1;
 -            }
 -            if (actingsus == 2)
 -            {
-+                bump0 = 1;
-+                break;
-+            case 1:
-                 suscoaster = 1;
-+                bump1 = 1;
-+                break;
-+            case 2:
-+                ralcoaster = 1;
-+                bump2 = 1;
-+                break;
-+        }
-+        if (bumpactstarted == 1)
-+        {
-+            acting = 0;
-+            actcon = 1;
-+            actconnoe = 0;
-+            actingnoe = 0;
-+        }
-+        else
-+        {
-+            i = global.currentactingchar + 1;
-+            while (i < 3)
-+            {
-+                if ((acting == 2 && global.char[i] == 1) || (actingsus == 1 && global.char[i] == 2) || (actingral == 1 && global.char[i] == 3) || (actingnoe == 1 && global.char[i] == 4))
-+                {
-+                    switch (i)
-+                    {
-+                        case 0:
-+                            kriscoaster = 1;
-+                            bump0 = 1;
-+                            break;
-+                        case 1:
-+                            suscoaster = 1;
-+                            bump1 = 1;
-+                            break;
-+                        case 2:
-+                            ralcoaster = 1;
-+                            bump2 = 1;
-+                            break;
-+                    }
-+                }
-+                i++;
-             }
-+            if (bump0 && bump1 && bump2)
-+            {
-+                dialoguecon = 1;
-+            }
-+            else if ((bump0 + bump1 + bump2) == 2)
-+            {
-+                if (acting == 2 && actingsus != 1 && actingral != 1 && rideactgo == 0)
-+                {
-+                    msgset(0, "* You and Noelle will attempt to bump into Berdly's car!/%");
-+                    scr_battletext_default();
-+                }
-+                else if (acting == 0 && actingsus == 1 && actingral != 1 && rideactgo == 0)
-+                {
-+                    msgset(0, "* Susie and Noelle will attempt to bump into Berdly's car!/%");
-+                    scr_battletext_default();
-+                }
-+                else if (acting == 0 && actingsus != 1 && actingral == 1 && rideactgo == 0)
-+                {
-+                    msgset(0, "* Susie and Ralsei will attempt to bump into Berdly's car!/%");
-+                    scr_battletext_default();
-+                }
-+                else if (acting == 0 && actingsus != 1 && actingral != 1 && rideactgo == 0)
-+                {
-+                    msgset(0, "* Noelle will attempt to bump into Berdly's car!/%");
-+                    scr_battletext_default();
-+                }
-+            }
-+            else
-+            {
-+                msgset(0, "* Noelle will attempt to bump into Berdly's car!/%");
-+                scr_battletext_default();
-+            }
-+            acting = 0;
-+            actcon = 1;
-+            rideactgo = 1;
-+            actconnoe = 0;
-         }
-     }
+-                suscoaster = 1;
+-            }
+-        }
+-    }
      if (dialoguecon != 0)
-@@ -409,7 +645,7 @@
+     {
+         if (dialoguecon == 1)
+         {
+             msgsetloc(0, "* The whole gang will attempt to bump into Berdly's car!/%", "obj_berdlyb_enemy_slash_Step_0_gml_306_0");
+         }
+-        if (dialoguecon == 2)
+-        {
+-        }
+-        if (dialoguecon == 3)
+-        {
+-        }
+-        if (dialoguecon == 4)
+-        {
+-        }
+-        if (dialoguecon == 5)
+-        {
+-        }
+         scr_battletext_default();
+         dialoguecon = 0;
+     }
+@@ -409,7 +415,7 @@
          if (global.mercymod[myself] > 99)
          {
          }
 -        else if ((global.currentactingchar == 0 && actingsus == 0 && actingral == 0 && rideactgo == 1) || (global.currentactingchar == 1 && actingral == 0 && rideactgo == 1) || (global.currentactingchar == 2 && rideactgo == 1))
-+        else if ((global.currentactingchar == 0 && bump1 == 0 && bump2 == 0 && rideactgo == 1) || (global.currentactingchar == 1 && bump2 == 0 && rideactgo == 1) || (global.currentactingchar == 2 && rideactgo == 1))
++        else if (rideactgo == 1)
          {
              if (mrboneswildride == 1)
              {
-@@ -418,29 +654,32 @@
+@@ -418,29 +424,32 @@
              o_coaster_controller.timer = 0;
              o_coaster_controller.playerinputtimer = 0;
              o_coaster_controller.actcon = 1;
@@ -443,17 +303,19 @@
                      image_index = 0;
                      image_speed = 0.25;
                  }
-@@ -474,6 +713,9 @@
+@@ -474,6 +483,11 @@
              kriscoaster = 0;
              suscoaster = 0;
              ralcoaster = 0;
 +            bump0 = 0;
 +            bump1 = 0;
 +            bump2 = 0;
++            bumpchars = [0, 0, 0];
++            bumpcount = 0;
          }
          else
          {
-@@ -490,7 +732,7 @@
+@@ -490,7 +504,7 @@
      endtime++;
      if (endtime == 1)
      {

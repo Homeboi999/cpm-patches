@@ -1,0 +1,19 @@
+--- a/Code/gml_GlobalScript_scr_enemy_object_init.gml
++++ b/Code/gml_GlobalScript_scr_enemy_object_init.gml
+@@ -44,6 +44,16 @@
+     simulordersus = -1;
+     simulorderral = -1;
+     simulordernoe = -1;
++    simulorder[0] = -1;
++    simulorder[1] = -1;
++    simulorder[2] = -1;
++    simulcountkri = 0;
++    simulcountsus = 0;
++    simulcountral = 0;
++    simulcountnoe = 0;
++    simuldone[0] = 0;
++    simuldone[1] = 0;
++    simuldone[2] = 0;
+     simultotal = 0;
+     simulboss = -1;
+     talkmax = 90;

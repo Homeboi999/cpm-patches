@@ -19,11 +19,13 @@
  {
      x = camerax() - 200;
  }
-@@ -52,4 +52,7 @@
+@@ -52,4 +52,9 @@
  bumpactfast = 0;
  endcon = 0;
  endtime = 0;
 +bump0 = 0;
 +bump1 = 0;
 +bump2 = 0;
++bumpchars = [0, 0, 0];
++bumpcount = 0;
  

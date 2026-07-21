@@ -1,47 +1,28 @@
-// ---------------
-//    CPM LOGIC
-// ---------------
-
-// variations
 init = 0;
-HeroID = 0; // lane #
-HeroType = 0; // character
-CoasterType = 0; // coaster
-
-// battle object
-heroInit = 0; // cuz intro shenanigans
-heroInstance = 0; // battle object
-
-// sprites
+HeroID = 0;
+HeroType = 0;
+CoasterType = 0;
+heroInit = 0;
+heroInstance = 0;
 default_sprite_front = spr_sneo_car_front;
 default_sprite_back = -1;
 hurt_sprite_front = -1;
 hurt_sprite_back = -1;
 normalsprite = spr_krisr_dark;
-
-// offsets
 coaster_offset_x = 0;
 coaster_offset_y = 0;
 back_offset_x = 0;
 back_offset_y = 0;
-coaster_scale_x = 1; // used to flip sprites
-
+coaster_scale_x = 1;
 character_offset_x = 0;
 character_offset_y = 0;
 anim_offset_x = 0;
 anim_offset_y = 0;
-factor_y = 2; // how much the sprite height influences position
-disable_offsets = false; // un-hardcode the sneo checks
-
-lane_coaster_x = 0; // rename these to
-lane_coaster_y = 0; // "lane_offset" later
-
-debug_markers = false; // debug squares
-
-// -------------------
-//    VANILLA LOGIC
-// -------------------
-
+factor_y = 2;
+disable_offsets = false;
+lane_coaster_x = 0;
+lane_coaster_y = 0;
+debug_markers = false;
 forceact = 1;
 gooffscreen = 0;
 userealsprite = 0;
@@ -70,18 +51,10 @@ actoncondelay = 0;
 dontshowherosprite = 0;
 draw_button_press = 0;
 draw_button_press_timer = 0;
-
-// ------------------
-//    BATTLE LOGIC
-// ------------------
-
-// berdly
 endtargetx = 0;
 endscene = 0;
 endscenetimer = 0;
 bump = 0;
-
-// spamton
 xx = 0;
 yy = 0;
 lerpstate = 0;

@@ -46,3 +46,11 @@
              }
              with (obj_monsterparent)
              {
+@@ -559,6 +579,7 @@
+                     image_alpha = 1;
+                 }
+             }
++            scr_nextact_simul();
+             if (scr_terminate_writer())
+             {
+                 actconsus = -1;

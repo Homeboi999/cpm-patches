@@ -1,161 +1,112 @@
-// cant put this in Create event cuz the 
-// variables need to be set manually
 if (!init)
 {
     init = true;
-
-    // set HeroType and find battle object
     HeroType = global.char[HeroID];
-
-    // set coaster offsets
     switch (CoasterType)
     {
-        // kris
         case 1:
             default_sprite_front = spr_kris_coaster_front;
             hurt_sprite_front = spr_kris_coaster_hurt_front;
             default_sprite_back = spr_kris_coaster_back;
-            
             back_offset_x = 0;
             back_offset_y = -37;
             coaster_offset_x = 0;
             coaster_offset_y = -23;
             break;
-
-        // susie
         case 2:
             default_sprite_front = spr_susie_coaster_front;
             hurt_sprite_front = spr_susie_coaster_hurt_front;
             default_sprite_back = spr_susie_coaster_back;
-
             back_offset_x = 0;
             back_offset_y = -35;
             coaster_offset_x = 0;
             coaster_offset_y = -23;
             character_offset_x = -4;
             break;
-
-        // ralsei
         case 3:
             default_sprite_front = spr_ralsei_coaster_front;
             hurt_sprite_front = spr_ralsei_coaster_hurt_front;
             default_sprite_back = spr_ralsei_coaster_back;
-
             back_offset_x = -10;
             back_offset_y = -43;
             coaster_offset_x = -10;
             coaster_offset_y = -26;
             break;
-
-        // noelle
         case 4:
             default_sprite_front = spr_noelle_coaster_front;
             hurt_sprite_front = spr_noelle_coaster_front;
             default_sprite_back = -1;
-
             character_offset_x = 4;
             character_offset_y = -10;
             coaster_offset_x = -17;
             coaster_offset_y = 35;
-
-            // flip the sprite
             coaster_offset_x += (2 * sprite_get_width(default_sprite_front));
             coaster_offset_y -= (2 * sprite_get_height(default_sprite_front));
             coaster_scale_x = -1;
             break;
-
-        // spamton neo
         case 7:
             default_sprite_front = spr_sneo_car_front;
             default_sprite_back = spr_sneo_car_back;
-
             back_offset_x = 1;
             back_offset_y = -35;
             coaster_offset_x = 0;
             coaster_offset_y = -19;
             character_offset_x = -5;
-            character_offset_y = -90; // compensating for factor_y
-
-            // dont adjust per-sprite like other coasters
-            // (now character_offset_y is the only offset)
+            character_offset_y = -90;
             factor_y = 0;
             disable_offsets = true;
-
             break;
-
-        // berdly
         case 8:
             default_sprite_front = spr_berdly_coaster_front;
             hurt_sprite_front = spr_berdly_coaster_hurt_front;
             default_sprite_back = spr_berdly_coaster_back;
             hurt_sprite_back = spr_berdly_coaster_hurt_back;
-            
             back_offset_x = -8;
             back_offset_y = -53;
             coaster_offset_x = 12;
             coaster_offset_y = -30;
-
-            // flip the sprites
             coaster_offset_x += (2 * sprite_get_width(default_sprite_front));
             back_offset_x += (2 * sprite_get_width(default_sprite_back));
             coaster_scale_x = -1;
             break;
-
         default:
             visible = false;
             break;
     }
-
-    // char-specific offsets
     if (CoasterType == 7)
     {
-        // unique offsets for spamton coaster
         switch (HeroType)
         {
-            // kris
             case 1:
                 character_offset_y += 6;
                 break;
-
-            // susie
             case 2:
                 character_offset_x += -11;
                 character_offset_y += -5;
                 break;
-            
-            // ralsei
             case 3:
                 character_offset_x += -5;
                 character_offset_y += -3;
                 break;
                 break;
-            
-            // noelle
             case 4:
                 character_offset_x += 5;
                 character_offset_y += -5;
                 break;
         }
-
     }
     else
     {
-        // base offsets for other coasters
         switch (HeroType)
         {
-            // kris
             case 1:
                 character_offset_x += 2;
                 character_offset_y += 1;
                 break;
-
-            // susie
             case 2:
                 character_offset_x += -6;
                 character_offset_y += -1;
                 break;
-            
-            // noelle
             case 4:
                 character_offset_x += 4;
                 character_offset_y += -12;
@@ -163,16 +114,10 @@ if (!init)
         }
     }
 }
-
-// extra init check for obj_battlecontroller
-// cuz spamton spawns the coasters early
 if (i_ex(obj_battlecontroller) && !heroInit)
 {
-    // dont try to set if empty party slot
     if (HeroType > 0)
     {
-        // check against default value for 
-        // charinstance (try to prevent crashes)
         if (global.charinstance[HeroID] != 12129292)
         {
             heroInstance = global.charinstance[HeroID];
@@ -184,8 +129,6 @@ if (i_ex(obj_battlecontroller) && !heroInit)
         heroInit = true;
     }
 }
-
-// berdly logic
 if (i_ex(obj_berdlyb_enemy))
 {
     if (obj_berdlyb_enemy.nitro > 0)
@@ -196,8 +139,6 @@ if (i_ex(obj_berdlyb_enemy))
     {
         nitro = 0;
     }
-
-    // act sprite for bump?
     if (i_ex(o_coaster_controller))
     {
         if (o_coaster_controller.actcon == 1 && o_coaster_controller.timer < o_coaster_controller.timermax && bump == 1)
@@ -207,7 +148,6 @@ if (i_ex(obj_berdlyb_enemy))
                 bump = 0;
                 mykeybuffer = 3;
                 o_coaster_controller.playerinput = 1;
-
                 if (instance_exists(heroInstance) && (sprite_index != heroInstance.actsprite || (sprite_index == heroInstance.actsprite && image_index > heroInstance.actframes)))
                 {
                     sprite_index = heroInstance.actsprite;
@@ -217,35 +157,27 @@ if (i_ex(obj_berdlyb_enemy))
                 }
             }
         }
-
         if (o_coaster_controller.actcon != 0)
         {
             actoncondelay = 1;
         }
     }
 }
-
 if (instance_exists(obj_battleblcon))
 {
     actoncondelay = 0;
 }
-
 var controller_actcon = 0;
-
-// diff coaster controllers...
 if (i_ex(o_coaster_controller))
 {
     controller_actcon = o_coaster_controller.actcon;
 }
-
 if (i_ex(o_coaster_controller_sneo))
 {
     controller_actcon = o_coaster_controller_sneo.actcon;
 }
-
 if (instance_exists(heroInstance))
 {
-    // forceact checking
     if (controller_actcon == 0 && actoncondelay == 0 && endscene == 0)
     {
         if (forceact == 0)
@@ -254,8 +186,6 @@ if (instance_exists(heroInstance))
             image_index = heroInstance.image_index - 1;
         }
     }
-
-    // end act anim??
     if (sprite_index == heroInstance.actsprite && image_index > heroInstance.actframes)
     {
         heroInstance.sprite_index = heroInstance.idlesprite;
@@ -263,12 +193,8 @@ if (instance_exists(heroInstance))
         sprite_index = heroInstance.idlesprite;
         forceact = 0;
     }
-
-    // intro animations
     if (forceact == 1 && introanim == 1)
     {
-        // ralsei and noelle have unique anims
-        // susie and kris use their attack anims
         if (sprite_index == spr_ralsei_battleintro || sprite_index == spr_noelleb_battleintro)
         {
             sprite_index = heroInstance.idlesprite;
@@ -287,13 +213,10 @@ if (instance_exists(heroInstance))
         }
     }
 }
-
-// anim offsets (skipped for sneo variant)
 if (!disable_offsets)
 {
     switch (HeroType)
     {
-        // kris
         case 1:
             if (sprite_index == spr_krisb_idle)
             {
@@ -321,8 +244,6 @@ if (!disable_offsets)
                 anim_offset_y = 0;
             }
             break;
-
-        // susie
         case 2:
             if (sprite_index == spr_susieb_idle || sprite_index == spr_susieb_item || sprite_index == spr_susieb_itemready)
             {
@@ -340,8 +261,6 @@ if (!disable_offsets)
                 anim_offset_y = 0;
             }
             break;
-
-        // ralsei
         case 3:
             if (sprite_index == spr_ralsei_idle)
             {
@@ -374,11 +293,7 @@ if (!disable_offsets)
                 anim_offset_y = 0;
             }
             break;
-
-        // noelle doesnt have any
     }
-
-    // susie's sprite-height weirdness
     if (HeroType == 2)
     {
         if (sprite_index == spr_susieb_actready || sprite_index == spr_susieb_act || sprite_index == spr_susie_actready || sprite_index == spr_susie_act)
@@ -407,8 +322,6 @@ if (!disable_offsets)
         }
     }
 }
-
-// berdly logic
 if (endscene == 1 && instance_exists(obj_ch2_scene11a))
 {
     var temp_offset_x = 0;
@@ -431,7 +344,6 @@ if (endscene == 1 && instance_exists(obj_ch2_scene11a))
     }
     x = lerp(x, temp_offset_x - coaster_offset_x, endscenetimer / 10);
 }
-
 if (disabled == 1)
 {
     disabledtimer--;
@@ -440,8 +352,6 @@ if (disabled == 1)
         disabled = 0;
     }
 }
-
-// berdly logic
 if (i_ex(o_coaster_controller))
 {
     if (con == 0)

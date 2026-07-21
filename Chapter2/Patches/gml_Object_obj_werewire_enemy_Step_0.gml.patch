@@ -1,0 +1,29 @@
+--- a/Code/gml_Object_obj_werewire_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_werewire_enemy_Step_0.gml
+@@ -537,13 +537,9 @@
+     if (actcon == 10 && !instance_exists(obj_writer))
+     {
+     }
+-    if (actcon == 1 && !instance_exists(obj_writer))
+-    {
+-        scr_act_charsprite_end();
+-        scr_nextact();
+-    }
+     if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
+     {
++        scr_nextact_simul();
+         if (scr_terminate_writer())
+         {
+             actconsus = -1;
+@@ -551,6 +547,11 @@
+             actconnoe = -1;
+             actcon = 1;
+         }
++    }
++    if (actcon == 1 && !instance_exists(obj_writer))
++    {
++        scr_act_charsprite_end();
++        scr_nextact();
+     }
+ }
+ 

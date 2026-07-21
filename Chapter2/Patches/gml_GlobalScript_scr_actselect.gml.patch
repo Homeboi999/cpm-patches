@@ -4,7 +4,7 @@
  function scr_actselect(arg0, arg1)
  {
 -    if (i_ex(global.monsterinstance[arg0]))
-+    if ((global.charturn == 0 || (global.actingsimul[0] == 1 && actsimul[arg1] == 1)) && i_ex(global.monsterinstance[arg0]))
++    if (global.charturn == 0 && i_ex(global.monsterinstance[arg0]))
      {
          if (global.char[global.charturn] == 1)
          {
