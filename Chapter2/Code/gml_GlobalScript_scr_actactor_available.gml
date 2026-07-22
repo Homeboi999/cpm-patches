@@ -7,10 +7,13 @@ function scr_actactor_available(arg0)
         case 3:
             return scr_actactor_char_available(3);
         case 4:
-            return scr_actactor_char_available(2) && scr_actactor_char_available(3);
+            var result = scr_actactor_char_available(2);
+            result.and_in_place(scr_actactor_char_available(3));
+            break;
         case 5:
             return scr_actactor_char_available(4);
         case 6:
+            var result = new actactor_status(true);
             var character_count = 0;
             for (var i = 0; i < 3; i++)
             {
@@ -19,21 +22,14 @@ function scr_actactor_available(arg0)
                     continue;
                 }
                 character_count++;
-                if (global.hp[global.char[i]] <= 0)
-                {
-                    return false;
-                }
-                if (global.charaction[i] != 0)
-                {
-                    return false;
-                }
+                result.and_in_place(scr_actactor_slot_available(i));
             }
             if (character_count <= 1)
             {
-                return false;
+                return new actactor_status(false);
             }
-            return true;
+            return result;
         default:
-            return true;
+            return new actactor_status(true);
     }
 }

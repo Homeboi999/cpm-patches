@@ -75,7 +75,7 @@
  {
      thischar = global.charturn;
      spellcoord = global.bmenucoord[2][global.charturn];
-@@ -527,38 +461,37 @@
+@@ -527,38 +461,38 @@
          drawsus = 0;
          drawral = 0;
          drawnoe = 0;
@@ -138,14 +138,15 @@
 +                charoffset = 1;
 +                break;
 +        }
-+        if (!scr_actactor_available(chartime))
++        var available_result = scr_actactor_available(chartime);
++        if (!available_result.available)
 +        {
 +            cant = 1;
 +            faceblend = 8421504;
          }
          if (global.tension < acttpcost[i])
          {
-@@ -575,42 +508,75 @@
+@@ -575,42 +509,75 @@
          }
          if (chartime == 2)
          {
@@ -231,7 +232,7 @@
              }
          }
          var s1 = string_hash_to_newline(actname[i]);
-@@ -810,6 +776,67 @@
+@@ -810,6 +777,67 @@
          else
          {
              draw_text_ext_transformed(__view_get(e__VW.XView, 0) + 210 + xx2, __view_get(e__VW.YView, 0) + 376, stringsetloc("(Defenseless)", "obj_queen_enemy_slash_Draw_0_gml_82_0"), 9999, 9999, 1, 1, 0);

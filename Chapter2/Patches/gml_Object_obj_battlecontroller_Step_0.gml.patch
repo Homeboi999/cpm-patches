@@ -218,7 +218,7 @@
 -                }
 -            }
 +            var actactor = global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]];
-+            canpress = scr_actactor_available(actactor);
++            canpress = scr_actactor_available(actactor).available;
          }
          if (canpress == 1)
          {

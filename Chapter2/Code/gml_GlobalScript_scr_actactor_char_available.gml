@@ -1,15 +1,13 @@
 function scr_actactor_char_available(arg0)
 {
-    if (global.hp[arg0] <= 0)
-    {
-        return false;
-    }
+    var result = new actactor_status(false);
     for (var i = 0; i < 3; i++)
     {
-        if (global.char[i] == arg0 && global.charaction[i] == 0)
+        if (global.char[i] != arg0)
         {
-            return true;
+            continue;
         }
+        result.or_in_place(scr_actactor_slot_available(i));
     }
-    return false;
+    return result;
 }
