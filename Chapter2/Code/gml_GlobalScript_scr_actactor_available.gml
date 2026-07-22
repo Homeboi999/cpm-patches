@@ -19,7 +19,11 @@ function scr_actactor_available(arg0)
                     continue;
                 }
                 character_count++;
-                if (!scr_actactor_char_available(global.char[i]))
+                if (global.hp[global.char[i]] <= 0)
+                {
+                    return false;
+                }
+                if (global.charaction[i] != 0)
                 {
                     return false;
                 }
