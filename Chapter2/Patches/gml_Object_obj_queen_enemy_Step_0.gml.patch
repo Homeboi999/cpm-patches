@@ -127,6 +127,7 @@
 +                }
 +                msgnextloc("\\EC* Wow Spoken Like A Real Trucie\\f0 /%", "obj_queen_enemy_slash_Step_0_gml_768_0");
 +                scr_battletext_default();
++                global.actsimul[myself][0] = 1;
 +                waitnextactsusie = 1;
 +                waitnextactralsei = 1;
 +                waitnextactnoelle = 1;
@@ -161,13 +162,6 @@
                      {
                          waitnextactralsei = 1;
                      }
--                    if (actingsus == 1 && susieflattercount == 0 && actingral == 1 && ralseiflattercount > 0)
--                    {
--                        changesimulorder = 3;
--                    }
--                    msgsetloc(0, "* You toasted Queen!/%", "obj_queen_enemy_slash_Step_0_gml_803_0");
--                    scr_simultext("kris");
--                }
 +                    else
 +                    {
 +                        waitnextactralsei = 0;
@@ -179,14 +173,18 @@
 +                    {
 +                        waitnextactnoelle = 1;
 +                    }
+-                    if (actingsus == 1 && susieflattercount == 0 && actingral == 1 && ralseiflattercount > 0)
 +                    else
-+                    {
+                     {
+-                        changesimulorder = 3;
 +                        waitnextactnoelle = 0;
-+                    }
+                     }
 +                }
-+                simulorder = global.currentactingchar;
+-                    msgsetloc(0, "* You toasted Queen!/%", "obj_queen_enemy_slash_Step_0_gml_803_0");
 +                msgsetloc(0, "* You toasted Queen!/%", "obj_queen_enemy_slash_Step_0_gml_803_0");
+-                    scr_simultext("kris");
 +                scr_simultext("kris");
+-                }
 +                acting = 99;
              }
              krisflattercount++;
@@ -309,9 +307,11 @@
              {
                  shield_damage_buffer += 1.5;
              }
-@@ -1306,43 +1296,44 @@
+@@ -1305,44 +1295,46 @@
+                 scr_anyface_next("queen", "1");
                  msgnextloc("\\E1* It's A Good Thing I Have No Standards For This/%", "obj_queen_enemy_slash_Step_0_gml_932_0");
                  scr_battletext_default();
++                global.actsimulsus[myself][0] = 1;
                  waitnextactralsei = 1;
 -                if (actingral == 1)
 -                {
@@ -381,7 +381,7 @@
          }
          actconsus = 0;
          actingsus = 0;
-@@ -1359,7 +1350,7 @@
+@@ -1359,7 +1351,7 @@
              msgsetloc(0, "* Ralsei loosens one of Berdly's wires!/%", "obj_queen_enemy_slash_Step_0_gml_457_0");
              scr_battletext_default();
              var mercyset = 5;
@@ -390,7 +390,7 @@
              {
                  mercyset = 8;
              }
-@@ -1386,7 +1377,7 @@
+@@ -1386,7 +1378,7 @@
          else
          {
              shield_damage_buffer += 1;
@@ -399,10 +399,11 @@
              {
                  shield_damage_buffer += 1.5;
              }
-@@ -1399,37 +1390,143 @@
+@@ -1399,37 +1391,145 @@
                  scr_anyface_next("queen", "1");
                  msgnextloc("\\EL* Bro That's Weird But OK/%", "obj_queen_enemy_slash_Step_0_gml_1007_0");
                  scr_battletext_default();
++                global.actsimulral[myself][0] = 1;
 +                waitnextactsusie = 1;
 +                waitnextactnoelle = 1;
 +                acting = 100;
@@ -517,6 +518,7 @@
 +                scr_anyface_next("queen", "1");
 +                msgnext("\\EN* Something Something Placeholder Text Lmao/%");
 +                scr_battletext_default();
++                global.actsimulnoe[myself][0] = 1;
 +                waitnextactsusie = 1;
 +                waitnextactralsei = 1;
 +                acting = 100;
@@ -562,7 +564,7 @@
      }
      if (actingral == 2 && actconral == 1)
      {
-@@ -1440,6 +1537,50 @@
+@@ -1440,6 +1540,50 @@
          actingral = 0;
          actcon = 1;
      }
@@ -613,7 +615,7 @@
      if (acting == 100 && !instance_exists(obj_writer))
      {
          acting = 0;
-@@ -1529,26 +1670,29 @@
+@@ -1529,26 +1673,29 @@
      }
      if (actcon == 11)
      {
@@ -662,7 +664,7 @@
          }
          with (obj_herosusie)
          {
-@@ -1579,29 +1723,51 @@
+@@ -1579,29 +1726,51 @@
      }
      if (actcon == 21)
      {
@@ -734,7 +736,7 @@
          }
          actcon = 22;
      }
-@@ -1611,7 +1777,70 @@
+@@ -1611,7 +1780,70 @@
          if (acttimer >= 20)
          {
              actcon = 1;
@@ -806,7 +808,7 @@
              {
                  state = 0;
              }
-@@ -1621,7 +1850,7 @@
+@@ -1621,7 +1853,7 @@
      {
          waitnextactsusie = 0;
          waitnextactralsei = 0;

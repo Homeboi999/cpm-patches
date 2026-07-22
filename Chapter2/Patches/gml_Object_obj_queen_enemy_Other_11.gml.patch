@@ -1,6 +1,29 @@
 --- a/Code/gml_Object_obj_queen_enemy_Other_11.gml
 +++ b/Code/gml_Object_obj_queen_enemy_Other_11.gml
-@@ -37,45 +37,69 @@
+@@ -12,7 +12,7 @@
+ else
+ {
+     global.actname[myself][0] = stringsetloc("Toast", "obj_queen_enemy_slash_Other_11_gml_15_0");
+-    global.actsimul[myself][0] = 1;
++    global.actsimul[myself][0] = (krisflattercount > 0) ? 1 : 0;
+     global.actname[myself][1] = stringsetloc("GroupToast", "obj_queen_enemy_slash_Other_11_gml_16_0");
+ }
+ if (!instance_exists(obj_queenshield_enemy) || shieldbreaking == 1)
+@@ -23,7 +23,7 @@
+ else
+ {
+     global.actnamesus[myself][0] = stringsetloc("Toast", "obj_queen_enemy_slash_Other_11_gml_26_0");
+-    global.actsimulsus[myself][0] = 1;
++    global.actsimulsus[myself][0] = (susieflattercount > 0) ? 1 : 0;
+ }
+ if (!instance_exists(obj_queenshield_enemy) || shieldbreaking == 1)
+ {
+@@ -33,49 +33,73 @@
+ else
+ {
+     global.actnameral[myself][0] = stringsetloc("Toast", "obj_queen_enemy_slash_Other_11_gml_36_0");
+-    global.actsimulral[myself][0] = 1;
++    global.actsimulral[myself][0] = (ralseiflattercount > 0) ? 1 : 0;
  }
  if (!instance_exists(obj_queenshield_enemy) || shieldbreaking == 1)
  {
@@ -46,7 +69,7 @@
 -    global.actdesc[myself][5] = "";
 -    global.actcost[myself][5] = 0;
 +    global.actnamenoe[myself][0] = stringset("Toast");
-+    global.actsimulnoe[myself][0] = 1;
++    global.actsimulnoe[myself][0] = (noelleflattercount > 0) ? 1 : 0;
 +}
 +global.canact[myself][2] = 0;
 +global.actname[myself][2] = "";
