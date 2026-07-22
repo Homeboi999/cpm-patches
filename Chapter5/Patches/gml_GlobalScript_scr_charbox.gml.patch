@@ -163,7 +163,7 @@
              {
 @@ -205,19 +206,19 @@
                      {
-                         bname = 5501;
+                         bname = 5502;
                      }
 -                    draw_sprite(spr_headflowery, global.faceaction[charpos[c]], xx + 13 + xchunk, (bpoff + b_offset + mmy[c]) - 11);
 +                    draw_sprite(spr_headflowery, global.faceaction[pos], xx + 13 + xchunk, (bpoff + b_offset + mmy[pos]) - 11);
@@ -188,7 +188,7 @@
              if (c == 2)
              {
 @@ -229,25 +230,25 @@
-                         bname = 5501;
+                         bname = 5502;
                      }
                      draw_sprite(bname, 0, flx + 41, fly + 12);
 -                    if (global.faceaction[charpos[c]] == 0 || global.faceaction[charpos[c]] == 5 || global.faceaction[charpos[c]] == 9)
