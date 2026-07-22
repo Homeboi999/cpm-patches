@@ -25,3 +25,9 @@
  global.currentactingchar = 0;
  for (i = 0; i < 3; i += 1)
  {
+@@ -275,4 +293,5 @@
+         gigaqueencon = 3;
+     }
+ }
++drawactdebug = false;
+ 

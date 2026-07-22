@@ -2,7 +2,7 @@ function scr_nextact_simul()
 {
     for (var slot = 0; slot < 3; slot++)
     {
-        var needact = simulorder[slot] != -1 && simuldone[slot] == 0;
+        var needact = simulorder[slot] != -1 && simuldone[slot] == 0 && global.actingtarget[slot] == myself;
         var actreset = false;
         var actchoice = global.actingchoice[slot];
         switch (global.char[slot])

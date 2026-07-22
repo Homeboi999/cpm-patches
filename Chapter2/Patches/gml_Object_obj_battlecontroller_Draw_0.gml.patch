@@ -163,26 +163,30 @@
              }
          }
          var s1 = string_hash_to_newline(actname[i]);
-@@ -810,6 +877,53 @@
+@@ -810,6 +877,67 @@
          else
          {
              draw_text_ext_transformed(__view_get(e__VW.XView, 0) + 210 + xx2, __view_get(e__VW.YView, 0) + 376, stringsetloc("(Defenseless)", "obj_queen_enemy_slash_Draw_0_gml_82_0"), 9999, 9999, 1, 1, 0);
 +        }
 +    }
 +}
-+if (keyboard_check(vk_backspace))
++if (keyboard_check_pressed(vk_backspace))
++{
++    drawactdebug = !drawactdebug;
++}
++if (drawactdebug)
 +{
 +    draw_set_color(c_white);
 +    scr_84_set_draw_font("main");
-+    draw_text(xx + 100, yy + 25, "global.charturn: " + string(global.charturn));
++    draw_text(xx + 100, yy + 15, "global.charturn: " + string(global.charturn));
 +    draw_set_color(c_aqua);
-+    draw_text(xx + 300, yy + 25, "global.currentactingchar: " + string(global.currentactingchar));
++    draw_text(xx + 300, yy + 15, "global.currentactingchar: " + string(global.currentactingchar));
 +    for (var slot = 0; slot < 3; slot++)
 +    {
-+        var slotoffset = 100 + (150 * slot);
++        var slotoffset = 100 + (175 * slot);
 +        draw_set_color(c_black);
-+        draw_set_alpha(0.5);
-+        draw_rectangle((xx + slotoffset) - 10, yy + 65, xx + slotoffset + 125, yy + 130, false);
++        draw_set_alpha(0.75);
++        draw_rectangle((xx + slotoffset) - 10, yy + 65, xx + slotoffset + 125, yy + 145, false);
 +        draw_set_color(c_yellow);
 +        draw_set_alpha(1);
 +        draw_text(xx + slotoffset, yy + 75, "ACT Globals: Slot " + string(slot));
@@ -194,25 +198,35 @@
 +            if (myself == slot)
 +            {
 +                draw_set_color(c_black);
-+                draw_set_alpha(0.5);
-+                draw_rectangle((other.xx + slotoffset) - 10, other.yy + 165, other.xx + slotoffset + 130, other.yy + 215, false);
++                draw_set_alpha(0.75);
++                draw_rectangle((other.xx + slotoffset) - 10, other.yy + 165, other.xx + slotoffset + 150, other.yy + 275, false);
 +                draw_set_color(c_white);
 +                draw_set_alpha(1);
 +                draw_text(other.xx + slotoffset, other.yy + 175, "Active ACTs: Enemy " + string(slot));
 +                draw_text(other.xx + slotoffset, other.yy + 190, "acting:");
 +                draw_text(other.xx + slotoffset, other.yy + 205, "actcon:");
++                draw_text(other.xx + slotoffset, other.yy + 220, "simulorder:");
++                draw_text(other.xx + slotoffset, other.yy + 235, "simuldone:");
++                draw_text(other.xx + slotoffset, other.yy + 250, "simulcount:");
++                draw_set_color(c_yellow);
++                draw_text(other.xx + slotoffset + 90, other.yy + 220, string(simulorder));
++                draw_text(other.xx + slotoffset + 75, other.yy + 235, string(simuldone));
 +                draw_set_color(c_aqua);
 +                draw_text(other.xx + slotoffset + 60, other.yy + 190, string(acting));
 +                draw_text(other.xx + slotoffset + 60, other.yy + 205, string(actcon));
++                draw_text(other.xx + slotoffset + 90, other.yy + 250, string(simulcountkri));
 +                draw_set_color(c_fuchsia);
 +                draw_text(other.xx + slotoffset + 75, other.yy + 190, string(actingsus));
 +                draw_text(other.xx + slotoffset + 75, other.yy + 205, string(actconsus));
++                draw_text(other.xx + slotoffset + 105, other.yy + 250, string(simulcountsus));
 +                draw_set_color(c_lime);
 +                draw_text(other.xx + slotoffset + 90, other.yy + 190, string(actingral));
 +                draw_text(other.xx + slotoffset + 90, other.yy + 205, string(actconral));
++                draw_text(other.xx + slotoffset + 120, other.yy + 250, string(simulcountral));
 +                draw_set_color(c_yellow);
 +                draw_text(other.xx + slotoffset + 105, other.yy + 190, string(actingnoe));
 +                draw_text(other.xx + slotoffset + 105, other.yy + 205, string(actconnoe));
++                draw_text(other.xx + slotoffset + 135, other.yy + 250, string(simulcountnoe));
 +            }
          }
      }

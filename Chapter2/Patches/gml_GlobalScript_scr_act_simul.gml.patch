@@ -1,6 +1,6 @@
 --- a/Code/gml_GlobalScript_scr_act_simul.gml
 +++ b/Code/gml_GlobalScript_scr_act_simul.gml
-@@ -8,38 +8,74 @@
+@@ -8,38 +8,70 @@
          {
              if (global.char[__ii] == 1 && global.actsimul[global.actingtarget[__ii]][global.actingchoice[__ii]] == 1)
              {
@@ -66,25 +66,19 @@
              {
 -                obj_monsterparent.simulordernoe = __simulcount;
 -                with (global.monsterinstance[global.actingtarget[__ii]])
--                {
--                    actconnoe = 1;
--                }
 +                obj_monsterparent.simulorder[__ii] = __simulcount;
 +                obj_monsterparent.simulordernoe = 0;
 +                var acttarget = global.monsterinstance[global.actingtarget[__ii]];
 +                if (acttarget.simulcountnoe == 0)
-+                {
+                 {
 +                    var actchoice = global.actingchoice[__ii];
 +                    with (acttarget)
 +                    {
 +                        actingnoe = actchoice + 1;
+-                    actconnoe = 1;
 +                        actconnoe = 1;
 +                    }
-+                }
-+                else
-+                {
-+                    acttarget.simulchardupe[__ii] = 1;
-+                }
+                 }
 +                acttarget.simulcountnoe++;
                  __foundsimul = 1;
              }
