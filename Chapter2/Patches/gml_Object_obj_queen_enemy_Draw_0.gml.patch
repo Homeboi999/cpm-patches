@@ -20,14 +20,22 @@
      {
          with (obj_herokris)
          {
-@@ -40,6 +44,10 @@
-             flash = 1;
-         }
-         with (obj_heroralsei)
-+        {
-+            flash = 1;
-+        }
-+        with (obj_heronoelle)
+@@ -43,6 +47,10 @@
          {
              flash = 1;
          }
++        with (obj_heronoelle)
++        {
++            flash = 1;
++        }
+         flash = 0;
+     }
+ }
+@@ -101,4 +109,7 @@
+     flash = 0;
+ }
+ becomeflash = 0;
++scr_84_set_draw_font("mainbig");
++draw_set_color(c_yellow);
++draw_text(x - 50, y, string(bardlymercy) + "%");
+ 

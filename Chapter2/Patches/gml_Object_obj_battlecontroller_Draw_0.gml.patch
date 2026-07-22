@@ -293,7 +293,7 @@
      if (global.tensionselect > 0)
      {
          thiscost = round((acttpcost[actcoord] / global.maxtension) * 100);
-@@ -810,6 +806,158 @@
+@@ -810,6 +806,210 @@
          else
          {
              draw_text_ext_transformed(__view_get(e__VW.XView, 0) + 210 + xx2, __view_get(e__VW.YView, 0) + 376, stringsetloc("(Defenseless)", "obj_queen_enemy_slash_Draw_0_gml_82_0"), 9999, 9999, 1, 1, 0);
@@ -303,8 +303,9 @@
 +if (keyboard_check_pressed(vk_backspace))
 +{
 +    drawactdebug = !drawactdebug;
++    drawspelldebug = false;
 +}
-+if (drawactdebug)
++if (drawactdebug || drawspelldebug)
 +{
 +    draw_set_color(c_black);
 +    draw_set_alpha(0.8);
@@ -314,6 +315,9 @@
 +    scr_84_set_draw_font("main");
 +    draw_text(xx + 250, yy + 5, "global.charturn: " + string(global.charturn));
 +    draw_text(xx + 400, yy + 5, "global.currentactingchar: " + string(global.currentactingchar));
++}
++if (drawactdebug)
++{
 +    draw_set_color(c_black);
 +    draw_set_alpha(0.8);
 +    draw_rectangle(xx + 65, yy, xx + 225, yy + 90, false);
@@ -391,7 +395,7 @@
 +                draw_text(other.xx + xoffset + 135, other.yy + yoffset + 90, string(simulcountnoe));
 +                draw_set_color(c_black);
 +                draw_set_alpha(0.8);
-+                draw_rectangle((other.xx + xoffset2) - 10, (other.yy + yoffset) - 10, other.xx + xoffset2 + 200, other.yy + yoffset + 100, false);
++                draw_rectangle((other.xx + xoffset2) - 10, (other.yy + yoffset) - 10, other.xx + xoffset2 + 200, other.yy + yoffset + 85, false);
 +                draw_set_color(c_white);
 +                draw_set_alpha(1);
 +                draw_text(other.xx + xoffset2, other.yy + yoffset, "Available ACTs");
@@ -449,6 +453,54 @@
 +                    acttotal++;
 +                }
 +            }
++        }
++    }
++}
++if (keyboard_check_pressed(vk_numpad1))
++{
++    drawspelldebug = !drawspelldebug;
++    drawactdebug = false;
++}
++if (drawspelldebug)
++{
++    scr_84_set_draw_font("main");
++    var yoffset = 100;
++    for (var pos = 0; pos < 3; pos++)
++    {
++        var xoffset = 75 + (175 * pos);
++        draw_set_color(c_black);
++        draw_set_alpha(0.8);
++        draw_rectangle((xx + xoffset) - 5, (yy + yoffset) - 5, xx + xoffset + 150, yy + yoffset + 80, false);
++        draw_set_color(c_white);
++        draw_set_alpha(1);
++        draw_text(xx + xoffset, yy + yoffset, "Spell Menu Info");
++        draw_text(xx + xoffset, yy + yoffset + 30, "battleactcount: " + string(global.battleactcount[pos]));
++        draw_text(xx + xoffset, yy + yoffset + 45, "battlespells: ");
++        switch (global.char[pos])
++        {
++            case 1:
++                draw_set_color(c_aqua);
++                break;
++            case 2:
++                draw_set_color(c_fuchsia);
++                break;
++            case 3:
++                draw_set_color(c_lime);
++                break;
++            case 4:
++                draw_set_color(c_yellow);
++                break;
++            default:
++                draw_set_color(c_gray);
++                break;
++        }
++        for (var spell = 0; spell < 12; spell++)
++        {
++            if (global.battlespell[pos][spell] == 0)
++            {
++                continue;
++            }
++            draw_text(xx + xoffset + (30 * spell), yy + yoffset + 60, string(global.battlespell[pos][spell]));
          }
      }
  }
