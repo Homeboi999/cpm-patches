@@ -202,7 +202,7 @@
 +                        headsprite = spr_headnoelle;
 +                        break;
 +                }
-+                if (global.char[slot] > 1)
++                if (global.char[slot] > 0 && slot != global.charturn)
 +                {
 +                    charoffset += 30;
 +                    draw_sprite_ext(headsprite, 0, xx + charoffset + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
@@ -265,7 +265,7 @@
 +        case "noelle":
 +            displayed_actdesc = "Noelle#is busy";
 +            break;
-+        case "noelle":
++        case "everyone":
 +            displayed_actdesc = "Everyone#is busy";
 +            break;
 +        default:
