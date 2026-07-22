@@ -37,5 +37,5 @@
  becomeflash = 0;
 +scr_84_set_draw_font("mainbig");
 +draw_set_color(c_yellow);
-+draw_text(x - 50, y, string(bardlymercy) + "%");
++draw_text(x - 180, y, string(bardlymercy) + "%");
  
