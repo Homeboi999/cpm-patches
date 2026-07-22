@@ -25,11 +25,3 @@
  global.currentactingchar = 0;
  for (i = 0; i < 3; i += 1)
  {
-@@ -121,6 +139,7 @@
-     global.actingsimul[i] = 0;
-     global.actingtarget[i] = 0;
-     global.actingchoice[i] = 0;
-+    global.actwaiting[i] = 0;
-     global.charaction[i] = 0;
-     global.charspecial[i] = 0;
-     global.chartarget[i] = 0;
