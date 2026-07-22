@@ -1,28 +1,224 @@
 --- a/Code/gml_Object_obj_battlecontroller_Step_0.gml
 +++ b/Code/gml_Object_obj_battlecontroller_Step_0.gml
-@@ -785,6 +785,25 @@
-                     canpress = 0;
+@@ -228,133 +228,7 @@
+             depth = 3;
+         }
+     }
+-    if (global.bmenuno == 2 && global.flag[34] == 1)
+-    {
+-        with (battlewriter)
+-        {
+-            skipme = 1;
+-        }
+-        with (battlewriter)
+-        {
+-            depth = 10;
+-        }
+-        with (obj_face_parent)
+-        {
+-            depth = 10;
+-        }
+-        with (obj_smallface)
+-        {
+-            depth = 10;
+-        }
+-        thischar = global.char[global.charturn];
+-        if (right_p() || left_p())
+-        {
+-            cango = 1;
+-            spellcoord = global.bmenucoord[2][global.charturn];
+-            if (spellcoord < 11)
+-            {
+-                if (global.spell[thischar][global.bmenucoord[2][global.charturn] + 1] == 0)
+-                {
+-                    cango = 0;
+-                    if ((spellcoord % 2) == 1 && spellcoord > 0)
+-                    {
+-                        global.bmenucoord[2][global.charturn] -= 1;
+-                    }
+-                }
+-            }
+-            else
+-            {
+-                global.bmenucoord[2][global.charturn] -= 1;
+-                cango = 0;
+-            }
+-            if (cango == 1)
+-            {
+-                if ((spellcoord % 2) == 0)
+-                {
+-                    global.bmenucoord[2][global.charturn] += 1;
+-                }
+-                else
+-                {
+-                    global.bmenucoord[2][global.charturn] -= 1;
+-                }
+-            }
+-        }
+-        if (down_p())
+-        {
+-            spellcoord = global.bmenucoord[2][global.charturn];
+-            cango = 1;
+-            if (spellcoord >= 10)
+-            {
+-                cango = 0;
+-            }
+-            else
+-            {
+-                if (global.spell[thischar][spellcoord + 2] == 0)
+-                {
+-                    cango = 0;
+-                }
+-                if (spellcoord == 5 && global.spell[thischar][6] != 0 && global.spell[thischar][7] == 0)
+-                {
+-                    cango = 2;
+-                }
+-            }
+-            if (cango != 0)
+-            {
+-                if (cango == 1)
+-                {
+-                    global.bmenucoord[2][global.charturn] += 2;
+-                }
+-                if (cango == 2)
+-                {
+-                    global.bmenucoord[2][global.charturn] = 6;
+-                }
+-            }
+-        }
+-        if (up_p())
+-        {
+-            spellcoord = global.bmenucoord[2][global.charturn];
+-            cango = 1;
+-            if (spellcoord <= 1)
+-            {
+-                cango = 0;
+-            }
+-            if (cango == 1)
+-            {
+-                global.bmenucoord[2][global.charturn] -= 2;
+-            }
+-        }
+-        global.tensionselect = global.spellcost[thischar][global.bmenucoord[2][global.charturn]];
+-        if (button1_p() && global.spell[thischar][global.bmenucoord[2][global.charturn]] != 0 && onebuffer < 0)
+-        {
+-            if (global.spellcost[thischar][global.bmenucoord[2][global.charturn]] <= global.tension)
+-            {
+-                onebuffer = 2;
+-                global.bmenuno = 0;
+-                selnoise = 1;
+-                scr_spellinfo(global.spell[thischar][global.bmenucoord[2][global.charturn]]);
+-                if (spelltarget == 0)
+-                {
+-                    scr_spellconsumeb();
+-                }
+-                if (spelltarget == 1)
+-                {
+-                    global.bmenuno = 8;
+-                }
+-                if (spelltarget == 2)
+-                {
+-                    global.bmenuno = 3;
+-                }
+-            }
+-        }
+-        if (button2_p() && onebuffer < 0)
+-        {
+-            global.tensionselect = 0;
+-            twobuffer = 1;
+-            global.bmenuno = 0;
+-            movenoise = 1;
+-        }
+-    }
+-    if (global.bmenuno == 2 && global.flag[34] == 0)
++    if (global.bmenuno == 2)
+     {
+         with (battlewriter)
+         {
+@@ -457,29 +331,33 @@
+                 onebuffer = 2;
+                 global.bmenuno = 0;
+                 selnoise = 1;
+-                if (global.battlespell[thischar][global.bmenucoord[2][global.charturn]] != -1)
+-                {
+-                    scr_spellinfo(global.battlespell[thischar][global.bmenucoord[2][global.charturn]]);
+-                    if (spelltarget == 0)
+-                    {
+-                        scr_spellconsumeb();
+-                    }
+-                    if (spelltarget == 1)
+-                    {
+-                        global.bmenuno = 8;
+-                    }
+-                    if (spelltarget == 2)
+-                    {
+-                        global.bmenuno = 3;
+-                    }
+-                    if (spelltarget == 3)
+-                    {
+-                        global.bmenuno = 99;
+-                    }
+-                }
+-                else
+-                {
+-                    global.bmenuno = 13;
++                switch (global.battlespell[thischar][global.bmenucoord[2][global.charturn]])
++                {
++                    case -1:
++                        global.bmenuno = 13;
++                        break;
++                    case -2:
++                        scr_actwait();
++                        break;
++                    default:
++                        scr_spellinfo(global.battlespell[thischar][global.bmenucoord[2][global.charturn]]);
++                        if (spelltarget == 0)
++                        {
++                            scr_spellconsumeb();
++                        }
++                        if (spelltarget == 1)
++                        {
++                            global.bmenuno = 8;
++                        }
++                        if (spelltarget == 2)
++                        {
++                            global.bmenuno = 3;
++                        }
++                        if (spelltarget == 3)
++                        {
++                            global.bmenuno = 99;
++                        }
++                        break;
                  }
              }
-+            if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 6)
-+            {
-+                if (havechar[1] == 1 && global.hp[2] <= 0)
-+                {
-+                    canpress = 0;
-+                }
-+                if (havechar[2] == 1 && global.hp[3] <= 0)
-+                {
-+                    canpress = 0;
-+                }
-+                if (havechar[3] == 1 && global.hp[4] <= 0)
-+                {
-+                    canpress = 0;
-+                }
-+                if (havechar[1] != 1 && havechar[2] != 1 && havechar[3] != 1)
-+                {
-+                    canpress = 0;
-+                }
-+            }
+         }
+@@ -764,27 +642,8 @@
+         canpress = 1;
+         if (global.char[global.charturn] == 1)
+         {
+-            if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 2 || global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 4)
+-            {
+-                if (havechar[1] == 0 || global.hp[2] <= 0)
+-                {
+-                    canpress = 0;
+-                }
+-            }
+-            if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 3 || global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 4)
+-            {
+-                if (havechar[2] == 0 || global.hp[3] <= 0)
+-                {
+-                    canpress = 0;
+-                }
+-            }
+-            if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 5)
+-            {
+-                if (havechar[3] == 0 || global.hp[4] <= 0)
+-                {
+-                    canpress = 0;
+-                }
+-            }
++            var actactor = global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]];
++            canpress = scr_actactor_available(actactor);
          }
          if (canpress == 1)
          {

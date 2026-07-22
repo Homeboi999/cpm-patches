@@ -22,7 +22,18 @@
          global.encounterno -= 5;
      }
      if (keyboard_check_pressed(ord("4")))
-@@ -25,31 +25,74 @@
+@@ -18,6 +18,10 @@
+         global.encounterno += 5;
+     }
+ }
++if (keyboard_check_pressed(ord("5")))
++{
++    global.flag[34] = (global.flag[34] == 1) ? 0 : 1;
++}
+ global.encounterno = clamp(global.encounterno, encountermin, encountermax);
+ if (instance_exists(obj_chaseenemy))
+ {
+@@ -25,31 +29,76 @@
  }
  if (global.fighting == 0)
  {
@@ -69,7 +80,7 @@
 -        scr_itemget(1);
 +            scr_itemget(1);
 +        }
-+    }
+     }
 +    else
 +    {
 +        if (keyboard_check_pressed(ord("6")))
@@ -105,21 +116,23 @@
 +                global.char[2]++;
 +            }
 +        }
-     }
++    }
++    draw_set_color(c_yellow);
++    scr_84_set_draw_font("main");
++    draw_text(0, 410, string_hash_to_newline("S-Action and R-Action available:  " + ((global.flag[34] == 0) ? "Yes" : "No")));
      draw_set_color(c_lime);
-     scr_84_set_draw_font("main");
--    draw_text(0, 440, string_hash_to_newline("Party:  " + string(global.charname[global.char[0]]) + " " + string(global.charname[global.char[1]]) + " " + string(global.charname[global.char[2]])));
--    draw_text(0, 455, string_hash_to_newline("6: full party. 7:kris only. 8:kris and ralsei 9: kris + noelle"));
 +    draw_text(0, 425, string_hash_to_newline("Party:  " + string(global.charname[global.char[0]]) + " / " + string(global.charname[global.char[1]]) + " / " + string(global.charname[global.char[2]])));
 +    draw_text(0, 440, string_hash_to_newline("6-8, change party members"));
 +}
 +else
 +{
-+    scr_84_set_draw_font("main");
+     scr_84_set_draw_font("main");
+-    draw_text(0, 440, string_hash_to_newline("Party:  " + string(global.charname[global.char[0]]) + " " + string(global.charname[global.char[1]]) + " " + string(global.charname[global.char[2]])));
+-    draw_text(0, 455, string_hash_to_newline("6: full party. 7:kris only. 8:kris and ralsei 9: kris + noelle"));
  }
  if (!instance_exists(obj_debug_xy))
  {
-@@ -82,7 +125,7 @@
+@@ -82,7 +131,7 @@
                  }
              }
          }

@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_initializer2_Create_0.gml
++++ b/Code/gml_Object_obj_initializer2_Create_0.gml
+@@ -3,7 +3,7 @@
+ {
+     window_enable_borderless_fullscreen(true);
+ }
+-global.debug = 0;
++global.debug = 1;
+ var launch_data = scr_init_launch_parameters();
+ global.launcher = launch_data.is_launcher;
+ textures_loaded = false;
