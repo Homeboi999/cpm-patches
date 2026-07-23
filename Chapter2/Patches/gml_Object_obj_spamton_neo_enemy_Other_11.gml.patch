@@ -1,0 +1,41 @@
+--- a/Code/gml_Object_obj_spamton_neo_enemy_Other_11.gml
++++ b/Code/gml_Object_obj_spamton_neo_enemy_Other_11.gml
+@@ -1,4 +1,4 @@
+-global.canact[myself][0] = 1;
++global.canact[myself][0] = scr_havechar(4) ? 0 : 1;
+ global.actactor[myself][0] = 1;
+ global.actname[myself][0] = stringsetloc("", "obj_spamton_neo_enemy_slash_Other_11_gml_7_0");
+ global.actdesc[myself][0] = "";
+@@ -13,5 +13,32 @@
+ global.actname[myself][2] = "";
+ global.actdesc[myself][2] = "";
+ global.actcost[myself][2] = 0;
++global.canact[myself][3] = 0;
++global.actactor[myself][3] = 0;
++global.actname[myself][3] = "";
++global.actdesc[myself][3] = "";
++global.actcost[myself][3] = 0;
++global.canact[myself][4] = 0;
++global.actactor[myself][4] = 0;
++global.actname[myself][4] = "";
++global.actdesc[myself][4] = "";
++global.actcost[myself][4] = 0;
++global.canact[myself][5] = 0;
++global.actactor[myself][5] = 0;
++global.actname[myself][5] = "";
++global.actdesc[myself][5] = "";
++global.actcost[myself][5] = 0;
++global.canactsus[myself][0] = scr_havechar(4) ? 0 : 1;
++global.actnamesus[myself][0] = "";
++global.actdescsus[myself][0] = "";
++global.actcostsus[myself][0] = 0;
++global.canactral[myself][0] = scr_havechar(4) ? 0 : 1;
++global.actnameral[myself][0] = "";
++global.actdescral[myself][0] = "";
++global.actcostral[myself][0] = 0;
++global.canactnoe[myself][0] = 0;
++global.actnamenoe[myself][0] = "";
++global.actdescnoe[myself][0] = "";
++global.actcostnoe[myself][0] = 0;
+ scr_spellmenu_setup();
+ 

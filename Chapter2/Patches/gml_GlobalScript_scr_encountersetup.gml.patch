@@ -14,7 +14,7 @@
              global.battlemsg[0] = stringsetloc("* DON'T YOU WANNA BE A BIG SHOT?", "scr_encountersetup_slash_scr_encountersetup_gml_720_0");
              break;
          case 61:
-@@ -571,9 +574,14 @@
+@@ -571,9 +574,46 @@
              global.monstertype[2] = 0;
              global.heromakex[0] = xx + 80;
              global.heromakey[0] = yy + 60;
@@ -25,12 +25,44 @@
              if (scr_sideb_get_phase() > 2)
              {
 -                global.heromakey[0] = yy + 173;
-+                global.heromakey[0] += 113;
-+                global.heromakey[1] += 43;
++                var herocount = 0;
++                for (i = 0; i < 3; i++)
++                {
++                    global.heromakex[i] = (xx + 80) - ((herocount - 1) * 40);
++                    global.heromakey[i] = yy + 163 + ((herocount - 1) * 10);
++                    if (global.char[i] != 0)
++                    {
++                        herocount++;
++                    }
++                    if (global.char[i] == 1)
++                    {
++                        global.heromakey[i] += 10;
++                    }
++                    else if (global.char[i] == 2)
++                    {
++                        global.heromakex[i] -= 10;
++                    }
++                }
++                if (herocount == 2)
++                {
++                    for (i = 0; i < 3; i++)
++                    {
++                        global.heromakex[i] -= 20;
++                        global.heromakey[i] += 5;
++                    }
++                }
++                if (herocount == 1)
++                {
++                    for (i = 0; i < 3; i++)
++                    {
++                        global.heromakex[i] -= 40;
++                        global.heromakey[i] += 10;
++                    }
++                }
              }
              global.battlemsg[0] = stringsetloc("* It's time to be a BIG SHOT!", "scr_encountersetup_slash_scr_encountersetup_gml_732_0");
              break;
-@@ -595,12 +603,38 @@
+@@ -595,12 +635,38 @@
          case 63:
              if (i_ex(obj_ch2_scene21_loop))
              {

@@ -75,7 +75,15 @@
  {
      thischar = global.charturn;
      spellcoord = global.bmenucoord[2][global.charturn];
-@@ -501,6 +435,7 @@
+@@ -388,6 +322,7 @@
+             __n++;
+         }
+     }
++    scr_sneo_savemeact_drawface();
+     draw_set_color(c_gray);
+     draw_text(xx + spell_offset, yy + 375, string_hash_to_newline(global.battlespelldesc[thischar][(page * 6) + spellcoord]));
+     thiscost = round((global.battlespellcost[thischar][(page * 6) + spellcoord] / global.maxtension) * 100);
+@@ -501,6 +436,7 @@
      }
      draw_sprite(spr_heart, 0, xx + icx, yy + icy);
      scr_84_set_draw_font("mainbig");
@@ -83,7 +91,7 @@
      for (i = 0; i < 6; i += 1)
      {
          cant = 0;
-@@ -510,12 +445,12 @@
+@@ -510,12 +446,12 @@
              chartime = global.actactor[global.bmenucoord[11][global.charturn]][i];
          }
          charoffset = 0;
@@ -98,7 +106,7 @@
          if (i == 2 || i == 3)
          {
              yoffset = 30;
-@@ -527,38 +462,42 @@
+@@ -527,38 +463,42 @@
          drawsus = 0;
          drawral = 0;
          drawnoe = 0;
@@ -173,7 +181,7 @@
          }
          if (global.tension < acttpcost[i])
          {
-@@ -575,42 +514,75 @@
+@@ -575,44 +515,55 @@
          }
          if (chartime == 2)
          {
@@ -196,9 +204,29 @@
          {
 -            draw_sprite_ext(spr_headnoelle, 0, xx + 30 + xoffset, yy + 375 + yoffset, 1, 1, 0, noeblend, 1);
 +            draw_sprite_ext(spr_headnoelle, 0, xx + 30 + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
-+        }
+         }
+-        if (global.chapter == 2 && instance_exists(obj_spamton_neo_enemy) && obj_spamton_neo_enemy.savemeactcon > 0)
 +        if (chartime == 6)
-+        {
+         {
+-            if (obj_spamton_neo_enemy.savemeactcon == 1)
+-            {
+-                draw_sprite_ext(spr_headralsei, 0, xx + 30, yy + 380, 1, 1, 0, noeblend, 1);
+-            }
+-            if (obj_spamton_neo_enemy.savemeactcon == 2)
+-            {
+-                draw_sprite_ext(spr_headralsei, 0, xx + 30, yy + 380, 1, 1, 0, noeblend, 1);
+-            }
+-            if (obj_spamton_neo_enemy.savemeactcon == 3)
+-            {
+-                draw_sprite_ext(spr_headsusie, 0, xx + 30, yy + 380, 1, 1, 0, noeblend, 1);
+-            }
+-            if (obj_spamton_neo_enemy.savemeactcon == 4)
+-            {
+-                draw_sprite_ext(spr_headsusie, 0, xx + 30, yy + 380, 1, 1, 0, noeblend, 1);
+-            }
+-            if (obj_spamton_neo_enemy.savemeactcon > 4)
+-            {
+-                draw_sprite_ext(spr_headnoelle, 0, xx + 30, yy + 380, 1, 1, 0, noeblend, 1);
 +            for (var slot = 0; slot < 3; slot++)
 +            {
 +                headsprite = spr_headkris;
@@ -228,38 +256,13 @@
 +                charoffset += 30;
 +                draw_sprite_ext(spr_headkris, 8, xx + charoffset + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
 +                cant = 1;
-+            }
-         }
-         if (global.chapter == 2 && instance_exists(obj_spamton_neo_enemy) && obj_spamton_neo_enemy.savemeactcon > 0)
-         {
-             if (obj_spamton_neo_enemy.savemeactcon == 1)
-             {
--                draw_sprite_ext(spr_headralsei, 0, xx + 30, yy + 380, 1, 1, 0, noeblend, 1);
-+                draw_sprite_ext(spr_headralsei, 0, xx + 30, yy + 380, 1, 1, 0, c_white, 1);
-             }
-             if (obj_spamton_neo_enemy.savemeactcon == 2)
-             {
--                draw_sprite_ext(spr_headralsei, 0, xx + 30, yy + 380, 1, 1, 0, noeblend, 1);
-+                draw_sprite_ext(spr_headralsei, 0, xx + 30, yy + 380, 1, 1, 0, c_white, 1);
-             }
-             if (obj_spamton_neo_enemy.savemeactcon == 3)
-             {
--                draw_sprite_ext(spr_headsusie, 0, xx + 30, yy + 380, 1, 1, 0, noeblend, 1);
-+                draw_sprite_ext(spr_headsusie, 0, xx + 30, yy + 380, 1, 1, 0, c_white, 1);
-             }
-             if (obj_spamton_neo_enemy.savemeactcon == 4)
-             {
--                draw_sprite_ext(spr_headsusie, 0, xx + 30, yy + 380, 1, 1, 0, noeblend, 1);
-+                draw_sprite_ext(spr_headsusie, 0, xx + 30, yy + 380, 1, 1, 0, c_white, 1);
-             }
-             if (obj_spamton_neo_enemy.savemeactcon > 4)
-             {
--                draw_sprite_ext(spr_headnoelle, 0, xx + 30, yy + 380, 1, 1, 0, noeblend, 1);
-+                draw_sprite_ext(spr_headnoelle, 0, xx + 30, yy + 380, 1, 1, 0, c_white, 1);
              }
          }
++        scr_sneo_savemeact_drawface();
          var s1 = string_hash_to_newline(actname[i]);
-@@ -626,8 +598,32 @@
+         var s1_width = max(1, string_width(s1));
+         var s1_xscale = (206 - charoffset) / s1_width;
+@@ -626,8 +577,32 @@
          }
          draw_text_transformed(xx + 30 + charoffset + xoffset, yy + 375 + yoffset, string_hash_to_newline(actname[i]), s1_xscale, 1, 0);
      }
@@ -293,7 +296,7 @@
      if (global.tensionselect > 0)
      {
          thiscost = round((acttpcost[actcoord] / global.maxtension) * 100);
-@@ -810,6 +806,210 @@
+@@ -810,6 +785,210 @@
          else
          {
              draw_text_ext_transformed(__view_get(e__VW.XView, 0) + 210 + xx2, __view_get(e__VW.YView, 0) + 376, stringsetloc("(Defenseless)", "obj_queen_enemy_slash_Draw_0_gml_82_0"), 9999, 9999, 1, 1, 0);

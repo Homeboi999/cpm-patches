@@ -33,7 +33,7 @@
  global.encounterno = clamp(global.encounterno, encountermin, encountermax);
  if (instance_exists(obj_chaseenemy))
  {
-@@ -25,31 +29,76 @@
+@@ -25,31 +29,93 @@
  }
  if (global.fighting == 0)
  {
@@ -85,6 +85,21 @@
 +    {
 +        if (keyboard_check_pressed(ord("6")))
 +        {
++            if (global.flag[915] > 0)
++            {
++                global.flag[915] = 0;
++            }
++            else
++            {
++                global.flag[915] = 99;
++            }
++            if (global.flag[916] == 1 && global.flag[915] == 99)
++            {
++                global.flag[916] = 0;
++            }
++        }
++        if (keyboard_check_pressed(ord("7")))
++        {
 +            if (global.char[0] >= 4)
 +            {
 +                global.char[0] = 0;
@@ -94,7 +109,7 @@
 +                global.char[0]++;
 +            }
 +        }
-+        if (keyboard_check_pressed(ord("7")))
++        if (keyboard_check_pressed(ord("8")))
 +        {
 +            if (global.char[1] >= 4)
 +            {
@@ -105,7 +120,7 @@
 +                global.char[1]++;
 +            }
 +        }
-+        if (keyboard_check_pressed(ord("8")))
++        if (keyboard_check_pressed(ord("9")))
 +        {
 +            if (global.char[2] >= 4)
 +            {
@@ -119,10 +134,12 @@
 +    }
 +    draw_set_color(c_yellow);
 +    scr_84_set_draw_font("main");
-+    draw_text(0, 410, string_hash_to_newline("S-Action and R-Action available:  " + ((global.flag[34] == 0) ? "Yes" : "No")));
++    draw_text(0, 395, string_hash_to_newline("S-Action and R-Action available:  " + ((global.flag[34] == 0) ? "Yes" : "No")));
++    draw_set_color(c_aqua);
++    draw_text(0, 410, string_hash_to_newline("Weird Route:  " + ((global.flag[915] == 99) ? "Yes" : "No")));
      draw_set_color(c_lime);
 +    draw_text(0, 425, string_hash_to_newline("Party:  " + string(global.charname[global.char[0]]) + " / " + string(global.charname[global.char[1]]) + " / " + string(global.charname[global.char[2]])));
-+    draw_text(0, 440, string_hash_to_newline("6-8, change party members"));
++    draw_text(0, 440, string_hash_to_newline("7-9, change party members"));
 +}
 +else
 +{
@@ -132,7 +149,7 @@
  }
  if (!instance_exists(obj_debug_xy))
  {
-@@ -82,7 +131,7 @@
+@@ -82,7 +148,7 @@
                  }
              }
          }

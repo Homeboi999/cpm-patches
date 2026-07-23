@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_sneo_friedpipis_Step_0.gml
++++ b/Code/gml_Object_obj_sneo_friedpipis_Step_0.gml
+@@ -23,7 +23,7 @@
+ }
+ if (timer == 45)
+ {
+-    star = 0;
++    star = global.currentactingchar;
+     scr_healitemspell(120);
+     instance_destroy();
+ }

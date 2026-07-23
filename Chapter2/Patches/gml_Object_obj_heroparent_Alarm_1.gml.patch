@@ -1,0 +1,41 @@
+--- a/Code/gml_Object_obj_heroparent_Alarm_1.gml
++++ b/Code/gml_Object_obj_heroparent_Alarm_1.gml
+@@ -16,13 +16,34 @@
+     if (global.chapter == 2 && instance_exists(obj_spamton_neo_enemy) && obj_spamton_neo_enemy.weirdpathendcon > 0)
+     {
+         damage = round((global.battleat[myself] * points) / 150);
++        var mindamage = 5;
++        var maxdamage = 10;
++        switch (char)
++        {
++            case 1:
++                mindamage = 5;
++                maxdamage = 10;
++                break;
++            case 2:
++                mindamage = 10;
++                maxdamage = 15;
++                break;
++            case 3:
++                mindamage = 1;
++                maxdamage = 5;
++                break;
++            default:
++                mindamage = 1;
++                maxdamage = 1;
++                break;
++        }
+-        if (damage < 5)
++        if (damage < mindamage)
+         {
+-            damage = 5;
++            damage = mindamage;
+         }
+-        if (damage > 10)
++        if (damage > maxdamage)
+         {
+-            damage = 10;
++            damage = maxdamage;
+         }
+     }
+     else

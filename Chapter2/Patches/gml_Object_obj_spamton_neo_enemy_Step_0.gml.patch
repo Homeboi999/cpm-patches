@@ -1,6 +1,382 @@
 --- a/Code/gml_Object_obj_spamton_neo_enemy_Step_0.gml
 +++ b/Code/gml_Object_obj_spamton_neo_enemy_Step_0.gml
-@@ -1356,7 +1356,7 @@
+@@ -1067,24 +1067,44 @@
+             scr_battletext_default();
+             checkcount++;
+         }
+-        if (acting == 1 && actcon == 0 && savemeactcon > 0)
++        if (savemeactcon > 0)
+         {
+-            actcon = 1;
+-            if (savemeactcon < 5)
+-            {
+-                msgsetloc(0, "* Kris called for help.../", "obj_spamton_neo_enemy_slash_Step_0_gml_617_0");
+-                msgnextloc("* ... but nobody came./%", "obj_spamton_neo_enemy_slash_Step_0_gml_618_0");
+-                scr_battletext_default();
+-            }
+-            else
+-            {
+-                msgsetloc(0, "* You whispered Noelle's name.../%", "obj_spamton_neo_enemy_slash_Step_0_gml_623_0");
+-                scr_battletext_default();
+-                talktimer = 0;
+-                actcon = 95;
+-                alarm[4] = 1;
+-            }
+-            savemeactcon++;
++            if ((acting == 1 && actcon == 0) || (actingsus == 1 && actconsus == 1) || (actingral == 1 && actconral == 1))
++            {
++                actconsus = 0;
++                actconral = 0;
++                actcon = 1;
++                if (savemeactcon < 5)
++                {
++                    if (global.char[global.currentactingchar] == 1)
++                    {
++                        msgsetloc(0, "* Kris called for help.../", "obj_spamton_neo_enemy_slash_Step_0_gml_617_0");
++                    }
++                    else if (global.char[global.currentactingchar] == 2)
++                    {
++                        msgset(0, "* Susie called for help.../");
++                    }
++                    else if (global.char[global.currentactingchar] == 3)
++                    {
++                        msgset(0, "* Ralsei called for help.../");
++                    }
++                    else
++                    {
++                        msgset(0, "* You called for help.../");
++                    }
++                    msgnextloc("* ... but nobody came./%", "obj_spamton_neo_enemy_slash_Step_0_gml_618_0");
++                    scr_battletext_default();
++                }
++                else
++                {
++                    msgsetloc(0, "* You whispered Noelle's name.../%", "obj_spamton_neo_enemy_slash_Step_0_gml_623_0");
++                    scr_battletext_default();
++                    talktimer = 0;
++                    actcon = 95;
++                    alarm[4] = 1;
++                }
++                savemeactcon++;
++            }
+         }
+         if (actcon == 96 && !i_ex(obj_writer))
+         {
+@@ -1271,27 +1291,32 @@
+         }
+         if (scr_sideb_get_phase() > 2)
+         {
+-            if (acting == 2 && actcon == 0)
++            var actnum = 2;
++            if (!scr_havechar(2) && !scr_havechar(4))
+             {
++                if (acting == actnum && actcon == 0)
++                {
+-                msgsetloc(0, "* Kris used X-Slash!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_531_0");
++                    msgsetloc(0, "* Kris used X-Slash!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_531_0");
+-                scr_battletext_default();
++                    scr_battletext_default();
+-                acting = 0;
++                    acting = 0;
+-                actcon = 21;
++                    actcon = 21;
+-                krs = scr_act_charsprite("kris", spr_krisb_attack, 0.25, 1);
++                    krs = scr_act_charsprite("kris", spr_krisb_attack, 0.25, 1);
+-                krs.depth = obj_herokris.depth + 1;
++                    krs.depth = obj_herokris.depth + 1;
+-                alarm[4] = 14;
++                    alarm[4] = 14;
+-                snd_pitch(snd_play(snd_scytheburst), 1.2);
++                    snd_pitch(snd_play(snd_scytheburst), 1.2);
+-                att = instance_create(x + 57, y + 76, obj_basicattack);
++                    att = instance_create(x + 57, y + 76, obj_basicattack);
+-                att.image_xscale = 2;
++                    att.image_xscale = 2;
+-                att.image_yscale = 2;
++                    att.image_yscale = 2;
+-                caster = 0;
++                    caster = 0;
+-                global.hittarget[0] = 0;
++                    global.hittarget[0] = 0;
+-                partmode = 40;
++                    partmode = 40;
+-                shockthreshold = 15;
++                    shockthreshold = 15;
+-                shocktimer = 9999;
++                    shocktimer = 9999;
+-                hurttimer2 = 10;
++                    hurttimer2 = 10;
+-                var dam = round((((global.battleat[obj_herokris.myself] * 150) / 20) - (global.monsterdf[myself] * 3)) * 1.25);
++                    var dam = round((((global.battleat[obj_herokris.myself] * 150) / 20) - (global.monsterdf[myself] * 3)) * 1.25);
+-                scr_damage_enemy(0, dam);
++                    scr_damage_enemy(0, dam);
++                }
++                actnum++;
+             }
+             if (actcon == 22)
+             {
+@@ -1318,21 +1343,251 @@
+                 scr_act_charsprite_end();
+                 actcon = 1;
+             }
+-            if (acting == 3 && actcon == 0)
++            if (!scr_havechar(3) && !scr_havechar(4))
+             {
++                if (acting == actnum && actcon == 0)
++                {
+-                var n = irandom_range(42, 5555);
++                    var n = irandom_range(42, 5555);
+-                var small_text = stringsetloc(" Liked this!", "obj_spamton_neo_enemy_slash_Step_0_gml_928_0");
++                    var small_text = stringsetloc(" Liked this!", "obj_spamton_neo_enemy_slash_Step_0_gml_928_0");
+-                scr_smallface(0, "none", 6, "rightmid", "bottom", string("" + string([n]) + small_text));
++                    scr_smallface(0, "none", 6, "rightmid", "bottom", string("" + string([n]) + small_text));
+-                msgset(0, stringsetloc("* RECOVERED HP with pipis!\\f0 /%", "obj_spamton_neo_enemy_slash_Step_0_gml_581_0"));
++                    msgset(0, stringsetloc("* RECOVERED HP with pipis!\\f0 /%", "obj_spamton_neo_enemy_slash_Step_0_gml_581_0"));
+-                scr_battletext_default();
++                    scr_battletext_default();
+-                acting = 0;
++                    acting = 0;
+-                actcon = 31;
++                    actcon = 31;
+-                instance_create(obj_herokris.x + 105, obj_herokris.y + 50, obj_sneo_friedpipis);
++                    instance_create(obj_herokris.x + 105, obj_herokris.y + 50, obj_sneo_friedpipis);
++                }
++                actnum++;
+             }
+             if (actcon == 31 && !i_ex(obj_writer) && !instance_exists(obj_sneo_friedpipis))
+             {
+                 actcon = 1;
+             }
++            if (scr_havechar(2))
++            {
++                if (acting == actnum && actcon == 0)
++                {
++                    global.msg[0] = stringsetloc("* Your SOUL shined its power on Susie!/%", "obj_queen_enemy_slash_Step_0_gml_410_0");
++                    actcon = 50;
++                    scr_battletext_default();
++                    acttimer = 0;
++                }
++                actnum++;
++            }
++            if (scr_havechar(3) || scr_havechar(4))
++            {
++                if (acting == actnum && actcon == 0)
++                {
++                    if (scr_havechar(3))
++                    {
++                        global.msg[0] = stringsetloc("* Your SOUL shined its power on RALSEI!/%", "obj_queen_enemy_slash_Step_0_gml_419_0");
++                    }
++                    else
++                    {
++                        global.msg[0] = stringset("* Your SOUL shined its power on Noelle!/%");
++                    }
++                    scr_battletext_default();
++                    actcon = 60;
++                    acttimer = 0;
++                }
++                actnum++;
++            }
++            if (scr_havechar(4))
++            {
++                if (acting == actnum && actcon == 0)
++                {
++                    global.msg[0] = stringset("* Your SOUL shined its power on Noelle!/%");
++                    actcon = 70;
++                    scr_battletext_default();
++                    acttimer = 0;
++                }
++            }
++            if (actcon == 50)
++            {
++                acttimer += 1;
++                if (acttimer >= 10 || !instance_exists(obj_writer))
++                {
++                    acttimer = 0;
++                    actcon = 51;
++                }
++            }
++            if (actcon == 51)
++            {
++                var charSlot = scr_findchar(2);
++                global.faceaction[charSlot] = 2;
++                global.charaction[charSlot] = 2;
++                global.charspecial[charSlot] = 5;
++                global.chartarget[charSlot] = 0;
++                global.acting[charSlot] = 0;
++                snd_play(snd_boost);
++                if (i_ex(obj_herokris))
++                {
++                    heartanim = instance_create(obj_herokris.x + 30, obj_herokris.y + 50, obj_animation);
++                    with (heartanim)
++                    {
++                        depth = -20;
++                        image_index = 0;
++                        image_xscale = 2;
++                        image_yscale = 2;
++                        image_speed = 1;
++                        sprite_index = spr_soulshining;
++                    }
++                    with (obj_herokris)
++                    {
++                        scr_oflash();
++                    }
++                }
++                with (obj_herosusie)
++                {
++                    scr_oflash();
++                }
++                actcon = 52;
++            }
++            if (actcon == 52)
++            {
++                acttimer += 1;
++                if (acttimer >= 20)
++                {
++                    actcon = 1;
++                    with (obj_herosusie)
++                    {
++                        state = 0;
++                    }
++                }
++            }
++            if (actcon == 60)
++            {
++                acttimer += 1;
++                if (acttimer >= 10 || !instance_exists(obj_writer))
++                {
++                    acttimer = 0;
++                    actcon = 61;
++                }
++            }
++            if (actcon == 61)
++            {
++                var charSlot;
++                if (scr_havechar(3))
++                {
++                    charSlot = scr_findchar(3);
++                }
++                else
++                {
++                    charSlot = scr_findchar(4);
++                }
++                global.faceaction[charSlot] = 2;
++                global.charaction[charSlot] = 2;
++                global.charspecial[charSlot] = 6;
++                global.chartarget[charSlot] = 0;
++                global.acting[charSlot] = 0;
++                snd_play(snd_boost);
++                if (i_ex(obj_herokris))
++                {
++                    heartanim = instance_create(obj_herokris.x + 30, obj_herokris.y + 50, obj_animation);
++                    with (heartanim)
++                    {
++                        depth = -20;
++                        image_index = 0;
++                        image_xscale = 2;
++                        image_yscale = 2;
++                        image_speed = 1;
++                        sprite_index = spr_soulshining;
++                    }
++                    with (obj_herokris)
++                    {
++                        scr_oflash();
++                    }
++                }
++                if (scr_havechar(3))
++                {
++                    with (obj_heroralsei)
++                    {
++                        scr_oflash();
++                    }
++                }
++                else
++                {
++                    with (obj_heronoelle)
++                    {
++                        scr_oflash();
++                    }
++                }
++                actcon = 62;
++            }
++            if (actcon == 62)
++            {
++                acttimer += 1;
++                if (acttimer >= 20)
++                {
++                    actcon = 1;
++                    if (scr_havechar(3))
++                    {
++                        with (obj_heroralsei)
++                        {
++                            state = 0;
++                        }
++                    }
++                    else
++                    {
++                        with (obj_heronoelle)
++                        {
++                            state = 0;
++                        }
++                    }
++                }
++            }
++            if (actcon == 70)
++            {
++                acttimer += 1;
++                if (acttimer >= 10 || !instance_exists(obj_writer))
++                {
++                    acttimer = 0;
++                    actcon = 71;
++                }
++            }
++            if (actcon == 71)
++            {
++                var charSlot = scr_findchar(4);
++                global.faceaction[charSlot] = 2;
++                global.charaction[charSlot] = 2;
++                global.charspecial[charSlot] = 12;
++                global.chartarget[charSlot] = 0;
++                global.acting[charSlot] = 0;
++                snd_play(snd_boost);
++                if (i_ex(obj_herokris))
++                {
++                    heartanim = instance_create(obj_herokris.x + 30, obj_herokris.y + 50, obj_animation);
++                    with (heartanim)
++                    {
++                        depth = -20;
++                        image_index = 0;
++                        image_xscale = 2;
++                        image_yscale = 2;
++                        image_speed = 1;
++                        sprite_index = spr_soulshining;
++                    }
++                    with (obj_herokris)
++                    {
++                        scr_oflash();
++                    }
++                }
++                with (obj_heronoelle)
++                {
++                    scr_oflash();
++                }
++                actcon = 72;
++            }
++            if (actcon == 72)
++            {
++                acttimer += 1;
++                if (acttimer >= 20)
++                {
++                    actcon = 1;
++                    with (obj_heronoelle)
++                    {
++                        state = 0;
++                    }
++                }
++            }
+         }
+         else
+         {
+@@ -1356,7 +1611,7 @@
                      maxvinecount = maxv;
                  }
                  var multicut = 1;
@@ -9,111 +385,450 @@
                  {
                      var mercyset = 4;
                      if ((global.mercymod[myself] + mercyset) > 100)
-@@ -1513,7 +1513,7 @@
-                 maxvinecount = maxv;
-             }
-             var multicut = 1;
+@@ -1486,89 +1741,94 @@
+         {
+             actcon = 1;
+         }
+-        if (actingsus == 1 && actconsus == 1)
++        var susact = 1;
++        if (scr_sideb_get_phase() <= 2)
+         {
+-            var i = irandom(5);
+-            var a = -1;
+-            var maxv = 0;
+-            repeat (6)
+-            {
+-                if (partvisible[i] == 1 && partweakened[i] > 0)
+-                {
+-                    a = i;
+-                    break;
+-                }
+-                i++;
+-                if (i > 5)
+-                {
+-                    i = 0;
+-                }
+-                if (partvisible[i] == 1)
+-                {
+-                    maxv++;
+-                }
+-            }
+-            if (vinebgcount < 1)
+-            {
+-                maxvinecount = maxv;
+-            }
+-            var multicut = 1;
 -            if (global.hp[1] <= 0 && global.hp[3] <= 0)
-+            if ((global.hp[1] <= 0 || !scr_havechar(1)) && (global.hp[3] <= 0 || !scr_havechar(3)) && (global.hp[4] <= 0 || !scr_havechar(4)))
-             {
-                 var mercyset = 4;
-                 if ((global.mercymod[myself] + mercyset) > 100)
-@@ -1603,7 +1603,7 @@
-                 maxvinecount = maxv;
-             }
-             var multicut = 1;
+-            {
+-                var mercyset = 4;
+-                if ((global.mercymod[myself] + mercyset) > 100)
+-                {
+-                    mercyset = 100 - global.mercymod[myself];
+-                }
+-                scr_mercyadd(myself, mercyset);
+-                if (mercyset == 0)
+-                {
+-                    with (obj_dmgwriter)
+-                    {
+-                        if (type == 5)
+-                        {
+-                            instance_destroy();
+-                        }
+-                    }
+-                    msgsetloc(0, "* Susie tried to snap a wire... but it failed!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_1127_0");
+-                }
+-                else
+-                {
+-                    msgsetloc(0, "* Susie snapped desperately!/", "obj_spamton_neo_enemy_slash_Step_0_gml_1130_0");
+-                    msgnextloc("* Broke 2 wires!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_1131_0");
+-                }
+-                multicut = 2;
+-            }
+-            else
+-            {
+-                var mercyset = 2;
+-                if ((global.mercymod[myself] + mercyset) > 100)
+-                {
+-                    mercyset = 100 - global.mercymod[myself];
+-                }
+-                scr_mercyadd(myself, mercyset);
+-                if (mercyset == 0)
+-                {
+-                    with (obj_dmgwriter)
+-                    {
+-                        if (type == 5)
+-                        {
+-                            instance_destroy();
+-                        }
+-                    }
+-                    msgsetloc(0, "* Susie tried to snap a wire... but it failed!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_1140_0");
+-                }
+-                else
+-                {
+-                    msgsetloc(0, "* Susie snapped a wire!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_1141_0");
+-                }
+-            }
+-            scr_battletext_default();
+-            actconsus = 0;
+-            actingsus = 0;
+-            alarm[4] = 30;
++            if (actingsus == 1 && actconsus == 1)
++            {
++                var i = irandom(5);
++                var a = -1;
++                var maxv = 0;
++                repeat (6)
++                {
++                    if (partvisible[i] == 1 && partweakened[i] > 0)
++                    {
++                        a = i;
++                        break;
++                    }
++                    i++;
++                    if (i > 5)
++                    {
++                        i = 0;
++                    }
++                    if (partvisible[i] == 1)
++                    {
++                        maxv++;
++                    }
++                }
++                if (vinebgcount < 1)
++                {
++                    maxvinecount = maxv;
++                }
++                var multicut = 1;
++                if ((global.hp[1] <= 0 || !scr_havechar(1)) && (global.hp[3] <= 0 || !scr_havechar(3)) && (global.hp[4] <= 0 || !scr_havechar(4)))
++                {
++                    var mercyset = 4;
++                    if ((global.mercymod[myself] + mercyset) > 100)
++                    {
++                        mercyset = 100 - global.mercymod[myself];
++                    }
++                    scr_mercyadd(myself, mercyset);
++                    if (mercyset == 0)
++                    {
++                        with (obj_dmgwriter)
++                        {
++                            if (type == 5)
++                            {
++                                instance_destroy();
++                            }
++                        }
++                        msgsetloc(0, "* Susie tried to snap a wire... but it failed!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_1127_0");
++                    }
++                    else
++                    {
++                        msgsetloc(0, "* Susie snapped desperately!/", "obj_spamton_neo_enemy_slash_Step_0_gml_1130_0");
++                        msgnextloc("* Broke 2 wires!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_1131_0");
++                    }
++                    multicut = 2;
++                }
++                else
++                {
++                    var mercyset = 2;
++                    if ((global.mercymod[myself] + mercyset) > 100)
++                    {
++                        mercyset = 100 - global.mercymod[myself];
++                    }
++                    scr_mercyadd(myself, mercyset);
++                    if (mercyset == 0)
++                    {
++                        with (obj_dmgwriter)
++                        {
++                            if (type == 5)
++                            {
++                                instance_destroy();
++                            }
++                        }
++                        msgsetloc(0, "* Susie tried to snap a wire... but it failed!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_1140_0");
++                    }
++                    else
++                    {
++                        msgsetloc(0, "* Susie snapped a wire!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_1141_0");
++                    }
++                }
++                scr_battletext_default();
++                actconsus = 0;
++                actingsus = 0;
++                alarm[4] = 30;
++            }
++            susact++;
+         }
+-        if (actingsus == 2 && actconsus == 1)
++        if (actingsus == susact && actconsus == 1)
+         {
+             actingsus = 0;
+             actcon = 1;
+@@ -1576,89 +1836,94 @@
+             msgsetloc(0, "* You Super Charged! Can charge bullets faster! Lasts 20 shots./%", "obj_spamton_neo_enemy_slash_Step_0_gml_898_0");
+             scr_battletext_default();
+         }
+-        if (actingral == 1 && actconral == 1)
++        var ralact = 1;
++        if (scr_sideb_get_phase() <= 2)
+         {
+-            var i = irandom(5);
+-            var a = -1;
+-            var maxv = 0;
+-            repeat (6)
+-            {
+-                if (partvisible[i] == 1 && partweakened[i] > 0)
+-                {
+-                    a = i;
+-                    break;
+-                }
+-                i++;
+-                if (i > 5)
+-                {
+-                    i = 0;
+-                }
+-                if (partvisible[i] == 1)
+-                {
+-                    maxv++;
+-                }
+-            }
+-            if (vinebgcount < 1)
+-            {
+-                maxvinecount = maxv;
+-            }
+-            var multicut = 1;
 -            if (global.hp[1] <= 0 && global.hp[2] <= 0)
-+            if ((global.hp[1] <= 0 || !scr_havechar(1)) && (global.hp[2] <= 0 || !scr_havechar(2)) && (global.hp[4] <= 0 || !scr_havechar(4)))
-             {
-                 multicut = 2;
-                 var mercyset = 4;
-@@ -1741,8 +1741,99 @@
+-            {
+-                multicut = 2;
+-                var mercyset = 4;
+-                if ((global.mercymod[myself] + mercyset) > 100)
+-                {
+-                    mercyset = 100 - global.mercymod[myself];
+-                }
+-                scr_mercyadd(myself, mercyset);
+-                if (mercyset == 0)
+-                {
+-                    with (obj_dmgwriter)
+-                    {
+-                        if (type == 5)
+-                        {
+-                            instance_destroy();
+-                        }
+-                    }
+-                    msgsetloc(0, "* Ralsei tried to snap a wire... but it failed!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_1273_0");
+-                }
+-                else
+-                {
+-                    msgsetloc(0, "* Ralsei snapped desperately!/", "obj_spamton_neo_enemy_slash_Step_0_gml_1276_0");
+-                    msgnextloc("* Broke 2 wires!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_1277_0");
+-                }
+-            }
+-            else
+-            {
+-                var mercyset = 2;
+-                if ((global.mercymod[myself] + mercyset) > 100)
+-                {
+-                    mercyset = 100 - global.mercymod[myself];
+-                }
+-                scr_mercyadd(myself, mercyset);
+-                if (mercyset == 0)
+-                {
+-                    with (obj_dmgwriter)
+-                    {
+-                        if (type == 5)
+-                        {
+-                            instance_destroy();
+-                        }
+-                    }
+-                    msgsetloc(0, "* Ralsei tried to snap a wire... but it failed!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_1285_0");
+-                }
+-                else
+-                {
+-                    msgsetloc(0, "* Ralsei snapped a wire!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_1288_0");
+-                }
+-            }
+-            scr_battletext_default();
+-            actconral = 0;
+-            actingral = 0;
+-            actcon = 1;
++            if (actingral == 1 && actconral == 1)
++            {
++                var i = irandom(5);
++                var a = -1;
++                var maxv = 0;
++                repeat (6)
++                {
++                    if (partvisible[i] == 1 && partweakened[i] > 0)
++                    {
++                        a = i;
++                        break;
++                    }
++                    i++;
++                    if (i > 5)
++                    {
++                        i = 0;
++                    }
++                    if (partvisible[i] == 1)
++                    {
++                        maxv++;
++                    }
++                }
++                if (vinebgcount < 1)
++                {
++                    maxvinecount = maxv;
++                }
++                var multicut = 1;
++                if ((global.hp[1] <= 0 || !scr_havechar(1)) && (global.hp[2] <= 0 || !scr_havechar(2)) && (global.hp[4] <= 0 || !scr_havechar(4)))
++                {
++                    multicut = 2;
++                    var mercyset = 4;
++                    if ((global.mercymod[myself] + mercyset) > 100)
++                    {
++                        mercyset = 100 - global.mercymod[myself];
++                    }
++                    scr_mercyadd(myself, mercyset);
++                    if (mercyset == 0)
++                    {
++                        with (obj_dmgwriter)
++                        {
++                            if (type == 5)
++                            {
++                                instance_destroy();
++                            }
++                        }
++                        msgsetloc(0, "* Ralsei tried to snap a wire... but it failed!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_1273_0");
++                    }
++                    else
++                    {
++                        msgsetloc(0, "* Ralsei snapped desperately!/", "obj_spamton_neo_enemy_slash_Step_0_gml_1276_0");
++                        msgnextloc("* Broke 2 wires!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_1277_0");
++                    }
++                }
++                else
++                {
++                    var mercyset = 2;
++                    if ((global.mercymod[myself] + mercyset) > 100)
++                    {
++                        mercyset = 100 - global.mercymod[myself];
++                    }
++                    scr_mercyadd(myself, mercyset);
++                    if (mercyset == 0)
++                    {
++                        with (obj_dmgwriter)
++                        {
++                            if (type == 5)
++                            {
++                                instance_destroy();
++                            }
++                        }
++                        msgsetloc(0, "* Ralsei tried to snap a wire... but it failed!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_1285_0");
++                    }
++                    else
++                    {
++                        msgsetloc(0, "* Ralsei snapped a wire!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_1288_0");
++                    }
++                }
++                scr_battletext_default();
++                actconral = 0;
++                actingral = 0;
++                actcon = 1;
++            }
++            ralact++;
+         }
+-        if (actingral == 2 && actconral == 1)
++        if (actingral == ralact && actconral == 1)
+         {
+             actconral = 0;
+             actingral = 0;
+@@ -1741,8 +2006,104 @@
                  snd_play(snd_boost);
              }
          }
-+        if (actingnoe == 1 && actconnoe == 1)
++        var noeact = 1;
++        if (scr_sideb_get_phase() <= 2)
 +        {
-+            var i = irandom(5);
-+            var a = -1;
-+            var maxv = 0;
-+            repeat (6)
++            if (actingnoe == 1 && actconnoe == 1)
 +            {
-+                if (partvisible[i] == 1 && partweakened[i] > 0)
++                var i = irandom(5);
++                var a = -1;
++                var maxv = 0;
++                repeat (6)
 +                {
-+                    a = i;
-+                    break;
-+                }
-+                i++;
-+                if (i > 5)
-+                {
-+                    i = 0;
-+                }
-+                if (partvisible[i] == 1)
-+                {
-+                    maxv++;
-+                }
-+            }
-+            if (vinebgcount < 1)
-+            {
-+                maxvinecount = maxv;
-+            }
-+            var multicut = 1;
-+            if ((global.hp[1] <= 0 || !scr_havechar(1)) && (global.hp[2] <= 0 || !scr_havechar(2)) && (global.hp[3] <= 0 || !scr_havechar(3)))
-+            {
-+                multicut = 2;
-+                var mercyset = 4;
-+                if ((global.mercymod[myself] + mercyset) > 100)
-+                {
-+                    mercyset = 100 - global.mercymod[myself];
-+                }
-+                scr_mercyadd(myself, mercyset);
-+                if (mercyset == 0)
-+                {
-+                    with (obj_dmgwriter)
++                    if (partvisible[i] == 1 && partweakened[i] > 0)
 +                    {
-+                        if (type == 5)
-+                        {
-+                            instance_destroy();
-+                        }
++                        a = i;
++                        break;
 +                    }
-+                    msgset(0, "* Noelle tried to snap a wire... but it failed!/%");
++                    i++;
++                    if (i > 5)
++                    {
++                        i = 0;
++                    }
++                    if (partvisible[i] == 1)
++                    {
++                        maxv++;
++                    }
++                }
++                if (vinebgcount < 1)
++                {
++                    maxvinecount = maxv;
++                }
++                var multicut = 1;
++                if ((global.hp[1] <= 0 || !scr_havechar(1)) && (global.hp[2] <= 0 || !scr_havechar(2)) && (global.hp[3] <= 0 || !scr_havechar(3)))
++                {
++                    multicut = 2;
++                    var mercyset = 4;
++                    if ((global.mercymod[myself] + mercyset) > 100)
++                    {
++                        mercyset = 100 - global.mercymod[myself];
++                    }
++                    scr_mercyadd(myself, mercyset);
++                    if (mercyset == 0)
++                    {
++                        with (obj_dmgwriter)
++                        {
++                            if (type == 5)
++                            {
++                                instance_destroy();
++                            }
++                        }
++                        msgset(0, "* Noelle tried to snap a wire... but it failed!/%");
++                    }
++                    else
++                    {
++                        msgset(0, "* Noelle snapped desperately!/");
++                        msgnextloc("* Broke 2 wires!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_1277_0");
++                    }
 +                }
 +                else
 +                {
-+                    msgset(0, "* Noelle snapped desperately!/");
-+                    msgnextloc("* Broke 2 wires!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_1277_0");
-+                }
-+            }
-+            else
-+            {
-+                var mercyset = 2;
-+                if ((global.mercymod[myself] + mercyset) > 100)
-+                {
-+                    mercyset = 100 - global.mercymod[myself];
-+                }
-+                scr_mercyadd(myself, mercyset);
-+                if (mercyset == 0)
-+                {
-+                    with (obj_dmgwriter)
++                    var mercyset = 2;
++                    if ((global.mercymod[myself] + mercyset) > 100)
 +                    {
-+                        if (type == 5)
-+                        {
-+                            instance_destroy();
-+                        }
++                        mercyset = 100 - global.mercymod[myself];
 +                    }
-+                    msgset(0, "* Noelle tried to snap a wire... but it failed!/%");
++                    scr_mercyadd(myself, mercyset);
++                    if (mercyset == 0)
++                    {
++                        with (obj_dmgwriter)
++                        {
++                            if (type == 5)
++                            {
++                                instance_destroy();
++                            }
++                        }
++                        msgset(0, "* Noelle tried to snap a wire... but it failed!/%");
++                    }
++                    else
++                    {
++                        msgset(0, "* Noelle snapped a wire!/%");
++                    }
 +                }
-+                else
-+                {
-+                    msgset(0, "* Noelle snapped a wire!/%");
-+                }
++                scr_battletext_default();
++                actconnoe = 0;
++                actingnoe = 0;
++                actcon = 1;
 +            }
-+            scr_battletext_default();
-+            actconnoe = 0;
-+            actingnoe = 0;
-+            actcon = 1;
++            noeact++;
 +        }
-+        if (actingnoe == 2 && actconnoe == 1)
++        if (actingnoe == noeact && actconnoe == 1)
 +        {
 +            actingnoe = 0;
 +            actcon = 1;
@@ -128,7 +843,7 @@
              usedact = 1;
              if (global.mercymod[myself] > 99 && endcon == 0)
              {
-@@ -2044,6 +2135,10 @@
+@@ -2044,6 +2405,10 @@
                          {
                              global.hp[3] = 1;
                          }
@@ -139,7 +854,7 @@
                          if (i_ex(obj_ch2_sceneex2))
                          {
                              obj_ch2_sceneex2.forcend = 1;
-@@ -2283,6 +2378,10 @@
+@@ -2283,6 +2648,10 @@
                          if (global.hp[3] < 1)
                          {
                              global.hp[3] = 1;
