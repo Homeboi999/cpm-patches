@@ -41,6 +41,10 @@ function actactor_status(arg0, arg1 = undefined) constructor
         {
             busy_char_name = arg0.busy_char_name;
         }
+        if (available)
+        {
+            busy_char_name = undefined;
+        }
     };
     
     available = arg0;
