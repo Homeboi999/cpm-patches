@@ -1,0 +1,113 @@
+--- a/Code/gml_Object_obj_spell_snowgrave_Draw_0.gml
++++ b/Code/gml_Object_obj_spell_snowgrave_Draw_0.gml
+@@ -18,7 +18,11 @@
+         fncon = 0;
+     }
+ }
++if (!sneowait)
++{
+-timer++;
++    timer++;
++}
++var sneo_finalphase = instance_exists(obj_spamton_neo_enemy) && obj_spamton_neo_enemy.savemeactcon > 0;
+ if (altpath == 1)
+ {
+     if (fncon == 0)
+@@ -29,12 +33,22 @@
+             fntimer = 0;
+             fncon = 0.5;
+             mus_volume(global.batmusic[1], 0, 90);
++            if (sneo_finalphase)
++            {
++                with (obj_spamton_neo_enemy)
++                {
++                    global.myfight = 3;
++                    actcon = 107;
++                    alarm[4] = 90;
++                }
++                sneowait = true;
++            }
+         }
+     }
+     if (fncon == 0.5)
+     {
+         fntimer++;
+-        if (fntimer >= 120)
++        if (fntimer >= 120 && !sneowait)
+         {
+             with (fn)
+             {
+@@ -45,12 +59,15 @@
+             fncon = 0.8;
+             fntimer = 0;
+             amplitude = 0;
+-            with (obj_berdlyb2_enemy)
++            if (instance_exists(obj_berdlyb2_enemy))
+             {
++                with (obj_berdlyb2_enemy)
++                {
+-                visible = 0;
++                    visible = 0;
++                }
++                fb = scr_dark_marker(obj_berdlyb2_enemy.x, obj_berdlyb2_enemy.y, spr_berdlyb_idle_shocked);
++                fb.depth = obj_berdlyb2_enemy.depth;
+             }
+-            fb = scr_dark_marker(obj_berdlyb2_enemy.x, obj_berdlyb2_enemy.y, spr_berdlyb_idle_shocked);
+-            fb.depth = obj_berdlyb2_enemy.depth;
+         }
+     }
+     if (fncon == 0.8)
+@@ -116,6 +133,9 @@
+         }
+     }
+ }
++scr_84_set_draw_font("mainbig");
++draw_set_color(c_yellow);
++draw_text(xx + 10, yy + 10, "timer: " + string(timer));
+ if (timer > 0)
+ {
+     draw_set_alpha(bgalpha);
+@@ -138,6 +158,18 @@
+ {
+     audio_play_sound(snd_snowgrave, 50, 0);
+ }
++if (sneo_finalphase)
++{
++    if (timer >= 30)
++    {
++        sneodone = true;
++        with (fn)
++        {
++            instance_destroy();
++        }
++    }
++    exit;
++}
+ if (timer >= 20 && timer <= (75 + (altpath * 30)))
+ {
+     stimer++;
+@@ -157,9 +189,12 @@
+ }
+ if (timer == 70 && altpath == 1)
+ {
++    if (instance_exists(fb))
++    {
+-    fb.sprite_index = spr_berdly_ice;
++        fb.sprite_index = spr_berdly_ice;
+-    fb.x -= 22;
++        fb.x -= 22;
+-    fb.y -= 48;
++        fb.y -= 48;
++    }
+ }
+ if (timer == (95 + (altpath * 30)) && damage > 0 && global.fighting == 1)
+ {
+@@ -190,7 +225,7 @@
+                         __of = scr_oflash();
+                     }
+                 }
+-                if (altpath)
++                if (altpath && instance_exists(fb))
+                 {
+                     with (fb)
+                     {

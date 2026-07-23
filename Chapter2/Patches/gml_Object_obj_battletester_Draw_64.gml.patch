@@ -33,7 +33,7 @@
  global.encounterno = clamp(global.encounterno, encountermin, encountermax);
  if (instance_exists(obj_chaseenemy))
  {
-@@ -25,31 +29,93 @@
+@@ -25,31 +29,94 @@
  }
  if (global.fighting == 0)
  {
@@ -87,6 +87,7 @@
 +        {
 +            if (global.flag[915] > 0)
 +            {
++                global.flag[915] = 0;
 +                global.flag[915] = 0;
 +            }
 +            else
@@ -149,7 +150,7 @@
  }
  if (!instance_exists(obj_debug_xy))
  {
-@@ -82,7 +148,7 @@
+@@ -82,7 +149,7 @@
                  }
              }
          }

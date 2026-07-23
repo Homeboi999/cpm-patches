@@ -110,7 +110,19 @@
                  attack = instance_create(global.monsterx[star], global.monstery[star], obj_icespell);
                  attack.damage = damage;
                  attack.star = star;
-@@ -289,6 +318,27 @@
+@@ -254,6 +283,11 @@
+                     global.spelldelay = 999999;
+                     attack.textwait = 1;
+                 }
++                if (instance_exists(obj_spamton_neo_enemy) && obj_spamton_neo_enemy.weirdpathendcon > 0)
++                {
++                    global.spelldelay = 999999;
++                    attack.textwait = 1;
++                }
+             }
+             break;
+         case 11:
+@@ -289,6 +323,27 @@
                  }
              }
              break;
@@ -138,7 +150,7 @@
          case 100:
              if (global.monster[star] == 0)
              {
-@@ -326,6 +376,9 @@
+@@ -326,6 +381,9 @@
              }
              global.spelldelay = 0;
              break;
@@ -148,7 +160,7 @@
          case 200:
              break;
          case 201:
-@@ -514,6 +567,9 @@
+@@ -514,6 +572,9 @@
              item_use = true;
              break;
          case 233:

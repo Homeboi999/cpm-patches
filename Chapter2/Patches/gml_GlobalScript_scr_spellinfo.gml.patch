@@ -1,9 +1,22 @@
 --- a/Code/gml_GlobalScript_scr_spellinfo.gml
 +++ b/Code/gml_GlobalScript_scr_spellinfo.gml
-@@ -146,6 +146,15 @@
+@@ -130,6 +130,10 @@
+                     spellanim = 1;
+                 }
+             }
++            if (instance_exists(obj_spamton_neo_enemy) && obj_spamton_neo_enemy.weirdpathendcon > 0)
++            {
++                spellanim = 1;
++            }
+             cost = global.maxtension * 2;
+             if (global.charweapon[4] == 13)
+             {
+@@ -144,6 +148,15 @@
+             spelldesc = stringsetloc("Heals 1 party member to the#best of Susie's ability.", "scr_spellinfo_slash_scr_spellinfo_gml_150_0");
+             spelltarget = 1;
              cost = 250;
-             spellusable = 0;
-             break;
++            spellusable = 0;
++            break;
 +        case 12:
 +            spellname = stringset("SnowShock");
 +            spellnameb = stringset("SnowShock");
@@ -11,8 +24,6 @@
 +            spelldesc = stringset(" ");
 +            spelltarget = 0;
 +            cost = 0;
-+            spellusable = 0;
-+            break;
+             spellusable = 0;
+             break;
      }
- }
- 

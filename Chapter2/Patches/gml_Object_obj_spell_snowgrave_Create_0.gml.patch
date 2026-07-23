@@ -1,0 +1,15 @@
+--- a/Code/gml_Object_obj_spell_snowgrave_Create_0.gml
++++ b/Code/gml_Object_obj_spell_snowgrave_Create_0.gml
+@@ -12,4 +12,12 @@
+ {
+     altpath = 1;
+ }
++if (instance_exists(obj_spamton_neo_enemy) && obj_spamton_neo_enemy.weirdpathendcon > 0)
++{
++    altpath = 1;
++}
++sneowait = false;
++sneodone = false;
++fn = -4;
++fb = -4;
+ 

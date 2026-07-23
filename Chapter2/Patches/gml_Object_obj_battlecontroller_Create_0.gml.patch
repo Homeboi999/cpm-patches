@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_battlecontroller_Create_0.gml
 +++ b/Code/gml_Object_obj_battlecontroller_Create_0.gml
-@@ -113,6 +113,24 @@
+@@ -113,7 +113,41 @@
  global.monstergold[3] = 0;
  global.monsterexp[3] = 0;
  global.charturn = 0;
@@ -23,9 +23,26 @@
 +    }
 +}
  global.currentactingchar = 0;
++if (room == room_battletest)
++{
++    if (global.flag[915] == 99)
++    {
++        scr_spellget(4, 10);
++        global.charweapon[4] = 13;
++        scr_weaponinfo(13);
++        global.itemat[4][0] = weaponattemp;
++        global.itemdf[4][0] = weapondftemp;
++        global.itemmag[4][0] = weaponmagtemp;
++        global.hp[4] = 170;
++        global.maxhp[4] = 170;
++        global.at[4] = 8;
++        global.mag[4] = 16;
++    }
++}
  for (i = 0; i < 3; i += 1)
  {
-@@ -275,4 +293,6 @@
+     global.acting[i] = 0;
+@@ -275,4 +309,6 @@
          gigaqueencon = 3;
      }
  }

@@ -1,12 +1,23 @@
 --- a/Code/gml_Object_obj_spamton_neo_enemy_Other_11.gml
 +++ b/Code/gml_Object_obj_spamton_neo_enemy_Other_11.gml
-@@ -1,4 +1,4 @@
+@@ -1,8 +1,11 @@
++if (!scr_havechar(4))
++{
 -global.canact[myself][0] = 1;
-+global.canact[myself][0] = scr_havechar(4) ? 0 : 1;
- global.actactor[myself][0] = 1;
- global.actname[myself][0] = stringsetloc("", "obj_spamton_neo_enemy_slash_Other_11_gml_7_0");
- global.actdesc[myself][0] = "";
-@@ -13,5 +13,32 @@
++    global.canact[myself][0] = 1;
+-global.actactor[myself][0] = 1;
++    global.actactor[myself][0] = 1;
+-global.actname[myself][0] = stringsetloc("", "obj_spamton_neo_enemy_slash_Other_11_gml_7_0");
++    global.actname[myself][0] = stringsetloc("", "obj_spamton_neo_enemy_slash_Other_11_gml_7_0");
+-global.actdesc[myself][0] = "";
++    global.actdesc[myself][0] = "";
+-global.actcost[myself][0] = 0;
++    global.actcost[myself][0] = 0;
++}
+ global.canact[myself][1] = 0;
+ global.actactor[myself][1] = 0;
+ global.actname[myself][1] = "";
+@@ -13,5 +16,32 @@
  global.actname[myself][2] = "";
  global.actdesc[myself][2] = "";
  global.actcost[myself][2] = 0;

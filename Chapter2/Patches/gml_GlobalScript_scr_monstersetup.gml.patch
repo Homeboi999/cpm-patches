@@ -549,7 +549,7 @@
 +                global.actactor[myself][num] = 5;
 +                global.actname[myself][num] = stringset("SnowShock");
 +                global.actdesc[myself][num] = stringset("Icy#Damage");
-+                global.actcost[myself][num] = 75;
++                global.actcost[myself][num] = (global.charweapon[4] == 13) ? 37.5 : 75;
 +            }
              global.canactsus[myself][0] = 1;
              global.actnamesus[myself][0] = stringsetloc("Loosen", "scr_monstersetup_slash_scr_monstersetup_gml_1563_0");
@@ -612,7 +612,7 @@
 +                global.actactor[myself][num] = 5;
 +                global.actname[myself][num] = stringset("SnowShock");
 +                global.actdesc[myself][num] = stringset("Icy#Damage");
-+                global.actcost[myself][num] = 75;
++                global.actcost[myself][num] = (global.charweapon[4] == 13) ? 37.5 : 75;
 +                num++;
 +            }
 -            global.canact[myself][1] = 1;
