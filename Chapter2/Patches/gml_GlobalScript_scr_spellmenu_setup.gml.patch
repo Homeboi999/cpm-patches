@@ -1,6 +1,6 @@
 --- a/Code/gml_GlobalScript_scr_spellmenu_setup.gml
 +++ b/Code/gml_GlobalScript_scr_spellmenu_setup.gml
-@@ -11,85 +11,103 @@
+@@ -11,85 +11,104 @@
      }
      for (__i = 0; __i < 3; __i++)
      {
@@ -13,6 +13,7 @@
 +            {
 -            global.battlespell[__i][__fj] = 0;
 +                global.battlespell[__i][__fj] = 0;
++                global.battlespellspecial[__i][__fj] = 0;
 -            if (global.char[__i] == 1)
 +                if (global.char[__i] == 1)
 -            {
