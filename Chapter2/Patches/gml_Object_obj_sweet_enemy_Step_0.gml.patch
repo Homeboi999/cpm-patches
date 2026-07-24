@@ -1,27 +1,63 @@
 --- a/Code/gml_Object_obj_sweet_enemy_Step_0.gml
 +++ b/Code/gml_Object_obj_sweet_enemy_Step_0.gml
-@@ -265,8 +265,18 @@
+@@ -246,6 +246,16 @@
+         scr_anyface_next("susie", "L");
+         msgnextloc("\\EL* ... hey, wait^1. Why can't we ACT without Kris?/", "obj_sweet_enemy_slash_Step_0_gml_190_0");
+     }
++    else if (turns >= 3 && !scr_havechar(1))
++    {
++        scr_speaker("susie");
++        msgsetloc(0, "\\EK* Hey, is this really working!?/", "obj_sweet_enemy_slash_Step_0_gml_280_0");
++        msgnext("\\EC* ...We can't ACT without Kris!/");
++        scr_anyface_next("ralsei", "L");
++        msgnext("\\EL* Maybe if we tried... um.../");
++        scr_anyface_next("susie", "L");
++        msgnextloc("\\EL* ... hey, wait^1. Why can't we ACT without Kris?/", "obj_sweet_enemy_slash_Step_0_gml_190_0");
++    }
+     else
+     {
+         scr_speaker("susie");
+@@ -265,8 +275,37 @@
  }
  if (dancecon == 1.1 && !instance_exists(obj_writer))
  {
 +    if (scr_havechar(2) && scr_havechar(3))
 +    {
 -    susi = scr_act_charsprite("susie", spr_susie_dance, 0.16, 1);
-+        susi = scr_act_charsprite("susie", spr_susie_dance, 0.16, 1);
++        susi = scr_act_charsprite(scr_findchar(2), spr_susie_dance, 0.16, 1);
 -    susi.depth = obj_heroralsei.depth + 1;
 +        susi.depth = obj_heroralsei.depth + 1;
 +    }
 +    else
 +    {
 +        learnActCutscene = false;
-+        scr_act_charsprite("ralsei", spr_ralsei_dance, 0.16, 1);
-+        scr_act_charsprite("susie", spr_susie_dance, 0.16, 1);
-+        scr_act_charsprite("noelle", spr_noelle_dance, 0.16, 1);
++        for (var i = 0; i < 3; i++)
++        {
++            if (instance_exists(_charactsprite[i]))
++            {
++                continue;
++            }
++            switch (global.char[i])
++            {
++                case 1:
++                    scr_act_charsprite(i, spr_kris_dance, 0.16, 1);
++                    break;
++                case 2:
++                    scr_act_charsprite(i, spr_susie_dance, 0.16, 1);
++                    break;
++                case 3:
++                    scr_act_charsprite(i, spr_ralsei_dance, 0.16, 1);
++                    break;
++                case 4:
++                    scr_act_charsprite(i, spr_noelle_dance, 0.16, 1);
++                    break;
++            }
++        }
 +    }
      with (obj_afterimage)
      {
          instance_destroy();
-@@ -277,38 +287,134 @@
+@@ -277,38 +316,134 @@
      }
      global.flag[34] = 0;
      learnedhowtoact = 1;
@@ -180,15 +216,127 @@
      }
  }
  if (dancecon == 1.2 || (dancescenetimer > 0 && dancescenetimer <= 146))
-@@ -548,6 +654,7 @@
-         scr_act_charsprite("kris", spr_kris_dance, 0.16, 1);
-         scr_act_charsprite("ralsei", spr_ralsei_dance, 0.16, 1);
-         scr_act_charsprite("susie", spr_susie_dance, 0.16, 1);
-+        scr_act_charsprite("noelle", spr_noelle_dance, 0.16, 1);
+@@ -317,7 +452,7 @@
+     if (dancescenetimer == 1)
+     {
+         scr_act_charsprite_end();
+-        susi = scr_act_charsprite("susie", spr_susie_dance, 0.5, 1);
++        susi = scr_act_charsprite(scr_findchar(2), spr_susie_dance, 0.5, 1);
+         susi.depth = obj_heroralsei.depth + 1;
+         with (obj_afterimage)
+         {
+@@ -335,7 +470,7 @@
+     {
+         susi.hspeed = 10;
+         dancescenetimer2 = 1;
+-        rals = scr_act_charsprite("ralsei", spr_ralsei_hurt_fixed, 0.16, 1);
++        rals = scr_act_charsprite(scr_findchar(3), spr_ralsei_hurt_fixed, 0.16, 1);
+         with (obj_afterimage)
+         {
+             instance_destroy();
+@@ -400,10 +535,10 @@
+ if (dancecon == 2.3 && !instance_exists(obj_writer))
+ {
+     scr_act_charsprite_end();
+-    susi = scr_act_charsprite("susie", spr_susie_dance, 0.5, 1);
++    susi = scr_act_charsprite(scr_findchar(2), spr_susie_dance, 0.5, 1);
+     susi.x = obj_heroralsei.x + 80;
+     susi.y = obj_heroralsei.y + 5;
+-    scr_act_charsprite("ralsei", spr_ralsei_hurt_fixed, 0.16, 1);
++    scr_act_charsprite(scr_findchar(3), spr_ralsei_hurt_fixed, 0.16, 1);
+     with (obj_afterimage)
+     {
+         instance_destroy();
+@@ -418,10 +553,10 @@
+ {
+     scr_act_charsprite_end();
+     scr_speaker("none");
+-    susi = scr_act_charsprite("susie", spr_susie_dance, 0.16, 1);
++    susi = scr_act_charsprite(scr_findchar(2), spr_susie_dance, 0.16, 1);
+     susi.x = obj_heroralsei.x + 100;
+     susi.y = obj_heroralsei.y + 5;
+-    scr_act_charsprite("ralsei", spr_ralsei_dance, 0.16, 1);
++    scr_act_charsprite(scr_findchar(3), spr_ralsei_dance, 0.16, 1);
+     msgsetloc(0, "* (Susie made Ralsei learn \\cVR-Action\\cW even though he didn't want to!)/", "obj_sweet_enemy_slash_Step_0_gml_354_0");
+     scr_anyface_next("ralsei", "U");
+     msgnextloc("\\EU* (I... I'm sorry^1, Kris!!!)/%", "obj_sweet_enemy_slash_Step_0_gml_356_0");
+@@ -493,7 +628,14 @@
+     {
+         actCounter++;
+         danceCounter = 1;
++        if (global.lang != "ja")
++        {
++            scr_act_charsprite_simul("kris", 867, 0.16, 1);
++        }
++        else
++        {
+-        scr_act_charsprite("kris", spr_kris_dance, 0.16, 1);
++            scr_act_charsprite(global.currentactingchar, spr_kris_dance, 0.16, 1);
++        }
+         if (simultotal == 1 || (global.lang == "ja" && simultotal_funny == 1))
+         {
+             msgsetloc(0, "* You danced!/", "obj_sweet_enemy_slash_Step_0_gml_422_0");
+@@ -545,9 +687,24 @@
+     {
+         actCounter++;
+         danceCounter = 2;
+-        scr_act_charsprite("kris", spr_kris_dance, 0.16, 1);
+-        scr_act_charsprite("ralsei", spr_ralsei_dance, 0.16, 1);
+-        scr_act_charsprite("susie", spr_susie_dance, 0.16, 1);
++        for (var i = 0; i < 3; i++)
++        {
++            switch (global.char[i])
++            {
++                case 1:
++                    scr_act_charsprite(i, spr_kris_dance, 0.16, 1);
++                    break;
++                case 2:
++                    scr_act_charsprite(i, spr_susie_dance, 0.16, 1);
++                    break;
++                case 3:
++                    scr_act_charsprite(i, spr_ralsei_dance, 0.16, 1);
++                    break;
++                case 4:
++                    scr_act_charsprite(i, spr_noelle_dance, 0.16, 1);
++                    break;
++            }
++        }
          msgsetloc(0, "* Everyone danced with Sweet! They're totally lost in the groove!/%", "obj_sweet_enemy_slash_Step_0_gml_470_0");
          scr_battletext_default();
          actcon = 4;
-@@ -638,6 +745,46 @@
+@@ -562,7 +719,14 @@
+     {
+         dancing = true;
+         danceCounter = 1;
++        if (global.lang != "ja")
++        {
++            scr_act_charsprite_simul("susie", 823, 0.16, 1);
++        }
++        else
++        {
+-        scr_act_charsprite("susie", spr_susie_dance, 0.16, 1);
++            scr_act_charsprite(global.currentactingchar, spr_susie_dance, 0.16, 1);
++        }
+         if (groove == 0)
+         {
+             if (global.lang == "ja")
+@@ -602,7 +766,14 @@
+     {
+         dancing = true;
+         danceCounter = 1;
++        if (global.lang != "ja")
++        {
++            scr_act_charsprite_simul("ralsei", 783, 0.16, 1);
++        }
++        else
++        {
+-        scr_act_charsprite("ralsei", spr_ralsei_dance, 0.16, 1);
++            scr_act_charsprite(global.currentactingchar, spr_ralsei_dance, 0.16, 1);
++        }
+         if (groove == 0)
+         {
+             if (global.lang == "ja")
+@@ -638,6 +809,53 @@
              }
          }
      }
@@ -196,7 +344,14 @@
 +    {
 +        dancing = true;
 +        danceCounter = 1;
-+        scr_act_charsprite("noelle", spr_noelle_dance, 0.16, 1);
++        if (global.lang != "ja")
++        {
++            scr_act_charsprite_simul("noelle", 3383, 0.16, 1);
++        }
++        else
++        {
++            scr_act_charsprite(global.currentactingchar, spr_noelle_dance, 0.16, 1);
++        }
 +        if (groove == 0)
 +        {
 +            if (global.lang == "ja")
@@ -235,7 +390,7 @@
      if (actcon == 1 && !instance_exists(obj_writer))
      {
          if (obj_sweet_enemy.dancing == true && obj_kk_enemy.dancing == true && obj_hatguy_enemy.dancing == true && endcon == 0)
-@@ -648,7 +795,7 @@
+@@ -648,7 +866,7 @@
          {
              with (obj_marker)
              {
@@ -244,7 +399,7 @@
                  {
                      instance_destroy();
                      with (obj_heroparent)
-@@ -666,8 +813,9 @@
+@@ -666,8 +884,9 @@
              scr_nextact();
          }
      }
@@ -255,7 +410,7 @@
          if (scr_terminate_writer())
          {
              if (obj_sweet_enemy.dancing == true && obj_kk_enemy.dancing == true && obj_hatguy_enemy.dancing == true && endcon == 0)
-@@ -678,7 +826,7 @@
+@@ -678,7 +897,7 @@
              {
                  with (obj_marker)
                  {
@@ -264,7 +419,7 @@
                      {
                          instance_destroy();
                          with (obj_heroparent)
-@@ -693,6 +841,7 @@
+@@ -693,6 +912,7 @@
                          }
                      }
                  }

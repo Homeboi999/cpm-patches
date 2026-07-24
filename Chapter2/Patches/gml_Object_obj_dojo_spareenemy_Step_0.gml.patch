@@ -1,33 +1,432 @@
 --- a/Code/gml_Object_obj_dojo_spareenemy_Step_0.gml
 +++ b/Code/gml_Object_obj_dojo_spareenemy_Step_0.gml
-@@ -217,14 +217,21 @@
-         msgsetloc(0, "* Susie acted!/%", "obj_dojograzeenemy_slash_Step_0_gml_97_0");
+@@ -24,10 +24,89 @@
+         }
+         else if (battlestate == 0)
+         {
++            var chartotal = 0;
++            var krisindex = -1;
++            var charnames = ["", "", ""];
++            var haveactchar = false;
++            for (var i = 0; i < 3; i++)
++            {
++                if (global.char[i] > 0)
++                {
++                    charnames[chartotal] = global.charname[global.char[i]];
++                    chartotal++;
++                }
++                if (global.char[i] == 1 || global.flag[34] == 0)
++                {
++                    haveactchar = true;
++                }
++                if (global.char[i] == 1 && krisindex < 0)
++                {
++                    krisindex = i;
++                }
++            }
+             msgsetloc(0, "Boss!/", "obj_dojo_spareenemy_slash_Step_0_gml_32_0");
+             msgnextloc("You can ACT&and SPARE on&the same turn!/", "obj_dojo_spareenemy_slash_Step_0_gml_33_0");
+-            msgnextloc("If you know Kris's&ACT will give an&enemy 100`% mercy.../", "obj_dojo_spareenemy_slash_Step_0_gml_34_0");
+-            msgnextloc("SPARE them on&the same turn&with Susie&or Ralsei!/%", "obj_dojo_spareenemy_slash_Step_0_gml_35_0");
++            if (scr_findchar(1) != 0)
++            {
++                msgnext("It doesn't even&matter if the&one ACTing is&first to move!/");
++                msgnext("ACTing always happens&first in the order!/");
++            }
++            if (chartotal > 1 && haveactchar)
++            {
++                if (scr_havechar(1))
++                {
++                    msgnextloc("If you know Kris's&ACT will give an&enemy 100`% mercy.../", "obj_dojo_spareenemy_slash_Step_0_gml_34_0");
++                }
++                else
++                {
++                    msgnext("If you know " + string(charnames[0]) + "'s&ACT will give an&enemy 100`% mercy,&for instance.../");
++                }
++                if (chartotal == 3)
++                {
++                    if (scr_havechar(2) && scr_havechar(3))
++                    {
++                        msgnextloc("SPARE them on&the same turn&with Susie&or Ralsei!/%", "obj_dojo_spareenemy_slash_Step_0_gml_35_0");
++                    }
++                    else
++                    {
++                        msgnext("SPARE them on&the same turn&with " + string(charnames[(krisindex == 1) ? 0 : 1]) + "&or " + string(charnames[(krisindex == 2) ? 0 : 2]) + "!/%");
++                    }
++                }
++                else if (charnames[0] == charnames[1])
++                {
++                    msgnext("SPARE them on&the same turn&with the other&" + string(charnames[(krisindex == 1) ? 0 : 1]) + "!/%");
++                }
++                else
++                {
++                    msgnext("SPARE them on&the same turn&with " + string(charnames[(krisindex == 1) ? 0 : 1]) + "!/%");
++                }
++            }
++            else if (chartotal == 0)
++            {
++                msgset(0, "... Boss?/");
++                msgnext("I think the&battle's broken./");
++                msgnext("\\M2Theres no one&else here!/");
++                msgnext("\\M0Can you try that&again, Boss?/%");
++                wrongpartycon = 1;
++            }
++            else
++            {
++                if (chartotal == 1)
++                {
++                    msgnext("But you, uh...&need more than&one person./");
++                    if (!haveactchar)
++                    {
++                        msgnext("Not to mention&someone who can&ACT, too./");
++                    }
++                }
++                else
++                {
++                    msgnext("But you, uh...&need someone&who can ACT./");
++                }
++                msgnext("... I can't teach&you anything&like this!/");
++                msgnext("Come back with&a different&team, will you?/%");
++                wrongpartycon = 1;
++            }
+             battlestate = 1;
+         }
+         else if (battlestate <= 1)
+@@ -63,21 +142,88 @@
+             msgnextloc("\\M0Boss!/", "obj_dojo_spareenemy_slash_Step_0_gml_64_0");
+             msgnextloc("It works the&same with making&an enemy TIRED!/", "obj_dojo_spareenemy_slash_Step_0_gml_65_0");
+             msgnextloc("If an ACT&will make an&enemy TIRED.../", "obj_dojo_spareenemy_slash_Step_0_gml_66_0");
+-            if (global.tension >= 40)
++            if (scr_havechar(3) || scr_havechar(4))
+             {
++                if (global.tension >= 40)
++                {
++                    if (scr_havechar(3))
++                    {
+-                msgnextloc("Use Ralsei's PACIFY&right away!/%", "obj_dojo_spareenemy_slash_Step_0_gml_67_0");
++                        msgnextloc("Use Ralsei's PACIFY&right away!/%", "obj_dojo_spareenemy_slash_Step_0_gml_67_0");
++                    }
++                    else if (scr_havechar(4))
++                    {
++                        msgnext("Use Noelle's SLEEPMIST&right away!/%");
++                    }
++                }
++                else
++                {
++                    if (scr_havechar(3))
++                    {
++                        msgnextloc("Use Ralsei's PACIFY&right away!/", "obj_dojo_spareenemy_slash_Step_0_gml_74_0");
++                        msgnextloc("Of course, PACIFY is MAGIC,&so you'll need TP./", "obj_dojo_spareenemy_slash_Step_0_gml_75_0");
++                    }
++                    else if (scr_havechar(4))
++                    {
++                        msgnext("Use Noelle's SLEEPMIST&right away!/");
++                        msgnext("Of course, SLEEPMIST is MAGIC,&so you'll need TP./");
++                    }
++                    msgnextloc("Spend a turn&DEFENDING to gain TP&if you have to, boss!/%", "obj_dojo_spareenemy_slash_Step_0_gml_76_0");
++                }
+             }
+             else
+             {
+-                msgnextloc("Use Ralsei's PACIFY&right away!/", "obj_dojo_spareenemy_slash_Step_0_gml_74_0");
+-                msgnextloc("Of course, PACIFY is MAGIC,&so you'll need TP./", "obj_dojo_spareenemy_slash_Step_0_gml_75_0");
+-                msgnextloc("Spend a turn&DEFENDING to gain TP&if you have to, boss!/%", "obj_dojo_spareenemy_slash_Step_0_gml_76_0");
++                msgnext("Use, uh.../");
++                msgnext(".../");
++                msgnext("Look, Boss...&I can't really,&uh.../");
++                msgnext("I actually can't&really help you&practice.../");
++                msgnext("But sleeping SPELLS&work the same as&SPARING for this!/");
++                msgnext("Somethin' like Ralsei's&PACIFY would work.../");
++                msgnext("But since he's not&here, that's all&I've got for ya boss./%");
++                wrongpartycon = 1;
+             }
+             battlestate = 3;
++            var chartotal = 0;
++            var ralseicount = 0;
++            var noellecount = 0;
++            for (var i = 0; i < 3; i++)
++            {
++                if (global.char[i] > 0)
++                {
++                    chartotal++;
++                }
++                if (global.char[i] == 3)
++                {
++                    ralseicount++;
++                }
++                if (global.char[i] == 4)
++                {
++                    noellecount++;
++                }
++            }
++            if (chartotal == 3)
++            {
++                if (scr_havechar(2) && (scr_havechar(3) || scr_havechar(4)))
++                {
+-            global.actactor[myself][1] = 2;
++                    global.actactor[myself][1] = 2;
++                    storychar = 2;
++                }
++                else if (scr_havechar(3) && (scr_havechar(4) || ralseicount > 1))
++                {
++                    global.actactor[myself][1] = 3;
++                    storychar = 3;
++                }
++                else if (scr_havechar(4) && (scr_havechar(3) || noellecount > 1))
++                {
++                    global.actactor[myself][1] = 5;
++                    storychar = 4;
++                }
++            }
+             global.actname[myself][1] = stringsetloc("SleepyStory", "obj_dojo_spareenemy_slash_Step_0_gml_70_0");
+             global.actdesc[myself][1] = " ";
+-            global.actsimul[myself][1] = 1;
++            global.actnamesus[myself][0] = stringset("SleepyStory");
++            global.actnameral[myself][0] = stringset("SleepyStory");
++            global.actnamenoe[myself][0] = stringset("SleepyStory");
++            scr_spellmenu_setup();
+         }
+         else if (battlestate == 3)
+         {
+@@ -170,6 +316,17 @@
+                     darken = 0;
+                 }
+             }
++            else if (wrongpartycon == 1)
++            {
++                with (obj_battlecontroller)
++                {
++                    skipvictory = 1;
++                }
++                global.tempflag[9] = 1;
++                scr_monsterdefeat();
++                instance_destroy();
++                scr_mnendturn();
++            }
+             else
+             {
+                 with (obj_darkener)
+@@ -196,53 +353,187 @@
+         checkreact = true;
          scr_battletext_default();
-         actcon = 1;
+     }
+-    if (acting == 2 && actcon == 0 && battlestate < 2)
+-    {
+-        shavesprite = scr_act_charsprite("kris", spr_krisb_attackready, 0, 0);
+-        msgsetloc(0, "* (You shaved Jigsaw Joe's stubble!)/%", "obj_dojo_spareenemy_slash_Step_0_gml_187_0");
+-        scr_battletext_default();
+-        actcon = 2;
+-    }
+-    if (acting == 2 && actcon == 0 && battlestate >= 2)
+-    {
+-        msgsetloc(0, "* Susie told the enemy a bedtime story about beating them up!^1&* The enemy became TIRED!/%", "obj_dojo_spareenemy_slash_Step_0_gml_195_0");
+-        image_speed /= 2;
+-        snd_play(snd_hypnosis);
+-        scr_battletext_default();
+-        actcon = 1;
+-        scr_monster_make_tired(myself);
+-    }
+-    if (acting == 1 && actconsus == 1)
+-    {
+-        msgsetloc(0, "* Susie acted!/%", "obj_dojograzeenemy_slash_Step_0_gml_97_0");
+-        scr_battletext_default();
+-        actcon = 1;
 -        actconsus = 0;
-+        actconsus = 20;
-     }
-     if (acting == 1 && actconral == 1)
-     {
-         msgsetloc(0, "* Ralsei acted!/%", "obj_dojograzeenemy_slash_Step_0_gml_106_0");
-         scr_battletext_default();
-         actcon = 1;
+-    }
+-    if (acting == 1 && actconral == 1)
+-    {
+-        msgsetloc(0, "* Ralsei acted!/%", "obj_dojograzeenemy_slash_Step_0_gml_106_0");
+-        scr_battletext_default();
+-        actcon = 1;
 -        actconral = 0;
-+        actconral = 20;
-+    }
-+    if (acting == 1 && actconnoe == 1)
+-    }
+-    if (actcon == 2 && !instance_exists(obj_writer))
+-    {
+-        actcon = 3;
+-        with (shavesprite)
+-        {
+-            sprite_index = spr_krisb_attack;
+-            scr_animate(0, 0, 1);
+-        }
+-        alarm[2] = 20;
+-        snd_play_pitch(snd_laz_c, 1.5);
+-        image_speed = 0;
+-        var _cut = instance_create(x + 34, y + 38, obj_animation);
+-        _cut.sprite_index = spr_attack_cut1;
+-        _cut.image_xscale = 0.25;
+-        _cut.image_yscale = 0.25;
+-        _cut.depth = depth - 1;
+-        _cut.image_speed = 1/3;
++    if (battlestate < 2)
 +    {
-+        msgset(0, "* Noelle acted!/%");
-+        scr_battletext_default();
-+        actcon = 1;
-+        actconnoe = 20;
-     }
-     if (actcon == 2 && !instance_exists(obj_writer))
-     {
-@@ -243,6 +250,17 @@
-         _cut.image_yscale = 0.25;
-         _cut.depth = depth - 1;
-         _cut.image_speed = 1/3;
++        if (acting == 2 && actcon == 0)
++        {
++            if (global.mercymod[myself] == 100)
++            {
++                msgset(0, "* You tried to shave Jigsaw Joe's stubble, but he was already clean-shaven!/%");
++                scr_battletext_default();
++                actcon = 1;
++            }
++            else
++            {
++                shavesprite = scr_act_charsprite(global.currentactingchar, spr_krisb_attackready, 0, 0);
++                msgsetloc(0, "* (You shaved Jigsaw Joe's stubble!)/%", "obj_dojo_spareenemy_slash_Step_0_gml_187_0");
++                scr_battletext_default();
++                actcon = 2;
++            }
++        }
++        if (actingsus == 1 && actconsus == 1)
++        {
++            if (global.mercymod[myself] == 100)
++            {
++                msgset(0, "* Susie tried to shave Jigsaw Joe's stubble, but he was already clean-shaven!/%");
++                scr_battletext_default();
++                actcon = 1;
++            }
++            else
++            {
++                shavesprite = scr_act_charsprite(global.currentactingchar, spr_susie_attackready, 0, 0);
++                msgset(0, "* (Susie shaved Jigsaw Joe's stubble!)/%");
++                scr_battletext_default();
++                actcon = 2;
++            }
++            actconsus = 0;
++        }
++        if (actingral == 1 && actconral == 1)
++        {
++            if (global.mercymod[myself] == 100)
++            {
++                msgset(0, "* Ralsei tried to shave Jigsaw Joe's stubble, but he was already clean-shaven!/%");
++                scr_battletext_default();
++                actcon = 1;
++            }
++            else
++            {
++                shavesprite = scr_act_charsprite(global.currentactingchar, spr_ralsei_attackready, 0, 0);
++                msgset(0, "* (Ralsei shaved Jigsaw Joe's stubble!)/%");
++                scr_battletext_default();
++                actcon = 2;
++            }
++            actconral = 0;
++        }
++        if (actingnoe == 1 && actconnoe == 1)
++        {
++            if (global.mercymod[myself] == 100)
++            {
++                msgset(0, "* Noelle tried to shave Jigsaw Joe's stubble, but he was already clean-shaven!/%");
++                scr_battletext_default();
++                actcon = 1;
++            }
++            else
++            {
++                shavesprite = scr_act_charsprite(global.currentactingchar, spr_noelleb_actready, 0, 0);
++                msgset(0, "* (Noelle shaved Jigsaw Joe's stubble!)/%");
++                scr_battletext_default();
++                actcon = 2;
++            }
++            actconnoe = 0;
++        }
++        if (actcon == 2 && !instance_exists(obj_writer))
++        {
++            actcon = 3;
++            with (shavesprite)
++            {
++                if (sprite_index == spr_krisb_attackready)
++                {
++                    sprite_index = spr_krisb_attack;
++                }
++                else if (sprite_index == spr_susie_attackready)
++                {
++                    sprite_index = spr_susie_attack;
++                }
++                else if (sprite_index == spr_ralsei_attackready)
++                {
++                    sprite_index = spr_ralsei_attack;
++                }
++                else if (sprite_index == spr_noelleb_actready)
++                {
++                    sprite_index = spr_noelleb_act;
++                }
++                scr_animate(0, 0, 1);
++            }
++            alarm[2] = 20;
++            snd_play_pitch(snd_laz_c, 1.5);
++            image_speed = 0;
++            var _cut = instance_create(x + 34, y + 38, obj_animation);
++            _cut.sprite_index = spr_attack_cut1;
++            _cut.image_xscale = 0.25;
++            _cut.image_yscale = 0.25;
++            _cut.depth = depth - 1;
++            _cut.image_speed = 1/3;
++        }
++    }
++    if (battlestate >= 2)
++    {
++        if (acting == 2 && actcon == 0 && storychar == 1)
++        {
++            msgset(0, "* You told the enemy a bedtime story about a giant dog!^1&* The enemy became TIRED!/%");
++            actcon = 2;
++        }
++        if ((acting == 2 && actcon == 0 && storychar == 2) || (actingsus == 1 && actconsus == 1))
++        {
++            msgsetloc(0, "* Susie told the enemy a bedtime story about beating them up!^1&* The enemy became TIRED!/%", "obj_dojo_spareenemy_slash_Step_0_gml_195_0");
++            actcon = 2;
++            actconsus = 0;
++        }
++        if ((acting == 2 && actcon == 0 && storychar == 3) || (actingral == 1 && actconral == 1))
++        {
++            msgset(0, "* Ralsei told the enemy a bedtime story about three heroes saving the world!^1&* The enemy became TIRED!/%");
++            actcon = 2;
++            actconral = 0;
++        }
++        if ((acting == 2 && actcon == 0 && storychar == 4) || (actingnoe == 1 && actconnoe == 1))
++        {
++            msgset(0, "* Noelle told the enemy a bedtime story about a haunted video game!^1&* The enemy became TIRED!/%");
++            actcon = 2;
++            actconnoe = 0;
++        }
++        if (actcon == 2)
++        {
++            if (global.monsterstatus[myself] == 1)
++            {
++                var char = storychar;
++                if (actingsus == 1)
++                {
++                    char = 2;
++                }
++                else if (actingral == 1)
++                {
++                    char = 3;
++                }
++                else if (actingnoe == 1)
++                {
++                    char = 4;
++                }
++                switch (char)
++                {
++                    case 1:
++                        msgset(0, "* You told the enemy a bedtime story about a giant dog!^1&* ... But the enemy was already TIRED!/%");
++                        break;
++                    case 2:
++                        msgset(0, "* Susie told the enemy a bedtime story about beating them up!^1&* ... But the enemy was already TIRED!/%");
++                        break;
++                    case 3:
++                        msgset(0, "* Ralsei told the enemy a bedtime story about three heroes saving the world!^1&* ... But the enemy was already TIRED!/%");
++                        break;
++                    case 4:
++                        msgset(0, "* Noelle told the enemy a bedtime story about a haunted video game!^1&* ... But the enemy was already TIRED!/%");
++                        break;
++                }
++            }
++            else
++            {
++                image_speed /= 2;
++                snd_play(snd_hypnosis);
++                scr_monster_make_tired(myself);
++            }
++            scr_battletext_default();
++            actcon = 1;
++        }
 +    }
 +    if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
 +    {

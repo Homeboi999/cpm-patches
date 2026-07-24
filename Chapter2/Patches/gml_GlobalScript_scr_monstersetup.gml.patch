@@ -661,7 +661,21 @@
          }
      }
      if (global.monstertype[myself] == 51)
-@@ -1485,6 +1667,9 @@
+@@ -1463,7 +1645,12 @@
+         global.canact[myself][1] = 1;
+         global.actname[myself][1] = stringsetloc("Shave", "scr_monstersetup_slash_scr_monstersetup_gml_1742_0");
+         global.actdesc[myself][1] = " ";
+-        global.actsimul[myself][1] = 1;
++        global.canactsus[myself][0] = !scr_havechar(1);
++        global.actnamesus[myself][0] = stringset("Shave");
++        global.canactral[myself][0] = !scr_havechar(1);
++        global.actnameral[myself][0] = stringset("Shave");
++        global.canactnoe[myself][0] = !scr_havechar(1);
++        global.actnamenoe[myself][0] = stringset("Shave");
+     }
+     if (global.monstertype[myself] == 53)
+     {
+@@ -1485,6 +1672,9 @@
          global.canactral[myself][0] = 1;
          global.actnameral[myself][0] = stringsetloc("R-Action", "scr_monstersetup_slash_scr_monstersetup_gml_1820_0");
          global.actsimulral[myself][0] = 1;

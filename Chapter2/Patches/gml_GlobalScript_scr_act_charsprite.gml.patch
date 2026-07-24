@@ -1,0 +1,99 @@
+--- a/Code/gml_GlobalScript_scr_act_charsprite.gml
++++ b/Code/gml_GlobalScript_scr_act_charsprite.gml
+@@ -1,28 +1,16 @@
+ function scr_act_charsprite(arg0, arg1, arg2, arg3)
+ {
+-    _charactor = arg0;
+-    _charinstance = obj_herokris;
+-    if (_charactor == "noelle")
+-    {
+-        _charinstance = obj_heronoelle;
+-        _charnum = 4;
+-    }
+-    if (_charactor == "ralsei")
+-    {
+-        _charinstance = obj_heroralsei;
+-        _charnum = 3;
+-    }
+-    if (_charactor == "susie")
+-    {
+-        _charinstance = obj_herosusie;
+-        _charnum = 2;
+-    }
+-    if (_charactor == "kris")
+-    {
+-        _charinstance = obj_herokris;
+-        _charnum = 1;
+-    }
+-    __returnvalue = _charactsprite[_charnum];
++    var pos = arg0;
++    var charsprite = arg1;
++    _charinstance = -4;
++    if (pos < 0 || pos > 2)
++    {
++        return -4;
++    }
++    if (instance_exists(global.charinstance[pos]))
++    {
++        _charinstance = global.charinstance[pos];
++    }
+     if (i_ex(_charinstance))
+     {
+         with (_charinstance)
+@@ -30,11 +18,11 @@
+             image_alpha = 0;
+             state = 0;
+             global.faceaction[myself] = 0;
++            other._charactsprite[myself] = scr_dark_marker(x, y, charsprite);
+         }
+-        _charactsprite[_charnum] = scr_dark_marker(_charinstance.x, _charinstance.y, arg1);
+-        with (_charactsprite[_charnum])
++        with (_charactsprite[pos])
+         {
+-            depth = 20 - (__view_get(e__VW.YView, 0) / 40);
++            depth = other._charinstance.depth - 5;
+             scr_oflash();
+             if (arg2 > 0 && arg3 == 0)
+             {
+@@ -46,35 +34,16 @@
+             }
+             a = scr_afterimage();
+             a.hspeed = 2.5;
+-            a.depth = depth + 1;
+             b = scr_afterimage();
+             b.image_alpha = 0.6;
+             b.hspeed = 5;
+             b.depth = depth + 2;
+         }
+-        __returnvalue = _charactsprite[_charnum];
+-    }
+-    return __returnvalue;
+-}
+-
+-enum e__VW
+-{
+-    XView,
+-    YView,
+-    WView,
+-    HView,
+-    Angle,
+-    HBorder,
+-    VBorder,
+-    HSpeed,
+-    VSpeed,
+-    Object,
+-    Visible,
+-    XPort,
+-    YPort,
+-    WPort,
+-    HPort,
+-    Camera,
+-    SurfaceID
++        return _charactsprite[pos];
++    }
++    else
++    {
++        return -4;
++    }
+ }
+ 

@@ -1,25 +1,28 @@
 --- a/Code/gml_Object_obj_battlecontroller_Create_0.gml
 +++ b/Code/gml_Object_obj_battlecontroller_Create_0.gml
-@@ -113,7 +113,41 @@
+@@ -113,7 +113,44 @@
  global.monstergold[3] = 0;
  global.monsterexp[3] = 0;
  global.charturn = 0;
-+if (global.charmove[0] == 0)
++if (global.ambush == 0 && !instance_exists(obj_dojo_spareenemy))
 +{
-+    global.charturn = 1;
-+}
-+if (global.charturn == 1)
-+{
-+    if (global.charmove[1] == 0)
++    if (global.charmove[0] == 0)
 +    {
-+        global.charturn = 2;
++        global.charturn = 1;
 +    }
-+}
-+if (global.charturn == 2)
-+{
-+    if (global.charmove[2] == 0)
++    if (global.charturn == 1)
 +    {
-+        scr_attackphase();
++        if (global.charmove[1] == 0)
++        {
++            global.charturn = 2;
++        }
++    }
++    if (global.charturn == 2)
++    {
++        if (global.charmove[2] == 0)
++        {
++            scr_attackphase();
++        }
 +    }
 +}
  global.currentactingchar = 0;
@@ -42,7 +45,7 @@
  for (i = 0; i < 3; i += 1)
  {
      global.acting[i] = 0;
-@@ -275,4 +309,6 @@
+@@ -275,4 +312,6 @@
          gigaqueencon = 3;
      }
  }

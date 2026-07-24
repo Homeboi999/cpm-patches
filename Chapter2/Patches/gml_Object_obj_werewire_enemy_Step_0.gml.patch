@@ -1,5 +1,14 @@
 --- a/Code/gml_Object_obj_werewire_enemy_Step_0.gml
 +++ b/Code/gml_Object_obj_werewire_enemy_Step_0.gml
+@@ -449,7 +449,7 @@
+     if (acting == 2 && actcon == 0)
+     {
+         var simultext = (simultotal == 1) ? stringsetloc("* You jiggled your body. The wire loosened in turn!/%", "obj_werewire_enemy_slash_Step_0_gml_399_0") : stringsetloc("* You jiggled your body!/%", "obj_werewire_enemy_slash_Step_0_gml_399_1");
+-        scr_act_charsprite("kris", spr_krisb_wiggle, 0.25, 1);
++        scr_act_charsprite_simul("kris", 1436, 0.25, 1);
+         msgset(0, simultext);
+         scr_mercyadd(myself, 50);
+         scr_simultext("kris");
 @@ -537,13 +537,9 @@
      if (actcon == 10 && !instance_exists(obj_writer))
      {

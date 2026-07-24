@@ -1,5 +1,14 @@
 --- a/Code/gml_Object_obj_musical_controller_Alarm_0.gml
 +++ b/Code/gml_Object_obj_musical_controller_Alarm_0.gml
+@@ -14,7 +14,7 @@
+     scr_battletext();
+     exit;
+ }
+-if ((global.hp[1] <= 0 && happyfeetscene == 0) || (obj_sweet_enemy.actCounter > 3 && happyfeetscene == 0))
++if ((global.hp[1] <= 0 && happyfeetscene == 0) || (obj_sweet_enemy.actCounter > 3 && happyfeetscene == 0) || (obj_sweet_enemy.turns > 3 && !scr_havechar(1) && happyfeetscene == 0))
+ {
+     with (obj_battlecontroller)
+     {
 @@ -24,13 +24,23 @@
      obj_sweet_enemy.postattackscene = 1;
      if (global.hp[2] < 1)

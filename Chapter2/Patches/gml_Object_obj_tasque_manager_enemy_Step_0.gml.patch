@@ -1,5 +1,14 @@
 --- a/Code/gml_Object_obj_tasque_manager_enemy_Step_0.gml
 +++ b/Code/gml_Object_obj_tasque_manager_enemy_Step_0.gml
+@@ -245,7 +245,7 @@
+     }
+     if (acting == 2 && actcon == 0)
+     {
+-        scr_act_charsprite("kris", spr_krisb_wan_tail, 0, 0);
++        scr_act_charsprite_simul("kris", 1435, 0, 0);
+         var simultext;
+         if (violenceused == 1)
+         {
 @@ -254,7 +254,7 @@
          }
          else
@@ -9,17 +18,42 @@
              {
                  scr_mercyadd(myself, 15);
              }
-@@ -279,6 +279,9 @@
+@@ -278,7 +278,24 @@
+     }
      if (acting == 3 && actcon == 0)
      {
-         scr_act_charsprite("kris", spr_krisb_wan_tail, 0, 0);
-+        scr_act_charsprite("susie", spr_susie_wan_sign, 0, 0);
-+        scr_act_charsprite("ralsei", spr_ralseib_wan, 0, 0);
-+        scr_act_charsprite("noelle", spr_noelle_wan, 0, 0);
++        for (var i = 0; i < 3; i++)
++        {
++            switch (global.char[i])
++            {
++                case 1:
+-        scr_act_charsprite("kris", spr_krisb_wan_tail, 0, 0);
++                    scr_act_charsprite(i, spr_krisb_wan_tail, 0, 0);
++                    break;
++                case 2:
++                    scr_act_charsprite(i, spr_susie_wan_sign, 0, 0);
++                    break;
++                case 3:
++                    scr_act_charsprite(i, spr_ralseib_wan, 0, 0);
++                    break;
++                case 4:
++                    scr_act_charsprite(i, spr_noelle_wan, 0, 0);
++                    break;
++            }
++        }
          if (violenceused == 1)
          {
              msgsetloc(0, "* (You talked to Tasque Manager, but no effect...)/%", "obj_tasque_manager_enemy_slash_Step_0_gml_277_0");
-@@ -303,7 +306,7 @@
+@@ -295,7 +312,7 @@
+     }
+     if (actingsus == 1 && actconsus == 1)
+     {
+-        scr_act_charsprite("susie", spr_susie_wan_sign, 0, 0);
++        scr_act_charsprite_simul("susie", 1466, 0, 0);
+         var simultext;
+         if (violenceused == 1)
+         {
+@@ -303,7 +320,7 @@
          }
          else
          {
@@ -28,7 +62,16 @@
              {
                  scr_mercyadd(myself, 10);
              }
-@@ -335,7 +338,7 @@
+@@ -327,7 +344,7 @@
+     }
+     if (actingral == 1 && actconral == 1)
+     {
+-        scr_act_charsprite("ralsei", spr_ralseib_wan, 0, 0);
++        scr_act_charsprite_simul("ralsei", 1507, 0, 0);
+         var simultext;
+         if (violenceused == 1)
+         {
+@@ -335,7 +352,7 @@
          }
          else
          {
@@ -37,13 +80,13 @@
              {
                  scr_mercyadd(myself, 10);
              }
-@@ -357,23 +360,56 @@
+@@ -357,23 +374,56 @@
          scr_simultext("ralsei");
          actconral = (simulorderral == 0) ? 20 : 0;
      }
 +    if (actingnoe == 1 && actconnoe == 1)
 +    {
-+        scr_act_charsprite("noelle", spr_noelle_wan, 0, 0);
++        scr_act_charsprite_simul("noelle", 3384, 0, 0);
 +        var simultext;
 +        if (violenceused == 1)
 +        {

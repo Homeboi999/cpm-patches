@@ -1,5 +1,23 @@
 --- a/Code/gml_Object_obj_poppup_enemy_Step_0.gml
 +++ b/Code/gml_Object_obj_poppup_enemy_Step_0.gml
+@@ -513,7 +513,7 @@
+     }
+     if (actconsus == 1.1 && !instance_exists(obj_writer))
+     {
+-        scr_act_charsprite("susie", spr_susie_shock_r, 0, 0);
++        scr_act_charsprite(global.currentactingchar, spr_susie_shock_r, 0, 0);
+         scr_speaker("susie");
+         msgsetloc(0, "\\E5* D..^1. Damn!^1! They knew what I'd fall for!!/%", "obj_poppup_enemy_slash_Step_0_gml_470_0");
+         scr_battletext();
+@@ -549,7 +549,7 @@
+     }
+     if (actconral == 1.1 && !instance_exists(obj_writer))
+     {
+-        scr_act_charsprite("ralsei", spr_ralsei_hurt_fixed, 0, 0);
++        scr_act_charsprite(global.currentactingchar, spr_ralsei_hurt_fixed, 0, 0);
+         scr_speaker("ralsei");
+         msgsetloc(0, "\\EU* I... I didn't mean to do it... I... I'm sorry!!^1! I repent!!!/%", "obj_poppup_enemy_slash_Step_0_gml_507_0");
+         scr_battletext();
 @@ -582,7 +582,8 @@
          scr_anyface_next("noelle", "8");
          msgnextloc("\\E8* Wh-what!? What did I do wrong??/%", "obj_poppup_enemy_slash_Step_0_gml_536_0");

@@ -1,0 +1,14 @@
+--- a/Code/gml_Object_obj_dojo_spareenemy_Create_0.gml
++++ b/Code/gml_Object_obj_dojo_spareenemy_Create_0.gml
+@@ -9,9 +9,11 @@
+ beardcount = 0;
+ sparecon = 0;
+ pacifycon = 0;
++wrongpartycon = 0;
+ ambushed = 0;
+ shaved = false;
+ tensionstate = false;
+ checkreact = false;
+ shavesprite = 0;
++storychar = 1;
+ 

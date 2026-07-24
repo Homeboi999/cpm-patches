@@ -193,7 +193,7 @@
              }
          }
          if (actcon == 112)
-@@ -1271,27 +1353,32 @@
+@@ -1271,34 +1353,39 @@
          }
          if (scr_sideb_get_phase() > 2)
          {
@@ -212,9 +212,9 @@
 -                actcon = 21;
 +                    actcon = 21;
 -                krs = scr_act_charsprite("kris", spr_krisb_attack, 0.25, 1);
-+                    krs = scr_act_charsprite("kris", spr_krisb_attack, 0.25, 1);
++                    krs = scr_act_charsprite(global.currentactingchar, spr_krisb_attack, 0.25, 1);
 -                krs.depth = obj_herokris.depth + 1;
-+                    krs.depth = obj_herokris.depth + 1;
++                    krs.depth = global.charinstance[global.currentactingchar].depth + 1;
 -                alarm[4] = 14;
 +                    alarm[4] = 14;
 -                snd_pitch(snd_play(snd_scytheburst), 1.2);
@@ -238,7 +238,7 @@
 -                hurttimer2 = 10;
 +                    hurttimer2 = 10;
 -                var dam = round((((global.battleat[obj_herokris.myself] * 150) / 20) - (global.monsterdf[myself] * 3)) * 1.25);
-+                    var dam = round((((global.battleat[obj_herokris.myself] * 150) / 20) - (global.monsterdf[myself] * 3)) * 1.25);
++                    var dam = round((((global.battleat[global.currentactingchar] * 150) / 20) - (global.monsterdf[myself] * 3)) * 1.25);
 -                scr_damage_enemy(0, dam);
 +                    scr_damage_enemy(0, dam);
 +                }
@@ -246,6 +246,24 @@
              }
              if (actcon == 22)
              {
+                 actcon = 23;
+                 scr_act_charsprite_end();
+-                krs = scr_act_charsprite("kris", spr_krisb_attack, 0.25, 1);
++                krs = scr_act_charsprite(global.currentactingchar, spr_krisb_attack, 0.25, 1);
+-                krs.depth = obj_herokris.depth + 1;
++                krs.depth = global.charinstance[global.currentactingchar].depth + 1;
+                 alarm[4] = 14;
+                 snd_pitch(snd_play(snd_scytheburst), 0.8);
+                 att = instance_create(x + 57, y + 76, obj_basicattack);
+@@ -1310,7 +1397,7 @@
+                 shockthreshold = 15;
+                 shocktimer = 9999;
+                 hurttimer2 = 10;
+-                var dam = round((((global.battleat[obj_herokris.myself] * 150) / 20) - (global.monsterdf[myself] * 3)) * 1.25);
++                var dam = round((((global.battleat[global.currentactingchar] * 150) / 20) - (global.monsterdf[myself] * 3)) * 1.25);
+                 scr_damage_enemy(0, dam);
+             }
+             if (actcon == 24)
 @@ -1318,21 +1405,251 @@
                  scr_act_charsprite_end();
                  actcon = 1;
@@ -270,7 +288,7 @@
 -                actcon = 31;
 +                    actcon = 31;
 -                instance_create(obj_herokris.x + 105, obj_herokris.y + 50, obj_sneo_friedpipis);
-+                    instance_create(obj_herokris.x + 105, obj_herokris.y + 50, obj_sneo_friedpipis);
++                    instance_create(global.charinstance[global.currentactingchar].x + 105, global.charinstance[global.currentactingchar].y + 50, obj_sneo_friedpipis);
 +                }
 +                actnum++;
              }
