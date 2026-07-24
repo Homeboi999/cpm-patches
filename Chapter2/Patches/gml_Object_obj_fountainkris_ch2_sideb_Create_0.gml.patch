@@ -1,0 +1,8 @@
+--- a/Code/gml_Object_obj_fountainkris_ch2_sideb_Create_0.gml
++++ b/Code/gml_Object_obj_fountainkris_ch2_sideb_Create_0.gml
+@@ -27,4 +27,5 @@
+ draw_fountain = true;
+ forcend = 0;
+ savekrisx = 0;
++blackall = -4;
+ 

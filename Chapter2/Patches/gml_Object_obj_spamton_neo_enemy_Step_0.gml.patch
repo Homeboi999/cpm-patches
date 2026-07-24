@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_spamton_neo_enemy_Step_0.gml
 +++ b/Code/gml_Object_obj_spamton_neo_enemy_Step_0.gml
-@@ -1051,9 +1051,10 @@
+@@ -1051,7 +1051,7 @@
      {
          xx = __view_get(e__VW.XView, 0);
          yy = __view_get(e__VW.YView, 0);
@@ -8,11 +8,8 @@
 +        if (acting == 1 && actcon == 0 && (savemeactcon == 0 || scr_havechar(4)))
          {
              actcon = 1;
-+            var sneo_dialogue = global.msg[0];
              if (checkcount == 0)
-             {
-                 msgsetloc(0, "* SPAMTON NEO - YOU WON'T FIND HIGHER ATTACK AND DEFENSE ANYWHERE ELSE!!!/", "obj_spamton_neo_enemy_slash_Step_0_gml_375_0");
-@@ -1064,27 +1065,58 @@
+@@ -1064,27 +1064,56 @@
              {
                  msgsetloc(0, "* Spamton Neo - He is his own worst invention./%", "obj_spamton_neo_enemy_slash_Step_0_gml_381_0");
              }
@@ -21,9 +18,7 @@
 +                msgsetloc(0, "* Enemy Weakness: ICE&Try your strongest ice spell./%", "obj_berdlyb2_enemy_slash_Step_0_gml_371_0");
 -            scr_battletext_default();
 +                scr_battletext_default();
-+                msgset(0, "I SEEM TO HAVE [Out Of Memory]&WHAT I WAS GOING TO SAY./");
-+                msgnext("TELL [G O D] TO-&TELL [G O D] TO.../");
-+                msgnext("[TODO: fix the dialogue&not being reset properly.]/%");
++                msgsetloc(0, "ENJOY THE FIREWORKS,&KID!!!!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_87_0_b");
 +            }
 +            else
 +            {
@@ -89,7 +84,7 @@
          }
          if (actcon == 96 && !i_ex(obj_writer))
          {
-@@ -1170,13 +1202,32 @@
+@@ -1170,13 +1199,32 @@
                  snd_free(global.currentsong[0]);
              }
          }
@@ -103,13 +98,13 @@
          }
 +        if (actcon == 107 && instance_exists(obj_spellphase) && instance_exists(obj_spell_snowgrave))
 +        {
-+            if (alarm[4] <= 45 && !instance_exists(obj_spellphase.spellwriter))
++            if (alarm[4] > 30 && !instance_exists(obj_spellphase.spellwriter))
 +            {
-+                alarm[4] = 15;
++                snd_free(global.currentsong[0]);
++                alarm[4] = 30;
 +            }
 +            if (alarm[4] <= 30)
 +            {
-+                snd_free(global.currentsong[0]);
 +                with (obj_spellphase)
 +                {
 +                    with (spellwriter)
@@ -123,7 +118,7 @@
          if (actcon == 108 && !i_ex(obj_writer))
          {
              talktimer++;
-@@ -1197,23 +1248,44 @@
+@@ -1197,23 +1245,57 @@
              talktimer++;
              if ((button3_p() && talktimer > 15) || !i_ex(obj_writer))
              {
@@ -145,14 +140,15 @@
 -                }
 -                alarm[4] = 60;
 +                var endfight = true;
-+                if (instance_exists(obj_spell_snowgrave))
++                var snowgrave = instance_exists(obj_spell_snowgrave);
++                if (instance_exists(obj_spell_snowgrave) && !obj_spell_snowgrave.sneodone)
 +                {
 +                    with (obj_spell_snowgrave)
 +                    {
 +                        if (sneowait)
 +                        {
 +                            sneowait = false;
-+                            timer += 150;
++                            timer += 180;
 +                        }
 +                    }
 +                    endfight = obj_spell_snowgrave.sneodone;
@@ -160,13 +156,11 @@
 +                if (endfight)
 +                {
 +                    actcon = 111;
-+                    snd_stop_all();
-+                    snd_play(snd_noise);
-+                    with (obj_writer)
++                    if (!snowgrave)
 +                    {
-+                        instance_destroy();
++                        snd_play(snd_noise);
 +                    }
-+                    with (obj_spell_snowgrave)
++                    with (obj_writer)
 +                    {
 +                        instance_destroy();
 +                    }
@@ -176,16 +170,30 @@
 +                        blackall.image_xscale = 999;
 +                        blackall.image_yscale = 999;
 +                        blackall.depth = 0;
-+                        blackall.image_alpha = 1;
++                        if (!snowgrave)
++                        {
++                            blackall.image_alpha = 1;
++                        }
++                        else
++                        {
++                            blackall.image_alpha = 0;
++                        }
 +                        blackall.image_blend = c_black;
 +                        blackall.depth = -99999;
++                        if (snowgrave)
++                        {
++                            obj_spell_snowgrave.depth = blackall.depth - 10;
++                        }
 +                    }
-+                    alarm[4] = 60;
++                    if (!snowgrave)
++                    {
++                        alarm[4] = 60;
++                    }
 +                }
              }
          }
          if (actcon == 112)
-@@ -1271,27 +1343,32 @@
+@@ -1271,27 +1353,32 @@
          }
          if (scr_sideb_get_phase() > 2)
          {
@@ -238,7 +246,7 @@
              }
              if (actcon == 22)
              {
-@@ -1318,21 +1395,251 @@
+@@ -1318,21 +1405,251 @@
                  scr_act_charsprite_end();
                  actcon = 1;
              }
@@ -499,7 +507,7 @@
          }
          else
          {
-@@ -1356,7 +1663,7 @@
+@@ -1356,7 +1673,7 @@
                      maxvinecount = maxv;
                  }
                  var multicut = 1;
@@ -508,7 +516,7 @@
                  {
                      var mercyset = 4;
                      if ((global.mercymod[myself] + mercyset) > 100)
-@@ -1486,89 +1793,94 @@
+@@ -1486,89 +1803,94 @@
          {
              actcon = 1;
          }
@@ -684,7 +692,7 @@
          {
              actingsus = 0;
              actcon = 1;
-@@ -1576,89 +1888,94 @@
+@@ -1576,89 +1898,94 @@
              msgsetloc(0, "* You Super Charged! Can charge bullets faster! Lasts 20 shots./%", "obj_spamton_neo_enemy_slash_Step_0_gml_898_0");
              scr_battletext_default();
          }
@@ -860,7 +868,7 @@
          {
              actconral = 0;
              actingral = 0;
-@@ -1741,8 +2058,104 @@
+@@ -1741,8 +2068,104 @@
                  snd_play(snd_boost);
              }
          }
@@ -966,7 +974,7 @@
              usedact = 1;
              if (global.mercymod[myself] > 99 && endcon == 0)
              {
-@@ -2044,6 +2457,10 @@
+@@ -2044,6 +2467,10 @@
                          {
                              global.hp[3] = 1;
                          }
@@ -977,7 +985,7 @@
                          if (i_ex(obj_ch2_sceneex2))
                          {
                              obj_ch2_sceneex2.forcend = 1;
-@@ -2283,6 +2700,10 @@
+@@ -2283,6 +2710,10 @@
                          if (global.hp[3] < 1)
                          {
                              global.hp[3] = 1;
