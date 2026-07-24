@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_werewire_kristhrown_Create_0.gml
++++ b/Code/gml_Object_obj_werewire_kristhrown_Create_0.gml
+@@ -4,6 +4,8 @@
+ timer = 0;
+ collided = 0;
+ mypower = 10;
++krishero = -4;
++susiehero = -4;
+ 
+ enum e__VW
+ {

@@ -5,9 +5,9 @@
      {
          moveswapped = 1;
 -        if (global.charmove[1] == 1 && global.acting[1] == 0)
-+        if (global.charmove[1] == 1 && !(global.acting[1] == 1 && global.actingsingle[1] == 0 && global.actingsingle[0] == 1))
++        if (global.charmove[1] == 1 && global.acting[1] != 2)
          {
-+            if (global.acting[0] == 1 && global.actingsingle[0] == 0)
++            if (global.acting[1] == 1 && global.acting[0] == 2)
 +            {
 +                global.acting[0] = 0;
 +                global.faceaction[0] = 0;

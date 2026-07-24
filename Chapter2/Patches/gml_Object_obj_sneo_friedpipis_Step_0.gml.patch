@@ -1,5 +1,14 @@
 --- a/Code/gml_Object_obj_sneo_friedpipis_Step_0.gml
 +++ b/Code/gml_Object_obj_sneo_friedpipis_Step_0.gml
+@@ -13,7 +13,7 @@
+ }
+ if (timer > 25 && timer < 36)
+ {
+-    x = lerp(x, obj_herokris.x + 35, (timer - 25) / 10);
++    x = lerp(x, global.charinstance[global.currentactingchar].x + 35, (timer - 25) / 10);
+ }
+ if (timer > 35)
+ {
 @@ -23,7 +23,7 @@
  }
  if (timer == 45)

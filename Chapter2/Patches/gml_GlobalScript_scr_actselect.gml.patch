@@ -8,7 +8,7 @@
      {
          if (global.char[global.charturn] == 1)
          {
-@@ -9,38 +9,76 @@
+@@ -9,42 +9,80 @@
          if (global.char[global.charturn] == 2)
          {
              global.monsterinstance[arg0].actingsus = arg1 + 1;
@@ -38,7 +38,7 @@
          {
 -            global.acting[charpos[1]] = 1;
 +            var pos = scr_findchar_available(2);
-+            global.acting[pos] = 1;
++            global.acting[pos] = 2;
 +            global.actingsimul[pos] = 0;
 +            global.actingsingle[pos] = 0;
 +            if (pos == 0)
@@ -52,7 +52,7 @@
          {
 -            global.acting[charpos[2]] = 1;
 +            var pos = scr_findchar_available(3);
-+            global.acting[pos] = 1;
++            global.acting[pos] = 2;
 +            global.actingsimul[pos] = 0;
 +            global.actingsingle[pos] = 0;
 +            if (pos == 0)
@@ -65,15 +65,16 @@
 -        if (global.actactor[arg0][arg1] == 4)
 +        if (global.actactor[arg0][arg1] == 4 || global.actactor[arg0][arg1] == 6)
          {
--            global.acting[2] = 1;
 +            global.acting[0] = 1;
 +            global.actingsimul[0] = actsimul[arg1];
 +            global.actingsingle[0] = 1;
 +            global.monsterinstance[arg0].acting = arg1 + 1;
-             global.acting[1] = 1;
+-            global.acting[2] = 1;
++            global.acting[1] = 2;
+-            global.acting[1] = 1;
 +            global.actingsimul[1] = 0;
 +            global.actingsingle[1] = 0;
-+            global.acting[2] = 1;
++            global.acting[2] = 2;
 +            global.actingsimul[2] = 0;
 +            global.actingsingle[2] = 0;
          }
@@ -81,7 +82,7 @@
          {
 -            global.acting[charpos[3]] = 1;
 +            var pos = scr_findchar_available(4);
-+            global.acting[pos] = 1;
++            global.acting[pos] = 2;
 +            global.actingsimul[pos] = 0;
 +            global.actingsingle[pos] = 0;
 +            if (pos == 0)
@@ -93,6 +94,11 @@
          }
          for (i = 0; i < 3; i += 1)
          {
+-            if (global.acting[i] == 1)
++            if (global.acting[i] > 0)
+             {
+                 global.faceaction[i] = 6;
+                 global.charaction[i] = 9;
 @@ -53,6 +91,7 @@
      }
      else

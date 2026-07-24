@@ -1,0 +1,42 @@
+--- a/Code/gml_Object_obj_werewire_kristhrown_Step_0.gml
++++ b/Code/gml_Object_obj_werewire_kristhrown_Step_0.gml
+@@ -9,7 +9,7 @@
+         gravity = 0;
+         speed = 0;
+         x = xx - 40;
+-        y = obj_herokris.y;
++        y = krishero.y;
+         sprite_index = spr_krisb_idle;
+         image_angle = 0;
+         hspeed = 20;
+@@ -19,18 +19,18 @@
+ if (con == 10)
+ {
+     timer += 1;
+-    if (x >= (obj_herokris.x - 10))
++    if (x >= (krishero.x - 10))
+     {
+         if (collided == 0)
+         {
+             global.msg[0] = stringsetloc("* Missed!/%", "obj_werewire_kristhrown_slash_Step_0_gml_25_0");
+             scr_battletext_default();
+         }
+-        with (obj_herokris)
++        with (krishero)
+         {
+             visible = 1;
+         }
+-        with (obj_herosusie)
++        with (susiehero)
+         {
+             visible = 1;
+         }
+@@ -78,7 +78,7 @@
+         gravity = 0;
+         speed = 0;
+         x = xx - 40;
+-        y = obj_herokris.y;
++        y = krishero.y;
+         sprite_index = spr_krisb_idle;
+         image_angle = 0;
+         hspeed = 20;

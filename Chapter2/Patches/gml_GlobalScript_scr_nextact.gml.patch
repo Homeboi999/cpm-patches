@@ -1,7 +1,18 @@
 --- a/Code/gml_GlobalScript_scr_nextact.gml
 +++ b/Code/gml_GlobalScript_scr_nextact.gml
-@@ -5,7 +5,7 @@
-     global.acting[2] = 0;
+@@ -1,11 +1,15 @@
+ function scr_nextact()
+ {
+-    global.acting[0] = 0;
+-    global.acting[1] = 0;
+-    global.acting[2] = 0;
++    for (var i = 0; i < 3; i++)
++    {
++        if (global.acting[i] != 2)
++        {
++            global.acting[i] = 0;
++        }
++    }
      global.actingsingle[global.currentactingchar] = 0;
      __minstance = global.monsterinstance[global.actingtarget[global.currentactingchar]];
 -    with (__minstance)
@@ -9,7 +20,7 @@
      {
          acting = 0;
          actcon = 0;
-@@ -22,10 +22,24 @@
+@@ -22,10 +26,24 @@
              if (global.actingsingle[global.currentactingchar] == 1)
              {
                  __minstance = global.monsterinstance[global.actingtarget[global.currentactingchar]];
@@ -34,7 +45,7 @@
                          actconsus = 1;
                      }
                      if (global.actingsimul[global.currentactingchar] == 0)
-@@ -38,6 +52,7 @@
+@@ -38,6 +56,7 @@
                  {
                      with (__minstance)
                      {
@@ -42,7 +53,7 @@
                          actconral = 1;
                      }
                      if (global.actingsimul[global.currentactingchar] == 0)
-@@ -50,6 +65,7 @@
+@@ -50,6 +69,7 @@
                  {
                      with (__minstance)
                      {
@@ -50,7 +61,18 @@
                          actconnoe = 1;
                      }
                      if (global.actingsimul[global.currentactingchar] == 0)
-@@ -70,7 +86,6 @@
+@@ -63,6 +83,10 @@
+     }
+     if (global.currentactingchar >= 3)
+     {
++        for (var i = 0; i < 3; i++)
++        {
++            global.acting[i] = 0;
++        }
+         with (obj_monsterparent)
+         {
+             acting = 0;
+@@ -70,7 +94,6 @@
              actingral = 0;
              actingnoe = 0;
          }

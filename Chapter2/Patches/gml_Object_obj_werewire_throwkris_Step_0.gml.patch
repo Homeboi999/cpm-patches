@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_werewire_throwkris_Step_0.gml
++++ b/Code/gml_Object_obj_werewire_throwkris_Step_0.gml
+@@ -31,6 +31,8 @@
+         throwcon = 2;
+         snd_play(snd_ultraswing);
+         kris = instance_create(kx, ky, obj_werewire_kristhrown);
++        kris.krishero = krishero;
++        kris.susiehero = susiehero;
+         kris.speed = mypower;
+         kris.mypower = mypower;
+         kris.image_xscale = 2;

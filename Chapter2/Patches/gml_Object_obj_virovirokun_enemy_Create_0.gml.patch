@@ -1,0 +1,13 @@
+--- a/Code/gml_Object_obj_virovirokun_enemy_Create_0.gml
++++ b/Code/gml_Object_obj_virovirokun_enemy_Create_0.gml
+@@ -12,7 +12,9 @@
+ noelle_special_con = 0;
+ viro_talk = 0;
+ init = 0;
+-nise_noelle = -1000;
++nise_noelle[0] = -4;
++nise_noelle[1] = -4;
++nise_noelle[2] = -4;
+ noelle_fall = false;
+ noelle_fall_timer = 0;
+ sinerx = 0;

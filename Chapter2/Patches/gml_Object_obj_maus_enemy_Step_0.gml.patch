@@ -34,41 +34,34 @@
      }
      if (actcon == 30)
      {
-@@ -255,17 +261,27 @@
-             {
-                 scr_move_to_point_over_time(currentX, currentY, 30);
-             }
-+            if (scr_havechar(3))
-+            {
--            actcon = 31;
-+                actcon = 31;
-+            }
-+            else
-+            {
-+                actcon = 33;
-+            }
-             alarm[4] = 30;
-         }
+@@ -261,26 +267,36 @@
      }
      if (actcon == 32)
      {
+-        scr_speaker("ralsei");
+-        msgsetloc(0, "\\EK* ...don't we just have to fight the cat now?/", "obj_maus_enemy_slash_Step_0_gml_251_0");
+-        scr_anyface_next("susie", "K");
+-        msgnextloc("\\EK* Huh?/%", "obj_maus_enemy_slash_Step_0_gml_253_0");
+-        scr_battletext();
+         remove = true;
 +        if (scr_havechar(3))
 +        {
--        scr_speaker("ralsei");
 +            scr_speaker("ralsei");
--        msgsetloc(0, "\\EK* ...don't we just have to fight the cat now?/", "obj_maus_enemy_slash_Step_0_gml_251_0");
 +            msgsetloc(0, "\\EK* ...don't we just have to fight the cat now?/", "obj_maus_enemy_slash_Step_0_gml_251_0");
--        scr_anyface_next("susie", "K");
 +            scr_anyface_next("susie", "K");
--        msgnextloc("\\EK* Huh?/%", "obj_maus_enemy_slash_Step_0_gml_253_0");
 +            msgnextloc("\\EK* Huh?/%", "obj_maus_enemy_slash_Step_0_gml_253_0");
--        scr_battletext();
 +            scr_battletext();
+-        actcon = 33;
++            actcon = 33;
+-        alarm[4] = 30;
++            alarm[4] = 30;
 +        }
-         remove = true;
-         actcon = 33;
-         alarm[4] = 30;
-@@ -274,13 +290,16 @@
++        else
++        {
++            actcon = 34;
++        }
+     }
+     if (actcon == 34 && !instance_exists(obj_writer))
      {
          actcon = 1;
      }
@@ -91,7 +84,7 @@
      }
      if (actcon == 10)
      {
-@@ -338,7 +357,7 @@
+@@ -338,7 +354,7 @@
      }
      if (actingral == 1 && actconral == 1)
      {
@@ -100,7 +93,26 @@
          {
              with (obj_maus_enemy)
              {
-@@ -437,7 +456,7 @@
+@@ -362,13 +378,14 @@
+     if (actconral == 2 && !instance_exists(obj_writer))
+     {
+         actconral = 2.5;
++        var susieinstance = global.charinstance[scr_findchar(2)];
+-        basket = instance_create(obj_herosusie.x - 5, cameray() - 100, obj_maus_basket_susie);
++        basket = instance_create(susieinstance.x - 5, cameray() - 100, obj_maus_basket_susie);
+-        with (obj_herosusie)
++        with (susieinstance)
+         {
+             visible = 0;
+         }
+-        nise_susie = scr_dark_marker(obj_herosusie.x + 16, obj_herosusie.y - 1, spr_susie_shock_r);
++        nise_susie = scr_dark_marker(susieinstance.x + 16, susieinstance.y - 1, spr_susie_shock_r);
+-        nise_susie.depth = obj_herosusie.depth;
++        nise_susie.depth = susieinstance.depth;
+         scr_speaker("no_name");
+         msgsetloc(0, "* Susie was captured!!/%", "obj_maus_enemy_slash_Step_0_gml_422_0");
+         scr_battletext_default();
+@@ -437,7 +454,7 @@
              {
                  if ((global.actingtarget[__i] == myself && global.char[__i] > 0 && global.charspecial[__i] == 0) || (global.chartarget[__i] == myself && (global.charspecial[__i] == 100 || global.charspecial[__i] == 3)))
                  {
@@ -109,7 +121,16 @@
                      {
                          acttriggered = 1;
                      }
-@@ -480,6 +499,7 @@
+@@ -472,7 +489,7 @@
+             {
+                 instance_destroy();
+             }
+-            with (obj_herosusie)
++            with (global.charinstance[scr_findchar(2)])
+             {
+                 visible = 1;
+             }
+@@ -480,6 +497,7 @@
      }
      if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
      {

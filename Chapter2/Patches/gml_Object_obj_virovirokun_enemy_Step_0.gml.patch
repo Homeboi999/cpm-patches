@@ -83,8 +83,134 @@
              with (obj_monsterparent)
              {
                  if (global.mercymod[myself] < global.mercymax[myself])
-@@ -559,6 +588,7 @@
-                     image_alpha = 1;
+@@ -367,37 +396,58 @@
+             {
+                 visible = 1;
+                 image_alpha = 0;
++                other.nise_noelle[myself] = scr_dark_marker(x, y, spr_noelleb_act_nurse);
+             }
+-            nise_noelle = scr_dark_marker(obj_heronoelle.x, obj_heronoelle.y, spr_noelleb_act_nurse);
+-            with (nise_noelle)
++            for (var noepos = 0; noepos < 3; noepos++)
+             {
++                if (instance_exists(nise_noelle[noepos]))
++                {
++                    with (nise_noelle[noepos])
++                    {
+-                depth = 20 - (__view_get(e__VW.YView, 0) / 40);
++                        depth = 20 - (__view_get(e__VW.YView, 0) / 40);
+-                scr_oflash();
++                        scr_oflash();
+-                a = scr_afterimage();
++                        a = scr_afterimage();
+-                a.hspeed = 2.5;
++                        a.hspeed = 2.5;
+-                a.depth = depth + 1;
++                        a.depth = depth + 1;
+-                b = scr_afterimage();
++                        b = scr_afterimage();
+-                b.image_alpha = 0.6;
++                        b.image_alpha = 0.6;
+-                b.hspeed = 5;
++                        b.hspeed = 5;
+-                b.depth = depth + 2;
++                        b.depth = depth + 2;
++                        image_speed = 0;
++                    }
++                }
+             }
+-            nise_noelle.image_speed = 0;
+         }
+         if (noelle_fall_timer == 30)
+         {
+-            nise_noelle.image_index = 1;
+             snd_play(snd_noise);
+-            with (nise_noelle)
++            for (var noepos = 0; noepos < 3; noepos++)
+             {
++                if (instance_exists(nise_noelle[noepos]))
++                {
++                    with (nise_noelle[noepos])
++                    {
++                        image_index = 1;
+-                scr_shakeobj();
++                        scr_shakeobj();
++                    }
++                }
+             }
+         }
+         if (noelle_fall_timer == 50)
+         {
+             snd_play_x(snd_splat, 0.6, 0.8);
+-            nise_noelle.image_index = 2;
+-            nise_noelle.hspeed = 6;
+-            nise_noelle.friction = 0.75;
++            for (var noepos = 0; noepos < 3; noepos++)
++            {
++                if (instance_exists(nise_noelle[noepos]))
++                {
++                    with (nise_noelle[noepos])
++                    {
++                        image_index = 2;
++                        hspeed = 6;
++                        friction = 0.75;
++                    }
++                }
++            }
+         }
+         if (noelle_fall_timer > 80)
+         {
+@@ -520,15 +570,18 @@
+     {
+         if (!noelle_fall)
+         {
+-            if (i_ex(nise_noelle))
++            for (var noepos = 0; noepos < 3; noepos++)
+             {
+-                with (nise_noelle)
+-                {
+-                    instance_destroy();
+-                }
+-                with (obj_heronoelle)
+-                {
+-                    image_alpha = 1;
++                if (instance_exists(nise_noelle[noepos]))
++                {
++                    with (nise_noelle[noepos])
++                    {
++                        instance_destroy();
++                    }
++                    with (global.charinstance[noepos])
++                    {
++                        image_alpha = 1;
++                    }
+                 }
+             }
+             if (explosion != -4)
+@@ -548,17 +601,21 @@
+     {
+         if (!noelle_fall)
+         {
+-            if (i_ex(nise_noelle))
++            for (var noepos = 0; noepos < 3; noepos++)
+             {
+-                with (nise_noelle)
+-                {
+-                    instance_destroy();
+-                }
+-                with (obj_heronoelle)
+-                {
+-                    image_alpha = 1;
++                if (instance_exists(nise_noelle[noepos]))
++                {
++                    with (nise_noelle[noepos])
++                    {
++                        instance_destroy();
++                    }
++                    with (global.charinstance[noepos])
++                    {
++                        image_alpha = 1;
++                    }
                  }
              }
 +            scr_nextact_simul();
