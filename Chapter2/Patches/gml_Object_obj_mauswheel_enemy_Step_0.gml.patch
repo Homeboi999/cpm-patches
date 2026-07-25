@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_mauswheel_enemy_Step_0.gml
 +++ b/Code/gml_Object_obj_mauswheel_enemy_Step_0.gml
-@@ -146,24 +146,25 @@
+@@ -146,36 +146,44 @@
      }
      if (actingral == 1 && actconral == 1 && !i_ex(obj_writer))
      {
@@ -8,6 +8,11 @@
 +        if (!trappedText && scr_havechar(2))
          {
 +            with (obj_maus_enemy)
++            {
++                trappedText = true;
++                global.actsimulral[myself][0] = 1;
++            }
++            with (obj_mauswheel_enemy)
 +            {
 -            trappedText = true;
 +                trappedText = true;
@@ -37,7 +42,34 @@
          }
      }
      if (actconral == 2 && !instance_exists(obj_writer))
-@@ -387,6 +388,7 @@
+     {
+         actconral = 2.5;
+-        basket = instance_create(obj_herosusie.x - 5, cameray() - 100, obj_maus_basket_susie);
+-        with (obj_herosusie)
++        var susieinstance = global.charinstance[scr_findchar(2)];
++        basket = instance_create(susieinstance.x - 5, cameray() - 100, obj_maus_basket_susie);
++        basket.targety = susieinstance.y;
++        with (susieinstance)
+         {
+             visible = 0;
+         }
+-        nise_susie = scr_dark_marker(obj_herosusie.x + 16, obj_herosusie.y - 1, spr_susie_shock_r);
++        nise_susie = scr_dark_marker(susieinstance.x + 16, susieinstance.y - 1, spr_susie_shock_r);
+-        nise_susie.depth = obj_herosusie.depth;
++        nise_susie.depth = susieinstance.depth;
+         scr_speaker("no_name");
+         msgsetloc(0, "* Susie was captured!!/%", "obj_mauswheel_enemy_slash_Step_0_gml_209_0");
+         scr_battletext_default();
+@@ -379,7 +387,7 @@
+             {
+                 instance_destroy();
+             }
+-            with (obj_herosusie)
++            with (global.charinstance[scr_findchar(2)])
+             {
+                 visible = 1;
+             }
+@@ -387,6 +395,7 @@
      }
      if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
      {

@@ -264,7 +264,7 @@
                  scr_damage_enemy(0, dam);
              }
              if (actcon == 24)
-@@ -1318,21 +1405,251 @@
+@@ -1318,21 +1405,237 @@
                  scr_act_charsprite_end();
                  actcon = 1;
              }
@@ -346,16 +346,18 @@
 +            }
 +            if (actcon == 51)
 +            {
-+                var charSlot = scr_findchar(2);
++                var krisinstance = global.charinstance[global.currentactingchar];
++                var charSlot = scr_findchar_actpartner(2);
++                spellactcaster = global.charinstance[charSlot];
 +                global.faceaction[charSlot] = 2;
 +                global.charaction[charSlot] = 2;
 +                global.charspecial[charSlot] = 5;
 +                global.chartarget[charSlot] = 0;
 +                global.acting[charSlot] = 0;
 +                snd_play(snd_boost);
-+                if (i_ex(obj_herokris))
++                if (i_ex(krisinstance))
 +                {
-+                    heartanim = instance_create(obj_herokris.x + 30, obj_herokris.y + 50, obj_animation);
++                    heartanim = instance_create(krisinstance.x + 30, krisinstance.y + 50, obj_animation);
 +                    with (heartanim)
 +                    {
 +                        depth = -20;
@@ -365,12 +367,12 @@
 +                        image_speed = 1;
 +                        sprite_index = spr_soulshining;
 +                    }
-+                    with (obj_herokris)
++                    with (krisinstance)
 +                    {
 +                        scr_oflash();
 +                    }
 +                }
-+                with (obj_herosusie)
++                with (spellactcaster)
 +                {
 +                    scr_oflash();
 +                }
@@ -382,7 +384,7 @@
 +                if (acttimer >= 20)
 +                {
 +                    actcon = 1;
-+                    with (obj_herosusie)
++                    with (spellactcaster)
 +                    {
 +                        state = 0;
 +                    }
@@ -399,24 +401,26 @@
 +            }
 +            if (actcon == 61)
 +            {
++                var krisinstance = global.charinstance[global.currentactingchar];
 +                var charSlot;
 +                if (scr_havechar(3))
 +                {
-+                    charSlot = scr_findchar(3);
++                    charSlot = scr_findchar_actpartner(3);
 +                }
 +                else
 +                {
-+                    charSlot = scr_findchar(4);
++                    charSlot = scr_findchar_actpartner(4);
 +                }
++                spellactcaster = global.charinstance[charSlot];
 +                global.faceaction[charSlot] = 2;
 +                global.charaction[charSlot] = 2;
 +                global.charspecial[charSlot] = 6;
 +                global.chartarget[charSlot] = 0;
 +                global.acting[charSlot] = 0;
 +                snd_play(snd_boost);
-+                if (i_ex(obj_herokris))
++                if (i_ex(krisinstance))
 +                {
-+                    heartanim = instance_create(obj_herokris.x + 30, obj_herokris.y + 50, obj_animation);
++                    heartanim = instance_create(krisinstance.x + 30, krisinstance.y + 50, obj_animation);
 +                    with (heartanim)
 +                    {
 +                        depth = -20;
@@ -426,24 +430,14 @@
 +                        image_speed = 1;
 +                        sprite_index = spr_soulshining;
 +                    }
-+                    with (obj_herokris)
++                    with (krisinstance)
 +                    {
 +                        scr_oflash();
 +                    }
 +                }
-+                if (scr_havechar(3))
++                with (spellactcaster)
 +                {
-+                    with (obj_heroralsei)
-+                    {
-+                        scr_oflash();
-+                    }
-+                }
-+                else
-+                {
-+                    with (obj_heronoelle)
-+                    {
-+                        scr_oflash();
-+                    }
++                    scr_oflash();
 +                }
 +                actcon = 62;
 +            }
@@ -453,19 +447,9 @@
 +                if (acttimer >= 20)
 +                {
 +                    actcon = 1;
-+                    if (scr_havechar(3))
++                    with (spellactcaster)
 +                    {
-+                        with (obj_heroralsei)
-+                        {
-+                            state = 0;
-+                        }
-+                    }
-+                    else
-+                    {
-+                        with (obj_heronoelle)
-+                        {
-+                            state = 0;
-+                        }
++                        state = 0;
 +                    }
 +                }
 +            }
@@ -480,16 +464,18 @@
 +            }
 +            if (actcon == 71)
 +            {
-+                var charSlot = scr_findchar(4);
++                var krisinstance = global.charinstance[global.currentactingchar];
++                var charSlot = scr_findchar_actpartner(4);
++                spellactcaster = global.charinstance[charSlot];
 +                global.faceaction[charSlot] = 2;
 +                global.charaction[charSlot] = 2;
 +                global.charspecial[charSlot] = 12;
 +                global.chartarget[charSlot] = 0;
 +                global.acting[charSlot] = 0;
 +                snd_play(snd_boost);
-+                if (i_ex(obj_herokris))
++                if (i_ex(krisinstance))
 +                {
-+                    heartanim = instance_create(obj_herokris.x + 30, obj_herokris.y + 50, obj_animation);
++                    heartanim = instance_create(krisinstance.x + 30, krisinstance.y + 50, obj_animation);
 +                    with (heartanim)
 +                    {
 +                        depth = -20;
@@ -499,12 +485,12 @@
 +                        image_speed = 1;
 +                        sprite_index = spr_soulshining;
 +                    }
-+                    with (obj_herokris)
++                    with (krisinstance)
 +                    {
 +                        scr_oflash();
 +                    }
 +                }
-+                with (obj_heronoelle)
++                with (spellactcaster)
 +                {
 +                    scr_oflash();
 +                }
@@ -516,7 +502,7 @@
 +                if (acttimer >= 20)
 +                {
 +                    actcon = 1;
-+                    with (obj_heronoelle)
++                    with (spellactcaster)
 +                    {
 +                        state = 0;
 +                    }
@@ -525,7 +511,7 @@
          }
          else
          {
-@@ -1356,7 +1673,7 @@
+@@ -1356,7 +1659,7 @@
                      maxvinecount = maxv;
                  }
                  var multicut = 1;
@@ -534,7 +520,7 @@
                  {
                      var mercyset = 4;
                      if ((global.mercymod[myself] + mercyset) > 100)
-@@ -1486,89 +1803,94 @@
+@@ -1486,89 +1789,94 @@
          {
              actcon = 1;
          }
@@ -710,7 +696,7 @@
          {
              actingsus = 0;
              actcon = 1;
-@@ -1576,89 +1898,94 @@
+@@ -1576,89 +1884,94 @@
              msgsetloc(0, "* You Super Charged! Can charge bullets faster! Lasts 20 shots./%", "obj_spamton_neo_enemy_slash_Step_0_gml_898_0");
              scr_battletext_default();
          }
@@ -886,7 +872,7 @@
          {
              actconral = 0;
              actingral = 0;
-@@ -1741,8 +2068,104 @@
+@@ -1741,8 +2054,104 @@
                  snd_play(snd_boost);
              }
          }
@@ -992,7 +978,7 @@
              usedact = 1;
              if (global.mercymod[myself] > 99 && endcon == 0)
              {
-@@ -2044,6 +2467,10 @@
+@@ -2044,6 +2453,10 @@
                          {
                              global.hp[3] = 1;
                          }
@@ -1003,7 +989,7 @@
                          if (i_ex(obj_ch2_sceneex2))
                          {
                              obj_ch2_sceneex2.forcend = 1;
-@@ -2283,6 +2710,10 @@
+@@ -2283,6 +2696,10 @@
                          if (global.hp[3] < 1)
                          {
                              global.hp[3] = 1;

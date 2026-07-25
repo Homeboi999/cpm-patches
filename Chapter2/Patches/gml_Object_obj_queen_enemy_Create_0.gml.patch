@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_queen_enemy_Create_0.gml
 +++ b/Code/gml_Object_obj_queen_enemy_Create_0.gml
-@@ -71,14 +71,18 @@
+@@ -71,14 +71,19 @@
  krisflattercount = 0;
  susieflattercount = 0;
  ralseiflattercount = 0;
@@ -19,4 +19,5 @@
  susiemaxhp = global.maxhp[2];
  ralseimaxhp = global.maxhp[3];
 +noellemaxhp = global.maxhp[4];
++spellactcaster = -4;
  

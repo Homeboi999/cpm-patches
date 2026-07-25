@@ -1,0 +1,25 @@
+--- a/Code/gml_Object_obj_queen_throwkris_Step_0.gml
++++ b/Code/gml_Object_obj_queen_throwkris_Step_0.gml
+@@ -54,6 +54,8 @@
+             kris.direction = angle;
+             kris.image_angle = angle;
+             kris.gravity = krisgrav;
++            kris.krishero = krishero;
++            kris.susiehero = susieero;
+         }
+         else
+         {
+@@ -81,11 +83,11 @@
+ }
+ if (throwXcon == 3 && !instance_exists(obj_queen_throwtarget))
+ {
+-    with (obj_herokris)
++    with (krishero)
+     {
+         visible = 1;
+     }
+-    with (obj_herosusie)
++    with (susiehero)
+     {
+         visible = 1;
+     }

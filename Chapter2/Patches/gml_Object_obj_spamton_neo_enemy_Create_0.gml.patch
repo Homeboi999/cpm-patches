@@ -8,3 +8,9 @@
  weakentimer = 0;
  weakenshakeamount = 0;
  maxvinecount = 6;
+@@ -199,4 +200,5 @@
+ specialcon = 0;
+ flameframe = 0;
+ flamealpha = 0;
++spellactcaster = -4;
+ 

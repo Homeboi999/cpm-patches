@@ -84,7 +84,7 @@
      }
      if (actcon == 10)
      {
-@@ -338,7 +354,7 @@
+@@ -338,13 +354,18 @@
      }
      if (actingral == 1 && actconral == 1)
      {
@@ -93,14 +93,26 @@
          {
              with (obj_maus_enemy)
              {
-@@ -362,13 +378,14 @@
+                 trappedText = true;
+                 global.actsimulral[myself][0] = 1;
+             }
++            with (obj_mauswheel_enemy)
++            {
++                trappedText = true;
++                global.actsimulral[myself][0] = 1;
++            }
+             msgsetloc(0, "* Ralsei started putting peanut butter on a spoon and put it in a trap!!/%", "obj_maus_enemy_slash_Step_0_gml_343_0");
+             scr_mercyadd(myself, 50);
+             actconral = 2;
+@@ -362,13 +383,15 @@
      if (actconral == 2 && !instance_exists(obj_writer))
      {
          actconral = 2.5;
-+        var susieinstance = global.charinstance[scr_findchar(2)];
 -        basket = instance_create(obj_herosusie.x - 5, cameray() - 100, obj_maus_basket_susie);
-+        basket = instance_create(susieinstance.x - 5, cameray() - 100, obj_maus_basket_susie);
 -        with (obj_herosusie)
++        var susieinstance = global.charinstance[scr_findchar(2)];
++        basket = instance_create(susieinstance.x - 5, cameray() - 100, obj_maus_basket_susie);
++        basket.targety = susieinstance.y;
 +        with (susieinstance)
          {
              visible = 0;
@@ -112,16 +124,31 @@
          scr_speaker("no_name");
          msgsetloc(0, "* Susie was captured!!/%", "obj_maus_enemy_slash_Step_0_gml_422_0");
          scr_battletext_default();
-@@ -437,7 +454,7 @@
+@@ -437,10 +460,7 @@
              {
                  if ((global.actingtarget[__i] == myself && global.char[__i] > 0 && global.charspecial[__i] == 0) || (global.chartarget[__i] == myself && (global.charspecial[__i] == 100 || global.charspecial[__i] == 3)))
                  {
 -                    if (global.char[__i] == 3)
-+                    if (global.char[__i] > 2)
-                     {
-                         acttriggered = 1;
-                     }
-@@ -472,7 +489,7 @@
+-                    {
+-                        acttriggered = 1;
++                    acttriggered = 1;
+-                    }
+                     global.acting[__i] = 0;
+                     global.actingsimul[__i] = 0;
+                     global.actingsingle[__i] = 0;
+@@ -458,7 +478,10 @@
+             }
+             if (acttriggered)
+             {
+-                scr_nextact();
++                with (global.monsterinstance[myself])
++                {
++                    actcon = 1;
++                }
+             }
+             instance_destroy();
+         }
+@@ -472,7 +495,7 @@
              {
                  instance_destroy();
              }
@@ -130,7 +157,7 @@
              {
                  visible = 1;
              }
-@@ -480,6 +497,7 @@
+@@ -480,6 +503,7 @@
      }
      if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
      {

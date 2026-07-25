@@ -1,0 +1,52 @@
+--- a/Code/gml_Object_obj_queen_kristhrown_Step_0.gml
++++ b/Code/gml_Object_obj_queen_kristhrown_Step_0.gml
+@@ -9,7 +9,7 @@
+         gravity = 0;
+         speed = 0;
+         x = xx - 40;
+-        y = obj_herokris.y;
++        y = krishero.y;
+         sprite_index = spr_krisb_idle;
+         image_angle = 0;
+         hspeed = 20;
+@@ -19,20 +19,20 @@
+ if (con == 10)
+ {
+     timer += 1;
+-    if (x >= (obj_herokris.x - 10))
++    if (x >= (krishero.x - 10))
+     {
+         if (collided == 0)
+         {
+             global.msg[0] = stringsetloc("* Missed!/%", "obj_queen_kristhrown_slash_Step_0_gml_24_0");
+             scr_battletext_default();
+         }
+-        with (obj_herokris)
++        with (krishero)
+         {
+             visible = 1;
+         }
+         if (obj_queen_throwkris.throwXcon == 0)
+         {
+-            with (obj_herosusie)
++            with (susiehero)
+             {
+                 visible = 1;
+             }
+@@ -66,7 +66,7 @@
+         gravity = 0;
+         speed = 0;
+         x = xx - 40;
+-        y = obj_herokris.y;
++        y = krishero.y;
+         sprite_index = spr_krisb_idle;
+         image_angle = 0;
+         image_xscale = 2;
+@@ -106,6 +106,6 @@
+ }
+ if (y > (cameray() + 240))
+ {
+-    depth = obj_herokris.depth + 1000;
++    depth = krishero.depth + 1000;
+ }
+ 

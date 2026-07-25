@@ -581,11 +581,36 @@
          }
      }
      if (actcon == 33)
-@@ -1529,26 +1564,29 @@
+@@ -1477,15 +1512,19 @@
+             msgsetloc(0, "* Use UP and DOWN to Aim for the wires!", "obj_queen_enemy_slash_Step_0_gml_520_0");
+         }
+         scr_battletext_default();
++        var krisinstance = global.charinstance[global.currentactingchar];
++        var susieinstance = global.charinstance[scr_findchar_actpartner(2)];
+-        with (obj_herokris)
++        with (krisinstance)
+         {
+             visible = 0;
+         }
+-        with (obj_herosusie)
++        with (susieinstance)
+         {
+             visible = 0;
+         }
+-        throwsus = instance_create(obj_herosusie.x, obj_herosusie.y, obj_queen_throwkris);
++        throwsus = instance_create(susieinstance.x, susieinstance.y, obj_queen_throwkris);
++        throwsus.krishero = krisinstance;
++        throwsus.susiehero = susieinstance;
+         if (throwX == 1)
+         {
+             throwsus.throwXcon = 1;
+@@ -1529,28 +1568,33 @@
      }
      if (actcon == 11)
      {
-+        var charSlot = scr_findchar(2);
++        var krisinstance = global.charinstance[global.currentactingchar];
++        var charSlot = scr_findchar_actpartner(2);
++        spellactcaster = global.charinstance[charSlot];
 -        global.faceaction[1] = 2;
 +        global.faceaction[charSlot] = 2;
 -        global.charaction[1] = 2;
@@ -598,51 +623,66 @@
 -        global.acting[1] = 0;
 +        global.acting[charSlot] = 0;
          snd_play(snd_boost);
-+        if (i_ex(obj_herokris))
-+        {
 -        heartanim = instance_create(obj_herokris.x + 30, obj_herokris.y + 50, obj_animation);
-+            heartanim = instance_create(obj_herokris.x + 30, obj_herokris.y + 50, obj_animation);
 -        with (heartanim)
-+            with (heartanim)
 -        {
-+            {
 -            depth = -20;
-+                depth = -20;
 -            image_index = 0;
-+                image_index = 0;
 -            image_xscale = 2;
-+                image_xscale = 2;
 -            image_yscale = 2;
-+                image_yscale = 2;
 -            image_speed = 1;
-+                image_speed = 1;
 -            sprite_index = spr_soulshining;
-+                sprite_index = spr_soulshining;
 -        }
-+            }
 -        with (obj_herokris)
-+            with (obj_herokris)
 -        {
-+            {
 -            scr_oflash();
+-        }
+-        with (obj_herosusie)
++        if (i_ex(krisinstance))
++        {
++            heartanim = instance_create(krisinstance.x + 30, krisinstance.y + 50, obj_animation);
++            with (heartanim)
++            {
++                depth = -20;
++                image_index = 0;
++                image_xscale = 2;
++                image_yscale = 2;
++                image_speed = 1;
++                sprite_index = spr_soulshining;
++            }
++            with (krisinstance)
++            {
 +                scr_oflash();
 +            }
-         }
-         with (obj_herosusie)
++        }
++        with (spellactcaster)
          {
-@@ -1579,29 +1617,51 @@
+             scr_oflash();
+         }
+@@ -1562,7 +1606,7 @@
+         if (acttimer >= 20)
+         {
+             actcon = 1;
+-            with (obj_herosusie)
++            with (spellactcaster)
+             {
+                 state = 0;
+             }
+@@ -1579,27 +1623,41 @@
      }
      if (actcon == 21)
      {
++        var krisinstance = global.charinstance[global.currentactingchar];
 +        var charSlot;
 +        if (scr_havechar(3))
 +        {
-+            charSlot = scr_findchar(3);
++            charSlot = scr_findchar_actpartner(3);
 +        }
 +        else
 +        {
-+            charSlot = scr_findchar(4);
++            charSlot = scr_findchar_actpartner(4);
 +        }
++        spellactcaster = global.charinstance[charSlot];
 -        global.faceaction[2] = 2;
 +        global.faceaction[charSlot] = 2;
 -        global.charaction[2] = 2;
@@ -654,72 +694,50 @@
 -        global.acting[2] = 0;
 +        global.acting[charSlot] = 0;
          snd_play(snd_boost);
-+        if (i_ex(obj_herokris))
-+        {
 -        heartanim = instance_create(obj_herokris.x + 30, obj_herokris.y + 50, obj_animation);
-+            heartanim = instance_create(obj_herokris.x + 30, obj_herokris.y + 50, obj_animation);
 -        with (heartanim)
-+            with (heartanim)
 -        {
-+            {
 -            depth = -20;
-+                depth = -20;
 -            image_index = 0;
-+                image_index = 0;
 -            image_xscale = 2;
-+                image_xscale = 2;
 -            image_yscale = 2;
-+                image_yscale = 2;
 -            image_speed = 1;
-+                image_speed = 1;
 -            sprite_index = spr_soulshining;
-+                sprite_index = spr_soulshining;
 -        }
-+            }
 -        with (obj_heroralsei)
-+            with (obj_herokris)
 -        {
-+            {
 -            scr_oflash();
-+                scr_oflash();
-+            }
-         }
+-        }
 -        with (obj_herokris)
-+        if (scr_havechar(3))
-         {
--            scr_oflash();
-+            with (obj_heroralsei)
++        if (i_ex(krisinstance))
++        {
++            heartanim = instance_create(krisinstance.x + 30, krisinstance.y + 50, obj_animation);
++            with (heartanim)
++            {
++                depth = -20;
++                image_index = 0;
++                image_xscale = 2;
++                image_yscale = 2;
++                image_speed = 1;
++                sprite_index = spr_soulshining;
++            }
++            with (krisinstance)
 +            {
 +                scr_oflash();
 +            }
 +        }
-+        else
-+        {
-+            with (obj_heronoelle)
-+            {
-+                scr_oflash();
-+            }
++        with (spellactcaster)
+         {
+             scr_oflash();
          }
-         actcon = 22;
-     }
-@@ -1611,7 +1671,70 @@
+@@ -1611,7 +1669,62 @@
          if (acttimer >= 20)
          {
              actcon = 1;
-+            if (scr_havechar(3))
-+            {
 -            with (obj_heroralsei)
-+                with (obj_heroralsei)
-+                {
-+                    state = 0;
-+                }
-+            }
-+            else
++            with (spellactcaster)
 +            {
-+                with (obj_heronoelle)
-+                {
-+                    state = 0;
-+                }
++                state = 0;
 +            }
 +        }
 +    }
@@ -734,16 +752,18 @@
 +    }
 +    if (actcon == 31)
 +    {
-+        var charSlot = scr_findchar(4);
++        var krisinstance = global.charinstance[global.currentactingchar];
++        var charSlot = scr_findchar_actpartner(4);
++        spellactcaster = global.charinstance[charSlot];
 +        global.faceaction[charSlot] = 2;
 +        global.charaction[charSlot] = 2;
 +        global.charspecial[charSlot] = 12;
 +        global.chartarget[charSlot] = 0;
 +        global.acting[charSlot] = 0;
 +        snd_play(snd_boost);
-+        if (i_ex(obj_herokris))
++        if (i_ex(krisinstance))
 +        {
-+            heartanim = instance_create(obj_herokris.x + 30, obj_herokris.y + 50, obj_animation);
++            heartanim = instance_create(krisinstance.x + 30, krisinstance.y + 50, obj_animation);
 +            with (heartanim)
 +            {
 +                depth = -20;
@@ -753,12 +773,12 @@
 +                image_speed = 1;
 +                sprite_index = spr_soulshining;
 +            }
-+            with (obj_herokris)
++            with (krisinstance)
 +            {
 +                scr_oflash();
 +            }
 +        }
-+        with (obj_heronoelle)
++        with (spellactcaster)
 +        {
 +            scr_oflash();
 +        }
@@ -770,11 +790,11 @@
 +        if (acttimer >= 20)
 +        {
 +            actcon = 1;
-+            with (obj_heronoelle)
++            with (spellactcaster)
              {
                  state = 0;
              }
-@@ -1619,10 +1742,19 @@
+@@ -1619,10 +1732,19 @@
      }
      if (actcon == 1 && !instance_exists(obj_writer) && !instance_exists(obj_queen_drink_droplet))
      {

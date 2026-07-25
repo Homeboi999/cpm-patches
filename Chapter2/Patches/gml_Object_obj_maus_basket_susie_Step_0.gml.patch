@@ -1,0 +1,12 @@
+--- a/Code/gml_Object_obj_maus_basket_susie_Step_0.gml
++++ b/Code/gml_Object_obj_maus_basket_susie_Step_0.gml
+@@ -1,7 +1,7 @@
+-if (y > (obj_herosusie.y - 14 - speed))
++if (y > (targety - 14 - speed))
+ {
+     gravity = 0;
+     speed = 0;
+-    y = obj_herosusie.y - 14;
++    y = targety - 14;
+ }
+ 
