@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_clubsenemy_Step_0.gml
++++ b/Code/gml_Object_obj_clubsenemy_Step_0.gml
+@@ -308,7 +308,7 @@
+             global.monsterstatus[myself] = 1;
+         }
+         actcon = 0;
+-        scr_attackphase();
++        scr_nextact();
+     }
+ }
+ 

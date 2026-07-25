@@ -7,7 +7,7 @@
  if (global.flag[9] == 1)
  {
      global.batmusic[1] = mus_loop_ext(global.batmusic[0], 0.7, 1);
-@@ -102,7 +105,30 @@
+@@ -102,10 +105,36 @@
          }
      }
  }
@@ -35,10 +35,16 @@
 +        }
 +    }
 +}
++global.currentactingchar = 0;
  for (i = 0; i < 3; i += 1)
  {
      global.acting[i] = 0;
-@@ -193,6 +219,10 @@
++    global.actingchoice[i] = 0;
++    global.actingtarget[i] = 0;
+     global.charaction[i] = 0;
+     global.charspecial[i] = 0;
+     global.chartarget[i] = 0;
+@@ -193,6 +222,10 @@
          global.charinstance[i].char = 3;
          global.charinstance[i].depth = 200 - (i * 20);
      }

@@ -117,11 +117,10 @@
      }
      if (actcon == 10)
      {
-@@ -261,6 +307,34 @@
-         if (sleeping == 1)
+@@ -262,6 +308,34 @@
          {
              global.msg[0] = scr_84_get_lang_string("obj_susieenemy_slash_Step_0_gml_224_0");
-+        }
+         }
 +        if (scr_monsterpop() > 1 && scr_havechar(2))
 +        {
 +            for (dx = 0; dx < 3; dx += 1)
@@ -149,6 +148,16 @@
 +                    }
 +                }
 +            }
-         }
++        }
          idlesprite = spr_susie_enemy_defeat;
          sleepcounter = 0;
+         sleeping = 1;
+@@ -273,7 +347,7 @@
+     if (actcon == 1 && !instance_exists(obj_writer))
+     {
+         actcon = 0;
+-        scr_attackphase();
++        scr_nextact();
+     }
+ }
+ if (pacifycon > 0)

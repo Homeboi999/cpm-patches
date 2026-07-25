@@ -55,69 +55,89 @@
  }
  if (victoried == 1)
  {
-@@ -557,7 +598,18 @@
-         canpress = 1;
-         if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 2 || global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 4)
-         {
-+            var sussleep = false;
-+            for (dx = 0; dx < 3; dx += 1)
-+            {
-+                if (global.char[dx] == 2)
-+                {
-+                    if (global.charcond[dx] == 5)
-+                    {
-+                        sussleep = true;
-+                    }
-+                }
-+            }
--            if (havechar[1] == 0 || global.hp[2] <= 0)
-+            if (havechar[1] == 0 || (global.hp[2] <= 0 || sussleep))
-             {
-                 canpress = 0;
-             }
-@@ -569,6 +621,32 @@
-                 canpress = 0;
-             }
+@@ -555,20 +596,8 @@
          }
-+        if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 5)
-+        {
-+            var sussleep = false;
-+            for (dx = 0; dx < 3; dx += 1)
-+            {
-+                if (global.char[dx] == 2)
-+                {
-+                    if (global.charcond[dx] == 5)
-+                    {
-+                        sussleep = true;
-+                    }
-+                }
-+            }
-+            if ((havechar[1] == 1 && global.hp[2] <= 0) || sussleep)
-+            {
-+                canpress = 0;
-+            }
-+            if (havechar[2] == 1 && global.hp[3] <= 0)
-+            {
-+                canpress = 0;
-+            }
-+            if (havechar[1] != 1 && havechar[2] != 1)
-+            {
-+                canpress = 0;
-+            }
-+        }
+         global.tensionselect = global.actcost[thisenemy][global.bmenucoord[9][global.charturn]];
+         canpress = 1;
+-        if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 2 || global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 4)
+-        {
+-            if (havechar[1] == 0 || global.hp[2] <= 0)
+-            {
+-                canpress = 0;
+-            }
+-        }
+-        if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 3 || global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 4)
+-        {
+-            if (havechar[2] == 0 || global.hp[3] <= 0)
+-            {
+-                canpress = 0;
+-            }
+-        }
++        var actactor = global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]];
++        canpress = scr_actactor_available(actactor).available;
          if (canpress == 1)
          {
              if (button1_p() && global.canact[thisenemy][global.bmenucoord[9][global.charturn]] == 1 && global.tension >= global.tensionselect && onebuffer < 0)
-@@ -595,6 +673,12 @@
-                 {
-                     global.acting[2] = 1;
-                     global.acting[1] = 1;
+@@ -576,29 +605,44 @@
+                 onebuffer = 2;
+                 global.bmenuno = 0;
+                 selnoise = 1;
++                global.actingtarget[global.charturn] = thisenemy;
++                global.actingchoice[global.charturn] = global.bmenucoord[9][global.charturn];
+                 global.tension -= global.actcost[thisenemy][global.bmenucoord[9][global.charturn]];
+                 global.tensionselect = 0;
+-                if (instance_exists(global.monsterinstance[thisenemy]))
+-                {
+-                    global.monsterinstance[thisenemy].acting = global.bmenucoord[9][global.charturn] + 1;
+-                }
+-                global.acting[0] = 1;
+-                if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 2)
+-                {
+-                    global.acting[charpos[1]] = 1;
+-                }
+-                if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 3)
+-                {
+-                    global.acting[charpos[2]] = 1;
+-                }
+-                if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 4)
+-                {
+-                    global.acting[2] = 1;
+-                    global.acting[1] = 1;
++                var actindex = global.bmenucoord[9][global.charturn] + 1;
++                if (global.charturn == 0 && instance_exists(global.monsterinstance[thisenemy]))
++                {
++                    global.monsterinstance[thisenemy].acting = actindex;
 +                }
-+                if (global.actactor[global.bmenucoord[11][global.charturn]][global.bmenucoord[9][global.charturn]] == 5)
++                global.acting[global.charturn] = 1;
++                if (actactor == 2)
++                {
++                    var pos = scr_findchar_available(2);
++                    global.acting[pos] = 2;
++                    if (pos == 0)
++                    {
++                        global.monsterinstance[thisenemy].acting = actindex;
++                    }
++                }
++                if (actactor == 3)
++                {
++                    var pos = scr_findchar_available(3);
++                    global.acting[pos] = 2;
++                    if (pos == 0)
++                    {
++                        global.monsterinstance[thisenemy].acting = actindex;
++                    }
++                }
++                if (actactor == 4 || actactor == 5)
 +                {
 +                    global.acting[0] = 1;
-+                    global.acting[1] = 1;
-+                    global.acting[2] = 1;
++                    global.acting[1] = 2;
++                    global.acting[2] = 2;
++                    global.monsterinstance[thisenemy].acting = actindex;
                  }
                  for (i = 0; i < 3; i += 1)
                  {
+-                    if (global.acting[i] == 1)
++                    if (global.acting[i] > 0)
+                     {
+                         global.faceaction[i] = 6;
+                         global.charaction[i] = 9;

@@ -9,7 +9,7 @@
      {
          global.msg[0] = scr_84_get_lang_string("obj_rudinnranger_slash_Step_0_gml_181_0");
          scr_susface(1, 2);
-@@ -252,9 +252,24 @@
+@@ -252,14 +252,29 @@
              complimented = 1;
          }
      }
@@ -35,3 +35,9 @@
          {
              scr_mercyadd(myself, 100);
          }
+         actcon = 0;
+-        scr_attackphase();
++        scr_nextact();
+     }
+     if (actcon == 10 && instance_exists(obj_writer) == false)
+     {

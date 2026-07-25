@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_bloxer_enemy_Step_0.gml
 +++ b/Code/gml_Object_obj_bloxer_enemy_Step_0.gml
-@@ -195,26 +195,45 @@
+@@ -195,31 +195,50 @@
      }
      if (acting == 3 && actcon == 0)
      {
@@ -65,4 +65,10 @@
 +        }
      }
      if (actcon == 1 && !instance_exists(obj_writer))
+     {
+         actcon = 0;
+-        scr_attackphase();
++        scr_nextact();
+     }
+     if (actcon == 10 && swaptime == 0)
      {

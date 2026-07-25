@@ -1,85 +1,88 @@
 --- a/Code/gml_Object_obj_battlecontroller_Draw_0.gml
 +++ b/Code/gml_Object_obj_battlecontroller_Draw_0.gml
-@@ -307,14 +307,24 @@
+@@ -286,17 +286,18 @@
+     }
+     draw_sprite(spr_heart, 0, xx + icx, yy + icy);
+     scr_84_set_draw_font("mainbig");
++    var hovered_available_result = new actactor_status(true);
+     for (i = 0; i < 6; i += 1)
+     {
+         cant = 0;
+         chartime = global.actactor[global.bmenucoord[11][global.charturn]][i];
+         charoffset = 0;
+-        xoffset = 0;
++        var xoffset = 0;
+         if (i == 1 || i == 3 || i == 5)
+         {
+             xoffset = 230;
+         }
+-        yoffset = 0;
++        var yoffset = 0;
+         if (i == 2 || i == 3)
+         {
+             yoffset = 30;
+@@ -307,31 +308,37 @@
          }
          drawsus = 0;
          drawral = 0;
 -        susblend = 16777215;
-+        faceblend = 16777215;
 -        ralblend = 16777215;
-         if (chartime == 2 || chartime == 4)
-         {
-             drawsus = 1;
-+            var sussleep = false;
-+            for (dx = 0; dx < 3; dx += 1)
-+            {
-+                if (global.char[dx] == 2)
-+                {
-+                    if (global.charcond[dx] == 5)
-+                    {
-+                        sussleep = true;
-+                    }
-+                }
-+            }
+-        if (chartime == 2 || chartime == 4)
+-        {
+-            drawsus = 1;
 -            if (havechar[1] == 0 || global.hp[2] <= 0)
-+            if (havechar[1] == 0 || global.hp[2] <= 0 || sussleep)
-             {
+-            {
 -                susblend = 8421504;
-+                faceblend = 8421504;
-                 cant = 1;
-             }
-             charoffset = 36;
-@@ -324,10 +334,48 @@
-             drawral = 1;
-             if (havechar[2] == 0 || global.hp[3] <= 0)
-             {
+-                cant = 1;
+-            }
+-            charoffset = 36;
+-        }
+-        if (chartime == 3 || chartime == 4)
+-        {
+-            drawral = 1;
+-            if (havechar[2] == 0 || global.hp[3] <= 0)
+-            {
 -                ralblend = 8421504;
-+                faceblend = 8421504;
-                 cant = 1;
-             }
-             charoffset = 36;
-+        }
-+        if (chartime == 5)
+-                cant = 1;
+-            }
+-            charoffset = 36;
+-        }
+-        if (global.tension < global.actcost[global.bmenucoord[11][global.charturn]][i])
++        faceblend = 16777215;
++        switch (chartime)
 +        {
-+            if (havechar[1] == 1)
-+            {
++            case 2:
 +                drawsus = 1;
-+                var sussleep = false;
-+                for (dx = 0; dx < 3; dx += 1)
-+                {
-+                    if (global.char[dx] == 2)
-+                    {
-+                        if (global.charcond[dx] == 5)
-+                        {
-+                            sussleep = true;
-+                        }
-+                    }
-+                }
-+                if (global.hp[2] <= 0 || sussleep)
-+                {
-+                    cant = 1;
-+                    faceblend = 8421504;
-+                }
-+            }
-+            if (havechar[2] == 1)
-+            {
++                charoffset = 30;
++                break;
++            case 3:
 +                drawral = 1;
-+                if (global.hp[3] <= 0)
-+                {
-+                    cant = 1;
-+                    faceblend = 8421504;
-+                }
-+            }
-+            if (!havechar[1] && !havechar[2])
-+            {
-+                cant = 1;
-+                faceblend = 8421504;
-+            }
-+            charoffset = 0;
-         }
-         if (global.tension < global.actcost[global.bmenucoord[11][global.charturn]][i])
++                charoffset = 30;
++                break;
++            case 4:
++                drawsus = 1;
++                drawral = 1;
++                charoffset = 30;
++                break;
++            case 5:
++                drawsus = havechar[1] == 1;
++                drawral = havechar[2] == 1;
++                charoffset = 0;
++                break;
++        }
++        var available_result = scr_actactor_available(chartime);
++        if (i == actcoord)
++        {
++            hovered_available_result = available_result;
++        }
++        if (!available_result.available)
          {
-@@ -344,16 +392,46 @@
+             cant = 1;
++            faceblend = 8421504;
+         }
+         if (chartime == 4)
+         {
+@@ -344,16 +351,46 @@
          }
          if (chartime == 2)
          {
@@ -100,7 +103,7 @@
 +        }
 +        if (chartime == 5)
 +        {
-+            for (slot = 0; slot < 3; slot++)
++            for (var slot = 0; slot < 3; slot++)
 +            {
 +                var headsprite = spr_headkris;
 +                switch (global.char[slot])
@@ -115,7 +118,7 @@
 +                        headsprite = spr_headralsei;
 +                        break;
 +                }
-+                if (global.char[slot] > 1)
++                if (global.char[slot] > 0 && slot != global.charturn)
 +                {
 +                    charoffset += 30;
 +                    draw_sprite_ext(headsprite, 0, xx + charoffset + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
@@ -130,7 +133,37 @@
          }
          if (global.lang == "ja")
          {
-@@ -415,7 +493,14 @@
+@@ -374,7 +411,28 @@
+         }
+     }
+     draw_set_color(c_gray);
+-    draw_text(xx + 500, yy + 375, string_hash_to_newline(global.actdesc[global.bmenucoord[11][global.charturn]][actcoord]));
++    var displayed_actdesc = global.actdesc[global.bmenucoord[11][global.charturn]][actcoord];
++    switch (hovered_available_result.busy_char_name)
++    {
++        case undefined:
++            break;
++        case "kris":
++            displayed_actdesc = "Kris#is busy";
++            break;
++        case "susie":
++            displayed_actdesc = "Susie#is busy";
++            break;
++        case "ralsei":
++            displayed_actdesc = "Ralsei#is busy";
++            break;
++        case "everyone":
++            displayed_actdesc = "Everyone#is busy";
++            break;
++        default:
++            displayed_actdesc = "Someone#is busy";
++            break;
++    }
++    draw_text(xx + 500, yy + 375, string_hash_to_newline(displayed_actdesc));
+     if (global.tensionselect > 0)
+     {
+         thiscost = round((global.actcost[global.bmenucoord[11][global.charturn]][actcoord] / global.maxtension) * 100);
+@@ -415,7 +473,14 @@
                  draw_set_color(c_maroon);
                  draw_rectangle(xx + 400, yy + 380 + (i * 30), xx + 500, yy + 380 + (i * 30) + 15, false);
                  draw_set_color(c_lime);

@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_placeholderenemy_Step_0.gml
++++ b/Code/gml_Object_obj_placeholderenemy_Step_0.gml
+@@ -199,7 +199,7 @@
+     if (actcon == 1 && !instance_exists(obj_writer))
+     {
+         actcon = 0;
+-        scr_attackphase();
++        scr_nextact();
+     }
+ }
+ if (global.myfight == 7)

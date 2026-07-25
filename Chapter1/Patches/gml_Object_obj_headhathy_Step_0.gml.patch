@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_headhathy_Step_0.gml
 +++ b/Code/gml_Object_obj_headhathy_Step_0.gml
-@@ -175,54 +175,71 @@
+@@ -175,59 +175,76 @@
      }
      if (acting == 3 && actcon == 0)
      {
@@ -119,3 +119,9 @@
      }
      if (actcon == 1 && !instance_exists(obj_writer))
      {
+         actcon = 0;
+-        scr_attackphase();
++        scr_nextact();
+         if (delete_n == 1)
+         {
+             instance_destroy();

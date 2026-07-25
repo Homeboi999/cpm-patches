@@ -279,9 +279,12 @@
          global.monstercomment[myself] = scr_84_get_lang_string("obj_smallcheckers_enemy_slash_Step_0_gml_174_0");
          global.automiss[0] = 1;
          scr_battletext_default();
-@@ -150,7 +317,7 @@
+@@ -148,9 +315,9 @@
+     if (actcon == 1 && !instance_exists(obj_writer))
+     {
          actcon = 0;
-         scr_attackphase();
+-        scr_attackphase();
++        scr_nextact();
      }
 -    if (actcon == 5 && instance_exists(obj_writer) == false)
 +    if (actcon == 5 && !instance_exists(obj_writer))

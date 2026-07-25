@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_jigsawryenemy_Step_0.gml
++++ b/Code/gml_Object_obj_jigsawryenemy_Step_0.gml
+@@ -239,7 +239,7 @@
+     if (actcon == 1 && !instance_exists(obj_writer))
+     {
+         actcon = 0;
+-        scr_attackphase();
++        scr_nextact();
+     }
+ }
+ 
