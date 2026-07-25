@@ -30,7 +30,7 @@
                              pacifycon = 1;
                              global.spelldelay = 999;
                          }
-@@ -133,6 +147,10 @@
+@@ -133,11 +147,20 @@
              {
                  global.spelldelay = 70;
                  damage = ceil(((global.battlemag[arg1] * 5) + (global.battleat[arg1] * 11)) - (global.monsterdf[star] * 3));
@@ -41,7 +41,18 @@
                  if (global.automiss[star] == 1)
                  {
                      damage = 0;
-@@ -155,6 +173,10 @@
+                 }
+-                attack = instance_create(obj_herosusie.x, obj_herosusie.y, obj_rudebuster_anim);
++                attack = instance_create(global.charinstance[caster].x, global.charinstance[caster].y, obj_rudebuster_anim);
++                attack.depth = global.charinstance[caster].depth;
++                with (global.charinstance[caster])
++                {
++                    visible = 0;
++                }
+                 attack.damage = damage;
+                 attack.star = star;
+                 attack.caster = caster;
+@@ -155,11 +178,20 @@
              {
                  global.spelldelay = 70;
                  damage = ceil(((global.battlemag[arg1] * 6) + (global.battleat[arg1] * 13)) - (global.monsterdf[star] * 6));
@@ -52,7 +63,18 @@
                  if (global.automiss[star] == 1)
                  {
                      damage = 0;
-@@ -171,27 +193,30 @@
+                 }
+-                attack = instance_create(obj_herosusie.x, obj_herosusie.y, obj_rudebuster_anim);
++                attack = instance_create(global.charinstance[caster].x, global.charinstance[caster].y, obj_rudebuster_anim);
++                attack.depth = global.charinstance[caster].depth;
++                with (global.charinstance[caster])
++                {
++                    visible = 0;
++                }
+                 attack.damage = damage;
+                 attack.star = star;
+                 attack.caster = caster;
+@@ -171,27 +203,30 @@
              healnum = ceil(global.battlemag[arg1] * 5.5);
              for (i = 0; i < 3; i += 1)
              {
@@ -99,7 +121,7 @@
                  }
              }
              global.spelldelay = 15;
-@@ -227,6 +252,10 @@
+@@ -227,6 +262,10 @@
                  var minbattlemag = clamp(global.battlemag[arg1] - 10, 1, 999);
                  global.spelldelay = 40;
                  damage = ceil((minbattlemag * 30) + 90 + random(10));
@@ -110,7 +132,7 @@
                  attack = instance_create(global.monsterx[star], global.monstery[star], obj_icespell);
                  attack.damage = damage;
                  attack.star = star;
-@@ -254,6 +283,11 @@
+@@ -254,6 +293,11 @@
                      global.spelldelay = 999999;
                      attack.textwait = 1;
                  }
@@ -122,7 +144,7 @@
              }
              break;
          case 11:
-@@ -289,6 +323,27 @@
+@@ -289,6 +333,27 @@
                  }
              }
              break;
@@ -150,7 +172,7 @@
          case 100:
              if (global.monster[star] == 0)
              {
-@@ -326,6 +381,9 @@
+@@ -326,6 +391,9 @@
              }
              global.spelldelay = 0;
              break;
@@ -160,7 +182,7 @@
          case 200:
              break;
          case 201:
-@@ -514,6 +572,9 @@
+@@ -514,6 +582,9 @@
              item_use = true;
              break;
          case 233:

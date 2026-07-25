@@ -12,41 +12,65 @@
          {
              if (c == 0)
              {
-@@ -22,71 +23,71 @@
+@@ -22,71 +23,77 @@
              }
              gc = global.charturn;
              xchunk = 0;
 -            if (charpos[c] == 0 && chartotal == 3)
-+            if (pos == 0 && chartotal == 3)
-             {
-                 xchunk = 0;
-             }
+-            {
+-                xchunk = 0;
+-            }
 -            if (charpos[c] == 1 && chartotal == 3)
-+            if (pos == 1 && chartotal == 3)
-             {
-                 xchunk = 213;
-             }
+-            {
+-                xchunk = 213;
+-            }
 -            if (charpos[c] == 2 && chartotal == 3)
-+            if (pos == 2 && chartotal == 3)
-             {
-                 xchunk = 426;
-             }
+-            {
+-                xchunk = 426;
+-            }
 -            if (charpos[c] == 0 && chartotal == 2)
-+            if (pos == 0 && chartotal == 2)
-             {
-                 xchunk = 108;
-             }
+-            {
+-                xchunk = 108;
+-            }
 -            if (charpos[c] == 1 && chartotal == 2)
-+            if (pos == 1 && chartotal == 2)
-             {
-                 xchunk = 322;
-             }
+-            {
+-                xchunk = 322;
+-            }
 -            if (charpos[c] == 0 && chartotal == 1)
-+            if (pos == 0 && chartotal == 1)
-             {
-                 xchunk = 213;
-             }
+-            {
+-                xchunk = 213;
+-            }
 -            if (gc == charpos[c])
++            if (chartotal == 3)
++            {
++                if (pos == 0)
++                {
++                    xchunk = 0;
++                }
++                if (pos == 1)
++                {
++                    xchunk = 213;
++                }
++                if (pos == 2)
++                {
++                    xchunk = 426;
++                }
++            }
++            else if (chartotal == 2)
++            {
++                if (pos == 0 || (pos == 1 && global.char[0] == 0))
++                {
++                    xchunk = 108;
++                }
++                if (pos == 2 || (pos == 1 && global.char[2] == 0))
++                {
++                    xchunk = 322;
++                }
++            }
++            else if (chartotal == 1)
++            {
++                xchunk = 213;
++            }
 +            if (gc == pos)
              {
                  if (global.myfight == 0)
@@ -105,7 +129,7 @@
              {
                  btc[global.bmenucoord[0][global.charturn]] = 1;
              }
-@@ -133,16 +134,16 @@
+@@ -133,16 +140,16 @@
                  draw_sprite(scr_84_get_sprite("spr_btitem"), btc[2], xx + xchunk + 85 + icon_offset, (485 - bp) + yy);
                  draw_sprite(scr_84_get_sprite("spr_btspare"), btc[3], xx + xchunk + 120 + icon_offset, (485 - bp) + yy);
                  draw_sprite(scr_84_get_sprite("spr_btdefend"), btc[4], xx + xchunk + 155 + icon_offset, (485 - bp) + yy);
@@ -125,7 +149,7 @@
              {
                  draw_set_color(charcolor);
              }
-@@ -150,13 +151,13 @@
+@@ -150,13 +157,13 @@
              {
                  draw_set_color(bcolor);
              }
@@ -142,7 +166,7 @@
              b_offset = 480;
              if (global.fighting == 0)
              {
-@@ -172,44 +173,44 @@
+@@ -172,44 +179,44 @@
                  {
                      if (o_boxingcontroller.headsprite == spr_bhero_head_a)
                      {
@@ -201,7 +225,7 @@
              draw_set_color(c_white);
              draw_set_font(global.hpfont);
              if ((global.hp[c + 1] / global.maxhp[c + 1]) <= 0.25)
-@@ -223,27 +224,27 @@
+@@ -223,27 +230,27 @@
              draw_set_halign(fa_right);
              if (global.chapter == 2 && instance_exists(o_boxingcontroller) && o_boxingcontroller.dead != 0)
              {

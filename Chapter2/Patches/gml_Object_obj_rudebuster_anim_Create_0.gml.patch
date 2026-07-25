@@ -1,0 +1,19 @@
+--- a/Code/gml_Object_obj_rudebuster_anim_Create_0.gml
++++ b/Code/gml_Object_obj_rudebuster_anim_Create_0.gml
+@@ -7,15 +7,7 @@
+ caster = 0;
+ star = 0;
+ battlemode = 1;
+-if (instance_exists(obj_herosusie))
++if (!instance_exists(obj_herosusie))
+-{
+-    depth = obj_herosusie.depth;
+-    with (obj_herosusie)
+-    {
+-        visible = 0;
+-    }
+-}
+-else
+ {
+     battlemode = 0;
+ }
