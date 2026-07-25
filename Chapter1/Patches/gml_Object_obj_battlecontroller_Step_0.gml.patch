@@ -55,7 +55,103 @@
  }
  if (victoried == 1)
  {
-@@ -555,20 +596,8 @@
+@@ -189,6 +230,7 @@
+     }
+     if (global.bmenuno == 2)
+     {
++        thischar = global.charturn;
+         with (battlewriter)
+         {
+             skipme = 1;
+@@ -205,14 +247,13 @@
+         {
+             depth = 10;
+         }
+-        thischar = global.char[global.charturn];
+         if (right_p())
+         {
+             cango = 1;
+             spellcoord = global.bmenucoord[2][global.charturn];
+             if (spellcoord < 11)
+             {
+-                if (global.spell[thischar][global.bmenucoord[2][global.charturn] + 1] == 0)
++                if (global.battlespell[thischar][spellcoord + 1] == 0)
+                 {
+                     cango = 0;
+                     if ((spellcoord % 2) == 1 && spellcoord > 0)
+@@ -242,7 +283,7 @@
+         {
+             cango = 1;
+             spellcoord = global.bmenucoord[2][global.charturn];
+-            if (global.spell[thischar][1] != 0)
++            if (global.battlespell[thischar][1] != 0)
+             {
+                 if ((spellcoord % 2) == 0)
+                 {
+@@ -264,11 +305,11 @@
+             }
+             else
+             {
+-                if (global.spell[thischar][spellcoord + 2] == 0)
++                if (global.battlespell[thischar][spellcoord + 2] == 0)
+                 {
+                     cango = 0;
+                 }
+-                if (spellcoord == 5 && global.spell[thischar][6] != 0 && global.spell[thischar][7] == 0)
++                if (spellcoord == 5 && global.battlespell[thischar][6] != 0 && global.battlespell[thischar][7] == 0)
+                 {
+                     cango = 2;
+                 }
+@@ -298,26 +339,33 @@
+                 global.bmenucoord[2][global.charturn] -= 2;
+             }
+         }
+-        global.tensionselect = global.spellcost[thischar][global.bmenucoord[2][global.charturn]];
++        global.tensionselect = global.battlespellcost[thischar][global.bmenucoord[2][global.charturn]];
+-        if (button1_p() && global.spell[thischar][global.bmenucoord[2][global.charturn]] != 0 && onebuffer < 0)
++        if (button1_p() && global.battlespell[thischar][global.bmenucoord[2][global.charturn]] != 0 && onebuffer < 0)
+         {
+-            if (global.spellcost[thischar][global.bmenucoord[2][global.charturn]] <= global.tension)
++            if (global.battlespellcost[thischar][global.bmenucoord[2][global.charturn]] <= global.tension)
+             {
+                 onebuffer = 2;
+                 global.bmenuno = 0;
+                 selnoise = 1;
+-                scr_spellinfo(global.spell[thischar][global.bmenucoord[2][global.charturn]]);
+-                if (spelltarget == 0)
+-                {
+-                    scr_spellconsumeb();
+-                }
+-                if (spelltarget == 1)
+-                {
+-                    global.bmenuno = 8;
+-                }
+-                if (spelltarget == 2)
+-                {
+-                    global.bmenuno = 3;
++                if (global.battlespell[thischar][global.bmenucoord[2][global.charturn]] == -2)
++                {
++                    scr_actwait();
++                }
++                else
++                {
++                    scr_spellinfo(global.battlespell[global.charturn][global.bmenucoord[2][global.charturn]]);
++                    if (spelltarget == 0)
++                    {
++                        scr_spellconsumeb();
++                    }
++                    if (spelltarget == 1)
++                    {
++                        global.bmenuno = 8;
++                    }
++                    if (spelltarget == 2)
++                    {
++                        global.bmenuno = 3;
++                    }
+                 }
+             }
+         }
+@@ -555,20 +603,8 @@
          }
          global.tensionselect = global.actcost[thisenemy][global.bmenucoord[9][global.charturn]];
          canpress = 1;
@@ -78,7 +174,7 @@
          if (canpress == 1)
          {
              if (button1_p() && global.canact[thisenemy][global.bmenucoord[9][global.charturn]] == 1 && global.tension >= global.tensionselect && onebuffer < 0)
-@@ -576,29 +605,44 @@
+@@ -576,29 +612,44 @@
                  onebuffer = 2;
                  global.bmenuno = 0;
                  selnoise = 1;

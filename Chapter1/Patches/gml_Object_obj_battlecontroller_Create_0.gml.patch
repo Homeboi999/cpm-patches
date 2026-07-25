@@ -44,14 +44,41 @@
      global.charaction[i] = 0;
      global.charspecial[i] = 0;
      global.chartarget[i] = 0;
-@@ -193,6 +222,10 @@
-         global.charinstance[i].char = 3;
+@@ -115,7 +144,17 @@
+     global.battleat[i] = global.at[global.char[i]] + global.itemat[global.char[i]][0] + global.itemat[global.char[i]][1] + global.itemat[global.char[i]][2];
+     global.battledf[i] = global.df[global.char[i]] + global.itemdf[global.char[i]][0] + global.itemdf[global.char[i]][1] + global.itemdf[global.char[i]][2];
+     global.battlemag[i] = global.mag[global.char[i]] + global.itemmag[global.char[i]][0] + global.itemmag[global.char[i]][1] + global.itemmag[global.char[i]][2];
++    for (j = 0; j < 18; j++)
++    {
++        global.battlespell[i][j] = 0;
++        global.battlespellname[i][j] = " ";
++        global.battlespelldesc[i][j] = " ";
++        global.battlespellcost[i][j] = 0;
++        global.battlespelltarget[i][j] = 2;
++        global.battlespellspecial[i][j] = 0;
++    }
+ }
++scr_spellmenu_setup();
+ for (i = 0; i < 20; i += 1)
+ {
+     for (j = 0; j < 20; j += 1)
+@@ -194,6 +233,10 @@
          global.charinstance[i].depth = 200 - (i * 20);
      }
-+}
+ }
 +if (firstskip)
 +{
 +    scr_attackphase();
- }
++}
  slmxx = 0;
  slmyy = 0;
+ s_siner = 0;
+@@ -204,4 +247,8 @@
+ hpcolor[0] = c_aqua;
+ hpcolor[1] = c_fuchsia;
+ hpcolor[2] = c_lime;
++for (i = 0; i < 3; i++)
++{
++    hpcolorsoft[i] = merge_color(hpcolor[i], c_white, 0.5);
++}
+ 
