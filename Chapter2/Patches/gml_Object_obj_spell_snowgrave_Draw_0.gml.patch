@@ -1,6 +1,20 @@
 --- a/Code/gml_Object_obj_spell_snowgrave_Draw_0.gml
 +++ b/Code/gml_Object_obj_spell_snowgrave_Draw_0.gml
-@@ -18,7 +18,11 @@
+@@ -8,17 +8,22 @@
+     if (altpath == 1)
+     {
+         timer = -270;
+-        with (obj_heronoelle)
++        var noelleinstance = global.charinstance[caster];
++        with (noelleinstance)
+         {
+             visible = 0;
+         }
+-        fn = scr_dark_marker(obj_heronoelle.x, obj_heronoelle.y, spr_noelleb_spell);
++        fn = scr_dark_marker(noelleinstance.x, noelleinstance.y, spr_noelleb_spell);
+-        fn.depth = obj_heronoelle.depth;
++        fn.depth = noelleinstance.depth;
+         fn.image_index = 0;
          fncon = 0;
      }
  }
@@ -13,7 +27,7 @@
  if (altpath == 1)
  {
      if (fncon == 0)
-@@ -29,12 +33,22 @@
+@@ -29,12 +34,22 @@
              fntimer = 0;
              fncon = 0.5;
              mus_volume(global.batmusic[1], 0, 90);
@@ -37,7 +51,7 @@
          {
              with (fn)
              {
-@@ -45,18 +59,21 @@
+@@ -45,18 +60,21 @@
              fncon = 0.8;
              fntimer = 0;
              amplitude = 0;
@@ -64,7 +78,7 @@
          {
              fntimer = 0;
              fncon = 1;
-@@ -123,7 +140,18 @@
+@@ -123,7 +141,18 @@
  }
  draw_background_tiled_ext(bg_snowfall, snowspeed / 1.5, timer * 6, 2, 2, c_white, bgalpha);
  draw_background_tiled_ext(bg_snowfall, snowspeed, timer * 8, 2, 2, c_white, bgalpha * 2);
@@ -84,7 +98,7 @@
  {
      if (bgalpha < 0.5)
      {
-@@ -136,6 +164,10 @@
+@@ -136,6 +165,10 @@
  }
  if (timer == 1)
  {
@@ -95,7 +109,7 @@
      audio_play_sound(snd_snowgrave, 50, 0);
  }
  if (timer >= 20 && timer <= (75 + (altpath * 30)))
-@@ -157,9 +189,42 @@
+@@ -157,9 +190,42 @@
  }
  if (timer == 70 && altpath == 1)
  {
@@ -141,7 +155,7 @@
  }
  if (timer == (95 + (altpath * 30)) && damage > 0 && global.fighting == 1)
  {
-@@ -190,7 +255,7 @@
+@@ -190,7 +256,7 @@
                          __of = scr_oflash();
                      }
                  }
@@ -150,7 +164,7 @@
                  {
                      with (fb)
                      {
-@@ -219,14 +284,16 @@
+@@ -219,12 +285,15 @@
  {
      if (altpath)
      {
@@ -168,7 +182,5 @@
 -        obj_berdlyb2_enemy.fn = fn;
 -        obj_berdlyb2_enemy.fb = fb;
      }
--    instance_destroy();
+     instance_destroy();
  }
- 
- enum e__VW
