@@ -1,0 +1,38 @@
+--- a/Code/gml_Object_obj_mainchara_Step_0.gml
++++ b/Code/gml_Object_obj_mainchara_Step_0.gml
+@@ -611,22 +611,27 @@
+     if (global.facing == 0)
+     {
+         sprite_index = dsprite;
++        visual_info.sprite_index = visual_info.dsprite;
+     }
+     if (global.facing == 1)
+     {
+         sprite_index = rsprite;
++        visual_info.sprite_index = visual_info.rsprite;
+     }
+     if (global.facing == 2)
+     {
+         sprite_index = usprite;
++        visual_info.sprite_index = visual_info.usprite;
+     }
+     if (global.facing == 3)
+     {
+         sprite_index = lsprite;
++        visual_info.sprite_index = visual_info.lsprite;
+     }
+     if (climbing == 1)
+     {
+         sprite_index = climbsprite;
++        visual_info.sprite_index = visual_info.climbsprite;
+     }
+ }
+ if (stepping == 1 && fun == 0)
+@@ -865,6 +870,7 @@
+             lsprite = spr_krisl;
+             usprite = spr_krisu;
+         }
++        scr_set_chara_sprites(name, visual_info);
+     }
+ }
+ if (scr_debug())

@@ -1,0 +1,17 @@
+--- a/Code/gml_Object_obj_mainchara_Draw_0.gml
++++ b/Code/gml_Object_obj_mainchara_Draw_0.gml
+@@ -5,12 +5,12 @@
+     }
+     else if (swordmode == 0)
+     {
+-        draw_sprite_ext(sprite_index, image_index, x + tower_shake_xoffset, y, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
++        draw_sprite_ext(visual_info.sprite_index, image_index, (x + tower_shake_xoffset) - visual_info.halign, y - visual_info.valign, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
+     }
+ }
+ else if (swordmode == 0)
+ {
+-    draw_self();
++    draw_sprite_ext(visual_info.sprite_index, image_index, x - visual_info.halign, y - visual_info.valign, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
+ }
+ if (button1_p() && scr_debug())
+ {

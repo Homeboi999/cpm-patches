@@ -1,0 +1,66 @@
+--- a/Code/gml_Object_obj_caterpillarchara_Step_2.gml
++++ b/Code/gml_Object_obj_caterpillarchara_Step_2.gml
+@@ -34,16 +34,6 @@
+         {
+             target = 8;
+         }
+-        halign = (global.darkzone == 0) ? 3 : 6;
+-        valign = (global.darkzone == 0) ? 6 : 16;
+-        if (room == room_dw_castle_town)
+-        {
+-            if (scr_flag_get(793) == 1)
+-            {
+-                valign = 20;
+-                y = remy[target] - valign;
+-            }
+-        }
+     }
+ }
+ if (name == "noelle")
+@@ -56,38 +46,19 @@
+     {
+         target = scr_havechar("su") ? 17 : 12;
+     }
+-    halign = (global.darkzone == 0) ? 2 : 4;
+-    valign = (global.darkzone == 0) ? 9 : 18;
+ }
+ if (name == "ralsei")
+ {
+     slidesprite = spr_ralsei_slide;
+     climbsprite = 4837;
+-    halign = 2;
+-    valign = 12;
+-    if (global.chapter == 4)
+-    {
+-        if (sprite_index == spr_ralsei_splat_caterpillar)
+-        {
+-            halign = 12;
+-        }
+-        if (room == room_dw_castle_town)
+-        {
+-            if (scr_flag_get(793) == 1)
+-            {
+-                if (sprite_index == spr_ralsei_walk_left)
+-                {
+-                    halign -= 12;
+-                }
+-                if (sprite_index == spr_ralsei_walk_right)
+-                {
+-                    halign += 12;
+-                }
+-                valign = 16;
+-                y = remy[target] - valign;
+-            }
+-        }
+-    }
++}
++var alignment = scr_get_chara_alignment(name, self);
++var valign_changed = alignment.valign != valign;
++halign = alignment.halign;
++valign = alignment.valign;
++if (valign_changed)
++{
++    y = remy[target] - valign;
+ }
+ if (!ignoredepth)
+ {
