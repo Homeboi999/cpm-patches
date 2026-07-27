@@ -1,0 +1,96 @@
+--- a/Code/gml_Object_obj_mainchara_Step_0.gml
++++ b/Code/gml_Object_obj_mainchara_Step_0.gml
+@@ -298,7 +298,7 @@
+         bkx = 0;
+         if (px > 0)
+         {
+-            for (i = px; i >= 0; i -= 1)
++            for (var i = px; i >= 0; i -= 1)
+             {
+                 if (!place_meeting(x + i, y, obj_solidblock))
+                 {
+@@ -310,7 +310,7 @@
+         }
+         if (px < 0)
+         {
+-            for (i = px; i <= 0; i += 1)
++            for (var i = px; i <= 0; i += 1)
+             {
+                 if (!place_meeting(x + i, y, obj_solidblock))
+                 {
+@@ -351,7 +351,7 @@
+         }
+         if (py > 0)
+         {
+-            for (i = py; i >= 0; i -= 1)
++            for (var i = py; i >= 0; i -= 1)
+             {
+                 if (!place_meeting(x, y + i, obj_solidblock))
+                 {
+@@ -363,7 +363,7 @@
+         }
+         if (py < 0)
+         {
+-            for (i = py; i <= 0; i += 1)
++            for (var i = py; i <= 0; i += 1)
+             {
+                 if (!place_meeting(x, y + i, obj_solidblock))
+                 {
+@@ -382,7 +382,7 @@
+     {
+         xymeet = 1;
+         bkxy = 0;
+-        i = px;
++        var i = px;
+         j = py;
+         while (j != 0 || i != 0)
+         {
+@@ -450,6 +450,25 @@
+     }
+     x += px;
+     y += py;
++    moved = 0;
++    if (x != remx[0] || y != remy[0])
++    {
++        moved = 1;
++    }
++    if (moved == 1)
++    {
++        for (var i = 75; i > 0; i -= 1)
++        {
++            remx[i] = remx[i - 1];
++            remy[i] = remy[i - 1];
++            facing[i] = facing[i - 1];
++            sliding[i] = sliding[i - 1];
++        }
++        remx[0] = x;
++        remy[0] = y;
++        sliding[0] = sliding;
++        facing[0] = global.facing;
++    }
+ }
+ if (fun == 0)
+ {
+@@ -521,18 +540,22 @@
+     if (global.facing == 0)
+     {
+         sprite_index = dsprite;
++        visual_info.sprite_index = visual_info.dsprite;
+     }
+     if (global.facing == 1)
+     {
+         sprite_index = rsprite;
++        visual_info.sprite_index = visual_info.rsprite;
+     }
+     if (global.facing == 2)
+     {
+         sprite_index = usprite;
++        visual_info.sprite_index = visual_info.usprite;
+     }
+     if (global.facing == 3)
+     {
+         sprite_index = lsprite;
++        visual_info.sprite_index = visual_info.lsprite;
+     }
+ }
+ if (stepping == 1 && fun == 0)

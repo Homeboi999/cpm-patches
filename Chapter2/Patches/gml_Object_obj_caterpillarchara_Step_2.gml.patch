@@ -1,0 +1,66 @@
+--- a/Code/gml_Object_obj_caterpillarchara_Step_2.gml
++++ b/Code/gml_Object_obj_caterpillarchara_Step_2.gml
+@@ -3,6 +3,14 @@
+     ignoredepth = 0;
+     init = 1;
+ }
++var alignment = scr_get_chara_alignment(name, self);
++var valign_changed = alignment.valign != valign;
++halign = alignment.halign;
++valign = alignment.valign;
++if (valign_changed)
++{
++    y = remy[target] - valign;
++}
+ if (!ignoredepth)
+ {
+     scr_depth();
+@@ -52,46 +60,8 @@
+     remy[0] = obj_mainchara.y;
+     sliding[0] = obj_mainchara.sliding;
+     facing[0] = global.facing;
+-    if (usprite == spr_susieu_dark)
+-    {
+-        x = remx[target] - 6;
+-    }
+-    else if (usprite == spr_susie_walk_up_dw)
+-    {
+-        x = remx[target] - 6;
+-    }
+-    else if (usprite == spr_susie_walk_up_lw)
+-    {
+-        x = remx[target] - 3;
+-    }
+-    else if (usprite == spr_noelle_walk_up_dw)
+-    {
+-        x = remx[target] - 4;
+-    }
+-    else
+-    {
+-        x = remx[target] - 2;
+-    }
+-    if (usprite == spr_susieu_dark)
+-    {
+-        y = remy[target] - 16;
+-    }
+-    else if (usprite == spr_susie_walk_up_dw)
+-    {
+-        y = remy[target] - 16;
+-    }
+-    else if (usprite == spr_susie_walk_up_lw)
+-    {
+-        y = remy[target] - 6;
+-    }
+-    else if (usprite == spr_noelle_walk_up_dw)
+-    {
+-        y = remy[target] - 20;
+-    }
+-    else
+-    {
+-        y = remy[target] - 12;
+-    }
++    x = remx[target] - halign;
++    y = remy[target] - valign;
+     if (sliding[target] == 1)
+     {
+         x = remx[target];

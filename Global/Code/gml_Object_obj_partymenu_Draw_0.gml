@@ -149,26 +149,29 @@ if (partyMenu == 0 || partyMenu == 1)
     gapWarn = 0;
     dupeWarn = 0;
 
-    // Kris outside of Slot 1
-    if (global.char[1] == 1 || global.char[2] == 1)
-    {
-        krisWarn = 1;
-    }
-
     // Fully empty party
     if (global.char[0] == 0 && global.char[1] == 0 && global.char[2] == 0)
     {
         emptyWarn = 1;
     }
+
     // Someone in Slot 3 and not Slot 2
     if (global.char[1] <= 1 && global.char[2] > 1)
     {
         gapWarn = 1;
     }
 
-    // Skipped in Chapter 1 bc there's no X-Action (also stringsetsub() doesnt exist then lol)
-    if (global.chapter > 1)
+    // X-Actions and duplicates have been fixed in
+    // in Chapters 1 & 2, so these warnings aren't
+    // needed anymore.
+    if (global.chapter > 2)
     {
+        // Kris outside of Slot 1
+        if (global.char[1] == 1 || global.char[2] == 1)
+        {
+            krisWarn = 1;
+        }
+
         // Anyone but Kris in Slot 1
         if (global.char[0] > 1 && global.chapter > 1)
         {
@@ -187,9 +190,11 @@ if (partyMenu == 0 || partyMenu == 1)
             {
                 otherSlot = i + 1;
             }
+
             if (global.char[i] == global.char[otherSlot])
             {
                 dupeChar = global.char[i];
+                
                 if (dupeChar != 0)
                 {
                     dupeWarn = 1;
