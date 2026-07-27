@@ -1,19 +1,13 @@
 --- a/Code/gml_Object_obj_musicalslide_Step_2.gml
 +++ b/Code/gml_Object_obj_musicalslide_Step_2.gml
-@@ -38,57 +38,64 @@
- }
- table.x = sweet.x - 54;
- table.y = sweet.y + 58;
-+var slideSprites = [2491, 658, 836, 820, 3390];
- if (state == 0)
- {
-     if (instance_exists(obj_mainchara) && obj_mainchara.y > gameIntroY)
+@@ -44,36 +44,50 @@
      {
          with (obj_mainchara)
          {
 -            sprite_index = spr_krisd_slide;
-+            sprite_index = slideSprites[1];
++            visual_info.sprite_index = visual_info.slidesprite;
              fun = 1;
++            sliding = 1;
              autorun = 2;
              cutscene = 1;
              battlemode = 1;
@@ -38,25 +32,6 @@
 -        }
 -        slideSus = instance_create(susX, susY, obj_marker);
 -        slideRal = instance_create(ralX, ralY, obj_marker);
--        with (slideSus)
--        {
--            con = 0;
--            sprite_index = spr_susie_slide;
--            image_xscale = 2;
--            image_yscale = 2;
--            image_speed = 0.25;
--            depth = 900000;
--            timer = 0;
--        }
--        with (slideRal)
--        {
--            con = 0;
--            sprite_index = spr_ralsei_slide;
--            image_xscale = 2;
--            image_yscale = 2;
--            image_speed = 0.25;
--            depth = 900000;
--            timer = 0;
 +        if (instance_exists(global.cinstance[0]))
 +        {
 +            with (global.cinstance[0])
@@ -66,6 +41,13 @@
 +                visible = false;
 +            }
 +            slideSus = instance_create(susX, susY, obj_marker);
++            slideSus.sprite_index = global.cinstance[0].slidesprite;
++        }
++        else
++        {
++            slideSus = instance_create(obj_mainchara.x, obj_mainchara.x, obj_marker);
++            slideSus.sprite_index = spr_susie_slide;
++            slideSus.visible = false;
 +        }
 +        if (instance_exists(global.cinstance[1]))
 +        {
@@ -76,41 +58,210 @@
 +                visible = false;
 +            }
 +            slideRal = instance_create(ralX, ralY, obj_marker);
++            slideRal.sprite_index = global.cinstance[1].slidesprite;
 +        }
-+        if (slideSus != 0)
++        else
 +        {
-+            with (slideSus)
-+            {
-+                con = 0;
-+                sprite_index = slideSprites[global.char[1]];
-+                image_xscale = 2;
-+                image_yscale = 2;
-+                image_speed = 0.25;
-+                depth = 900000;
-+                timer = 0;
-+            }
++            slideRal = instance_create(obj_mainchara.x, obj_mainchara.x, obj_marker);
++            slideRal.sprite_index = spr_ralsei_slide;
++            slideRal.visible = false;
 +        }
-+        if (slideRal != 0)
+         with (slideSus)
+         {
+             con = 0;
+-            sprite_index = spr_susie_slide;
+             image_xscale = 2;
+             image_yscale = 2;
+             image_speed = 0.25;
+@@ -83,7 +97,6 @@
+         with (slideRal)
+         {
+             con = 0;
+-            sprite_index = spr_ralsei_slide;
+             image_xscale = 2;
+             image_yscale = 2;
+             image_speed = 0.25;
+@@ -97,92 +110,86 @@
+         instance_create(0, 0, obj_battlealphaer);
+     }
+ }
+-if (slideRal != 0)
++with (slideRal)
+ {
+-    with (slideRal)
+-    {
+-        depth = 900000;
+-        if (con == 0)
+-        {
+-            desiredpoint = 210;
+-            if ((charaX() - 64 - 10) > desiredpoint)
+-            {
+-                desiredpoint = charaX() - 64 - 10;
+-            }
+-            scr_move_to_point_over_time(desiredpoint, 148, 10);
+-            con++;
+-        }
+-        if (con == 1)
+-        {
+-            timer++;
+-            if (timer == 60)
+-            {
+-                con++;
+-            }
+-        }
+-        if (con == 2)
+-        {
+-            if (other.slideSus.con == 2)
+-            {
+-                other.slideSus.con = 3;
+-                con++;
+-            }
+-        }
+-        if (con == 3)
+-        {
+-            y += 8;
+-            image_alpha *= 0.99;
+-            if (y > (cameray() + 480 + 32))
+-            {
+-                instance_destroy();
+-            }
+-        }
+-        if (y > 360)
+-        {
+-            image_alpha -= 0.1;
+-        }
++    depth = 900000;
++    if (con == 0)
++    {
++        desiredpoint = 210;
++        if ((charaX() - 64 - 10) > desiredpoint)
 +        {
-+            with (slideRal)
-+            {
-+                con = 0;
-+                sprite_index = slideSprites[global.char[2]];
-+                image_xscale = 2;
-+                image_yscale = 2;
-+                image_speed = 0.25;
-+                depth = 900000;
-+                timer = 0;
-+            }
++            desiredpoint = charaX() - 64 - 10;
++        }
++        scr_move_to_point_over_time(desiredpoint, 148, 10);
++        con++;
++    }
++    if (con == 1)
++    {
++        timer++;
++        if (timer == 60)
++        {
++            con++;
++        }
++    }
++    if (con == 2)
++    {
++        if (other.slideSus.con == 2)
++        {
++            other.slideSus.con = 3;
++            con++;
++        }
++    }
++    if (con == 3)
++    {
++        y += 8;
++        image_alpha *= 0.99;
++        if (y > (cameray() + 480 + 32))
++        {
++            instance_destroy();
++        }
++    }
++    if (y > 360)
++    {
++        image_alpha -= 0.1;
+     }
+ }
+-if (slideSus != 0)
++with (slideSus)
+ {
+-    with (slideSus)
+-    {
+-        depth = 900000;
+-        if (con == 0)
+-        {
+-            desiredpoint = 260;
+-            if (desiredpoint < (charaX() + 28 + 10))
+-            {
+-                desiredpoint = charaX() + 28 + 10;
+-            }
+-            desiredpoint = clamp(desiredpoint, 260, 390);
+-            scr_move_to_point_over_time(desiredpoint, 148, 10);
++    depth = 900000;
++    if (con == 0)
++    {
++        desiredpoint = 260;
++        if (desiredpoint < (charaX() + 28 + 10))
++        {
++            desiredpoint = charaX() + 28 + 10;
++        }
++        desiredpoint = clamp(desiredpoint, 260, 390);
++        scr_move_to_point_over_time(desiredpoint, 148, 10);
++        con++;
++    }
++    if (con == 1)
++    {
++        timer++;
++        if (timer == 60)
++        {
+             con++;
          }
-         snd_play(snd_noise);
-         slideSound = snd_loop(snd_paper_surf);
-@@ -232,7 +239,7 @@
+-        if (con == 1)
+-        {
+-            timer++;
+-            if (timer == 60)
+-            {
+-                con++;
+-            }
+-        }
+-        if (con == 2)
+-        {
+-        }
+-        if (con == 3)
+-        {
+-            y += 10;
+-            image_alpha *= 0.99;
+-            if (y > (cameray() + 480 + 32))
+-            {
+-                instance_destroy();
+-            }
+-        }
+-        if (y > 360)
+-        {
+-            image_alpha -= 0.1;
+-        }
++    }
++    if (con == 2)
++    {
++    }
++    if (con == 3)
++    {
++        y += 10;
++        image_alpha *= 0.99;
++        if (y > (cameray() + 480 + 32))
++        {
++            instance_destroy();
++        }
++    }
++    if (y > 360)
++    {
++        image_alpha -= 0.1;
+     }
+ }
+ if (state > 0)
+@@ -206,6 +213,7 @@
+     }
+     with (obj_mainchara)
+     {
++        image_index++;
+         x = max(x, 200);
+     }
+ }
+@@ -232,7 +240,7 @@
  {
      with (obj_mainchara)
      {
 -        sprite_index = spr_krisd_slide;
-+        sprite_index = slideSprites[1];
++        visual_info.sprite_index = visual_info.slidesprite;
          autorun = 2;
      }
      var _camY = cameray();

@@ -28,7 +28,7 @@
 +    remx[i] = x;
 +    remy[i] = y;
 +    facing[i] = global.facing;
-+    sliding[i] = 0;
++    wassliding[i] = 0;
 +    special[i] = 0;
  }
  initwd = sprite_width;

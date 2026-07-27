@@ -9,6 +9,7 @@ function scr_set_chara_sprites(arg0, arg1)
                 rsprite = spr_krisr;
                 usprite = spr_krisu;
                 lsprite = spr_krisl;
+                slidesprite = spr_krisd_slide;
                 if (global.darkzone == 1)
                 {
                     dsprite = spr_krisd_dark;
@@ -43,6 +44,7 @@ function scr_set_chara_sprites(arg0, arg1)
                 dsprite = spr_ralseid;
                 rsprite = spr_ralseir;
                 lsprite = spr_ralseil;
+                slidesprite = spr_ralsei_slide;
                 if (global.chapter >= 2)
                 {
                     usprite = spr_ralsei_walk_up;
@@ -56,6 +58,7 @@ function scr_set_chara_sprites(arg0, arg1)
                 dsprite = spr_noelle_walk_down_dw;
                 rsprite = spr_noelle_walk_right_dw;
                 lsprite = spr_noelle_walk_left_dw;
+                slidesprite = spr_noelle_slide;
                 if (global.chapter == 2 && global.plot == 95)
                 {
                     dsprite = spr_noelle_walk_down_blush_dw;

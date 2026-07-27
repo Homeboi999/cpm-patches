@@ -1,10 +1,41 @@
 --- a/Code/gml_Object_obj_mainchara_Draw_0.gml
 +++ b/Code/gml_Object_obj_mainchara_Draw_0.gml
-@@ -1,6 +1,6 @@
+@@ -1,6 +1,13 @@
  if (swordmode == 0)
  {
 -    draw_self();
-+    draw_sprite_ext(visual_info.sprite_index, image_index, x - visual_info.halign, y - visual_info.valign, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
++    if (sliding == 1)
++    {
++        draw_sprite_ext(visual_info.sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
++    }
++    else
++    {
++        draw_sprite_ext(visual_info.sprite_index, image_index, x - visual_info.halign, y - visual_info.valign, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
++    }
  }
  if (button1_p() && scr_debug())
  {
+@@ -62,7 +69,11 @@
+ battleheart.image_alpha = battlealpha;
+ if (swordmode == 0)
+ {
++    if (sliding == 1)
++    {
++        draw_sprite_ext(spr_krisd_slide_heart, image_index, x, y, image_xscale, image_yscale, 0, image_blend, battlealpha);
++    }
+-    if (fun == 0)
++    else if (fun == 0)
+     {
+         if (global.facing == 0)
+         {
+@@ -80,10 +91,6 @@
+         {
+             draw_sprite_ext(spr_krisl_heart, image_index, x, y, image_xscale, image_yscale, 0, image_blend, battlealpha);
+         }
+-    }
+-    else if (sprite_index == spr_krisd_slide)
+-    {
+-        draw_sprite_ext(spr_krisd_slide_heart, image_index, x, y, image_xscale, image_yscale, 0, image_blend, battlealpha);
+     }
+ }
+ draw_sprite_ext(spr_heart_outline2, 0, x + 12, y + 40, 1, 1, 0, c_white, battlealpha * 2);

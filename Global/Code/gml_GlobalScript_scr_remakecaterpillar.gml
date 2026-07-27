@@ -22,10 +22,13 @@ function scr_remakecaterpillar()
                 if (global.char[pos] > 0)
                 {
                     var name = scr_char_id_to_name(global.char[pos]);
+                    var alignment = scr_get_chara_alignment(name);
                     with (chara)
                     {
                         self.name = name;
                         scr_set_chara_sprites(name, self);
+                        x = remx[target] - alignment.halign;
+                        y = remy[target] - alignment.valign;
                     }
                 }
                 else
@@ -39,8 +42,11 @@ function scr_remakecaterpillar()
             else if (global.char[pos] > 0)
             {
                 var targetpos = 12 * pos;
-                var makex = obj_mainchara.remx[targetpos];
-                var makey = obj_mainchara.remy[targetpos];
+                var name = scr_char_id_to_name(global.char[i]);
+                var alignment = scr_get_chara_alignment(name);
+
+                var makex = obj_mainchara.remx[targetpos] - alignment.halign;
+                var makey = obj_mainchara.remy[targetpos] - alignment.valign;
                 scr_makecaterpillar(makex, makey, global.char[pos], pos - 1);
             }
         }

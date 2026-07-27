@@ -156,7 +156,10 @@ if (partyMenu == 0 || partyMenu == 1)
     }
 
     // Someone in Slot 3 and not Slot 2
-    if (global.char[1] <= 1 && global.char[2] > 1)
+    // Kris only counts as a "gap" in unstable versions,
+    // since the stable chapters have support for them.
+    var gapchar = (isStable) ? 0 : 1;
+    if (global.char[1] <= gapchar && global.char[2] > gapchar)
     {
         gapWarn = 1;
     }

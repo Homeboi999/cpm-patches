@@ -41,7 +41,7 @@
 +    remx[i] = parent.remx[i];
 +    remy[i] = parent.remy[i];
 +    facing[i] = parent.facing[i];
-+    sliding[i] = parent.sliding[i];
++    sliding[i] = parent.wassliding[i];
  }
  depth = parent.depth + 5;
  mywidth = sprite_width;

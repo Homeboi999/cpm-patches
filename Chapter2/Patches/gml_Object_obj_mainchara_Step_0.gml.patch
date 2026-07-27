@@ -61,17 +61,34 @@
 +            remx[i] = remx[i - 1];
 +            remy[i] = remy[i - 1];
 +            facing[i] = facing[i - 1];
-+            sliding[i] = sliding[i - 1];
++            wassliding[i] = wassliding[i - 1];
 +        }
 +        remx[0] = x;
 +        remy[0] = y;
-+        sliding[0] = sliding;
++        wassliding[0] = sliding;
 +        facing[0] = global.facing;
 +    }
  }
  if (fun == 0)
  {
-@@ -521,18 +540,22 @@
+@@ -462,6 +481,10 @@
+     {
+         walk = 1;
+     }
++    if (sliding == 1)
++    {
++        walk = 1;
++    }
+     if (walk == 1)
+     {
+         walkbuffer = 6;
+@@ -516,23 +539,27 @@
+     }
+     walkbuffer -= 0.75;
+ }
+-if (fun == 0)
++if (fun == 0 && sliding == 0)
+ {
      if (global.facing == 0)
      {
          sprite_index = dsprite;
