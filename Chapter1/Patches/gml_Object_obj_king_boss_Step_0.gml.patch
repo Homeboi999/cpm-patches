@@ -146,7 +146,99 @@
      }
      if (actcon == 10)
      {
-@@ -440,7 +450,7 @@
+@@ -350,13 +360,16 @@
+     }
+     if (actcon == 11)
+     {
++        var krisinstance = global.charinstance[global.currentactingchar];
++        var charslot = scr_findchar_actpartner(2);
++        spellactpartner = global.charinstance[charslot];
+-        global.faceaction[1] = 2;
++        global.faceaction[charslot] = 2;
+-        global.charaction[1] = 2;
++        global.charaction[charslot] = 2;
+-        global.charspecial[1] = 5;
++        global.charspecial[charslot] = 5;
+-        global.chartarget[1] = 0;
++        global.chartarget[charslot] = 0;
+-        global.acting[1] = 0;
++        global.acting[charslot] = 0;
+         snd_play(snd_boost);
+-        heartanim = instance_create(obj_herokris.x + 30, obj_herokris.y + 50, obj_animation);
++        heartanim = instance_create(krisinstance.x + 30, krisinstance.y + 50, obj_animation);
+         with (heartanim)
+         {
+             depth = -20;
+@@ -366,11 +379,11 @@
+             image_speed = 1;
+             sprite_index = spr_soulshining;
+         }
+-        with (obj_herokris)
++        with (krisinstance)
+         {
+             scr_oflash();
+         }
+-        with (obj_herosusie)
++        with (spellactpartner)
+         {
+             scr_oflash();
+         }
+@@ -382,7 +395,7 @@
+         if (acttimer >= 20)
+         {
+             actcon = 1;
+-            with (obj_herosusie)
++            with (spellactpartner)
+             {
+                 state = 0;
+             }
+@@ -399,13 +412,16 @@
+     }
+     if (actcon == 21)
+     {
++        var krisinstance = global.charinstance[global.currentactingchar];
++        var charslot = scr_findchar_actpartner(3);
++        spellactpartner = global.charinstance[charslot];
+-        global.faceaction[2] = 2;
++        global.faceaction[charslot] = 2;
+-        global.charaction[2] = 2;
++        global.charaction[charslot] = 2;
+-        global.charspecial[2] = 6;
++        global.charspecial[charslot] = 6;
+-        global.chartarget[2] = 0;
++        global.chartarget[charslot] = 0;
+-        global.acting[2] = 0;
++        global.acting[charslot] = 0;
+         snd_play(snd_boost);
+-        heartanim = instance_create(obj_herokris.x + 30, obj_herokris.y + 50, obj_animation);
++        heartanim = instance_create(krisinstance.x + 30, krisinstance.y + 50, obj_animation);
+         with (heartanim)
+         {
+             depth = -20;
+@@ -415,11 +431,11 @@
+             image_speed = 1;
+             sprite_index = spr_soulshining;
+         }
+-        with (obj_heroralsei)
++        with (spellactpartner)
+         {
+             scr_oflash();
+         }
+-        with (obj_herokris)
++        with (krisinstance)
+         {
+             scr_oflash();
+         }
+@@ -431,7 +447,7 @@
+         if (acttimer >= 20)
+         {
+             actcon = 1;
+-            with (obj_heroralsei)
++            with (spellactpartner)
+             {
+                 state = 0;
+             }
+@@ -440,7 +456,7 @@
      if (actcon == 1 && !instance_exists(obj_writer))
      {
          actcon = 0;

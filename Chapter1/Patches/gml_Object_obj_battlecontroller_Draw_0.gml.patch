@@ -115,7 +115,7 @@
 +                drawral = 1;
 +                charoffset = 30;
 +                break;
-+            case 5:
++            case 6:
 +                drawsus = havechar[1] == 1;
 +                drawral = havechar[2] == 1;
 +                charoffset = 0;
@@ -152,7 +152,7 @@
 -            draw_sprite_ext(spr_headralsei, 0, xx + 60 + xoffset, yy + 375 + yoffset, 1, 1, 0, susblend, 1);
 +            draw_sprite_ext(spr_headralsei, 0, xx + 60 + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
 +        }
-+        if (chartime == 5)
++        if (chartime == 6)
 +        {
 +            for (var slot = 0; slot < 3; slot++)
 +            {

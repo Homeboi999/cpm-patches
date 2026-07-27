@@ -223,7 +223,7 @@
 +                        global.monsterinstance[thisenemy].acting = actindex;
 +                    }
 +                }
-+                if (actactor == 4 || actactor == 5)
++                if (actactor == 4 || actactor == 6)
 +                {
 +                    global.acting[0] = 1;
 +                    global.acting[1] = 2;

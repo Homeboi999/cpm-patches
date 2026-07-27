@@ -465,7 +465,7 @@
          global.msg[0] = scr_84_get_lang_string("obj_dummyenemy_slash_Step_0_gml_602_0");
      }
 +    msg_num = 0;
-+    if (scr_havechar(2))
++    if (scr_havechar(2) && scr_susiemode())
 +    {
 +        scr_susface(1, 8);
 +        global.msg[2] = "* You dorks just wanna run away from everything?/";
@@ -485,7 +485,7 @@
 -    global.msg[4] = scr_84_get_lang_string("obj_dummyenemy_slash_Step_0_gml_607_0");
 +    global.msg[msg_num + 3] = scr_84_get_lang_string("obj_dummyenemy_slash_Step_0_gml_606_0");
 -    global.battlemsg[0] = scr_84_get_lang_string("obj_dummyenemy_slash_Step_0_gml_610_0");
-+    if (scr_havechar(2))
++    if (scr_havechar(2) && scr_susiemode())
 +    {
 +        global.msg[msg_num + 3] = global.msg[msg_num + 3] + "%";
 +        scr_battletext();
@@ -577,17 +577,26 @@
  if (global.myfight == 3)
  {
      xx = __view_get(e__VW.XView, 0);
+@@ -665,7 +906,7 @@
+     if (acting == 2 && actcon == 0)
+     {
+         actcon = 10;
+-        with (obj_herokris)
++        with (global.charinstance[global.currentactingchar])
+         {
+             global.faceaction[myself] = 0;
+             state = 0;
 @@ -685,11 +926,11 @@
      }
      if (actcon == 10)
      {
 -        with (global.charinstance[0])
-+        with (global.charinstance[scr_findchar(1)])
++        with (global.charinstance[global.currentactingchar])
          {
              visible = 0;
          }
 -        k = scr_dark_marker(global.charinstance[0].x, global.charinstance[0].y, spr_kris_hug);
-+        k = scr_dark_marker(global.charinstance[scr_findchar(1)].x, global.charinstance[scr_findchar(1)].y, spr_kris_hug);
++        k = scr_dark_marker(global.charinstance[global.currentactingchar].x, global.charinstance[global.currentactingchar].y, spr_kris_hug);
          with (k)
          {
              scr_move_to_point_over_time(global.monsterx[0] - 42, global.monstery[0] - 30, 15);
@@ -650,48 +659,89 @@
          with (k)
          {
 -            scr_move_to_point_over_time(global.charinstance[0].x, global.charinstance[0].y, 15);
-+            scr_move_to_point_over_time(global.charinstance[scr_findchar(1)].x, global.charinstance[scr_findchar(1)].y, 15);
++            scr_move_to_point_over_time(global.charinstance[global.currentactingchar].x, global.charinstance[global.currentactingchar].y, 15);
          }
          actcon = 19;
          alarm[4] = 25;
-@@ -799,7 +1057,7 @@
+@@ -799,19 +1057,19 @@
          }
          global.mercymod[0] = 100;
          global.mercymod[1] = 100;
 -        global.charinstance[0].visible = 1;
-+        global.charinstance[scr_findchar(1)].visible = 1;
++        global.charinstance[global.currentactingchar].visible = 1;
          actcon = 1;
      }
      if (acting == 3 && actcon == 0)
-@@ -825,11 +1083,11 @@
+     {
+         makekris = 0;
+-        with (obj_herokris)
++        with (global.charinstance[global.currentactingchar])
+         {
+             global.faceaction[myself] = 0;
+             state = 0;
+             acttimer = 0;
+         }
+-        with (obj_heroralsei)
++        with (global.charinstance[scr_findchar_actpartner(3)])
+         {
+             global.faceaction[myself] = 0;
+             state = 0;
+@@ -825,14 +1083,14 @@
      {
          makekris = 1;
          maker = 0;
 -        with (global.charinstance[0])
-+        with (global.charinstance[scr_findchar(1)])
++        with (global.charinstance[global.currentactingchar])
          {
              visible = 0;
          }
 -        k = scr_dark_marker(global.charinstance[0].x, global.charinstance[0].y, spr_kris_hug);
-+        k = scr_dark_marker(global.charinstance[scr_findchar(1)].x, global.charinstance[scr_findchar(1)].y, spr_kris_hug);
++        k = scr_dark_marker(global.charinstance[global.currentactingchar].x, global.charinstance[global.currentactingchar].y, spr_kris_hug);
          with (k)
          {
-             scr_move_to_point_over_time(obj_heroralsei.x - 24, obj_heroralsei.y + 10, 15);
+-            scr_move_to_point_over_time(obj_heroralsei.x - 24, obj_heroralsei.y + 10, 15);
++            scr_move_to_point_over_time(global.charinstance[scr_findchar_actpartner(3)].x - 24, global.charinstance[scr_findchar_actpartner(3)].y + 10, 15);
+         }
+         actcon = 31;
+         alarm[4] = 25;
+@@ -840,11 +1098,11 @@
+     if (actcon == 32)
+     {
+         maker = 1;
+-        with (obj_heroralsei)
++        with (global.charinstance[scr_findchar_actpartner(3)])
+         {
+             visible = 0;
+         }
+-        rb = scr_dark_marker(obj_heroralsei.x, obj_heroralsei.y, spr_ralseil_blush);
++        rb = scr_dark_marker(global.charinstance[scr_findchar_actpartner(3)].x, global.charinstance[scr_findchar_actpartner(3)].y, spr_ralseil_blush);
+         with (k)
+         {
+             image_speed = 0.25;
 @@ -919,7 +1177,7 @@
          }
          with (k)
          {
 -            scr_move_to_point_over_time(global.charinstance[0].x, global.charinstance[0].y, 15);
-+            scr_move_to_point_over_time(global.charinstance[scr_findchar(1)].x, global.charinstance[scr_findchar(1)].y, 15);
++            scr_move_to_point_over_time(global.charinstance[global.currentactingchar].x, global.charinstance[global.currentactingchar].y, 15);
          }
          actcon = 39;
          alarm[4] = 25;
+@@ -932,7 +1190,7 @@
+         {
+             instance_destroy();
+         }
+-        with (obj_heroralsei)
++        with (global.charinstance[scr_findchar_actpartner(3)])
+         {
+             visible = 1;
+         }
 @@ -940,7 +1198,7 @@
          {
              instance_destroy();
          }
 -        global.charinstance[0].visible = 1;
-+        global.charinstance[scr_findchar(1)].visible = 1;
++        global.charinstance[global.currentactingchar].visible = 1;
          actcon = 1;
      }
      if (actcon >= 30 && actcon < 40)

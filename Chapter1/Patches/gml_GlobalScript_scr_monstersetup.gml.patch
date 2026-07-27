@@ -136,7 +136,7 @@
          global.canact[myself][2] = 1;
          global.actname[myself][2] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_381_0");
 -        global.actactor[myself][2] = 3;
-+        global.actactor[myself][2] = 5;
++        global.actactor[myself][2] = 6;
 -        if (scr_havechar(2) && global.plot < 150)
 +        if (scr_havechar(2) && scr_susiemode())
          {
@@ -231,7 +231,7 @@
          global.actcost[myself][1] = 50;
          global.canact[myself][2] = 1;
 -        global.actactor[myself][2] = 4;
-+        global.actactor[myself][2] = 5;
++        global.actactor[myself][2] = 6;
          global.actname[myself][2] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_585_0");
          global.actdesc[myself][2] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_586_0");
          global.actcost[myself][2] = 125;

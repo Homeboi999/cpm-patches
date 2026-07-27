@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_susieenemy_Step_0.gml
 +++ b/Code/gml_Object_obj_susieenemy_Step_0.gml
-@@ -200,42 +200,88 @@
+@@ -200,42 +200,90 @@
          anythingcounter += 1;
          actcon = 1;
      }
@@ -34,14 +34,16 @@
 +                }
 +            }
 +            global.msg[0] = scr_84_get_lang_string("obj_susieenemy_slash_Step_0_gml_197_0");
-+            with (obj_heroralsei)
++            var ralinstance = global.charinstance[scr_findchar_actpartner(3)];
++            with (ralinstance)
 +            {
 +                visible = 0;
 +            }
-+            ralsing = scr_dark_marker(obj_heroralsei.x, obj_heroralsei.y, spr_ralseib_sing);
++            ralsing = scr_dark_marker(ralinstance.x, ralinstance.y, spr_ralseib_sing);
 +            with (ralsing)
 +            {
 +                image_speed = 0.2;
++                depth = ralinstance.depth;
 +            }
 +            lullatimer = 0;
 +            scr_battletext_default();
@@ -117,7 +119,16 @@
      }
      if (actcon == 10)
      {
-@@ -262,6 +308,34 @@
+@@ -251,7 +299,7 @@
+         {
+             instance_destroy();
+         }
+-        with (obj_heroralsei)
++        with (global.charinstance[scr_findchar_actpartner(3)])
+         {
+             visible = 1;
+         }
+@@ -262,6 +310,34 @@
          {
              global.msg[0] = scr_84_get_lang_string("obj_susieenemy_slash_Step_0_gml_224_0");
          }
@@ -152,7 +163,7 @@
          idlesprite = spr_susie_enemy_defeat;
          sleepcounter = 0;
          sleeping = 1;
-@@ -273,7 +347,7 @@
+@@ -273,7 +349,7 @@
      if (actcon == 1 && !instance_exists(obj_writer))
      {
          actcon = 0;

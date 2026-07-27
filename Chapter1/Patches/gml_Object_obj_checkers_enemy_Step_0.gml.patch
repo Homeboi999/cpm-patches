@@ -97,7 +97,7 @@
 +            hspeed = -10;
 +            friction = -0.4;
 +        }
-+        for (i = 0; i < 4; i += 1)
++        for (var i = 0; i < 4; i += 1)
 +        {
 +            if (global.hp[i] < 1)
 +            {
@@ -203,6 +203,22 @@
  if (global.myfight == 3)
  {
      xx = __view_get(e__VW.XView, 0);
+@@ -343,13 +414,13 @@
+             crown += 18;
+         }
+         global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_296_0");
+-        with (obj_herokris)
++        with (global.charinstance[global.currentactingchar])
+         {
+             visible = 0;
+         }
+         global.faceaction[0] = 0;
+         global.charaction[0] = 0;
+-        bowkris = scr_dark_marker(obj_herokris.x, obj_herokris.y, spr_krisb_bow);
++        bowkris = scr_dark_marker(global.charinstance[global.currentactingchar].x, global.charinstance[global.currentactingchar].y, spr_krisb_bow);
+         with (bowkris)
+         {
+             scr_oflash();
 @@ -372,21 +443,38 @@
          global.fc = 0;
          global.typer = 4;
@@ -315,7 +331,14 @@
              }
          }
          bowcounter += 1;
-@@ -440,7 +556,7 @@
+@@ -434,23 +550,23 @@
+             instance_destroy();
+         }
+         visible = 1;
+-        with (obj_herokris)
++        with (global.charinstance[global.currentactingchar])
+         {
+             visible = 1;
          }
          actcon = 1;
      }
@@ -324,6 +347,36 @@
      {
          if (acting == 3 && actcon == 0)
          {
+             crown += 20;
+             global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_398_0");
+-            with (obj_herokris)
++            with (global.charinstance[global.currentactingchar])
+             {
+                 visible = 0;
+             }
+-            with (obj_heroralsei)
++            with (global.charinstance[scr_findchar_actpartner(3)])
+             {
+                 visible = 0;
+             }
+@@ -458,7 +574,7 @@
+             global.charaction[0] = 0;
+             global.faceaction[1] = 0;
+             global.charaction[1] = 0;
+-            bowkris = scr_dark_marker(obj_herokris.x, obj_herokris.y, spr_krisb_bow);
++            bowkris = scr_dark_marker(global.charinstance[global.currentactingchar].x, global.charinstance[global.currentactingchar].y, spr_krisb_bow);
+             with (bowkris)
+             {
+                 scr_oflash();
+@@ -466,7 +582,7 @@
+                 a.hspeed = 5;
+                 a.depth = depth + 1;
+             }
+-            bowral = scr_dark_marker(obj_heroralsei.x, obj_heroralsei.y, spr_ralseib_bow);
++            bowral = scr_dark_marker(global.charinstance[scr_findchar_actpartner(3)].x, global.charinstance[scr_findchar_actpartner(3)].y, spr_ralseib_bow);
+             with (bowral)
+             {
+                 scr_oflash();
 @@ -488,18 +604,26 @@
              image_speed = 0.5;
          }
@@ -358,7 +411,19 @@
              ralsei_lecture = 1;
          }
          scr_battletext_default();
-@@ -530,7 +654,7 @@
+@@ -520,17 +644,17 @@
+             instance_destroy();
+         }
+         visible = 1;
+-        with (obj_heroralsei)
++        with (global.charinstance[scr_findchar_actpartner(3)])
+         {
+             visible = 1;
+         }
+-        with (obj_herokris)
++        with (global.charinstance[global.currentactingchar])
+         {
+             visible = 1;
          }
          actcon = 1;
      }
@@ -367,7 +432,43 @@
      {
          if (acting == 3 && actcon == 0)
          {
-@@ -616,7 +740,7 @@
+@@ -551,17 +675,17 @@
+                 scr_battletext_default();
+                 actcon = 90;
+                 instance_create(x, y, obj_throwtarget);
+-                throwsus = instance_create(obj_herosusie.x, obj_herosusie.y, obj_throwralsei);
++                throwsus = instance_create(global.charinstance[scr_findchar_actpartner(2)].x, global.charinstance[scr_findchar_actpartner(2)].y, obj_throwralsei);
+                 visible = 0;
+                 global.faceaction[1] = 0;
+                 global.charaction[1] = 0;
+                 global.faceaction[2] = 0;
+                 global.charaction[2] = 0;
+-                with (obj_herosusie)
++                with (global.charinstance[scr_findchar_actpartner(2)])
+                 {
+                     visible = 0;
+                 }
+-                with (obj_heroralsei)
++                with (global.charinstance[scr_findchar_actpartner(3)])
+                 {
+                     visible = 0;
+                 }
+@@ -601,7 +725,13 @@
+             global.msg[0] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_540_0");
+             global.msg[1] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_541_0");
+             global.msg[2] = scr_84_get_lang_string("obj_checkers_enemy_slash_Step_0_gml_542_0");
++            for (var i = 0; i < 3; i++)
++            {
++                if (global.char[i] == 2)
++                {
+-            global.battleat[2] *= 1.5;
++                    global.battleat[i] *= 1.5;
++                }
++            }
+         }
+         warned += 1;
+         scr_battletext_default();
+@@ -616,23 +746,23 @@
          }
          else
          {
@@ -376,3 +477,22 @@
          }
      }
      if (actcon == 10 && !instance_exists(obj_writer))
+     {
+         actcon = 11;
+         alarm[4] = 30;
+-        with (obj_herosusie)
++        with (global.charinstance[scr_findchar_actpartner(2)])
+         {
+             visible = 0;
+         }
+-        with (obj_heroralsei)
++        with (global.charinstance[scr_findchar_actpartner(3)])
+         {
+             visible = 0;
+         }
+         thrown = 1;
+-        trsus = scr_dark_marker(obj_herosusie.x, obj_herosusie.y, spr_susieb_throwralseiready);
++        trsus = scr_dark_marker(global.charinstance[scr_findchar_actpartner(2)].x, global.charinstance[scr_findchar_actpartner(2)].y, spr_susieb_throwralseiready);
+         snd_play(snd_grab);
+     }
+     if (actcon == 12)

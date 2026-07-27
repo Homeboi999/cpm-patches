@@ -1,6 +1,25 @@
 --- a/Code/gml_Object_obj_ponman_enemy_Step_0.gml
 +++ b/Code/gml_Object_obj_ponman_enemy_Step_0.gml
-@@ -215,7 +215,7 @@
+@@ -184,14 +184,16 @@
+             }
+         }
+         global.msg[0] = scr_84_get_lang_string("obj_ponman_enemy_slash_Step_0_gml_134_0");
+-        with (obj_heroralsei)
++        var ralseiinstance = global.charinstance[scr_findchar_actpartner(3)];
++        with (ralseiinstance)
+         {
+             visible = 0;
+         }
+-        ralsing = scr_dark_marker(obj_heroralsei.x, obj_heroralsei.y, spr_ralseib_sing);
++        ralsing = scr_dark_marker(global.charinstance[scr_findchar_actpartner(3)].x, global.charinstance[scr_findchar_actpartner(3)].y, spr_ralseib_sing);
+         with (ralsing)
+         {
+             image_speed = 0.2;
++            depth = ralseiinstance.depth;
+         }
+         lullatimer = 0;
+         scr_battletext_default();
+@@ -215,7 +217,7 @@
      if (actcon == 1 && !instance_exists(obj_writer))
      {
          actcon = 0;
@@ -9,7 +28,16 @@
      }
      if (actcon == 10)
      {
-@@ -247,6 +247,7 @@
+@@ -231,7 +233,7 @@
+         {
+             instance_destroy();
+         }
+-        with (obj_heroralsei)
++        with (global.charinstance[scr_findchar_actpartner(3)])
+         {
+             visible = 1;
+         }
+@@ -247,6 +249,7 @@
                      if (global.charcond[dx] != 5)
                      {
                          global.charcond[dx] = 5;

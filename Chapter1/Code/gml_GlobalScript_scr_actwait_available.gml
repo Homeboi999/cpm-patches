@@ -41,9 +41,6 @@ function scr_actwait_available(arg0)
                 case 4:
                     is_included_in_act = char == 2 || char == 3;
                     break;
-                case 5:
-                    is_included_in_act = char == 4;
-                    break;
                 case 6:
                     is_included_in_act = true;
                     break;
