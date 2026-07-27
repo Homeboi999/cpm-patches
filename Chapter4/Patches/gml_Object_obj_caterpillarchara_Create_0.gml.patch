@@ -9,7 +9,7 @@
 -rsprite = spr_susier_dark;
 -lsprite = spr_susiel_dark;
 -slidesprite = spr_susie_slide;
--climbsprite = 2649;
+-climbsprite = 2651;
 -if (global.chapter >= 2)
 -{
 -    usprite = spr_susie_walk_up_dw;
@@ -68,3 +68,26 @@
  usprite_blush = spr_ralseiu;
  dsprite_blush = spr_ralseid;
  rsprite_blush = spr_ralseir_blush;
+@@ -98,15 +39,15 @@
+ pu = parent.usprite;
+ for (i = 0; i < 75; i += 1)
+ {
+-    remx[i] = parent.x;
+-    remy[i] = parent.y;
+-    facing[i] = global.facing;
+-    sliding[i] = 0;
+-    special[i] = 0;
++    remx[i] = parent.remx[i];
++    remy[i] = parent.remy[i];
++    facing[i] = parent.facing[i];
++    sliding[i] = parent.sliding[i];
++    special[i] = parent.special[i];
+     if (global.chapter == 4 && room == room_dw_rotating_tower)
+     {
+-        tower_angle[i] = 0;
+-        tower_yoffset[i] = 480;
++        tower_angle[i] = parent.tower_angle[i];
++        tower_yoffset[i] = parent.tower_yoffset[i];
+     }
+ }
+ depth = parent.depth + 5;

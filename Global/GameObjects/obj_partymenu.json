@@ -11,6 +11,11 @@
       "Subtype": 0
     },
     {
+      "Code": "gml_Object_obj_partymenu_Destroy_0",
+      "Type": 1,
+      "Subtype": 0
+    },
+    {
       "Code": "gml_Object_obj_partymenu_Step_0",
       "Type": 3,
       "Subtype": 0

@@ -18,3 +18,23 @@
  swordfacing = 1;
  swordsprite = rsprite;
  fun = 0;
+@@ -280,6 +291,19 @@
+                 debug_message("entrance requested was global.entrance=" + string(global.entrance));
+             }
+         }
++    }
++}
++for (i = 0; i < 75; i += 1)
++{
++    remx[i] = x;
++    remy[i] = y;
++    facing[i] = global.facing;
++    sliding[i] = 0;
++    special[i] = 0;
++    if (global.chapter == 4 && room == room_dw_rotating_tower)
++    {
++        tower_angle[i] = 0;
++        tower_yoffset[i] = 480;
+     }
+ }
+ initwd = sprite_width;

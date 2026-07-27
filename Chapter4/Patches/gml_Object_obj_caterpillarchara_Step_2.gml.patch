@@ -27,7 +27,7 @@
  if (name == "ralsei")
  {
      slidesprite = spr_ralsei_slide;
-     climbsprite = 4837;
+     climbsprite = 4840;
 -    halign = 2;
 -    valign = 12;
 -    if (global.chapter == 4)

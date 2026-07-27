@@ -1,6 +1,40 @@
 --- a/Code/gml_Object_obj_mainchara_Step_0.gml
 +++ b/Code/gml_Object_obj_mainchara_Step_0.gml
-@@ -611,22 +611,27 @@
+@@ -512,6 +512,33 @@
+     }
+     x += px;
+     y += py;
++    moved = 0;
++    if (x != remx[0] || y != remy[0])
++    {
++        moved = 1;
++    }
++    if (moved == 1)
++    {
++        for (var i = 75; i > 0; i -= 1)
++        {
++            remx[i] = remx[i - 1];
++            remy[i] = remy[i - 1];
++            facing[i] = facing[i - 1];
++            sliding[i] = sliding[i - 1];
++            if (global.chapter == 4)
++            {
++                special[i] = special[i - 1];
++            }
++        }
++        remx[0] = x;
++        remy[0] = y;
++        sliding[0] = sliding;
++        facing[0] = global.facing;
++        if (global.chapter == 4)
++        {
++            special[0] = climbing;
++        }
++    }
+ }
+ if (fun == 0)
+ {
+@@ -611,22 +638,27 @@
      if (global.facing == 0)
      {
          sprite_index = dsprite;
@@ -28,7 +62,7 @@
      }
  }
  if (stepping == 1 && fun == 0)
-@@ -865,6 +870,7 @@
+@@ -865,6 +897,7 @@
              lsprite = spr_krisl;
              usprite = spr_krisu;
          }
