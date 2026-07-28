@@ -1,0 +1,19 @@
+--- a/Code/gml_Object_obj_cyber_shadowMaker_fireworks_Create_0.gml
++++ b/Code/gml_Object_obj_cyber_shadowMaker_fireworks_Create_0.gml
+@@ -18,15 +18,7 @@
+ inactive_cleanup = false;
+ cleanup_timer = 0;
+ depth = (room == room_dw_cyber_post_music_boss_slide) ? 80000 : 900000;
+-var shadow_amount = 1;
++var shadow_amount = 3;
+-if (i_ex(obj_caterpillarchara))
+-{
+-    with (obj_caterpillarchara)
+-    {
+-        shadow_amount++;
+-        scr_caterpillar_interpolate();
+-    }
+-}
+ if (i_ex(obj_interactablesolid))
+ {
+     with (obj_interactablesolid)

@@ -1,7 +1,11 @@
 --- a/Code/gml_Object_obj_cyber_shadowMaker_fireworks_Draw_0.gml
 +++ b/Code/gml_Object_obj_cyber_shadowMaker_fireworks_Draw_0.gml
-@@ -48,33 +48,14 @@
-     draw_sprite_ext(obj_mainchara.sprite_index, obj_mainchara.image_index, obj_mainchara.x, (obj_mainchara.y + (obj_mainchara.sprite_height * obj_mainchara.image_yscale)) - 4, 2, -2, 0, frontShadowColor, frontshadOpacity);
+@@ -45,36 +45,17 @@
+     gpu_set_colorwriteenable(true, true, true, true);
+     gpu_set_blendmode_ext(bm_dest_alpha, bm_inv_dest_alpha);
+     gpu_set_alphatestenable(true);
+-    draw_sprite_ext(obj_mainchara.sprite_index, obj_mainchara.image_index, obj_mainchara.x, (obj_mainchara.y + (obj_mainchara.sprite_height * obj_mainchara.image_yscale)) - 4, 2, -2, 0, frontShadowColor, frontshadOpacity);
++    draw_sprite_ext(obj_mainchara.visual_info.sprite_index, obj_mainchara.image_index, obj_mainchara.x - obj_mainchara.visual_info.halign, (obj_mainchara.y + obj_mainchara.visual_info.valign + (obj_mainchara.sprite_height * obj_mainchara.image_yscale)) - 4, 2, -2, 0, frontShadowColor, frontshadOpacity);
      if (i_ex(obj_caterpillarchara))
      {
 -        var sus_x, sus_sprite, sus_index, sus_y, sus_height, ral_x, ral_sprite, ral_index, ral_y, ral_height;
@@ -40,3 +44,12 @@
          }
      }
      if (i_ex(obj_interactablesolid))
+@@ -88,7 +69,7 @@
+             hacker_index = image_index;
+             hacker_height = sprite_height;
+         }
+-        draw_sprite_ext(hacker_sprite, hacker_index, hacker_x, (hacker_y + (hacker_height * 2)) - 4, 2, -2, 0, frontShadowColor, 1);
++        draw_sprite_ext(hacker_sprite, hacker_index, hacker_x, (hacker_y + (hacker_height * 2)) - 4, 2, -2, 0, frontShadowColor, frontshadOpacity);
+     }
+     gpu_set_alphatestenable(false);
+     gpu_set_blendmode(bm_normal);

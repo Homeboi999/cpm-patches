@@ -1,9 +1,18 @@
 --- a/Code/gml_Object_obj_cyber_shadowMaker_fireworks_Step_2.gml
 +++ b/Code/gml_Object_obj_cyber_shadowMaker_fireworks_Step_2.gml
-@@ -31,52 +31,29 @@
-     shadow_char[0].image_alpha = frontshadOpacity;
-     shadow_char[0].image_index = obj_mainchara.image_index;
-     shadow_char[0].depth = obj_mainchara.depth - 1;
+@@ -22,61 +22,56 @@
+             scr_lerpvar_instance(id, "frontshadOpacity", 0.6, 0, 15);
+         }
+     }
+-    shadow_char[0].sprite_index = obj_mainchara.sprite_index;
+-    shadow_char[0].image_xscale = obj_mainchara.image_xscale;
+-    shadow_char[0].image_yscale = obj_mainchara.image_yscale;
+-    shadow_char[0].x = obj_mainchara.x;
+-    shadow_char[0].y = obj_mainchara.y + 4;
+-    shadow_char[0].image_blend = frontShadowColor;
+-    shadow_char[0].image_alpha = frontshadOpacity;
+-    shadow_char[0].image_index = obj_mainchara.image_index;
+-    shadow_char[0].depth = obj_mainchara.depth - 1;
 -    if (i_ex(obj_caterpillarchara))
 -    {
 -        var sus_x, sus_sprite, sus_y, sus_index, sus_depth, ral_x, ral_sprite, ral_y, ral_index, ral_depth;
@@ -50,6 +59,23 @@
 -            shadow_char[2].image_index = ral_index;
 -            shadow_char[2].depth = ral_depth - 1;
 -        }
++    if (i_ex(obj_mainchara))
++    {
++        shadow_char[0].sprite_index = obj_mainchara.visual_info.sprite_index;
++        shadow_char[0].image_xscale = obj_mainchara.image_xscale;
++        shadow_char[0].image_yscale = obj_mainchara.image_yscale;
++        shadow_char[0].x = obj_mainchara.x - obj_mainchara.visual_info.halign;
++        shadow_char[0].y = (obj_mainchara.y - obj_mainchara.visual_info.valign) + 4;
++        shadow_char[0].image_blend = frontShadowColor;
++        shadow_char[0].image_alpha = frontshadOpacity;
++        shadow_char[0].image_index = obj_mainchara.image_index;
++        shadow_char[0].depth = obj_mainchara.depth - 1;
++        shadow_char[0].visible = 1;
++    }
++    else
++    {
++        shadow_char[0].visible = 0;
++    }
 +    if (i_ex(global.cinstance[0]))
 +    {
 +        shadow_char[1].sprite_index = global.cinstance[0].sprite_index;
@@ -61,6 +87,11 @@
 +        shadow_char[1].image_alpha = frontshadOpacity;
 +        shadow_char[1].image_index = global.cinstance[0].image_index;
 +        shadow_char[1].depth = global.cinstance[0].depth - 1;
++        shadow_char[1].visible = 1;
++    }
++    else
++    {
++        shadow_char[1].visible = 0;
 +    }
 +    if (i_ex(global.cinstance[1]))
 +    {
@@ -73,6 +104,11 @@
 +        shadow_char[2].image_alpha = frontshadOpacity;
 +        shadow_char[2].image_index = global.cinstance[1].image_index;
 +        shadow_char[2].depth = global.cinstance[1].depth - 1;
++        shadow_char[2].visible = 1;
++    }
++    else
++    {
++        shadow_char[2].visible = 0;
      }
      if (i_ex(obj_interactablesolid))
      {

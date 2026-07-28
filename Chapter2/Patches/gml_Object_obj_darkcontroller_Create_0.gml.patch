@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_darkcontroller_Create_0.gml
 +++ b/Code/gml_Object_obj_darkcontroller_Create_0.gml
-@@ -46,73 +46,20 @@
+@@ -46,72 +46,18 @@
  for (var i = 0; i < 3; i += 1)
  {
      global.faceaction[i] = 0;
@@ -70,7 +70,6 @@
 -                lsprite = spr_noelle_walk_left_dw;
 -            }
 -        }
--    }
 +    if (global.char[i] == 0)
 +    {
 +        continue;
@@ -83,8 +82,6 @@
 +        var name = scr_char_id_to_name(global.char[i]);
 +        var alignment = scr_get_chara_alignment(name);
 +        scr_makecaterpillar(obj_mainchara.x - alignment.halign, obj_mainchara.y - alignment.valign, global.char[i], i - 1);
-+    }
-+    continue;
+     }
  }
  global.charinstance[0] = obj_mainchara;
- global.charinstance[1] = global.cinstance[0];
