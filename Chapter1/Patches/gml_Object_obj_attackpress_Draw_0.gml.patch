@@ -1,0 +1,37 @@
+--- a/Code/gml_Object_obj_attackpress_Draw_0.gml
++++ b/Code/gml_Object_obj_attackpress_Draw_0.gml
+@@ -181,16 +181,24 @@
+         posttimer += 1;
+         if (posttimer > (timermax - 35) && haveauto == 1 && autoed == 0 && scr_monsterpop() > 0)
+         {
+-            global.charinstance[sus].points = 160;
+-            if (global.automiss[global.chartarget[sus]] == 1)
+-            {
+-                global.charinstance[sus].points = 0;
+-            }
+-            with (global.charinstance[sus])
+-            {
+-                state = 1;
+-                attacktimer = 0;
+-                is_auto_susie = 1;
++            var suscount = 0;
++            for (var sus = 0; sus < 3; sus++)
++            {
++                if (global.charauto[global.char[sus]] == 1 && global.charmove[sus] == 1)
++                {
++                    global.charinstance[sus].points = 160;
++                    if (global.automiss[global.chartarget[sus]] == 1)
++                    {
++                        global.charinstance[sus].points = 0;
++                    }
++                    with (global.charinstance[sus])
++                    {
++                        state = 1;
++                        attacktimer = attackframes * suscount * -1;
++                        is_auto_susie = 1;
++                    }
++                    suscount++;
++                }
+             }
+             posttimer -= 25;
+             autoed = 1;

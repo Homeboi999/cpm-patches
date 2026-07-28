@@ -15,7 +15,46 @@
  {
      if (global.myfight == 3 && global.faceaction[myself] == 6)
      {
-@@ -146,7 +155,8 @@
+@@ -48,7 +57,7 @@
+     if (state == 1 && hurt == 0)
+     {
+         siner += 1;
+-        if (attacked == 0)
++        if (attacked == 0 && attacktimer >= 0)
+         {
+             snd_stop(snd_laz_c);
+             if (object_index == obj_herokris)
+@@ -84,16 +93,19 @@
+             attacked = 1;
+             alarm[1] = 10;
+         }
+-        if (attacktimer < attackframes)
+-        {
+-            image_index = attacktimer;
+-        }
+-        else
+-        {
+-            image_index = attackframes;
+-        }
+-        thissprite = attacksprite;
+-        index = image_index;
++        if (attacktimer >= 0)
++        {
++            if (attacktimer < attackframes)
++            {
++                image_index = attacktimer;
++            }
++            else
++            {
++                image_index = attackframes;
++            }
++            thissprite = attacksprite;
++            index = image_index;
++        }
+         attacktimer += attackspeed;
+     }
+     if (state == 2 && hurt == 0)
+@@ -146,7 +158,8 @@
      }
      if (state == 6)
      {
