@@ -30,7 +30,7 @@
      }
      dir = facing[target];
 +}
-+var alignment = gml_Script_scr_get_chara_alignment(name, self);
++var alignment = scr_get_chara_alignment(name, self);
 +var valign_changed = alignment.valign != valign;
 +halign = alignment.halign;
 +valign = alignment.valign;

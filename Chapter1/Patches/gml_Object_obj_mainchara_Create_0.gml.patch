@@ -10,9 +10,9 @@
 +    halign: 0,
 +    valign: 0
 +};
-+gml_Script_scr_set_chara_sprites(name, visual_info);
++scr_set_chara_sprites(name, visual_info);
 +visual_info.sprite_index = visual_info.dsprite;
-+var alignment = gml_Script_scr_get_chara_alignment(name, visual_info);
++var alignment = scr_get_chara_alignment(name, visual_info);
 +visual_info.halign = alignment.halign;
 +visual_info.valign = alignment.valign;
  fun = 0;

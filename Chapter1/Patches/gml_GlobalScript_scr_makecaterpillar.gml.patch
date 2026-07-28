@@ -16,7 +16,7 @@
 -            lsprite = spr_ralseil;
 -        }
 +        self.name = name;
-+        gml_Script_scr_set_chara_sprites(name, self);
++        scr_set_chara_sprites(name, self);
      }
      return global.cinstance[arg3];
  }
