@@ -1,6 +1,30 @@
 --- a/Code/gml_Object_obj_caterpillarchara_Step_2.gml
 +++ b/Code/gml_Object_obj_caterpillarchara_Step_2.gml
-@@ -25,22 +25,8 @@
+@@ -3,6 +3,7 @@
+ nowx = x;
+ nowy = y;
+ moved = 0;
++slided = 0;
+ walk = 0;
+ runmove = 0;
+ if (obj_mainchara.x != remx[0])
+@@ -13,6 +14,10 @@
+ {
+     moved = 1;
+ }
++if (sliding[target] == 1)
++{
++    moved = 1;
++}
+ if (moved == 1)
+ {
+     blushtimer = 0;
+@@ -21,26 +26,14 @@
+         remx[i] = remx[i - 1];
+         remy[i] = remy[i - 1];
+         facing[i] = facing[i - 1];
++        sliding[i] = sliding[i - 1];
+     }
      remx[0] = obj_mainchara.x;
      remy[0] = obj_mainchara.y;
      facing[0] = global.facing;
@@ -20,15 +44,17 @@
 -    {
 -        y = remy[target] - 12;
 -    }
++    sliding[0] = obj_mainchara.sliding;
 +    x = remx[target] - halign;
 +    y = remy[target] - valign;
      if (abs(remx[target + 1] - remx[target]) > 4)
      {
          runmove = 1;
-@@ -50,6 +36,14 @@
+@@ -50,6 +43,15 @@
          runmove = 1;
      }
      dir = facing[target];
++    slided = sliding[target];
 +}
 +var alignment = scr_get_chara_alignment(name, self);
 +var valign_changed = alignment.valign != valign;
@@ -40,3 +66,47 @@
  }
  if (x != nowx)
  {
+@@ -114,21 +116,28 @@
+ walkbuffer -= 0.75;
+ if (fun == 0)
+ {
+-    if (facing[target] == 0)
+-    {
+-        sprite_index = dsprite;
+-    }
+-    if (facing[target] == 1)
+-    {
+-        sprite_index = rsprite;
+-    }
+-    if (facing[target] == 2)
+-    {
+-        sprite_index = usprite;
+-    }
+-    if (facing[target] == 3)
+-    {
+-        sprite_index = lsprite;
++    if (slided == 1)
++    {
++        sprite_index = slidesprite;
++    }
++    else
++    {
++        if (facing[target] == 0)
++        {
++            sprite_index = dsprite;
++        }
++        if (facing[target] == 1)
++        {
++            sprite_index = rsprite;
++        }
++        if (facing[target] == 2)
++        {
++            sprite_index = usprite;
++        }
++        if (facing[target] == 3)
++        {
++            sprite_index = lsprite;
++        }
+     }
+ }
+ if (dsprite == spr_ralseid && global.interact == 0 && fun == 0)

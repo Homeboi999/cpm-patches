@@ -1,6 +1,12 @@
 --- a/Code/gml_Object_obj_caterpillarchara_Create_0.gml
 +++ b/Code/gml_Object_obj_caterpillarchara_Create_0.gml
-@@ -13,32 +13,27 @@
+@@ -8,37 +8,47 @@
+ }
+ walk = 0;
+ fun = 0;
++slided = 0;
+ runmove = 0;
+ dir = 0;
  walkbuffer = 0;
  walktimer = 0;
  blushtimer = 0;
@@ -31,14 +37,30 @@
 -pr = parent.rsprite;
 -pl = parent.lsprite;
 -pu = parent.usprite;
- for (i = 0; i < 25; i += 1)
- {
+-for (i = 0; i < 25; i += 1)
+-{
 -    remx[i] = obj_mainchara.x;
 -    remy[i] = obj_mainchara.y;
 -    facing[i] = global.facing;
-+    remx[i] = parent.remx[i];
-+    remy[i] = parent.remy[i];
-+    facing[i] = parent.facing[i];
++if (!instance_exists(obj_lancerslideevent))
++{
++    for (i = 0; i < 25; i += 1)
++    {
++        remx[i] = parent.remx[i];
++        remy[i] = parent.remy[i];
++        facing[i] = parent.facing[i];
++        sliding[i] = parent.wassliding[i];
++    }
++}
++else
++{
++    for (i = 0; i < 25; i += 1)
++    {
++        remx[i] = x;
++        remy[i] = y;
++        facing[i] = global.facing;
++        sliding[i] = slided;
++    }
  }
  depth = obj_mainchara.depth + 5;
  mywidth = sprite_width;

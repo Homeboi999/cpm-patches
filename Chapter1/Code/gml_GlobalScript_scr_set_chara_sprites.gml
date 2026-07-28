@@ -23,6 +23,7 @@ function scr_set_chara_sprites(arg0, arg1)
                 dsprite = spr_susied_dark;
                 rsprite = spr_susier_dark;
                 lsprite = spr_susiel_dark;
+                slidesprite = spr_susie_slide;
                 if (global.plot >= 240)
                 {
                     usprite = spr_susieu_dark;
@@ -36,12 +37,14 @@ function scr_set_chara_sprites(arg0, arg1)
                 dsprite = spr_ralseid;
                 rsprite = spr_ralseir;
                 lsprite = spr_ralseil;
+                slidesprite = spr_ralsei_dark_slide;
                 break;
             case "starwalker":
                 usprite = spr_npc_originalstarwalker;
                 dsprite = spr_npc_originalstarwalker;
                 rsprite = spr_npc_originalstarwalker;
                 lsprite = spr_npc_originalstarwalker;
+                slidesprite = spr_npc_originalstarwalker;
                 break;
         }
     }

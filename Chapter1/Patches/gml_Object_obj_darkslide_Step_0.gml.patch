@@ -1,0 +1,13 @@
+--- a/Code/gml_Object_obj_darkslide_Step_0.gml
++++ b/Code/gml_Object_obj_darkslide_Step_0.gml
+@@ -9,8 +9,9 @@
+         {
+             with (obj_mainchara)
+             {
+-                fun = 0;
++                sliding = 0;
+                 sprite_index = spr_krisd_dark;
++                visual_info.sprite_index = visual_info.dsprite;
+             }
+             snd_stop(slide_noise);
+         }

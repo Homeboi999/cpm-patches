@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_darklanding_Step_0.gml
++++ b/Code/gml_Object_obj_darklanding_Step_0.gml
+@@ -2,7 +2,7 @@
+ {
+     with (obj_mainchara)
+     {
+-        sprite_index = spr_krisd_dark;
++        visual_info.sprite_index = visual_info.dsprite;
+         fun = 0;
+         global.facing = 0;
+     }

@@ -1,0 +1,23 @@
+{
+  "Name": "spr_ralsei_dark_slide",
+  "index": 1098,
+  "ImageFile": "spr_ralsei_dark_slide_strip3.png",
+  "FrameCount": 3,
+  "Size": [
+    26,
+    38
+  ],
+  "Margins": [
+    0,
+    25,
+    37,
+    0
+  ],
+  "BoundingBoxMode": 0,
+  "Origin": [
+    3,
+    2
+  ],
+  "playbackSpeed": 1,
+  "playbackType": 1
+}

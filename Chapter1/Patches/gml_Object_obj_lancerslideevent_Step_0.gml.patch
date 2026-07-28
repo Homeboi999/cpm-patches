@@ -1,12 +1,33 @@
 --- a/Code/gml_Object_obj_lancerslideevent_Step_0.gml
 +++ b/Code/gml_Object_obj_lancerslideevent_Step_0.gml
-@@ -1,5 +1,9 @@
- if (con == 1)
- {
+@@ -4,7 +4,11 @@
+     {
+         visible = 0;
+     }
 +    with (obj_caterpillarchara)
 +    {
 +        visible = 0;
 +    }
-     with (obj_mainchara)
+-    k = scr_dark_marker(0, obj_mainchara.y, spr_krisr_dark);
++    k = scr_dark_marker(0, obj_mainchara.y, obj_mainchara.visual_info.rsprite);
+     with (k)
      {
-         visible = 0;
+         hspeed = 12;
+@@ -43,7 +47,7 @@
+     }
+     with (k)
+     {
+-        sprite_index = spr_krisd_dark;
++        sprite_index = obj_mainchara.visual_info.dsprite;
+     }
+     con = 5;
+     alarm[4] = 30;
+@@ -71,6 +75,8 @@
+         visible = 1;
+         vspeed = 20;
+         fun = 1;
++        sliding = 1;
++        visual_info.sprite_index = visual_info.slidesprite;
+         sprite_index = spr_krisd_slide;
+         autorun = 2;
+     }

@@ -1,9 +1,18 @@
 --- a/Code/gml_Object_obj_mainchara_Draw_0.gml
 +++ b/Code/gml_Object_obj_mainchara_Draw_0.gml
-@@ -1,4 +1,18 @@
+@@ -1,4 +1,27 @@
 -draw_self();
-+var drawx = x - visual_info.halign;
-+var drawy = y - visual_info.valign;
++var drawx, drawy;
++if (sliding == 1)
++{
++    drawx = x;
++    drawy = y;
++}
++else
++{
++    drawx = x - visual_info.halign;
++    drawy = y - visual_info.valign;
++}
 +if (visual_info.sprite_index == spr_krisd_dark)
 +{
 +    draw_sprite_ext(visual_info.sprite_index, image_index, drawx, drawy, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
@@ -20,7 +29,7 @@
  if (button1_p() && scr_debug())
  {
      if (global.darkzone == 0)
-@@ -57,29 +71,6 @@
+@@ -57,29 +80,6 @@
      battlealpha -= 0.08;
  }
  battleheart.image_alpha = battlealpha;

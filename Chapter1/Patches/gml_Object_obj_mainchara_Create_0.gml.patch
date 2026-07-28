@@ -1,6 +1,14 @@
 --- a/Code/gml_Object_obj_mainchara_Create_0.gml
 +++ b/Code/gml_Object_obj_mainchara_Create_0.gml
-@@ -58,6 +58,17 @@
+@@ -38,6 +38,7 @@
+     wspeed = 4;
+ }
+ run = 0;
++runmove = 0;
+ runtimer = 0;
+ subxspeed = 0;
+ subyspeed = 0;
+@@ -58,7 +59,19 @@
      lsprite = spr_krisl_dark;
      usprite = spr_krisu_dark;
  }
@@ -16,9 +24,11 @@
 +visual_info.halign = alignment.halign;
 +visual_info.valign = alignment.valign;
  fun = 0;
++sliding = 0;
  if (global.facing == 0)
  {
-@@ -79,7 +90,7 @@
+     sprite_index = dsprite;
+@@ -79,7 +92,7 @@
  twobuffer = 0;
  threebuffer = 0;
  global.menuno = 0;
@@ -27,7 +37,7 @@
  {
      global.menucoord[i] = 0;
  }
-@@ -155,11 +166,17 @@
+@@ -155,11 +168,18 @@
          }
      }
  }
@@ -36,6 +46,7 @@
 +    remx[i] = x;
 +    remy[i] = y;
 +    facing[i] = global.facing;
++    wassliding[i] = sliding;
 +}
  initwd = sprite_width;
  initht = sprite_height;

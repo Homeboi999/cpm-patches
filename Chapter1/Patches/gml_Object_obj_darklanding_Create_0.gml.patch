@@ -1,0 +1,22 @@
+--- a/Code/gml_Object_obj_darklanding_Create_0.gml
++++ b/Code/gml_Object_obj_darklanding_Create_0.gml
+@@ -5,7 +5,18 @@
+     with (obj_mainchara)
+     {
+         fun = 1;
+-        sprite_index = spr_kris_fallen_dark;
++        switch (name)
++        {
++            case "susie":
++                visual_info.sprite_index = spr_susieb_defeat;
++                break;
++            case "ralsei":
++                visual_info.sprite_index = spr_ralseib_defeat;
++                break;
++            default:
++                visual_info.sprite_index = spr_kris_fallen_dark;
++                break;
++        }
+     }
+     alarm[4] = 45;
+ }

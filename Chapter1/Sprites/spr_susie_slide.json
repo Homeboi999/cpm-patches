@@ -1,0 +1,23 @@
+{
+  "Name": "spr_susie_slide",
+  "index": 1097,
+  "ImageFile": "spr_susie_slide_strip3.png",
+  "FrameCount": 3,
+  "Size": [
+    32,
+    55
+  ],
+  "Margins": [
+    0,
+    24,
+    42,
+    26
+  ],
+  "BoundingBoxMode": 0,
+  "Origin": [
+    5,
+    16
+  ],
+  "playbackSpeed": 1,
+  "playbackType": 1
+}
