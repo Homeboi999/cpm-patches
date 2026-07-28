@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_lancerboss2_Step_0.gml
 +++ b/Code/gml_Object_obj_lancerboss2_Step_0.gml
-@@ -1,34 +1,45 @@
+@@ -1,34 +1,47 @@
 -if (firstskip == 1)
 +if (!init)
  {
@@ -46,6 +46,8 @@
 +        }
 +        global.charturn = 3;
 +        global.myfight = 3;
++        acting = 99;
++        actcon = 10;
 +    }
 +    else
 +    {
@@ -70,7 +72,7 @@
          scr_randomtarget();
          if (!instance_exists(obj_darkener))
          {
-@@ -57,42 +68,51 @@
+@@ -57,42 +70,51 @@
      if (global.mnfight == 2 && attacked == 0)
      {
          rtimer += 1;
@@ -149,7 +151,7 @@
                  {
                      dc.difficulty = 90;
                  }
-@@ -104,7 +124,10 @@
+@@ -104,7 +126,10 @@
              attacked = 1;
              global.typer = 6;
              global.fc = 0;
@@ -161,7 +163,7 @@
          }
          else
          {
-@@ -125,98 +148,639 @@
+@@ -125,98 +150,651 @@
      yy = __view_get(e__VW.YView, 0);
      if (acting == 1 && actcon == 0)
      {
@@ -354,13 +356,18 @@
 +    {
 +        laughsound = snd_play(snd_suslaugh);
 +        global.msg[0] = "* ... Susie laughs menacingly.^1&* Lancer takes a step back./%";
-+        with (obj_herosusie)
++        var susielaugh = global.charinstance[scr_findchar(2)];
++        with (susielaugh)
 +        {
++            state = 0;
++            global.charaction[myself] = 0;
++            global.faceaction[myself] = 0;
 +            visible = 0;
 +        }
-+        suslaugh = scr_dark_marker(obj_herosusie.x, obj_herosusie.y, spr_susier_dark_laugh);
++        suslaugh = scr_dark_marker(susielaugh.x, susielaugh.y, spr_susier_dark_laugh);
 +        with (suslaugh)
 +        {
++            depth = susielaugh.depth;
 +            image_speed = 0.2;
 +        }
 +        laughtimer = 0;
@@ -396,7 +403,7 @@
 +        {
 +            instance_destroy();
 +        }
-+        with (obj_herosusie)
++        with (global.charinstance[scr_findchar(2)])
 +        {
 +            visible = 1;
 +        }
@@ -455,10 +462,9 @@
 +        convincecon++;
 +        scr_battletext_default();
 +    }
-+    if (acting != 99 && actcon < 2 && !instance_exists(obj_writer))
++    if (actcon == 1 && !instance_exists(obj_writer))
 +    {
-+        acting = 99;
-+        actcon = 10;
++        scr_nextact();
 +    }
 +    if (acting == 99 && actcon == 10)
 +    {
@@ -496,13 +502,21 @@
 +}
 +if (global.myfight == 4)
 +{
++    var spellphasedone = instance_exists(obj_spellphase) && (obj_spellphase.char >= 3 || obj_spellphase.spelltotal == 1);
++    if (sparecon == 0)
++    {
++        if (spellphasedone && scr_havechar(2) && scr_susiemode)
++        {
++            sparecon = 2;
++        }
++    }
 +    if (sparecon == 1)
 +    {
 +        if ((global.attacking || rudebuster) && !(scr_havechar(2) && scr_susiemode()))
 +        {
 +            sparecon = 0;
 +        }
-+        else if (instance_exists(obj_spellphase) && (obj_spellphase.char >= 3 || obj_spellphase.spelltotal == 1))
++        else if (spellphasedone)
 +        {
 +            sparecon = 2;
 +        }

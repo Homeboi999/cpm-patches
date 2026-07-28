@@ -40,6 +40,17 @@ function scr_nextact()
         {
             acting = 0;
         }
-        scr_attackphase();
+        if (instance_exists(obj_lancerboss2))
+        {
+            with (obj_lancerboss2)
+            {
+                acting = 99;
+                actcon = 10;
+            }
+        }
+        else
+        {
+            scr_attackphase();
+        }
     }
 }

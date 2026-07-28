@@ -15,3 +15,13 @@
  {
      if (global.myfight == 3 && global.faceaction[myself] == 6)
      {
+@@ -146,7 +155,8 @@
+     }
+     if (state == 6)
+     {
+-        if (global.myfight == 3)
++        var lancercon = instance_exists(obj_lancerboss2) && obj_lancerboss2.bubbleactive;
++        if (global.myfight == 3 && !lancercon)
+         {
+             if (acttimer < actframes)
+             {

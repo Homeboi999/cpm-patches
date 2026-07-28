@@ -1,10 +1,11 @@
 --- a/Code/gml_Object_obj_king_boss_Create_0.gml
 +++ b/Code/gml_Object_obj_king_boss_Create_0.gml
-@@ -47,6 +47,7 @@
+@@ -47,6 +47,8 @@
  chain_dragging = 0;
  wall_bouncing = 0;
  talk_all_message = 0;
 +spellactpartner = -4;
++autosusie_reset = false;
  
  enum e__VW
  {

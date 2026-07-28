@@ -55,7 +55,7 @@
 +        {
 +            continue;
 +        }
-+        haveChar[i] = 1;
++        havechar[i] = 1;
 +        c[i] = scr_dark_marker(global.heromakex[i], global.heromakey[i], csprite);
 +        c[i].direction = point_direction(c[i].x, c[i].y, targetx, targety);
 +        c[i].speed = point_distance(c[i].x, c[i].y, targetx, targety) / 10;

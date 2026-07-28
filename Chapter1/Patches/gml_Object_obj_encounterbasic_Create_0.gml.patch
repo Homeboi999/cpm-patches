@@ -68,15 +68,15 @@
 +    {
 +        case 1:
 +            c[pos] = scr_dark_marker(charx, chary, spr_krisr_dark);
-+            haveChar[pos] = 1;
++            havechar[pos] = 1;
 +            break;
 +        case 2:
 +            c[pos] = scr_dark_marker(charx, chary, spr_susier_wall);
-+            haveChar[pos] = 1;
++            havechar[pos] = 1;
 +            break;
 +        case 3:
 +            c[pos] = scr_dark_marker(charx, chary, spr_ralseir);
-+            haveChar[pos] = 1;
++            havechar[pos] = 1;
 +            break;
 +    }
 +}
