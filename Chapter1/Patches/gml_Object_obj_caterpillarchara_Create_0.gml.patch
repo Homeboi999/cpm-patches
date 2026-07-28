@@ -1,8 +1,31 @@
 --- a/Code/gml_Object_obj_caterpillarchara_Create_0.gml
 +++ b/Code/gml_Object_obj_caterpillarchara_Create_0.gml
-@@ -30,10 +30,6 @@
+@@ -13,32 +13,27 @@
+ walkbuffer = 0;
+ walktimer = 0;
+ blushtimer = 0;
++name = "susie";
+ target = 12;
++var alignment = gml_Script_scr_get_chara_alignment(name, self);
++halign = alignment.halign;
++valign = alignment.valign;
+ usprite = spr_susieu_dark;
+ dsprite = spr_susied_dark;
+ rsprite = spr_susier_dark;
+ lsprite = spr_susiel_dark;
+-if (global.plot >= 240)
+-{
+-    usprite = spr_susieu_dark;
+-    dsprite = spr_susied_dark_eyes;
+-    rsprite = spr_susier_dark_eyes;
+-    lsprite = spr_susiel_dark_eyes;
+-}
++slidesprite = spr_krisd_slide;
+ usprite_blush = spr_ralseiu;
+ dsprite_blush = spr_ralseid;
  rsprite_blush = spr_ralseir_blush;
  lsprite_blush = spr_ralseil_blush;
++gml_Script_scr_set_chara_sprites(name, self);
  parent = obj_mainchara;
 -pd = parent.dsprite;
 -pr = parent.rsprite;
@@ -10,4 +33,12 @@
 -pu = parent.usprite;
  for (i = 0; i < 25; i += 1)
  {
-     remx[i] = obj_mainchara.x;
+-    remx[i] = obj_mainchara.x;
+-    remy[i] = obj_mainchara.y;
+-    facing[i] = global.facing;
++    remx[i] = parent.remx[i];
++    remy[i] = parent.remy[i];
++    facing[i] = parent.facing[i];
+ }
+ depth = obj_mainchara.depth + 5;
+ mywidth = sprite_width;

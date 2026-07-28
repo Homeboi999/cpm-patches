@@ -1,0 +1,26 @@
+--- a/Code/gml_Object_obj_mainchara_Step_0.gml
++++ b/Code/gml_Object_obj_mainchara_Step_0.gml
+@@ -367,6 +367,23 @@
+     }
+     x += px;
+     y += py;
++    moved = 0;
++    if (x != remx[0] || y != remy[0])
++    {
++        moved = 1;
++    }
++    if (moved == 1)
++    {
++        for (var i = 75; i > 0; i -= 1)
++        {
++            remx[i] = remx[i - 1];
++            remy[i] = remy[i - 1];
++            facing[i] = facing[i - 1];
++        }
++        remx[0] = x;
++        remy[0] = y;
++        facing[0] = global.facing;
++    }
+ }
+ walk = 0;
+ if (x != nowx && nopress == 0)

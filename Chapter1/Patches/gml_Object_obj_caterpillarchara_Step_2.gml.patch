@@ -1,0 +1,42 @@
+--- a/Code/gml_Object_obj_caterpillarchara_Step_2.gml
++++ b/Code/gml_Object_obj_caterpillarchara_Step_2.gml
+@@ -25,22 +25,8 @@
+     remx[0] = obj_mainchara.x;
+     remy[0] = obj_mainchara.y;
+     facing[0] = global.facing;
+-    if (usprite == spr_susieu_dark)
+-    {
+-        x = remx[target] - 6;
+-    }
+-    else
+-    {
+-        x = remx[target] - 4;
+-    }
+-    if (usprite == spr_susieu_dark)
+-    {
+-        y = remy[target] - 16;
+-    }
+-    else
+-    {
+-        y = remy[target] - 12;
+-    }
++    x = remx[target] - halign;
++    y = remy[target] - valign;
+     if (abs(remx[target + 1] - remx[target]) > 4)
+     {
+         runmove = 1;
+@@ -50,6 +36,14 @@
+         runmove = 1;
+     }
+     dir = facing[target];
++}
++var alignment = gml_Script_scr_get_chara_alignment(name, self);
++var valign_changed = alignment.valign != valign;
++halign = alignment.halign;
++valign = alignment.valign;
++if (valign_changed)
++{
++    y = remy[target] - valign;
+ }
+ if (x != nowx)
+ {

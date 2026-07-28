@@ -1,0 +1,22 @@
+--- a/Code/gml_GlobalScript_scr_makecaterpillar.gml
++++ b/Code/gml_GlobalScript_scr_makecaterpillar.gml
+@@ -2,15 +2,11 @@
+ {
+     global.cinstance[arg3] = instance_create(arg0, arg1, obj_caterpillarchara);
+     global.cinstance[arg3].target = 12 + (arg3 * 12);
+-    if (arg2 == 3)
++    var name = scr_char_id_to_name(arg2);
++    with (global.cinstance[arg3])
+     {
+-        with (global.cinstance[arg3])
+-        {
+-            usprite = spr_ralseiu;
+-            dsprite = spr_ralseid;
+-            rsprite = spr_ralseir;
+-            lsprite = spr_ralseil;
+-        }
++        self.name = name;
++        gml_Script_scr_set_chara_sprites(name, self);
+     }
+     return global.cinstance[arg3];
+ }

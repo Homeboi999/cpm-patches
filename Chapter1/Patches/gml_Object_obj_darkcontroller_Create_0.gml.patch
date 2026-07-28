@@ -1,0 +1,56 @@
+--- a/Code/gml_Object_obj_darkcontroller_Create_0.gml
++++ b/Code/gml_Object_obj_darkcontroller_Create_0.gml
+@@ -44,41 +44,18 @@
+ for (var i = 0; i < 3; i += 1)
+ {
+     global.faceaction[i] = 0;
+-    if (global.char[i] != 0)
+-    {
+-        chartotal += 1;
+-    }
+-    if (global.char[i] == 1)
+-    {
+-        havechar[0] = 1;
+-        charpos[0] = i;
+-    }
+-    if (global.char[i] == 2)
+-    {
+-        havechar[1] = 1;
+-        charpos[1] = i;
+-        if (i > 0)
+-        {
+-            global.cinstance[i - 1] = instance_create(obj_mainchara.x - 6, obj_mainchara.y - 16, obj_caterpillarchara);
+-            global.cinstance[i - 1].target = i * 12;
+-        }
+-    }
+-    if (global.char[i] == 3)
+-    {
+-        havechar[2] = 1;
+-        charpos[2] = i;
+-        if (i > 0)
+-        {
+-            global.cinstance[i - 1] = instance_create(obj_mainchara.x - 4, obj_mainchara.y - 12, obj_caterpillarchara);
+-            global.cinstance[i - 1].target = i * 12;
+-            with (global.cinstance[i - 1])
+-            {
+-                usprite = spr_ralseiu;
+-                dsprite = spr_ralseid;
+-                rsprite = spr_ralseir;
+-                lsprite = spr_ralseil;
+-            }
+-        }
++    if (global.char[i] == 0)
++    {
++        continue;
++    }
++    chartotal += 1;
++    havechar[global.char[i] - 1] = 1;
++    charpos[global.char[i] - 1] = i;
++    if (i > 0)
++    {
++        var name = scr_char_id_to_name(global.char[i]);
++        var alignment = gml_Script_scr_get_chara_alignment(name);
++        scr_makecaterpillar(obj_mainchara.x - alignment.halign, obj_mainchara.y - alignment.valign, global.char[i], i - 1);
+     }
+ }
+ slmxx = 0;
