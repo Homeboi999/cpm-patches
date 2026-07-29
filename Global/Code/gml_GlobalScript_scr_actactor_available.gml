@@ -9,9 +9,11 @@ function scr_actactor_available(arg0)
         case 4:
             var result = scr_actactor_char_available(2);
             result.and_in_place(scr_actactor_char_available(3));
-            break;
+            return result;
+        case 5:
+            return scr_actactor_char_available(4);
         case 6:
-            var result = new actactor_status(true);
+            result = new actactor_status(true);
             var character_count = 0;
             for (var i = 0; i < 3; i++)
             {
