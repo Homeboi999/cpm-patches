@@ -16,3 +16,30 @@
      if (scr_isphase("enemytalk") && talked == 0)
      {
          scr_randomtarget();
+@@ -172,9 +182,16 @@
+         msgsetloc(0, "* SPAMTON - He wants to make a \\cYDEAL\\c0, but don't give him your \\cYMONEY\\c0!/%", "obj_spamton_enemy_slash_Step_0_gml_153_0");
+         scr_battletext_default();
+     }
+-    if (acting == 2 && actcon == 0)
++    if ((acting == 2 && actcon == 0) || (actingsus == 1 && actconsus == 1) || (actingral == 1 && actconral == 1) || (actingnoe == 1 && actconnoe == 1))
+     {
++        acting = 2;
+         actcon = 5;
++        actingsus = 0;
++        actconsus = 0;
++        actingral = 0;
++        actconral = 0;
++        actingnoe = 0;
++        actconnoe = 0;
+         if (deal_counter == 0)
+         {
+             correct_answer = 0;
+@@ -471,7 +488,7 @@
+     }
+     if (acting == 3 && actcon == 0)
+     {
+-        star = 0;
++        star = global.currentactingchar;
+         scr_healitemspell(60);
+         acting = 2;
+         actcon = 0;

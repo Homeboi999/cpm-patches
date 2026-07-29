@@ -296,215 +296,166 @@
      if (global.tensionselect > 0)
      {
          thiscost = round((acttpcost[actcoord] / global.maxtension) * 100);
-@@ -810,6 +785,211 @@
+@@ -810,6 +785,162 @@
          else
          {
              draw_text_ext_transformed(__view_get(e__VW.XView, 0) + 210 + xx2, __view_get(e__VW.YView, 0) + 376, stringsetloc("(Defenseless)", "obj_queen_enemy_slash_Draw_0_gml_82_0"), 9999, 9999, 1, 1, 0);
 +        }
 +    }
 +}
-+if (keyboard_check_pressed(vk_backspace))
++if (scr_debug())
 +{
-+    drawactdebug = !drawactdebug;
-+    drawspelldebug = false;
-+}
-+if (drawactdebug || drawspelldebug)
-+{
-+    draw_set_color(c_black);
-+    draw_set_alpha(0.8);
-+    draw_rectangle(xx + 240, yy, xx + 600, yy + 45, false);
-+    draw_set_color(c_aqua);
-+    draw_set_alpha(1);
-+    scr_84_set_draw_font("main");
-+    draw_text(xx + 250, yy + 5, "global.charturn: " + string(global.charturn));
-+    draw_text(xx + 400, yy + 5, "global.currentactingchar: " + string(global.currentactingchar));
-+    draw_text(xx + 250, yy + 20, "global.myfight: " + string(global.myfight));
-+}
-+if (drawactdebug)
-+{
-+    draw_set_color(c_black);
-+    draw_set_alpha(0.8);
-+    draw_rectangle(xx + 65, yy, xx + 225, yy + 90, false);
-+    draw_set_color(c_white);
-+    draw_set_alpha(1);
-+    draw_text(xx + 75, yy + 5, "ACT Globals");
-+    draw_text(xx + 75, yy + 35, "acting: ");
-+    draw_text(xx + 75, yy + 50, "actingsingle: ");
-+    draw_text(xx + 75, yy + 65, "actingsimul: ");
-+    for (var slot = 0; slot < 3; slot++)
++    if (keyboard_check_pressed(vk_backspace))
 +    {
-+        switch (global.char[slot])
-+        {
-+            case 1:
-+                draw_set_color(c_aqua);
-+                break;
-+            case 2:
-+                draw_set_color(c_fuchsia);
-+                break;
-+            case 3:
-+                draw_set_color(c_lime);
-+                break;
-+            case 4:
-+                draw_set_color(c_yellow);
-+                break;
-+            default:
-+                draw_set_color(c_gray);
-+                break;
-+        }
-+        draw_text(xx + 165 + (15 * slot), yy + 35, string(global.acting[slot]));
-+        draw_text(xx + 165 + (15 * slot), yy + 50, string(global.actingsingle[slot]));
-+        draw_text(xx + 165 + (15 * slot), yy + 65, string(global.actingsimul[slot]));
-+        var xoffset = 175;
-+        var yoffset = 125 + (115 * slot);
-+        var xoffset2 = xoffset + 200;
-+        with (obj_monsterparent)
-+        {
-+            if (myself == slot)
-+            {
-+                draw_set_color(c_black);
-+                draw_set_alpha(0.8);
-+                draw_rectangle((other.xx + xoffset) - 90, (other.yy + yoffset) - 10, (other.xx + xoffset) - 20, other.yy + yoffset + 25, false);
-+                draw_set_color(c_white);
-+                draw_set_alpha(1);
-+                draw_text((other.xx + xoffset) - 80, other.yy + yoffset, "Enemy " + string(slot));
-+                draw_set_color(c_black);
-+                draw_set_alpha(0.8);
-+                draw_rectangle((other.xx + xoffset) - 10, (other.yy + yoffset) - 10, other.xx + xoffset + 175, other.yy + yoffset + 100, false);
-+                draw_set_color(c_white);
-+                draw_set_alpha(1);
-+                draw_text(other.xx + xoffset, other.yy + yoffset, "Chosen ACTs");
-+                draw_text(other.xx + xoffset, other.yy + yoffset + 30, "acting:");
-+                draw_text(other.xx + xoffset, other.yy + yoffset + 45, "actcon:");
-+                draw_text(other.xx + xoffset, other.yy + yoffset + 60, "simulorder:");
-+                draw_text(other.xx + xoffset, other.yy + yoffset + 75, "simuldone:");
-+                draw_text(other.xx + xoffset, other.yy + yoffset + 90, "simulcount:");
-+                draw_set_color(c_yellow);
-+                draw_text(other.xx + xoffset + 90, other.yy + yoffset + 60, string(simulorder));
-+                draw_text(other.xx + xoffset + 90, other.yy + yoffset + 75, string(simuldone));
-+                draw_set_color(c_aqua);
-+                draw_text(other.xx + xoffset + 90, other.yy + yoffset + 30, string(acting));
-+                draw_text(other.xx + xoffset + 90, other.yy + yoffset + 45, string(actcon));
-+                draw_text(other.xx + xoffset + 90, other.yy + yoffset + 90, string(simulcountkri));
-+                draw_set_color(c_fuchsia);
-+                draw_text(other.xx + xoffset + 105, other.yy + yoffset + 30, string(actingsus));
-+                draw_text(other.xx + xoffset + 105, other.yy + yoffset + 45, string(actconsus));
-+                draw_text(other.xx + xoffset + 105, other.yy + yoffset + 90, string(simulcountsus));
-+                draw_set_color(c_lime);
-+                draw_text(other.xx + xoffset + 120, other.yy + yoffset + 30, string(actingral));
-+                draw_text(other.xx + xoffset + 120, other.yy + yoffset + 45, string(actconral));
-+                draw_text(other.xx + xoffset + 120, other.yy + yoffset + 90, string(simulcountral));
-+                draw_set_color(c_yellow);
-+                draw_text(other.xx + xoffset + 135, other.yy + yoffset + 30, string(actingnoe));
-+                draw_text(other.xx + xoffset + 135, other.yy + yoffset + 45, string(actconnoe));
-+                draw_text(other.xx + xoffset + 135, other.yy + yoffset + 90, string(simulcountnoe));
-+                draw_set_color(c_black);
-+                draw_set_alpha(0.8);
-+                draw_rectangle((other.xx + xoffset2) - 10, (other.yy + yoffset) - 10, other.xx + xoffset2 + 200, other.yy + yoffset + 85, false);
-+                draw_set_color(c_white);
-+                draw_set_alpha(1);
-+                draw_text(other.xx + xoffset2, other.yy + yoffset, "Available ACTs");
-+                draw_text(other.xx + xoffset2, other.yy + yoffset + 30, "canact:");
-+                draw_text(other.xx + xoffset2, other.yy + yoffset + 45, "actactor:");
-+                draw_text(other.xx + xoffset2, other.yy + yoffset + 60, "actsimul:");
-+                var acttotal = 0;
-+                for (var act = 0; act < 6; act++)
-+                {
-+                    var actoffset = 75 + (15 * acttotal);
-+                    if (global.canact[myself][act] == 0)
-+                    {
-+                        break;
-+                    }
-+                    draw_set_color(c_aqua);
-+                    draw_text(other.xx + xoffset2 + actoffset, other.yy + yoffset + 30, string(global.canact[myself][act]));
-+                    draw_text(other.xx + xoffset2 + actoffset, other.yy + yoffset + 45, string(global.actactor[myself][act]));
-+                    draw_text(other.xx + xoffset2 + actoffset, other.yy + yoffset + 60, string(global.actsimul[myself][act]));
-+                    acttotal++;
-+                }
-+                for (var act = 0; act < 6; act++)
-+                {
-+                    var actoffset = 75 + (15 * acttotal);
-+                    if (global.canactsus[myself][act] == 0)
-+                    {
-+                        break;
-+                    }
-+                    draw_set_color(c_fuchsia);
-+                    draw_text(other.xx + xoffset2 + actoffset, other.yy + yoffset + 30, string(global.canactsus[myself][act]));
-+                    draw_text(other.xx + xoffset2 + actoffset, other.yy + yoffset + 60, string(global.actsimulsus[myself][act]));
-+                    acttotal++;
-+                }
-+                for (var act = 0; act < 6; act++)
-+                {
-+                    var actoffset = 75 + (15 * acttotal);
-+                    if (global.canactral[myself][act] == 0)
-+                    {
-+                        break;
-+                    }
-+                    draw_set_color(c_lime);
-+                    draw_text(other.xx + xoffset2 + actoffset, other.yy + yoffset + 30, string(global.canactral[myself][act]));
-+                    draw_text(other.xx + xoffset2 + actoffset, other.yy + yoffset + 60, string(global.actsimulral[myself][act]));
-+                    acttotal++;
-+                }
-+                for (var act = 0; act < 6; act++)
-+                {
-+                    var actoffset = 75 + (15 * acttotal);
-+                    if (global.canactnoe[myself][act] == 0)
-+                    {
-+                        break;
-+                    }
-+                    draw_set_color(c_yellow);
-+                    draw_text(other.xx + xoffset2 + actoffset, other.yy + yoffset + 30, string(global.canactnoe[myself][act]));
-+                    draw_text(other.xx + xoffset2 + actoffset, other.yy + yoffset + 60, string(global.actsimulnoe[myself][act]));
-+                    acttotal++;
-+                }
-+            }
-+        }
++        drawactdebug = !drawactdebug;
 +    }
-+}
-+if (keyboard_check_pressed(vk_numpad1))
-+{
-+    drawspelldebug = !drawspelldebug;
-+    drawactdebug = false;
-+}
-+if (drawspelldebug)
-+{
-+    scr_84_set_draw_font("main");
-+    var yoffset = 100;
-+    for (var pos = 0; pos < 3; pos++)
++    if (drawactdebug)
 +    {
-+        var xoffset = 75 + (175 * pos);
 +        draw_set_color(c_black);
 +        draw_set_alpha(0.8);
-+        draw_rectangle((xx + xoffset) - 5, (yy + yoffset) - 5, xx + xoffset + 150, yy + yoffset + 80, false);
++        draw_rectangle(xx + 240, yy, xx + 600, yy + 45, false);
++        draw_set_color(c_aqua);
++        draw_set_alpha(1);
++        scr_84_set_draw_font("main");
++        draw_text(xx + 250, yy + 5, "global.charturn: " + string(global.charturn));
++        draw_text(xx + 400, yy + 5, "global.currentactingchar: " + string(global.currentactingchar));
++        draw_text(xx + 250, yy + 20, "global.myfight: " + string(global.myfight));
++        draw_set_color(c_black);
++        draw_set_alpha(0.8);
++        draw_rectangle(xx + 65, yy, xx + 225, yy + 90, false);
 +        draw_set_color(c_white);
 +        draw_set_alpha(1);
-+        draw_text(xx + xoffset, yy + yoffset, "Spell Menu Info");
-+        draw_text(xx + xoffset, yy + yoffset + 30, "battleactcount: " + string(global.battleactcount[pos]));
-+        draw_text(xx + xoffset, yy + yoffset + 45, "battlespells: ");
-+        switch (global.char[pos])
++        draw_text(xx + 75, yy + 5, "ACT Globals");
++        draw_text(xx + 75, yy + 35, "acting: ");
++        draw_text(xx + 75, yy + 50, "actingsingle: ");
++        draw_text(xx + 75, yy + 65, "actingsimul: ");
++        for (var slot = 0; slot < 3; slot++)
 +        {
-+            case 1:
-+                draw_set_color(c_aqua);
-+                break;
-+            case 2:
-+                draw_set_color(c_fuchsia);
-+                break;
-+            case 3:
-+                draw_set_color(c_lime);
-+                break;
-+            case 4:
-+                draw_set_color(c_yellow);
-+                break;
-+            default:
-+                draw_set_color(c_gray);
-+                break;
-+        }
-+        for (var spell = 0; spell < 12; spell++)
-+        {
-+            if (global.battlespell[pos][spell] == 0)
++            switch (global.char[slot])
 +            {
-+                continue;
++                case 1:
++                    draw_set_color(c_aqua);
++                    break;
++                case 2:
++                    draw_set_color(c_fuchsia);
++                    break;
++                case 3:
++                    draw_set_color(c_lime);
++                    break;
++                case 4:
++                    draw_set_color(c_yellow);
++                    break;
++                default:
++                    draw_set_color(c_gray);
++                    break;
 +            }
-+            draw_text(xx + xoffset + (30 * spell), yy + yoffset + 60, string(global.battlespell[pos][spell]));
++            draw_text(xx + 165 + (15 * slot), yy + 35, string(global.acting[slot]));
++            draw_text(xx + 165 + (15 * slot), yy + 50, string(global.actingsingle[slot]));
++            draw_text(xx + 165 + (15 * slot), yy + 65, string(global.actingsimul[slot]));
++            var xoffset = 175;
++            var yoffset = 125 + (115 * slot);
++            var xoffset2 = xoffset + 200;
++            with (obj_monsterparent)
++            {
++                if (myself == slot)
++                {
++                    draw_set_color(c_black);
++                    draw_set_alpha(0.8);
++                    draw_rectangle((other.xx + xoffset) - 90, (other.yy + yoffset) - 10, (other.xx + xoffset) - 20, other.yy + yoffset + 25, false);
++                    draw_set_color(c_white);
++                    draw_set_alpha(1);
++                    draw_text((other.xx + xoffset) - 80, other.yy + yoffset, "Enemy " + string(slot));
++                    draw_set_color(c_black);
++                    draw_set_alpha(0.8);
++                    draw_rectangle((other.xx + xoffset) - 10, (other.yy + yoffset) - 10, other.xx + xoffset + 175, other.yy + yoffset + 100, false);
++                    draw_set_color(c_white);
++                    draw_set_alpha(1);
++                    draw_text(other.xx + xoffset, other.yy + yoffset, "Chosen ACTs");
++                    draw_text(other.xx + xoffset, other.yy + yoffset + 30, "acting:");
++                    draw_text(other.xx + xoffset, other.yy + yoffset + 45, "actcon:");
++                    draw_text(other.xx + xoffset, other.yy + yoffset + 60, "simulorder:");
++                    draw_text(other.xx + xoffset, other.yy + yoffset + 75, "simuldone:");
++                    draw_text(other.xx + xoffset, other.yy + yoffset + 90, "simulcount:");
++                    draw_set_color(c_yellow);
++                    draw_text(other.xx + xoffset + 90, other.yy + yoffset + 60, string(simulorder));
++                    draw_text(other.xx + xoffset + 90, other.yy + yoffset + 75, string(simuldone));
++                    draw_set_color(c_aqua);
++                    draw_text(other.xx + xoffset + 90, other.yy + yoffset + 30, string(acting));
++                    draw_text(other.xx + xoffset + 90, other.yy + yoffset + 45, string(actcon));
++                    draw_text(other.xx + xoffset + 90, other.yy + yoffset + 90, string(simulcountkri));
++                    draw_set_color(c_fuchsia);
++                    draw_text(other.xx + xoffset + 105, other.yy + yoffset + 30, string(actingsus));
++                    draw_text(other.xx + xoffset + 105, other.yy + yoffset + 45, string(actconsus));
++                    draw_text(other.xx + xoffset + 105, other.yy + yoffset + 90, string(simulcountsus));
++                    draw_set_color(c_lime);
++                    draw_text(other.xx + xoffset + 120, other.yy + yoffset + 30, string(actingral));
++                    draw_text(other.xx + xoffset + 120, other.yy + yoffset + 45, string(actconral));
++                    draw_text(other.xx + xoffset + 120, other.yy + yoffset + 90, string(simulcountral));
++                    draw_set_color(c_yellow);
++                    draw_text(other.xx + xoffset + 135, other.yy + yoffset + 30, string(actingnoe));
++                    draw_text(other.xx + xoffset + 135, other.yy + yoffset + 45, string(actconnoe));
++                    draw_text(other.xx + xoffset + 135, other.yy + yoffset + 90, string(simulcountnoe));
++                    draw_set_color(c_black);
++                    draw_set_alpha(0.8);
++                    draw_rectangle((other.xx + xoffset2) - 10, (other.yy + yoffset) - 10, other.xx + xoffset2 + 200, other.yy + yoffset + 85, false);
++                    draw_set_color(c_white);
++                    draw_set_alpha(1);
++                    draw_text(other.xx + xoffset2, other.yy + yoffset, "Available ACTs");
++                    draw_text(other.xx + xoffset2, other.yy + yoffset + 30, "canact:");
++                    draw_text(other.xx + xoffset2, other.yy + yoffset + 45, "actactor:");
++                    draw_text(other.xx + xoffset2, other.yy + yoffset + 60, "actsimul:");
++                    var acttotal = 0;
++                    for (var act = 0; act < 6; act++)
++                    {
++                        var actoffset = 75 + (15 * acttotal);
++                        if (global.canact[myself][act] == 0)
++                        {
++                            break;
++                        }
++                        draw_set_color(c_aqua);
++                        draw_text(other.xx + xoffset2 + actoffset, other.yy + yoffset + 30, string(global.canact[myself][act]));
++                        draw_text(other.xx + xoffset2 + actoffset, other.yy + yoffset + 45, string(global.actactor[myself][act]));
++                        draw_text(other.xx + xoffset2 + actoffset, other.yy + yoffset + 60, string(global.actsimul[myself][act]));
++                        acttotal++;
++                    }
++                    for (var act = 0; act < 6; act++)
++                    {
++                        var actoffset = 75 + (15 * acttotal);
++                        if (global.canactsus[myself][act] == 0)
++                        {
++                            break;
++                        }
++                        draw_set_color(c_fuchsia);
++                        draw_text(other.xx + xoffset2 + actoffset, other.yy + yoffset + 30, string(global.canactsus[myself][act]));
++                        draw_text(other.xx + xoffset2 + actoffset, other.yy + yoffset + 60, string(global.actsimulsus[myself][act]));
++                        acttotal++;
++                    }
++                    for (var act = 0; act < 6; act++)
++                    {
++                        var actoffset = 75 + (15 * acttotal);
++                        if (global.canactral[myself][act] == 0)
++                        {
++                            break;
++                        }
++                        draw_set_color(c_lime);
++                        draw_text(other.xx + xoffset2 + actoffset, other.yy + yoffset + 30, string(global.canactral[myself][act]));
++                        draw_text(other.xx + xoffset2 + actoffset, other.yy + yoffset + 60, string(global.actsimulral[myself][act]));
++                        acttotal++;
++                    }
++                    for (var act = 0; act < 6; act++)
++                    {
++                        var actoffset = 75 + (15 * acttotal);
++                        if (global.canactnoe[myself][act] == 0)
++                        {
++                            break;
++                        }
++                        draw_set_color(c_yellow);
++                        draw_text(other.xx + xoffset2 + actoffset, other.yy + yoffset + 30, string(global.canactnoe[myself][act]));
++                        draw_text(other.xx + xoffset2 + actoffset, other.yy + yoffset + 60, string(global.actsimulnoe[myself][act]));
++                        acttotal++;
++                    }
++                }
++            }
          }
      }
  }

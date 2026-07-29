@@ -193,56 +193,24 @@
              }
          }
          if (actcon == 112)
-@@ -1271,34 +1353,39 @@
-         }
-         if (scr_sideb_get_phase() > 2)
-         {
--            if (acting == 2 && actcon == 0)
-+            var actnum = 2;
-+            if (!scr_havechar(2) && !scr_havechar(4))
-             {
-+                if (acting == actnum && actcon == 0)
-+                {
--                msgsetloc(0, "* Kris used X-Slash!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_531_0");
-+                    msgsetloc(0, "* Kris used X-Slash!/%", "obj_spamton_neo_enemy_slash_Step_0_gml_531_0");
--                scr_battletext_default();
-+                    scr_battletext_default();
--                acting = 0;
-+                    acting = 0;
--                actcon = 21;
-+                    actcon = 21;
+@@ -1277,8 +1359,8 @@
+                 scr_battletext_default();
+                 acting = 0;
+                 actcon = 21;
 -                krs = scr_act_charsprite("kris", spr_krisb_attack, 0.25, 1);
-+                    krs = scr_act_charsprite(global.currentactingchar, spr_krisb_attack, 0.25, 1);
++                krs = scr_act_charsprite(global.currentactingchar, spr_krisb_attack, 0.25, 1);
 -                krs.depth = obj_herokris.depth + 1;
-+                    krs.depth = global.charinstance[global.currentactingchar].depth + 1;
--                alarm[4] = 14;
-+                    alarm[4] = 14;
--                snd_pitch(snd_play(snd_scytheburst), 1.2);
-+                    snd_pitch(snd_play(snd_scytheburst), 1.2);
--                att = instance_create(x + 57, y + 76, obj_basicattack);
-+                    att = instance_create(x + 57, y + 76, obj_basicattack);
--                att.image_xscale = 2;
-+                    att.image_xscale = 2;
--                att.image_yscale = 2;
-+                    att.image_yscale = 2;
--                caster = 0;
-+                    caster = 0;
--                global.hittarget[0] = 0;
-+                    global.hittarget[0] = 0;
--                partmode = 40;
-+                    partmode = 40;
--                shockthreshold = 15;
-+                    shockthreshold = 15;
--                shocktimer = 9999;
-+                    shocktimer = 9999;
--                hurttimer2 = 10;
-+                    hurttimer2 = 10;
++                krs.depth = global.charinstance[global.currentactingchar].depth + 1;
+                 alarm[4] = 14;
+                 snd_pitch(snd_play(snd_scytheburst), 1.2);
+                 att = instance_create(x + 57, y + 76, obj_basicattack);
+@@ -1290,15 +1372,15 @@
+                 shockthreshold = 15;
+                 shocktimer = 9999;
+                 hurttimer2 = 10;
 -                var dam = round((((global.battleat[obj_herokris.myself] * 150) / 20) - (global.monsterdf[myself] * 3)) * 1.25);
-+                    var dam = round((((global.battleat[global.currentactingchar] * 150) / 20) - (global.monsterdf[myself] * 3)) * 1.25);
--                scr_damage_enemy(0, dam);
-+                    scr_damage_enemy(0, dam);
-+                }
-+                actnum++;
++                var dam = round((((global.battleat[global.currentactingchar] * 150) / 20) - (global.monsterdf[myself] * 3)) * 1.25);
+                 scr_damage_enemy(0, dam);
              }
              if (actcon == 22)
              {
@@ -255,7 +223,7 @@
                  alarm[4] = 14;
                  snd_pitch(snd_play(snd_scytheburst), 0.8);
                  att = instance_create(x + 57, y + 76, obj_basicattack);
-@@ -1310,7 +1397,7 @@
+@@ -1310,7 +1392,7 @@
                  shockthreshold = 15;
                  shocktimer = 9999;
                  hurttimer2 = 10;
@@ -264,38 +232,18 @@
                  scr_damage_enemy(0, dam);
              }
              if (actcon == 24)
-@@ -1318,21 +1405,237 @@
-                 scr_act_charsprite_end();
-                 actcon = 1;
-             }
--            if (acting == 3 && actcon == 0)
-+            if (!scr_havechar(3) && !scr_havechar(4))
-             {
-+                if (acting == actnum && actcon == 0)
-+                {
--                var n = irandom_range(42, 5555);
-+                    var n = irandom_range(42, 5555);
--                var small_text = stringsetloc(" Liked this!", "obj_spamton_neo_enemy_slash_Step_0_gml_928_0");
-+                    var small_text = stringsetloc(" Liked this!", "obj_spamton_neo_enemy_slash_Step_0_gml_928_0");
--                scr_smallface(0, "none", 6, "rightmid", "bottom", string("" + string([n]) + small_text));
-+                    scr_smallface(0, "none", 6, "rightmid", "bottom", string("" + string([n]) + small_text));
--                msgset(0, stringsetloc("* RECOVERED HP with pipis!\\f0 /%", "obj_spamton_neo_enemy_slash_Step_0_gml_581_0"));
-+                    msgset(0, stringsetloc("* RECOVERED HP with pipis!\\f0 /%", "obj_spamton_neo_enemy_slash_Step_0_gml_581_0"));
--                scr_battletext_default();
-+                    scr_battletext_default();
--                acting = 0;
-+                    acting = 0;
--                actcon = 31;
-+                    actcon = 31;
+@@ -1327,12 +1409,225 @@
+                 scr_battletext_default();
+                 acting = 0;
+                 actcon = 31;
 -                instance_create(obj_herokris.x + 105, obj_herokris.y + 50, obj_sneo_friedpipis);
-+                    instance_create(global.charinstance[global.currentactingchar].x + 105, global.charinstance[global.currentactingchar].y + 50, obj_sneo_friedpipis);
-+                }
-+                actnum++;
++                instance_create(global.charinstance[global.currentactingchar].x + 105, global.charinstance[global.currentactingchar].y + 50, obj_sneo_friedpipis);
              }
              if (actcon == 31 && !i_ex(obj_writer) && !instance_exists(obj_sneo_friedpipis))
              {
                  actcon = 1;
              }
++            var actnum = 4;
 +            if (scr_havechar(2))
 +            {
 +                if (acting == actnum && actcon == 0)
@@ -511,7 +459,7 @@
          }
          else
          {
-@@ -1356,7 +1659,7 @@
+@@ -1356,7 +1651,7 @@
                      maxvinecount = maxv;
                  }
                  var multicut = 1;
@@ -520,7 +468,7 @@
                  {
                      var mercyset = 4;
                      if ((global.mercymod[myself] + mercyset) > 100)
-@@ -1486,89 +1789,94 @@
+@@ -1486,89 +1781,94 @@
          {
              actcon = 1;
          }
@@ -696,7 +644,7 @@
          {
              actingsus = 0;
              actcon = 1;
-@@ -1576,89 +1884,94 @@
+@@ -1576,89 +1876,94 @@
              msgsetloc(0, "* You Super Charged! Can charge bullets faster! Lasts 20 shots./%", "obj_spamton_neo_enemy_slash_Step_0_gml_898_0");
              scr_battletext_default();
          }
@@ -872,7 +820,7 @@
          {
              actconral = 0;
              actingral = 0;
-@@ -1741,8 +2054,104 @@
+@@ -1741,8 +2046,104 @@
                  snd_play(snd_boost);
              }
          }
@@ -978,7 +926,7 @@
              usedact = 1;
              if (global.mercymod[myself] > 99 && endcon == 0)
              {
-@@ -2044,6 +2453,10 @@
+@@ -2044,6 +2445,10 @@
                          {
                              global.hp[3] = 1;
                          }
@@ -989,7 +937,7 @@
                          if (i_ex(obj_ch2_sceneex2))
                          {
                              obj_ch2_sceneex2.forcend = 1;
-@@ -2283,6 +2696,10 @@
+@@ -2283,6 +2688,10 @@
                          if (global.hp[3] < 1)
                          {
                              global.hp[3] = 1;

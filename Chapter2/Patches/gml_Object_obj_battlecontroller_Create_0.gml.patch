@@ -45,10 +45,9 @@
  for (i = 0; i < 3; i += 1)
  {
      global.acting[i] = 0;
-@@ -275,4 +312,6 @@
+@@ -275,4 +312,5 @@
          gigaqueencon = 3;
      }
  }
 +drawactdebug = false;
-+drawspelldebug = false;
  
