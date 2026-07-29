@@ -8,10 +8,10 @@
 +        switch (name)
 +        {
 +            case "susie":
-+                visual_info.sprite_index = spr_susieb_defeat;
++                visual_info.sprite_index = spr_susier_kneel;
 +                break;
 +            case "ralsei":
-+                visual_info.sprite_index = spr_ralseib_defeat;
++                visual_info.sprite_index = spr_ralseir_kneel;
 +                break;
 +            default:
 +                visual_info.sprite_index = spr_kris_fallen_dark;
