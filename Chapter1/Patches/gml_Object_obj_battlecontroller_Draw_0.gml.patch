@@ -72,7 +72,7 @@
          if (i == 2 || i == 3)
          {
              yoffset = 30;
-@@ -307,31 +312,37 @@
+@@ -307,36 +312,42 @@
          }
          drawsus = 0;
          drawral = 0;
@@ -97,8 +97,6 @@
 -                cant = 1;
 -            }
 -            charoffset = 36;
--        }
--        if (global.tension < global.actcost[global.bmenucoord[11][global.charturn]][i])
 +        faceblend = 16777215;
 +        switch (chartime)
 +        {
@@ -113,7 +111,7 @@
 +            case 4:
 +                drawsus = 1;
 +                drawral = 1;
-+                charoffset = 30;
++                charoffset = 65;
 +                break;
 +            case 6:
 +                drawsus = havechar[1] == 1;
@@ -127,13 +125,22 @@
 +            hovered_available_result = available_result;
 +        }
 +        if (!available_result.available)
-         {
-             cant = 1;
++        {
++            cant = 1;
 +            faceblend = 8421504;
          }
-         if (chartime == 4)
+         if (global.tension < global.actcost[global.bmenucoord[11][global.charturn]][i])
          {
-@@ -344,16 +355,46 @@
+             cant = 1;
+         }
+-        if (chartime == 4)
+-        {
+-            charoffset = round(charoffset * 1.8);
+-        }
+         draw_set_color(c_white);
+         if (cant == 1)
+         {
+@@ -344,16 +355,52 @@
          }
          if (chartime == 2)
          {
@@ -154,6 +161,7 @@
 +        }
 +        if (chartime == 6)
 +        {
++            var total = 0;
 +            for (var slot = 0; slot < 3; slot++)
 +            {
 +                var headsprite = spr_headkris;
@@ -172,6 +180,7 @@
 +                if (global.char[slot] > 0 && slot != global.charturn)
 +                {
 +                    charoffset += 30;
++                    total++;
 +                    draw_sprite_ext(headsprite, 0, xx + charoffset + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
 +                }
 +            }
@@ -181,10 +190,14 @@
 +                draw_sprite_ext(spr_headkris, 8, xx + charoffset + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
 +                cant = 1;
 +            }
++            else
++            {
++                charoffset += (5 * (total - 1));
++            }
          }
          if (global.lang == "ja")
          {
-@@ -374,7 +415,28 @@
+@@ -374,7 +421,28 @@
          }
      }
      draw_set_color(c_gray);
@@ -214,7 +227,7 @@
      if (global.tensionselect > 0)
      {
          thiscost = round((global.actcost[global.bmenucoord[11][global.charturn]][actcoord] / global.maxtension) * 100);
-@@ -415,7 +477,14 @@
+@@ -415,7 +483,14 @@
                  draw_set_color(c_maroon);
                  draw_rectangle(xx + 400, yy + 380 + (i * 30), xx + 500, yy + 380 + (i * 30) + 15, false);
                  draw_set_color(c_lime);
