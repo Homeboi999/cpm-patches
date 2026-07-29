@@ -12,8 +12,8 @@
 +            if (i_ex(obj_spamton_neo_enemy) && obj_spamton_neo_enemy.multishotcount > 0)
 +            {
 +                bulletspershot = 3;
-+                var extra1 = instance_create(x + 10, y + 10, obj_yheart_shot);
-+                var extra2 = instance_create(x + 10, y + 10, obj_yheart_shot);
++                var extra1 = instance_create(x + 10, y + 5, obj_yheart_shot);
++                var extra2 = instance_create(x + 10, y + 15, obj_yheart_shot);
 +                if (obj_spamton_neo_enemy.multishotcount >= 10)
 +                {
 +                    extra1.spread_angle = 15;
