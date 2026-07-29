@@ -1,9 +1,15 @@
 --- a/Code/gml_Object_obj_caterpillarchara_Step_2.gml
 +++ b/Code/gml_Object_obj_caterpillarchara_Step_2.gml
-@@ -3,6 +3,14 @@
+@@ -2,6 +2,19 @@
+ {
      ignoredepth = 0;
      init = 1;
- }
++    if (instance_exists(obj_silhouette_base))
++    {
++        var d = instance_create(x, cameray() - 100, obj_following_silhouette);
++        d.target_char = id;
++    }
++}
 +var alignment = scr_get_chara_alignment(name, self);
 +var valign_changed = alignment.valign != valign;
 +halign = alignment.halign;
@@ -11,11 +17,10 @@
 +if (valign_changed)
 +{
 +    y = remy[target] - valign;
-+}
+ }
  if (!ignoredepth)
  {
-     scr_depth();
-@@ -52,46 +60,8 @@
+@@ -52,46 +65,8 @@
      remy[0] = obj_mainchara.y;
      sliding[0] = obj_mainchara.sliding;
      facing[0] = global.facing;

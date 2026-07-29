@@ -389,11 +389,10 @@
      if (_c == "soundplay")
      {
          if (!instant)
-@@ -592,97 +683,6 @@
-             myshake.shakey = command_arg2[i];
+@@ -593,97 +684,6 @@
              myshake.shakespeed = command_arg3[i];
          }
--    }
+     }
 -    if (_c == "shakeobj")
 -    {
 -        if (!instant)
@@ -484,6 +483,15 @@
 -    {
 -        instance_create(command_actor[i].x, command_actor[i].y, command_arg1[i]);
 -        command_actor[i].visible = 0;
-     }
+-    }
      if (_c == "actortokris")
+     {
+         for (jjj = 0; jjj < 20; jjj++)
+@@ -712,6 +712,7 @@
+                 }
+             }
+         }
++        obj_mainchara.visible = 1;
+     }
+     if (_c == "actortocaterpillar")
      {

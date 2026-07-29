@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_ch2_city_noelle_monologue_Create_0.gml
++++ b/Code/gml_Object_obj_ch2_city_noelle_monologue_Create_0.gml
+@@ -23,7 +23,7 @@
+     {
+         global.flag[7] = 0;
+     }
+-    if (!scr_havechar(4))
++    if (!scr_havechar(4) && scr_modconfig("forceParty") == 0)
+     {
+         scr_losechar();
+         if (instance_exists(obj_caterpillarchara))

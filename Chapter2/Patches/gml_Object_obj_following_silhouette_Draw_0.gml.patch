@@ -1,0 +1,109 @@
+--- a/Code/gml_Object_obj_following_silhouette_Draw_0.gml
++++ b/Code/gml_Object_obj_following_silhouette_Draw_0.gml
+@@ -14,27 +14,39 @@
+ if (init == 0)
+ {
+     depth = 0;
+-    if (target_char != obj_mainchara)
++    obj_silhouette_base.outline = true;
++    init = 1;
++}
++if (name != target_char.name)
++{
++    name = target_char.name;
++    switch (name)
+     {
+-        if (target_char.name == "susie")
+-        {
++        case "kris":
++        default:
++            color = #00A2E8;
++            break;
++        case "susie":
+             color = #EA79C8;
+-        }
+-        if (target_char.name == "ralsei")
+-        {
++            break;
++        case "ralsei":
+             color = #B5E61D;
+-        }
+-        if (target_char.name == "noelle")
+-        {
++            break;
++        case "noelle":
+             color = c_yellow;
+-            rsprite = spr_noelle_young_silhouette;
+-        }
++            break;
+     }
+-    init = 1;
+ }
+ if (copy_sprite)
+ {
++    if (target_char.object_index == obj_mainchara)
++    {
++        sprite_index = target_char.visual_info.sprite_index;
++    }
++    else
++    {
+-    sprite_index = target_char.sprite_index;
++        sprite_index = target_char.sprite_index;
++    }
+     image_index = target_char.image_index;
+ }
+ else if (target_char.sprite_index == target_char.usprite)
+@@ -51,7 +63,6 @@
+ }
+ else if (target_char.sprite_index == target_char.rsprite || target_char.sprite_index == spr_noelle_walk_face_up_dw)
+ {
+-    obj_silhouette_base.outline = true;
+     sprite_index = rsprite;
+ }
+ else
+@@ -82,10 +93,21 @@
+     }
+ }
+ gpu_set_blendenable(true);
++var targetx, targety;
++if (target_char.object_index == obj_mainchara)
++{
++    targetx = target_char.x - target_char.visual_info.halign;
++    targety = target_char.y - target_char.visual_info.valign;
++}
++else
++{
++    targetx = target_char.x;
++    targety = target_char.y;
++}
+ if (outline)
+ {
+     gpu_set_blendmode_ext(bm_zero, bm_zero);
+-    draw_sprite_ext(sprite_index, target_char.image_index, target_char.x, target_char.y, target_char.image_xscale, target_char.image_yscale, 0, c_black, 1);
++    draw_sprite_ext(sprite_index, target_char.image_index, targetx, targety, target_char.image_xscale, target_char.image_yscale, 0, c_black, 1);
+ }
+ gpu_set_colorwriteenable(true, true, true, true);
+ gpu_set_blendmode_ext(bm_dest_alpha, bm_inv_dest_alpha);
+@@ -93,16 +115,16 @@
+ d3d_set_fog(true, color, 0, 1);
+ if (outline)
+ {
+-    draw_sprite_ext(sprite_index, target_char.image_index, target_char.x - 2, target_char.y, target_char.image_xscale, target_char.image_yscale, 0, image_blend, 1);
++    draw_sprite_ext(sprite_index, target_char.image_index, targetx - 2, targety, target_char.image_xscale, target_char.image_yscale, 0, image_blend, 1);
+-    draw_sprite_ext(sprite_index, target_char.image_index, target_char.x + 2, target_char.y, target_char.image_xscale, target_char.image_yscale, 0, image_blend, 1);
++    draw_sprite_ext(sprite_index, target_char.image_index, targetx + 2, targety, target_char.image_xscale, target_char.image_yscale, 0, image_blend, 1);
+-    draw_sprite_ext(sprite_index, target_char.image_index, target_char.x, target_char.y - 2, target_char.image_xscale, target_char.image_yscale, 0, image_blend, 1);
++    draw_sprite_ext(sprite_index, target_char.image_index, targetx, targety - 2, target_char.image_xscale, target_char.image_yscale, 0, image_blend, 1);
+-    draw_sprite_ext(sprite_index, target_char.image_index, target_char.x, target_char.y + 2, target_char.image_xscale, target_char.image_yscale, 0, image_blend, 1);
++    draw_sprite_ext(sprite_index, target_char.image_index, targetx, targety + 2, target_char.image_xscale, target_char.image_yscale, 0, image_blend, 1);
+ }
+ else
+ {
+-    draw_sprite_ext(sprite_index, target_char.image_index, target_char.x, target_char.y, target_char.image_xscale, target_char.image_yscale, 0, c_black, 1);
++    draw_sprite_ext(sprite_index, target_char.image_index, targetx, targety, target_char.image_xscale, target_char.image_yscale, 0, c_black, 1);
+ }
+-draw_sprite_ext(sprite_index, target_char.image_index, target_char.x, target_char.y, target_char.image_xscale, target_char.image_yscale, 0, c_black, 0.5);
++draw_sprite_ext(sprite_index, target_char.image_index, targetx, targety, target_char.image_xscale, target_char.image_yscale, 0, c_black, 0.5);
+ d3d_set_fog(false, c_black, 0, 0);
+ gpu_set_alphatestenable(false);
+ gpu_set_blendmode(bm_normal);

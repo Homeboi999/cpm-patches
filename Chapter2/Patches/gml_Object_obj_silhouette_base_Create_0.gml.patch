@@ -1,0 +1,16 @@
+--- a/Code/gml_Object_obj_silhouette_base_Create_0.gml
++++ b/Code/gml_Object_obj_silhouette_base_Create_0.gml
+@@ -1,10 +1,8 @@
+ outline = true;
+-var d = instance_create(x, cameray() - 100, obj_following_silhouette);
+-d.target_char = obj_mainchara;
+-with (obj_caterpillarchara)
++with (obj_mainchara)
+ {
+-    d = instance_create(x, cameray() - 100, obj_following_silhouette);
++    var d = instance_create(x, cameray() - 100, obj_following_silhouette);
+-    d.target_char = self;
++    d.target_char = id;
+ }
+ depth = 200;
+ 

@@ -1,0 +1,15 @@
+--- a/Code/gml_Object_obj_following_silhouette_Create_0.gml
++++ b/Code/gml_Object_obj_following_silhouette_Create_0.gml
+@@ -5,10 +5,11 @@
+ dsprite = spr_noelle_walk_down_lw;
+ usprite = spr_noelle_walk_up_lw;
+ init = 0;
++name = "";
+ color = #00A2E8;
+ image_speed = 0;
+ second_char = -4;
+ second_sprite = -4;
+-outline = obj_silhouette_base.outline;
++outline = true;
+ tiled_cover = true;
+ 

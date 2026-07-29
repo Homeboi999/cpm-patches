@@ -1,0 +1,22 @@
+--- a/Code/gml_Object_obj_ch2_city_car_a_Create_0.gml
++++ b/Code/gml_Object_obj_ch2_city_car_a_Create_0.gml
+@@ -69,12 +69,15 @@
+ else
+ {
+     scr_losechar();
+-    if (instance_exists(obj_caterpillarchara))
++    if (scr_modconfig("forceParty") == 0)
+     {
++        if (instance_exists(obj_caterpillarchara))
++        {
+-        instance_destroy(obj_caterpillarchara);
++            instance_destroy(obj_caterpillarchara);
++        }
++        scr_getchar(4);
++        scr_makecaterpillar(obj_mainchara.x - 120, obj_mainchara.y, 4, 0);
+     }
+-    scr_getchar(4);
+-    scr_makecaterpillar(obj_mainchara.x - 120, obj_mainchara.y, 4, 0);
+     queencar = instance_create(-200, 97, obj_caradventure_car);
+     with (queencar)
+     {

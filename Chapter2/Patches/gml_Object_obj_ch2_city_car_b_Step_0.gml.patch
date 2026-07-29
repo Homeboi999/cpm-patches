@@ -1,0 +1,14 @@
+--- a/Code/gml_Object_obj_ch2_city_car_b_Step_0.gml
++++ b/Code/gml_Object_obj_ch2_city_car_b_Step_0.gml
+@@ -6,7 +6,10 @@
+         global.interact = 1;
+         global.facing = 1;
+         scr_getchar(4);
++        if (scr_modconfig("forceParty") == 0)
++        {
+-        scr_makecaterpillar(obj_mainchara.x + 60, obj_mainchara.y + 1000, 4, 0);
++            scr_makecaterpillar(obj_mainchara.x + 60, obj_mainchara.y + 1000, 4, 0);
++        }
+         with (obj_caterpillarchara)
+         {
+             visible = 0;
