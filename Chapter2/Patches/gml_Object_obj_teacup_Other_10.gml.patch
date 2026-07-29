@@ -9,3 +9,22 @@
          var _rideToRide = rideToRide;
          _rideToRide = true;
          with (_character)
+@@ -62,10 +62,17 @@
+             {
+                 _spr = _rollSprites[global.char[i]];
+             }
++            var offsetx = 0;
++            var offsety = 0;
++            if (object_index == obj_mainchara)
++            {
++                offsetx = visual_info.halign;
++                offsety = visual_info.valign;
++            }
+             image_alpha = 0;
+             facing[0] = 0;
+             global.facing = 0;
+-            with (scr_dark_marker(x, y, _spr))
++            with (scr_dark_marker(x - offsetx, y - offsety, _spr))
+             {
+                 if (_rideToRide)
+                 {

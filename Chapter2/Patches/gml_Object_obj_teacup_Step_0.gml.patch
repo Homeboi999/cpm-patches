@@ -54,7 +54,7 @@
              }
              var _closest = abs(368 - spin) > abs(8 - spin);
              spin = scr_approach(spin, _closest ? 8 : 368, spinSpeed);
-@@ -398,7 +404,7 @@
+@@ -398,9 +404,14 @@
          snd_play(snd_jump);
          for (var i = 0; i < partySize; i++)
          {
@@ -62,8 +62,15 @@
 +            var _sprites = [spr_empty, spr_kris_fall_ball, spr_susie_dw_fall_ball, spr_ralsei_teacup_enter, spr_noelle_jump_ball];
              var _charaDest = reverse ? startPos[i] : endPos[i];
              jumpMarker[i] = instance_create(cup_char[i].x, cup_char[i].y, obj_marker);
++            if (i == 0)
++            {
++                _charaDest[0] -= obj_mainchara.visual_info.halign;
++                _charaDest[1] -= obj_mainchara.visual_info.valign;
++            }
              with (jumpMarker[i])
-@@ -432,7 +438,7 @@
+             {
+                 sprite_index = _sprites[global.char[i]];
+@@ -432,7 +443,7 @@
          var _longestAnim, _animSpeed;
          for (var i = 0; i < partySize; i++)
          {
@@ -72,7 +79,35 @@
              _longestAnim = 0;
              _animSpeed = 0.25;
              with (jumpMarker[i])
-@@ -628,12 +634,12 @@
+@@ -447,7 +458,7 @@
+         waitingAround = 12 + (_longestAnim / _animSpeed);
+         state = 9;
+         snd_play(snd_wing);
+-        cameramarker = scr_dark_marker(jumpMarker[0].jumper.endx, jumpMarker[0].jumper.endy, spr_krisd_dark);
++        cameramarker = scr_dark_marker(jumpMarker[0].jumper.endx + obj_mainchara.visual_info.halign, jumpMarker[0].jumper.endy + obj_mainchara.visual_info.valign, spr_krisd_dark);
+         cameramarker.depth = -100;
+         cameramarker.image_blend = c_blue;
+         cameramarker.visible = 0;
+@@ -497,8 +508,16 @@
+             var _marker = jumpMarker[i];
+             with (_character)
+             {
++                if (object_index == obj_mainchara)
++                {
++                    x = _marker.x + visual_info.halign;
++                    y = _marker.y + visual_info.valign;
++                }
++                else
++                {
+-                x = _marker.x;
++                    x = _marker.x;
+-                y = _marker.y;
++                    y = _marker.y;
++                }
+                 image_alpha = 1;
+             }
+             with (_marker)
+@@ -628,12 +647,12 @@
      cupx = lengthdir_x(cupDistanceFromCenter, _charSpin);
      cupy = lengthdir_y(cupDistanceFromCenter * 0.5, _charSpin);
      var _cupDepth = depth - depthSeparation - cupy;
