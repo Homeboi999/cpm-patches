@@ -9,7 +9,7 @@
          if (global.mercymod[myself] < global.mercymax[myself])
          {
              scr_mercyadd(myself, 100);
-@@ -164,26 +164,55 @@
+@@ -164,26 +164,51 @@
      {
          if (noelle_special == 0)
          {
@@ -40,10 +40,6 @@
 +                            {
 +                                noelle_splat = 1;
 +                            }
-+                        }
-+                        else
-+                        {
-+                            scr_act_charsprite(i, spr_noelleb_act_nurse, 0, 1);
 +                        }
 +                        break;
 +                }
@@ -83,7 +79,7 @@
              with (obj_monsterparent)
              {
                  if (global.mercymod[myself] < global.mercymax[myself])
-@@ -367,37 +396,58 @@
+@@ -367,37 +392,58 @@
              {
                  visible = 1;
                  image_alpha = 0;
@@ -160,7 +156,7 @@
          }
          if (noelle_fall_timer > 80)
          {
-@@ -520,15 +570,18 @@
+@@ -520,15 +566,18 @@
      {
          if (!noelle_fall)
          {
@@ -187,7 +183,7 @@
                  }
              }
              if (explosion != -4)
-@@ -548,17 +601,21 @@
+@@ -548,17 +597,21 @@
      {
          if (!noelle_fall)
          {

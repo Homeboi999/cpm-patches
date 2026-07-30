@@ -19,7 +19,6 @@ function scr_remakecaterpillar()
             {
                 var name = scr_char_id_to_name(global.char[pos]);
                 var alignment = scr_get_chara_alignment(name);
-                
                 with (global.cinstance[pos - 1])
                 {
                     self.name = name;
@@ -31,7 +30,9 @@ function scr_remakecaterpillar()
             else
             {
                 with (global.cinstance[pos - 1])
+                {
                     instance_destroy();
+                }
             }
         }
         else if (global.char[pos] > 0)
@@ -42,11 +43,12 @@ function scr_remakecaterpillar()
             var makex = obj_mainchara.remx[targetpos] - alignment.halign;
             var makey = obj_mainchara.remy[targetpos] - alignment.valign;
             global.charinstance[pos] = scr_makecaterpillar(makex, makey, global.char[pos], pos - 1);
-            
             if (instance_exists(obj_shadowMaker) && obj_shadowMaker.type == 1)
             {
                 with (obj_shadowMaker)
+                {
                     listinstance[pos] = global.charinstance[pos];
+                }
             }
         }
     }
