@@ -1,6 +1,6 @@
 --- a/Code/gml_GlobalScript_scr_charbox_x.gml
 +++ b/Code/gml_GlobalScript_scr_charbox_x.gml
-@@ -1,26 +1,32 @@
+@@ -1,28 +1,36 @@
  function scr_charbox_x(arg0)
  {
 -    if (arg0 == 0 && chartotal == 3)
@@ -24,33 +24,40 @@
 -        return 326;
 -    }
 -    if (arg0 == 0 && chartotal == 1)
+-    {
+-        return 212;
+-    }
++    var result = 0;
 +    if (chartotal == 3)
 +    {
 +        if (pos == 0)
 +        {
-+            return 0;
++            result = 0;
 +        }
 +        if (pos == 1)
 +        {
-+            return 212;
++            result = 212;
 +        }
 +        if (pos == 2)
 +        {
-+            return 424;
++            result = 424;
 +        }
 +    }
 +    else if (chartotal == 2)
 +    {
 +        if (pos == 0 || (pos == 1 && global.char[0] == 0))
 +        {
-+            return 106;
++            result = 106;
 +        }
 +        if (pos == 2 || (pos == 1 && global.char[2] == 0))
 +        {
-+            return 326;
++            result = 326;
 +        }
 +    }
 +    else if (chartotal == 1)
-     {
-         return 212;
-     }
++    {
++        result = 212;
++    }
++    return result;
+ }
+ 
