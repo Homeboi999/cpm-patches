@@ -1,16 +1,49 @@
 --- a/Code/gml_GlobalScript_scr_actselect.gml
 +++ b/Code/gml_GlobalScript_scr_actselect.gml
-@@ -33,10 +33,11 @@
+@@ -18,25 +18,40 @@
+         {
+             global.monsterinstance[arg0].actingnoe = arg1 + 1;
+         }
++        if (oopsallacts)
++        {
++            global.monsterinstance[arg0].acting = arg1 + 1;
++        }
+     }
+-    if (global.char[global.charturn] == 1)
++    if (global.char[global.charturn] == 1 || oopsallacts)
+     {
+-        global.actingsimul[0] = actsimul[arg1];
++        global.actingsimul[global.charturn] = actsimul[arg1];
+-        global.acting[0] = 1;
++        global.acting[global.charturn] = 1;
+-        global.actingsingle[0] = 1;
++        global.actingsingle[global.charturn] = 1;
+         global.actingtarget[global.charturn] = arg0;
+         if (global.actactor[arg0][arg1] == 2)
+         {
+             global.acting[charpos[1]] = 1;
++            global.actingsingle[charpos[1]] = 0;
++            global.actingsimul[charpos[1]] = 0;
+         }
+         if (global.actactor[arg0][arg1] == 3)
          {
              global.acting[charpos[2]] = 1;
++            global.actingsingle[charpos[2]] = 0;
++            global.actingsimul[charpos[2]] = 0;
          }
 -        if (global.actactor[arg0][arg1] == 4)
-+        if (global.actactor[arg0][arg1] == 4 || global.actactor[arg0][arg1] == 6)
++        if (global.actactor[arg0][arg1] == 4 || global.actactor[arg0][arg1] == 6 || global.actactor[arg0][arg1] == 7)
          {
 -            global.acting[2] = 1;
 +            global.acting[0] = 1;
++            global.actingsingle[0] = 1;
++            global.actingsimul[0] = actsimul[arg1];
              global.acting[1] = 1;
++            global.actingsingle[1] = 0;
++            global.actingsimul[1] = 0;
 +            global.acting[2] = 1;
++            global.actingsingle[2] = 0;
++            global.actingsimul[2] = 0;
          }
          if (global.actactor[arg0][arg1] == 5)
          {

@@ -119,15 +119,40 @@
                              {
                              }
                              else
-@@ -154,7 +162,7 @@
+@@ -154,26 +162,26 @@
          }
          if (global.chapter == 3 && i_ex(obj_rouxls_ch3_enemy))
          {
 -            if (global.hp[1] > global.hp[2] && global.hp[1] > global.hp[3])
-+            if (global.hp[0] > global.hp[2] && global.hp[1] > global.hp[3])
++            if (global.char[0] != 0 && (global.char[1] == 0 || global.hp[global.char[0]] > global.hp[global.char[1]]) && (global.char[2] == 0 || global.hp[global.char[0]] > global.hp[global.char[2]]))
              {
                  target = 0;
              }
+-            if (global.hp[2] > global.hp[1] && global.hp[2] > global.hp[3])
++            if (global.char[1] != 0 && (global.char[0] == 0 || global.hp[global.char[1]] > global.hp[global.char[0]]) && (global.char[2] == 0 || global.hp[global.char[1]] > global.hp[global.char[2]]))
+             {
+                 target = 1;
+             }
+-            if (global.hp[3] > global.hp[1] && global.hp[3] > global.hp[2])
++            if (global.char[2] != 0 && (global.char[0] == 0 || global.hp[global.char[2]] > global.hp[global.char[0]]) && (global.char[1] == 0 || global.hp[global.char[2]] > global.hp[global.char[1]]))
+             {
+                 target = 2;
+             }
+-            if (i_ex(obj_dbulletcontroller) && i_ex(obj_rouxls_ch3_enemy) && obj_dbulletcontroller.type == 72 && obj_rouxls_ch3_enemy.ralseiyarnhp > 0 && global.hp[3] > 0)
++            if (i_ex(obj_dbulletcontroller) && i_ex(obj_rouxls_ch3_enemy) && obj_dbulletcontroller.type == 72 && obj_rouxls_ch3_enemy.ralseiyarnhp > 0 && scr_havechar(3) && global.hp[3] > 0)
+             {
+-                target = 2;
++                target = scr_findchar(3);
+             }
+         }
+-        if (global.chapter == 3 && i_ex(obj_tenna_enemy) && obj_tenna_enemy.popularboy && global.hp[3] > 0)
++        if (global.chapter == 3 && i_ex(obj_tenna_enemy) && obj_tenna_enemy.popularboy && scr_havechar(3) && global.hp[3] > 0)
+         {
+-            target = 2;
++            target = scr_findchar(3);
+         }
+         tdamage = damage;
+         var oldcalculation = 0;
 @@ -194,17 +202,7 @@
              chartarget = global.char[target];
              if (global.chapter == 3 && i_ex(obj_knight_enemy) && truedamage == 0)
@@ -156,3 +181,22 @@
                          {
                              hpdiff = abs(global.hp[chartarget] - (global.maxhp[chartarget] / 2));
                              doomtype = 4;
+@@ -325,17 +323,7 @@
+                     }
+                     if (global.chapter == 3 && i_ex(obj_knight_enemy))
+                     {
+-                        if ((global.chararmor1[1] == 23 || global.chararmor2[1] == 23) && hpi == 0)
+-                        {
+-                            tdamage = round(tdamage * 0.33);
+-                            shadowmantlereduction = true;
+-                        }
+-                        if ((global.chararmor1[2] == 23 || global.chararmor2[2] == 23) && hpi == 1)
+-                        {
+-                            tdamage = round(tdamage * 0.33);
+-                            shadowmantlereduction = true;
+-                        }
+-                        if ((global.chararmor1[3] == 23 || global.chararmor2[3] == 23) && hpi == 2)
++                        if (scr_armorcheck_equipped(chartarget, 23) && hpi == 0)
+                         {
+                             tdamage = round(tdamage * 0.33);
+                             shadowmantlereduction = true;

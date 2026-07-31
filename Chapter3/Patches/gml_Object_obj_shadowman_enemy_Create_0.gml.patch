@@ -1,0 +1,16 @@
+--- a/Code/gml_Object_obj_shadowman_enemy_Create_0.gml
++++ b/Code/gml_Object_obj_shadowman_enemy_Create_0.gml
+@@ -25,6 +25,7 @@
+ savekrishp = global.hp[1];
+ savesusiehp = global.hp[2];
+ saveralseihp = global.hp[3];
++savenoellehp = global.hp[4];
+ sharpshoottimer = 0;
+ sharpshootmercy = 0;
+ sharpshootlength = 0;
+@@ -49,4 +50,5 @@
+ krisdancing = false;
+ susiedancing = false;
+ ralseidancing = false;
++noelledancing = false;
+ 

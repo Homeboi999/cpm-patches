@@ -1,0 +1,24 @@
+--- a/Code/gml_Object_obj_tenna_board4_gacha_Step_0.gml
++++ b/Code/gml_Object_obj_tenna_board4_gacha_Step_0.gml
+@@ -18,15 +18,19 @@
+     }
+     var xoffset = 0;
+     var yoffset = 0;
+-    if (actor_target == 1409)
++    if (actor_target.object_index == obj_herokris)
+     {
+         xoffset = 0;
+         yoffset = 0;
+     }
+-    if (actor_target == 1411)
++    if (actor_target.object_index == obj_herosusie)
+     {
+         xoffset = -3;
+         yoffset = 0;
++    }
++    if (actor_target.object_index == obj_heronoelle)
++    {
++        xoffset -= 10;
+     }
+     scr_lerpvar("ball_alpha", 0, 1, 5);
+     var x_offset = (mode == 3) ? 30 : 20;

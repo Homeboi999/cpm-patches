@@ -1,0 +1,54 @@
+--- a/Code/gml_Object_obj_shutta_photo_controller_Other_10.gml
++++ b/Code/gml_Object_obj_shutta_photo_controller_Other_10.gml
+@@ -30,8 +30,11 @@
+         susie_walk_time = 0;
+         susie_walk_duration = 0;
+         subact_state = "create_item";
++        if (i_ex(obj_herosusie))
++        {
+-        obj_herosusie.state = 0;
++            obj_herosusie.state = 0;
+-        global.faceaction[obj_herosusie.myself] = 0;
++            global.faceaction[obj_herosusie.myself] = 0;
++        }
+         break;
+     case "create_item":
+         var _gap = 70;
+@@ -159,6 +162,19 @@
+                     }
+                     global.flag[515] = 1;
+                 }
++                else if (other.got_noelle && other.closest_hero == "noelle")
++                {
++                    endmessage = other.message_nicephoto;
++                    if (other.enemy.amiabossfight == true)
++                    {
++                        obj_shutta_photo_controller.endmessage = message_noelle;
++                        if (global.flag[516] > 0)
++                        {
++                            obj_shutta_photo_controller.endmessage = message_noelle2;
++                        }
++                    }
++                    global.flag[516] = 1;
++                }
+             }
+             else if (sprite_index == spr_realisticexplosion && image_index > 2 && image_index < 13)
+             {
+@@ -260,7 +276,7 @@
+         }
+         with (obj_heroparent)
+         {
+-            if (object_index == obj_heroralsei || object_index == obj_herokris)
++            if (object_index != obj_herosusie)
+             {
+                 x = xstart;
+                 y = ystart;
+@@ -276,7 +292,7 @@
+     case "post_capture":
+         with (obj_heroparent)
+         {
+-            if (object_index == obj_heroralsei || object_index == obj_herokris)
++            if (object_index != obj_herosusie)
+             {
+                 x = xstart;
+                 y = ystart;
