@@ -573,7 +573,27 @@
      }
      if (global.monstertype[myself] == 50)
      {
-@@ -1373,6 +1499,53 @@
+@@ -1364,6 +1490,19 @@
+         global.actname[myself][0] = stringsetloc("Check", "scr_monstersetup_slash_scr_monstersetup_gml_1614_0");
+         if (scr_sideb_get_phase() > 2)
+         {
++            var partysize = 0;
++            for (var i = 0; i < 3; i++)
++            {
++                if (global.char[i] > 0)
++                {
++                    partysize++;
++                }
++            }
++            if (partysize > 1)
++            {
++                global.monstermaxhp[myself] *= 0.75 + (0.25 * partysize);
++                global.monsterhp[myself] *= 0.75 + (0.25 * partysize);
++            }
+             global.monsterdf[myself] = -27;
+             global.canact[myself][1] = 1;
+             global.actname[myself][1] = stringsetloc("X-Slash", "scr_monstersetup_slash_scr_monstersetup_gml_1643_0");
+@@ -1373,6 +1512,53 @@
              global.actname[myself][2] = stringsetloc("FriedPipis", "scr_monstersetup_slash_scr_monstersetup_gml_1649_0");
              global.actdesc[myself][2] = stringsetloc("Heals#120 HP", "scr_monstersetup_slash_scr_monstersetup_gml_1650_0");
              global.actcost[myself][2] = 80;
@@ -627,7 +647,7 @@
          }
          else
          {
-@@ -1381,7 +1554,7 @@
+@@ -1381,7 +1567,7 @@
              global.actdesc[myself][1] = "";
              global.actcost[myself][1] = 0;
              global.canact[myself][2] = 1;
@@ -636,7 +656,7 @@
              global.actname[myself][2] = stringsetloc("SnapAll", "scr_monstersetup_slash_scr_monstersetup_gml_1670_0");
              global.actdesc[myself][2] = "";
              global.actcost[myself][2] = 0;
-@@ -1401,6 +1574,13 @@
+@@ -1401,6 +1587,13 @@
              global.actnameral[myself][1] = stringsetloc("FluffyGuard", "scr_monstersetup_slash_scr_monstersetup_gml_1703_0");
              global.actdescral[myself][1] = stringsetloc("Orbiting#shield", "scr_monstersetup_slash_scr_monstersetup_gml_1701_0");
              global.actcostral[myself][1] = 40;
@@ -650,7 +670,7 @@
          }
      }
      if (global.monstertype[myself] == 51)
-@@ -1463,7 +1643,12 @@
+@@ -1463,7 +1656,12 @@
          global.canact[myself][1] = 1;
          global.actname[myself][1] = stringsetloc("Shave", "scr_monstersetup_slash_scr_monstersetup_gml_1742_0");
          global.actdesc[myself][1] = " ";
@@ -664,7 +684,7 @@
      }
      if (global.monstertype[myself] == 53)
      {
-@@ -1485,6 +1670,9 @@
+@@ -1485,6 +1683,9 @@
          global.canactral[myself][0] = 1;
          global.actnameral[myself][0] = stringsetloc("R-Action", "scr_monstersetup_slash_scr_monstersetup_gml_1820_0");
          global.actsimulral[myself][0] = 1;
