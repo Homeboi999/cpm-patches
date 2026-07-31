@@ -1,8 +1,0 @@
---- a/Code/gml_Object_obj_shutta_photo_controller_Step_1.gml
-+++ b/Code/gml_Object_obj_shutta_photo_controller_Step_1.gml
-@@ -1,4 +1,5 @@
- got_kris = false;
- got_susie = false;
- got_ralsei = false;
-+got_noelle = false;
- 

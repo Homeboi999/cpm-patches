@@ -261,8 +261,7 @@
              {
 -                draw_rectangle(xx + xchunk, (480 - bp - 3) + yy + mmy[c], xx + xchunk + 212, (480 - bp - 2) + yy + mmy[c], false);
 +                draw_rectangle(xx + xchunk, (480 - bp - 3) + yy + mmy[pos], xx + xchunk + 212, (480 - bp - 2) + yy + mmy[pos], false);
--                if (mmy[c] < -32)
-+                if (mmy[pos] < -32)
+                 if (mmy[c] < -32)
                  {
 -                    draw_rectangle(xx + xchunk, (480 - bp - 3) + yy + mmy[c], xx + xchunk + 1, bpoff + b_offset + 39 + mmy[c], false);
 +                    draw_rectangle(xx + xchunk, (480 - bp - 3) + yy + mmy[pos], xx + xchunk + 1, bpoff + b_offset + 39 + mmy[pos], false);
