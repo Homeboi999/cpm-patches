@@ -152,9 +152,12 @@
          acting = 0;
          actcon = 1;
          rideactgo = 1;
-         kriscoaster = 1;
-         suscoaster = 1;
-         ralcoaster = 1;
+-        kriscoaster = 1;
+-        suscoaster = 1;
+-        ralcoaster = 1;
++        kriscoaster = (global.char[0] > 0) ? 1 : 0;
++        suscoaster = (global.char[1] > 0) ? 1 : 0;
++        ralcoaster = (global.char[2] > 0) ? 1 : 0;
 +        dialoguecon = 1;
      }
      if (acting == 4 && actcon == 0)

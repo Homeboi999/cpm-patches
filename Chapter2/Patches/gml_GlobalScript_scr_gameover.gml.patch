@@ -5,10 +5,10 @@
              global.hp[2] = global.maxhp[2];
              global.hp[3] = global.maxhp[3];
 +            global.hp[4] = global.maxhp[4];
-             scr_tempsave();
          }
          if (i_ex(obj_spamton_neo_enemy))
-@@ -45,6 +46,7 @@
+         {
+@@ -44,6 +45,7 @@
          global.hp[1] = 1;
          global.hp[2] = 1;
          global.hp[3] = 1;
