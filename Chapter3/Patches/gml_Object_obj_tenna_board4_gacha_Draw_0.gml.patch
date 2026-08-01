@@ -4,20 +4,20 @@
  var actor_sprite = actor_target.sprite_index;
  if (sharpshoot == true)
  {
--    if (actor_target == 1409)
+-    if (actor_target == 1410)
 +    if (actor_target.object_index == obj_herokris)
      {
          actor_sprite = 147;
      }
--    if (actor_target == 1411)
+-    if (actor_target == 1412)
 +    if (actor_target.object_index == obj_herosusie)
      {
-         actor_sprite = 4259;
+         actor_sprite = 4260;
      }
--    if (actor_target == 1412)
+-    if (actor_target == 1413)
 +    if (actor_target.object_index == obj_heroralsei)
      {
-         actor_sprite = 3910;
+         actor_sprite = 3911;
      }
 +    if (actor_target.object_index == obj_heronoelle)
 +    {
@@ -34,28 +34,28 @@
      }
  }
  var _xx = 0;
--if (actor_target == 1409 && obj_herokris.hurt == 1)
+-if (actor_target == 1410 && obj_herokris.hurt == 1)
 -{
 -    actor_sprite = obj_herokris.hurtsprite;
 -    _xx = -20 + (obj_herokris.hurtindex * 10);
 -}
--if (actor_target == 1411 && obj_herosusie.hurt == 1)
+-if (actor_target == 1412 && obj_herosusie.hurt == 1)
 -{
 -    actor_sprite = obj_herosusie.hurtsprite;
 -    _xx = -30 + (obj_herosusie.hurtindex * 10);
 -}
--if (actor_target == 1412 && obj_heroralsei.hurt == 1)
+-if (actor_target == 1413 && obj_heroralsei.hurt == 1)
 -{
 -    actor_sprite = obj_heroralsei.hurtsprite;
 -    _xx = -20 + (obj_heroralsei.hurtindex * 10);
 -}
--if (actor_target == 1412 && actor_target.thissprite == actor_target.actsprite)
+-if (actor_target == 1413 && actor_target.thissprite == actor_target.actsprite)
 -{
 -    xx = lerp(xx, 22, 0.2);
 -    yy = lerp(yy, 22, 0.2);
 -    ball_angle = lerp(ball_angle, -120, 0.2);
 -}
--else if (actor_target == 1411 && actor_target.thissprite == actor_target.actsprite)
+-else if (actor_target == 1412 && actor_target.thissprite == actor_target.actsprite)
 -{
 -    xx = lerp(xx, 16, 0.2);
 -    ball_angle = lerp(ball_angle, -110, 0.2);
@@ -87,14 +87,14 @@
  }
  else
  {
--    if (actor_target == 1412)
+-    if (actor_target == 1413)
 +    if (actor_target.object_index == obj_heroralsei)
      {
          xx = lerp(xx, 0, 0.2);
          yy = lerp(yy, 0, 0.3);
          ball_angle = lerp(ball_angle, -100, 0.3);
      }
--    if (actor_target == 1411)
+-    if (actor_target == 1412)
 +    if (actor_target.object_index == obj_herosusie)
      {
          xx = lerp(xx, 0, 1);
@@ -102,7 +102,7 @@
      }
  }
  var _scale = 1.55;
--if (actor_target == 1411)
+-if (actor_target == 1412)
 +if (actor_target.object_index == obj_herosusie)
  {
      _scale = 2.02;

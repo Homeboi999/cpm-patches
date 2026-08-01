@@ -1,0 +1,61 @@
+--- a/Code/gml_Object_obj_mainchara_Step_0.gml
++++ b/Code/gml_Object_obj_mainchara_Step_0.gml
+@@ -700,6 +700,25 @@
+     }
+     x += px;
+     y += py;
++    moved = 0;
++    if (x != remx[0] || y != remy[0])
++    {
++        moved = 1;
++    }
++    if (moved == 1)
++    {
++        for (var i = 75; i > 0; i -= 1)
++        {
++            remx[i] = remx[i - 1];
++            remy[i] = remy[i - 1];
++            facing[i] = facing[i - 1];
++            wassliding[i] = wassliding[i - 1];
++        }
++        remx[0] = x;
++        remy[0] = y;
++        wassliding[0] = sliding;
++        facing[0] = global.facing;
++    }
+ }
+ if (fun == 0)
+ {
+@@ -766,27 +785,27 @@
+     }
+     walkbuffer -= 0.75;
+ }
+-if (fun == 0)
++if (fun == 0 && sliding == 0)
+ {
+     if (global.facing == 0)
+     {
+         sprite_index = dsprite;
++        visual_info.sprite_index = visual_info.dsprite;
+     }
+     if (global.facing == 1)
+     {
+         sprite_index = rsprite;
++        visual_info.sprite_index = visual_info.rsprite;
+     }
+     if (global.facing == 2)
+     {
+         sprite_index = usprite;
++        visual_info.sprite_index = visual_info.usprite;
+     }
+     if (global.facing == 3)
+     {
+         sprite_index = lsprite;
+-    }
+-    if (climbing == 1)
+-    {
+-        sprite_index = climbsprite;
++        visual_info.sprite_index = visual_info.lsprite;
+     }
+ }
+ if (stepping == 1 && fun == 0)

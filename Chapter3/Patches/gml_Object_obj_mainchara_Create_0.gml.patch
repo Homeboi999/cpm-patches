@@ -1,0 +1,65 @@
+--- a/Code/gml_Object_obj_mainchara_Create_0.gml
++++ b/Code/gml_Object_obj_mainchara_Create_0.gml
+@@ -67,6 +67,7 @@
+ rsprite = spr_krisr;
+ usprite = spr_krisu;
+ lsprite = spr_krisl;
++slidesprite = spr_krisd_slide;
+ climbsprite = 3935;
+ if (global.darkzone == 1)
+ {
+@@ -82,24 +83,39 @@
+         }
+     }
+ }
++name = scr_char_id_to_name(global.char[0]) ?? "kris";
++visual_info = 
++{
++    halign: 0,
++    valign: 0
++};
++scr_set_chara_sprites(name, visual_info);
++visual_info.sprite_index = visual_info.dsprite;
++var alignment = scr_get_chara_alignment(name, visual_info);
++visual_info.halign = alignment.halign;
++visual_info.valign = alignment.valign;
+ swordfacing = 1;
+ swordsprite = rsprite;
+ fun = 0;
+ if (global.facing == 0)
+ {
+     sprite_index = dsprite;
++    visual_info.sprite_index = visual_info.dsprite;
+ }
+ if (global.facing == 1)
+ {
+     sprite_index = rsprite;
++    visual_info.sprite_index = visual_info.rsprite;
+ }
+ if (global.facing == 2)
+ {
+     sprite_index = usprite;
++    visual_info.sprite_index = visual_info.usprite;
+ }
+ if (global.facing == 3)
+ {
+     sprite_index = lsprite;
++    visual_info.sprite_index = visual_info.lsprite;
+ }
+ onebuffer = 0;
+ twobuffer = 0;
+@@ -277,6 +293,14 @@
+             }
+         }
+     }
++}
++for (i = 0; i < 75; i += 1)
++{
++    remx[i] = x;
++    remy[i] = y;
++    facing[i] = global.facing;
++    wassliding[i] = 0;
++    special[i] = 0;
+ }
+ initwd = sprite_width;
+ initht = sprite_height;

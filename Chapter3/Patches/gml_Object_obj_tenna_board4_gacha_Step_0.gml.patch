@@ -4,13 +4,13 @@
      }
      var xoffset = 0;
      var yoffset = 0;
--    if (actor_target == 1409)
+-    if (actor_target == 1410)
 +    if (actor_target.object_index == obj_herokris)
      {
          xoffset = 0;
          yoffset = 0;
      }
--    if (actor_target == 1411)
+-    if (actor_target == 1412)
 +    if (actor_target.object_index == obj_herosusie)
      {
          xoffset = -3;

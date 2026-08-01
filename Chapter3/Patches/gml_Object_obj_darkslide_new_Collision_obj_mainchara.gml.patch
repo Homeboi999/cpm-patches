@@ -1,0 +1,10 @@
+--- a/Code/gml_Object_obj_darkslide_new_Collision_obj_mainchara.gml
++++ b/Code/gml_Object_obj_darkslide_new_Collision_obj_mainchara.gml
+@@ -19,6 +19,7 @@
+             {
+                 sliding = 1;
+                 fun = 1;
++                visual_info.sprite_index = visual_info.slidesprite;
+                 sprite_index = spr_krisd_slide;
+                 image_speed = 0.2;
+             }

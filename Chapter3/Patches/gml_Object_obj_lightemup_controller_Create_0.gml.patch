@@ -5,11 +5,11 @@
  cursor_ystart = cursor_y;
  shooting_enabled = true;
 +charnames = ["", "kris", "susie", "ralsei", "noelle"];
-+charsprites[0] = [4130, 4130, 2051, 821, 4992];
-+charsprites[1] = [147, 147, 4259, 3910, 4993];
-+charsprites[2] = [2306, 2306, 4769, 239, 4991];
-+charsprites[3] = [2489, 2489, 4225, 4118, 1619];
-+charsprites[4] = [4897, 4897, 3151, 1776, 1619];
++charsprites[0] = [4131, 4131, 2051, 821, 4994];
++charsprites[1] = [147, 147, 4260, 3911, 4995];
++charsprites[2] = [2306, 2306, 4770, 239, 4993];
++charsprites[3] = [2489, 2489, 4226, 4119, 1619];
++charsprites[4] = [4898, 4898, 3151, 1776, 1619];
  with (obj_tenna_enemy)
  {
      var xx = camerax();

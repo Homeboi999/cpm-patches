@@ -1,0 +1,97 @@
+--- a/Code/gml_Object_obj_mainchara_Draw_0.gml
++++ b/Code/gml_Object_obj_mainchara_Draw_0.gml
+@@ -1,6 +1,29 @@
+ if (swordmode == 0)
+ {
+-    draw_self();
++    var drawx, drawy;
++    if (sliding == 1)
++    {
++        drawx = x;
++        drawy = y;
++    }
++    else
++    {
++        drawx = x - visual_info.halign;
++        drawy = y - visual_info.valign;
++    }
++    if (visual_info.sprite_index == spr_krisd_dark)
++    {
++        draw_sprite_ext(visual_info.sprite_index, image_index, drawx, drawy, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
++        draw_sprite_ext(spr_krisd_heart, image_index, drawx, drawy, image_xscale, image_yscale, image_angle, image_blend, battlealpha);
++    }
++    else
++    {
++        scr_draw_hard_outline(visual_info.sprite_index, image_index, drawx, drawy, image_xscale, image_yscale, image_angle, 255, battlealpha, 1);
++        draw_sprite_ext(visual_info.sprite_index, image_index, drawx, drawy, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
++        gpu_set_fog(true, #202020, 0, 0);
++        draw_sprite_ext(visual_info.sprite_index, image_index, drawx, drawy, image_xscale, image_yscale, image_angle, c_white, battlealpha);
++        gpu_set_fog(false, c_white, 0, 0);
++    }
+ }
+ if (button1_p() && scr_debug())
+ {
+@@ -45,6 +68,7 @@
+     }
+     draw_set_color(c_white);
+ }
++var heartalign = scr_get_heart_alignment(name, self);
+ if (battlemode == 1)
+ {
+     becamebattle = 1;
+@@ -52,50 +76,17 @@
+     {
+         battlealpha += 0.04;
+     }
+-    global.heartx = (x + 12) - camerax();
++    global.heartx = (x + heartalign.halign) - camerax();
+-    global.hearty = (y + 40) - cameray();
++    global.hearty = (y + heartalign.valign) - cameray();
+ }
+ else if (battlealpha > 0)
+ {
+     battlealpha -= 0.08;
+ }
+ battleheart.image_alpha = battlealpha;
+-if (swordmode == 0)
+-{
+-    if (fun == 0)
+-    {
+-        if (global.facing == 0)
+-        {
+-            draw_sprite_ext(spr_krisd_heart, image_index, x, y, image_xscale, image_yscale, 0, image_blend, battlealpha);
+-        }
+-        if (global.facing == 1)
+-        {
+-            draw_sprite_ext(spr_krisr_heart, image_index, x, y, image_xscale, image_yscale, 0, image_blend, battlealpha);
+-        }
+-        if (global.facing == 2)
+-        {
+-            draw_sprite_ext(spr_krisu_heart, image_index, x, y, image_xscale, image_yscale, 0, image_blend, battlealpha);
+-        }
+-        if (global.facing == 3)
+-        {
+-            draw_sprite_ext(spr_krisl_heart, image_index, x, y, image_xscale, image_yscale, 0, image_blend, battlealpha);
+-        }
+-    }
+-    else if (sprite_index == spr_krisd_slide)
+-    {
+-        draw_sprite_ext(spr_krisd_slide_heart, image_index, x, y, image_xscale, image_yscale, 0, image_blend, battlealpha);
+-    }
+-    else if (global.chapter == 3)
+-    {
+-    }
+-    else
+-    {
+-        scr_draw_battle_outline(255, battlealpha);
+-    }
+-}
+-draw_sprite_ext(spr_heart_outline2, 0, x + 12, y + 40, 1, 1, 0, c_white, battlealpha * 2);
++draw_sprite_ext(spr_heart_outline2, 0, x + heartalign.halign, y + heartalign.valign, 1, 1, 0, c_white, battlealpha * 2);
+-battleheart.x = x + 12;
++battleheart.x = x + heartalign.halign;
+-battleheart.y = y + 40;
++battleheart.y = y + heartalign.valign;
+ if (battlemode == 4)
+ {
+     draw_set_color(c_lime);
