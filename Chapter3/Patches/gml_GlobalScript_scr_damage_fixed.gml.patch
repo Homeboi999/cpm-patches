@@ -1,0 +1,11 @@
+--- a/Code/gml_GlobalScript_scr_damage_fixed.gml
++++ b/Code/gml_GlobalScript_scr_damage_fixed.gml
+@@ -123,7 +123,7 @@
+                             global.hp[1] = 1;
+                             hpdiff = round(global.hp[chartarget] - 1);
+                             doomtype = 4;
+-                            scr_battle_sprite_set("kris", spr_kris_fallen_dark, 0.25, true);
++                            scr_battle_sprite_set(target, spr_kris_fallen_dark, 0.25, true);
+                         }
+                         else
+                         {

@@ -1,0 +1,10 @@
+--- a/Code/gml_Object_obj_ribbick_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_ribbick_enemy_Step_0.gml
+@@ -609,6 +609,7 @@
+     }
+     if (actcon == 20 || actconsus == 20 || actconral == 20)
+     {
++        scr_nextact_simul();
+         if (scr_terminate_writer())
+         {
+             actconsus = -1;

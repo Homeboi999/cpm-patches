@@ -53,24 +53,24 @@
 -                    obj_heroralsei.y += 4;
 +                with (obj_herokris)
 +                {
-+                    scr_battle_sprite_set("kris", spr_kris_dance, 0.25, 1);
++                    scr_battle_sprite_set(myself, spr_kris_dance, 0.25, 1);
 +                    y += 15;
 +                }
 +                with (obj_herosusie)
 +                {
-+                    scr_battle_sprite_set("susie", spr_susie_dance, 0.25, 1);
++                    scr_battle_sprite_set(myself, spr_susie_dance, 0.25, 1);
 +                }
 +                with (obj_heroralsei)
 +                {
 +                    if (sprite_index != spr_ralseib_yarn_1 && sprite_index != spr_ralseib_yarn_2)
 +                    {
-+                        scr_battle_sprite_set("ralsei", spr_ralsei_dance, 0.25, 1);
++                        scr_battle_sprite_set(myself, spr_ralsei_dance, 0.25, 1);
 +                        y += 4;
 +                    }
 +                }
 +                with (obj_heronoelle)
 +                {
-+                    scr_battle_sprite_set("noelle", spr_noelle_walk_down_dw, 0.25, 1);
++                    scr_battle_sprite_set(myself, spr_noelle_walk_down_dw, 0.25, 1);
                  }
                  danceanim = true;
                  msgset(0, text1);
@@ -80,24 +80,24 @@
                  {
 +                    with (obj_herokris)
 +                    {
-+                        scr_battle_sprite_reset("kris");
-+                        obj_herokris.y -= 15;
++                        scr_battle_sprite_reset(myself);
++                        y -= 15;
 +                    }
 +                    with (obj_herosusie)
 +                    {
-+                        scr_battle_sprite_reset("susie");
++                        scr_battle_sprite_reset(myself);
 +                    }
 +                    with (obj_heroralsei)
 +                    {
 +                        if (sprite_index != spr_ralseib_yarn_1 && sprite_index != spr_ralseib_yarn_2)
 +                        {
-+                            scr_battle_sprite_reset("ralsei");
++                            scr_battle_sprite_reset(myself);
 +                            y -= 4;
 +                        }
 +                    }
 +                    with (obj_heronoelle)
 +                    {
-+                        scr_battle_sprite_reset("noelle");
++                        scr_battle_sprite_reset(myself);
 +                    }
                      rouxlsdance = false;
 -                    scr_battle_sprite_reset("kris");
@@ -175,24 +175,24 @@
 -                    obj_heroralsei.y += 4;
 +                with (obj_herokris)
 +                {
-+                    scr_battle_sprite_set("kris", spr_kris_dance, 0.25, 1);
++                    scr_battle_sprite_set(myself, spr_kris_dance, 0.25, 1);
 +                    y += 14;
 +                }
 +                with (obj_herosusie)
 +                {
-+                    scr_battle_sprite_set("susie", spr_susie_dance, 0.25, 1);
++                    scr_battle_sprite_set(myself, spr_susie_dance, 0.25, 1);
 +                }
 +                with (obj_heroralsei)
 +                {
 +                    if (sprite_index != spr_ralseib_yarn_1 && sprite_index != spr_ralseib_yarn_2)
 +                    {
-+                        scr_battle_sprite_set("ralsei", spr_ralsei_dance, 0.25, 1);
++                        scr_battle_sprite_set(myself, spr_ralsei_dance, 0.25, 1);
 +                        y += 4;
 +                    }
 +                }
 +                with (obj_heronoelle)
 +                {
-+                    scr_battle_sprite_set("noelle", spr_noelle_walk_down_dw, 0.25, 1);
++                    scr_battle_sprite_set(myself, spr_noelle_walk_down_dw, 0.25, 1);
                  }
                  with (obj_shadowman_enemy)
                  {
@@ -317,32 +317,33 @@
                      spincon = 0;
                      lancer.sprite_index = spr_lancer_dt;
                      audio_resume_sound(global.batmusic[1]);
+-                    scr_battle_sprite_reset("kris");
+-                    obj_herokris.y -= 14;
+-                    scr_battle_sprite_reset("susie");
+-                    if (obj_heroralsei.sprite_index != spr_ralseib_yarn_1 && obj_heroralsei.sprite_index != spr_ralseib_yarn_2)
+-                    {
+-                        scr_battle_sprite_reset("ralsei");
+-                        obj_heroralsei.y -= 4;
 +                    with (obj_herokris)
 +                    {
--                    scr_battle_sprite_reset("kris");
-+                        scr_battle_sprite_reset("kris");
--                    obj_herokris.y -= 14;
++                        scr_battle_sprite_reset(myself);
 +                        obj_herokris.y -= 14;
--                    scr_battle_sprite_reset("susie");
 +                    }
--                    if (obj_heroralsei.sprite_index != spr_ralseib_yarn_1 && obj_heroralsei.sprite_index != spr_ralseib_yarn_2)
 +                    with (obj_herosusie)
-                     {
--                        scr_battle_sprite_reset("ralsei");
-+                        scr_battle_sprite_reset("susie");
--                        obj_heroralsei.y -= 4;
++                    {
++                        scr_battle_sprite_reset(myself);
 +                    }
 +                    with (obj_heroralsei)
 +                    {
 +                        if (sprite_index != spr_ralseib_yarn_1 && sprite_index != spr_ralseib_yarn_2)
 +                        {
-+                            scr_battle_sprite_reset("ralsei");
++                            scr_battle_sprite_reset(myself);
 +                            y -= 4;
 +                        }
 +                    }
 +                    with (obj_heronoelle)
 +                    {
-+                        scr_battle_sprite_reset("noelle");
++                        scr_battle_sprite_reset(myself);
                      }
                      with (obj_shadowman_enemy)
                      {
@@ -439,7 +440,7 @@
                  endcon = 1;
                  endtalktimer = 0;
              }
-@@ -1413,23 +1568,44 @@
+@@ -1413,22 +1568,34 @@
          {
              if ((button3_p() && endtalktimer > 15) || !i_ex(obj_writer))
              {
@@ -448,60 +449,43 @@
 -                scr_enemyblcon(obj_herosusie.x + 85, obj_herosusie.y + 45, 10);
 -                myblcon.side = -1;
 -                scr_battle_sprite_set("susie", spr_susie_shock_r, 0, 1);
--                with (obj_herosusie)
--                {
--                    scr_shakeobj();
--                }
+                 with (obj_herosusie)
+                 {
++                    msgsetloc(0, "The hell are you&talking about?", "obj_rouxls_ch3_enemy_slash_Step_0_gml_1201_0");
++                    x += 20;
++                    global.typer = 75;
++                    scr_enemyblcon(x + 85, y + 45, 10);
++                    myblcon.side = -1;
++                    scr_battle_sprite_set(myself, spr_susie_shock_r, 0, 1);
+                     scr_shakeobj();
+                 }
 -                msgsetloc(0, "L... like us!?", "obj_rouxls_ch3_enemy_slash_Step_0_gml_1208_0");
 -                obj_heroralsei.x += 20;
 -                scr_enemyblcon(obj_heroralsei.x + 85, obj_heroralsei.y + 45, 10);
 -                myblcon.side = -1;
 -                scr_battle_sprite_set("ralsei", spr_ralsei_walk_down_blush, 0, 1);
--                with (obj_heroralsei)
--                {
--                    scr_shakeobj();
-+                if (i_ex(obj_herosusie))
-+                {
-+                    msgsetloc(0, "The hell are you&talking about?", "obj_rouxls_ch3_enemy_slash_Step_0_gml_1201_0");
-+                    obj_herosusie.x += 20;
-+                    global.typer = 75;
-+                    scr_enemyblcon(obj_herosusie.x + 85, obj_herosusie.y + 45, 10);
+                 with (obj_heroralsei)
+                 {
++                    msgsetloc(0, "L... like us!?", "obj_rouxls_ch3_enemy_slash_Step_0_gml_1208_0");
++                    x += 20;
++                    global.typer = 74;
++                    scr_enemyblcon(x + 85, y + 45, 10);
 +                    myblcon.side = -1;
-+                    scr_battle_sprite_set("susie", spr_susie_shock_r, 0, 1);
-+                    with (obj_herosusie)
-+                    {
-+                        scr_shakeobj();
-+                    }
++                    scr_battle_sprite_set(myself, spr_ralsei_walk_down_blush, 0, 1);
++                    scr_shakeobj();
 +                }
-+                if (i_ex(obj_heronoelle))
++                with (obj_heronoelle)
 +                {
 +                    msgset(0, "Wait, what?!");
-+                    obj_heronoelle.x += 20;
++                    x += 20;
 +                    global.typer = 76;
-+                    scr_enemyblcon(obj_heronoelle.x + 85, obj_heronoelle.y + 45, 10);
++                    scr_enemyblcon(x + 85, y + 45, 10);
 +                    myblcon.side = -1;
-+                    scr_battle_sprite_set("noelle", spr_noelleb_actready, 0, 1);
-+                    with (obj_heronoelle)
-+                    {
-+                        scr_shakeobj();
-+                    }
-+                }
-+                if (i_ex(obj_heroralsei))
-+                {
-+                    msgsetloc(0, "L... like us!?", "obj_rouxls_ch3_enemy_slash_Step_0_gml_1208_0");
-+                    obj_heroralsei.x += 20;
-+                    global.typer = 74;
-+                    scr_enemyblcon(obj_heroralsei.x + 85, obj_heroralsei.y + 45, 10);
-+                    myblcon.side = -1;
-+                    scr_battle_sprite_set("ralsei", spr_ralsei_walk_down_blush, 0, 1);
-+                    with (obj_heroralsei)
-+                    {
-+                        scr_shakeobj();
-+                    }
++                    scr_battle_sprite_set(myself, spr_noelleb_actready, 0, 1);
+                     scr_shakeobj();
                  }
                  endcon = 4.6;
-                 endtalktimer = 0;
-@@ -1454,10 +1630,33 @@
+@@ -1454,10 +1621,33 @@
          {
              if ((button3_p() && endtalktimer > 15) || !i_ex(obj_writer))
              {
@@ -539,7 +523,7 @@
                  endcon = 5;
              }
          }
-@@ -1478,10 +1677,21 @@
+@@ -1478,10 +1668,21 @@
                  }
                  endtalktimer = 0;
                  endcon = 5.5;
@@ -547,47 +531,55 @@
 -                scr_battle_sprite_reset("susie");
 -                obj_heroralsei.x -= 20;
 -                scr_battle_sprite_reset("ralsei");
-+                if (i_ex(obj_herosusie))
++                with (obj_herosusie)
 +                {
-+                    obj_herosusie.x -= 20;
-+                    scr_battle_sprite_reset("susie");
++                    x -= 20;
++                    scr_battle_sprite_reset(myself);
 +                }
-+                if (i_ex(obj_heroralsei))
++                with (obj_heroralsei)
 +                {
-+                    obj_heroralsei.x -= 20;
-+                    scr_battle_sprite_reset("ralsei");
++                    x -= 20;
++                    scr_battle_sprite_reset(myself);
 +                }
-+                if (i_ex(obj_heronoelle))
++                with (obj_heronoelle)
 +                {
-+                    obj_heronoelle.x -= 20;
-+                    scr_battle_sprite_reset("noelle");
++                    x -= 20;
++                    scr_battle_sprite_reset(myself);
 +                }
              }
          }
          if (endcon == 5.5)
-@@ -2024,12 +2234,18 @@
+@@ -2024,12 +2225,26 @@
              }
              if (talktimer == 60)
              {
-+                if (instance_exists(obj_herosusie))
-+                {
 -                scr_battle_sprite_set("susie", spr_susier_dark_laugh, 1/3, 1);
-+                    scr_battle_sprite_set("susie", spr_susier_dark_laugh, 1/3, 1);
 -                snd_play(snd_suslaugh);
++                var shouldlaugh = false;
++                with (obj_heroparent)
++                {
++                    if (object_index == obj_herosusie)
++                    {
++                        scr_battle_sprite_set(myself, spr_susier_dark_laugh, 1/3, 1);
++                        shouldlaugh = true;
++                    }
++                }
++                if (shouldlaugh)
++                {
 +                    snd_play(snd_suslaugh);
 +                }
              }
              if (talktimer == 150)
              {
-+                if (instance_exists(obj_herosusie))
-+                {
 -                scr_battle_sprite_reset("susie");
-+                    scr_battle_sprite_reset("susie");
++                with (obj_herosusie)
++                {
++                    scr_battle_sprite_reset(myself);
 +                }
              }
              if (talktimer == 151)
              {
-@@ -2198,11 +2414,18 @@
+@@ -2198,11 +2413,18 @@
          }
          scr_move_to_point_over_time(xstart, ystart, 8);
          shadowmengetfiredcon = 2;
@@ -611,14 +603,14 @@
          msgnextloc("* .../", "obj_rouxls_ch3_enemy_slash_Step_0_gml_1811_0");
          msgnextloc("* I don't thinketh, THIS is what I askedst for./", "obj_rouxls_ch3_enemy_slash_Step_0_gml_1812_0");
          msgnextloc("* Likest, Yarne? You don't even havest Gun's?/", "obj_rouxls_ch3_enemy_slash_Step_0_gml_1813_0");
-@@ -2243,13 +2466,16 @@
+@@ -2243,13 +2465,16 @@
          talktimer++;
          if (talktimer == 1)
          {
 +            if (i_ex(obj_heroralsei))
 +            {
 -            scr_battle_sprite_reset("ralsei");
-+                scr_battle_sprite_reset("ralsei");
++                scr_battle_sprite_reset(obj_heroralsei.myself);
 -            yarnmarker = instance_create_depth(obj_heroralsei.x, obj_heroralsei.y, obj_heroralsei.depth - 2, obj_marker);
 +                yarnmarker = instance_create_depth(obj_heroralsei.x, obj_heroralsei.y, obj_heroralsei.depth - 2, obj_marker);
 -            yarnmarker.sprite_index = spr_ralseib_yarn_2;
@@ -635,7 +627,7 @@
          }
          if (talktimer == 30)
          {
-@@ -2469,22 +2695,25 @@
+@@ -2469,22 +2694,25 @@
          }
          else if (phase == 2 && phasedone == true)
          {
@@ -645,7 +637,7 @@
 +                if (obj_heroralsei.state == 8)
 +                {
 -                scr_battle_sprite_reset("ralsei");
-+                    scr_battle_sprite_reset("ralsei");
++                    scr_battle_sprite_reset(obj_heroralsei.myself);
 -                yarnmarker = instance_create_depth(obj_heroralsei.x, obj_heroralsei.y, obj_heroralsei.depth - 2, obj_marker);
 +                    yarnmarker = instance_create_depth(obj_heroralsei.x, obj_heroralsei.y, obj_heroralsei.depth - 2, obj_marker);
 -                if (obj_rouxls_ch3_enemy.ralseiyarnhp == 0)

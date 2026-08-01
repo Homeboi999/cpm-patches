@@ -21,25 +21,25 @@ switch (subact_state)
         }
         with (obj_heroparent)
         {
-            if (object_index != obj_heronoelle)
+            if (global.charinstance[myself] != other.activenoelle)
             {
                 scr_move_to_point_over_time(x - 180, y, 8);
             }
         }
         noelle_walk_time = 0;
-        noelle_walk_duration = floor(point_distance(obj_heronoelle.x, obj_heronoelle.y, _center_x, _center_y) / 10);
+        noelle_walk_duration = floor(point_distance(activenoelle.x, activenoelle.y, _center_x, _center_y) / 10);
         subact_state = "noelle_move";
-        if (i_ex(obj_heronoelle))
+        if (i_ex(activenoelle))
         {
-            obj_heronoelle.state = 0;
-            global.faceaction[obj_heronoelle.myself] = 0;
+            activenoelle.state = 0;
+            global.faceaction[activenoelle.myself] = 0;
         }
         break;
     case "noelle_move":
         if (noelle_walk_time == 0)
         {
-            scr_battle_sprite_set("noelle", spr_noelle_walk_right_dw, 0.5, true);
-            with (obj_heronoelle)
+            scr_battle_sprite_set(activenoelle.myself, spr_noelle_walk_right_dw, 0.5, true);
+            with (activenoelle)
             {
                 scr_move_to_point_over_time(_center_x, _center_y, other.noelle_walk_duration);
             }
@@ -47,7 +47,7 @@ switch (subact_state)
         noelle_walk_time++;
         if (noelle_walk_time == noelle_walk_duration)
         {
-            scr_battle_sprite_set("noelle", spr_noelle_walk_down_dw, 0, true);
+            scr_battle_sprite_set(activenoelle.myself, spr_noelle_walk_down_dw, 0, true);
             subact_state = "noelle_stand";
         }
         break;
@@ -130,7 +130,7 @@ switch (subact_state)
         }
         with (obj_heroparent)
         {
-            if (object_index != obj_heronoelle)
+            if (global.charinstance[myself] != other.activenoelle)
             {
                 x = xstart;
                 y = ystart;
@@ -144,7 +144,7 @@ switch (subact_state)
         }
         break;
     case "post_capture":
-        with (obj_heroparent)
+        with (activenoelle)
         {
             x = xstart;
             y = ystart;
@@ -156,6 +156,6 @@ switch (subact_state)
             y = ystart;
         }
         instance_destroy(obj_move_to_point);
-        scr_battle_sprite_reset("noelle");
+        scr_battle_sprite_reset(activenoelle.myself);
         break;
 }

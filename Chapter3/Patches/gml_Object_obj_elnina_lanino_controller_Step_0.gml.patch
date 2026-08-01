@@ -1,0 +1,72 @@
+--- a/Code/gml_Object_obj_elnina_lanino_controller_Step_0.gml
++++ b/Code/gml_Object_obj_elnina_lanino_controller_Step_0.gml
+@@ -108,22 +108,33 @@
+         }
+         intro = 0.2;
+     }
++    var ralseipos = scr_findchar(3);
+     if (intro >= 0.2 && ralseishocked == false)
+     {
+         extimer++;
+         if (extimer == 24 || introtimer == 5)
+         {
+-            scr_battle_sprite_set("ralsei", spr_ralsei_shocked_right, 0, 0);
+-            if (i_ex(obj_heroralsei))
++            if (ralseipos > -1)
+             {
+-                obj_heroralsei.x += 30;
++                scr_battle_sprite_set(ralseipos, spr_ralsei_shocked_right, 0, 0);
++                if (i_ex(global.charinstance[ralseipos]))
++                {
++                    global.charinstance[ralseipos].x += 30;
++                }
++                ralseishocked = true;
+             }
+-            ralseishocked = true;
+         }
+     }
+     if (intro == 0.2 && !i_ex(obj_writer))
+     {
++        if (ralseishocked)
++        {
+-        intro = 0.3;
++            intro = 0.3;
++        }
++        else
++        {
++            intro = 1;
++        }
+     }
+     if (intro == 0.3)
+     {
+@@ -132,7 +143,8 @@
+         {
+             msgsetloc(0, "Ninety... Ni-", "obj_elnina_lanino_controller_slash_Step_0_gml_62_0");
+             global.typer = 74;
+-            var heroballoon = scr_enemyblcon(obj_heroralsei.x + 50, obj_heroralsei.y + 40, 10);
++            var shockedralsei = global.charinstance[ralseipos];
++            var heroballoon = scr_enemyblcon(global.charinstance[ralseipos].x + 50, global.charinstance[ralseipos].y + 40, 10);
+             heroballoon.side = -1;
+             tenna.vspeed = 50;
+         }
+@@ -156,10 +168,17 @@
+     scr_speaker("tenna");
+     global.typer = 80;
+     global.fc = 22;
+-    scr_battle_sprite_reset("ralsei");
+-    if (i_ex(obj_heroralsei))
++    if (ralseishocked)
+     {
+-        obj_heroralsei.x -= 30;
++        var ralseipos = scr_findchar(3);
++        if (ralseipos > -1)
++        {
++            scr_battle_sprite_reset(ralseipos);
++            if (i_ex(global.charinstance[ralseipos]))
++            {
++                global.charinstance[ralseipos].x -= 30;
++            }
++        }
+     }
+ }
+ if (ilovetv_increase > 0 && digit_flash_timer == 0)

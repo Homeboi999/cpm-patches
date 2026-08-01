@@ -138,7 +138,7 @@
              }
          }
          var oldcalculation = 0;
-@@ -191,9 +187,9 @@
+@@ -191,12 +187,12 @@
                  {
                      if (global.chapter == 3 && i_ex(obj_knight_enemy))
                      {
@@ -149,4 +149,8 @@
 +                            global.hp[chartarget] = 1;
                              hpdiff = round(global.hp[chartarget] - 1);
                              doomtype = 4;
-                             scr_battle_sprite_set("kris", spr_kris_fallen_dark, 0.25, true);
+-                            scr_battle_sprite_set("kris", spr_kris_fallen_dark, 0.25, true);
++                            scr_battle_sprite_set(target, spr_kris_fallen_dark, 0.25, true);
+                         }
+                         else
+                         {

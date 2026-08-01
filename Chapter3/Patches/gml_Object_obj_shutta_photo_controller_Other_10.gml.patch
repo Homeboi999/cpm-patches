@@ -1,20 +1,88 @@
 --- a/Code/gml_Object_obj_shutta_photo_controller_Other_10.gml
 +++ b/Code/gml_Object_obj_shutta_photo_controller_Other_10.gml
-@@ -30,8 +30,11 @@
+@@ -19,7 +19,7 @@
+         }
+         with (obj_heroparent)
+         {
+-            if (object_index != obj_herosusie)
++            if (global.charinstance[myself] != other.activesusie)
+             {
+                 scr_move_to_point_over_time(x - 180, y, 8);
+             }
+@@ -30,8 +30,14 @@
          susie_walk_time = 0;
          susie_walk_duration = 0;
          subact_state = "create_item";
-+        if (i_ex(obj_herosusie))
-+        {
 -        obj_herosusie.state = 0;
-+            obj_herosusie.state = 0;
 -        global.faceaction[obj_herosusie.myself] = 0;
-+            global.faceaction[obj_herosusie.myself] = 0;
++        if (i_ex(activesusie))
++        {
++            with (activesusie)
++            {
++                state = 0;
++                global.faceaction[myself] = 0;
++            }
 +        }
          break;
      case "create_item":
          var _gap = 70;
-@@ -159,6 +162,19 @@
+@@ -45,7 +51,7 @@
+             _xx = _min_x + (irandom(_gap_width) * _gap);
+             _yy = _min_y + (irandom(_gap_height) * _gap);
+         }
+-        until ((_xx != last_item_x && _yy != last_item_y) && !position_meeting(_xx, _yy - 10, obj_herosusie));
++        until ((_xx != last_item_x && _yy != last_item_y) && !position_meeting(_xx, _yy - 10, activesusie));
+         if (_yy < (cameray() + 140))
+         {
+             _yy = cameray() + 140;
+@@ -56,7 +62,7 @@
+         susie_target_x = last_item_x - 100;
+         susie_target_y = last_item_y - 90;
+         susie_walk_time = 0;
+-        susie_walk_duration = floor(point_distance(obj_herosusie.x, obj_herosusie.y, susie_target_x, susie_target_y) / 10);
++        susie_walk_duration = floor(point_distance(activesusie.x, activesusie.y, susie_target_x, susie_target_y) / 10);
+         subact_state = "susie_move";
+         break;
+     case "susie_move":
+@@ -66,15 +72,15 @@
+         }
+         if (susie_walk_time == 0)
+         {
+-            if (last_item_x > obj_herosusie.x)
++            if (last_item_x > activesusie.x)
+             {
+-                scr_battle_sprite_set("susie", spr_susie_walk_right_dw, 0.5, true);
++                scr_battle_sprite_set(activesusie.myself, spr_susie_walk_right_dw, 0.5, true);
+             }
+             else
+             {
+-                scr_battle_sprite_set("susie", spr_susie_walk_left_dw, 0.5, true);
++                scr_battle_sprite_set(activesusie.myself, spr_susie_walk_left_dw, 0.5, true);
+             }
+-            with (obj_herosusie)
++            with (activesusie)
+             {
+                 scr_move_to_point_over_time(other.susie_target_x, other.susie_target_y, other.susie_walk_duration);
+             }
+@@ -90,7 +96,7 @@
+         }
+         if (susie_walk_time == susie_walk_duration)
+         {
+-            scr_battle_sprite_set("susie", spr_susie_attack, 0.5, false);
++            scr_battle_sprite_set(activesusie.myself, spr_susie_attack, 0.5, false);
+             with (last_item)
+             {
+                 event_user(0);
+@@ -107,7 +113,7 @@
+         }
+         break;
+     case "susie_attack":
+-        if (obj_herosusie.sprite_index != spr_susie_attack)
++        if (activesusie.sprite_index != spr_susie_attack)
+         {
+             subact_state = "create_item";
+         }
+@@ -159,11 +165,24 @@
                      }
                      global.flag[515] = 1;
                  }
@@ -34,21 +102,39 @@
              }
              else if (sprite_index == spr_realisticexplosion && image_index > 2 && image_index < 13)
              {
-@@ -260,7 +276,7 @@
+-                scr_battle_sprite_set("susie", spr_susie_attack, 0, false);
++                scr_battle_sprite_set(activesusie.myself, spr_susie_attack, 0, false);
+-                obj_herosusie.image_index = 1;
++                activesusie.image_index = 1;
+                 var _cx = x - 40;
+                 var _cy = y;
+                 with (obj_shutta_photo_controller)
+@@ -260,7 +279,7 @@
          }
          with (obj_heroparent)
          {
 -            if (object_index == obj_heroralsei || object_index == obj_herokris)
-+            if (object_index != obj_herosusie)
++            if (global.charinstance[myself] != other.activesusie)
              {
                  x = xstart;
                  y = ystart;
-@@ -276,7 +292,7 @@
+@@ -276,7 +295,7 @@
      case "post_capture":
          with (obj_heroparent)
          {
 -            if (object_index == obj_heroralsei || object_index == obj_herokris)
-+            if (object_index != obj_herosusie)
++            if (global.charinstance[myself] != other.activesusie)
              {
                  x = xstart;
                  y = ystart;
+@@ -291,8 +310,8 @@
+         instance_destroy(obj_shutta_falling_item);
+         instance_destroy(obj_shutta_falling_item_piece);
+         instance_destroy(obj_move_to_point);
+-        scr_battle_sprite_reset("susie");
+-        with (obj_herosusie)
++        scr_battle_sprite_reset(activesusie.myself);
++        with (activesusie)
+         {
+             x = xstart;
+             y = ystart;

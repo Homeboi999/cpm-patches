@@ -66,15 +66,15 @@
 +            }
 +            if (global.char[2] > 0)
 +            {
-+                scr_act_charsprite(other.charnames[global.char[2]], other.charsprites[_channelnumber][global.char[2]], 0, 0);
++                scr_act_charsprite(2, other.charsprites[_channelnumber][global.char[2]], 0, 0);
 +            }
 +            if (global.char[0] > 0)
 +            {
-+                scr_act_charsprite(other.charnames[global.char[0]], other.charsprites[_channelnumber][global.char[0]], 0, 0);
++                scr_act_charsprite(0, other.charsprites[_channelnumber][global.char[0]], 0, 0);
 +            }
 +            if (global.char[1] > 0)
 +            {
-+                scr_act_charsprite(other.charnames[global.char[1]], other.charsprites[_channelnumber][global.char[1]], 0, 0);
++                scr_act_charsprite(1, other.charsprites[_channelnumber][global.char[1]], 0, 0);
              }
              with (obj_oflash)
              {

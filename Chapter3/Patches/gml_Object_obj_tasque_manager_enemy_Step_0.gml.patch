@@ -1,0 +1,10 @@
+--- a/Code/gml_Object_obj_tasque_manager_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_tasque_manager_enemy_Step_0.gml
+@@ -365,6 +365,7 @@
+     if (actcon == 20 || actconsus == 20 || actconral == 20)
+     {
+         scr_act_charsprite_end();
++        scr_nextact_simul();
+         if (scr_terminate_writer())
+         {
+             actconsus = -1;

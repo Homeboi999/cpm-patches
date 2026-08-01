@@ -1,0 +1,50 @@
+--- a/Code/gml_Object_obj_shadowman_enemy_CleanUp_0.gml
++++ b/Code/gml_Object_obj_shadowman_enemy_CleanUp_0.gml
+@@ -1,16 +1,33 @@
+-if (i_ex(obj_herokris) && obj_herokris.sprite_index == spr_kris_dance)
+-{
+-    scr_battle_sprite_reset("kris");
+-    krisdancing = false;
+-}
+-if (i_ex(obj_herosusie) && obj_herosusie.sprite_index == spr_susie_dance)
+-{
+-    scr_battle_sprite_reset("susie");
+-    susiedancing = false;
+-}
+-if (i_ex(obj_heroralsei) && obj_heroralsei.sprite_index == spr_ralsei_dance)
+-{
+-    scr_battle_sprite_reset("ralsei");
+-    ralseidancing = false;
++with (obj_herokris)
++{
++    if (sprite_index == spr_kris_dance)
++    {
++        scr_battle_sprite_reset(myself);
++    }
++    other.krisdancing = false;
++}
++with (obj_herosusie)
++{
++    if (sprite_index == spr_susie_dance)
++    {
++        scr_battle_sprite_reset(myself);
++    }
++    other.susiedancing = false;
++}
++with (obj_heroralsei)
++{
++    if (sprite_index == spr_ralsei_dance)
++    {
++        scr_battle_sprite_reset(myself);
++    }
++    other.ralseidancing = false;
++}
++with (obj_heronoelle)
++{
++    if (sprite_index == spr_noelle_dance)
++    {
++        scr_battle_sprite_reset(myself);
++    }
++    other.noelledancing = false;
+ }
+ 

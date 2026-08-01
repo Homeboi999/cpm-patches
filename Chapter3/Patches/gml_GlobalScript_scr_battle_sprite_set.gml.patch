@@ -1,0 +1,42 @@
+--- a/Code/gml_GlobalScript_scr_battle_sprite_set.gml
++++ b/Code/gml_GlobalScript_scr_battle_sprite_set.gml
+@@ -1,30 +1,14 @@
+ function scr_battle_sprite_set(arg0, arg1, arg2, arg3)
+ {
+-    _charactor = arg0;
+-    _charinstance = obj_herokris;
+-    if (_charactor == "noelle")
+-    {
+-        _charinstance = obj_heronoelle;
+-        _charnum = 4;
+-    }
+-    if (_charactor == "ralsei")
+-    {
+-        _charinstance = obj_heroralsei;
+-        _charnum = 3;
+-    }
+-    if (_charactor == "susie")
+-    {
+-        _charinstance = obj_herosusie;
+-        _charnum = 2;
+-    }
+-    if (_charactor == "kris")
+-    {
+-        _charinstance = obj_herokris;
+-        _charnum = 1;
+-    }
+-    if (instance_exists(_charinstance))
+-    {
+-        with (_charinstance)
++    var pos = arg0;
++    var charsprite = arg1;
++    if (pos < 0 || pos > 2)
++    {
++        exit;
++    }
++    if (instance_exists(global.charinstance[pos]))
++    {
++        with (global.charinstance[pos])
+         {
+             state = 8;
+             hurt = 0;

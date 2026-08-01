@@ -13,7 +13,19 @@
  if (audience_goes_away == true)
  {
      with (obj_tenna_enemy_bg)
-@@ -706,33 +697,36 @@
+@@ -701,38 +692,47 @@
+         smashcuthurt = 0;
+         pointsmultiplierthisturn = 5;
+         totalfails = 0;
+-        scr_battle_sprite_reset("ralsei");
++        for (var i = 0; i < 3; i++)
++        {
++            if (global.char[i] == 3)
++            {
++                scr_battle_sprite_reset(i);
++            }
++        }
+         if (resetralsei == true)
          {
              resetralsei = false;
              snd_play(snd_wing);
@@ -77,7 +89,7 @@
              }
          }
          if (lancercheat == true)
-@@ -795,7 +789,7 @@
+@@ -795,7 +795,7 @@
          }
      }
      var havejeviltail = false;
@@ -86,7 +98,7 @@
      {
          havejeviltail = true;
      }
-@@ -806,7 +800,7 @@
+@@ -806,7 +806,7 @@
          {
              msgsetloc(0, "* TENNA - Despite his size, sadly, he's quite fragile./%", "obj_tenna_enemy_slash_Step_0_gml_446_0");
          }
@@ -95,7 +107,7 @@
          {
              msgsetloc(0, "* TENNA - THE [Tragic businesmen] THAT [Died] AT THE [Now] OF THE [Story]/%", "obj_tenna_enemy_slash_Step_0_gml_449_0");
          }
-@@ -816,30 +810,32 @@
+@@ -816,30 +816,32 @@
          }
          scr_battletext_default();
      }
@@ -151,7 +163,7 @@
          }
          acting = 5.1;
      }
-@@ -856,7 +852,7 @@
+@@ -856,7 +858,7 @@
              minigametimecon = 1;
          }
      }
@@ -160,7 +172,38 @@
      {
          var _ilovetvstring = stringsetloc("* You said \"I Love TV\"!", "obj_tenna_enemy_slash_Step_0_gml_502_0");
          if (simultotal == 1)
-@@ -1080,12 +1076,55 @@
+@@ -942,13 +944,13 @@
+             }
+         }
+     }
++    var actinghero = global.charinstance[global.currentactingchar];
+     if (actingsus == 2 && actconsus == 1)
+     {
+         bet = true;
+-        obj_herosusie.x -= 8;
+-        obj_herosusie.y -= 6;
+-        scr_act_charsprite("susie", spr_susie_zoosuit_Card, 1/3, 8);
+-        _charinstance.actspriteobject = _charactsprite[_charnum];
++        actinghero.x -= 8;
++        actinghero.y -= 6;
++        actinghero.actspriteobject = scr_act_charsprite(global.currentactingchar, spr_susie_zoosuit_Card, 1/3, 8);
+         if (havejeviltail)
+         {
+             betamount = 30;
+@@ -980,9 +982,9 @@
+     if (actingsus == 2.1 && !i_ex(obj_writer))
+     {
+         scr_act_charsprite_end();
+-        obj_herosusie.x += 8;
++        actinghero.x += 8;
+-        obj_herosusie.y += 6;
++        actinghero.y += 6;
+-        scr_battle_sprite_reset("susie");
++        scr_battle_sprite_reset(global.currentactingchar);
+         actingsus = 2.2;
+         actcon = 1;
+         actconsus = 0;
+@@ -1080,12 +1082,56 @@
          actconral = 0;
          global.actsimulral[myself][1] = 1;
      }
@@ -209,6 +252,7 @@
 -    if (actcon == 20 || actconsus == 20 || actconral == 20)
 +    if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
      {
++        scr_nextact_simul();
          if (scr_terminate_writer() && obj_tenna_enemy_bg.addscore == 0)
          {
              actconsus = -1;
@@ -217,7 +261,7 @@
              actcon = 1;
              with (obj_face)
              {
-@@ -1332,6 +1371,13 @@
+@@ -1332,6 +1378,13 @@
              if (global.hp[3] > 0)
              {
                  with (obj_heroralsei)

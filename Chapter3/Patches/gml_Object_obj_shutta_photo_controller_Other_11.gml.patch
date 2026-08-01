@@ -19,24 +19,42 @@
          {
              x = xstart;
              y = ystart;
-@@ -48,19 +38,29 @@
+@@ -47,20 +37,44 @@
+         krs_duration = 10;
          if (krs_time == 0)
          {
-             scr_battle_sprite_set("kris", spr_krisr_dark, 0.5, true);
+-            scr_battle_sprite_set("kris", spr_krisr_dark, 0.5, true);
 -            with (obj_herokris)
 -            {
 -                scr_move_to_point_over_time(_center_x, _center_y - 2, other.krs_duration);
 -            }
-             scr_battle_sprite_set("susie", spr_susie_walk_right_dw, 0.5, true);
+-            scr_battle_sprite_set("susie", spr_susie_walk_right_dw, 0.5, true);
 -            with (obj_herosusie)
 -            {
 -                scr_move_to_point_over_time(_center_x - 50, _center_y - 12 - 6, other.krs_duration);
 -            }
-             scr_battle_sprite_set("ralsei", spr_ralsei_walk_right, 0.5, true);
+-            scr_battle_sprite_set("ralsei", spr_ralsei_walk_right, 0.5, true);
 -            with (obj_heroralsei)
 -            {
 -                scr_move_to_point_over_time(_center_x + 40, _center_y - 8, other.krs_duration);
-+            scr_battle_sprite_set("noelle", spr_noelle_walk_right_dw, 0.5, true);
++            for (var pos = 0; pos < 3; pos++)
++            {
++                switch (global.char[pos])
++                {
++                    case 1:
++                        scr_battle_sprite_set(pos, spr_krisr_dark, 0.5, true);
++                        break;
++                    case 2:
++                        scr_battle_sprite_set(pos, spr_susie_walk_right_dw, 0.5, true);
++                        break;
++                    case 3:
++                        scr_battle_sprite_set(pos, spr_ralsei_walk_right, 0.5, true);
++                        break;
++                    case 4:
++                        scr_battle_sprite_set(pos, spr_noelle_walk_right_dw, 0.5, true);
++                        break;
++                }
++            }
 +            if (i_ex(global.charinstance[0]))
 +            {
 +                with (global.charinstance[0])
@@ -60,95 +78,177 @@
              }
          }
          if (krs_time >= krs_duration)
-@@ -69,7 +69,10 @@
+@@ -68,10 +82,25 @@
+             krs_got_funny = true;
              krs_time = -1;
              subact_state = "final_lerp";
-             scr_battle_sprite_set("ralsei", spr_ralsei_funnyface, 0, true);
+-            scr_battle_sprite_set("ralsei", spr_ralsei_funnyface, 0, true);
 -            obj_heroralsei.image_index = 2;
-+            with (obj_heroralsei)
+-            scr_battle_sprite_set("kris", spr_krisd_dark, 0, true);
+-            scr_battle_sprite_set("susie", spr_susie_walk_down_dw, 0, true);
++            for (var pos = 0; pos < 3; pos++)
 +            {
-+                image_index = 2;
++                switch (global.char[pos])
++                {
++                    case 1:
++                        scr_battle_sprite_set(pos, spr_krisd_dark, 0, true);
++                        break;
++                    case 2:
++                        scr_battle_sprite_set(pos, spr_susie_walk_down_dw, 0, true);
++                        break;
++                    case 3:
++                        scr_battle_sprite_set(pos, spr_ralsei_funnyface, 0, true);
++                        global.charinstance[pos].image_index = 2;
++                        break;
++                    case 4:
++                        scr_battle_sprite_set(pos, spr_noelle_walk_down_dw, 0.5, true);
++                        break;
++                }
 +            }
-             scr_battle_sprite_set("kris", spr_krisd_dark, 0, true);
-             scr_battle_sprite_set("susie", spr_susie_walk_down_dw, 0, true);
          }
-@@ -84,7 +87,7 @@
+         break;
+     case "choose_pattern":
+@@ -84,14 +113,14 @@
              var _k_py = _center_y + path_get_y(k_path, pattern_reverse);
              var _s_px = (_center_x - 25) + (path_get_x(s_path, pattern_reverse) * s_flip_h);
              var _s_py = (_center_y - 12) + (path_get_y(s_path, pattern_reverse) * s_flip_v);
 -            if (point_distance(obj_herokris.x, obj_herokris.y, _k_px, _k_py) < 5 && point_distance(obj_herosusie.x, obj_herosusie.y, _s_px, _s_py) < 5)
-+            if (i_ex(obj_herokris) && point_distance(obj_herokris.x, obj_herokris.y, _k_px, _k_py) < 5 && i_ex(obj_herosusie) && point_distance(obj_herosusie.x, obj_herosusie.y, _s_px, _s_py) < 5)
++            if (i_ex(activekris) && point_distance(activekris.x, activekris.y, _k_px, _k_py) < 5 && i_ex(activesusie) && point_distance(activesusie.x, activesusie.y, _s_px, _s_py) < 5)
              {
                  krs_time = krs_duration;
              }
-@@ -126,8 +129,11 @@
+             else
+             {
+-                scr_battle_sprite_set("kris", spr_krisd_dark, 0, true);
++                scr_battle_sprite_set(activekris.myself, spr_krisd_dark, 0, true);
+-                with (obj_herosusie)
++                with (activesusie)
+                 {
+                     scr_move_to_point_over_time(_s_px, _s_py, other.krs_duration);
+                 }
+@@ -126,8 +155,11 @@
          {
              _path_pos = 1 - _path_pos;
          }
-+        if (i_ex(obj_herosusie))
++        if (i_ex(activesusie))
 +        {
 -        obj_herosusie.x = (_center_x - 25) + (path_get_x(s_path, _path_pos) * s_flip_h);
-+            obj_herosusie.x = (_center_x - 25) + (path_get_x(s_path, _path_pos) * s_flip_h);
++            activesusie.x = (_center_x - 25) + (path_get_x(s_path, _path_pos) * s_flip_h);
 -        obj_herosusie.y = (_center_y - 12) + (path_get_y(s_path, _path_pos) * s_flip_v);
-+            obj_herosusie.y = (_center_y - 12) + (path_get_y(s_path, _path_pos) * s_flip_v);
++            activesusie.y = (_center_y - 12) + (path_get_y(s_path, _path_pos) * s_flip_v);
 +        }
          if (krs_time >= krs_duration)
          {
              pattern_prev = pattern;
-@@ -145,9 +151,15 @@
-                     scr_battle_sprite_set("susie", spr_susie_pose, 0, true);
+@@ -142,20 +174,26 @@
+             switch (pattern)
+             {
+                 case 0:
+-                    scr_battle_sprite_set("susie", spr_susie_pose, 0, true);
++                    scr_battle_sprite_set(activesusie.myself, spr_susie_pose, 0, true);
                      break;
                  case 1:
 -                    obj_herokris.x += 40;
 -                    obj_herokris.y += 2;
 -                    obj_herosusie.y += 2;
-+                    with (obj_herokris)
+-                    scr_battle_sprite_set("kris", spr_kris_susie_faceaway_flipped, 0, true);
+-                    scr_battle_sprite_set("susie", spr_nothing, 0, true);
++                    with (activekris)
 +                    {
 +                        x += 40;
 +                        y += 2;
 +                    }
-+                    with (obj_herosusie)
++                    with (activesusie)
 +                    {
 +                        y += 2;
 +                    }
-                     scr_battle_sprite_set("kris", spr_kris_susie_faceaway_flipped, 0, true);
-                     scr_battle_sprite_set("susie", spr_nothing, 0, true);
++                    scr_battle_sprite_set(activekris.myself, spr_kris_susie_faceaway_flipped, 0, true);
++                    scr_battle_sprite_set(activesusie.myself, spr_nothing, 0, true);
                      break;
-@@ -187,12 +199,21 @@
+                 case 2:
+-                    scr_battle_sprite_set("susie", spr_susie_dance, 0, true);
++                    scr_battle_sprite_set(activesusie.myself, spr_susie_dance, 0, true);
+                     break;
+                 case 3:
+-                    scr_battle_sprite_set("susie", spr_susie_chomp, 0, true);
++                    scr_battle_sprite_set(activesusie.myself, spr_susie_chomp, 0, true);
+                     break;
+             }
+         }
+@@ -171,11 +209,11 @@
+         }
+         if (krs_time >= krs_duration)
+         {
+-            with (obj_herokris)
++            with (activekris)
+             {
+                 scr_move_to_point_over_time(_center_x - 6, _center_y, other.krs_duration);
+             }
+-            with (obj_herosusie)
++            with (activesusie)
+             {
+                 scr_move_to_point_over_time(_center_x - 54, _center_y - 14, other.krs_duration);
+             }
+@@ -186,24 +224,59 @@
+     case "final_pose":
          if (krs_time == 0)
          {
-             scr_battle_sprite_set("ralsei", spr_ralsei_funnyface, 0, true);
+-            scr_battle_sprite_set("ralsei", spr_ralsei_funnyface, 0, true);
 -            obj_heroralsei.image_index = 0;
 -            obj_heroralsei.image_index = 1;
 -            obj_herosusie.x -= 2;
-+            with (obj_heroralsei)
-+            {
-+                image_index = 0;
-+                image_index = 1;
-+            }
-             scr_battle_sprite_set("susie", spr_susie_funnyface, 0, true);
+-            scr_battle_sprite_set("susie", spr_susie_funnyface, 0, true);
 -            obj_herosusie.depth = obj_heroralsei.depth + 1;
 -            obj_herosusie.image_index = 1;
-+            with (obj_herosusie)
+-            scr_battle_sprite_set("kris", spr_nothing, 0, true);
++            for (var pos = 0; pos < 3; pos++)
 +            {
-+                x -= 2;
-+                if (i_ex(obj_heroralsei))
++                switch (global.char[pos])
 +                {
-+                    depth = obj_heroralsei.depth + 1;
++                    case 1:
++                        scr_battle_sprite_set(pos, spr_nothing, 0, true);
++                        break;
++                    case 2:
++                        scr_battle_sprite_set(pos, spr_susie_funnyface, 0, true);
++                        with (global.charinstance[pos])
++                        {
++                            x -= 2;
++                            if (pos < 2 && i_ex(global.charinstance[pos]))
++                            {
++                                depth = global.charinstance[pos].depth + 1;
++                            }
++                            image_index = 1;
++                        }
++                        break;
++                    case 3:
++                        scr_battle_sprite_set(pos, spr_ralsei_funnyface, 0, true);
++                        global.charinstance[pos].image_index = 1;
++                        break;
++                    case 4:
++                        scr_battle_sprite_set(pos, spr_noelleb_actready, 0, true);
++                        break;
 +                }
-+                image_index = 1;
 +            }
-             scr_battle_sprite_set("kris", spr_nothing, 0, true);
          }
          break;
-@@ -201,9 +222,17 @@
+     case "capture":
+         if (krs_got_funny)
          {
-             scr_battle_sprite_set("ralsei", spr_ralsei_funnyface2, 0, true);
-             scr_battle_sprite_set("susie", spr_susie_funnyface, 0, true);
-+            with (obj_herosusie)
-+            {
+-            scr_battle_sprite_set("ralsei", spr_ralsei_funnyface2, 0, true);
+-            scr_battle_sprite_set("susie", spr_susie_funnyface, 0, true);
 -            obj_herosusie.image_index = 2;
-+                obj_herosusie.image_index = 2;
++            for (var pos = 0; pos < 3; pos++)
++            {
++                switch (global.char[pos])
++                {
++                    case 2:
++                        scr_battle_sprite_set(pos, spr_susie_funnyface, 0, true);
++                        global.charinstance[pos].image_index = 2;
++                        break;
++                    case 3:
++                        scr_battle_sprite_set(pos, spr_ralsei_funnyface2, 0, true);
++                        break;
++                }
 +            }
          }
 -        if (got_kris && got_susie && got_ralsei)
@@ -161,7 +261,7 @@
          {
              enemy.photosuccessballoon = 1;
              enemy.endcon = 1;
-@@ -239,7 +268,7 @@
+@@ -239,7 +312,7 @@
                  _comment.color = c_yellow;
              }
          }
@@ -170,7 +270,7 @@
          {
              enemy.photosuccesscount++;
              if (enemy.amiabossfight == true)
-@@ -269,7 +298,7 @@
+@@ -269,7 +342,7 @@
              }
              global.flag[513] = 1;
          }
@@ -179,7 +279,7 @@
          {
              enemy.photosuccesscount++;
              if (enemy.amiabossfight == true)
-@@ -299,7 +328,7 @@
+@@ -299,7 +372,7 @@
              }
              global.flag[514] = 1;
          }
@@ -188,7 +288,7 @@
          {
              enemy.photosuccesscount++;
              if (enemy.amiabossfight == true)
-@@ -332,7 +361,37 @@
+@@ -332,7 +405,37 @@
              }
              global.flag[515] = 1;
          }
@@ -227,11 +327,18 @@
          {
              enemy.photosuccesscount++;
              if (enemy.amiabossfight == true)
-@@ -387,17 +446,8 @@
-         scr_battle_sprite_reset("susie");
-         scr_battle_sprite_reset("kris");
-         scr_battle_sprite_reset("ralsei");
+@@ -384,20 +487,10 @@
+             y = ystart;
+         }
+         instance_destroy(obj_move_to_point);
+-        scr_battle_sprite_reset("susie");
++        scr_battle_sprite_reset(0);
+-        scr_battle_sprite_reset("kris");
++        scr_battle_sprite_reset(1);
+-        scr_battle_sprite_reset("ralsei");
++        scr_battle_sprite_reset(2);
 -        with (obj_herosusie)
++        with (obj_heroparent)
 -        {
 -            x = xstart;
 -            y = ystart;
@@ -242,13 +349,15 @@
 -            y = ystart;
 -        }
 -        with (obj_heroralsei)
-+        scr_battle_sprite_reset("noelle");
-+        with (obj_heroparent)
          {
              x = xstart;
              y = ystart;
-@@ -425,7 +475,10 @@
-                 scr_battle_sprite_set("kris", _spr, 0.25, true);
+@@ -422,10 +515,13 @@
+             }
+             if (sprite_index != _spr)
+             {
+-                scr_battle_sprite_set("kris", _spr, 0.25, true);
++                scr_battle_sprite_set(myself, _spr, 0.25, true);
              }
          }
 +        if (i_ex(obj_heroralsei))
@@ -259,8 +368,12 @@
      }
      with (obj_herosusie)
      {
-@@ -445,7 +498,10 @@
-                 scr_battle_sprite_set("susie", _spr, 0.25, true);
+@@ -442,10 +538,13 @@
+             }
+             if (sprite_index != _spr)
+             {
+-                scr_battle_sprite_set("susie", _spr, 0.25, true);
++                scr_battle_sprite_set(myself, _spr, 0.25, true);
              }
          }
 +        if (i_ex(obj_heroralsei))

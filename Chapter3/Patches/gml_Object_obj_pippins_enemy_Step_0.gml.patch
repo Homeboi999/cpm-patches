@@ -1,0 +1,105 @@
+--- a/Code/gml_Object_obj_pippins_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_pippins_enemy_Step_0.gml
+@@ -402,11 +402,12 @@
+     if (acting == 4.1 && actcon == 0 && !i_ex(obj_writer))
+     {
+         global.typer = 74;
++        var ralseihero = global.charinstance[scr_findchar_actpartner(3)];
+         msgsetloc(0, "B-Bribe? Umm, no, I...&This is just a peace&offering!", "obj_pippins_enemy_slash_Step_0_gml_317_0");
+-        var heroballoon = scr_enemyblcon(obj_heroralsei.x + 120, obj_heroralsei.y + 60, 10);
++        var heroballoon = scr_enemyblcon(ralseihero.x + 120, ralseihero.y + 60, 10);
+         heroballoon.side = -1;
+-        obj_heroralsei.x += 40;
++        ralseihero.x += 40;
+-        scr_battle_sprite_set("ralsei", spr_ralsei_shocked_right, 0, 1);
++        scr_battle_sprite_set(ralseihero.myself, spr_ralsei_shocked_right, 0, 1);
+         acting = 4.11;
+     }
+     if (acting >= 4.11 && acting < 4.6)
+@@ -442,6 +443,7 @@
+     }
+     if (acting == 4.13 && actcon == 0 && talktimer > 15 && (button3_p() || button1_p()))
+     {
++        var ralseihero = global.charinstance[scr_findchar_actpartner(3)];
+         with (obj_writer)
+         {
+             instance_destroy();
+@@ -450,8 +452,8 @@
+         global.typer = 74;
+         snd_play(snd_bump);
+         msgsetloc(0, "W-wait, maybe&I shouldn't...", "obj_pippins_enemy_slash_Step_0_gml_363_0");
+-        var heroballoon = scr_enemyblcon(obj_heroralsei.x + 80, obj_heroralsei.y + 55, 10);
+-        with (obj_heroralsei)
++        var heroballoon = scr_enemyblcon(ralseihero.x + 80, ralseihero.y + 55, 10);
++        with (ralseihero)
+         {
+             scr_shakeobj();
+         }
+@@ -489,21 +491,23 @@
+             scr_spareanim();
+             scr_recruit();
+             scr_monsterdefeat();
+-            with (obj_heroralsei)
++            var ralseihero = global.charinstance[scr_findchar_actpartner(3)];
++            with (ralseihero)
+             {
+                 scr_shakeobj();
+             }
+             snd_play(snd_bump);
+             msgsetloc(0, "WAIT!!!", "obj_pippins_enemy_slash_Step_0_gml_390_0");
+-            var heroballoon = scr_enemyblcon(obj_heroralsei.x + 80, obj_heroralsei.y + 55, 10);
++            var heroballoon = scr_enemyblcon(ralseihero.x + 80, ralseihero.y + 55, 10);
+             heroballoon.side = -1;
+             acting = 4.15;
+         }
+     }
+     if (acting == 4.15 && actcon == 0 && talktimer > 15 && (button3_p() || button1_p()))
+     {
++        var ralseihero = global.charinstance[scr_findchar_actpartner(3)];
+-        obj_heroralsei.x -= 40;
++        ralseihero.x -= 40;
+-        scr_battle_sprite_reset("ralsei");
++        scr_battle_sprite_reset(ralseihero.myself);
+         with (obj_writer)
+         {
+             instance_destroy();
+@@ -514,23 +518,25 @@
+     }
+     if (acting == 4.51 && actcon == 0 && !i_ex(obj_writer))
+     {
++        var ralseihero = global.charinstance[scr_findchar_actpartner(3)];
+-        obj_heroralsei.x += 40;
++        ralseihero.x += 40;
+-        scr_battle_sprite_set("ralsei", spr_ralsei_shocked_right, 0, 1);
++        scr_battle_sprite_set(ralseihero.myself, spr_ralsei_shocked_right, 0, 1);
+-        with (obj_heroralsei)
++        with (ralseihero)
+         {
+             scr_shakeobj();
+         }
+         snd_play(snd_bump);
+         global.typer = 74;
+         msgsetloc(0, "It's, it's not a...", "obj_pippins_enemy_slash_Step_0_gml_416_0");
+-        var heroballoon = scr_enemyblcon(obj_heroralsei.x + 80, obj_heroralsei.y + 55, 10);
++        var heroballoon = scr_enemyblcon(ralseihero.x + 80, ralseihero.y + 55, 10);
+         heroballoon.side = -1;
+         acting = 4.52;
+     }
+     if (acting == 4.52 && actcon == 0 && talktimer > 15 && (button3_p() || button1_p()))
+     {
++        var ralseihero = global.charinstance[scr_findchar_actpartner(3)];
+-        obj_heroralsei.x -= 40;
++        ralseihero.x -= 40;
+-        scr_battle_sprite_reset("ralsei");
++        scr_battle_sprite_reset(ralseihero.myself);
+         with (obj_writer)
+         {
+             instance_destroy();
+@@ -603,6 +609,7 @@
+     }
+     if (actcon == 20 || actconsus == 20 || actconral == 20)
+     {
++        scr_nextact_simul();
+         if (scr_terminate_writer())
+         {
+             actconsus = -1;

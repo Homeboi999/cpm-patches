@@ -17,7 +17,7 @@
  {
      mask_index = -1;
  }
-@@ -19,26 +11,40 @@
+@@ -19,26 +11,24 @@
  {
      instance_destroy();
  }
@@ -29,10 +29,9 @@
  {
      instance_destroy();
  }
-+scr_battle_sprite_reset("noelle");
- scr_battle_sprite_reset("ralsei");
- scr_battle_sprite_reset("susie");
- scr_battle_sprite_reset("kris");
+-scr_battle_sprite_reset("ralsei");
+-scr_battle_sprite_reset("susie");
+-scr_battle_sprite_reset("kris");
 -with (obj_herokris)
 -{
 -    state = other.krisstate;
@@ -47,28 +46,16 @@
 -{
 -    state = other.ralseistate;
 -    global.faceaction[myself] = other.ralseifaceaction;
-+if (i_ex(global.charinstance[0]))
++for (var i = 0; i < 3; i++)
 +{
-+    with (global.charinstance[0])
++    scr_battle_sprite_reset(i);
++    if (i_ex(global.charinstance[i]))
 +    {
-+        state = other.charstate[0];
-+        global.faceaction[myself] = other.charfaceaction[0];
-+    }
-+}
-+if (i_ex(global.charinstance[1]))
-+{
-+    with (global.charinstance[1])
-+    {
-+        state = other.charstate[1];
-+        global.faceaction[myself] = other.charfaceaction[1];
-+    }
-+}
-+if (i_ex(global.charinstance[2]))
-+{
-+    with (global.charinstance[2])
-+    {
-+        state = other.charstate[2];
-+        global.faceaction[myself] = other.charfaceaction[2];
++        with (global.charinstance[i])
++        {
++            state = other.charstate[i];
++            global.faceaction[myself] = other.charfaceaction[i];
++        }
 +    }
  }
  

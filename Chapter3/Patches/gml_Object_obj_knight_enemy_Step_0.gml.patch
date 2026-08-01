@@ -171,7 +171,7 @@
          scr_spellmenu_setup();
      }
      if (actingral == 1 && actconral == 1)
-@@ -868,10 +903,52 @@
+@@ -868,10 +903,53 @@
          actcon = 1;
          actconral = 0;
      }
@@ -219,6 +219,7 @@
 -    if (actcon == 20 || actconsus == 20 || actconral == 20)
 +    if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
      {
++        scr_nextact_simul();
          if (scr_terminate_writer())
          {
 +            actconnoe = -1;

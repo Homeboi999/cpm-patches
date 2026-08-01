@@ -1,0 +1,72 @@
+--- a/Code/gml_Object_obj_watercooler_enemy_Step_0.gml
++++ b/Code/gml_Object_obj_watercooler_enemy_Step_0.gml
+@@ -270,15 +270,31 @@
+     }
+     if (acting == 3 && actcon == 0)
+     {
+-        obj_herokris.x = x - 70;
+-        obj_herokris.y = y - 50;
+-        obj_herosusie.x = x - 130;
+-        obj_herosusie.y = y;
+-        obj_heroralsei.x = x - 80;
+-        obj_heroralsei.y = y + 50;
+-        scr_battle_sprite_set("kris", spr_kris_zoosuit_cup, 0, true);
+-        scr_battle_sprite_set("susie", spr_susie_zoosuit_cup, 0, true);
+-        scr_battle_sprite_set("ralsei", spr_ralsei_zoosuit_cup, 0, true);
++        for (var pos = 0; pos < 3; pos++)
++        {
++            var herooffset_x = [-70, -130, -80];
++            var herooffset_y = [-50, 0, 50];
++            if (instance_exists(global.charinstance[pos]))
++            {
++                global.charinstance[pos].x = x + herooffset_x[pos];
++                global.charinstance[pos].y = y + herooffset_y[pos];
++                switch (global.char[pos])
++                {
++                    case 1:
++                        scr_battle_sprite_set(pos, spr_kris_zoosuit_cup, 0, true);
++                        break;
++                    case 2:
++                        scr_battle_sprite_set(pos, spr_susie_zoosuit_cup, 0, true);
++                        break;
++                    case 3:
++                        scr_battle_sprite_set(pos, spr_ralsei_zoosuit_cup, 0, true);
++                        break;
++                    case 4:
++                        scr_battle_sprite_set(pos, spr_noelle_zoosuit, 0, true);
++                        break;
++                }
++            }
++        }
+         msgsetloc(0, "* Everyone chatted around the watercooler./%", "obj_watercooler_enemy_slash_Step_0_gml_226_0");
+         scr_battletext_default();
+         acting = 3.1;
+@@ -293,17 +309,11 @@
+     {
+         alarm[5] = 1;
+         acting = 0;
+-        obj_herokris.x = obj_herokris.xstart;
+-        obj_herokris.y = obj_herokris.ystart;
+-        obj_herosusie.x = obj_herosusie.xstart;
+-        obj_herosusie.y = obj_herosusie.ystart;
+-        obj_heroralsei.x = obj_heroralsei.xstart;
+-        obj_heroralsei.y = obj_heroralsei.ystart;
+-        scr_battle_sprite_reset("kris");
+-        scr_battle_sprite_reset("susie");
+-        scr_battle_sprite_reset("ralsei");
+         with (obj_heroparent)
+         {
++            x = xstart;
++            y = ystart;
++            scr_battle_sprite_reset(myself);
+             thissprite = idlesprite;
+         }
+     }
+@@ -465,6 +475,7 @@
+     }
+     if (actcon == 20 || actconsus == 20 || actconral == 20)
+     {
++        scr_nextact_simul();
+         if (scr_terminate_writer())
+         {
+             actconsus = -1;

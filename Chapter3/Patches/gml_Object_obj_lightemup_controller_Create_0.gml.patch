@@ -1,10 +1,9 @@
 --- a/Code/gml_Object_obj_lightemup_controller_Create_0.gml
 +++ b/Code/gml_Object_obj_lightemup_controller_Create_0.gml
-@@ -37,25 +37,47 @@
+@@ -37,25 +37,46 @@
  cursor_xstart = cursor_x;
  cursor_ystart = cursor_y;
  shooting_enabled = true;
-+charnames = ["", "kris", "susie", "ralsei", "noelle"];
 +charsprites[0] = [4131, 4131, 2051, 821, 4994];
 +charsprites[1] = [147, 147, 4260, 3911, 4995];
 +charsprites[2] = [2306, 2306, 4770, 239, 4993];
@@ -50,15 +49,15 @@
 +    }
 +    if (global.char[2] > 0)
 +    {
-+        scr_act_charsprite(other.charnames[global.char[2]], other.charsprites[1][global.char[2]], 0, 0);
++        scr_act_charsprite(2, other.charsprites[1][global.char[2]], 0, 0);
 +    }
 +    if (global.char[0] > 0)
 +    {
-+        scr_act_charsprite(other.charnames[global.char[0]], other.charsprites[1][global.char[0]], 0, 0);
++        scr_act_charsprite(0, other.charsprites[1][global.char[0]], 0, 0);
 +    }
 +    if (global.char[1] > 0)
 +    {
-+        scr_act_charsprite(other.charnames[global.char[1]], other.charsprites[1][global.char[1]], 0, 0);
++        scr_act_charsprite(1, other.charsprites[1][global.char[1]], 0, 0);
 +    }
      with (obj_afterimage)
      {

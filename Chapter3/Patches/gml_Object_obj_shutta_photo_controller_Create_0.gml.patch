@@ -35,7 +35,7 @@
  screenshot = -1;
  reticle_over_good_shot = false;
  reticle_over_good_shot_prev = false;
-@@ -123,25 +131,25 @@
+@@ -123,25 +131,29 @@
  bullettarget = -1;
  secrettargetx = 0;
  secrettargety = 0;
@@ -65,6 +65,10 @@
 +charfaceaction[1] = -1;
 +charstate[2] = -1;
 +charfaceaction[2] = -1;
++activekris = (scr_findchar(1) > -1) ? global.charinstance[scr_findchar(1)] : -4;
++activesusie = (scr_findchar(2) > -1) ? global.charinstance[scr_findchar(2)] : -4;
++activeralsei = (scr_findchar(3) > -1) ? global.charinstance[scr_findchar(3)] : -4;
++activenoelle = (scr_findchar(4) > -1) ? global.charinstance[scr_findchar(4)] : -4;
 +if (i_ex(global.charinstance[0]))
 +{
 +    charstate[0] = global.charinstance[0].state;

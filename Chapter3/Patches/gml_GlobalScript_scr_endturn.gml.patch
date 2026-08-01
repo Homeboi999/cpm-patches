@@ -17,3 +17,12 @@
          if (global.actingsingle[__noactorsi] == 1)
          {
              __noactors = 0;
+@@ -79,7 +79,7 @@
+         global.charturn = 3;
+         global.myfight = 3;
+         global.currentactingchar = 0;
+-        if (global.acting[0] == 0)
++        if (global.actingsingle[0] == 0)
+         {
+             scr_nextact();
+         }

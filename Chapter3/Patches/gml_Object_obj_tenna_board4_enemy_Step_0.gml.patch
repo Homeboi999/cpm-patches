@@ -59,3 +59,11 @@
          {
              with (global.charinstance[i])
              {
+@@ -1008,6 +997,7 @@
+     }
+     if (actcon == 20 || actconsus == 20 || actconral == 20)
+     {
++        scr_nextact_simul();
+         if (scr_terminate_writer())
+         {
+             actconsus = -1;
