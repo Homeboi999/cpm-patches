@@ -1,0 +1,163 @@
+--- a/Code/gml_GlobalScript_scr_maincharacters_actors.gml
++++ b/Code/gml_GlobalScript_scr_maincharacters_actors.gml
+@@ -1,59 +1,126 @@
+ function scr_maincharacters_actors()
+ {
+-    actor_count = 0;
+-    kr = 0;
+-    kr_actor = instance_create(obj_mainchara.x, obj_mainchara.y, obj_actor);
+-    scr_actor_setup(kr, kr_actor, "kris");
+-    kr_actor.sprite_index = obj_mainchara.sprite_index;
+-    kr_actor.depth = obj_mainchara.depth;
+-    with (obj_mainchara)
+-    {
+-        visible = 0;
+-    }
+-    for (__jj = 0; __jj < array_length_1d(global.cinstance); __jj++)
+-    {
+-        if (i_ex(global.cinstance[__jj]))
+-        {
+-            if (global.cinstance[__jj].name == "susie")
+-            {
+-                actor_count++;
+-                su = __jj + 1;
+-                su_actor = instance_create(global.cinstance[__jj].x, global.cinstance[__jj].y, obj_actor);
++    actor_count = -1;
++    var kr_exists = false;
++    var su_exists = false;
++    var ra_exists = false;
++    var no_exists = false;
++    for (__jj = -1; __jj < array_length_1d(global.cinstance); __jj++)
++    {
++        var charinstance, actorx, actory, actorsprite;
++        if (__jj < 0)
++        {
++            charinstance = obj_mainchara;
++            actorx = obj_mainchara.x - obj_mainchara.visual_info.halign;
++            actory = obj_mainchara.y - obj_mainchara.visual_info.valign;
++            actorsprite = obj_mainchara.visual_info.sprite_index;
++        }
++        else if (instance_exists(global.cinstance[__jj]))
++        {
++            charinstance = global.cinstance[__jj];
++            actorx = global.cinstance[__jj].x;
++            actory = global.cinstance[__jj].y;
++            actorsprite = global.cinstance[__jj].sprite_index;
++        }
++        if (i_ex(charinstance))
++        {
++            if (charinstance.name == "kris" && !kr_exists)
++            {
++                actor_count++;
++                kr = actor_count;
++                kr_actor = instance_create(actorx, actory, obj_actor);
++                scr_actor_setup(kr, kr_actor, "kris");
++                kr_actor.sprite_index = actorsprite;
++                kr_actor.depth = charinstance.depth;
++                kr_exists = true;
++                with (charinstance)
++                {
++                    visible = 0;
++                }
++            }
++            if (charinstance.name == "susie" && !su_exists)
++            {
++                actor_count++;
++                su = actor_count;
++                su_actor = instance_create(actorx, actory, obj_actor);
+                 scr_actor_setup(su, su_actor, "susie");
+-                su_actor.sprite_index = global.cinstance[__jj].sprite_index;
+-                su_actor.depth = global.cinstance[__jj].depth;
+-                with (global.cinstance[__jj])
++                su_actor.sprite_index = actorsprite;
++                su_actor.depth = charinstance.depth;
++                su_exists = true;
++                with (charinstance)
+                 {
+                     visible = 0;
+                 }
+             }
+-            if (global.cinstance[__jj].name == "ralsei")
++            if (charinstance.name == "ralsei" && !ra_exists)
+             {
+                 actor_count++;
+-                ra = __jj + 1;
+-                ra_actor = instance_create(global.cinstance[__jj].x, global.cinstance[__jj].y, obj_actor);
++                ra = actor_count;
++                ra_actor = instance_create(actorx, actory, obj_actor);
+                 scr_actor_setup(ra, ra_actor, "ralsei");
+-                ra_actor.sprite_index = global.cinstance[__jj].sprite_index;
+-                ra_actor.depth = global.cinstance[__jj].depth;
+-                with (global.cinstance[__jj])
++                ra_actor.sprite_index = actorsprite;
++                ra_actor.depth = charinstance.depth;
++                ra_exists = true;
++                with (charinstance)
+                 {
+                     visible = 0;
+                 }
+             }
+-            if (global.cinstance[__jj].name == "noelle")
++            if (charinstance.name == "noelle" && !no_exists)
+             {
+                 actor_count++;
+-                no = __jj + 1;
+-                no_actor = instance_create(global.cinstance[__jj].x, global.cinstance[__jj].y, obj_actor);
++                no = actor_count;
++                no_actor = instance_create(actorx, actory, obj_actor);
+                 scr_actor_setup(no, no_actor, "noelle");
+-                no_actor.sprite_index = global.cinstance[__jj].sprite_index;
+-                no_actor.depth = global.cinstance[__jj].depth;
+-                with (global.cinstance[__jj])
++                no_actor.sprite_index = actorsprite;
++                no_actor.depth = charinstance.depth;
++                no_exists = true;
++                with (charinstance)
+                 {
+                     visible = 0;
+                 }
+             }
+         }
++    }
++    if (!kr_exists)
++    {
++        actor_count++;
++        kr = actor_count;
++        kr_actor = instance_create(obj_mainchara.x, obj_mainchara.y, obj_actor);
++        scr_actor_setup(kr, kr_actor, "kris");
++        kr_actor.sprite_index = spr_krisd_dark;
++        kr_actor.depth = obj_mainchara.depth;
++        kr_actor.visible = 0;
++    }
++    if (!su_exists)
++    {
++        actor_count++;
++        su = actor_count;
++        su_actor = instance_create(obj_mainchara.x, obj_mainchara.y, obj_actor);
++        scr_actor_setup(su, su_actor, "susie");
++        su_actor.sprite_index = spr_susied_dark;
++        su_actor.depth = obj_mainchara.depth + 5;
++        su_actor.visible = 0;
++    }
++    if (!ra_exists)
++    {
++        actor_count++;
++        ra = actor_count;
++        ra_actor = instance_create(obj_mainchara.x, obj_mainchara.y, obj_actor);
++        scr_actor_setup(ra, ra_actor, "ralsei");
++        ra_actor.sprite_index = spr_ralseid;
++        ra_actor.depth = obj_mainchara.depth + 10;
++        ra_actor.visible = 0;
++    }
++    if (!no_exists)
++    {
++        actor_count++;
++        no = actor_count;
++        no_actor = instance_create(obj_mainchara.x, obj_mainchara.y, obj_actor);
++        scr_actor_setup(no, no_actor, "noelle");
++        no_actor.sprite_index = spr_noelle_walk_down_dw;
++        no_actor.depth = obj_mainchara.depth + 15;
++        no_actor.visible = 0;
+     }
+ }
+ 
