@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_tenna_enemy_Create_0.gml
 +++ b/Code/gml_Object_obj_tenna_enemy_Create_0.gml
-@@ -135,4 +135,41 @@
+@@ -136,4 +136,41 @@
  rhythm_combo[0] = 0;
  rhythm_combo[1] = 0;
  rhythm_combo[2] = 0;
