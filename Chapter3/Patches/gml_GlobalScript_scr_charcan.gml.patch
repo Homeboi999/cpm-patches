@@ -1,0 +1,11 @@
+--- a/Code/gml_GlobalScript_scr_charcan.gml
++++ b/Code/gml_GlobalScript_scr_charcan.gml
+@@ -5,7 +5,7 @@
+     {
+         charcan = 0;
+     }
+-    if (global.acting[arg0] == 1)
++    if (global.acting[arg0] > 0)
+     {
+         charcan = 0;
+     }

@@ -1,6 +1,26 @@
 --- a/Code/gml_GlobalScript_scr_nextact.gml
 +++ b/Code/gml_GlobalScript_scr_nextact.gml
-@@ -22,6 +22,19 @@
+@@ -1,11 +1,15 @@
+ function scr_nextact()
+ {
+-    global.acting[0] = 0;
+-    global.acting[1] = 0;
+-    global.acting[2] = 0;
++    for (var i = 0; i < 3; i++)
++    {
++        if (global.acting[i] != 2)
++        {
++            global.acting[i] = 0;
++        }
++    }
+     global.actingsingle[global.currentactingchar] = 0;
+     __minstance = global.monsterinstance[global.actingtarget[global.currentactingchar]];
+-    with (__minstance)
++    with (obj_monsterparent)
+     {
+         acting = 0;
+         actcon = 0;
+@@ -22,10 +26,24 @@
              if (global.actingsingle[global.currentactingchar] == 1)
              {
                  __minstance = global.monsterinstance[global.actingtarget[global.currentactingchar]];
@@ -20,3 +40,43 @@
                  if (global.char[global.currentactingchar] == 2)
                  {
                      with (__minstance)
+                     {
++                        actingsus = actchoice + 1;
+                         actconsus = 1;
+                     }
+                     if (global.actingsimul[global.currentactingchar] == 0)
+@@ -38,6 +56,7 @@
+                 {
+                     with (__minstance)
+                     {
++                        actingral = actchoice + 1;
+                         actconral = 1;
+                     }
+                     if (global.actingsimul[global.currentactingchar] == 0)
+@@ -50,6 +69,7 @@
+                 {
+                     with (__minstance)
+                     {
++                        actingnoe = actchoice + 1;
+                         actconnoe = 1;
+                     }
+                     if (global.actingsimul[global.currentactingchar] == 0)
+@@ -63,6 +83,10 @@
+     }
+     if (global.currentactingchar >= 3)
+     {
++        for (var i = 0; i < 3; i++)
++        {
++            global.acting[i] = 0;
++        }
+         with (obj_monsterparent)
+         {
+             acting = 0;
+@@ -70,7 +94,6 @@
+             actingral = 0;
+             actingnoe = 0;
+         }
+-        global.currentactingchar = 0;
+         scr_attackphase();
+     }
+     else if (!singleactcomplete)

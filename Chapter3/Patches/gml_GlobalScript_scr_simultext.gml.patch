@@ -1,0 +1,45 @@
+--- a/Code/gml_GlobalScript_scr_simultext.gml
++++ b/Code/gml_GlobalScript_scr_simultext.gml
+@@ -1,21 +1,35 @@
+ function scr_simultext(arg0)
+ {
++    var __simulorder = 0;
+     __simulorder = 0;
++    var char = 0;
+     if (arg0 == "kris")
+     {
+-        __simulorder = simulorderkri;
++        char = 1;
+     }
+-    if (arg0 == "susie")
++    else if (arg0 == "susie")
+     {
+-        __simulorder = simulordersus;
++        char = 2;
+     }
+-    if (arg0 == "ralsei")
++    else if (arg0 == "ralsei")
+     {
+-        __simulorder = simulorderral;
++        char = 3;
+     }
+-    if (arg0 == "noelle")
++    else if (arg0 == "noelle")
+     {
+-        __simulorder = simulordernoe;
++        char = 4;
++    }
++    for (var i = 0; i < 3; i++)
++    {
++        if (global.char[i] == char && simulorder[i] != -1 && simuldone[i] == 0)
++        {
++            __simulorder = simulorder[i];
++            with (obj_monsterparent)
++            {
++                simuldone[i] = 1;
++            }
++            break;
++        }
+     }
+     __yoffset = __simulorder * 30;
+     global.typer = 4;

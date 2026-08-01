@@ -25,3 +25,9 @@
  global.currentactingchar = 0;
  for (i = 0; i < 3; i += 1)
  {
+@@ -319,4 +337,5 @@
+         }
+     }
+ }
++drawactdebug = false;
+ 
