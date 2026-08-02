@@ -1,6 +1,6 @@
 --- a/Code/gml_GlobalScript_scr_mnendturn.gml
 +++ b/Code/gml_GlobalScript_scr_mnendturn.gml
-@@ -128,6 +128,20 @@
+@@ -128,15 +128,52 @@
              actingsus = 0;
              actingral = 0;
              actingnoe = 0;
@@ -20,4 +20,42 @@
 +            simulcountnoe = 0;
          }
          if (skip == 1)
+         {
++            if (global.char[0] == 0 && global.char[1] == 0 && global.char[2] == 0)
++            {
++                var forceturn = false;
++                if (i_ex(obj_rouxls_ch3_enemy))
++                {
++                    forceturn = true;
++                }
++                if (i_ex(obj_tenna_board4_enemy))
++                {
++                    forceturn = true;
++                }
++                if (forceturn)
++                {
++                    global.charturn = 0;
++                }
++                else
++                {
++                    scr_endturn();
++                }
++            }
++            else
++            {
+-            if (global.char[0] == 2 && global.charauto[2] == 1)
++                if (global.char[0] == 2 && global.charauto[2] == 1)
+-            {
++                {
+-                global.acting[0] = 1;
++                    global.acting[0] = 1;
+-                global.myfight = 3;
++                    global.myfight = 3;
+-            }
++                }
+-            scr_endturn();
++                scr_endturn();
++            }
+         }
+         for (i = 0; i < 12; i += 1)
          {

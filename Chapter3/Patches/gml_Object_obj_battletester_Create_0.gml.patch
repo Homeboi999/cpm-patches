@@ -1,0 +1,13 @@
+--- a/Code/gml_Object_obj_battletester_Create_0.gml
++++ b/Code/gml_Object_obj_battletester_Create_0.gml
+@@ -16,4 +16,10 @@
+     obj_chaseenemy.radius = 2;
+ }
+ global.flag[34] = 0;
++global.flag[35] = 2;
++global.hp[0] = global.maxhp[0];
++global.hp[1] = global.maxhp[1];
++global.hp[2] = global.maxhp[2];
++global.hp[3] = global.maxhp[3];
++global.hp[4] = global.maxhp[4];
+ 

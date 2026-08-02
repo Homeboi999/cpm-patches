@@ -16,11 +16,12 @@
  setdownmessage = false;
  damagecounter = 0;
  phase4turn = 0;
-@@ -92,9 +94,45 @@
+@@ -92,9 +94,46 @@
      spellsprite = spr_susieb_spell_unhappy;
      defeatsprite = spr_susie_dw_fell;
  }
 +vanillaParty = global.char[0] == 1 && global.char[1] == 2 && global.char[2] == 3;
++emptyParty = global.char[0] == 0 && global.char[1] == 0 && global.char[2] == 0;
 +krisTarget = global.hp[1] > 0 && scr_havechar(1);
 +susieTarget = global.hp[2] > 0 && scr_havechar(2);
 +ralseiTarget = global.hp[3] > 0 && scr_havechar(3);

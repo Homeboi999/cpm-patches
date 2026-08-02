@@ -40,7 +40,7 @@
              {
                  msgsetloc(0, "As long as I'm here to&lift them back up.../%", "obj_knight_enemy_slash_Step_0_gml_152_0");
                  ballooncon = 6;
-@@ -706,35 +697,79 @@
+@@ -706,35 +697,82 @@
              var krisdown = "";
              var susiedown = "";
              var ralseidown = "";
@@ -70,7 +70,11 @@
 -            if (downcount == 2)
 -            {
 -                global.battlemsg[0] = krisdown + susiedown + ralseidown;
-+            for (i = 0; i < 3; i++)
+-            }
+-        }
+-    }
+-    if (global.hp[1] < 1 && global.hp[2] < 1 && global.hp[3] < 1 && global.turntimer > 0)
++            for (var i = 0; i < 3; i++)
 +            {
 +                switch (global.char[i])
 +                {
@@ -127,10 +131,9 @@
 +                        }
 +                        break;
 +                }
-             }
-         }
-     }
--    if (global.hp[1] < 1 && global.hp[2] < 1 && global.hp[3] < 1 && global.turntimer > 0)
++            }
++        }
++    }
 +    krisTarget = global.hp[1] > 0 && scr_havechar(1);
 +    susieTarget = global.hp[2] > 0 && scr_havechar(2);
 +    ralseiTarget = global.hp[3] > 0 && scr_havechar(3);
@@ -139,13 +142,16 @@
 +    susieOnly = !krisTarget && susieTarget && !ralseiTarget && !noelleTarget;
 +    if (!krisTarget && !susieTarget && !ralseiTarget && !noelleTarget)
 +    {
-+        allDown = true;
++        if (!(emptyParty && progamer))
++        {
++            allDown = true;
++        }
 +    }
 +    if (allDown && global.turntimer > 0)
      {
          global.turntimer = 0;
          with (obj_lerpvar)
-@@ -750,7 +785,7 @@
+@@ -750,14 +788,14 @@
              instance_destroy();
          }
      }
@@ -154,7 +160,15 @@
      {
          endcon = 1;
          with (obj_particle_generic)
-@@ -833,11 +868,11 @@
+         {
+             instance_destroy();
+         }
+-        if (scr_get_knight_total_attempts() > 0)
++        if (scr_get_knight_total_attempts() > 0 || room == room_battletest)
+         {
+             scr_gameover();
+         }
+@@ -833,11 +871,14 @@
          global.actsimulsus[myself][0] = 0;
          global.actactorsus[myself][0] = 0;
          global.actcostsus[myself][0] = 0;
@@ -163,15 +177,18 @@
 -        global.battleactcount[1] = 0;
 -        global.battlespellname[1][0] = "";
 -        global.battlespelldesc[1][0] = "";
-+        global.battlespell[scr_findchar(2)][0] = 0;
-+        global.battlespell[scr_findchar(2)][0] = -1;
-+        global.battleactcount[scr_findchar(2)] = 0;
-+        global.battlespellname[scr_findchar(2)][0] = "";
-+        global.battlespelldesc[scr_findchar(2)][0] = "";
++        for (var i = 0; i < 3; i++)
++        {
++            if (global.char[i] == 2 && global.actingsingle[i] == 1)
++            {
++                global.acting[i] = 0;
++                global.actingsingle[i] = 0;
++            }
++        }
          scr_spellmenu_setup();
      }
      if (actingral == 1 && actconral == 1)
-@@ -868,10 +903,53 @@
+@@ -868,10 +909,53 @@
          actcon = 1;
          actconral = 0;
      }
