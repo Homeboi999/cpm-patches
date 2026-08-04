@@ -10,6 +10,7 @@ function scr_set_chara_sprites(arg0, arg1)
                 usprite = spr_krisu;
                 lsprite = spr_krisl;
                 slidesprite = spr_krisd_slide;
+
                 if (global.darkzone == 1)
                 {
                     dsprite = spr_krisd_dark;
@@ -17,13 +18,16 @@ function scr_set_chara_sprites(arg0, arg1)
                     lsprite = spr_krisl_dark;
                     usprite = spr_krisu_dark;
                 }
+                
                 break;
+
             case "susie":
                 usprite = spr_susieu_dark;
                 dsprite = spr_susied_dark;
                 rsprite = spr_susier_dark;
                 lsprite = spr_susiel_dark;
                 slidesprite = spr_susie_slide;
+
                 if (global.plot >= 240)
                 {
                     usprite = spr_susieu_dark;
@@ -31,7 +35,24 @@ function scr_set_chara_sprites(arg0, arg1)
                     rsprite = spr_susier_dark_eyes;
                     lsprite = spr_susiel_dark_eyes;
                 }
+                
+                if (global.darkzone == 0)
+                {
+                    usprite = spr_susieu;
+                    dsprite = spr_susied;
+                    rsprite = spr_susier;
+                    lsprite = spr_susiel;
+
+                    if (global.plot >= 240)
+                    {
+                        usprite = spr_susieu;
+                        dsprite = spr_susied_eyes;
+                        rsprite = spr_susier_eyes;
+                        lsprite = spr_susiel_eyes;
+                    }
+                }
                 break;
+            
             case "ralsei":
                 usprite = spr_ralseiu;
                 dsprite = spr_ralseid;
@@ -39,6 +60,7 @@ function scr_set_chara_sprites(arg0, arg1)
                 lsprite = spr_ralseil;
                 slidesprite = spr_ralsei_dark_slide;
                 break;
+
             case "starwalker":
                 usprite = spr_npc_originalstarwalker;
                 dsprite = spr_npc_originalstarwalker;

@@ -34,9 +34,18 @@ warnPrefix = "[!] ";
 krisWarnText = "Kris's ACTs might not work as intended.";
 krisWarn = 0;
 
-// Taking damage with an empty party crashes the game,
-// and it could cause other issues elsewhere but idk
-emptyWarnText = "An empty party is VERY UNSTABLE!";
+if (isStable)
+{
+    // Crashes + softlocks with empty parties have been fixed,
+    // but the player still never gets a turn.
+    emptyWarnText = "An empty party can't win most battles.";
+}
+else
+{
+    // Taking damage with an empty party crashes the game,
+    // and causes issues with parts of the game.
+    emptyWarnText = "An empty party is VERY UNSTABLE!";
+}
 emptyWarn = 0;
 
 // Having a character in slot 3 but not in slot 2 can
@@ -44,20 +53,16 @@ emptyWarn = 0;
 gapWarnText = "Gaps in the party are likely to crash.";
 gapWarn = 0;
 
-// Warnings relating to X-Actions, irrelevant for Chapter 1
-if (global.chapter > 1)
-{
-    // X-Actions do nothing in slot 1, and could
-    // mess with future acts in unpredictable ways.
-    slot1WarnText = "~1 doesn't work from Slot 1.";
-    slot1Warn = 0;
+// X-Actions do nothing in slot 1, and could
+// mess with future acts in unpredictable ways.
+slot1WarnText = "~1 doesn't work from Slot 1.";
+slot1Warn = 0;
 
-    // Theres 1 variable controlling each X-Action,
-    // so the game can get stuck if using two in one turn.
-    dupeWarnText = "ACTing with multiple ~1 might break.";
-    dupeWarn = 0;
-    dupeChar = 0;
-}
+// Theres 1 variable controlling each X-Action,
+// so the game can get stuck if using two in one turn.
+dupeWarnText = "ACTing with multiple ~1 might break.";
+dupeWarn = 0;
+dupeChar = 0;
 
 // Character-Specific Text for X-Action Warnings.
 charList[0] = ["", ""];

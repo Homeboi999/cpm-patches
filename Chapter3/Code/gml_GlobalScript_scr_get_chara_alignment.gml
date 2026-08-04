@@ -11,14 +11,14 @@ function scr_get_chara_alignment(arg0, arg1 = -4)
             };
 
         case "susie":
-            return 
+            return
             {
                 halign: (global.darkzone == 0) ? 3 : 6,
                 valign: (global.darkzone == 0) ? 6 : 16
             };
-
+            
         case "ralsei":
-            return 
+            return
             {
                 halign: 2,
                 valign: 12
@@ -28,7 +28,7 @@ function scr_get_chara_alignment(arg0, arg1 = -4)
             return 
             {
                 halign: (global.darkzone == 0) ? 2 : 4,
-                valign: (global.darkzone == 0) ? 10 : 20
+                valign: (global.darkzone == 0) ? 9 : 18
             };
     }
 }

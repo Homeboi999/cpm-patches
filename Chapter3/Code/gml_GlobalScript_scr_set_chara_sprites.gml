@@ -10,6 +10,7 @@ function scr_set_chara_sprites(arg0, arg1)
                 usprite = spr_krisu;
                 lsprite = spr_krisl;
                 slidesprite = spr_krisd_slide;
+                climbsprite = spr_kris_climb;
 
                 if (global.darkzone == 1)
                 {
@@ -23,10 +24,11 @@ function scr_set_chara_sprites(arg0, arg1)
 
             case "susie":
                 usprite = spr_susie_walk_up_dw;
+                dsprite = spr_susie_walk_down_dw;
                 rsprite = spr_susie_walk_right_dw;
                 lsprite = spr_susie_walk_left_dw;
-                dsprite = spr_susie_walk_down_dw;
                 slidesprite = spr_susie_slide;
+                climbsprite = spr_susie_climb;
 
                 if (global.darkzone == 0)
                 {
@@ -35,6 +37,17 @@ function scr_set_chara_sprites(arg0, arg1)
                     lsprite = spr_susie_walk_left_lw;
                     dsprite = spr_susie_walk_down_lw;
                 }
+
+                if (room == room_dw_snow_zone)
+                {
+                    if (global.plot > 160 && global.plot < 170)
+                    {
+                        rsprite = spr_susie_walk_right_dw_unhappy;
+                        lsprite = spr_susie_walk_left_dw_unhappy;
+                        dsprite = spr_susie_walk_down_dw_unhappy;
+                    }
+                }
+
                 break;
 
             case "ralsei":
@@ -43,6 +56,18 @@ function scr_set_chara_sprites(arg0, arg1)
                 rsprite = spr_ralsei_walk_right;
                 lsprite = spr_ralsei_walk_left;
                 slidesprite = spr_ralsei_slide;
+                climbsprite = spr_ralsei_climb;
+
+                if (room == room_dw_snow_zone)
+                {
+                    if (global.plot > 160 && global.plot < 170)
+                    {
+                        rsprite = spr_ralsei_walk_right_unhappy;
+                        lsprite = spr_ralsei_walk_left_unhappy;
+                        dsprite = spr_ralsei_walk_down_unhappy;
+                    }
+                }
+
                 break;
 
             case "noelle":
@@ -50,14 +75,8 @@ function scr_set_chara_sprites(arg0, arg1)
                 dsprite = spr_noelle_walk_down_dw;
                 rsprite = spr_noelle_walk_right_dw;
                 lsprite = spr_noelle_walk_left_dw;
-                slidesprite = spr_noelle_slide;
-
-                if (global.plot == 95)
-                {
-                    dsprite = spr_noelle_walk_down_blush_dw;
-                    rsprite = spr_noelle_walk_right_blush_dw;
-                    lsprite = spr_noelle_walk_left_blush_dw;
-                }
+                slidesprite = spr_noelle_walk_up_dw;
+                climbsprite = spr_noelle_walk_down_dw;
 
                 if (global.darkzone == 0)
                 {
@@ -66,14 +85,7 @@ function scr_set_chara_sprites(arg0, arg1)
                     lsprite = spr_noelle_walk_left_lw;
                     dsprite = spr_noelle_walk_down_lw;
                 }
-                break;
 
-            case "berdly":
-                usprite = spr_berdly_walk_up_dw;
-                dsprite = spr_berdly_walk_down_dw;
-                rsprite = spr_berdly_walk_right_dw;
-                lsprite = spr_berdly_walk_left_dw;
-                slidesprite = spr_berdly_walk_down_dw;
                 break;
 
             case "starwalker":
@@ -82,6 +94,7 @@ function scr_set_chara_sprites(arg0, arg1)
                 rsprite = spr_npc_originalstarwalker;
                 lsprite = spr_npc_originalstarwalker;
                 slidesprite = spr_npc_originalstarwalker;
+                climbsprite = spr_npc_originalstarwalker;
                 break;
         }
     }
