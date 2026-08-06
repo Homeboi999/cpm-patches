@@ -1,9 +1,10 @@
 --- a/Code/gml_Object_obj_battlecontroller_Create_0.gml
 +++ b/Code/gml_Object_obj_battlecontroller_Create_0.gml
-@@ -113,7 +113,44 @@
+@@ -113,7 +113,45 @@
  global.monstergold[3] = 0;
  global.monsterexp[3] = 0;
  global.charturn = 0;
++firstskip = false;
 +if (global.ambush == 0 && !instance_exists(obj_dojo_spareenemy))
 +{
 +    if (global.charmove[0] == 0)
@@ -21,7 +22,7 @@
 +    {
 +        if (global.charmove[2] == 0)
 +        {
-+            scr_attackphase();
++            firstskip = true;
 +        }
 +    }
 +}
@@ -45,9 +46,37 @@
  for (i = 0; i < 3; i += 1)
  {
      global.acting[i] = 0;
-@@ -275,4 +312,5 @@
+@@ -274,5 +312,33 @@
+     {
          gigaqueencon = 3;
      }
- }
++}
++xx = __view_get(e__VW.XView, 0);
++yy = __view_get(e__VW.YView, 0);
++if (firstskip)
++{
++    scr_attackphase();
++}
 +drawactdebug = false;
++
++enum e__VW
++{
++    XView,
++    YView,
++    WView,
++    HView,
++    Angle,
++    HBorder,
++    VBorder,
++    HSpeed,
++    VSpeed,
++    Object,
++    Visible,
++    XPort,
++    YPort,
++    WPort,
++    HPort,
++    Camera,
++    SurfaceID
+ }
  

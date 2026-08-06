@@ -1,10 +1,11 @@
 --- a/Code/gml_GlobalScript_scr_charbox.gml
 +++ b/Code/gml_GlobalScript_scr_charbox.gml
-@@ -1,128 +1,132 @@
+@@ -1,128 +1,127 @@
  function scr_charbox()
  {
 -    for (c = 0; c < 4; c += 1)
--    {
++    for (pos = 0; pos < 3; pos++)
+     {
 -        if (havechar[c] == 1)
 -        {
 -            if (c == 0)
@@ -23,13 +24,6 @@
 -            {
 -                charcolor = hpcolor[3];
 -            }
-+    var drawempty = false;
-+    if (i_ex(obj_battlecontroller) && obj_battlecontroller.oopsallacts)
-+    {
-+        drawempty = true;
-+    }
-+    for (pos = 0; pos < 3; pos++)
-+    {
 +        c = global.char[pos] - 1;
 +        if (c == -1)
 +        {
@@ -39,7 +33,7 @@
 +        {
 +            charcolor = hpcolor[c];
 +        }
-+        if (c != -1 || (drawempty && pos == 0))
++        if (c != -1 || (chartotal == 0 && pos == 0))
 +        {
              gc = global.charturn;
              xchunk = 0;
@@ -98,7 +92,7 @@
 +            {
 +                xchunk = 213;
 +            }
-+            if (gc == pos && c != -1)
++            if (gc == pos && (c != -1 || oopsallacts == 1))
              {
                  if (rouxlsgridenabled == false)
                  {
@@ -204,11 +198,11 @@
 +                draw_rectangle(xx + xchunk + 2, (480 - bp - 1) + yy + mmy[pos], xx + xchunk + 210, (480 - bp) + yy + 0 + 33, false);
              }
 -            if (gc == charpos[c])
-+            if (gc == pos && c != -1)
++            if (gc == pos && (c != -1 || oopsallacts == 1))
              {
                  if (global.myfight == 0)
                  {
-@@ -132,27 +136,27 @@
+@@ -132,27 +131,27 @@
                      }
                      else
                      {
@@ -245,7 +239,7 @@
                                  }
                              }
                          }
-@@ -174,7 +178,7 @@
+@@ -174,7 +173,7 @@
                      rep++;
                  }
              }
@@ -254,7 +248,7 @@
              {
                  btc[global.bmenucoord[0][global.charturn] + (rouxlsbuttoncount_y * 5)] = 1;
              }
-@@ -380,21 +384,32 @@
+@@ -380,21 +379,32 @@
                          {
                              snd_play(snd_petrify);
                          }
@@ -299,7 +293,7 @@
                              alpha = lerp(0, 1.2, obj_rouxls_ch3_enemy.introtimer / 29);
                              if (obj_rouxls_ch3_enemy.introtimer < 0)
                              {
-@@ -438,21 +453,32 @@
+@@ -438,21 +448,32 @@
                          {
                              snd_play(snd_petrify);
                          }
@@ -344,7 +338,7 @@
                              alpha = lerp(0, 1.2, obj_tenna_board4_enemy.introtimer / 29);
                              if (obj_tenna_board4_enemy.introtimer < 0)
                              {
-@@ -498,12 +524,12 @@
+@@ -498,12 +519,12 @@
                              y_extra = 0;
                              rep = 5;
                          }
@@ -360,7 +354,16 @@
                                  if (rep == 1)
                                  {
                                      __y += 32;
-@@ -644,17 +670,17 @@
+@@ -626,7 +647,7 @@
+                         }
+                     }
+                 }
+-                else
++                else if (c != -1)
+                 {
+                     draw_sprite(scr_84_get_sprite("spr_btfight"), btc[0], xx + xchunk + 15 + icon_offset, (485 - bp) + yy);
+                     if (c == 0)
+@@ -644,17 +665,17 @@
                      draw_sprite(scr_84_get_sprite("spr_btitem"), btc[2], xx + xchunk + 85 + icon_offset, (485 - bp) + yy);
                      draw_sprite(scr_84_get_sprite("spr_btspare"), btc[3], xx + xchunk + 120 + icon_offset, (485 - bp) + yy);
                      draw_sprite(scr_84_get_sprite("spr_btdefend"), btc[4], xx + xchunk + 155 + icon_offset, (485 - bp) + yy);
@@ -381,7 +384,7 @@
              {
                  draw_set_color(charcolor);
              }
-@@ -662,32 +688,35 @@
+@@ -662,32 +683,32 @@
              {
                  draw_set_color(bcolor);
              }
@@ -392,15 +395,11 @@
              }
              if (rouxlsgridenabled == false)
              {
-+                if (c != -1)
-+                {
 -                draw_rectangle(xx + xchunk, (480 - bp - 3) + yy + mmy[c], xx + xchunk + 212, ((480 - bp) + yy) - 2, false);
-+                    draw_rectangle(xx + xchunk, (480 - bp - 3) + yy + mmy[pos], xx + xchunk + 212, ((480 - bp) + yy) - 2, false);
--                draw_set_color(c_black);
-+                    draw_set_color(c_black);
++                draw_rectangle(xx + xchunk, (480 - bp - 3) + yy + mmy[pos], xx + xchunk + 212, ((480 - bp) + yy) - 2, false);
+                 draw_set_color(c_black);
 -                draw_rectangle(xx + xchunk + 2, (480 - bp - 1) + yy + mmy[c], xx + xchunk + 210, (480 - bp) + yy + mmy[c] + 33, false);
-+                    draw_rectangle(xx + xchunk + 2, (480 - bp - 1) + yy + mmy[pos], xx + xchunk + 210, (480 - bp) + yy + mmy[pos] + 33, false);
-+                }
++                draw_rectangle(xx + xchunk + 2, (480 - bp - 1) + yy + mmy[pos], xx + xchunk + 210, (480 - bp) + yy + mmy[pos] + 33, false);
              }
              else
              {
@@ -428,7 +427,7 @@
                  }
              }
              b_offset = 480;
-@@ -701,25 +730,29 @@
+@@ -701,25 +722,36 @@
              }
              if (c == 0)
              {
@@ -461,13 +460,20 @@
 -            draw_sprite(spr_hpname, 0, xx + 109 + xchunk, bpoff + b_offset + 11 + mmy[c]);
 +            if (c == -1)
 +            {
++                if (global.faceaction[pos] == 7)
++                {
++                    draw_sprite(spr_headkris, 7, xx + 13 + xchunk, bpoff + b_offset + mmy[pos]);
++                }
++                draw_set_color(bcolor);
++                draw_set_font(fnt_mainbig);
++                draw_text(xx + 63 + xchunk, ((bpoff + b_offset) - 9) + mmy[pos], "[EMPTY]");
 +                break;
 +            }
 +            draw_sprite(spr_hpname, 0, xx + 109 + xchunk, bpoff + b_offset + 11 + mmy[pos]);
              draw_set_color(c_white);
              draw_set_font(global.hpfont);
              if ((global.hp[c + 1] / global.maxhp[c + 1]) <= 0.25)
-@@ -731,16 +764,16 @@
+@@ -731,16 +763,16 @@
                  draw_set_color(c_red);
              }
              draw_set_halign(fa_right);

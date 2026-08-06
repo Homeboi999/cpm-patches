@@ -9,35 +9,29 @@ function scr_get_chara_alignment(arg0, arg1 = -4)
                 halign: 0,
                 valign: 0
             };
-            
         case "susie":
             var result = 
             {
                 halign: (global.darkzone == 0) ? 3 : 6,
                 valign: (global.darkzone == 0) ? 6 : 16
             };
-
             if (room == room_dw_castle_town && scr_flag_get(793) == 1)
             {
                 result.valign = 20;
             }
-            
             return result;
-
         case "ralsei":
             result = 
             {
                 halign: 2,
                 valign: 12
             };
-
             with (arg1)
             {
                 if (sprite_index == spr_ralsei_splat_caterpillar)
                 {
                     result.halign = 12;
                 }
-
                 if (room == room_dw_castle_town)
                 {
                     if (scr_flag_get(793) == 1)
@@ -54,9 +48,7 @@ function scr_get_chara_alignment(arg0, arg1 = -4)
                     }
                 }
             }
-
             return result;
-            
         case "noelle":
             return 
             {

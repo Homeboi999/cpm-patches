@@ -3,7 +3,6 @@ function scr_set_chara_sprites(arg0, arg1)
     with (arg1)
     {
         init_clothes = false;
-
         switch (arg0)
         {
             case "kris":
@@ -12,8 +11,7 @@ function scr_set_chara_sprites(arg0, arg1)
                 usprite = spr_krisu;
                 lsprite = spr_krisl;
                 slidesprite = spr_krisd_slide;
-                climbsprite = spr_kris_climb;
-
+                climbsprite = 3710;
                 if (global.darkzone == 1)
                 {
                     dsprite = spr_krisd_dark;
@@ -28,17 +26,14 @@ function scr_set_chara_sprites(arg0, arg1)
                     rsprite = spr_kris_walk_right_church;
                     lsprite = spr_kris_walk_left_church;
                 }
-
                 break;
-
-        case "susie":
+            case "susie":
                 usprite = spr_susie_walk_up_dw;
                 rsprite = spr_susie_walk_right_dw;
                 lsprite = spr_susie_walk_left_dw;
                 dsprite = spr_susie_walk_down_dw;
                 slidesprite = spr_susie_slide;
-                climbsprite = spr_susie_climb;
-                
+                climbsprite = 2651;
                 if (room == room_dw_castle_town && scr_flag_get(793) == 1)
                 {
                     init_clothes = true;
@@ -47,14 +42,12 @@ function scr_set_chara_sprites(arg0, arg1)
                     lsprite = spr_susie_lancer_carry_walk_left;
                     usprite = spr_susie_lancer_carry_walk_up;
                 }
-
                 if (global.darkzone == 0)
                 {
                     usprite = spr_susie_walk_up_lw;
                     rsprite = spr_susie_walk_right_lw;
                     lsprite = spr_susie_walk_left_lw;
                     dsprite = spr_susie_walk_down_lw;
-                    
                     if (global.plot >= 11 && global.plot < 35)
                     {
                         init_clothes = true;
@@ -63,7 +56,6 @@ function scr_set_chara_sprites(arg0, arg1)
                         lsprite = spr_susie_walk_left_church;
                         usprite = spr_susie_walk_up_church;
                     }
-
                     if (global.plot >= 220 || room == room_town_shelter)
                     {
                         init_clothes = true;
@@ -72,26 +64,22 @@ function scr_set_chara_sprites(arg0, arg1)
                         lsprite = spr_susie_walk_left_lw_unhappy;
                     }
                 }
-
                 break;
-
             case "ralsei":
                 usprite = spr_ralsei_walk_up;
                 dsprite = spr_ralsei_walk_down;
                 rsprite = spr_ralsei_walk_right;
                 lsprite = spr_ralsei_walk_left;
                 slidesprite = spr_ralsei_slide;
-                climbsprite = spr_ralsei_climb;
+                climbsprite = 4840;
                 break;
-
             case "noelle":
                 usprite = spr_noelle_walk_up_dw;
                 dsprite = spr_noelle_walk_down_dw;
                 rsprite = spr_noelle_walk_right_dw;
                 lsprite = spr_noelle_walk_left_dw;
                 slidesprite = spr_noelle_walk_down_dw;
-                climbsprite = spr_noelle_walk_up_dw;
-
+                climbsprite = 306;
                 if (global.darkzone == 0)
                 {
                     usprite = spr_noelle_walk_up_lw;
@@ -99,25 +87,22 @@ function scr_set_chara_sprites(arg0, arg1)
                     rsprite = spr_noelle_walk_right_lw;
                     lsprite = spr_noelle_walk_left_lw;
                 }
-
                 break;
-
             case "starwalker":
                 usprite = spr_npc_originalstarwalker;
                 dsprite = spr_npc_originalstarwalker;
                 rsprite = spr_npc_originalstarwalker;
                 lsprite = spr_npc_originalstarwalker;
                 slidesprite = spr_npc_originalstarwalker;
-                climbsprite = spr_npc_originalstarwalker;
+                climbsprite = 1131;
                 break;
-
             case "lancer":
                 usprite = spr_lancer_ut;
                 dsprite = spr_lancer_dt;
                 rsprite = spr_lancer_rt;
                 lsprite = spr_lancer_lt;
                 slidesprite = spr_lancer_dt;
-                climbsprite = spr_lancer_ut;
+                climbsprite = 1270;
                 break;
         }
     }
