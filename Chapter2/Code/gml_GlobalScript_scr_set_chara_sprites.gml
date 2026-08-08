@@ -19,39 +19,25 @@ function scr_set_chara_sprites(arg0, arg1)
                 }
                 break;
             case "susie":
-                usprite = spr_susieu_dark;
-                dsprite = spr_susied_dark;
-                rsprite = spr_susier_dark;
-                lsprite = spr_susiel_dark;
+                usprite = spr_susie_walk_up_dw;
+                rsprite = spr_susie_walk_right_dw;
+                lsprite = spr_susie_walk_left_dw;
+                dsprite = spr_susie_walk_down_dw;
                 slidesprite = spr_susie_slide;
-                if (global.chapter >= 2)
+                if (global.darkzone == 0)
                 {
-                    usprite = spr_susie_walk_up_dw;
-                    rsprite = spr_susie_walk_right_dw;
-                    lsprite = spr_susie_walk_left_dw;
-                    dsprite = spr_susie_walk_down_dw;
-                    if (global.darkzone == 0)
-                    {
-                        usprite = spr_susie_walk_up_lw;
-                        rsprite = spr_susie_walk_right_lw;
-                        lsprite = spr_susie_walk_left_lw;
-                        dsprite = spr_susie_walk_down_lw;
-                    }
+                    usprite = spr_susie_walk_up_lw;
+                    rsprite = spr_susie_walk_right_lw;
+                    lsprite = spr_susie_walk_left_lw;
+                    dsprite = spr_susie_walk_down_lw;
                 }
                 break;
             case "ralsei":
-                usprite = spr_ralseiu;
-                dsprite = spr_ralseid;
-                rsprite = spr_ralseir;
-                lsprite = spr_ralseil;
+                usprite = spr_ralsei_walk_up;
+                dsprite = spr_ralsei_walk_down;
+                rsprite = spr_ralsei_walk_right;
+                lsprite = spr_ralsei_walk_left;
                 slidesprite = spr_ralsei_slide;
-                if (global.chapter >= 2)
-                {
-                    usprite = spr_ralsei_walk_up;
-                    dsprite = spr_ralsei_walk_down;
-                    rsprite = spr_ralsei_walk_right;
-                    lsprite = spr_ralsei_walk_left;
-                }
                 break;
             case "noelle":
                 usprite = spr_noelle_walk_up_dw;
@@ -59,18 +45,18 @@ function scr_set_chara_sprites(arg0, arg1)
                 rsprite = spr_noelle_walk_right_dw;
                 lsprite = spr_noelle_walk_left_dw;
                 slidesprite = spr_noelle_slide;
-                if (global.chapter == 2 && global.plot == 95)
+                if (global.plot == 95)
                 {
                     dsprite = spr_noelle_walk_down_blush_dw;
                     rsprite = spr_noelle_walk_right_blush_dw;
                     lsprite = spr_noelle_walk_left_blush_dw;
-                    if (global.darkzone == 0)
-                    {
-                        usprite = spr_noelle_walk_up_lw;
-                        rsprite = spr_noelle_walk_right_lw;
-                        lsprite = spr_noelle_walk_left_lw;
-                        dsprite = spr_noelle_walk_down_lw;
-                    }
+                }
+                if (global.darkzone == 0)
+                {
+                    usprite = spr_noelle_walk_up_lw;
+                    rsprite = spr_noelle_walk_right_lw;
+                    lsprite = spr_noelle_walk_left_lw;
+                    dsprite = spr_noelle_walk_down_lw;
                 }
                 break;
             case "berdly":
@@ -78,12 +64,14 @@ function scr_set_chara_sprites(arg0, arg1)
                 dsprite = spr_berdly_walk_down_dw;
                 rsprite = spr_berdly_walk_right_dw;
                 lsprite = spr_berdly_walk_left_dw;
+                slidesprite = spr_berdly_walk_down_dw;
                 break;
             case "starwalker":
                 usprite = spr_npc_originalstarwalker;
                 dsprite = spr_npc_originalstarwalker;
                 rsprite = spr_npc_originalstarwalker;
                 lsprite = spr_npc_originalstarwalker;
+                slidesprite = spr_npc_originalstarwalker;
                 break;
         }
     }

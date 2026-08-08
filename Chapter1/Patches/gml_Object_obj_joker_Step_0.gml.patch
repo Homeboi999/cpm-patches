@@ -28,7 +28,7 @@
          {
              visible = 1;
          }
-@@ -481,65 +481,77 @@
+@@ -481,65 +481,80 @@
          {
              global.msg[0] = scr_84_get_lang_string("obj_joker_slash_Step_0_gml_314_0");
              star = choose(0, 1, 2);
@@ -110,7 +110,7 @@
 +            if (chartotal > 1)
 +            {
 +                hpshift = 0 + choose(-1, 1);
-+                for (i = 0; i < 3; i++)
++                for (var i = 0; i < 3; i++)
 +                {
 +                    if (global.char[i] != 0)
 +                    {
@@ -144,13 +144,16 @@
 +                        hpcolor[i] = charcolor[hpchar[i]];
 +                    }
 +                }
-+                for (i = 1; i < 3; i++)
++                for (var i = 0; i < 3; i++)
 +                {
-+                    if (global.hp[hpchar[i]] < 1)
++                    if (hpchar[i] != 0)
 +                    {
-+                        global.hp[hpchar[i]] = 1;
++                        if (global.hp[hpchar[i]] < 1)
++                        {
++                            global.hp[hpchar[i]] = 1;
++                        }
++                        scr_revive(i);
 +                    }
-+                    scr_revive(i);
 +                }
 +                snd_play(snd_weirdeffect);
 +            }
@@ -161,7 +164,7 @@
          }
          if (chaosdance == 7)
          {
-@@ -573,7 +585,19 @@
+@@ -573,7 +588,19 @@
          hypnofx = instance_create(global.monsterx[myself], global.monstery[myself], obj_hypnofx);
          snd_play(snd_hypnosis);
          actcon = 1;
@@ -182,7 +185,7 @@
          if (aaa == 0)
          {
              txtpart1 = scr_84_get_lang_string("obj_joker_slash_Step_0_gml_400_0");
-@@ -606,7 +630,7 @@
+@@ -606,7 +633,7 @@
      if (actcon == 1 && !instance_exists(obj_writer))
      {
          actcon = 0;

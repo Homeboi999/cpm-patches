@@ -1,0 +1,27 @@
+--- a/Code/gml_GlobalScript_scr_damage_all.gml
++++ b/Code/gml_GlobalScript_scr_damage_all.gml
+@@ -5,15 +5,24 @@
+         scr_damage_cache();
+         remdamage = damage;
+         _temptarget = target;
++        var isempty = true;
+         for (ti = 0; ti < 3; ti += 1)
+         {
+             global.inv = -1;
+             damage = remdamage;
+             target = ti;
++            if (global.char[ti] > 0)
++            {
++                isempty = false;
++            }
+             if (global.hp[global.char[ti]] > 0 && global.char[ti] != 0)
+             {
+                 scr_damage();
+             }
++        }
++        if (isempty)
++        {
++            scr_damage();
+         }
+         global.inv = global.invc * 40;
+         target = _temptarget;

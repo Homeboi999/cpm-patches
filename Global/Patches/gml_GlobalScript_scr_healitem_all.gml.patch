@@ -1,0 +1,21 @@
+--- a/Code/gml_GlobalScript_scr_healitem_all.gml
++++ b/Code/gml_GlobalScript_scr_healitem_all.gml
+@@ -1,11 +1,14 @@
+ function scr_healitem_all(arg0)
+ {
+     scr_healall(arg0);
+-    for (i = 0; i < chartotal; i += 1)
++    for (i = 0; i < 3; i += 1)
+     {
++        if (global.char[i] != 0)
++        {
+-        healx = scr_charbox_x(i);
++            healx = scr_charbox_x(i);
+-        healtext = instance_create(healx + 70 + xx, yy + 430, obj_healwriter);
++            healtext = instance_create(healx + 70 + xx, yy + 430, obj_healwriter);
+-        healtext.healamt = arg0;
++            healtext.healamt = arg0;
++        }
+     }
+ }
+ 

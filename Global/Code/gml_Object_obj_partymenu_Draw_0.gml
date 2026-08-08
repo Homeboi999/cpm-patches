@@ -155,20 +155,19 @@ if (partyMenu == 0 || partyMenu == 1)
         emptyWarn = 1;
     }
 
-    // Someone in Slot 3 and not Slot 2
-    // Kris only counts as a "gap" in unstable versions,
-    // since the stable chapters have support for them.
-    var gapchar = (isStable) ? 0 : 1;
-    if (global.char[1] <= gapchar && global.char[2] > gapchar)
-    {
-        gapWarn = 1;
-    }
-
     // X-Actions and duplicates have been fixed in
     // in Chapters 1 & 2, so these warnings aren't
     // needed anymore.
-    if (global.chapter > 2)
+    if (!isStable)
     {
+
+        // Someone in Slot 3 and not Slot 2
+        var gapchar = 1;
+        if (global.char[1] <= gapchar && global.char[2] > gapchar)
+        {
+            gapWarn = 1;
+        }
+        
         // Kris outside of Slot 1
         if (global.char[1] == 1 || global.char[2] == 1)
         {
@@ -211,7 +210,10 @@ if (partyMenu == 0 || partyMenu == 1)
         showWarning = true;
         draw_set_color(c_white);
         draw_text(x + 20, y + 10, string_hash_to_newline("#" + warnPrefix + emptyWarnText));
-        draw_set_color(c_red);
+
+        // Only use a yellow "!" in Stable Chapters.
+        var warncolor = (isStable) ? c_yellow : c_red;
+        draw_set_color(warncolor);
         draw_text(x + 20, y + 10, string_hash_to_newline("#" + warnPrefix));
     }
     else if (partySelect != 3)

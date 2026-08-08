@@ -1,31 +1,40 @@
 --- a/Code/gml_GlobalScript_scr_charbox.gml
 +++ b/Code/gml_GlobalScript_scr_charbox.gml
-@@ -1,88 +1,91 @@
+@@ -1,92 +1,99 @@
  function scr_charbox()
  {
 -    for (c = 0; c < 3; c += 1)
 +    for (pos = 0; pos < 3; pos += 1)
      {
 -        if (havechar[c] == 1)
-+        c = global.char[pos] - 1;
-+        if (c != -1)
-         {
+-        {
 -            if (c == 0)
-+            if (instance_exists(obj_joker))
-             {
+-            {
 -                charcolor = hpcolor[0];
-+                charcolor = obj_joker.hpcolor[pos];
-             }
+-            }
 -            if (c == 1)
-+            else
-             {
+-            {
 -                charcolor = hpcolor[1];
-+                charcolor = hpcolor[c];
 -            }
 -            if (c == 2)
 -            {
 -                charcolor = hpcolor[2];
-             }
+-            }
++        c = global.char[pos] - 1;
++        if (c == -1)
++        {
++            charcolor = bcolor;
++        }
++        else if (instance_exists(obj_joker))
++        {
++            charcolor = obj_joker.hpcolor[pos];
++        }
++        else
++        {
++            charcolor = hpcolor[c];
++        }
++        if (c != -1 || (chartotal == 0 && pos == 0))
++        {
              gc = global.charturn;
              xchunk = 0;
 -            if (charpos[c] == 0 && chartotal == 3)
@@ -79,11 +88,11 @@
 +                    xchunk = 326;
 +                }
 +            }
-+            else if (chartotal == 1)
++            else
 +            {
 +                xchunk = 212;
 +            }
-+            if (gc == pos)
++            if (gc == pos && c != -1)
              {
                  if (global.myfight == 0)
                  {
@@ -141,7 +150,12 @@
              {
                  btc[global.bmenucoord[0][global.charturn]] = 1;
              }
-@@ -123,16 +126,16 @@
+-            if (global.fighting == 1)
++            if (global.fighting == 1 && c != -1)
+             {
+                 spare_glow = 0;
+                 for (sglowi = 0; sglowi < 3; sglowi += 1)
+@@ -123,16 +130,16 @@
                  draw_sprite(scr_84_get_sprite("spr_btitem"), btc[2], xx + xchunk + 85, (485 - bp) + yy);
                  draw_sprite(scr_84_get_sprite("spr_btspare"), btc[3], xx + xchunk + 120, (485 - bp) + yy);
                  draw_sprite(scr_84_get_sprite("spr_btdefend"), btc[4], xx + xchunk + 155, (485 - bp) + yy);
@@ -161,7 +175,7 @@
              {
                  draw_set_color(charcolor);
              }
-@@ -140,13 +143,13 @@
+@@ -140,13 +147,13 @@
              {
                  draw_set_color(bcolor);
              }
@@ -178,7 +192,7 @@
              b_offset = 480;
              if (global.fighting == 0)
              {
-@@ -158,22 +161,26 @@
+@@ -158,22 +165,37 @@
              }
              if (c == 0)
              {
@@ -202,6 +216,17 @@
 +                draw_sprite(scr_84_get_sprite("spr_bnameralsei"), 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[pos]);
              }
 -            draw_sprite(spr_hpname, 0, xx + 109 + xchunk, bpoff + b_offset + 11 + mmy[c]);
++            if (c == -1)
++            {
++                if (global.faceaction[pos] == 7)
++                {
++                    draw_sprite(spr_headkris, 7, xx + 13 + xchunk, bpoff + b_offset + mmy[pos]);
++                }
++                draw_set_color(bcolor);
++                draw_set_font(fnt_mainbig);
++                draw_text(xx + 63 + xchunk, ((bpoff + b_offset) - 8) + mmy[pos], "[EMPTY]");
++                break;
++            }
 +            draw_sprite(spr_hpname, 0, xx + 109 + xchunk, bpoff + b_offset + 11 + mmy[pos]);
              draw_set_color(c_white);
              draw_set_font(global.hpfont);
@@ -212,7 +237,7 @@
              if ((global.hp[c + 1] / global.maxhp[c + 1]) <= 0.25)
              {
                  draw_set_color(c_yellow);
-@@ -183,16 +190,16 @@
+@@ -183,16 +205,16 @@
                  draw_set_color(c_red);
              }
              draw_set_halign(fa_right);

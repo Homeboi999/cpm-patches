@@ -1,7 +1,14 @@
 --- a/Code/gml_GlobalScript_scr_damage.gml
 +++ b/Code/gml_GlobalScript_scr_damage.gml
-@@ -13,7 +13,7 @@
+@@ -11,9 +11,14 @@
+                 __element = element;
+             }
          }
++        if (global.char[0] == 0 && global.char[1] == 0 && global.char[2] == 0)
++        {
++            scr_gameover();
++            exit;
++        }
          if (target < 3)
          {
 -            if (global.hp[global.char[target]] <= 0)

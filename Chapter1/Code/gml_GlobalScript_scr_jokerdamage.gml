@@ -10,6 +10,11 @@ function scr_jokerdamage()
         if (global.inv < 0 && debug_inv == 0)
         {
             scr_damage_cache();
+            if (global.char[0] == 0 && global.char[1] == 0 && global.char[2] == 0)
+            {
+                scr_gameover();
+                exit;
+            }
             if (target < 3)
             {
                 if (global.hp[obj_joker.hpchar[target]] <= 0)

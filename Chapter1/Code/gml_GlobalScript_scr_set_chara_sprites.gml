@@ -31,6 +31,20 @@ function scr_set_chara_sprites(arg0, arg1)
                     rsprite = spr_susier_dark_eyes;
                     lsprite = spr_susiel_dark_eyes;
                 }
+                if (global.darkzone == 0)
+                {
+                    usprite = spr_susieu;
+                    dsprite = spr_susied;
+                    rsprite = spr_susier;
+                    lsprite = spr_susiel;
+                    if (global.plot >= 240)
+                    {
+                        usprite = spr_susieu;
+                        dsprite = spr_susied_eyes;
+                        rsprite = spr_susier_eyes;
+                        lsprite = spr_susiel_eyes;
+                    }
+                }
                 break;
             case "ralsei":
                 usprite = spr_ralseiu;

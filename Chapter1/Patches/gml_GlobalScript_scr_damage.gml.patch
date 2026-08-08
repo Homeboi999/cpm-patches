@@ -1,9 +1,22 @@
 --- a/Code/gml_GlobalScript_scr_damage.gml
 +++ b/Code/gml_GlobalScript_scr_damage.gml
-@@ -118,6 +118,17 @@
+@@ -8,6 +8,11 @@
+     if (global.inv < 0 && debug_inv == 0)
+     {
+         scr_damage_cache();
++        if (global.char[0] == 0 && global.char[1] == 0 && global.char[2] == 0)
++        {
++            scr_gameover();
++            exit;
++        }
+         if (target < 3)
+         {
+             if (global.hp[global.char[target]] <= 0)
+@@ -117,6 +122,17 @@
+         if (global.char[2] != 0 && global.hp[global.char[2]] > 0)
          {
              gameover = 0;
-         }
++        }
 +        if (instance_exists(obj_checkers_enemy) && gameover == 1)
 +        {
 +            if (obj_checkers_enemy.susie_solo)
@@ -14,7 +27,6 @@
 +                    susie_end = 1;
 +                }
 +            }
-+        }
+         }
          if (gameover == 1)
          {
-             scr_gameover();
