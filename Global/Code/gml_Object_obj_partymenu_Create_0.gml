@@ -9,7 +9,7 @@ menusiner = 0;
 depth = -1000; // move to front
 partyMenu = 0;
 partySelect = 0;
-isStable = (global.chapter <= 3) ? true : false;
+isStable = (global.chapter <= 2) ? true : false;
 
 // Chapter 1 doesnt update charselect in the POWER menu...
 if (global.charselect > -1)
