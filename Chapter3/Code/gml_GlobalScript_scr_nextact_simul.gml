@@ -1,5 +1,6 @@
 function scr_nextact_simul()
 {
+    simuldone[global.currentactingchar] = 1;
     for (var slot = 0; slot < 3; slot++)
     {
         var needact = simulorder[slot] != -1 && simuldone[slot] == 0 && global.actingtarget[slot] == myself;

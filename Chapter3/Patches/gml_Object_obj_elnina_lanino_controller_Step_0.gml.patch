@@ -26,7 +26,7 @@
          }
      }
      if (intro == 0.2 && !i_ex(obj_writer))
-@@ -128,15 +132,16 @@
+@@ -128,15 +132,19 @@
      if (intro == 0.3)
      {
          introtimer++;
@@ -39,6 +39,9 @@
 +            var shockedralsei = global.charinstance[ralseipos];
 +            var heroballoon = scr_enemyblcon(global.charinstance[ralseipos].x + 50, global.charinstance[ralseipos].y + 40, 10);
              heroballoon.side = -1;
++        }
++        if (introtimer == 6)
++        {
              tenna.vspeed = 50;
          }
 -        if (introtimer == 24)
@@ -46,7 +49,7 @@
          {
              intro = 1;
          }
-@@ -156,10 +161,17 @@
+@@ -156,10 +164,17 @@
      scr_speaker("tenna");
      global.typer = 80;
      global.fc = 22;
@@ -67,3 +70,148 @@
      }
  }
  if (ilovetv_increase > 0 && digit_flash_timer == 0)
+@@ -198,75 +213,72 @@
+         ilovetv_pitch = 1;
+     }
+ }
+-if (scr_isphase("menu"))
++if (!calculated_forecast)
+ {
+-    if (!calculated_forecast)
+-    {
+-        turn2_turns++;
++    turn2_turns++;
+-        if (ilovetv > 0)
++    if (ilovetv > 0)
+-        {
++    {
+-            if (turn2_turns > 2 && turns < 2)
++        if (turn2_turns > 2 && turns < 2)
+-            {
++        {
+-                turns = 2;
++            turns = 2;
+-            }
+         }
++    }
+-        else if (turns > 1 && ilovetv == 0 && turn2_turns < 7)
++    else if (turns > 1 && ilovetv == 0 && turn2_turns < 7)
+-        {
++    {
+-            turns = 0;
++        turns = 0;
+-        }
++    }
+-        ilovetv_increased = false;
++    ilovetv_increased = false;
+-        forecast_turn = turns;
++    forecast_turn = turns;
+-        var _sun = 783;
++    var _sun = 783;
+-        var _moon = 1474;
++    var _moon = 1474;
+-        var _rain = 4256;
++    var _rain = 4256;
+-        var _snow = 1650;
++    var _snow = 1650;
+-        var _hale = 14;
++    var _hale = 14;
+-        var _temp_min = 50;
++    var _temp_min = 50;
+-        var _temp_max = 60;
++    var _temp_max = 60;
+-        switch (forecast_turn)
++    switch (forecast_turn)
+-        {
++    {
+-            case 0:
++        case 0:
+-                forecasts[0] = [irandom_range(_temp_min, _temp_max), _moon, _snow];
++            forecasts[0] = [irandom_range(_temp_min, _temp_max), _moon, _snow];
+-                forecasts[1] = [irandom_range(_temp_min, _temp_max), _moon, _snow];
++            forecasts[1] = [irandom_range(_temp_min, _temp_max), _moon, _snow];
+-                forecasts[2] = [irandom_range(_temp_min, _temp_max), _moon, _snow];
++            forecasts[2] = [irandom_range(_temp_min, _temp_max), _moon, _snow];
+-                break;
++            break;
+-            case 1:
++        case 1:
+-                forecasts[0] = [irandom_range(_temp_min, _temp_max), _sun, _rain];
++            forecasts[0] = [irandom_range(_temp_min, _temp_max), _sun, _rain];
+-                forecasts[1] = [irandom_range(_temp_min, _temp_max), _sun, _rain];
++            forecasts[1] = [irandom_range(_temp_min, _temp_max), _sun, _rain];
+-                forecasts[2] = [irandom_range(_temp_min, _temp_max), _sun, _rain];
++            forecasts[2] = [irandom_range(_temp_min, _temp_max), _sun, _rain];
+-                break;
++            break;
+-            case 2:
++        case 2:
++            forecasts[0] = [irandom_range(_temp_min, _temp_max), _moon, _rain];
++            forecasts[1] = [irandom_range(_temp_min, _temp_max), _moon, _rain];
++            forecasts[2] = [irandom_range(_temp_min, _temp_max), _moon, _rain];
++            break;
++        default:
++            if (lastchosen == "lanino")
++            {
++                _temp_min = 80 + ((forecast_turn - 3) * 100);
++                _temp_max = 89 + ((forecast_turn - 3) * 100);
++            }
++            else
++            {
++                _temp_min = 40 - ((forecast_turn - 3) * 30);
++                _temp_max = 50 - ((forecast_turn - 3) * 30);
++            }
++            if (choose(0, 1) == 1)
++            {
++                forecasts[0] = [irandom_range(_temp_min, _temp_max), _sun, _snow];
++                forecasts[1] = [irandom_range(_temp_min, _temp_max), _sun, _snow];
++                forecasts[2] = [irandom_range(_temp_min, _temp_max), _sun, _snow];
++            }
++            else
++            {
+                 forecasts[0] = [irandom_range(_temp_min, _temp_max), _moon, _rain];
+                 forecasts[1] = [irandom_range(_temp_min, _temp_max), _moon, _rain];
+                 forecasts[2] = [irandom_range(_temp_min, _temp_max), _moon, _rain];
+-                break;
+-            default:
+-                if (lastchosen == "lanino")
+-                {
+-                    _temp_min = 80 + ((forecast_turn - 3) * 100);
+-                    _temp_max = 89 + ((forecast_turn - 3) * 100);
+-                }
+-                else
+-                {
+-                    _temp_min = 40 - ((forecast_turn - 3) * 30);
+-                    _temp_max = 50 - ((forecast_turn - 3) * 30);
+-                }
+-                if (choose(0, 1) == 1)
+-                {
+-                    forecasts[0] = [irandom_range(_temp_min, _temp_max), _sun, _snow];
+-                    forecasts[1] = [irandom_range(_temp_min, _temp_max), _sun, _snow];
+-                    forecasts[2] = [irandom_range(_temp_min, _temp_max), _sun, _snow];
+-                }
+-                else
+-                {
+-                    forecasts[0] = [irandom_range(_temp_min, _temp_max), _moon, _rain];
+-                    forecasts[1] = [irandom_range(_temp_min, _temp_max), _moon, _rain];
+-                    forecasts[2] = [irandom_range(_temp_min, _temp_max), _moon, _rain];
+-                }
+-                break;
+-        }
+-        calculated_forecast = true;
++            }
++            break;
+     }
++    calculated_forecast = true;
+ }
+ var lanino = obj_lanino_enemy;
+ var elnina = obj_elnina_enemy;
+@@ -275,7 +287,7 @@
+ var _moon_atk = 69;
+ var _snow_atk = 70;
+ var _rain_atk = 71;
+-if (scr_isphase("enemytalk") && talked == 0 && !i_ex(obj_rouxls_ch3_enemy))
++if (scr_isphase("enemytalk") && talked == 0 && !i_ex(obj_rouxls_ch3_enemy) && intro >= 4)
+ {
+     scr_randomtarget();
+     if (!instance_exists(obj_darkener))

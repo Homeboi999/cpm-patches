@@ -353,15 +353,15 @@
 +        var rand = choose(0, 1, 2);
 +        if (rand == 0)
 +        {
-+            _text = stringset("* Noelle adjusts the focus!");
++            _text = stringset("* Noelle said \"Cheese!\"");
 +        }
 +        if (rand == 1)
 +        {
-+            _text = stringset("* Noelle cleans the camera lens!");
++            _text = stringset("* Noelle tries not to blink!");
 +        }
 +        if (rand == 2)
 +        {
-+            _text = stringset("* Noelle poses with a festive prop!");
++            _text = stringset("* Noelle holds her pose!");
 +        }
 +        if (simultotal == 1)
 +        {
