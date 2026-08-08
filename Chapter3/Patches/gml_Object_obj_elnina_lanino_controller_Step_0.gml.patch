@@ -1,6 +1,6 @@
 --- a/Code/gml_Object_obj_elnina_lanino_controller_Step_0.gml
 +++ b/Code/gml_Object_obj_elnina_lanino_controller_Step_0.gml
-@@ -108,22 +108,33 @@
+@@ -108,17 +108,21 @@
          }
          intro = 0.2;
      }
@@ -26,20 +26,12 @@
          }
      }
      if (intro == 0.2 && !i_ex(obj_writer))
-     {
-+        if (ralseishocked)
-+        {
--        intro = 0.3;
-+            intro = 0.3;
-+        }
-+        else
-+        {
-+            intro = 1;
-+        }
-     }
+@@ -128,15 +132,16 @@
      if (intro == 0.3)
      {
-@@ -132,7 +143,8 @@
+         introtimer++;
+-        if (introtimer == 6)
++        if (introtimer == 6 && ralseishocked)
          {
              msgsetloc(0, "Ninety... Ni-", "obj_elnina_lanino_controller_slash_Step_0_gml_62_0");
              global.typer = 74;
@@ -49,7 +41,12 @@
              heroballoon.side = -1;
              tenna.vspeed = 50;
          }
-@@ -156,10 +168,17 @@
+-        if (introtimer == 24)
++        if (introtimer == 24 || (introtimer == 6 && !ralseishocked))
+         {
+             intro = 1;
+         }
+@@ -156,10 +161,17 @@
      scr_speaker("tenna");
      global.typer = 80;
      global.fc = 22;

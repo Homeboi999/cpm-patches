@@ -1,10 +1,57 @@
 --- a/Code/gml_Object_obj_lanino_enemy_Step_0.gml
 +++ b/Code/gml_Object_obj_lanino_enemy_Step_0.gml
-@@ -97,6 +97,7 @@
+@@ -35,13 +35,14 @@
      }
-     if (actcon == 20 || actconsus == 20 || actconral == 20)
+     if (acting == 200 && actcon == 0)
+     {
++        var ilovetv_count = obj_battlecontroller.chartotal;
+         with (obj_writer)
+         {
+             if (reachedend)
+             {
+                 if (obj_elnina_lanino_controller.ilovetv_increased == false)
+                 {
+-                    obj_elnina_lanino_controller.ilovetv_increase = 3;
++                    obj_elnina_lanino_controller.ilovetv_increase = min(3, obj_elnina_lanino_controller.ilovetv_increase + ilovetv_count);
+                 }
+             }
+         }
+@@ -49,7 +50,7 @@
+         {
+             if (obj_elnina_lanino_controller.ilovetv_increased == false)
+             {
+-                obj_elnina_lanino_controller.ilovetv_increase = 3;
++                obj_elnina_lanino_controller.ilovetv_increase = min(3, obj_elnina_lanino_controller.ilovetv_increase + ilovetv_count);
+             }
+             if (obj_elnina_lanino_controller.ilovetv_increase == 0)
+             {
+@@ -95,12 +96,28 @@
+         }
+         obj_elnina_lanino_controller.ilovetv_increase++;
+     }
++    if (actingnoe == 1 && actconnoe == 1)
++    {
++        msgset(0, "* Noelle said \"I Love TV!\"/%");
++        scr_simultext("noelle");
++        if (simulordernoe == 0)
++        {
++            actconnoe = 20;
++        }
++        else
++        {
++            actconnoe = 0;
++        }
++        obj_elnina_lanino_controller.ilovetv_increase++;
++    }
+-    if (actcon == 20 || actconsus == 20 || actconral == 20)
++    if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
      {
 +        scr_nextact_simul();
          if (scr_terminate_writer())
          {
              actconsus = -1;
+             actconral = -1;
++            actconnoe = -1;
+             actcon = 1;
+         }
+     }

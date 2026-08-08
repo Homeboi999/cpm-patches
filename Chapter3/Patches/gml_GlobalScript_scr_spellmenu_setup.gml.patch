@@ -1,18 +1,18 @@
 --- a/Code/gml_GlobalScript_scr_spellmenu_setup.gml
 +++ b/Code/gml_GlobalScript_scr_spellmenu_setup.gml
-@@ -11,93 +11,112 @@
+@@ -11,93 +11,116 @@
      }
      for (__i = 0; __i < 3; __i++)
      {
 +        global.battleactcount[__i] = 0;
 +        if (global.flag[34] == 0)
 +        {
--        for (__fj = 0; __fj < 6; __fj++)
 +            for (__fj = 0; __fj < 6; __fj++)
--        {
+-        for (__fj = 0; __fj < 6; __fj++)
 +            {
--            global.battlespell[__i][__fj] = 0;
+-        {
 +                global.battlespell[__i][__fj] = 0;
+-            global.battlespell[__i][__fj] = 0;
 +                global.battlespellspecial[__i][__fj] = 0;
 -            if (global.char[__i] == 1)
 +                if (global.char[__i] == 1)
@@ -168,6 +168,10 @@
 -                        global.battlespellname[__i][__fj] = stringsetloc("N-Action", "scr_monstersetup_slash_scr_monstersetup_gml_1061_0");
 +                            global.battlespellname[__i][__fj] = stringsetloc("N-Action", "scr_monstersetup_slash_scr_monstersetup_gml_1061_0");
 -                    }
++                        }
++                        if (__actnamecheck && global.chapter == 3 && i_ex(obj_elnina_lanino_controller))
++                        {
++                            global.battlespellname[__i][__fj] = stringset("ILoveTV");
 +                        }
 -                    global.battlespelldesc[__i][__fj] = global.actdescnoe[0][__fj];
 +                        global.battlespelldesc[__i][__fj] = global.actdescnoe[0][__fj];
