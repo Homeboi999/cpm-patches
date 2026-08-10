@@ -1,0 +1,23 @@
+--- a/Code/gml_Object_obj_kk_enemy_Create_0.gml
++++ b/Code/gml_Object_obj_kk_enemy_Create_0.gml
+@@ -32,4 +32,20 @@
+ dancetimer = 0;
+ dance_index = 4;
+ updatetimer = 0;
++partysize = 0;
++kriscount = 0;
++for (var i = 0; i < 3; i++)
++{
++    if (global.char[i] == 0)
++    {
++        continue;
++    }
++    partysize++;
++    if (global.char[i] == 1)
++    {
++        kriscount++;
++    }
++}
++actchange = false;
++danceallneeded = partysize <= 1 || (partysize == 2 && kriscount == 0);
+ 

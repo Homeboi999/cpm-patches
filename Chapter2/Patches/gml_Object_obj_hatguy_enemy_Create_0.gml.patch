@@ -8,3 +8,24 @@
  heal = 0;
  learnedAct = false;
  helpusattack = 0;
+@@ -19,4 +20,20 @@
+ siner2 = 10;
+ musicalnotetimer = 0;
+ hurtstate2 = 0;
++partysize = 0;
++kriscount = 0;
++for (var i = 0; i < 3; i++)
++{
++    if (global.char[i] == 0)
++    {
++        continue;
++    }
++    partysize++;
++    if (global.char[i] == 1)
++    {
++        kriscount++;
++    }
++}
++actchange = false;
++danceallneeded = partysize <= 1 || (partysize == 2 && kriscount == 0);
+ 

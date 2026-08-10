@@ -166,7 +166,7 @@
 +                drawsus = havechar[1] == 1;
 +                drawral = havechar[2] == 1;
 +                drawnoe = havechar[3] == 1;
-+                charoffset = 1;
++                charoffset = 0;
 +                break;
 +        }
 +        var available_result = scr_actactor_available(chartime);

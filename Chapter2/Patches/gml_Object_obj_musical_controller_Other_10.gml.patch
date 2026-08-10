@@ -1,13 +1,25 @@
 --- a/Code/gml_Object_obj_musical_controller_Other_10.gml
 +++ b/Code/gml_Object_obj_musical_controller_Other_10.gml
-@@ -16,6 +16,10 @@
+@@ -4,15 +4,19 @@
+ var b = 1;
+ if (global.flag[34] == 0)
+ {
+-    if (global.hp[1] < 1)
++    if (scr_havechar(1) && global.hp[1] < 1)
      {
          b = 0;
      }
-+    if (global.hp[4] < 1)
+-    if (global.hp[2] < 1)
++    if (scr_havechar(2) && global.hp[2] < 1)
+     {
+         b = 0;
+     }
+-    if (global.hp[3] < 1)
++    if (scr_havechar(3) && global.hp[3] < 1)
 +    {
 +        b = 0;
 +    }
- }
- if (b == 0)
- {
++    if (scr_havechar(4) && global.hp[4] < 1)
+     {
+         b = 0;
+     }

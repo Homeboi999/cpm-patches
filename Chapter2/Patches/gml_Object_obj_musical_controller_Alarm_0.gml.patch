@@ -5,33 +5,38 @@
      exit;
  }
 -if ((global.hp[1] <= 0 && happyfeetscene == 0) || (obj_sweet_enemy.actCounter > 3 && happyfeetscene == 0))
-+if ((global.hp[1] <= 0 && happyfeetscene == 0) || (obj_sweet_enemy.actCounter > 3 && happyfeetscene == 0) || (obj_sweet_enemy.turns > 3 && !scr_havechar(1) && happyfeetscene == 0))
++if ((global.hp[1] <= 0 && happyfeetscene == 0) || (obj_sweet_enemy.actCounter > 3 && happyfeetscene == 0) || (obj_sweet_enemy.turns > 3 && !scr_havechar(1) && happyfeetscene == 0 && !(global.char[0] == 0 && global.char[1] == 0 && global.char[2] == 0)))
  {
      with (obj_battlecontroller)
      {
-@@ -24,13 +24,23 @@
+@@ -22,15 +22,25 @@
+     }
+     obj_sweet_enemy.dancecon = 1;
      obj_sweet_enemy.postattackscene = 1;
-     if (global.hp[2] < 1)
-     {
+-    if (global.hp[2] < 1)
+-    {
 -        star = 1;
++    if (scr_havechar(1) && global.hp[1] < 1)
++    {
++        star = scr_findchar(1);
++        scr_healitemspell(abs(global.hp[1]) + 1);
++    }
++    if (scr_havechar(2) && global.hp[2] < 1)
++    {
 +        star = scr_findchar(2);
          scr_healitemspell(abs(global.hp[2]) + 1);
      }
-     if (global.hp[3] < 1)
+-    if (global.hp[3] < 1)
++    if (scr_havechar(3) && global.hp[3] < 1)
      {
 -        star = 2;
 +        star = scr_findchar(3);
          scr_healitemspell(abs(global.hp[3]) + 1);
 +    }
-+    if (global.hp[4] < 1)
++    if (scr_havechar(4) && global.hp[4] < 1)
 +    {
 +        star = scr_findchar(4);
 +        scr_healitemspell(abs(global.hp[4]) + 1);
-+    }
-+    if (scr_havechar(0))
-+    {
-+        star = 0;
-+        scr_healitemspell(abs(global.hp[1]) + 1);
      }
      exit;
  }

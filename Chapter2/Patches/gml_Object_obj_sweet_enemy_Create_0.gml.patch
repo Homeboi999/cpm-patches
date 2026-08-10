@@ -8,7 +8,7 @@
  letsdance = false;
  letsdance2 = false;
  letsdance3 = false;
-@@ -45,4 +46,31 @@
+@@ -45,4 +46,33 @@
  endcon = 0;
  endtimer = 0;
  simultotal_funny = 0;
@@ -39,4 +39,6 @@
 +        kriscount++;
 +    }
 +}
++actchange = false;
++danceallneeded = partysize <= 1 || (partysize == 2 && kriscount == 0);
  
