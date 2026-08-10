@@ -1,0 +1,16 @@
+--- a/Code/gml_Object_obj_bullet_dice_Other_15.gml
++++ b/Code/gml_Object_obj_bullet_dice_Other_15.gml
+@@ -18,6 +18,13 @@
+                 scr_mercyadd(myself, 35);
+             }
+         }
++        if (enemy[i].highroll)
++        {
++            with (enemy[i])
++            {
++                scr_mercyadd(myself, 35);
++            }
++        }
+     }
+     instance_destroy();
+     exit;

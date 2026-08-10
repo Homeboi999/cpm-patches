@@ -1,6 +1,242 @@
 --- a/Code/gml_Object_obj_pippins_enemy_Step_0.gml
 +++ b/Code/gml_Object_obj_pippins_enemy_Step_0.gml
-@@ -402,11 +402,12 @@
+@@ -40,6 +40,36 @@
+                 }
+             }
+         }
++        else if (highroll && noballoon == -2)
++        {
++            with (obj_pippins_enemy)
++            {
++                if (myself == 0 && image_alpha != 0)
++                {
++                    msgset(0, "(You do know&that makes my&attack stronger...)");
++                    scr_enemyblcon(x - 10, global.monstery[myself] - 10, 10);
++                    noballoon = true;
++                }
++            }
++            with (obj_pippins_enemy)
++            {
++                if (myself == 1 && image_alpha != 0)
++                {
++                    msgsetloc(0, "(This girl...&she boggles&the mind.)", "obj_pippins_enemy_slash_Step_0_gml_28_0");
++                    scr_enemyblcon(x - 10, global.monstery[myself] - 10, 10);
++                    noballoon = true;
++                }
++            }
++            with (obj_pippins_enemy)
++            {
++                if (myself == 2 && image_alpha != 0)
++                {
++                    msgsetloc(0, "(What have you&done, you&yatzy!?)", "obj_pippins_enemy_slash_Step_0_gml_29_0");
++                    scr_enemyblcon(x - 10, global.monstery[myself] - 10, 10);
++                    noballoon = true;
++                }
++            }
++        }
+         else if (noballoon == 0)
+         {
+             rr = choose(0, 1, 2);
+@@ -145,6 +175,10 @@
+             {
+                 cheat = true;
+             }
++            if (diedwithhighroll)
++            {
++                highroll = true;
++            }
+             var diceattackexists = false;
+             for (var i = 0; i < instance_number(obj_dbulletcontroller); i++)
+             {
+@@ -239,8 +273,10 @@
+         bet = false;
+         fixedbet = false;
+         cheat = false;
++        highroll = false;
+         diedwithbet = false;
+         diedwithcheat = false;
++        diedwithhighroll = false;
+     }
+ }
+ if (global.myfight == 3)
+@@ -278,65 +314,70 @@
+         }
+         bet = true;
+     }
+-    if (acting == 3 && actcon == 0)
++    var actnum = 3;
++    if (scr_havechar(2))
+     {
+-        with (obj_monsterparent)
++        if (acting == actnum && actcon == 0)
+         {
++            with (obj_monsterparent)
++            {
+-            scr_monster_make_tired(myself);
++                scr_monster_make_tired(myself);
+-        }
++            }
+-        cheatcount++;
++            cheatcount++;
+-        if (cheatcount == 1)
++            if (cheatcount == 1)
+-        {
++            {
+-            msgsetloc(0, "* Susie drew 4 dots on all the dice! The enemies got TIRED!/%", "obj_pippins_enemy_slash_Step_0_gml_217_0");
++                msgsetloc(0, "* Susie drew 4 dots on all the dice! The enemies got TIRED!/%", "obj_pippins_enemy_slash_Step_0_gml_217_0");
+-            scr_battletext_default();
++                scr_battletext_default();
+-            acting = 3.1;
++                acting = 3.1;
+-            with (obj_pippins_enemy)
++                with (obj_pippins_enemy)
+-            {
+-                cheat = true;
+-            }
+-        }
+-        else
+-        {
+-            var ran = choose(0, 1);
+-            if (krismarker == true && ralseimarker == false)
+-            {
+-                ran = 0;
+-            }
+-            if (krismarker == false && ralseimarker == true)
+-            {
+-                ran = 1;
+-            }
+-            if (ran == 0)
+-            {
+-                msgsetloc(0, "* Susie got bored of cheating and drew a mustache on Ralsei!/%", "obj_pippins_enemy_slash_Step_0_gml_229_0");
+-                if (instance_number(obj_pippins_marker) < 3)
+                 {
+-                    inst = instance_create(obj_heroralsei.x, obj_heroralsei.y, obj_pippins_marker);
+-                    inst.sprite_index = spr_ralsei_mustache2;
+-                    inst.image_xscale = 2;
+-                    inst.image_yscale = 2;
++                    cheat = true;
+                 }
+-                ralseimarker = false;
+             }
+             else
+             {
++                var ran = choose(0, 1);
++                if (krismarker == true && ralseimarker == false)
++                {
++                    ran = 0;
++                }
++                if (krismarker == false && ralseimarker == true)
++                {
++                    ran = 1;
++                }
++                if (ran == 0)
++                {
++                    msgsetloc(0, "* Susie got bored of cheating and drew a mustache on Ralsei!/%", "obj_pippins_enemy_slash_Step_0_gml_229_0");
++                    if (instance_number(obj_pippins_marker) < 3)
++                    {
++                        inst = instance_create(obj_heroralsei.x, obj_heroralsei.y, obj_pippins_marker);
++                        inst.sprite_index = spr_ralsei_mustache2;
++                        inst.image_xscale = 2;
++                        inst.image_yscale = 2;
++                    }
++                    ralseimarker = false;
++                }
++                else
++                {
+-                msgsetloc(0, "* Susie got bored of cheating and drew dead eyes on Kris!/%", "obj_pippins_enemy_slash_Step_0_gml_241_0");
++                    msgsetloc(0, "* Susie got bored of cheating and drew dead eyes on Kris!/%", "obj_pippins_enemy_slash_Step_0_gml_241_0");
+-                if (instance_number(obj_pippins_marker) < 3)
++                    if (instance_number(obj_pippins_marker) < 3)
+-                {
++                    {
+-                    inst = instance_create(obj_herokris.x, obj_herokris.y, obj_pippins_marker);
++                        inst = instance_create(obj_herokris.x, obj_herokris.y, obj_pippins_marker);
+-                    inst.sprite_index = spr_krisb_eye_x;
++                        inst.sprite_index = spr_krisb_eye_x;
+-                    inst.image_xscale = 2;
++                        inst.image_xscale = 2;
+-                    inst.image_yscale = 2;
++                        inst.image_yscale = 2;
+-                }
++                    }
+-                krismarker = true;
++                    krismarker = true;
+-            }
++                }
+-            scr_battletext_default();
++                scr_battletext_default();
+-            actcon = 1;
++                actcon = 1;
+-        }
++            }
+-        with (obj_pippins_enemy)
++            with (obj_pippins_enemy)
+-        {
++            {
+-            global.flag[510]++;
++                global.flag[510]++;
++            }
+         }
++        actnum++;
+     }
+     if (acting >= 3.1 && acting < 3.6)
+     {
+@@ -371,42 +412,47 @@
+         }
+         actcon = 1;
+     }
+-    if (acting == 4 && actcon == 0)
++    if (scr_havechar(3))
+     {
+-        if (global.flag[1044] >= 150)
++        if (acting == actnum && actcon == 0)
+         {
+-            global.flag[1044] -= 150;
+-            bribe = true;
+-            msgsetloc(0, "* You and Ralsei used 150 POINTs to BRIBE the enemy!/%", "obj_pippins_enemy_slash_Step_0_gml_296_0");
+-            scr_battletext_default();
+-            if (global.flag[509] == 0)
++            if (global.flag[1044] >= 150)
+             {
++                global.flag[1044] -= 150;
++                bribe = true;
++                msgsetloc(0, "* You and Ralsei used 150 POINTs to BRIBE the enemy!/%", "obj_pippins_enemy_slash_Step_0_gml_296_0");
++                scr_battletext_default();
++                if (global.flag[509] == 0)
++                {
+-                acting = 4.1;
++                    acting = 4.1;
++                }
++                else
++                {
++                    acting = 4.51;
++                }
++                with (obj_pippins_enemy)
++                {
++                    global.flag[509]++;
++                }
+             }
+             else
+             {
+-                acting = 4.51;
+-            }
+-            with (obj_pippins_enemy)
+-            {
+-                global.flag[509]++;
+-            }
+-        }
+-        else
+-        {
+-            msgsetloc(0, "* You don't have enough points to bribe Pippins!/%", "obj_pippins_enemy_slash_Step_0_gml_324_0");
++                msgsetloc(0, "* You don't have enough points to bribe Pippins!/%", "obj_pippins_enemy_slash_Step_0_gml_324_0");
+-            scr_battletext_default();
++                scr_battletext_default();
+-            actcon = 1;
++                actcon = 1;
++            }
+         }
++        actnum++;
+     }
      if (acting == 4.1 && actcon == 0 && !i_ex(obj_writer))
      {
          global.typer = 74;
@@ -16,7 +252,7 @@
          acting = 4.11;
      }
      if (acting >= 4.11 && acting < 4.6)
-@@ -442,6 +443,7 @@
+@@ -442,6 +488,7 @@
      }
      if (acting == 4.13 && actcon == 0 && talktimer > 15 && (button3_p() || button1_p()))
      {
@@ -24,7 +260,7 @@
          with (obj_writer)
          {
              instance_destroy();
-@@ -450,8 +452,8 @@
+@@ -450,8 +497,8 @@
          global.typer = 74;
          snd_play(snd_bump);
          msgsetloc(0, "W-wait, maybe&I shouldn't...", "obj_pippins_enemy_slash_Step_0_gml_363_0");
@@ -35,7 +271,19 @@
          {
              scr_shakeobj();
          }
-@@ -489,21 +491,23 @@
+@@ -478,7 +525,10 @@
+                 {
+                     if (global.actingtarget[__i] == myself && global.char[__i] > 0)
+                     {
++                        if (global.acting[__i] != 2)
++                        {
+-                        global.acting[__i] = 0;
++                            global.acting[__i] = 0;
++                        }
+                         global.actingsimul[__i] = 0;
+                         global.actingsingle[__i] = 0;
+                         global.faceaction[__i] = 0;
+@@ -489,21 +539,23 @@
              scr_spareanim();
              scr_recruit();
              scr_monsterdefeat();
@@ -63,7 +311,7 @@
          with (obj_writer)
          {
              instance_destroy();
-@@ -514,23 +518,25 @@
+@@ -514,23 +566,25 @@
      }
      if (acting == 4.51 && actcon == 0 && !i_ex(obj_writer))
      {
@@ -95,11 +343,120 @@
          with (obj_writer)
          {
              instance_destroy();
-@@ -603,6 +609,7 @@
+@@ -552,6 +606,53 @@
+         scr_spare(myself);
+         actcon = 1;
      }
-     if (actcon == 20 || actconsus == 20 || actconral == 20)
++    if (scr_havechar(4))
++    {
++        if (acting == actnum && actcon == 0)
++        {
++            highroll = true;
++            for (var __i = 1; __i < 3; __i++)
++            {
++                if (global.monster[__i] == 1)
++                {
++                    scr_mercyadd(__i, 50);
++                }
++            }
++            msgset(0, "* You and Noelle raised the stakes!&* More bullets will spawn next turn!/%");
++            scr_battletext_default();
++            acting = 5.1;
++        }
++        actnum++;
++    }
++    if (acting >= 5.1 && acting < 5.6)
++    {
++        talktimer++;
++    }
++    if (acting == 5.1 && actcon == 0 && !i_ex(obj_writer))
++    {
++        with (obj_writer)
++        {
++            instance_destroy();
++        }
++        talktimer = 0;
++        global.typer = 79;
++        msgset(0, "Who's the highroller&now, idiot!?/%", "obj_pippins_enemy_slash_Step_0_gml_271_0");
++        scr_heroblcon("noelle");
++        acting = 5.2;
++    }
++    if (acting == 5.2 && actcon == 0 && talktimer > 15 && (button3_p() || button1_p()))
++    {
++        with (obj_writer)
++        {
++            instance_destroy();
++        }
++        talktimer = 0;
++        with (obj_pippins_enemy)
++        {
++            noballoon = -2;
++        }
++        actcon = 1;
++    }
+     if (actingsus == 1 && actconsus == 1)
+     {
+         scr_mercyadd(myself, 50);
+@@ -583,7 +684,14 @@
+         if (simultotal == 1)
+         {
+             msgsetloc(0, "* Ralsei swore not to cheat!/", "obj_pippins_enemy_slash_Step_0_gml_464_0");
++            if (scr_havechar(2))
++            {
+-            msgnextloc("* Susie swore to cheat! (That didn't help...)/%", "obj_pippins_enemy_slash_Step_0_gml_465_0");
++                msgnextloc("* Susie swore to cheat! (That didn't help...)/%", "obj_pippins_enemy_slash_Step_0_gml_465_0");
++            }
++            else
++            {
++                msgset(0, global.msg[0] + "%");
++            }
+             scr_battletext_default();
+             actconral = 20;
+         }
+@@ -601,10 +709,45 @@
+             }
+         }
+     }
++    if (actingnoe == 1 && actconnoe == 1)
++    {
++        scr_mercyadd(myself, 50);
++        if (simultotal == 1)
++        {
++            var msg2 = "* Pippins told her to figure it out on her own!/%";
++            if (scr_havechar(3))
++            {
++                msg2 = "* Ralsei explained in detail!/%";
++            }
++            else if (scr_havechar(2))
++            {
++                msg2 = "* Susie made something up!/%";
++            }
++            msgset(0, "* Noelle asked about the rules!&" + msg2);
++            scr_battletext_default();
++            actconnoe = 0;
++            actcon = 1;
++        }
++        else
++        {
++            msgset(0, "* Noelle asked about the rules!");
++            scr_simultext("noelle");
++            if (simulordernoe == 0)
++            {
++                actconnoe = 20;
++            }
++            else
++            {
++                actconnoe = 0;
++            }
++        }
++    }
+-    if (actcon == 20 || actconsus == 20 || actconral == 20)
++    if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
      {
 +        scr_nextact_simul();
          if (scr_terminate_writer())
          {
++            actconnoe = -1;
              actconsus = -1;
+             actconral = -1;
+             actcon = 1;

@@ -25,18 +25,59 @@
  usprite_blush = spr_ralseiu;
  dsprite_blush = spr_ralseid;
  rsprite_blush = spr_ralseir_blush;
-@@ -55,10 +45,10 @@
- pu = parent.usprite;
- for (i = 0; i < 75; i += 1)
- {
+@@ -49,21 +39,40 @@
+     lsprite_blush = spr_ralsei_walk_left_blush;
+ }
+ parent = obj_mainchara;
++if (variable_instance_exists(parent, "dsprite"))
++{
+-pd = parent.dsprite;
++    pd = parent.dsprite;
+-pr = parent.rsprite;
++    pr = parent.rsprite;
+-pl = parent.lsprite;
++    pl = parent.lsprite;
+-pu = parent.usprite;
++    pu = parent.usprite;
+-for (i = 0; i < 75; i += 1)
++    for (i = 0; i < 75; i += 1)
+-{
++    {
 -    remx[i] = parent.x;
++        remx[i] = parent.remx[i];
 -    remy[i] = parent.y;
++        remy[i] = parent.remy[i];
 -    facing[i] = global.facing;
++        facing[i] = parent.facing[i];
 -    sliding[i] = 0;
-+    remx[i] = parent.remx[i];
-+    remy[i] = parent.remy[i];
-+    facing[i] = parent.facing[i];
-+    sliding[i] = parent.wassliding[i];
-     special[i] = 0;
-     if (global.chapter == 4 && room == room_dw_rotating_tower)
-     {
++        sliding[i] = parent.wassliding[i];
+-    special[i] = 0;
++        special[i] = 0;
+-    if (global.chapter == 4 && room == room_dw_rotating_tower)
++        if (global.chapter == 4 && room == room_dw_rotating_tower)
+-    {
++        {
+-        tower_angle[i] = 0;
++            tower_angle[i] = 0;
+-        tower_yoffset[i] = 480;
++            tower_yoffset[i] = 480;
++        }
++    }
++}
++else
++{
++    for (i = 0; i < 75; i += 1)
++    {
++        remx[i] = parent.x;
++        remy[i] = parent.y;
++        facing[i] = global.facing;
++        sliding[i] = 0;
++        special[i] = 0;
++        if (global.chapter == 4 && room == room_dw_rotating_tower)
++        {
++            tower_angle[i] = 0;
++            tower_yoffset[i] = 480;
++        }
+     }
+ }
+ depth = parent.depth + 5;

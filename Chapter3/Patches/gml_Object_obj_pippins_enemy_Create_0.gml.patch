@@ -1,0 +1,20 @@
+--- a/Code/gml_Object_obj_pippins_enemy_Create_0.gml
++++ b/Code/gml_Object_obj_pippins_enemy_Create_0.gml
+@@ -10,9 +10,11 @@
+ bet = false;
+ fixedbet = false;
+ cheat = false;
++highroll = false;
+ krismarker = false;
+ ralseimarker = false;
+ cheatcount = 0;
++highrollcount = 0;
+ balloonorder = 0;
+ ballooncon = 0;
+ balloonend = 1;
+@@ -36,4 +38,5 @@
+ sharpshootballoon = false;
+ diedwithbet = false;
+ diedwithcheat = false;
++diedwithhighroll = false;
+ 

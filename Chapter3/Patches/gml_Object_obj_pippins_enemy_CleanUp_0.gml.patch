@@ -1,0 +1,14 @@
+--- a/Code/gml_Object_obj_pippins_enemy_CleanUp_0.gml
++++ b/Code/gml_Object_obj_pippins_enemy_CleanUp_0.gml
+@@ -12,4 +12,11 @@
+         diedwithcheat = true;
+     }
+ }
++if (highroll == true)
++{
++    with (obj_pippins_enemy)
++    {
++        diedwithhighroll = true;
++    }
++}
+ 

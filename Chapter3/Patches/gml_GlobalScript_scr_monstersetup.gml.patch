@@ -111,7 +111,61 @@
      }
      if (global.monstertype[myself] == 57)
      {
-@@ -1711,13 +1739,16 @@
+@@ -1675,22 +1703,43 @@
+         global.canact[myself][1] = 1;
+         global.actdesc[myself][1] = stringsetloc("Touch#Green#4 Mercy", "scr_monstersetup_slash_scr_monstersetup_gml_265_0");
+         global.actsimul[myself][1] = 1;
++        var actnum = 2;
++        if (scr_havechar(2))
++        {
+-        global.actname[myself][2] = stringsetloc("Cheat", "scr_monstersetup_slash_scr_monstersetup_gml_274_0");
++            global.actname[myself][actnum] = stringsetloc("Cheat", "scr_monstersetup_slash_scr_monstersetup_gml_274_0");
+-        global.canact[myself][2] = 1;
++            global.canact[myself][actnum] = 1;
+-        global.actactor[myself][2] = 2;
++            global.actactor[myself][actnum] = 2;
+-        global.actdesc[myself][2] = stringsetloc("TIRE#Enemies,#but...", "scr_monstersetup_slash_scr_monstersetup_gml_277_0");
++            global.actdesc[myself][actnum] = stringsetloc("TIRE#Enemies,#but...", "scr_monstersetup_slash_scr_monstersetup_gml_277_0");
+-        global.actsimul[myself][2] = 0;
++            global.actsimul[myself][actnum] = 0;
++            actnum++;
++        }
++        if (scr_havechar(3))
++        {
+-        global.actname[myself][3] = stringsetloc("Bribe", "scr_monstersetup_slash_scr_monstersetup_gml_280_0_b");
++            global.actname[myself][actnum] = stringsetloc("Bribe", "scr_monstersetup_slash_scr_monstersetup_gml_280_0_b");
+-        global.canact[myself][3] = 1;
++            global.canact[myself][actnum] = 1;
+-        global.actactor[myself][3] = 3;
++            global.actactor[myself][actnum] = 3;
+-        global.actdesc[myself][3] = stringsetloc("Give 150#POINTs#to SPARE", "scr_monstersetup_slash_scr_monstersetup_gml_283_0");
++            global.actdesc[myself][actnum] = stringsetloc("Give 150#POINTs#to SPARE", "scr_monstersetup_slash_scr_monstersetup_gml_283_0");
+-        global.actsimul[myself][3] = 0;
++            global.actsimul[myself][actnum] = 0;
++            actnum++;
++        }
++        if (scr_havechar(4))
++        {
++            global.actname[myself][actnum] = stringset("HighRoll");
++            global.canact[myself][actnum] = 1;
++            global.actactor[myself][actnum] = 5;
++            global.actdesc[myself][actnum] = stringset("50% MERCY#to all,#but...");
++            global.actsimul[myself][actnum] = 0;
++            actnum++;
++        }
+         global.canactsus[myself][0] = 1;
+         global.actnamesus[myself][0] = stringsetloc("S-Action", "scr_monstersetup_slash_scr_monstersetup_gml_287_0");
+         global.actsimulsus[myself][0] = 1;
+         global.canactral[myself][0] = 1;
+         global.actnameral[myself][0] = stringsetloc("R-Action", "scr_monstersetup_slash_scr_monstersetup_gml_291_0_b");
+         global.actsimulral[myself][0] = 1;
++        global.canactnoe[myself][0] = 1;
++        global.actnamenoe[myself][0] = stringset("N-Action");
++        global.actsimulnoe[myself][0] = 1;
+     }
+     if (global.monstertype[myself] == 60)
+     {
+@@ -1711,13 +1760,16 @@
          global.actname[myself][1] = stringsetloc("ILoveTV", "scr_monstersetup_slash_scr_monstersetup_gml_2033_0");
          global.canact[myself][2] = 1;
          global.actname[myself][2] = stringsetloc("ILoveTVX", "scr_monstersetup_slash_scr_monstersetup_gml_2036_0");
@@ -129,7 +183,7 @@
      }
      if (global.monstertype[myself] == 61)
      {
-@@ -1738,13 +1769,16 @@
+@@ -1738,13 +1790,16 @@
          global.actname[myself][1] = stringsetloc("ILoveTV", "scr_monstersetup_slash_scr_monstersetup_gml_2069_0");
          global.canact[myself][2] = 1;
          global.actname[myself][2] = stringsetloc("ILoveTVX", "scr_monstersetup_slash_scr_monstersetup_gml_2072_0");
@@ -147,7 +201,7 @@
      }
      if (global.monstertype[myself] == 102)
      {
-@@ -1786,34 +1820,73 @@
+@@ -1786,34 +1841,73 @@
          var _minigame_string = stringsetloc("Minigame", "scr_monstersetup_slash_scr_monstersetup_gml_2239_0");
          var _playgame_string = stringsetloc("Play#game", "scr_monstersetup_slash_scr_monstersetup_gml_2240_0");
          var _earnscore_string = stringsetloc("Earn#score", "scr_monstersetup_slash_scr_monstersetup_gml_2241_0");
@@ -249,7 +303,7 @@
          var havejeviltail = false;
          if (global.chararmor1[1] == 7 || global.chararmor2[1] == 7 || global.chararmor1[2] == 7 || global.chararmor2[2] == 7 || global.chararmor1[3] == 7 || global.chararmor2[3] == 7)
          {
-@@ -1839,6 +1912,10 @@
+@@ -1839,6 +1933,10 @@
          global.actnameral[myself][1] = stringsetloc("PopularBoy", "scr_monstersetup_slash_scr_monstersetup_gml_2158_0");
          global.actdescral[myself][1] = stringsetloc("Ralsei#HPChange#=score", "scr_monstersetup_slash_scr_monstersetup_gml_2321_0");
          global.actsimulral[myself][1] = 0;
@@ -260,7 +314,7 @@
      }
      if (global.monstertype[myself] == 104)
      {
-@@ -1863,6 +1940,9 @@
+@@ -1863,6 +1961,9 @@
          global.canactral[myself][0] = 1;
          global.actnameral[myself][0] = stringsetloc("R-Action", "scr_monstersetup_slash_scr_monstersetup_gml_2187_0");
          global.actsimulral[myself][0] = 0;
@@ -270,7 +324,7 @@
      }
      if (global.monstertype[myself] == 105)
      {
-@@ -1878,12 +1958,12 @@
+@@ -1878,12 +1979,12 @@
          global.mercymax[myself] = 100;
          global.canact[myself][0] = 1;
          global.actname[myself][0] = stringsetloc("ILOVETV", "scr_monstersetup_slash_scr_monstersetup_gml_2205_0");

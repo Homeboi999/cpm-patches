@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_bullet_dice_Create_0.gml
++++ b/Code/gml_Object_obj_bullet_dice_Create_0.gml
+@@ -18,6 +18,8 @@
+ timer = 0;
+ slowed_rotate = 0;
+ slowdown = false;
++slowed = false;
++slowfactor = 0.5;
+ gotopointer = false;
+ turn_rate = 0.1;
+ queue_lock = false;

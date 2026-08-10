@@ -1,0 +1,125 @@
+--- a/Code/gml_Object_obj_dbulletcontroller_Step_0.gml
++++ b/Code/gml_Object_obj_dbulletcontroller_Step_0.gml
+@@ -2379,6 +2379,10 @@
+             {
+                 special = 4;
+             }
++            if (enemy[i].highroll)
++            {
++                special = 8;
++            }
+             if (image_alpha != 0)
+             {
+                 pippins_count_true++;
+@@ -2400,6 +2404,10 @@
+         {
+             n = 3;
+         }
++        if (special == 8)
++        {
++            n += 2;
++        }
+         if (special == 2)
+         {
+             n++;
+@@ -2431,6 +2439,10 @@
+             {
+                 sprite_index = spr_bullet_dice_all4s;
+             }
++            if (flags & 8)
++            {
++                slowdown = true;
++            }
+             target = other.target;
+             damage = 66;
+             if (other.difficulty == 0)
+@@ -2451,6 +2463,14 @@
+                 {
+                     image_index = 5;
+                 }
++                if (other.n == 4)
++                {
++                    image_index = 1;
++                }
++                if (other.n == 5)
++                {
++                    image_index = 5;
++                }
+             }
+             if (other.difficulty == 1)
+             {
+@@ -2470,6 +2490,14 @@
+                 {
+                     image_index = 8;
+                 }
++                if (other.n == 4)
++                {
++                    image_index = 5;
++                }
++                if (other.n == 5)
++                {
++                    image_index = 12;
++                }
+             }
+             if (other.difficulty == 2)
+             {
+@@ -2489,6 +2517,14 @@
+                 {
+                     image_index = 5;
+                 }
++                if (other.n == 4)
++                {
++                    image_index = 1;
++                }
++                if (other.n == 5)
++                {
++                    image_index = 5;
++                }
+             }
+             if (other.difficulty == 3)
+             {
+@@ -2508,6 +2544,14 @@
+                 {
+                     image_index = 8;
+                 }
++                if (other.n == 4)
++                {
++                    image_index = 12;
++                }
++                if (other.n == 5)
++                {
++                    image_index = 5;
++                }
+             }
+             if (other.difficulty == 4)
+             {
+@@ -2527,6 +2571,14 @@
+                 {
+                     image_index = 12;
+                 }
++                if (other.n == 4)
++                {
++                    image_index = 5;
++                }
++                if (other.n == 5)
++                {
++                    image_index = 12;
++                }
+             }
+             if (other.difficulty == 5)
+             {
+@@ -2545,6 +2597,14 @@
+                 if (other.n == 3)
+                 {
+                     image_index = 8;
++                }
++                if (other.n == 4)
++                {
++                    image_index = 8;
++                }
++                if (other.n == 5)
++                {
++                    image_index = 5;
+                 }
+             }
+         }

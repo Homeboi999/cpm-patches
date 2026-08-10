@@ -1,0 +1,52 @@
+--- a/Code/gml_Object_obj_bullet_dice_Step_0.gml
++++ b/Code/gml_Object_obj_bullet_dice_Step_0.gml
+@@ -6,17 +6,26 @@
+     hspeed *= -0.9;
+     x += hspeed;
+ }
++var realfactor = slowdown ? slowfactor : 1;
+ if (decel == -1)
+ {
++    if (slowdown && !slowed)
++    {
++        realfactor = slowfactor;
++        rot_speed *= slowfactor;
++        hspeed *= slowfactor;
++        vspeed *= slowfactor;
++        slowed = true;
++    }
+-    vspeed = scr_approach(vspeed, max_speed, 0.4);
++    vspeed = scr_approach(vspeed, max_speed, 0.4 * realfactor);
+ }
+ else if (decel > 0)
+ {
+-    speed = scr_approach_curve(speed, 0, decel);
++    speed = scr_approach_curve(speed, 0, decel * realfactor);
+-    hspeed = scr_approach_curve(hspeed, 0, sqr(decel));
++    hspeed = scr_approach_curve(hspeed, 0, sqr(decel * realfactor));
+-    rot_speed = scr_approach_curve(rot_speed, 0, decel);
++    rot_speed = scr_approach_curve(rot_speed, 0, decel * realfactor);
+     decel--;
+-    if (decel == 10)
++    if (decel == (10 * (1 / realfactor)))
+     {
+         queue_lock = true;
+     }
+@@ -24,7 +33,7 @@
+     {
+         if (alarm[1] == -1)
+         {
+-            alarm[1] = 20;
++            alarm[1] = 20 * (1 / realfactor);
+         }
+         decel = -2;
+     }
+@@ -34,7 +43,7 @@
+     vspeed *= choose(-0.3, -0.6, -0.8, -1);
+     if (decel == -1)
+     {
+-        decel = 15;
++        decel = 15 * (1 / realfactor);
+     }
+     snd_play(snd_bump);
+ }
