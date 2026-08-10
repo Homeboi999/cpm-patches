@@ -80,7 +80,7 @@
          }
          if (button1_p() && onebuffer < 0 && twobuffer < 0)
          {
-@@ -851,9 +877,10 @@
+@@ -848,9 +874,10 @@
              }
              if (button1_p() && onebuffer < 0)
              {
@@ -92,7 +92,7 @@
                      {
                          global.submenu = 22;
                          onebuffer = 2;
-@@ -879,28 +906,22 @@
+@@ -876,28 +903,22 @@
              if (left_p())
              {
                  movenoise = 1;
@@ -127,7 +127,7 @@
              }
              global.charselect = global.submenucoord[20];
              if (button1_p() && onebuffer < 0)
-@@ -1101,10 +1122,16 @@
+@@ -1098,10 +1119,16 @@
          }
          if (global.submenu == 2)
          {
@@ -144,7 +144,7 @@
                  if (itemtarget == 1)
                  {
                      selectnoise = 1;
-@@ -1486,20 +1513,12 @@
+@@ -1476,20 +1503,12 @@
              if (left_p())
              {
                  movenoise = 1;
@@ -167,7 +167,7 @@
              }
              global.charselect = global.submenucoord[10];
              if (button1_p() && onebuffer < 0)
-@@ -1562,6 +1581,15 @@
+@@ -1552,6 +1571,15 @@
              selectnoise = 1;
              onebuffer = 2;
              global.menuno = global.menucoord[0] + 1;
@@ -183,7 +183,7 @@
              if (global.menuno == 1)
              {
                  global.submenu = 1;
-@@ -1576,7 +1604,7 @@
+@@ -1566,7 +1594,7 @@
                  scr_armorinfo_all();
                  scr_weaponinfo_mine();
                  scr_armorinfo_mine();
@@ -192,7 +192,7 @@
                  global.submenucoord[11] = 0;
                  global.submenucoord[12] = 0;
                  global.submenucoord[13] = 0;
-@@ -1593,6 +1621,10 @@
+@@ -1583,6 +1611,10 @@
              if (global.menuno == 4)
              {
                  global.submenu = 20;

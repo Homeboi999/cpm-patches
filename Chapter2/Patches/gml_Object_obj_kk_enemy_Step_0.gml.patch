@@ -1,22 +1,181 @@
 --- a/Code/gml_Object_obj_kk_enemy_Step_0.gml
 +++ b/Code/gml_Object_obj_kk_enemy_Step_0.gml
-@@ -183,7 +183,14 @@
+@@ -173,65 +173,140 @@
+         msgsetloc(0, "* K_K - The silly one. Looks up to the other two./%", "obj_kk_enemy_slash_Step_0_gml_151_0");
+         scr_battletext_default();
+     }
+-    if (acting == 2 && actcon == 0)
++    if (danceallneeded && actchange)
+     {
+-        if (instance_exists(obj_sweet_enemy))
++        if ((acting > 1 && actcon == 0) || (actingsus == 1 && actconsus == 1) || (actingral == 1 && actconral == 1) || (actingnoe == 1 && actconnoe == 1))
+         {
+             with (obj_sweet_enemy)
+             {
+                 actCounter++;
+             }
+-        }
+-        danceCounter = 1;
+-        scr_act_charsprite("kris", spr_kris_dance, 0.16, 1);
+-        if (simultotal == 1 || (global.lang == "ja" && obj_sweet_enemy.simultotal_funny == 1))
+-        {
+-            msgsetloc(0, "* You danced!/", "obj_kk_enemy_slash_Step_0_gml_172_0");
+-            msgnextloc("* K_K got lost in the groove!/%", "obj_kk_enemy_slash_Step_0_gml_173_0");
+-            scr_battletext_default();
+-            actcon = 4;
+-            alarm[4] = 10;
+-        }
+-        else
+-        {
++            obj_sweet_enemy.dancing = true;
++            obj_sweet_enemy.danceCounter = 1;
++            obj_hatguy_enemy.dancing = true;
++            obj_hatguy_enemy.danceCounter = 1;
+             dancing = true;
+-            if (groove == 0)
+-            {
+-                if (global.lang == "ja")
+-                {
+-                    msgsetloc(0, "* You danced with K_K!/", "obj_kk_enemy_slash_Step_0_gml_184_0");
+-                    msgnextloc("* K_K  got lost in the groove!/%", "obj_kk_enemy_slash_Step_0_gml_185_0");
+-                }
+-                else
+-                {
+-                    msgsetloc(0, "* You danced with K_K!/%", "obj_kk_enemy_slash_Step_0_gml_190_0");
+-                }
+-                groove = 1;
++            danceCounter = 1;
++            var name = "Someone";
++            for (var i = 0; i < 3; i++)
++            {
++                switch (global.char[i])
++                {
++                    case 1:
++                        scr_act_charsprite(i, spr_kris_dance, 0.16, 1);
++                        if (i == global.currentactingchar)
++                        {
++                            name = "You";
++                        }
++                        break;
++                    case 2:
++                        scr_act_charsprite(i, spr_susie_dance, 0.16, 1);
++                        if (i == global.currentactingchar)
++                        {
++                            name = "Susie";
++                        }
++                        break;
++                    case 3:
++                        scr_act_charsprite(i, spr_ralsei_dance, 0.16, 1);
++                        if (i == global.currentactingchar)
++                        {
++                            name = "Ralsei";
++                        }
++                        break;
++                    case 4:
++                        scr_act_charsprite(i, spr_noelle_dance, 0.16, 1);
++                        if (i == global.currentactingchar)
++                        {
++                            name = "Noelle";
++                        }
++                        break;
++                }
++                global.acting[i] = 0;
++                global.actingsingle[i] = 0;
++            }
++            if (partysize > 1)
++            {
++                name = "Everyone";
++            }
++            msgset(0, "* " + name + " danced with Sweet, Cap'n and K_K at the same time!/%");
++            scr_battletext_default();
++            actcon = 1;
++            actconsus = 0;
++            actconral = 0;
++            actconnoe = 0;
++        }
++    }
++    var actnum = 2;
++    if (kriscount <= 1 || actchange)
++    {
++        if (acting == actnum && actcon == 0)
++        {
++            if (instance_exists(obj_sweet_enemy))
++            {
++                with (obj_sweet_enemy)
++                {
++                    actCounter++;
++                }
++            }
++            danceCounter = 1;
++            if (global.lang != "ja")
++            {
++                scr_act_charsprite_simul("kris", 867, 0.16, 1);
+             }
+             else
+             {
+-                msgsetloc(0, "* You danced with K_K!/%", "obj_kk_enemy_slash_Step_0_gml_190_0");
++                scr_act_charsprite(global.currentactingchar, spr_kris_dance, 0.16, 1);
+             }
+-            if (global.lang == "ja")
++            if (simultotal == 1 || (global.lang == "ja" && obj_sweet_enemy.simultotal_funny == 1))
+             {
++                msgsetloc(0, "* You danced!/", "obj_kk_enemy_slash_Step_0_gml_172_0");
++                msgnextloc("* K_K got lost in the groove!/%", "obj_kk_enemy_slash_Step_0_gml_173_0");
+                 scr_battletext_default();
+-                actcon = 20;
++                actcon = 4;
++                alarm[4] = 10;
+             }
+             else
+             {
+-                scr_simultext("kris");
++                dancing = true;
+-                if (simulorderkri == 0)
++                if (groove == 0)
+                 {
++                    if (global.lang == "ja")
++                    {
++                        msgsetloc(0, "* You danced with K_K!/", "obj_kk_enemy_slash_Step_0_gml_184_0");
++                        msgnextloc("* K_K  got lost in the groove!/%", "obj_kk_enemy_slash_Step_0_gml_185_0");
++                    }
++                    else
++                    {
++                        msgsetloc(0, "* You danced with K_K!/%", "obj_kk_enemy_slash_Step_0_gml_190_0");
++                    }
++                    groove = 1;
++                }
++                else
++                {
++                    msgsetloc(0, "* You danced with K_K!/%", "obj_kk_enemy_slash_Step_0_gml_190_0");
++                }
++                if (global.lang == "ja")
++                {
++                    scr_battletext_default();
+                     actcon = 20;
+                 }
+                 else
+                 {
++                    scr_simultext("kris");
++                    if (simulorderkri == 0)
++                    {
++                        actcon = 20;
++                    }
++                    else
++                    {
+-                    actcon = 0;
++                        actcon = 0;
++                    }
+                 }
              }
          }
-         danceCounter = 1;
-+        if (global.lang != "ja")
-+        {
-+            scr_act_charsprite_simul("kris", 867, 0.16, 1);
-+        }
-+        else
-+        {
--        scr_act_charsprite("kris", spr_kris_dance, 0.16, 1);
-+            scr_act_charsprite(global.currentactingchar, spr_kris_dance, 0.16, 1);
-+        }
-         if (simultotal == 1 || (global.lang == "ja" && obj_sweet_enemy.simultotal_funny == 1))
++        actnum++;
+     }
+-    if (acting == 3 && actcon == 0)
++    if (acting == actnum && actcon == 0)
+     {
+         if (instance_exists(obj_sweet_enemy))
          {
-             msgsetloc(0, "* You danced!/", "obj_kk_enemy_slash_Step_0_gml_172_0");
-@@ -241,9 +248,24 @@
+@@ -241,9 +316,24 @@
              }
          }
          danceCounter = 2;
@@ -44,7 +203,7 @@
          msgsetloc(0, "* Everyone danced with K_K! They're totally lost in the groove!/%", "obj_kk_enemy_slash_Step_0_gml_221_0");
          scr_battletext_default();
          actcon = 4;
-@@ -258,7 +280,14 @@
+@@ -258,7 +348,14 @@
      {
          dancing = true;
          danceCounter = 1;
@@ -60,7 +219,7 @@
          if (groove == 0)
          {
              if (global.lang == "ja")
-@@ -298,7 +327,14 @@
+@@ -298,7 +395,14 @@
      {
          dancing = true;
          danceCounter = 1;
@@ -76,7 +235,7 @@
          if (groove == 0)
          {
              if (global.lang == "ja")
-@@ -334,6 +370,53 @@
+@@ -334,6 +438,53 @@
              }
          }
      }
@@ -86,7 +245,7 @@
 +        danceCounter = 1;
 +        if (global.lang != "ja")
 +        {
-+            scr_act_charsprite_simul("noelle", 3383, 0.16, 1);
++            scr_act_charsprite_simul("noelle", 3384, 0.16, 1);
 +        }
 +        else
 +        {
@@ -130,7 +289,7 @@
      if (actcon == 1 && !instance_exists(obj_writer))
      {
          if (obj_sweet_enemy.dancing == true && obj_kk_enemy.dancing == true && obj_hatguy_enemy.dancing == true && obj_sweet_enemy.endcon == 0)
-@@ -346,7 +429,7 @@
+@@ -346,7 +497,7 @@
              acting = 0;
              with (obj_marker)
              {
@@ -139,7 +298,7 @@
                  {
                      instance_destroy();
                      with (obj_heroparent)
-@@ -364,8 +447,9 @@
+@@ -364,8 +515,9 @@
              scr_nextact();
          }
      }
@@ -150,7 +309,7 @@
          if (scr_terminate_writer())
          {
              if (obj_sweet_enemy.dancing == true && obj_kk_enemy.dancing == true && obj_hatguy_enemy.dancing == true && obj_sweet_enemy.endcon == 0)
-@@ -376,7 +460,7 @@
+@@ -376,7 +528,7 @@
              {
                  with (obj_marker)
                  {
@@ -159,7 +318,7 @@
                      {
                          instance_destroy();
                          with (obj_heroparent)
-@@ -391,6 +475,7 @@
+@@ -391,6 +543,7 @@
                          }
                      }
                  }

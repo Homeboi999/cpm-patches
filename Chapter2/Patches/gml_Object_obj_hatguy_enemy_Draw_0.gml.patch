@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_hatguy_enemy_Draw_0.gml
++++ b/Code/gml_Object_obj_hatguy_enemy_Draw_0.gml
+@@ -43,7 +43,7 @@
+     siner2++;
+     var xoffset = 0;
+     var yoffset = 0;
+-    if (global.charturn > 0 && global.bmenuno == 13)
++    if (global.bmenuno == 13)
+     {
+         xoffset = 140;
+         yoffset = 6;
