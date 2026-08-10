@@ -8,3 +8,35 @@
  letsdance = false;
  letsdance2 = false;
  letsdance3 = false;
+@@ -45,4 +46,31 @@
+ endcon = 0;
+ endtimer = 0;
+ simultotal_funny = 0;
++partysize = 0;
++kriscount = 0;
++unique_xactions = 0;
++if (scr_havechar(2))
++{
++    unique_xactions++;
++}
++if (scr_havechar(3))
++{
++    unique_xactions++;
++}
++if (scr_havechar(4))
++{
++    unique_xactions++;
++}
++for (var i = 0; i < 3; i++)
++{
++    if (global.char[i] == 0)
++    {
++        continue;
++    }
++    partysize++;
++    if (global.char[i] == 1)
++    {
++        kriscount++;
++    }
++}
+ 

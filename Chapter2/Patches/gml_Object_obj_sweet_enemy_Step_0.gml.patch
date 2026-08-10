@@ -17,16 +17,30 @@
      else
      {
          scr_speaker("susie");
-@@ -265,8 +275,37 @@
+@@ -265,8 +275,48 @@
  }
  if (dancecon == 1.1 && !instance_exists(obj_writer))
  {
+-    susi = scr_act_charsprite("susie", spr_susie_dance, 0.16, 1);
+-    susi.depth = obj_heroralsei.depth + 1;
 +    if (scr_havechar(2) && scr_havechar(3))
 +    {
--    susi = scr_act_charsprite("susie", spr_susie_dance, 0.16, 1);
-+        susi = scr_act_charsprite(scr_findchar(2), spr_susie_dance, 0.16, 1);
--    susi.depth = obj_heroralsei.depth + 1;
-+        susi.depth = obj_heroralsei.depth + 1;
++        for (var i = 0; i < 3; i++)
++        {
++            if (instance_exists(_charactsprite[i]))
++            {
++                continue;
++            }
++            switch (global.char[i])
++            {
++                case 2:
++                    susi = scr_act_charsprite(i, spr_susie_dance, 0.16, 1);
++                    break;
++                case 4:
++                    scr_act_charsprite(i, spr_noelle_dance, 0.16, 1);
++                    break;
++            }
++        }
 +    }
 +    else
 +    {
@@ -39,9 +53,6 @@
 +            }
 +            switch (global.char[i])
 +            {
-+                case 1:
-+                    scr_act_charsprite(i, spr_kris_dance, 0.16, 1);
-+                    break;
 +                case 2:
 +                    scr_act_charsprite(i, spr_susie_dance, 0.16, 1);
 +                    break;
@@ -57,7 +68,7 @@
      with (obj_afterimage)
      {
          instance_destroy();
-@@ -277,38 +316,134 @@
+@@ -277,38 +327,170 @@
      }
      global.flag[34] = 0;
      learnedhowtoact = 1;
@@ -92,96 +103,130 @@
      scr_speaker("none");
 +    if (learnActCutscene)
 +    {
++        if (scr_havechar(4))
++        {
++            msgset(0, "* Susie and Noelle learned \\cSS-Action\\cW and \\cNN-Action\\cW! They can ACT from their \\cYMAGIC\\cW menus!/");
++        }
++        else
++        {
 -    msgsetloc(0, "* Susie learned \\cSS-Action\\cW! She can ACT from her \\cYMAGIC\\cW menu!/", "obj_sweet_enemy_slash_Step_0_gml_266_0");
-+        msgsetloc(0, "* Susie learned \\cSS-Action\\cW! She can ACT from her \\cYMAGIC\\cW menu!/", "obj_sweet_enemy_slash_Step_0_gml_266_0");
++            msgsetloc(0, "* Susie learned \\cSS-Action\\cW! She can ACT from her \\cYMAGIC\\cW menu!/", "obj_sweet_enemy_slash_Step_0_gml_266_0");
++        }
 -    scr_anyface_next("ralsei", "L");
 +        scr_anyface_next("ralsei", "L");
 -    msgnextloc("\\EL* S-Susie^1, I-I don't think you should.../%", "obj_sweet_enemy_slash_Step_0_gml_268_0");
 +        msgnextloc("\\EL* S-Susie^1, I-I don't think you should.../%", "obj_sweet_enemy_slash_Step_0_gml_268_0");
--    scr_battletext();
-+        scr_battletext();
--    dancecon = 1.15;
-+        dancecon = 1.15;
++    }
++    else if (unique_xactions == 3)
++    {
++        var learntext = "";
++        for (var pos = 0; pos < 3; pos++)
++        {
++            if (pos > 0)
++            {
++                learntext += "&";
++            }
++            switch (global.char[pos])
++            {
++                case 2:
++                    learntext += "Susie learned \\cSS-Action\\cW!";
++                    break;
++                case 3:
++                    learntext += "Ralsei learned \\cVR-Action\\cW!";
++                    break;
++                case 4:
++                    learntext += "Noelle learned \\cNN-Action\\cW!";
++                    break;
++                default:
++                    learntext += "Someone learned something!";
++                    break;
++            }
++        }
++        msgset(0, "* " + learntext + "/");
++        msgnext("* They can ACT from their \\cYMAGIC\\cW menus!/%");
++    }
++    else if (unique_xactions == 2)
++    {
++        var total = 0;
++        var chars = [0, 0];
++        var charnames = ["", ""];
++        var actnames = ["", ""];
++        for (var pos = 0; pos < 3; pos++)
++        {
++            if (total >= 2)
++            {
++                break;
++            }
++            if (global.char[pos] <= 1)
++            {
++                continue;
++            }
++            if (total == 1 && global.char[pos] == chars[0])
++            {
++                continue;
++            }
++            switch (global.char[pos])
++            {
++                case 2:
++                    chars[total] = 2;
++                    charnames[total] = "Susie";
++                    actnames[total] = "\\cSS-Action\\cW";
++                    total++;
++                    break;
++                case 3:
++                    chars[total] = 3;
++                    charnames[total] = "Ralsei";
++                    actnames[total] = "\\cVR-Action\\cW";
++                    total++;
++                    break;
++                case 4:
++                    chars[total] = 4;
++                    charnames[total] = "Noelle";
++                    actnames[total] = "\\cNN-Action\\cW";
++                    total++;
++                    break;
++            }
++        }
++        var message = "* ";
++        message += (charnames[0] + " and " + charnames[1] + " learned ");
++        message += (actnames[0] + " and " + actnames[1] + "! ");
++        message += "They can ACT from their \\cYMAGIC\\cW menus!/%";
++        msgset(0, message);
++    }
++    else if (unique_xactions == 1)
++    {
++        var char = 0;
++        for (var pos = 0; pos < 3; pos++)
++        {
++            if (global.char[pos] > 1)
++            {
++                char = global.char[pos];
++                break;
++            }
++        }
++        switch (char)
++        {
++            case 2:
++                msgsetloc(0, "* Susie learned \\cSS-Action\\cW! She can ACT from her \\cYMAGIC\\cW menu!/", "obj_sweet_enemy_slash_Step_0_gml_266_0");
++                global.msg[0] += "%";
++                break;
++            case 3:
++                msgset(0, "* Ralsei learned \\cVR-Action\\cW! He can ACT from his \\cYMAGIC\\cW menu!/%");
++                break;
++            case 4:
++                msgset(0, "* Noelle learned \\cNN-Action\\cW! She can ACT from her \\cYMAGIC\\cW menu!/%");
++                break;
++            default:
++                msgset(0, "* Other party members can now ACT from their \\cYMAGIC\\cW menus!/%");
++                break;
++        }
 +    }
 +    else
 +    {
-+        var charNames = "";
-+        var pronoun1 = "";
-+        var pronoun2 = "";
-+        var actNames = "";
-+        var prevChar = 0;
-+        var s = "";
-+        switch (global.char[1])
-+        {
-+            case 2:
-+                charNames = "Susie";
-+                actNames = "\\cSS-Action\\cW";
-+                pronoun1 = "She";
-+                pronoun2 = "her";
-+                prevChar = 2;
-+                break;
-+            case 3:
-+                charNames = "Ralsei";
-+                actNames = "\\cVR-Action\\cW";
-+                pronoun1 = "He";
-+                pronoun2 = "his";
-+                prevChar = 3;
-+                break;
-+            case 4:
-+                charNames = "Noelle";
-+                actNames = "\\cNN-Action\\cW";
-+                pronoun1 = "She";
-+                pronoun2 = "her";
-+                prevChar = 4;
-+                break;
-+        }
-+        switch (global.char[2])
-+        {
-+            case 2:
-+                if (prevChar != 2)
-+                {
-+                    charNames = charNames + " and Susie";
-+                    actNames = actNames + " and \\cSS-Action\\cW";
-+                    pronoun1 = "They";
-+                    pronoun2 = "their";
-+                    prevChar = 2;
-+                    s = "s";
-+                }
-+                break;
-+            case 3:
-+                if (prevChar != 3)
-+                {
-+                    charNames = charNames + " and Ralsei";
-+                    actNames = actNames + " and \\cVR-Action\\cW";
-+                    pronoun1 = "They";
-+                    pronoun2 = "their";
-+                    prevChar = 3;
-+                    s = "s";
-+                }
-+                break;
-+            case 4:
-+                if (prevChar != 4)
-+                {
-+                    charNames = charNames + " and Noelle";
-+                    actNames = actNames + " and \\cNN-Action\\cW";
-+                    pronoun1 = "They";
-+                    pronoun2 = "their";
-+                    prevChar = 4;
-+                    s = "s";
-+                }
-+                break;
-+        }
-+        if (prevChar != 0)
-+        {
-+            msgset(0, "* " + charNames + " learned " + actNames + "! " + pronoun1 + " can ACT from " + pronoun2 + " \\cYMAGIC\\cW menu" + s + "!/%");
-+        }
-+        else
-+        {
-+            msgset(0, "* Other party members can now ACT from their \\cYMAGIC\\cW menus!/%");
-+        }
-+        scr_battletext();
-+        dancecon = 1.15;
++        msgset(0, "* Other party members can now ACT from their \\cYMAGIC\\cW menus!/%");
 +    }
+     scr_battletext();
+     dancecon = 1.15;
  }
  if (dancecon == 1.15 && !instance_exists(obj_writer))
  {
@@ -193,7 +238,7 @@
 -        move_towards_point(obj_heroralsei.x + 100, obj_heroralsei.y + 5, 10);
 +            move_towards_point(obj_heroralsei.x + 100, obj_heroralsei.y + 5, 10);
 +        }
-+        if (susi.y >= (obj_heroralsei.y - 3))
++        if ((susi.y >= (obj_heroralsei.y - 3) && susi.ystart <= (obj_heroralsei.y - 3)) || (susi.y <= (obj_heroralsei.y + 13) && susi.ystart >= (obj_heroralsei.y + 13)))
 +        {
 +            susi.x = obj_heroralsei.x + 100;
 +            susi.y = obj_heroralsei.y + 5;
@@ -216,16 +261,18 @@
      }
  }
  if (dancecon == 1.2 || (dancescenetimer > 0 && dancescenetimer <= 146))
-@@ -317,7 +452,7 @@
+@@ -316,8 +498,8 @@
+     dancescenetimer++;
      if (dancescenetimer == 1)
      {
-         scr_act_charsprite_end();
+-        scr_act_charsprite_end();
 -        susi = scr_act_charsprite("susie", spr_susie_dance, 0.5, 1);
-+        susi = scr_act_charsprite(scr_findchar(2), spr_susie_dance, 0.5, 1);
++        susi.image_index = 0;
++        susi.image_speed = 0.5;
          susi.depth = obj_heroralsei.depth + 1;
          with (obj_afterimage)
          {
-@@ -335,7 +470,7 @@
+@@ -335,7 +517,7 @@
      {
          susi.hspeed = 10;
          dancescenetimer2 = 1;
@@ -234,33 +281,64 @@
          with (obj_afterimage)
          {
              instance_destroy();
-@@ -400,10 +535,10 @@
+@@ -399,11 +581,8 @@
+ }
  if (dancecon == 2.3 && !instance_exists(obj_writer))
  {
-     scr_act_charsprite_end();
+-    scr_act_charsprite_end();
 -    susi = scr_act_charsprite("susie", spr_susie_dance, 0.5, 1);
-+    susi = scr_act_charsprite(scr_findchar(2), spr_susie_dance, 0.5, 1);
      susi.x = obj_heroralsei.x + 80;
      susi.y = obj_heroralsei.y + 5;
 -    scr_act_charsprite("ralsei", spr_ralsei_hurt_fixed, 0.16, 1);
-+    scr_act_charsprite(scr_findchar(3), spr_ralsei_hurt_fixed, 0.16, 1);
      with (obj_afterimage)
      {
          instance_destroy();
-@@ -418,10 +553,10 @@
+@@ -416,12 +595,19 @@
+ }
+ if (dancecon == 2.4 && !instance_exists(obj_writer))
  {
-     scr_act_charsprite_end();
+-    scr_act_charsprite_end();
      scr_speaker("none");
 -    susi = scr_act_charsprite("susie", spr_susie_dance, 0.16, 1);
-+    susi = scr_act_charsprite(scr_findchar(2), spr_susie_dance, 0.16, 1);
++    susi.image_speed = 0.16;
      susi.x = obj_heroralsei.x + 100;
      susi.y = obj_heroralsei.y + 5;
 -    scr_act_charsprite("ralsei", spr_ralsei_dance, 0.16, 1);
-+    scr_act_charsprite(scr_findchar(3), spr_ralsei_dance, 0.16, 1);
++    rals.sprite_index = spr_ralsei_dance;
++    rals.image_speed = 0.16;
++    for (var i = 0; i < 10; i++)
++    {
++        if (instance_exists(_charactsprite[i]))
++        {
++            _charactsprite[i].image_index = 0;
++        }
++    }
      msgsetloc(0, "* (Susie made Ralsei learn \\cVR-Action\\cW even though he didn't want to!)/", "obj_sweet_enemy_slash_Step_0_gml_354_0");
      scr_anyface_next("ralsei", "U");
      msgnextloc("\\EU* (I... I'm sorry^1, Kris!!!)/%", "obj_sweet_enemy_slash_Step_0_gml_356_0");
-@@ -493,7 +628,14 @@
+@@ -456,15 +642,16 @@
+ }
+ if (dancecon == 2.5 && !instance_exists(obj_writer))
+ {
++    var susietarget = global.charinstance[scr_findchar(2)];
+     with (susi)
+     {
+-        move_towards_point(obj_herosusie.x, obj_herosusie.y, 10);
+-        depth = obj_heroralsei.depth + 1;
++        move_towards_point(susietarget.x, susietarget.y, 10);
++        depth = susietarget.depth;
+     }
+-    if (susi.y <= (obj_herosusie.y + 8))
++    if (susi.y <= (susietarget.y + 8))
+     {
+-        susi.x = obj_herosusie.x;
++        susi.x = susietarget.x;
+-        susi.y = obj_herosusie.y;
++        susi.y = susietarget.y;
+         susi.speed = 0;
+         dancecon = 4;
+     }
+@@ -493,7 +680,14 @@
      {
          actCounter++;
          danceCounter = 1;
@@ -276,7 +354,7 @@
          if (simultotal == 1 || (global.lang == "ja" && simultotal_funny == 1))
          {
              msgsetloc(0, "* You danced!/", "obj_sweet_enemy_slash_Step_0_gml_422_0");
-@@ -545,9 +687,24 @@
+@@ -545,9 +739,24 @@
      {
          actCounter++;
          danceCounter = 2;
@@ -304,7 +382,7 @@
          msgsetloc(0, "* Everyone danced with Sweet! They're totally lost in the groove!/%", "obj_sweet_enemy_slash_Step_0_gml_470_0");
          scr_battletext_default();
          actcon = 4;
-@@ -562,7 +719,14 @@
+@@ -562,7 +771,14 @@
      {
          dancing = true;
          danceCounter = 1;
@@ -320,7 +398,7 @@
          if (groove == 0)
          {
              if (global.lang == "ja")
-@@ -602,7 +766,14 @@
+@@ -602,7 +818,14 @@
      {
          dancing = true;
          danceCounter = 1;
@@ -336,7 +414,7 @@
          if (groove == 0)
          {
              if (global.lang == "ja")
-@@ -638,6 +809,53 @@
+@@ -638,6 +861,53 @@
              }
          }
      }
@@ -346,7 +424,7 @@
 +        danceCounter = 1;
 +        if (global.lang != "ja")
 +        {
-+            scr_act_charsprite_simul("noelle", 3383, 0.16, 1);
++            scr_act_charsprite_simul("noelle", 3384, 0.16, 1);
 +        }
 +        else
 +        {
@@ -390,7 +468,7 @@
      if (actcon == 1 && !instance_exists(obj_writer))
      {
          if (obj_sweet_enemy.dancing == true && obj_kk_enemy.dancing == true && obj_hatguy_enemy.dancing == true && endcon == 0)
-@@ -648,7 +866,7 @@
+@@ -648,7 +918,7 @@
          {
              with (obj_marker)
              {
@@ -399,7 +477,7 @@
                  {
                      instance_destroy();
                      with (obj_heroparent)
-@@ -666,8 +884,9 @@
+@@ -666,8 +936,9 @@
              scr_nextact();
          }
      }
@@ -410,7 +488,7 @@
          if (scr_terminate_writer())
          {
              if (obj_sweet_enemy.dancing == true && obj_kk_enemy.dancing == true && obj_hatguy_enemy.dancing == true && endcon == 0)
-@@ -678,7 +897,7 @@
+@@ -678,7 +949,7 @@
              {
                  with (obj_marker)
                  {
@@ -419,7 +497,7 @@
                      {
                          instance_destroy();
                          with (obj_heroparent)
-@@ -693,6 +912,7 @@
+@@ -693,6 +964,7 @@
                          }
                      }
                  }
