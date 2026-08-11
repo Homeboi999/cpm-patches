@@ -65,7 +65,7 @@ function scr_set_chara_sprites(arg0, arg1)
                 dsprite = spr_noelle_walk_down_dw;
                 rsprite = spr_noelle_walk_right_dw;
                 lsprite = spr_noelle_walk_left_dw;
-                slidesprite = spr_noelle_walk_up_dw;
+                slidesprite = spr_noelle_slide;
                 climbsprite = 276;
                 if (global.darkzone == 0)
                 {

@@ -1,0 +1,23 @@
+{
+  "Name": "spr_noelle_slide",
+  "index": 4996,
+  "ImageFile": "spr_noelle_slide_strip3.png",
+  "FrameCount": 3,
+  "Size": [
+    29,
+    52
+  ],
+  "Margins": [
+    0,
+    28,
+    51,
+    0
+  ],
+  "BoundingBoxMode": 0,
+  "Origin": [
+    0,
+    0
+  ],
+  "playbackSpeed": 1,
+  "playbackType": 1
+}
