@@ -13,7 +13,15 @@
  if (audience_goes_away == true)
  {
      with (obj_tenna_enemy_bg)
-@@ -701,38 +692,47 @@
+@@ -693,6 +684,7 @@
+             smashcutwithouttakingdamage = 1;
+         }
+         popularboy = false;
++        popularboycount = 0;
+         gothit = false;
+         bet = false;
+         minigameactivated = false;
+@@ -701,38 +693,50 @@
          smashcuthurt = 0;
          pointsmultiplierthisturn = 5;
          totalfails = 0;
@@ -29,67 +37,79 @@
          {
              resetralsei = false;
              snd_play(snd_wing);
+-            obj_heroralsei.x = obj_heroralsei.xstart;
+-            obj_heroralsei.y = obj_heroralsei.ystart;
+-            with (obj_heroralsei)
+-            {
+-                normalsprite = spr_ralsei_walk_right;
+-                idlesprite = spr_ralsei_idle;
+-                defendsprite = spr_ralsei_defend;
+-                hurtsprite = spr_ralsei_hurt_fixed;
+-                attackreadysprite = spr_ralsei_attackready;
+-                attacksprite = spr_ralsei_attack;
+-                itemsprite = spr_ralsei_item;
+-                itemreadysprite = spr_ralsei_itemready;
+-                spellreadysprite = spr_ralsei_spellready;
+-                spellsprite = spr_ralsei_spell;
+-                defeatsprite = spr_ralsei_defeat;
+-                victorysprite = spr_ralsei_victory;
+-                actreadysprite = spr_ralsei_actready;
+-                actsprite = spr_ralsei_act;
+-            }
+-            repeat (26)
+-            {
+-                puff = instance_create(((obj_heroralsei.x + 50) - 60) + irandom(80), (obj_heroralsei.y - 90) + 90 + irandom(100), obj_animation);
+-                puff.depth = obj_heroralsei.depth - 1;
+-                puff.sprite_index = spr_susiezilla_houseexplosion;
+-                puff.image_speed = 0.5;
+-                puff.image_xscale = 1;
+-                puff.image_yscale = 1;
 +            if (instance_exists(obj_heroralsei))
 +            {
--            obj_heroralsei.x = obj_heroralsei.xstart;
-+                obj_heroralsei.x = obj_heroralsei.xstart;
--            obj_heroralsei.y = obj_heroralsei.ystart;
-+                obj_heroralsei.y = obj_heroralsei.ystart;
--            with (obj_heroralsei)
 +                with (obj_heroralsei)
--            {
 +                {
--                normalsprite = spr_ralsei_walk_right;
++                    x = xstart;
++                    y = ystart;
++                    if (idlesprite == spr_gameshow_drowningRalsei_ralsei_origin_edit)
++                    {
++                        repeat (26)
++                        {
++                            puff = instance_create(((x + 50) - 60) + irandom(80), (y - 90) + 90 + irandom(100), obj_animation);
++                            puff.depth = depth - 1;
++                            puff.sprite_index = spr_susiezilla_houseexplosion;
++                            puff.image_speed = 0.5;
++                            puff.image_xscale = 1;
++                            puff.image_yscale = 1;
++                        }
++                    }
 +                    normalsprite = spr_ralsei_walk_right;
--                idlesprite = spr_ralsei_idle;
 +                    idlesprite = spr_ralsei_idle;
--                defendsprite = spr_ralsei_defend;
 +                    defendsprite = spr_ralsei_defend;
--                hurtsprite = spr_ralsei_hurt_fixed;
 +                    hurtsprite = spr_ralsei_hurt_fixed;
--                attackreadysprite = spr_ralsei_attackready;
 +                    attackreadysprite = spr_ralsei_attackready;
--                attacksprite = spr_ralsei_attack;
 +                    attacksprite = spr_ralsei_attack;
--                itemsprite = spr_ralsei_item;
 +                    itemsprite = spr_ralsei_item;
--                itemreadysprite = spr_ralsei_itemready;
 +                    itemreadysprite = spr_ralsei_itemready;
--                spellreadysprite = spr_ralsei_spellready;
 +                    spellreadysprite = spr_ralsei_spellready;
--                spellsprite = spr_ralsei_spell;
 +                    spellsprite = spr_ralsei_spell;
--                defeatsprite = spr_ralsei_defeat;
 +                    defeatsprite = spr_ralsei_defeat;
--                victorysprite = spr_ralsei_victory;
 +                    victorysprite = spr_ralsei_victory;
--                actreadysprite = spr_ralsei_actready;
 +                    actreadysprite = spr_ralsei_actready;
--                actsprite = spr_ralsei_act;
 +                    actsprite = spr_ralsei_act;
--            }
-+                }
--            repeat (26)
-+                repeat (26)
--            {
-+                {
--                puff = instance_create(((obj_heroralsei.x + 50) - 60) + irandom(80), (obj_heroralsei.y - 90) + 90 + irandom(100), obj_animation);
-+                    puff = instance_create(((obj_heroralsei.x + 50) - 60) + irandom(80), (obj_heroralsei.y - 90) + 90 + irandom(100), obj_animation);
--                puff.depth = obj_heroralsei.depth - 1;
-+                    puff.depth = obj_heroralsei.depth - 1;
--                puff.sprite_index = spr_susiezilla_houseexplosion;
-+                    puff.sprite_index = spr_susiezilla_houseexplosion;
--                puff.image_speed = 0.5;
-+                    puff.image_speed = 0.5;
--                puff.image_xscale = 1;
-+                    puff.image_xscale = 1;
--                puff.image_yscale = 1;
-+                    puff.image_yscale = 1;
 +                }
              }
          }
          if (lancercheat == true)
-@@ -795,7 +795,7 @@
+@@ -752,7 +756,7 @@
+ }
+ if (popularboy == true && ralseihpprev != global.hp[3])
+ {
+-    obj_tenna_enemy_bg.addscore += round(abs(ralseihpprev - global.hp[3]) * 0.17);
++    obj_tenna_enemy_bg.addscore += (round(abs(ralseihpprev - global.hp[3]) * 0.17) * popularboycount);
+ }
+ ralseihpprev = global.hp[3];
+ if (lancerspin == true && lancermarker.y > (cameray() + 40) && lancermarker.gravity > 0)
+@@ -795,7 +799,7 @@
          }
      }
      var havejeviltail = false;
@@ -98,7 +118,7 @@
      {
          havejeviltail = true;
      }
-@@ -806,7 +806,7 @@
+@@ -806,7 +810,7 @@
          {
              msgsetloc(0, "* TENNA - Despite his size, sadly, he's quite fragile./%", "obj_tenna_enemy_slash_Step_0_gml_446_0");
          }
@@ -107,7 +127,7 @@
          {
              msgsetloc(0, "* TENNA - THE [Tragic businesmen] THAT [Died] AT THE [Now] OF THE [Story]/%", "obj_tenna_enemy_slash_Step_0_gml_449_0");
          }
-@@ -816,30 +816,32 @@
+@@ -816,30 +820,32 @@
          }
          scr_battletext_default();
      }
@@ -163,7 +183,7 @@
          }
          acting = 5.1;
      }
-@@ -856,7 +858,7 @@
+@@ -856,9 +862,13 @@
              minigametimecon = 1;
          }
      }
@@ -171,8 +191,41 @@
 +    if (acting == (act_solominigame + 1) && actcon == 0)
      {
          var _ilovetvstring = stringsetloc("* You said \"I Love TV\"!", "obj_tenna_enemy_slash_Step_0_gml_502_0");
++        if (simulcountkri > 1)
++        {
++            extrapoints += 10;
++        }
          if (simultotal == 1)
-@@ -942,13 +944,13 @@
+         {
+             msgset(0, _ilovetvstring + "/%");
+@@ -885,7 +895,7 @@
+         with (obj_tenna_enemy_bg)
+         {
+             addscore += (20 + other.extrapoints);
+-            if (global.hp[2] < 1 && global.hp[3] < 1)
++            if (scr_heroupcount() <= 1)
+             {
+                 addscore += 20;
+             }
+@@ -907,7 +917,7 @@
+             with (obj_tenna_enemy_bg)
+             {
+                 addscore += 10;
+-                if (global.hp[1] < 1)
++                if (scr_havechar(1) && global.hp[1] < 1)
+                 {
+                     addscore += 10;
+                 }
+@@ -916,7 +926,7 @@
+         else
+         {
+             extrapoints += 10;
+-            if (global.hp[1] < 1)
++            if (scr_havechar(1) && global.hp[1] < 1)
+             {
+                 extrapoints += 10;
+             }
+@@ -942,13 +952,13 @@
              }
          }
      }
@@ -190,7 +243,7 @@
          if (havejeviltail)
          {
              betamount = 30;
-@@ -980,9 +982,9 @@
+@@ -980,9 +990,9 @@
      if (actingsus == 2.1 && !i_ex(obj_writer))
      {
          scr_act_charsprite_end();
@@ -203,10 +256,73 @@
          actingsus = 2.2;
          actcon = 1;
          actconsus = 0;
-@@ -1080,12 +1082,56 @@
-         actconral = 0;
-         global.actsimulral[myself][1] = 1;
+@@ -994,7 +1004,7 @@
+             with (obj_tenna_enemy_bg)
+             {
+                 addscore += 10;
+-                if (global.hp[1] < 1)
++                if (scr_havechar(1) && global.hp[1] < 1)
+                 {
+                     addscore += 10;
+                 }
+@@ -1003,7 +1013,7 @@
+         else
+         {
+             extrapoints += 10;
+-            if (global.hp[1] < 1)
++            if (scr_havechar(1) && global.hp[1] < 1)
+             {
+                 extrapoints += 10;
+             }
+@@ -1032,6 +1042,7 @@
+     if (actingral == 2 && actconral == 1)
+     {
+         popularboy = true;
++        popularboycount++;
+         saveralseihp = global.hp[3];
+         instance_create(x, y, obj_popularboy_act);
+         snd_play(snd_drumroll);
+@@ -1041,17 +1052,10 @@
+         }
+         else
+         {
+-            if (simulorderral == 0)
+-            {
+-                actconral = 20;
+-            }
+-            else
+-            {
+-                actconral = 0;
+-            }
+             actingral = 2.3;
+             msgsetloc(0, "* Ralsei's HP linked to points!/%", "obj_tenna_enemy_slash_Step_0_gml_602_0");
+             scr_simultext("ralsei");
++            actconral = 20;
+         }
      }
+     if (actingral == 2.1 && !i_ex(obj_popularboy_act))
+@@ -1061,6 +1065,16 @@
+             actingral = 2.2;
+             msgsetloc(0, "* Ralsei became the center of attention!/%", "obj_tenna_enemy_slash_Step_0_gml_612_0");
+             scr_battletext_default();
++            global.actsimulral[myself][1] = 1;
++            var i = global.currentactingchar + 1;
++            while (i < 3)
++            {
++                if (global.char[i] == 3 && global.actingsingle[i] == 1 && global.actingchoice[i] == 1)
++                {
++                    global.actingsimul[i] = 1;
++                }
++                i++;
++            }
+         }
+     }
+     if (actingral == 2.2 && !i_ex(obj_writer))
+@@ -1078,14 +1092,57 @@
+         actingral = 2.3;
+         actcon = 1;
+         actconral = 0;
++    }
 +    if (actingnoe == 1 && actconnoe == 1)
 +    {
 +        if (acting != 6.1)
@@ -214,7 +330,7 @@
 +            with (obj_tenna_enemy_bg)
 +            {
 +                addscore += 10;
-+                if (global.hp[1] < 1)
++                if (scr_havechar(1) && global.hp[1] < 1)
 +                {
 +                    addscore += 10;
 +                }
@@ -223,7 +339,7 @@
 +        else
 +        {
 +            extrapoints += 10;
-+            if (global.hp[1] < 1)
++            if (scr_havechar(1) && global.hp[1] < 1)
 +            {
 +                extrapoints += 10;
 +            }
@@ -247,8 +363,9 @@
 +            {
 +                actconnoe = 0;
 +            }
+-        global.actsimulral[myself][1] = 1;
 +        }
-+    }
+     }
 -    if (actcon == 20 || actconsus == 20 || actconral == 20)
 +    if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
      {
@@ -261,7 +378,7 @@
              actcon = 1;
              with (obj_face)
              {
-@@ -1332,6 +1378,13 @@
+@@ -1332,6 +1389,13 @@
              if (global.hp[3] > 0)
              {
                  with (obj_heroralsei)

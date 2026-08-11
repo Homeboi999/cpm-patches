@@ -1,0 +1,61 @@
+--- a/Code/gml_Object_obj_popularboy_act_Create_0.gml
++++ b/Code/gml_Object_obj_popularboy_act_Create_0.gml
+@@ -3,20 +3,42 @@
+ spotlight2_len = 150;
+ spotlight2_angle = 180;
+ timer = 0;
++ralseiinstance = -4;
++if (global.actsimulral[obj_tenna_enemy.myself][1] == 0)
++{
++    ralseiinstance = global.charinstance[global.currentactingchar];
++}
++else
++{
++    for (var i = 0; i < 3; i++)
++    {
++        if (global.char[i] == 3 && obj_tenna_enemy.simulorder[i] != -1 && obj_tenna_enemy.simuldone[i] == 0)
++        {
++            if (global.actingchoice[i] == 1)
++            {
++                ralseiinstance = global.charinstance[i];
++                break;
++            }
++        }
++    }
++}
++if (i_ex(ralseiinstance))
++{
+-ralseix = obj_heroralsei.x + 50;
++    ralseix = ralseiinstance.x + 50;
+-ralseiy = obj_heroralsei.y - 90;
++    ralseiy = ralseiinstance.y - 90;
+-spotlightmarker1 = instance_create(x, y, obj_marker);
++    spotlightmarker1 = instance_create(x, y, obj_marker);
+-spotlightmarker1.sprite_index = spr_tenna_popularboy_spotlight;
++    spotlightmarker1.sprite_index = spr_tenna_popularboy_spotlight;
+-spotlightmarker1.image_speed = 0;
++    spotlightmarker1.image_speed = 0;
+-spotlightmarker1.image_alpha = 0;
++    spotlightmarker1.image_alpha = 0;
+-spotlightmarker1.image_xscale = 2;
++    spotlightmarker1.image_xscale = 2;
+-spotlightmarker1.image_yscale = 2;
++    spotlightmarker1.image_yscale = 2;
+-spotlightmarker1.depth = obj_heroralsei.depth + 1;
++    spotlightmarker1.depth = ralseiinstance.depth + 1;
+-spotlightmarker2 = instance_create(x, y, obj_marker);
++    spotlightmarker2 = instance_create(x, y, obj_marker);
+-spotlightmarker2.sprite_index = spr_tenna_popularboy_spotlight;
++    spotlightmarker2.sprite_index = spr_tenna_popularboy_spotlight;
+-spotlightmarker2.image_speed = 0;
++    spotlightmarker2.image_speed = 0;
+-spotlightmarker2.image_alpha = 0;
++    spotlightmarker2.image_alpha = 0;
+-spotlightmarker2.image_xscale = 2;
++    spotlightmarker2.image_xscale = 2;
+-spotlightmarker2.image_yscale = 2;
++    spotlightmarker2.image_yscale = 2;
+-spotlightmarker2.depth = obj_heroralsei.depth + 1;
++    spotlightmarker2.depth = ralseiinstance.depth + 1;
++}
+ 

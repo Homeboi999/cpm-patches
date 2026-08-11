@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_popularboy_act_Step_0.gml
++++ b/Code/gml_Object_obj_popularboy_act_Step_0.gml
+@@ -32,7 +32,7 @@
+         puff.image_xscale = 1;
+         puff.image_yscale = 1;
+     }
+-    with (obj_heroralsei)
++    with (ralseiinstance)
+     {
+         normalsprite = spr_gameshow_drowningRalsei_ralsei_origin_edit;
+         idlesprite = spr_gameshow_drowningRalsei_ralsei_origin_edit;

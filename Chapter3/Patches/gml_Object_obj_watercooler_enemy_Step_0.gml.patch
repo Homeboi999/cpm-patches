@@ -1,5 +1,14 @@
 --- a/Code/gml_Object_obj_watercooler_enemy_Step_0.gml
 +++ b/Code/gml_Object_obj_watercooler_enemy_Step_0.gml
+@@ -253,7 +253,7 @@
+         }
+         scr_battletext_default();
+         global.canact[myself][2] = 1;
+-        global.actactor[myself][2] = 4;
++        global.actactor[myself][2] = 6;
+         global.actname[myself][2] = stringsetloc("ActCool", "obj_watercooler_enemy_slash_Step_0_gml_207_0");
+         if (amimoonwarmer)
+         {
 @@ -270,15 +270,31 @@
      }
      if (acting == 3 && actcon == 0)
@@ -33,7 +42,7 @@
 +                        scr_battle_sprite_set(pos, spr_ralsei_zoosuit_cup, 0, true);
 +                        break;
 +                    case 4:
-+                        scr_battle_sprite_set(pos, spr_noelle_zoosuit, 0, true);
++                        scr_battle_sprite_set(pos, spr_noelle_zoosuit_cup, 0, true);
 +                        break;
 +                }
 +            }
@@ -62,11 +71,146 @@
              thissprite = idlesprite;
          }
      }
-@@ -465,6 +475,7 @@
+@@ -346,7 +356,7 @@
+         }
+         scr_battletext_default();
+         acting = 4.1;
+-        if (global.hp[2] < 1 && global.hp[3] < 1)
++        if (scr_heroupcount() <= 1)
+         {
+             scr_mercyadd(myself, 14);
+         }
+@@ -369,17 +379,30 @@
+     {
+         var _text = "_";
+         var rand = choose(0, 1, 2);
++        var otherchar = global.char[(rand + 4) % 3];
+-        if (rand == 0)
++        if (otherchar == 0)
++        {
++            otherchar = global.char[(rand + 5) % 3];
++            if (otherchar == 0)
++            {
++                otherchar = 2;
++            }
++        }
++        if (otherchar == 1)
++        {
++            _text = stringsetloc("* Susie puts cups on Kris's eyes!", "obj_watercooler_enemy_slash_Step_0_gml_315_0");
++        }
++        if (otherchar == 2)
+         {
+             _text = stringsetloc("* Susie face-crushes a cup!!", "obj_watercooler_enemy_slash_Step_0_gml_313_0");
+         }
+-        if (rand == 1)
++        if (otherchar == 3)
+         {
+             _text = stringsetloc("* Susie puts cups on Ralsei!", "obj_watercooler_enemy_slash_Step_0_gml_314_0");
+         }
+-        if (rand == 2)
++        if (otherchar == 4)
+         {
+-            _text = stringsetloc("* Susie puts cups on Kris's eyes!", "obj_watercooler_enemy_slash_Step_0_gml_315_0");
++            _text = stringset("* Susie puts cups on Noelle!");
+         }
+         if (simultotal == 1)
+         {
+@@ -405,7 +428,7 @@
+             }
+         }
+         actingsus = 0;
+-        if (global.hp[1] < 1 && global.hp[3] < 1)
++        if (scr_heroupcount() <= 1)
+         {
+             scr_mercyadd(myself, 10);
+         }
+@@ -424,7 +447,14 @@
+         }
+         if (rand == 1)
+         {
++            if (scr_havechar(2))
++            {
++                _text = stringset("* Ralsei cleans a spill!!");
++            }
++            else
++            {
+-            _text = stringsetloc("* Ralsei cleans Susie's spill!!", "obj_watercooler_enemy_slash_Step_0_gml_342_0");
++                _text = stringsetloc("* Ralsei cleans Susie's spill!!", "obj_watercooler_enemy_slash_Step_0_gml_342_0");
++            }
+         }
+         if (rand == 2)
+         {
+@@ -454,7 +484,56 @@
+             }
+         }
+         actingral = 0;
++        if (scr_heroupcount() <= 1)
++        {
++            scr_mercyadd(myself, 10);
++        }
++        else
++        {
++            scr_mercyadd(myself, 6);
++        }
++    }
++    if (actingnoe == 1 && actconnoe == 1)
++    {
++        var _text = "_";
++        var rand = choose(0, 1, 2);
++        if (rand == 0)
++        {
++            _text = stringset("* Noelle gets more ice cubes!");
++        }
++        if (rand == 1)
++        {
++            _text = stringset("* Noelle fills a water bottle!");
++        }
++        if (rand == 2)
++        {
++            _text = stringset("* Noelle gets a different cup!");
++        }
++        if (simultotal == 1)
++        {
++            msgset(0, _text + "/%");
++            scr_battletext_default();
++            with (obj_face)
++            {
++                instance_destroy();
++            }
++            actconnoe = 20;
++        }
++        else
++        {
++            msgset(0, _text);
++            scr_simultext("noelle");
++            if (simulordernoe == 0)
++            {
++                actconnoe = 20;
++            }
++            else
++            {
++                actconnoe = 0;
++            }
++        }
++        actingnoe = 0;
+-        if (global.hp[1] < 1 && global.hp[2] < 1)
++        if (scr_heroupcount() <= 1)
+         {
+             scr_mercyadd(myself, 10);
+         }
+@@ -463,12 +542,14 @@
+             scr_mercyadd(myself, 6);
+         }
      }
-     if (actcon == 20 || actconsus == 20 || actconral == 20)
+-    if (actcon == 20 || actconsus == 20 || actconral == 20)
++    if (actcon == 20 || actconsus == 20 || actconral == 20 || actconnoe == 20)
      {
 +        scr_nextact_simul();
          if (scr_terminate_writer())
          {
              actconsus = -1;
+             actconral = -1;
++            actconnoe = -1;
+             actcon = 1;
+         }
+     }

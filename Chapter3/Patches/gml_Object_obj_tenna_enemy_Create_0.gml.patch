@@ -1,6 +1,14 @@
 --- a/Code/gml_Object_obj_tenna_enemy_Create_0.gml
 +++ b/Code/gml_Object_obj_tenna_enemy_Create_0.gml
-@@ -136,4 +136,41 @@
+@@ -51,6 +51,7 @@
+ haveusedbetbefore = false;
+ extrapointsviatension = 0;
+ popularboy = false;
++popularboycount = 0;
+ saveralseihp = 0;
+ ralseihpprev = 0;
+ healthphase = 1;
+@@ -136,4 +137,41 @@
  rhythm_combo[0] = 0;
  rhythm_combo[1] = 0;
  rhythm_combo[2] = 0;

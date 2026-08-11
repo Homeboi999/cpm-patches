@@ -1,0 +1,13 @@
+--- a/Code/gml_Object_obj_watercooler_enemy_Create_0.gml
++++ b/Code/gml_Object_obj_watercooler_enemy_Create_0.gml
+@@ -26,6 +26,10 @@
+ ralseitalks = 0;
+ susietalks = 0;
+ turns = 1;
++if (room == room_battletest)
++{
++    global.flag[1119] = 0;
++}
+ if (global.flag[1119] == 1)
+ {
+     begformercycount = 2;
