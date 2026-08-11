@@ -16,23 +16,37 @@
              global.charturn = 1;
          }
          else if (global.charmove[0] == 1)
-@@ -46,12 +52,23 @@
-                 actingsus = 0;
-             }
-         }
+@@ -25,33 +31,16 @@
+     if (moveswapped == 1)
+     {
+         global.bmenuno = 0;
+-        if (global.char[global.charturn] == 4)
+-        {
+-            with (obj_monsterparent)
+-            {
+-                actingnoe = 0;
+-            }
+-        }
+-        if (global.char[global.charturn] == 3)
+-        {
+-            with (obj_monsterparent)
+-            {
+-                actingral = 0;
+-            }
+-        }
+-        if (global.char[global.charturn] == 2)
+-        {
+-            with (obj_monsterparent)
+-            {
+-                actingsus = 0;
+-            }
+-        }
 -        global.actingsingle[global.charturn] = 0;
 -        global.actingsimul[global.charturn] = 0;
 -        global.faceaction[global.charturn] = 0;
 -        global.chartarget[global.charturn] = 0;
 -        global.charaction[global.charturn] = 0;
 -        global.charspecial[global.charturn] = 0;
-+        if (global.char[global.charturn] == 1)
-+        {
-+            with (obj_monsterparent)
-+            {
-+                acting = 0;
-+            }
-+        }
 +        for (var i = global.charturn; i < 3; i++)
 +        {
 +            global.acting[i] = 0;
@@ -46,7 +60,17 @@
          movenoise = 1;
      }
      if (idefendedthisturn > 0)
-@@ -74,7 +91,7 @@
+@@ -64,6 +53,9 @@
+         with (obj_monsterparent)
+         {
+             acting = 0;
++            actingsus = 0;
++            actingral = 0;
++            actingnoe = 0;
+         }
+         global.acting[0] = 0;
+         global.acting[1] = 0;
+@@ -74,7 +66,7 @@
          global.charspecial[1] = 0;
          global.faceaction[2] = 0;
          global.tension = global.temptension[0];
@@ -55,7 +79,7 @@
          {
              tempitem[i][0] = global.item[i];
          }
-@@ -82,7 +99,7 @@
+@@ -82,7 +74,7 @@
      else
      {
          global.tension = global.temptension[global.charturn];
