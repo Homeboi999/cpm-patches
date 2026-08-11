@@ -327,7 +327,7 @@
      if (global.tensionselect > 0)
      {
          thiscost = round((acttpcost[actcoord] / global.maxtension) * 100);
-@@ -1500,6 +1517,162 @@
+@@ -1500,6 +1517,163 @@
              global.facing = 3;
              scr_keyitemremove(18);
              room_goto(room_dw_ch3_man);
@@ -351,6 +351,7 @@
 +        draw_text(xx + 250, yy + 5, "global.charturn: " + string(global.charturn));
 +        draw_text(xx + 400, yy + 5, "global.currentactingchar: " + string(global.currentactingchar));
 +        draw_text(xx + 250, yy + 20, "global.myfight: " + string(global.myfight));
++        draw_text(xx + 400, yy + 20, "scr_heroupcount: " + string(scr_heroupcount()));
 +        draw_set_color(c_black);
 +        draw_set_alpha(0.8);
 +        draw_rectangle(xx + 65, yy, xx + 225, yy + 90, false);
