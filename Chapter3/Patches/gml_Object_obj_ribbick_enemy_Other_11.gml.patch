@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_ribbick_enemy_Other_11.gml
++++ b/Code/gml_Object_obj_ribbick_enemy_Other_11.gml
+@@ -1,7 +1,7 @@
+ global.actname[myself][1] = stringsetloc("Blow On", "obj_ribbick_enemy_slash_Other_11_gml_3_0");
+ global.canact[myself][2] = 1;
+ global.actname[myself][2] = stringsetloc("BreathAll", "obj_ribbick_enemy_slash_Other_11_gml_6_0");
+-global.actactor[myself][2] = 3;
++global.actactor[myself][2] = (scr_havechar(4) && !scr_havechar(3)) ? 5 : 3;
+ global.monsterat[myself] = 8;
+ global.monstergold[myself] = 38;
+ scr_spellmenu_setup();

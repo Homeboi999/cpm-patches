@@ -131,20 +131,16 @@
      }
      if (global.monstertype[myself] == 13)
      {
-@@ -335,9 +372,10 @@
-         global.actname[myself][1] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_379_0");
+@@ -336,7 +373,7 @@
          global.canact[myself][2] = 1;
          global.actname[myself][2] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_381_0");
--        global.actactor[myself][2] = 3;
-+        global.actactor[myself][2] = 6;
+         global.actactor[myself][2] = 3;
 -        if (scr_havechar(2) && global.plot < 150)
 +        if (scr_havechar(2) && scr_susiemode())
          {
-+            global.actactor[myself][2] = 3;
              global.canact[myself][3] = 1;
              global.actname[myself][3] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_386_0");
-             global.actactor[myself][3] = 3;
-@@ -359,11 +397,20 @@
+@@ -359,11 +396,20 @@
          global.actname[myself][0] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_406_0");
          global.canact[myself][1] = 1;
          global.actname[myself][1] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_408_0");
@@ -169,7 +165,7 @@
          }
      }
      if (global.monstertype[myself] == 15)
-@@ -382,7 +429,7 @@
+@@ -382,7 +428,7 @@
          global.actname[myself][0] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_432_0");
          global.canact[myself][1] = 1;
          global.actname[myself][1] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_434_0");
@@ -178,7 +174,7 @@
          {
              global.canact[myself][2] = 1;
              global.actname[myself][2] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_440_0");
-@@ -459,9 +506,20 @@
+@@ -459,9 +505,20 @@
          global.actname[myself][0] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_524_0");
          global.canact[myself][1] = 1;
          global.actname[myself][1] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_527_0");
@@ -202,7 +198,7 @@
      }
      if (global.monstertype[myself] == 19)
      {
-@@ -480,9 +538,20 @@
+@@ -480,9 +537,20 @@
          global.actname[myself][0] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_550_0");
          global.canact[myself][1] = 1;
          global.actname[myself][1] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_553_0");
@@ -226,7 +222,7 @@
      }
      if (global.monstertype[myself] == 20)
      {
-@@ -504,7 +573,7 @@
+@@ -504,7 +572,7 @@
          global.actdesc[myself][1] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_580_0");
          global.actcost[myself][1] = 50;
          global.canact[myself][2] = 1;
@@ -235,7 +231,7 @@
          global.actname[myself][2] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_585_0");
          global.actdesc[myself][2] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_586_0");
          global.actcost[myself][2] = 125;
-@@ -529,9 +598,27 @@
+@@ -529,9 +597,27 @@
          }
          global.canact[myself][1] = 1;
          global.actname[myself][1] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_609_0");
@@ -266,7 +262,7 @@
      }
      if (global.monstertype[myself] == 22)
      {
-@@ -549,9 +636,18 @@
+@@ -549,9 +635,18 @@
          global.actname[myself][0] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_631_0");
          global.canact[myself][1] = 1;
          global.actname[myself][1] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_633_0");
@@ -288,7 +284,7 @@
      }
      if (global.monstertype[myself] == 23)
      {
-@@ -569,9 +665,18 @@
+@@ -569,9 +664,18 @@
          global.actname[myself][0] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_655_0");
          global.canact[myself][1] = 1;
          global.actname[myself][1] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_657_0");
@@ -310,7 +306,7 @@
      }
      if (global.monstertype[myself] == 25)
      {
-@@ -592,16 +697,6 @@
+@@ -592,16 +696,6 @@
          global.actname[myself][1] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_682_0");
          global.actdesc[myself][1] = " ";
          global.actcost[myself][1] = 0;
@@ -327,7 +323,7 @@
          if (global.tempflag[5] == 1)
          {
              global.canact[myself][1] = 1;
-@@ -610,21 +705,38 @@
+@@ -610,21 +704,38 @@
              global.actdesc[myself][1] = scr_84_get_lang_string("scr_monstersetup_slash_scr_monstersetup_gml_705_0");
              global.actcost[myself][1] = 62;
          }
