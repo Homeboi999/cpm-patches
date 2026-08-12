@@ -1,0 +1,16 @@
+--- a/Code/gml_GlobalScript_showval.gml
++++ b/Code/gml_GlobalScript_showval.gml
+@@ -2,11 +2,8 @@
+ {
+     if (scr_debug())
+     {
+-        if (global.chemg_show_val)
+-        {
+-            var _debugstring = arg2 + " = " + string(variable_instance_get(self, arg2));
++        var _debugstring = arg2 + " = " + string(variable_instance_get(self, arg2));
+-            draw_text_debug(arg0, arg1, _debugstring);
++        draw_text_debug(arg0, arg1, _debugstring);
+-        }
+     }
+ }
+ 

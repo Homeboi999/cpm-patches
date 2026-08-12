@@ -127,7 +127,7 @@
          {
              msgsetloc(0, "* TENNA - THE [Tragic businesmen] THAT [Died] AT THE [Now] OF THE [Story]/%", "obj_tenna_enemy_slash_Step_0_gml_449_0");
          }
-@@ -816,30 +820,32 @@
+@@ -816,30 +820,58 @@
          }
          scr_battletext_default();
      }
@@ -156,10 +156,36 @@
 -            {
 -                strng = "";
 -            }
-+        switch (global.actactor[myself][acting - 1])
++        var actactor = global.actactor[myself][acting - 1];
++        if (actactor == 8)
++        {
++            if (global.currentactingchar == 0)
++            {
++                actactor = global.char[1];
++            }
++            else
++            {
++                actactor = global.char[0];
++            }
++        }
++        if (actactor == 9)
++        {
++            if (global.currentactingchar == 2)
++            {
++                actactor = global.char[1];
++            }
++            else
++            {
++                actactor = global.char[2];
++            }
++        }
++        switch (actactor)
 +        {
 +            case 6:
 +                strng = stringsetloc("Everyone gets", "obj_tenna_enemy_slash_Step_0_gml_387_0_b");
++                break;
++            case 1:
++                strng = stringset("You and Kris get");
 +                break;
 +            case 2:
 +                strng = stringsetloc("You and Susie get", "obj_tenna_enemy_slash_Step_0_gml_385_0");
@@ -167,7 +193,7 @@
 +            case 3:
 +                strng = stringsetloc("You and Ralsei get", "obj_tenna_enemy_slash_Step_0_gml_386_0");
 +                break;
-+            case 5:
++            case 4:
 +                strng = stringset("You and Noelle get");
 +                break;
 +            default:
@@ -183,7 +209,7 @@
          }
          acting = 5.1;
      }
-@@ -856,9 +862,13 @@
+@@ -856,9 +888,13 @@
              minigametimecon = 1;
          }
      }
@@ -198,7 +224,7 @@
          if (simultotal == 1)
          {
              msgset(0, _ilovetvstring + "/%");
-@@ -885,7 +895,7 @@
+@@ -885,7 +921,7 @@
          with (obj_tenna_enemy_bg)
          {
              addscore += (20 + other.extrapoints);
@@ -207,7 +233,7 @@
              {
                  addscore += 20;
              }
-@@ -907,7 +917,7 @@
+@@ -907,7 +943,7 @@
              with (obj_tenna_enemy_bg)
              {
                  addscore += 10;
@@ -216,7 +242,7 @@
                  {
                      addscore += 10;
                  }
-@@ -916,7 +926,7 @@
+@@ -916,7 +952,7 @@
          else
          {
              extrapoints += 10;
@@ -225,7 +251,7 @@
              {
                  extrapoints += 10;
              }
-@@ -942,13 +952,13 @@
+@@ -942,13 +978,13 @@
              }
          }
      }
@@ -243,7 +269,7 @@
          if (havejeviltail)
          {
              betamount = 30;
-@@ -980,9 +990,9 @@
+@@ -980,9 +1016,9 @@
      if (actingsus == 2.1 && !i_ex(obj_writer))
      {
          scr_act_charsprite_end();
@@ -256,7 +282,7 @@
          actingsus = 2.2;
          actcon = 1;
          actconsus = 0;
-@@ -994,7 +1004,7 @@
+@@ -994,7 +1030,7 @@
              with (obj_tenna_enemy_bg)
              {
                  addscore += 10;
@@ -265,7 +291,7 @@
                  {
                      addscore += 10;
                  }
-@@ -1003,7 +1013,7 @@
+@@ -1003,7 +1039,7 @@
          else
          {
              extrapoints += 10;
@@ -274,7 +300,7 @@
              {
                  extrapoints += 10;
              }
-@@ -1032,6 +1042,7 @@
+@@ -1032,6 +1068,7 @@
      if (actingral == 2 && actconral == 1)
      {
          popularboy = true;
@@ -282,7 +308,7 @@
          saveralseihp = global.hp[3];
          instance_create(x, y, obj_popularboy_act);
          snd_play(snd_drumroll);
-@@ -1041,17 +1052,10 @@
+@@ -1041,17 +1078,10 @@
          }
          else
          {
@@ -301,7 +327,7 @@
          }
      }
      if (actingral == 2.1 && !i_ex(obj_popularboy_act))
-@@ -1061,6 +1065,16 @@
+@@ -1061,6 +1091,16 @@
              actingral = 2.2;
              msgsetloc(0, "* Ralsei became the center of attention!/%", "obj_tenna_enemy_slash_Step_0_gml_612_0");
              scr_battletext_default();
@@ -318,7 +344,7 @@
          }
      }
      if (actingral == 2.2 && !i_ex(obj_writer))
-@@ -1078,14 +1092,57 @@
+@@ -1078,14 +1118,57 @@
          actingral = 2.3;
          actcon = 1;
          actconral = 0;
@@ -378,7 +404,7 @@
              actcon = 1;
              with (obj_face)
              {
-@@ -1332,6 +1389,13 @@
+@@ -1332,6 +1415,13 @@
              if (global.hp[3] > 0)
              {
                  with (obj_heroralsei)

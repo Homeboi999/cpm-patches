@@ -1,0 +1,11 @@
+--- a/Code/gml_Object_obj_rhythmgame_Draw_0.gml
++++ b/Code/gml_Object_obj_rhythmgame_Draw_0.gml
+@@ -565,7 +565,7 @@
+     draw_text(0, 60, notetime[0]);
+     draw_text(0, 90, trackpos / meter);
+ }
+-if (scr_debug() && global.chemg_show_val)
++if (scr_debug())
+ {
+     draw_set_alpha(1);
+     draw_set_color(c_white);

@@ -150,7 +150,7 @@
          if (i == 2 || i == 3)
          {
              yoffset = 30;
-@@ -1166,38 +1113,43 @@
+@@ -1166,38 +1113,47 @@
          drawsus = 0;
          drawral = 0;
          drawnoe = 0;
@@ -213,6 +213,10 @@
 +                drawnoe = havechar[3] == 1;
 +                charoffset = 0;
 +                break;
++            case 8:
++            case 9:
++                charoffset = 30;
++                break;
 +        }
 +        var available_result = scr_actactor_available(chartime);
 +        if (i == actcoord)
@@ -226,7 +230,7 @@
          }
          if (global.tension < acttpcost[i])
          {
-@@ -1235,20 +1187,61 @@
+@@ -1235,20 +1191,135 @@
          }
          if (chartime == 2)
          {
@@ -255,7 +259,7 @@
 +            var curheadsprite = 2847;
 +            for (var slot = 0; slot < 3; slot++)
 +            {
-+                headsprite = spr_headkris;
++                var headsprite = spr_headkris;
 +                switch (global.char[slot])
 +                {
 +                    case 1:
@@ -290,10 +294,84 @@
 +                draw_sprite_ext(curheadsprite, 8, xx + charoffset + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
 +                cant = 1;
 +            }
++        }
++        if (chartime == 8)
++        {
++            var slot;
++            if (global.charturn == 0)
++            {
++                slot = 1;
++            }
++            else
++            {
++                slot = 0;
++            }
++            var headsprite = spr_headkris;
++            switch (global.char[slot])
++            {
++                case 1:
++                    headsprite = spr_headkris;
++                    break;
++                case 2:
++                    headsprite = spr_headsusie;
++                    break;
++                case 3:
++                    headsprite = spr_headralsei;
++                    break;
++                case 4:
++                    headsprite = spr_headnoelle;
++                    break;
++            }
++            if (global.char[slot] > 0)
++            {
++                draw_sprite_ext(headsprite, 0, xx + 30 + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
++            }
++            else
++            {
++                draw_sprite_ext(spr_headkris, 8, xx + 30 + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
++                cant = 1;
++            }
++        }
++        if (chartime == 9)
++        {
++            var slot;
++            if (global.charturn == 2)
++            {
++                slot = 1;
++            }
++            else
++            {
++                slot = 2;
++            }
++            var headsprite = spr_headkris;
++            switch (global.char[slot])
++            {
++                case 1:
++                    headsprite = spr_headkris;
++                    break;
++                case 2:
++                    headsprite = spr_headsusie;
++                    break;
++                case 3:
++                    headsprite = spr_headralsei;
++                    break;
++                case 4:
++                    headsprite = spr_headnoelle;
++                    break;
++            }
++            if (global.char[slot] > 0)
++            {
++                draw_sprite_ext(headsprite, 0, xx + 30 + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
++            }
++            else
++            {
++                draw_sprite_ext(spr_headkris, 8, xx + 30 + xoffset, yy + 375 + yoffset, 1, 1, 0, faceblend, 1);
++                cant = 1;
++            }
          }
          var s1 = string_hash_to_newline(actname[i]);
          var s1_width = max(1, string_width(s1));
-@@ -1263,8 +1256,32 @@
+@@ -1263,8 +1334,32 @@
          }
          draw_text_transformed(xx + 30 + charoffset + xoffset, yy + 375 + yoffset, string_hash_to_newline(actname[i]), s1_xscale, 1, 0);
      }
@@ -327,7 +405,7 @@
      if (global.tensionselect > 0)
      {
          thiscost = round((acttpcost[actcoord] / global.maxtension) * 100);
-@@ -1500,6 +1517,163 @@
+@@ -1500,6 +1595,163 @@
              global.facing = 3;
              scr_keyitemremove(18);
              room_goto(room_dw_ch3_man);
