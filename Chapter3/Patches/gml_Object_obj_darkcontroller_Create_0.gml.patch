@@ -1,6 +1,22 @@
 --- a/Code/gml_Object_obj_darkcontroller_Create_0.gml
 +++ b/Code/gml_Object_obj_darkcontroller_Create_0.gml
-@@ -46,99 +46,18 @@
+@@ -37,6 +37,15 @@
+ mmy[3] = 0;
+ global.submenu = 0;
+ global.charselect = -1;
++global.nocaterpillar = 0;
++if (room == room_dw_ch3_man)
++{
++    global.nocaterpillar = 1;
++}
++if (room == room_ch3_gacharoom_unknown)
++{
++    global.nocaterpillar = 1;
++}
+ for (var i = 0; i < 36; i += 1)
+ {
+     global.submenucoord[i] = 0;
+@@ -46,99 +55,18 @@
  for (var i = 0; i < 3; i += 1)
  {
      global.faceaction[i] = 0;

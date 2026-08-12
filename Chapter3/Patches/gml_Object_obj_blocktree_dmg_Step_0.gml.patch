@@ -1,0 +1,10 @@
+--- a/Code/gml_Object_obj_blocktree_dmg_Step_0.gml
++++ b/Code/gml_Object_obj_blocktree_dmg_Step_0.gml
+@@ -292,6 +292,7 @@
+         rsprite = spr_krisr_dark;
+         lsprite = spr_krisl_dark;
+         usprite = spr_krisu_dark;
++        scr_set_chara_sprites(name, visual_info);
+     }
+     snd_play(snd_equip);
+     myinteract = 0;

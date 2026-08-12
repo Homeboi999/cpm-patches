@@ -1,0 +1,12 @@
+--- a/Code/gml_GlobalScript_scr_setparty.gml
++++ b/Code/gml_GlobalScript_scr_setparty.gml
+@@ -1,5 +1,9 @@
+ function scr_setparty(arg0, arg1, arg2)
+ {
++    if (scr_modconfig("forceParty") == 1)
++    {
++        exit;
++    }
+     var kris = obj_mainchara;
+     var slot = 0;
+     var __make = true;

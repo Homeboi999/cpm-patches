@@ -1,0 +1,23 @@
+{
+  "Name": "spr_noelle_walk_right_lw_neutral",
+  "index": 5002,
+  "ImageFile": "spr_noelle_walk_right_lw_neutral_strip4.png",
+  "FrameCount": 4,
+  "Size": [
+    23,
+    46
+  ],
+  "Margins": [
+    2,
+    19,
+    45,
+    0
+  ],
+  "BoundingBoxMode": 0,
+  "Origin": [
+    0,
+    0
+  ],
+  "playbackSpeed": 1,
+  "playbackType": 1
+}

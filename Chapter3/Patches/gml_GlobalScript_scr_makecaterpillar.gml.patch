@@ -1,7 +1,12 @@
 --- a/Code/gml_GlobalScript_scr_makecaterpillar.gml
 +++ b/Code/gml_GlobalScript_scr_makecaterpillar.gml
-@@ -2,62 +2,11 @@
+@@ -1,63 +1,16 @@
+ function scr_makecaterpillar(arg0, arg1, arg2, arg3)
  {
++    if (global.nocaterpillar == 1)
++    {
++        return -4;
++    }
      global.cinstance[arg3] = instance_create(arg0, arg1, obj_caterpillarchara);
      global.cinstance[arg3].target = 12 + (arg3 * 12);
 -    if (arg2 == 3)

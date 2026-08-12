@@ -1,0 +1,28 @@
+--- a/Code/gml_Object_obj_ch3_BTB03_Create_0.gml
++++ b/Code/gml_Object_obj_ch3_BTB03_Create_0.gml
+@@ -5,17 +5,21 @@
+     {
+         setxy(2046, 434);
+     }
+-    with (obj_caterpillarchara)
++    if (i_ex(global.cinstance[0]))
+     {
+-        if (name == "susie")
++        with (global.cinstance[0])
+         {
+             setxy(2028, 354);
++            scr_caterpillar_interpolate();
+         }
+-        if (name == "ralsei")
++    }
++    if (i_ex(global.cinstance[1]))
++    {
++        with (global.cinstance[1])
+         {
+             setxy(2028, 274);
++            scr_caterpillar_interpolate();
+         }
+-        scr_caterpillar_interpolate();
+     }
+ }
+ con = -1;

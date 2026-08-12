@@ -1,0 +1,39 @@
+--- a/Code/gml_Object_obj_b3bs_zapper_b_Create_0.gml
++++ b/Code/gml_Object_obj_b3bs_zapper_b_Create_0.gml
+@@ -15,20 +15,28 @@
+     {
+         setxy(1360, 220);
+     }
+-    with (obj_caterpillarchara)
++    if (i_ex(global.cinstance[0]))
+     {
+-        if (name == "ralsei")
++        with (global.cinstance[0])
+         {
+             setxy(1392, 228);
++            scr_caterpillar_interpolate();
++            for (var i = 0; i < 25; i += 1)
++            {
++                facing[i] = 2;
++            }
+         }
+-        if (name == "susie")
++    }
++    if (i_ex(global.cinstance[1]))
++    {
++        with (global.cinstance[1])
+         {
+             setxy(1314, 224);
+-        }
+-        scr_caterpillar_interpolate();
++            scr_caterpillar_interpolate();
+-        for (var i = 0; i < 25; i += 1)
++            for (var i = 0; i < 25; i += 1)
+-        {
++            {
+-            facing[i] = 2;
++                facing[i] = 2;
++            }
+         }
+     }
+ }

@@ -1,0 +1,28 @@
+--- a/Code/gml_Object_obj_ch3_dw_man_scenetransition_persistent_Step_2.gml
++++ b/Code/gml_Object_obj_ch3_dw_man_scenetransition_persistent_Step_2.gml
+@@ -97,17 +97,21 @@
+         {
+             setxy(xloc, yloc);
+         }
+-        with (obj_caterpillarchara)
++        if (i_ex(global.cinstance[0]))
+         {
+-            if (name == "susie")
++            with (global.cinstance[0])
+             {
+                 setxy(xloc - 54, yloc - valign);
++                scr_caterpillar_interpolate();
+             }
+-            if (name == "ralsei")
++        }
++        if (i_ex(global.cinstance[1]))
++        {
++            with (global.cinstance[1])
+             {
+                 setxy(xloc - 98, (yloc - valign) + 4);
++                scr_caterpillar_interpolate();
+             }
+-            scr_caterpillar_interpolate();
+         }
+         setinplace = 0;
+     }

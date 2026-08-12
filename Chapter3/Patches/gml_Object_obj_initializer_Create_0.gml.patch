@@ -1,0 +1,10 @@
+--- a/Code/gml_Object_obj_initializer_Create_0.gml
++++ b/Code/gml_Object_obj_initializer_Create_0.gml
+@@ -110,6 +110,7 @@
+ global.msg = " ";
+ global.msc = 0;
+ global.darkzone = 1;
++global.nocaterpillar = 0;
+ for (i = 0; i < 10; i += 1)
+ {
+     global.smdir[i] = 90;

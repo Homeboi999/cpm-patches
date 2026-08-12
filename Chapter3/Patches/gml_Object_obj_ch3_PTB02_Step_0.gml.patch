@@ -1,6 +1,31 @@
 --- a/Code/gml_Object_obj_ch3_PTB02_Step_0.gml
 +++ b/Code/gml_Object_obj_ch3_PTB02_Step_0.gml
-@@ -515,10 +515,20 @@
+@@ -9,16 +9,14 @@
+             {
+                 setxy(1840, 240);
+             }
+-            with (obj_caterpillarchara)
+-            {
+-                if (name == "susie")
+-                {
+-                    setxy(1738, 224);
+-                }
+-                if (name == "ralsei")
+-                {
+-                    setxy(1646, 228);
+-                }
++            with (global.cinstance[0])
++            {
++                setxy(1738, 224);
++                scr_caterpillar_interpolate();
++            }
++            with (global.cinstance[1])
++            {
++                setxy(1646, 228);
+                 scr_caterpillar_interpolate();
+             }
+         }
+@@ -515,10 +513,20 @@
              destroy = 1;
          }
      }
@@ -25,7 +50,7 @@
      if (teamdefeated == true)
      {
          kr_actor.sprite_index = spr_krisb_defeat;
-@@ -527,8 +537,16 @@
+@@ -527,8 +535,16 @@
      {
          kr_actor.sprite_index = spr_krisr_dark;
      }
@@ -44,7 +69,7 @@
      if (teamdefeated == true)
      {
          su_actor.sprite_index = spr_susie_dw_fell;
-@@ -537,8 +555,16 @@
+@@ -537,8 +553,16 @@
      {
          su_actor.sprite_index = spr_susie_walk_right_dw_unhappy;
      }
@@ -63,7 +88,7 @@
      if (teamdefeated == true)
      {
          ra_actor.sprite_index = spr_ralsei_defeat;
-@@ -559,6 +585,7 @@
+@@ -559,6 +583,7 @@
      {
          visible = 1;
      }

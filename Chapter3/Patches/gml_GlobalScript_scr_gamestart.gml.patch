@@ -1,0 +1,10 @@
+--- a/Code/gml_GlobalScript_scr_gamestart.gml
++++ b/Code/gml_GlobalScript_scr_gamestart.gml
+@@ -2,6 +2,7 @@
+ {
+     global.chapter = 3;
+     global.darkzone = 0;
++    global.nocaterpillar = 0;
+     global.filechoice = 0;
+     global.plot = 0;
+     global.truename = "";

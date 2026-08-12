@@ -18,6 +18,13 @@ function scr_set_chara_sprites(arg0, arg1)
                     lsprite = spr_krisl_dark;
                     usprite = spr_krisu_dark;
                 }
+                if (room == room_dw_ch3_man && global.flag[930] == 0)
+                {
+                    dsprite = spr_krisd;
+                    rsprite = spr_krisr;
+                    usprite = spr_krisu;
+                    lsprite = spr_krisl;
+                }
                 break;
             case "susie":
                 usprite = spr_susie_walk_up_dw;
@@ -42,6 +49,30 @@ function scr_set_chara_sprites(arg0, arg1)
                         dsprite = spr_susie_walk_down_dw_unhappy;
                     }
                 }
+                if (room == room_dw_ch3_man)
+                {
+                    if (global.flag[930] == 0)
+                    {
+                        usprite = spr_susie_walk_up_lw;
+                        rsprite = spr_susie_walk_right_lw_unhappy;
+                        lsprite = spr_susie_walk_left_lw_unhappy;
+                        dsprite = spr_susie_walk_down_lw_unhappy;
+                    }
+                    else
+                    {
+                        usprite = spr_susie_walk_up_dw;
+                        rsprite = spr_susie_walk_right_dw_unhappy;
+                        lsprite = spr_susie_walk_left_dw_unhappy;
+                        dsprite = spr_susie_walk_down_dw_unhappy;
+                    }
+                }
+                if (room == room_ch3_gacharoom_unknown)
+                {
+                    usprite = spr_susie_walk_up_dw;
+                    rsprite = spr_susie_walk_right_dw_unhappy;
+                    lsprite = spr_susie_walk_left_dw_unhappy;
+                    dsprite = spr_susie_walk_down_dw_unhappy;
+                }
                 break;
             case "ralsei":
                 usprite = spr_ralsei_walk_up;
@@ -59,6 +90,29 @@ function scr_set_chara_sprites(arg0, arg1)
                         dsprite = spr_ralsei_walk_down_unhappy;
                     }
                 }
+                if (room == room_dw_ch3_man)
+                {
+                    if (global.flag[930] == 0)
+                    {
+                        usprite = spr_ralseiu;
+                        rsprite = spr_ralseir;
+                        lsprite = spr_ralseil;
+                        dsprite = spr_ralseid;
+                    }
+                    else
+                    {
+                        usprite = spr_ralsei_walk_up;
+                        rsprite = spr_ralsei_walk_right_unhappy;
+                        lsprite = spr_ralsei_walk_left_unhappy;
+                        dsprite = spr_ralsei_walk_down_unhappy;
+                    }
+                }
+                if (room == room_ch3_gacharoom_unknown)
+                {
+                    rsprite = spr_ralsei_walk_right_unhappy;
+                    lsprite = spr_ralsei_walk_left_unhappy;
+                    dsprite = spr_ralsei_walk_down_unhappy;
+                }
                 break;
             case "noelle":
                 usprite = spr_noelle_walk_up_dw;
@@ -73,6 +127,13 @@ function scr_set_chara_sprites(arg0, arg1)
                     rsprite = spr_noelle_walk_right_lw;
                     lsprite = spr_noelle_walk_left_lw;
                     dsprite = spr_noelle_walk_down_lw;
+                }
+                if (room == room_dw_ch3_man && global.flag[930] == 0)
+                {
+                    usprite = spr_noelle_walk_up_lw;
+                    rsprite = spr_noelle_walk_right_lw_neutral;
+                    lsprite = spr_noelle_walk_left_lw_neutral;
+                    dsprite = spr_noelle_walk_down_lw_neutral;
                 }
                 break;
             case "starwalker":

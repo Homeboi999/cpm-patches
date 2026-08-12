@@ -1,0 +1,29 @@
+--- a/Code/gml_Object_obj_dw_teevie_shadow_guys_Step_0.gml
++++ b/Code/gml_Object_obj_dw_teevie_shadow_guys_Step_0.gml
+@@ -103,16 +103,21 @@
+     {
+         global.facing = 3;
+         global.interact = 1;
+-        with (obj_caterpillarchara)
++        if (i_ex(global.cinstance[0]))
+         {
+-            follow = false;
+-            scr_caterpillar_facing(3);
+-            if (name == "susie")
++            with (global.cinstance[0])
+             {
++                follow = false;
++                scr_caterpillar_facing(3);
+                 setxy(1244 + xmove, 276);
+             }
+-            if (name == "ralsei")
++        }
++        if (i_ex(global.cinstance[1]))
++        {
++            with (global.cinstance[1])
+             {
++                follow = false;
++                scr_caterpillar_facing(3);
+                 setxy(1290 + xmove, 280);
+             }
+         }

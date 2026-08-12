@@ -1,0 +1,28 @@
+--- a/Code/gml_Object_obj_room_teevie_large_02_Create_0.gml
++++ b/Code/gml_Object_obj_room_teevie_large_02_Create_0.gml
+@@ -4,17 +4,21 @@
+     {
+         setxy(900, 1080);
+     }
+-    with (obj_caterpillarchara)
++    if (i_ex(global.cinstance[0]))
+     {
+-        if (name == "susie")
++        with (global.cinstance[0])
+         {
+             setxy(798, 1080);
++            scr_caterpillar_interpolate();
+         }
+-        if (name == "ralsei")
++    }
++    if (i_ex(global.cinstance[1]))
++    {
++        with (global.cinstance[1])
+         {
+             setxy(706, 1080);
++            scr_caterpillar_interpolate();
+         }
+-        scr_caterpillar_interpolate();
+     }
+ }
+ con = (scr_flag_get(1235) == 0) ? 0 : -1;
