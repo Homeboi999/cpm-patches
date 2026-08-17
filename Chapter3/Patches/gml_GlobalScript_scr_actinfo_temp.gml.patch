@@ -1,15 +1,39 @@
 --- a/Code/gml_GlobalScript_scr_actinfo_temp.gml
 +++ b/Code/gml_GlobalScript_scr_actinfo_temp.gml
-@@ -27,6 +27,12 @@
-             acttpcost[__acti] = global.actcostnoe[arg0][__acti];
-             actsimul[__acti] = global.actsimulnoe[arg0][__acti];
+@@ -7,25 +7,36 @@
+         {
+             canact[__acti] = global.canact[arg0][__acti];
+             acttpcost[__acti] = global.actcost[arg0][__acti];
++            actpointcost[__acti] = global.actprice[arg0][__acti];
+             actsimul[__acti] = global.actsimul[arg0][__acti];
          }
+         if (global.char[global.charturn] == 2)
+         {
+             canact[__acti] = global.canactsus[arg0][__acti];
+             acttpcost[__acti] = global.actcostsus[arg0][__acti];
++            actpointcost[__acti] = global.actpricesus[arg0][__acti];
+             actsimul[__acti] = global.actsimulsus[arg0][__acti];
+         }
+         if (global.char[global.charturn] == 3)
+         {
+             canact[__acti] = global.canactral[arg0][__acti];
+             acttpcost[__acti] = global.actcostral[arg0][__acti];
++            actpointcost[__acti] = global.actpriceral[arg0][__acti];
+             actsimul[__acti] = global.actsimulral[arg0][__acti];
+         }
+         if (global.char[global.charturn] == 4)
+         {
+             canact[__acti] = global.canactnoe[arg0][__acti];
+             acttpcost[__acti] = global.actcostnoe[arg0][__acti];
++            actpointcost[__acti] = global.actpricenoe[arg0][__acti];
+             actsimul[__acti] = global.actsimulnoe[arg0][__acti];
++        }
 +        if (oopsallacts)
 +        {
 +            canact[__acti] = global.canact[arg0][__acti];
 +            acttpcost[__acti] = global.actcost[arg0][__acti];
++            actpointcost[__acti] = global.actprice[arg0][__acti];
 +            actsimul[__acti] = global.actsimul[arg0][__acti];
-+        }
+         }
      }
  }
- 

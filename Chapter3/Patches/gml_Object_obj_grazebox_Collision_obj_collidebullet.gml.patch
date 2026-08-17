@@ -1,0 +1,16 @@
+--- a/Code/gml_Object_obj_grazebox_Collision_obj_collidebullet.gml
++++ b/Code/gml_Object_obj_grazebox_Collision_obj_collidebullet.gml
+@@ -39,7 +39,12 @@
+                 }
+             }
+             grazed = 1;
++            var grazepointamount = 1;
++            if (i_ex(obj_tenna_enemy) && obj_tenna_enemy.tensionpointbooster > 0)
++            {
++                grazepointamount += obj_tenna_enemy.tensionpointbooster;
++            }
+-            scr_tenna_add_score(1);
++            scr_tenna_add_score(grazepointamount);
+             scr_tensionheal(grazepoints * _grazetpfactor);
+             if (global.turntimer >= 10)
+             {

@@ -16,7 +16,7 @@
              global.charturn = 1;
          }
          else if (global.charmove[0] == 1)
-@@ -25,33 +31,16 @@
+@@ -25,33 +31,17 @@
      if (moveswapped == 1)
      {
          global.bmenuno = 0;
@@ -52,6 +52,7 @@
 +            global.acting[i] = 0;
 +            global.actingsingle[i] = 0;
 +            global.actingsimul[i] = 0;
++            global.temppoints[i] = 0;
 +            global.faceaction[i] = 0;
 +            global.chartarget[i] = 0;
 +            global.charaction[i] = 0;
@@ -60,7 +61,7 @@
          movenoise = 1;
      }
      if (idefendedthisturn > 0)
-@@ -64,6 +53,9 @@
+@@ -64,6 +54,9 @@
          with (obj_monsterparent)
          {
              acting = 0;
@@ -70,7 +71,7 @@
          }
          global.acting[0] = 0;
          global.acting[1] = 0;
-@@ -74,7 +66,7 @@
+@@ -74,7 +67,7 @@
          global.charspecial[1] = 0;
          global.faceaction[2] = 0;
          global.tension = global.temptension[0];
@@ -79,7 +80,7 @@
          {
              tempitem[i][0] = global.item[i];
          }
-@@ -82,7 +74,7 @@
+@@ -82,7 +75,7 @@
      else
      {
          global.tension = global.temptension[global.charturn];

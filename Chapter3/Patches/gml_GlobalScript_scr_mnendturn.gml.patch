@@ -1,6 +1,14 @@
 --- a/Code/gml_GlobalScript_scr_mnendturn.gml
 +++ b/Code/gml_GlobalScript_scr_mnendturn.gml
-@@ -128,15 +128,52 @@
+@@ -113,6 +113,7 @@
+             global.actingsimul[i] = 0;
+             global.actingtarget[i] = 0;
+             global.temptension[i] = global.tension;
++            global.temppoints[i] = 0;
+             global.charspecial[i] = 0;
+             global.targeted[i] = 0;
+             global.charaction[i] = 0;
+@@ -128,15 +129,52 @@
              actingsus = 0;
              actingral = 0;
              actingnoe = 0;

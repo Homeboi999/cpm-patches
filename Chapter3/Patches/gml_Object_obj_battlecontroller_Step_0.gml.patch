@@ -144,7 +144,7 @@
      {
          with (battlewriter)
          {
-@@ -757,7 +631,7 @@
+@@ -757,19 +631,19 @@
          global.tensionselect = global.battlespellcost[thischar][global.bmenucoord[2][global.charturn]];
          var _confirm = true;
          var havejeviltail = false;
@@ -152,6 +152,27 @@
 +        if (scr_armorcheck_equipped_party(7))
          {
              havejeviltail = true;
+         }
+-        if (i_ex(obj_pippins_enemy) && global.battlespellname[thischar][global.bmenucoord[2][global.charturn]] == global.actname[obj_pippins_enemy.myself][3] && global.flag[1044] < 150)
+-        {
+-            _confirm = false;
+-        }
+-        if (!havejeviltail && i_ex(obj_tenna_enemy_bg) && i_ex(obj_tenna_enemy) && obj_tenna_enemy_bg.myscore < 20 && global.battlespellname[thischar][global.bmenucoord[2][global.charturn]] == global.actnamesus[obj_tenna_enemy.myself][1])
+-        {
+-            _confirm = false;
+-        }
+-        if (havejeviltail && i_ex(obj_tenna_enemy_bg) && i_ex(obj_tenna_enemy) && obj_tenna_enemy_bg.myscore < 30 && global.battlespellname[thischar][global.bmenucoord[2][global.charturn]] == global.actnamesus[obj_tenna_enemy.myself][1])
++        var totalspent = global.temppoints[0] + global.temppoints[1] + global.temppoints[2];
++        if (i_ex(obj_tenna_enemy_bg))
++        {
++            if ((obj_tenna_enemy_bg.myscore - totalspent) < global.battlespellprice[thischar][global.bmenucoord[2][global.charturn]])
++            {
++                _confirm = false;
++            }
++        }
++        else if ((global.flag[1044] - totalspent) < global.battlespellprice[thischar][global.bmenucoord[2][global.charturn]])
+         {
+             _confirm = false;
          }
 @@ -780,29 +654,33 @@
                  onebuffer = 2;
@@ -210,7 +231,7 @@
                  }
              }
          }
-@@ -1085,29 +963,10 @@
+@@ -1085,53 +963,23 @@
          }
          global.tensionselect = acttpcost[global.bmenucoord[9][global.charturn]];
          canpress = 1;
@@ -242,17 +263,41 @@
 +            canpress = scr_actactor_available(actactor).available;
          }
          var _confirm = true;
-         if (global.flag[1044] < 150 && i_ex(obj_pippins_enemy) && global.actname[thisenemy][global.bmenucoord[9][global.charturn]] == global.actname[obj_pippins_enemy.myself][3])
-@@ -1115,7 +974,7 @@
-             _confirm = false;
-         }
-         var havejeviltail = false;
--        if (global.chararmor1[1] == 7 || global.chararmor2[1] == 7 || global.chararmor1[2] == 7 || global.chararmor2[2] == 7 || global.chararmor1[3] == 7 || global.chararmor2[3] == 7)
-+        if (scr_armorcheck_equipped_party(7))
+-        if (global.flag[1044] < 150 && i_ex(obj_pippins_enemy) && global.actname[thisenemy][global.bmenucoord[9][global.charturn]] == global.actname[obj_pippins_enemy.myself][3])
++        var totalspent = global.temppoints[0] + global.temppoints[1] + global.temppoints[2];
++        if (i_ex(obj_tenna_enemy_bg))
++        {
++            if ((obj_tenna_enemy_bg.myscore - totalspent) < global.actprice[global.charturn][global.bmenucoord[9][global.charturn]])
++            {
++                _confirm = false;
++            }
++        }
++        else if ((global.flag[1044] - totalspent) < global.actprice[global.charturn][global.bmenucoord[9][global.charturn]])
          {
-             havejeviltail = true;
+             _confirm = false;
+-        }
+-        var havejeviltail = false;
+-        if (global.chararmor1[1] == 7 || global.chararmor2[1] == 7 || global.chararmor1[2] == 7 || global.chararmor2[2] == 7 || global.chararmor1[3] == 7 || global.chararmor2[3] == 7)
+-        {
+-            havejeviltail = true;
+-        }
+-        if (!havejeviltail)
+-        {
+-            if (i_ex(obj_tenna_enemy_bg) && i_ex(obj_tenna_enemy) && obj_tenna_enemy_bg.myscore < 20 && global.actname[thisenemy][global.bmenucoord[9][global.charturn]] == global.actnamesus[obj_tenna_enemy.myself][1])
+-            {
+-                _confirm = false;
+-            }
+-        }
+-        if (havejeviltail)
+-        {
+-            if (i_ex(obj_tenna_enemy_bg) && i_ex(obj_tenna_enemy) && obj_tenna_enemy_bg.myscore < 30 && global.actname[thisenemy][global.bmenucoord[9][global.charturn]] == global.actnamesus[obj_tenna_enemy.myself][1])
+-            {
+-                _confirm = false;
+-            }
          }
-@@ -1382,6 +1241,19 @@
+         if (canpress == 1)
+         {
+@@ -1382,6 +1230,19 @@
                          for (i = 0; i < 6; i += 1)
                          {
                              if (global.canactnoe[thisenemy][actcoord] == 0)
