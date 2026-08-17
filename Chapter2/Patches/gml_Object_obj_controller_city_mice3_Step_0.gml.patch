@@ -1,0 +1,65 @@
+--- a/Code/gml_Object_obj_controller_city_mice3_Step_0.gml
++++ b/Code/gml_Object_obj_controller_city_mice3_Step_0.gml
+@@ -186,7 +186,10 @@
+     }
+     if (con == 6)
+     {
+-        obj_caterpillarchara.visible = false;
++        with (obj_caterpillarchara)
++        {
++            visible = false;
++        }
+         if (instance_exists(obj_trigger_area))
+         {
+             with (obj_trigger_area)
+@@ -852,21 +855,45 @@
+     {
+         noelle.sprite_index = spr_noelle_walk_up_dw;
+         noelle.image_speed = 0.25;
++        if (i_ex(obj_caterpillarchara))
++        {
+-        with (noelle)
++            with (noelle)
+-        {
++            {
+-            scr_move_to_point_over_time(obj_caterpillarchara.x, obj_caterpillarchara.y, 12);
++                scr_move_to_point_over_time(obj_caterpillarchara.x, obj_caterpillarchara.y, 12);
++            }
++        }
++        else
++        {
++            with (noelle)
++            {
++                scr_move_to_point_over_time(obj_mainchara.x - 30, obj_mainchara.y, 12);
++            }
+         }
+         con++;
+     }
+     if (con == 37)
+     {
+-        if (noelle.x == obj_caterpillarchara.x && noelle.y == obj_caterpillarchara.y)
++        var destx, desty;
++        if (i_ex(obj_caterpillarchara))
++        {
++            destx = obj_caterpillarchara.x;
++            desty = obj_caterpillarchara.y;
++        }
++        else
++        {
++            destx = obj_mainchara.x - 30;
++            desty = obj_mainchara.y;
++        }
++        if (noelle.x == destx && noelle.y == desty)
+         {
+             with (leaveBlock)
+             {
+                 instance_destroy();
+             }
+-            obj_caterpillarchara.visible = true;
++            with (obj_caterpillarchara)
++            {
++                visible = true;
++            }
+             with (noelle)
+             {
+                 instance_destroy();
